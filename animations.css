@@ -24,3 +24,12 @@
 .slide-in {
     animation: slideIn 0.8s ease-out;
 }
+
+/* Respect user preference for reduced motion -- REMOVED */
+/* @media (prefers-reduced-motion: reduce) { */
+/*  .fade-in, */
+/*  .slide-up, */
+/*  .slide-in { */
+/*    animation-name: none; */
+/*  } */
+/* } */

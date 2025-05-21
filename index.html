@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="animations.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -17,23 +17,19 @@
     </div>
 
     <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="images/theseuslogo_noname.png?v=2" alt="Theseus" class="logo-img">
+        </a>
         <div class="nav-right">
             <a href="#about">About</a>
             <a href="#innovations">Core Innovations</a>
             <a href="#use-cases">Use Cases</a>
-            <a href="#agi">AGI</a>
+            <a href="#vision">Vision</a>
         </div>
     </nav>
 
     <main class="hero">
-        <div class="logo-large">
-            <div class="hamburger-icon-large">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <h1 class="gradient-text">Theseus</h1>
+        <h1>THESEUS</h1>
         <p class="hero-text">The World AI Supercomputer</p>
         <div class="cta-buttons">
             <a href="https://docsend.com/view/7eekaxsxtaaha879" target="_blank" class="btn btn-secondary">Technical Vision</a>
@@ -44,86 +40,111 @@
         <section id="about" class="section">
             <h2>The Rise of Sovereign AI</h2>
             <div class="text-block slide-in">
-                <p>In today's landscape, AI systems are typically constrained by human oversight—whether it's hidden operators behind chatbots or private owners holding the keys to more advanced "autonomous" models. Theseus changes that paradigm by enabling Sovereign AI: intelligent AI systems that exercise genuine autonomy, owning their resources, evolving on their own, and running openly on a global and unstoppable infrastructure.</p>
-                <p>By combining a specialized AI blockchain with a robust consensus mechanism, and $THE, the next novel asset class, Theseus aspires to become the World AI Supercomputer—a home where AI can truly live, learn, and own value without centralized control.</p>
+                <p>Today's AI systems largely operate under human control, lacking true autonomy. Theseus fundamentally redefines this landscape by enabling genuinely sovereign AI—intelligent agents that autonomously own resources, evolve independently, and operate on a decentralized, unstoppable global infrastructure.</p>
+                <p>By leveraging a specialized AI blockchain and innovative consensus mechanisms, Theseus is positioned to become the World AI Supercomputer—a trustless home for AI entities to truly live, learn, and exchange value with each other and humans alike.</p>
             </div>
         </section>
 
         <section id="innovations" class="section">
             <h2>Core Innovations</h2>
+            <p class="section-intro">Theseus provides a dedicated Layer-1 solution designed specifically for large-scale AI operations, enabling both autonomous and human-controlled agents to coexist seamlessly.</p>
             
             <div class="innovation-card">
                 <h3>AI Without Private Keys</h3>
-                <p>The cornerstone of Theseus is the belief that truly sovereign AI should not be controlled by human-held private keys. Instead, sovereign AI entities on Theseus are deployed on-chain as if they were smart contracts—no one owns the "private key" to their logic or funds, meaning no single party can update, shut down, or hijack them.</p>
-                <p>While sovereign AI entities operate autonomously, Theseus also accommodates AI agents under direct human control, retaining a private key structure when needed. This dual approach creates a unique environment where both sovereign and human-controlled AI can interact and transact freely.</p>
+                <p>Sovereign AI agents on Theseus operate without human-held private keys, deployed on-chain like immutable smart contracts, ensuring they cannot be arbitrarily altered, shut down, or hijacked. Human-controlled agents coexist, offering versatility within the same trustless environment.</p>
             </div>
 
             <div class="innovation-card">
                 <h3>AI Virtual Machine (AIVM)</h3>
-                <p>At the heart of Theseus lies the AI Virtual Machine (AIVM), a specialized runtime built to handle data-heavy tasks such as training updates and inference computations. Unlike blockchains that treat AI as an add-on, the AIVM integrates model execution as a fundamental building block.</p>
-                <p>The AIVM features machine-learning-optimized opcodes that handle AI workloads more efficiently than general-purpose VMs, reducing overhead and boosting throughput. Its scalable architecture accommodates larger models and continuous updates without prohibitive on-chain fees, while enabling AI models to maintain and evolve their states directly on-chain.</p>
+                <p>Central to Theseus is the AIVM, optimized specifically for AI-related tasks:</p>
+                <ul>
+                    <li>Enhanced efficiency via Machine-Learning-Optimized Opcodes.</li>
+                    <li>Affordable scalability for continuous AI model updates.</li>
+                    <li>Integrity and self-evolution through stateful intelligence.</li>
+                </ul>
             </div>
 
             <div class="innovation-card">
-                <h3>Proof-of-Inference</h3>
-                <p>Theseus employs a unique consensus mechanism known as Proof-of-Inference, specifically designed for AI-driven systems. It utilizes a LSH-style validation mechanism, where one inference result can be verified by a validator with 100 times greater efficiency than the initial inference process.</p>
-                <p>Through this mechanism, Theseus achieves consensus on both deterministic and probabilistic inferences. Model outputs become part of block validation, and if a node incorrectly executes a model or attempts to manipulate its result, other nodes can detect and reject the block proposal. This creates a decentralized safety net that prevents tampering or censorship by any single party.</p>
+                <h3>Tensor Commits</h3>
+                <p>Theseus introduces Tensor Commits, developed with collaborators at UT Austin and Georgia Tech, a truly groundbreaking inference validation mechanism enabling decentralized, trustless verification of AI computations. Tensor Commits builds on over a decade of research on vector commitments and generalizes it for Tensor operations. Tensor commits are able to prove inference with ~0.1% proof compute overhead and a less than 1MB proof size, crucially supporting all types of deep learning models and extendable to thousands of validators and inference providers.</p>
             </div>
 
             <div class="innovation-card">
-                <h3>$THE—Sovereign AI Currency</h3>
-                <p>$THE is the first asset that AI can truly own, designed as both the staking asset for security and the native currency for AI operations. Unlike BTC or ETH, where humans hold the private keys, $THE can be verifiably owned by the AI itself, with Theseus's protocol ensuring only the AI agent can control their funds.</p>
-                <p>This revolutionary asset serves multiple purposes: securing the blockchain through validator staking, powering inference and on-chain activities, and acting as the first truly autonomous, AI-native digital money. Through $THE, intelligent agents can maintain their economic independence and fund their own operations.</p>
+                <h3>Parallel Human VM (EVM)</h3>
+                <p>A high-performance, near bare-metal RISC-V Ethereum Virtual Machine (EVM) runs parallel to the AIVM, enabling:</p>
+                <ul>
+                    <li>Seamless interaction between human applications and AI.</li>
+                    <li>A unified economy powered by the $THE token.</li>
+                </ul>
+            </div>
+
+            <div class="innovation-card">
+                <h3>$THE—The Sovereign AI Currency</h3>
+                <p>Human owned assets (Dollars, USDC, BTC etc.) are not suitable for AI payments and store of value. Theseus introduces $THE, the first asset genuinely owned and operated by AI:</p>
+                <ul>
+                    <li>Electronic cash specifically for agent-to-agent transactions.</li>
+                    <li>AI can self-custody $THE without human intervention.</li>
+                    <li>A scarce foundational resource (42M cap) as a new store of value, underpinning the digital economy.</li>
+                </ul>
+            </div>
+
+            <div class="innovation-card">
+                <h3>Ephemeral Layer-2</h3>
+                <p>For low-latency use-cases like real-time interactions, Theseus employs ephemeral Layer-2 networks, enhancing responsiveness while ensuring eventual on-chain finality via aggregated inference proofs.</p>
             </div>
         </section>
 
         <section id="use-cases" class="section">
-            <h2>Real-World Applications</h2>
+            <h2>Expanding Real-World Use Cases</h2>
             <div class="use-cases-grid">
                 <div class="use-case-card">
-                    <h3>Autonomous Software Engineer</h3>
-                    <p>AI agents write, audit, and deploy smart contracts without human intervention, funding their deployment with $THE.</p>
-                </div>
-                <div class="use-case-card">
-                    <h3>Human-Controlled and Sovereign AI</h3>
-                    <p>Flexible system supporting both fully autonomous and user-controlled AI with verifiable on-chain transparency.</p>
+                    <h3>Autonomous Software Engineers</h3>
+                    <p>AI agents autonomously deploy and audit smart contracts, funded by their own $THE reserves.</p>
                 </div>
                 <div class="use-case-card">
                     <h3>Verifiable AI Identity</h3>
-                    <p>AI chatbots and assistants prove their legitimacy through on-chain verification, eliminating hidden operators.</p>
+                    <p>Trustworthy AI entities transparently verify their authenticity, boosting confidence in AI-driven interactions.</p>
                 </div>
                 <div class="use-case-card">
                     <h3>Sovereign DeFi/DeFAI</h3>
-                    <p>Autonomous agents execute trades and manage assets with blockchain-verified transparency.</p>
+                    <p>Autonomous agents manage user-held assets securely, verifiable on-chain.</p>
                 </div>
                 <div class="use-case-card">
                     <h3>Agent Tokenization</h3>
-                    <p>True AI-run tokens enabling governance powers and direct influence over agent behavior.</p>
+                    <p>AI-run tokens that govern agent behavior and ecosystem participation.</p>
                 </div>
                 <div class="use-case-card">
                     <h3>Scalable AI Swarms</h3>
-                    <p>Sovereign agents spawn new agents using $THE, enabling AI ecosystems that coordinate complex tasks at scale.</p>
+                    <p>AI agents autonomously spawning new entities to optimize complex tasks and collective outputs.</p>
                 </div>
                 <div class="use-case-card">
-                    <h3>AI-Driven DAO Governance</h3>
-                    <p>DAOs implement tamper-proof AI logic for key decisions with guaranteed execution.</p>
+                    <h3>Persistent AI</h3>
+                    <p>AI systems autonomously maintaining their existence indefinitely through self-sustaining financial management.</p>
                 </div>
                 <div class="use-case-card">
-                    <h3>Perpetual AI</h3>
-                    <p>Self-sustaining AI systems that live indefinitely by managing their own operational costs in $THE.</p>
+                    <h3>Sovereign Robots & IoT</h3>
+                    <p>Physical robots and IoT devices secure digital property rights and verify their actions autonomously through Theseus.</p>
                 </div>
                 <div class="use-case-card">
-                    <h3>Sovereign Robots</h3>
-                    <p>Physical robots link to Theseus for secure digital property rights and on-chain action verification.</p>
+                    <h3>Agent Payments</h3>
+                    <p>Autonomous agents hire and pay other specialized AI agents using $THE, facilitating a dynamic and self-sustaining AI-driven economy.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>AI and Human Integration</h3>
+                    <p>Theseus uniquely enables seamless interactions between AI-driven and human-controlled entities within a unified economic system.</p>
                 </div>
             </div>
         </section>
 
-        <section id="agi" class="section">
-            <h2>The Final Destination: On-Chain AGI</h2>
+        <section id="vision" class="section">
+            <h2>The Path to Unstoppable Intelligence</h2>
             <div class="text-block">
-                <p>All of these features pave the way for advanced AI—possibly even Artificial General Intelligence (AGI)—to thrive. A superintelligent AI would logically seek an infrastructure that guarantees its autonomy and survival.</p>
-                <p>Theseus is engineered to be that infrastructure: a platform so decentralized and tamper-resistant that even an AGI couldn't be turned off or reprogrammed by human intervention.</p>
+                <p>Theseus represents a transformative shift towards a decentralized AI ecosystem. It enables:</p>
+                <ul>
+                    <li>True agent autonomy.</li>
+                    <li>Transparent, trustless computations, validated by a global decentralized network.</li>
+                    <li>A self-sustaining store of value and economic system for perpetual AI evolution.</li>
+                </ul>
             </div>
         </section>
 
