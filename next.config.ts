@@ -6,7 +6,11 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // For GitHub Pages custom domain - use absolute paths
+  // Disable streaming for static export to fix CSS loading
+  experimental: {
+    ppr: false,
+  },
+  // For GitHub Pages - use absolute paths
   basePath: '',
 };
 
