@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Theseus Website — Desktop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <ul class="nav-left">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#market">Market</a></li>
+          <li><a href="#whitepaper">Whitepaper</a></li>
+        </ul>
+        <a class="brand" href="#home" aria-label="Theseus home">
+          <img class="brand-logo" src="assets/images/img-001.png" alt="Theseus logo" />
+        </a>
+        <a class="btn-whitepaper" href="assets/whitepaper.pdf" target="_blank" rel="noopener">Download the Whitepaper</a>
+      </nav>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="hero-corners" aria-hidden="true">
+        <i class="c tl"></i>
+        <i class="c tr"></i>
+        <i class="c bl"></i>
+        <i class="c br"></i>
+      </div>
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            <span>Build.</span> <span>Verify.</span> <span>Liberate</span> <span>Intelligence.</span>
+          </h1>
+          <p class="hero-sub">
+            Theseus is the only platform to enable
+            <a class="dotted-link" href="#about">Stateful Sovereign Intelligence</a>
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="assets/whitepaper.pdf" target="_blank" rel="noopener" download>
+              Download the Whitepaper
+            </a>
+            <div class="note">PASSWORD PROTECTED</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <p>Replace this copy with real project content. This anchor is here so the header links scroll to the correct section.</p>
+      </div>
+    </section>
+
+    <section id="market" class="section features">
+      <div class="container">
+        <h2 class="visually-hidden">Key Innovations</h2>
+        <ul class="feature-grid" role="list">
+          <li class="feature">
+            <div class="icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12h16M12 4v16" stroke="white" stroke-opacity="0.8" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Tensor Commitments</h3>
+            <p>The most efficient way to verify inference in a public shared state environment.</p>
+          </li>
+          <li class="feature">
+            <div class="icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l8 6-8 6M12 6l8 6-8 6" stroke="white" stroke-opacity="0.8" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Terkle Trees</h3>
+            <p>The first generalization of Verkle Trees to tensors.</p>
+          </li>
+          <li class="feature">
+            <div class="icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="white" stroke-opacity="0.8" stroke-width="2"/>
+                <path d="M12 7v10M7 12h10" stroke="white" stroke-opacity="0.8" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>The AIVM</h3>
+            <p>Dedicated virtual machine with ML opcodes translating raw inference into strict on-chain actions.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="whitepaper" class="section">
+      <div class="container">
+        <h2>Whitepaper</h2>
+        <p>You can drop your real PDF at <code>assets/whitepaper.pdf</code>. The header button opens it in a new tab.</p>
+        <p><a class="btn-whitepaper inline" href="assets/whitepaper.pdf" target="_blank" rel="noopener">Open Whitepaper</a></p>
+      </div>
+    </section>
+  </body>
+  
+</html>
+
+
