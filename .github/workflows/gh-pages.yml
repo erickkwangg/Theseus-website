@@ -32,6 +32,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prepare Pages artifacts (.nojekyll + CNAME)
+        run: |
+          touch ./out/.nojekyll
+          if [ -f CNAME ]; then cp CNAME ./out/CNAME; fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
