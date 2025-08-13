@@ -55,7 +55,7 @@ export default function Features() {
 
               <div className="space-y-4 sm:col-span-2 lg:col-span-1">
                 <Image src={machineIcon} alt="icon" className="size-8" />
-                <h4 className="text-base lg:text-lg font-medium">The ATVM</h4>
+                <h4 className="text-base lg:text-lg font-medium">The AIVM</h4>
                 <p className="text-gray-400 text-sm">
                   Dedicated virtual machine specifically with ML opcodes and a
                   method to translate raw neural inference to strict on-chain
