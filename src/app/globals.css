@@ -124,19 +124,19 @@
   filter: drop-shadow(-2px 0 0 #374151);
 }
 .custom-hero-bg {
-  background-image: url(/herobg.png);
+  background-image: url("./herobg.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .market-bg {
-  background-image: url(/market-bg.png);
+  background-image: url("./market-bg.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .footer-section-bg {
-  background-image: url(/footer-section-bg.png);
+  background-image: url("./footer-section-bg.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -237,7 +237,7 @@
 /* Logo Card Design */
 .logo-card {
   position: relative;
-  background-image: url("/logo-card-bg.png");
+  background-image: url("./logo-card-bg.png");
   background-size: cover;
   background-position: center;
   border: 1px solid rgba(255, 255, 255, 0.2);

@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // Ensure static assets and chunks are referenced relatively for GitHub Pages
+  assetPrefix: './',
 };
 
 export default nextConfig;
