@@ -38,6 +38,8 @@ export default function Header() {
           </Link>
           <a
             href="https://theseuschain.substack.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:text-gray-300 transition-colors text-sm"
           >
             BLOG
@@ -80,6 +82,8 @@ export default function Header() {
                 </Link>
                 <a
                   href="https://theseuschain.substack.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white hover:text-gray-300 transition-colors text-sm"
                 >
                   BLOG

@@ -16,7 +16,7 @@ export default function Footer() {
             </h2>
 
             <div>
-              <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg">
+              <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base">
                   DOWNLOAD THE WHITEPAPER
                 </Button>
@@ -95,12 +95,16 @@ export default function Footer() {
               </Link>
               <a
                 href="https://theseuschain.substack.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 BLOG
               </a>
               <a
                 href="https://docsend.com/view/p9fw7vh3ygrrnwgg"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 WHITEPAPER
