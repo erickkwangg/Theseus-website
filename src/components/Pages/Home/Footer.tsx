@@ -100,6 +100,8 @@ export default function Footer() {
               <a
                 href="https://theseuschain.substack.com"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 BLOG
               </a>
