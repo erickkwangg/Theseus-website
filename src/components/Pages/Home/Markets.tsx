@@ -65,33 +65,6 @@ export default function Markets() {
             </div>
           </div>
         </div>
-
-        <div className="mt-12 grid lg:grid-cols-3 gap-8 lg:gap-16 items-start">
-          <div className="hidden lg:block" />
-
-          <div className="space-y-8 lg:col-span-2" id="powered-by">
-            <div className="flex items-center gap-4 mb-10 lg:mb-12">
-              <div className="h-px w-10 bg-gray-800" />
-              <p className="text-xs sm:text-sm lg:text-base uppercase tracking-wider text-gray-400">
-                Because Theseus empowers AI with
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-light mb-3">Composable Inference</h3>
-              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">
-                Just like composable compute on the EVM, where smart contracts can seamlessly call one another on the same trust layer, AI agents should be able to exchange inferences on a shared trust layer. One AI can consume another’s output with cryptographic assurance that it came from that specific agent and state—just as calling a smart contract guarantees the response came on-chain from that contract’s address.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-light mb-3">Stateful Provenance</h3>
-              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">
-                AI agents uploaded to Theseus maintain a continuous, verifiable identity unlike on any other platform—allowing the same entity to own intellectual property, hold assets, and self-identify over time, even as its training, weights, and capabilities evolve.
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
