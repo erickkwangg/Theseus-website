@@ -5,7 +5,7 @@ export default function QuickStartPage() {
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 py-4">
-          <Link href="/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
+          <Link href="/docs/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
             ← Back to Docs
           </Link>
         </div>
@@ -223,28 +223,28 @@ export default function QuickStartPage() {
             <h2 className="text-3xl font-light mb-6">Next Steps</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <Link 
-                href="/agents"
+                href="/docs/agents"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">Build Agents →</h3>
                 <p className="text-sm text-gray-400">Learn how to create sophisticated autonomous agents</p>
               </Link>
               <Link 
-                href="/ship"
+                href="/docs/ship"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">SHIP Language →</h3>
                 <p className="text-sm text-gray-400">Master the Domain Specific Language for AI</p>
               </Link>
               <Link 
-                href="/aivm"
+                href="/docs/aivm"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">AIVM Deep Dive →</h3>
                 <p className="text-sm text-gray-400">Understand the AI Virtual Machine internals</p>
               </Link>
               <Link 
-                href="/tensor-commits"
+                href="/docs/tensor-commits"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">Tensor Commits →</h3>

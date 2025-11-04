@@ -5,7 +5,7 @@ export default function IntroductionPage() {
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 py-4">
-          <Link href="/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
+          <Link href="/docs/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
             ← Back to Docs
           </Link>
         </div>
@@ -138,7 +138,7 @@ export default function IntroductionPage() {
 
           <div className="border-t border-gray-800 pt-8">
             <Link 
-              href="/quickstart"
+              href="/docs/quickstart"
               className="inline-block bg-white text-black px-6 py-3 hover:bg-gray-200 transition-colors"
             >
               Continue to Quick Start →
