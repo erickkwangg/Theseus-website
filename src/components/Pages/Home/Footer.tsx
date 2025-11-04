@@ -108,6 +108,8 @@ export default function Footer() {
               <a
                 href="https://docsend.com/view/p9fw7vh3ygrrnwgg"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 WHITEPAPER
               </a>

@@ -34,7 +34,7 @@ export default function Hero() {
           </div>
 
           <div>
-            <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg">
+            <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
               <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base">
                 DOWNLOAD THE WHITEPAPER
               </Button>
