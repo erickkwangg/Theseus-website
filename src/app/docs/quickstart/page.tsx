@@ -223,28 +223,28 @@ export default function QuickStartPage() {
             <h2 className="text-3xl font-light mb-6">Next Steps</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <Link 
-                href="/docs/agents"
+                href="/agents"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">Build Agents →</h3>
                 <p className="text-sm text-gray-400">Learn how to create sophisticated autonomous agents</p>
               </Link>
               <Link 
-                href="/docs/ship"
+                href="/ship"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">SHIP Language →</h3>
                 <p className="text-sm text-gray-400">Master the Domain Specific Language for AI</p>
               </Link>
               <Link 
-                href="/docs/aivm"
+                href="/aivm"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">AIVM Deep Dive →</h3>
                 <p className="text-sm text-gray-400">Understand the AI Virtual Machine internals</p>
               </Link>
               <Link 
-                href="/docs/tensor-commits"
+                href="/tensor-commits"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">Tensor Commits →</h3>

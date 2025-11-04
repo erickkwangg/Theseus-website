@@ -138,7 +138,7 @@ export default function IntroductionPage() {
 
           <div className="border-t border-gray-800 pt-8">
             <Link 
-              href="/docs/quickstart"
+              href="/quickstart"
               className="inline-block bg-white text-black px-6 py-3 hover:bg-gray-200 transition-colors"
             >
               Continue to Quick Start →

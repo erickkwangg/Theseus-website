@@ -17,11 +17,11 @@ export default function Footer() {
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/docs">
+              <a href="https://docs.theseuschain.com">
                 <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
                   DEVELOPER DOCS
                 </Button>
-              </Link>
+              </a>
               <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
                   DOWNLOAD WHITEPAPER
@@ -102,12 +102,12 @@ export default function Footer() {
               >
                 MARKET
               </Link>
-              <Link
-                href="/docs"
+              <a
+                href="https://docs.theseuschain.com"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 DOCS
-              </Link>
+              </a>
               <a
                 href="https://theseuschain.substack.com"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"

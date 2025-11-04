@@ -252,14 +252,14 @@ export default function TensorCommitsPage() {
           <div className="border-t border-gray-800 pt-8">
             <div className="grid sm:grid-cols-2 gap-4">
               <Link 
-                href="/docs/aivm"
+                href="/aivm"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">← AIVM Architecture</h3>
                 <p className="text-sm text-gray-400">Learn how proofs integrate with execution</p>
               </Link>
               <Link 
-                href="/docs/agents"
+                href="/agents"
                 className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
               >
                 <h3 className="font-medium mb-2">Build Agents →</h3>

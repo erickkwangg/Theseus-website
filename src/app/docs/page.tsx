@@ -7,9 +7,9 @@ export default function DocsHomePage() {
       {/* Header */}
       <header className="border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
+          <a href="https://theseuschain.com" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
             ← Back to Theseus
-          </Link>
+          </a>
           <h1 className="text-lg sm:text-2xl font-light">Developer Docs</h1>
         </div>
       </header>
@@ -26,13 +26,13 @@ export default function DocsHomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="/docs/quickstart"
+              href="/quickstart"
               className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 hover:bg-gray-200 transition-colors"
             >
               Quick Start <ArrowRight className="h-4 w-4" />
             </Link>
             <Link 
-              href="/docs/introduction"
+              href="/introduction"
               className="inline-flex items-center gap-2 bg-transparent border border-white text-white px-8 py-3 hover:bg-white hover:text-black transition-colors"
             >
               Read Introduction
@@ -42,7 +42,7 @@ export default function DocsHomePage() {
 
         {/* Main Categories */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          <Link href="/docs/introduction" className="group">
+          <Link href="/introduction" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Getting Started</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -52,7 +52,7 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
-          <Link href="/docs/aivm" className="group">
+          <Link href="/aivm" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">AI Virtual Machine</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -62,7 +62,7 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
-          <Link href="/docs/tensor-commits" className="group">
+          <Link href="/tensor-commits" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Tensor Commits</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -72,7 +72,7 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
-          <Link href="/docs/agents" className="group">
+          <Link href="/agents" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Agents & Models</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -82,7 +82,7 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
-          <Link href="/docs/architecture" className="group">
+          <Link href="/architecture" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Architecture</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -92,7 +92,7 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
-          <Link href="/docs/ship" className="group">
+          <Link href="/ship" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">SHIP Language</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -135,7 +135,7 @@ export default function DocsHomePage() {
               <ArrowRight className="h-4 w-4 text-gray-600 ml-auto" />
             </a>
             <Link 
-              href="/docs/examples"
+              href="/examples"
               className="flex items-center gap-3 p-4 border border-gray-800 hover:border-gray-600 transition-colors"
             >
               <span className="text-gray-400">Code Examples</span>
