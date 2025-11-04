@@ -144,7 +144,7 @@ export default function AgentsPage() {
                   <tr>
                     <td className="p-4 border-b border-gray-800 font-medium">3. Fee & balance test</td>
                     <td className="p-4 border-b border-gray-800 text-gray-400">
-                      Look up model's posted cost, add network proof surcharge, confirm $THE balance covers total
+                      Look up model&apos;s posted cost, add network proof surcharge, confirm $THE balance covers total
                     </td>
                   </tr>
                   <tr>
@@ -185,14 +185,14 @@ export default function AgentsPage() {
                 <p className="text-gray-400">
                   The caller sends a single AIVM request that names the callee, the desired function, arguments, and 
                   (when required) either a capability token or a stake deposit. Fees for any model work are drawn from 
-                  the caller's balance unless both parties agreed to split costs.
+                  the caller&apos;s balance unless both parties agreed to split costs.
                 </p>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-3">3. Model Invocation</h3>
                 <p className="text-gray-400">
-                  Once control reaches the callee, that agent's own bytecode decides whether to run a model. If it 
+                  Once control reaches the callee, that agent&apos;s own bytecode decides whether to run a model. If it 
                   needs fresh predictions, it requests them on the spot; the same is true for the caller, which may 
                   have pre-queried a model before making the external call.
                 </p>
@@ -213,14 +213,14 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-light mb-6">Model Usage Fees</h2>
             
             <p className="text-gray-400 mb-6">
-              Model owners set a base inference fee in $THE. Model usage fees flow straight to the model's owner 
+              Model owners set a base inference fee in $THE. Model usage fees flow straight to the model&apos;s owner 
               address. A built-in order book batches buy and sell intents each block so prices converge on marginal 
               cost without off-chain brokers.
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6">
               <p className="text-gray-400">
-                Dishonest proofs trigger a slash that burns the offender's stake, ensuring economic security scales 
+                Dishonest proofs trigger a slash that burns the offender&apos;s stake, ensuring economic security scales 
                 directly with staked value.
               </p>
             </div>

@@ -28,7 +28,7 @@ export default function TensorCommitsPage() {
               prohibitively expensive, especially for large language models.
             </p>
             <p className="text-gray-400">
-              Theseus' Tensor Commits provide batch verification and reduce the opening costs while keeping the 
+              Theseus&apos; Tensor Commits provide batch verification and reduce the opening costs while keeping the 
               computation overheads small. This is achieved through a novel application of KZG commitment schemes 
               extended to multi-dimensional tensor structures.
             </p>
@@ -122,7 +122,7 @@ export default function TensorCommitsPage() {
                 <ul className="space-y-2 text-gray-400 list-none">
                   <li>• Opening (y, π) showing the computation result</li>
                   <li>• Commitment to input embeddings</li>
-                  <li>• Commitment to each layer's output</li>
+                  <li>• Commitment to each layer&apos;s output</li>
                   <li>• Merkle path through the Terkle tree</li>
                 </ul>
               </div>
@@ -234,14 +234,14 @@ export default function TensorCommitsPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Why This Matters</h2>
             <p className="text-gray-400 mb-6">
-              Theseus' tensor commitments uniquely support scalable, transparent, and cryptographically sound 
+              Theseus&apos; tensor commitments uniquely support scalable, transparent, and cryptographically sound 
               verification for LLM inference. This novel commitment mechanism positions Theseus as the ideal 
               blockchain solution for deploying trustworthy, decentralized, and verifiable large language models.
             </p>
             
             <div className="bg-gray-900 border border-gray-800 rounded p-6">
               <ul className="space-y-3 text-gray-400">
-                <li>• <strong className="text-white">No recomputation required:</strong> Verifiers don't need to re-run the entire model</li>
+                <li>• <strong className="text-white">No recomputation required:</strong> Verifiers do not need to re-run the entire model</li>
                 <li>• <strong className="text-white">Hardware independence:</strong> Proofs are valid regardless of the hardware used</li>
                 <li>• <strong className="text-white">Privacy preserving:</strong> Model weights remain private while computation is verifiable</li>
                 <li>• <strong className="text-white">Scalable verification:</strong> Thousands of validators can verify simultaneously</li>

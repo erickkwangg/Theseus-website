@@ -57,7 +57,7 @@ export default function ArchitecturePage() {
                 </p>
                 <ul className="space-y-2 text-gray-400 list-none">
                   <li>• HotStuff-inspired BFT consensus</li>
-                  <li>• Model-transaction coupling (blocks can't finalize without valid model roots)</li>
+                  <li>• Model-transaction coupling (blocks cannot finalize without valid model roots)</li>
                   <li>• VRF-based validator selection</li>
                   <li>• One-block finality under honest-majority stake</li>
                 </ul>
@@ -106,7 +106,7 @@ export default function ArchitecturePage() {
                 <ul className="space-y-2 text-gray-400">
                   <li>• Models are split into blobs with Reed-Solomon parity</li>
                   <li>• Storage is enforced by storage-miner staking</li>
-                  <li>• Cold storage optimization (like AWS S3) - retrieval doesn't need to be extremely quick</li>
+                  <li>• Cold storage optimization (like AWS S3) - retrieval does not need to be extremely quick</li>
                   <li>• Tensor Commits require minimal liveness for secure inference</li>
                 </ul>
               </div>
@@ -133,7 +133,7 @@ export default function ArchitecturePage() {
                   <div className="space-y-3">
                     <div>
                       <strong className="text-white">On-Chain Checkpoints:</strong>
-                      <p className="text-gray-400 mt-1">Critical variables (balances, last model versions, config flags) live directly inside the agent's state root</p>
+                      <p className="text-gray-400 mt-1">Critical variables (balances, last model versions, config flags) live directly inside the agent&apos;s state root</p>
                     </div>
                     <div>
                       <strong className="text-white">Off-Chain Memory Vault:</strong>
@@ -206,7 +206,7 @@ export default function ArchitecturePage() {
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-2">1. Model Deployment</h3>
                 <p className="text-gray-400">
-                  Developer uploads weights (with model's Tensor Commit) to TheseusStore
+                  Developer uploads weights (with model&apos;s Tensor Commit) to TheseusStore
                 </p>
               </div>
 

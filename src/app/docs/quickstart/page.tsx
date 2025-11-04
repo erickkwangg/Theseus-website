@@ -165,7 +165,7 @@ export default function QuickStartPage() {
             <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
               <div># Register a model</div>
               <div>theseus-cli register-model \</div>
-              <div>  --name "Llama-3.1-8B" \</div>
+              <div>  --name &quot;Llama-3.1-8B&quot; \</div>
               <div>  --weights ./models/llama-8b.safetensors \</div>
               <div>  --base-fee 100</div>
             </div>

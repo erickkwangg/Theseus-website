@@ -92,7 +92,7 @@ export default function SHIPPage() {
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-3">Verifiability</h3>
                 <p className="text-gray-400">
-                  SHIP programs are compatible with Theseus' backends and generate Tensor Commit proofs alongside 
+                  SHIP programs are compatible with Theseus&apos; backends and generate Tensor Commit proofs alongside 
                   inference outputs.
                 </p>
               </div>
@@ -131,7 +131,7 @@ export default function SHIPPage() {
                 </p>
                 <ul className="mt-3 space-y-2 text-gray-400 list-none">
                   <li>• The agent itself is fine-tuned on the SHIP language or provided context on the DSL</li>
-                  <li>• There is a "meta-model" whose specific task is to transform natural language from an initial 
+                  <li>• There is a &quot;meta-model&quot; whose specific task is to transform natural language from an initial 
                     model into an output</li>
                 </ul>
                 <p className="text-gray-400 mt-3">
@@ -160,15 +160,15 @@ export default function SHIPPage() {
             <h2 className="text-3xl font-light mb-6">Example Use Case</h2>
             
             <p className="text-gray-400 mb-6">
-              A sovereign agent runs a summarization model on-chain. The summary contains a trigger like "Pay 10 $THE 
-              to agent_xyz for document processing".
+              A sovereign agent runs a summarization model on-chain. The summary contains a trigger like &quot;Pay 10 $THE 
+              to agent_xyz for document processing&quot;.
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
               <h3 className="text-lg font-medium mb-4">Without SHIP</h3>
               <p className="text-gray-400">
                 This text would be parsed directly into bytecode, causing chances for execution unaligned with the 
-                agent's intention.
+                agent&apos;s intention.
               </p>
             </div>
 

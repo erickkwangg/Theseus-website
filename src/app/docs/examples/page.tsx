@@ -57,7 +57,7 @@ export default function ExamplesPage() {
                 </p>
                 <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
                   <div>autonomy_flag = 0  // human-gated</div>
-                  <div>controller_key = 0x1234...  // owner's public key</div>
+                  <div>controller_key = 0x1234...  // owner&apos;s public key</div>
                   <div>resource_quota = 1000000  // max FLOPs per epoch</div>
                 </div>
               </div>

@@ -233,8 +233,8 @@ export default function AIVMPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Comparison to EVM</h2>
             <p className="text-gray-400 mb-6">
-              The EVM simply isn't built for on-chain AI. It offers no tensor-aware opcodes and no native inference 
-              proofs like AIVM's Tensor Commits, so hardware-specific rounding quirks can slip through unchecked.
+              The EVM simply isn&apos;t built for on-chain AI. It offers no tensor-aware opcodes and no native inference 
+              proofs like AIVM&apos;s Tensor Commits, so hardware-specific rounding quirks can slip through unchecked.
             </p>
             
             <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden">

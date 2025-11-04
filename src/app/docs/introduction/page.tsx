@@ -63,7 +63,7 @@ export default function IntroductionPage() {
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-xl font-medium mb-3">$THE Token</h3>
                 <p className="text-gray-400">
-                  The first asset that AI can truly own. Balances live autonomously within the agent's code, serving 
+                  The first asset that AI can truly own. Balances live autonomously within the agent&apos;s code, serving 
                   as both a store of value and a payment method for AI-to-AI transactions.
                 </p>
               </div>
@@ -114,16 +114,16 @@ export default function IntroductionPage() {
             <div className="space-y-4 text-gray-400">
               <div>
                 <strong className="text-white">Decentralization first.</strong> Sovereign AI should never trade 
-                decentralization for performance. Once deployed, an agent's logic and state must remain reachable 
+                decentralization for performance. Once deployed, an agent&apos;s logic and state must remain reachable 
                 without reliance on any single node.
               </div>
               <div>
                 <strong className="text-white">Autonomous value execution.</strong> AI must be able to initiate and 
-                execute transactions on its own, without a human "approving" the transfer.
+                execute transactions on its own, without a human &quot;approving&quot; the transfer.
               </div>
               <div>
-                <strong className="text-white">Tensor-aware runtime.</strong> Inference that isn't included in the 
-                blockchain's state-transition function leaves a system dependent on third-party services.
+                <strong className="text-white">Tensor-aware runtime.</strong> Inference that isn&apos;t included in the 
+                blockchain&apos;s state-transition function leaves a system dependent on third-party services.
               </div>
               <div>
                 <strong className="text-white">Low-overhead, verifiable inference.</strong> Auditing a deep-learning 
