@@ -38,6 +38,8 @@ export default function Header() {
           </Link>
           <a
             href="https://docs.theseuschain.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:text-gray-300 transition-colors text-sm"
           >
             DOCS
@@ -91,6 +93,8 @@ export default function Header() {
                 </Link>
                 <a
                   href="https://docs.theseuschain.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-gray-300 transition-colors text-lg"
                 >
                   DOCS

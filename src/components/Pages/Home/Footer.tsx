@@ -17,7 +17,7 @@ export default function Footer() {
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://docs.theseuschain.com">
+              <a href="https://docs.theseuschain.com" target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
                   DEVELOPER DOCS
                 </Button>
@@ -104,6 +104,8 @@ export default function Footer() {
               </Link>
               <a
                 href="https://docs.theseuschain.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 DOCS
