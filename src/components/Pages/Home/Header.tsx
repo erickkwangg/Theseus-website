@@ -37,7 +37,7 @@ export default function Header() {
             MARKET
           </Link>
           <a
-            href="https://docs.theseuschain.com"
+            href="https://theseuschain.com/docs"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-gray-300 transition-colors text-sm"
@@ -92,7 +92,7 @@ export default function Header() {
                   MARKET
                 </Link>
                 <a
-                  href="https://docs.theseuschain.com"
+                  href="https://theseuschain.com/docs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gray-300 transition-colors text-lg"
