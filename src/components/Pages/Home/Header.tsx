@@ -36,6 +36,12 @@ export default function Header() {
           >
             MARKET
           </Link>
+          <Link
+            href="/docs"
+            className="text-white hover:text-gray-300 transition-colors text-sm"
+          >
+            DOCS
+          </Link>
           <a
             href="https://theseuschain.substack.com"
             className="text-white hover:text-gray-300 transition-colors text-sm"
@@ -82,6 +88,12 @@ export default function Header() {
                   className="hover:text-gray-300 transition-colors text-lg"
                 >
                   MARKET
+                </Link>
+                <Link
+                  href="/docs"
+                  className="hover:text-gray-300 transition-colors text-lg"
+                >
+                  DOCS
                 </Link>
                 <a
                   href="https://theseuschain.substack.com"

@@ -17,13 +17,18 @@ export default function Footer() {
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/docs">
+                <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
+                  DEVELOPER DOCS
+                </Button>
+              </Link>
               <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
-                <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base">
-                  DOWNLOAD THE WHITEPAPER
+                <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
+                  DOWNLOAD WHITEPAPER
                 </Button>
               </a>
               <a href="https://github.com/ob-theseus/theseuschain" target="_blank" rel="noopener noreferrer">
-                <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base flex items-center gap-2">
+                <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base flex items-center gap-2 w-full sm:w-auto">
                   <Github className="h-4 w-4" />
                   VIEW ON GITHUB
                 </Button>
@@ -78,7 +83,7 @@ export default function Footer() {
               className="size-10"
             />
 
-            <nav className="flex space-x-6 lg:space-x-8">
+            <nav className="flex flex-wrap justify-center gap-4 lg:gap-6">
               <Link
                 href="/"
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
@@ -96,6 +101,12 @@ export default function Footer() {
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 MARKET
+              </Link>
+              <Link
+                href="/docs"
+                className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
+              >
+                DOCS
               </Link>
               <a
                 href="https://theseuschain.substack.com"
