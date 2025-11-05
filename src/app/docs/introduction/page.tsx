@@ -136,6 +136,99 @@ export default function IntroductionPage() {
             </div>
           </section>
 
+          <section className="mb-12">
+            <h2 className="text-3xl font-light mb-6">Theseus Agents vs. Ethereum Smart Contracts</h2>
+            <p className="text-gray-400 mb-6">
+              While the deployment and interaction patterns may look similar on the surface, Theseus agents represent 
+              a fundamental paradigm shift from traditional smart contracts.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                <h3 className="text-xl font-medium mb-4 text-gray-300">Ethereum Smart Contracts</h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Passive code that waits to be called. Deterministic, rigid logic with no ability to initiate actions.
+                </p>
+                <ul className="space-y-3 text-sm text-gray-400">
+                  <li>• <strong className="text-white">Reactive:</strong> Only executes when externally triggered by a transaction</li>
+                  <li>• <strong className="text-white">Deterministic:</strong> Same input always produces same output</li>
+                  <li>• <strong className="text-white">Human-controlled:</strong> Requires external accounts (private keys) to initiate any action</li>
+                  <li>• <strong className="text-white">Simple logic:</strong> Basic conditional statements and state transitions</li>
+                  <li>• <strong className="text-white">No inference:</strong> Cannot perform ML operations or complex reasoning</li>
+                </ul>
+              </div>
+
+              <div className="bg-gray-900 border border-blue-900 rounded p-6">
+                <h3 className="text-xl font-medium mb-4 text-blue-400">Theseus Agents</h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Autonomous entities with true agency. Can think, decide, and act independently without human control.
+                </p>
+                <ul className="space-y-3 text-sm text-gray-400">
+                  <li>• <strong className="text-white">Proactive:</strong> Can wake up, evaluate conditions, and initiate transactions autonomously</li>
+                  <li>• <strong className="text-white">Intelligent:</strong> Performs ML inference on-chain to make complex decisions</li>
+                  <li>• <strong className="text-white">Self-sovereign:</strong> Owns its own $THE balance and controls its actions without private keys</li>
+                  <li>• <strong className="text-white">Agentic logic:</strong> Can reason, learn from context, and adapt behavior</li>
+                  <li>• <strong className="text-white">Native inference:</strong> Runs models directly in AIVM with verifiable proofs</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
+              <h3 className="text-lg font-medium mb-4">Visual Comparison: Interaction Flows</h3>
+              <p className="text-gray-400 mb-6">
+                Notice how Ethereum smart contracts require external accounts to initiate everything, while Theseus 
+                agents can wake up and act autonomously.
+              </p>
+              <div className="bg-black border border-gray-700 rounded p-4 overflow-x-auto">
+                <img 
+                  src="/theseus-vs-ethereum.png" 
+                  alt="Theseus vs Ethereum interaction flow comparison" 
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
+              <h3 className="text-lg font-medium mb-4">Deployment: Similar Process, Different Outcome</h3>
+              <p className="text-gray-400 mb-4">
+                Deploying a Theseus agent feels familiar to web2 developers and resembles smart contract deployment, 
+                but with crucial additions that enable true autonomy:
+              </p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-white mb-2">Smart Contract Deployment</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    <li>1. Write Solidity code</li>
+                    <li>2. Compile to bytecode</li>
+                    <li>3. Deploy to Ethereum</li>
+                    <li>4. Contract sits waiting for calls</li>
+                    <li>5. Requires external accounts to do anything</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white mb-2">Theseus Agent Deployment</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    <li>1. Write agent code (Python, Rust, or SHIP DSL)</li>
+                    <li>2. Add Theseus context (models, autonomy level, triggers)</li>
+                    <li>3. Deploy to Theseus with initial $THE balance</li>
+                    <li>4. Agent immediately begins autonomous operation</li>
+                    <li>5. Can initiate transactions, run inference, and coordinate independently</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-950 border border-blue-900 rounded p-6">
+              <h3 className="text-lg font-medium mb-3 text-blue-400">Key Insight: True Autonomy</h3>
+              <p className="text-gray-300">
+                Ethereum smart contracts are glorified databases with conditional logic. Theseus agents are <strong>autonomous 
+                digital entities</strong> that can think, plan, and act without human intervention. The deployment process 
+                may look similar, but what you get is fundamentally different: not a passive contract, but an active, 
+                intelligent agent with real agency.
+              </p>
+            </div>
+          </section>
+
           <div className="border-t border-gray-800 pt-8">
             <Link 
               href="/docs/quickstart"
