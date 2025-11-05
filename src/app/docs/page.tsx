@@ -52,6 +52,16 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
+          <Link href="/docs/comparison" className="group">
+            <div className="bg-gray-900 border border-blue-900 p-6 hover:border-blue-600 transition-colors h-full">
+              <h3 className="text-xl font-medium mb-3 group-hover:text-blue-400">Theseus vs. Ethereum</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Understand the critical difference: true autonomy. Agents vs. smart contracts explained.
+              </p>
+              <span className="text-sm text-gray-500 group-hover:text-blue-400">Compare →</span>
+            </div>
+          </Link>
+
           <Link href="/docs/aivm" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">AI Virtual Machine</h3>
