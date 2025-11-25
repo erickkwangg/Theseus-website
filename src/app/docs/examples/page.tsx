@@ -5,7 +5,7 @@ export default function ExamplesPage() {
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 py-4">
-          <Link href="/docs/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
+          <Link href="/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
             ← Back to Docs
           </Link>
         </div>
