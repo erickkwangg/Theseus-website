@@ -184,6 +184,55 @@ export default function ComparisonPage() {
             </div>
           </section>
 
+          <section className="mb-12">
+            <h2 className="text-3xl font-light mb-6">Beyond Technical Differences: An Expanded Design Space</h2>
+            <p className="text-gray-400 mb-6">
+              The technical differences between Theseus agents and Ethereum smart contracts are significant, 
+              but the implications go far deeper. Theseus doesn&apos;t just make contracts &quot;smarter&quot;—it opens 
+              up an entirely new design space for on-chain applications that were previously impossible or 
+              impractical.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <h3 className="text-sm font-medium mb-2 text-gray-300">Subjective Outcomes</h3>
+                <p className="text-xs text-gray-400">
+                  Agents can adjudicate nuanced, subjective questions that traditional smart contracts 
+                  cannot handle.
+                </p>
+              </div>
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <h3 className="text-sm font-medium mb-2 text-gray-300">Natural Language Deployment</h3>
+                <p className="text-xs text-gray-400">
+                  Deploy agents using prompts instead of code, making blockchain accessible to 
+                  non-developers.
+                </p>
+              </div>
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <h3 className="text-sm font-medium mb-2 text-gray-300">AI Persons</h3>
+                <p className="text-xs text-gray-400">
+                  Fully autonomous digital entities with their own goals, operating as first-class 
+                  economic participants.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-blue-950 border border-blue-900 rounded p-6">
+              <h3 className="text-lg font-medium mb-3 text-blue-400">Why This Matters for TAM</h3>
+              <p className="text-gray-300 mb-4">
+                If Ethereum&apos;s ~$500B market cap is tied to the value of its apps, then making those apps 
+                dramatically more capable should substantially increase the value captured by the base chain. 
+                When applications become more powerful and cheaper to operate, more activity can live on-chain.
+              </p>
+              <Link 
+                href="/docs/design-space"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition-colors"
+              >
+                Explore the Full Design Space →
+              </Link>
+            </div>
+          </section>
+
           <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
             <Link 
               href="/docs/introduction"

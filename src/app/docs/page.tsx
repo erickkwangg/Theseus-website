@@ -62,6 +62,16 @@ export default function DocsHomePage() {
             </div>
           </Link>
 
+          <Link href="/docs/design-space" className="group">
+            <div className="bg-gray-900 border border-green-900 p-6 hover:border-green-600 transition-colors h-full">
+              <h3 className="text-xl font-medium mb-3 group-hover:text-green-400">Design Space</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Explore the expanded design space: new primitives, markets, and applications only possible with Theseus.
+              </p>
+              <span className="text-sm text-gray-500 group-hover:text-green-400">Explore →</span>
+            </div>
+          </Link>
+
           <Link href="/docs/aivm" className="group">
             <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
               <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">AI Virtual Machine</h3>
