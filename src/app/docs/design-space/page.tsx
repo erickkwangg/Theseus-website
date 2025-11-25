@@ -88,18 +88,70 @@ export default function DesignSpacePage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Why Previous Blockchain Attempts Failed to Expand the Design Space</h2>
+            <h2 className="text-3xl font-light mb-6">The Design Space Constraint</h2>
             <p className="text-gray-400 mb-4">
-              Over the last decade, runtimes like SVM or MoveVM, and systems like Polkadot or eWASM tried to 
-              improve smart contracts. However, <strong className="text-white">none fundamentally changed the 
-              design space</strong>—they still required deterministic, replicated execution across all nodes.
+              Over the last decade, runtimes like SVM or MoveVM, and systems like Polkadot or eWASM improved 
+              smart contract platforms with cleaner programming models or different languages. However, <strong className="text-white">
+              all maintained the same fundamental constraint</strong>: deterministic, replicated execution across 
+              all nodes. This design choice prioritizes security and verifiability but limits the complexity of 
+              programs that can run economically on-chain.
             </p>
             <p className="text-gray-400">
-              Theseus breaks this constraint using tensor commitments for verifiable inference, making complex, 
-              intelligent applications economically feasible on-chain for the first time.
+              Theseus takes a different approach, using tensor commitments for verifiable inference. This makes 
+              complex, intelligent applications economically feasible on-chain while preserving verifiability.
             </p>
           </section>
 
+          <section className="mb-12">
+            <h2 className="text-3xl font-light mb-6">Concrete Example: Lending Protocol</h2>
+            <p className="text-gray-400 mb-6">
+              To illustrate the difference in design space, consider how a lending protocol would work on 
+              Ethereum versus Theseus.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                <h3 className="text-xl font-medium mb-4 text-gray-300">Ethereum (Aave, Compound)</h3>
+                <div className="space-y-4 text-sm text-gray-400">
+                  <div>
+                    <strong className="text-white">Off-chain:</strong>
+                    <p className="mt-1">Backend computes interest rates, keeper pushes parameters on-chain</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">On-chain:</strong>
+                    <p className="mt-1">Contract executes user transactions (borrowing, lending, liquidations) based on predetermined formulas</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Updates:</strong>
+                    <p className="mt-1">Deploy new contract or upgrade existing one through governance</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-900 border border-green-900 rounded p-6">
+                <h3 className="text-xl font-medium mb-4 text-green-400">Theseus</h3>
+                <div className="space-y-4 text-sm text-gray-400">
+                  <div>
+                    <strong className="text-white">On-chain Agent:</strong>
+                    <p className="mt-1">The market runs as a lending agent—a first-class on-chain entity. Its 
+                    inference process may be deterministic, but its code is nonetheless deterministically 
+                    verifiable just like any smart contract.</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Execution:</strong>
+                    <p className="mt-1">Solvency and limit templates in the agent&apos;s context gate what the agent 
+                    can execute. The pricing step runs via agent inference, and validators then verify a 
+                    tensor-commit receipt.</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Updates:</strong>
+                    <p className="mt-1">Agent&apos;s context or underlying model can be swapped—by the creator or, 
+                    where allowed, by the agent itself.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">New Primitives Only Possible with Theseus</h2>

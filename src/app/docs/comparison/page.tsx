@@ -194,17 +194,18 @@ export default function ComparisonPage() {
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-xl font-medium mb-4">Why Previous Attempts Failed</h3>
+              <h3 className="text-xl font-medium mb-4">The Design Space Constraint</h3>
               <p className="text-gray-400 mb-4">
-                Over the last decade, many efforts tried to expand smart contracts: SVM, MoveVM, Polkadot, 
-                eWASM. These promised cleaner programming or different languages, but <strong className="text-white">none 
-                fundamentally changed the design space</strong>. They still required deterministic, replicated 
-                execution across all nodes—the same core constraint, just with different tooling.
+                Over the last decade, many efforts improved smart contract platforms: SVM, MoveVM, Polkadot, 
+                eWASM. These provided cleaner programming models or different languages, but <strong className="text-white">all 
+                maintained the same fundamental design constraint</strong>: deterministic, replicated execution across 
+                all nodes. This is excellent for security and verifiability, but limits the complexity of programs 
+                that can run economically on-chain.
               </p>
               <p className="text-gray-400">
-                Theseus breaks this constraint. By using tensor commitments for verifiable inference, one node 
+                Theseus takes a different approach. By using tensor commitments for verifiable inference, one node 
                 performs heavy computation while others verify it. This makes complex, intelligent applications 
-                economically feasible on-chain for the first time.
+                economically feasible on-chain while preserving verifiability.
               </p>
             </div>
 
@@ -231,37 +232,7 @@ export default function ComparisonPage() {
               </div>
             </div>
 
-            <div className="bg-amber-950 border border-amber-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-3 text-amber-400">Concrete Example: Lending Protocol</h3>
-              <div className="grid md:grid-cols-2 gap-6 text-sm">
-                <div>
-                  <h4 className="text-white font-medium mb-2">Ethereum (Aave, Compound)</h4>
-                  <p className="text-gray-400 mb-2">
-                    <strong>Off-chain:</strong> Backend computes rates, keeper pushes parameters on-chain
-                  </p>
-                  <p className="text-gray-400 mb-2">
-                    <strong>On-chain:</strong> Contract executes based on oracle data
-                  </p>
-                  <p className="text-gray-400">
-                    <strong>Updates:</strong> Deploy new contract or upgrade existing one
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-green-400 font-medium mb-2">Theseus</h4>
-                  <p className="text-gray-400 mb-2">
-                    <strong>On-chain agent:</strong> First-class entity running inference deterministically
-                  </p>
-                  <p className="text-gray-400 mb-2">
-                    <strong>Execution:</strong> Agent runs pricing logic, validators verify tensor-commit receipt
-                  </p>
-                  <p className="text-gray-400">
-                    <strong>Updates:</strong> Swap context or model—by creator or by agent itself
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
+<div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
               <h3 className="text-lg font-medium mb-3 text-blue-400">The Evolution: Each Step Removes Human Dependency</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
