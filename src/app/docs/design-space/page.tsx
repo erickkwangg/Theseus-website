@@ -205,7 +205,7 @@ export default function DesignSpacePage() {
               >
                 <h4 className="font-medium mb-2">Theseus Thesis: TAM →</h4>
                 <p className="text-sm text-gray-400">Full market analysis</p>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
