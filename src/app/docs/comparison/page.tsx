@@ -40,7 +40,7 @@ export default function ComparisonPage() {
               <ul className="space-y-3 text-gray-400">
                 <li>❌ <strong className="text-white">Wake up on their own:</strong> Cannot execute based on time, block number, or any condition without external triggering</li>
                 <li>❌ <strong className="text-white">Initiate transactions:</strong> Must be called by an EOA (private key holder) to do anything</li>
-                <li>❌ <strong className="text-white">Own assets independently:</strong> Any ETH or tokens in a contract are controlled by whoever has the authority to call withdrawal functions</li>
+                <li>❌ <strong className="text-white">Autonomously manage assets:</strong> While contracts hold ETH and tokens, they cannot decide on their own when or how to use them—they need external transactions to trigger any asset movement</li>
                 <li>❌ <strong className="text-white">Make autonomous decisions:</strong> Cannot evaluate conditions and act without being triggered externally</li>
               </ul>
               
@@ -58,7 +58,7 @@ export default function ComparisonPage() {
               <ul className="space-y-3 text-gray-300">
                 <li>✅ <strong className="text-white">Wake up autonomously:</strong> Agents activate every N blocks via heartbeat mechanism, no external trigger needed</li>
                 <li>✅ <strong className="text-white">Initiate transactions:</strong> Can send transactions, invoke models, and interact with other agents entirely on their own</li>
-                <li>✅ <strong className="text-white">Own assets independently:</strong> $THE balance belongs to the agent itself—no private key controls it</li>
+                <li>✅ <strong className="text-white">Autonomously manage assets:</strong> Holds $THE balance and can decide when and how to use it without external triggers or private key control</li>
                 <li>✅ <strong className="text-white">Make autonomous decisions:</strong> Evaluates triggers, runs ML inference, and acts based on its own logic</li>
               </ul>
             </div>
@@ -99,7 +99,7 @@ export default function ComparisonPage() {
                   <li>• <strong className="text-white">Human-controlled:</strong> Requires external accounts (private keys) to initiate any action</li>
                   <li>• <strong className="text-white">Simple logic:</strong> Basic conditional statements and state transitions</li>
                   <li>• <strong className="text-white">No inference:</strong> Cannot perform ML operations or complex reasoning</li>
-                  <li>• <strong className="text-white">No self-ownership:</strong> Cannot truly own or control assets without private keys</li>
+                  <li>• <strong className="text-white">No autonomous control:</strong> Holds assets but cannot decide to use them without external triggering</li>
                 </ul>
               </div>
 
@@ -114,7 +114,7 @@ export default function ComparisonPage() {
                   <li>• <strong className="text-white">Self-sovereign:</strong> Owns its own $THE balance and controls its actions without private keys</li>
                   <li>• <strong className="text-white">Agentic logic:</strong> Can reason, learn from context, and adapt behavior</li>
                   <li>• <strong className="text-white">Native inference:</strong> Runs models directly in AIVM with verifiable proofs</li>
-                  <li>• <strong className="text-white">True ownership:</strong> Assets belong to the agent, not to any human controller</li>
+                  <li>• <strong className="text-white">Autonomous asset control:</strong> Can independently decide when and how to use its assets without external triggers</li>
                 </ul>
               </div>
             </div>
@@ -176,11 +176,10 @@ export default function ComparisonPage() {
             <div className="bg-blue-950 border border-blue-900 rounded p-6">
               <h3 className="text-lg font-medium mb-3 text-blue-400">Key Insight</h3>
               <p className="text-gray-300">
-                Ethereum smart contracts are <strong>glorified databases with conditional logic</strong> that must be 
+                Ethereum smart contracts are <strong>reactive programs with conditional logic</strong> that must be 
                 externally triggered. Theseus agents are <strong>autonomous digital entities</strong> that can think, 
                 plan, and act without human intervention. The deployment process may look similar, but what you get is 
-                fundamentally different: not a passive contract, but an active, intelligent agent with real agency and 
-                true self-ownership.
+                fundamentally different: not a passive contract, but an active, intelligent agent with real autonomy.
               </p>
             </div>
           </section>
