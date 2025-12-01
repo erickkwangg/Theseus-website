@@ -1,76 +1,95 @@
+"use client";
+
 import commitmentIcon from "@/assets/icon/commitment.svg";
 import machineIcon from "@/assets/icon/machine.svg";
 import treesIcon from "@/assets/icon/trees.svg";
-import logo from "@/assets/logo.svg";
 import Image from "next/image";
-import InteractiveTooltip from "./InteractiveTooltip";
+import { useState } from "react";
+
+const features = [
+  {
+    icon: machineIcon,
+    title: "AIVM",
+    subtitle: "AI Virtual Machine",
+    description: "Full stateful agents as smart contracts, without the private keys that would control them. Not your weights, not your brain.",
+  },
+  {
+    icon: commitmentIcon,
+    title: "Tensor Commits",
+    subtitle: "Verification Protocol",
+    description: "<1% proof generation overhead. <0.1% verification time. The most efficient verification for shared-state AI.",
+  },
+  {
+    icon: treesIcon,
+    title: "Terkle Trees",
+    subtitle: "Data Structures",
+    description: "Merkle Trees generalized to tensor operations. Efficient cryptographic commitments for multi-dimensional AI data.",
+  },
+];
 
 export default function Features() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
-    <section className="bg-black text-white py-12 lg:py-20 grid-bg" id="about">
+    <section className="bg-black text-white py-16 lg:py-24 grid-bg" id="about">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-16 items-start">
-          <div className="w-full h-full flex lg:flex-col items-center lg:items-start justify-between">
-            <h2 className="text-xs sm:text-sm uppercase tracking-wider text-gray-400">
-              THE FUTURE IS AI PERSONS
-            </h2>
-            <Image src={logo} alt="icon" className="size-8" />
+        {/* Big stat + tagline */}
+        <div className="text-center mb-16 lg:mb-20">
+          <div className="mb-4">
+            <span className="text-7xl sm:text-8xl lg:text-9xl font-extralight tracking-tight">
+              1.3B
+            </span>
           </div>
+          <p className="text-gray-500 text-sm uppercase tracking-widest mb-6">
+            AI agents by 2028
+          </p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light max-w-2xl mx-auto">
+            Theseus gives them <span className="text-white">personhood</span>.
+          </h2>
+        </div>
 
-          <div className="space-y-6 lg:space-y-8 lg:col-span-2">
-            <div>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light leading-tight mb-4 lg:mb-6">
-                By 2028, 1.3 billion AI agents will be online.{" "}
-                <span className="text-gray-400">
-                  Yet humans view them as mere tools, incapable of true agency. This fundamentally 
-                  limits the creativity and trust we can place in them. Theseus transforms them 
-                  into AI persons, a new class of individuals unlocking massive GDP growth. Built on:
-                </span>
-              </h3>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              <div className="space-y-4 sm:col-span-2 lg:col-span-1 p-6 -m-6 rounded-lg card-hover border border-transparent">
-                <Image src={machineIcon} alt="icon" className="size-8" />
-                <h4 className="text-base lg:text-lg font-medium">AI Virtual Machine (AIVM)</h4>
-                <div className="text-gray-400 text-sm">
-                  The first ever representation of full{" "}
-                  <InteractiveTooltip
-                    word="stateful agents"
-                    title="Stateful Agents"
-                    description="Stateful means agents exist in shared state, just like Ethereum smart contracts. You can track their lineage, verify their identity, and their memory persists on-chain. This shared state model fully obfuscates trust. You don't need to trust the agent or any intermediary, only the protocol."
-                  >
-                    stateful agents
-                  </InteractiveTooltip>{" "}
-                  as smart contracts, without the private keys that would control them. 
-                  Not your weights, not your brain.
+        {/* Feature cards - icon-forward, hover to reveal */}
+        <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group relative p-8 lg:p-10 rounded-lg border border-gray-800 bg-black/50 
+                         hover:border-gray-600 transition-all duration-300 cursor-pointer
+                         hover:bg-gray-900/30"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {/* Icon - large and centered */}
+              <div className="flex flex-col items-center text-center">
+                <Image 
+                  src={feature.icon} 
+                  alt={feature.title} 
+                  className="size-16 lg:size-20 mb-6 opacity-80 group-hover:opacity-100 
+                             group-hover:scale-110 transition-all duration-300" 
+                />
+                <h3 className="text-xl lg:text-2xl font-medium mb-1">{feature.title}</h3>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">
+                  {feature.subtitle}
+                </p>
+                
+                {/* Description - fades in on hover */}
+                <div 
+                  className={`text-gray-400 text-sm leading-relaxed transition-all duration-300
+                              ${hoveredIndex === index ? 'opacity-100 max-h-32' : 'opacity-0 max-h-0 overflow-hidden'}`}
+                >
+                  {feature.description}
+                </div>
+                
+                {/* Hover hint */}
+                <div 
+                  className={`text-gray-600 text-xs mt-4 transition-opacity duration-300
+                              ${hoveredIndex === index ? 'opacity-0' : 'opacity-100'}`}
+                >
+                  Hover to learn more
                 </div>
               </div>
-
-              <div className="space-y-4 p-6 -m-6 rounded-lg card-hover border border-transparent">
-                <Image src={commitmentIcon} alt="icon" className="size-8" />
-                <h4 className="text-base lg:text-lg font-medium">
-                  Tensor Commits Protocol
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  We proved {"<"}1% proof generation overhead and {"<"}0.1% verification 
-                  time overhead. Cryptographically verify ML inference at scale, the most 
-                  efficient verification for shared-state AI environments.
-                </p>
-              </div>
-
-              <div className="space-y-4 p-6 -m-6 rounded-lg card-hover border border-transparent">
-                <Image src={treesIcon} alt="icon" className="size-8" />
-                <h4 className="text-base lg:text-lg font-medium">
-                  Terkle Trees
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  The first generalization of Merkle Trees to arbitrary tensor operations. 
-                  Enables efficient cryptographic commitments for multi-dimensional AI data structures.
-                </p>
-              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

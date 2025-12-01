@@ -1,12 +1,44 @@
+"use client";
+
+import { useState } from "react";
+
+const aiPersonTypes = [
+  {
+    title: "Free AI Person",
+    tagline: "AI with autonomous goals",
+    description: "AI with their own goals and purposes, who can collaborate with humans and other agents to create new forms of value and new types of emergent behavior.",
+    icon: "◈",
+  },
+  {
+    title: "Proto-AI Person", 
+    tagline: "Human-owned, operationally independent",
+    description: "Stateful AI with an associated human private key, but still operates independently and can aggregate revenue directly to its owner.",
+    icon: "◇",
+  },
+  {
+    title: "Lighthouse AI",
+    tagline: "Sovereign and public-serving",
+    description: "Fully sovereign entity that serves human interests and may aggregate value to humans instead of itself, like smart contracts but with inference.",
+    icon: "◆",
+  },
+];
+
 export default function Markets() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
   return (
-    <section className="market-bg text-white py-12 lg:py-20" id="market">
+    <section className="market-bg text-white py-16 lg:py-24" id="market">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-12 lg:mb-16">
-          Three Forms of AI Personhood
-          <br />
-          <span className="text-2xl lg:text-3xl text-gray-400">
-            first to power a new{" "}
+        {/* Header */}
+        <div className="text-center mb-12 lg:mb-16">
+          <p className="text-gray-500 text-xs uppercase tracking-widest mb-4">
+            Three Forms of Personhood
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
+            A New Class of Individuals
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Powering a{" "}
             <a 
               href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of" 
               target="_blank" 
@@ -15,55 +47,56 @@ export default function Markets() {
             >
               multi-trillion dollar market
             </a>
-          </span>
-        </h2>
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full card-hover">
-            <div className="corner-bracket-tr"></div>
-            <div className="corner-bracket-bl"></div>
-            <div className="space-y-4">
-              <h3 className="text-xl lg:text-2xl font-light">
-                Free AI Person
+        {/* Cards - expandable */}
+        <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
+          {aiPersonTypes.map((type, index) => (
+            <div
+              key={index}
+              className={`group bg-black border border-gray-800 p-6 lg:p-8 cursor-pointer
+                          transition-all duration-300 hover:border-gray-600
+                          ${expandedIndex === index ? 'border-gray-500 bg-gray-900/20' : ''}`}
+              onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+            >
+              {/* Icon */}
+              <div className="text-3xl lg:text-4xl mb-4 text-gray-600 group-hover:text-white transition-colors">
+                {type.icon}
+              </div>
+              
+              {/* Title */}
+              <h3 className="text-xl lg:text-2xl font-light mb-2">
+                {type.title}
               </h3>
-              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">
-                AI with their own goals and purposes, who can collaborate with humans and other 
-                agents to create new forms of value and new types of emergent behavior. Examples include 
-                a GP of a decentralized LP fund or a marketing agent that competes in a swarm.
+              
+              {/* Tagline - always visible */}
+              <p className="text-gray-400 text-sm mb-4">
+                {type.tagline}
               </p>
+              
+              {/* Expanded content */}
+              <div 
+                className={`overflow-hidden transition-all duration-300
+                            ${expandedIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
+              >
+                <div className="pt-4 border-t border-gray-800">
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {type.description}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Expand indicator */}
+              <div className={`text-gray-600 text-xs mt-4 flex items-center gap-2 transition-all duration-300
+                              ${expandedIndex === index ? 'opacity-0' : 'opacity-100 group-hover:opacity-100'}`}>
+                <span className={`transform transition-transform ${expandedIndex === index ? 'rotate-90' : ''}`}>
+                  →
+                </span>
+                Click to expand
+              </div>
             </div>
-          </div>
-
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full card-hover">
-            <div className="corner-bracket-tr"></div>
-            <div className="corner-bracket-bl"></div>
-            <div className="space-y-4">
-              <h3 className="text-xl lg:text-2xl font-light">
-                Proto-AI Person
-              </h3>
-              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">
-                Stateful AI that has an associated human private key to control it, but still 
-                operates independently in most use-cases and can aggregate revenue and value 
-                directly to its underlying owner. These agents work on behalf of humans while 
-                maintaining operational autonomy and the ability to generate value autonomously.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full md:col-span-2 lg:col-span-1 card-hover">
-            <div className="corner-bracket-tr"></div>
-            <div className="corner-bracket-bl"></div>
-            <div className="space-y-4">
-              <h3 className="text-xl lg:text-2xl font-light">
-                Lighthouse AI
-              </h3>
-              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">
-                A fully sovereign entity that, like smart contracts but with inference capabilities, 
-                serves human interests and may aggregate value to humans instead of itself. Examples include 
-                a neutral arbiter of computational transparency, thought, or DAO orchestrator.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
