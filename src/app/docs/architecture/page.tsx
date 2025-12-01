@@ -2,17 +2,8 @@ import Link from "next/link";
 
 export default function ArchitecturePage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="border-b border-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 py-4">
-          <Link href="/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
-            ← Back to Docs
-          </Link>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-4xl">
-        <h1 className="text-4xl sm:text-5xl font-light mb-8">System Architecture</h1>
+    <div>
+      <h1 className="text-4xl sm:text-5xl font-light mb-8">System Architecture</h1>
         
         <div className="prose prose-invert max-w-none">
           <p className="text-xl text-gray-400 mb-8">
@@ -267,7 +258,6 @@ export default function ArchitecturePage() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

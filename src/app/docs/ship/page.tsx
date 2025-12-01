@@ -2,17 +2,8 @@ import Link from "next/link";
 
 export default function SHIPPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="border-b border-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 py-4">
-          <Link href="/docs" className="text-base sm:text-xl font-light hover:text-gray-300 transition-colors">
-            ← Back to Docs
-          </Link>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-4xl">
-        <h1 className="text-4xl sm:text-5xl font-light mb-8">SHIP Language</h1>
+    <div>
+      <h1 className="text-4xl sm:text-5xl font-light mb-8">SHIP Language</h1>
         
         <div className="prose prose-invert max-w-none">
           <p className="text-xl text-gray-400 mb-8">
@@ -119,19 +110,6 @@ export default function SHIPPage() {
             </div>
           </section>
 
-          <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-12">
-            <h3 className="text-xl font-medium mb-4">📖 More Coming Soon</h3>
-            <p className="text-gray-400 mb-4">
-              This page is being expanded with:
-            </p>
-            <ul className="space-y-2 text-gray-400">
-              <li>• Complete SHIP language reference</li>
-              <li>• Syntax and grammar specification</li>
-              <li>• Code examples and patterns</li>
-              <li>• Compiler usage and tooling</li>
-            </ul>
-          </div>
-
           <div className="border-t border-gray-800 pt-8">
             <div className="grid sm:grid-cols-2 gap-4">
               <Link 
@@ -151,7 +129,6 @@ export default function SHIPPage() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

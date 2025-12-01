@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import DocsLayoutWrapper from "@/components/docs/DocsLayout";
 
 export const metadata: Metadata = {
   title: "Developer Documentation - Theseus",
@@ -11,6 +12,6 @@ export default function DocsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <DocsLayoutWrapper>{children}</DocsLayoutWrapper>;
 }
 
