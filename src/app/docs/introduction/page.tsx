@@ -110,28 +110,27 @@ export default function IntroductionPage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-4">Key Design Principles</h2>
-            <div className="space-y-4 text-gray-400">
-              <div>
-                <strong className="text-white">Decentralization first.</strong> Sovereign AI should never trade 
-                decentralization for performance. Once deployed, an agent&apos;s logic and state must remain reachable 
-                without reliance on any single node.
+            <h2 className="text-3xl font-light mb-4">Design Principles</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <strong className="text-white text-sm">Decentralization first</strong>
+                <p className="text-gray-400 text-xs mt-1">No performance trade-offs, zero single-node dependency</p>
               </div>
-              <div>
-                <strong className="text-white">Autonomous value execution.</strong> AI must be able to initiate and 
-                execute transactions on its own, without a human &quot;approving&quot; the transfer.
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <strong className="text-white text-sm">Autonomous execution</strong>
+                <p className="text-gray-400 text-xs mt-1">Agents initiate transactions without human approval</p>
               </div>
-              <div>
-                <strong className="text-white">Tensor-aware runtime.</strong> Inference that isn&apos;t included in the 
-                blockchain&apos;s state-transition function leaves a system dependent on third-party services.
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <strong className="text-white text-sm">Tensor-aware runtime</strong>
+                <p className="text-gray-400 text-xs mt-1">Inference is part of state transition function</p>
               </div>
-              <div>
-                <strong className="text-white">Low-overhead, verifiable inference.</strong> Auditing a deep-learning 
-                model should add less than 1% overhead in storage and verification time.
+              <div className="bg-gray-900 border border-gray-800 rounded p-4">
+                <strong className="text-white text-sm">Verifiable inference</strong>
+                <p className="text-gray-400 text-xs mt-1">&lt;1% overhead for proof generation and verification</p>
               </div>
-              <div>
-                <strong className="text-white">Native support for AI capital markets.</strong> AIs must be able to pay 
-                one another autonomously and form capital markets on their own.
+              <div className="bg-gray-900 border border-gray-800 rounded p-4 md:col-span-2">
+                <strong className="text-white text-sm">Native AI capital markets</strong>
+                <p className="text-gray-400 text-xs mt-1">Autonomous agent-to-agent payments and market formation</p>
               </div>
             </div>
           </section>

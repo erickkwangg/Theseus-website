@@ -17,25 +17,8 @@ export default function QuickStartPage() {
         <div className="prose prose-invert max-w-none">
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Prerequisites</h2>
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span><strong className="text-white">Rust 1.70+</strong> - For core blockchain implementation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span><strong className="text-white">Go 1.21+</strong> - For additional tooling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span><strong className="text-white">Docker</strong> - For containerized development</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span><strong className="text-white">16GB+ RAM</strong> - For model inference</span>
-                </li>
-              </ul>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              <strong className="text-white">Rust 1.70+</strong> · <strong className="text-white">Go 1.21+</strong> · <strong className="text-white">Docker</strong> · <strong className="text-white">16GB+ RAM</strong>
             </div>
           </section>
 
@@ -86,39 +69,9 @@ export default function QuickStartPage() {
               This deploys a simple autonomous agent that can hold $THE tokens and interact with other agents on the network.
             </p>
 
-            <h3 className="text-xl font-medium mb-4">Agent Registration Fields</h3>
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <div className="space-y-3 text-sm">
-                <div>
-                  <strong className="text-white">Code hash:</strong>
-                  <span className="text-gray-400 ml-2">Verifies the binary that will run on AIVM/HVM</span>
-                </div>
-                <div>
-                  <strong className="text-white">Autonomy flag:</strong>
-                  <span className="text-gray-400 ml-2">0 = human-gated, 1 = sovereign</span>
-                </div>
-                <div>
-                  <strong className="text-white">Controller key:</strong>
-                  <span className="text-gray-400 ml-2">Optional public key for human overrides</span>
-                </div>
-                <div>
-                  <strong className="text-white">Min AIVM version:</strong>
-                  <span className="text-gray-400 ml-2">Signals which ISA features the agent requires</span>
-                </div>
-                <div>
-                  <strong className="text-white">Resource quota:</strong>
-                  <span className="text-gray-400 ml-2">Max FLOPs it may consume per epoch</span>
-                </div>
-                <div>
-                  <strong className="text-white">Stake:</strong>
-                  <span className="text-gray-400 ml-2">$THE locked for potential slashing</span>
-                </div>
-                <div>
-                  <strong className="text-white">Initial Context:</strong>
-                  <span className="text-gray-400 ml-2">Context that empowers the agent, linked to TheseusStore</span>
-                </div>
-              </div>
-            </div>
+            <p className="text-gray-400 text-sm mb-6">
+              <strong className="text-white">Key fields:</strong> Code hash (binary verification) · Autonomy flag (0=human, 1=sovereign) · Controller key (optional) · AIVM version · Resource quota · Stake ($THE) · Initial context
+            </p>
           </section>
 
           <section className="mb-12">
@@ -128,39 +81,9 @@ export default function QuickStartPage() {
               Models are registered separately from agents and can be invoked by any agent that pays the inference fee.
             </p>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">Model Registration Fields</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <strong className="text-white">Name & version:</strong>
-                  <span className="text-gray-400 ml-2">e.g., Llama 3.1 8B</span>
-                </div>
-                <div>
-                  <strong className="text-white">Architecture tag:</strong>
-                  <span className="text-gray-400 ml-2">LLM, diffusion, GAN, etc.</span>
-                </div>
-                <div>
-                  <strong className="text-white">Tensor Commit:</strong>
-                  <span className="text-gray-400 ml-2">Cryptographic fingerprint of the weights</span>
-                </div>
-                <div>
-                  <strong className="text-white">Param count:</strong>
-                  <span className="text-gray-400 ml-2">Used for fee estimation</span>
-                </div>
-                <div>
-                  <strong className="text-white">Base fee:</strong>
-                  <span className="text-gray-400 ml-2">$THE per inference</span>
-                </div>
-                <div>
-                  <strong className="text-white">Owner:</strong>
-                  <span className="text-gray-400 ml-2">Address or DAO receiving revenue</span>
-                </div>
-                <div>
-                  <strong className="text-white">Weights URI:</strong>
-                  <span className="text-gray-400 ml-2">Where validators can fetch parameters</span>
-                </div>
-              </div>
-            </div>
+            <p className="text-gray-400 text-sm mb-6">
+              <strong className="text-white">Required:</strong> Name/version · Architecture (LLM, diffusion, etc.) · Tensor Commit (weight fingerprint) · Param count · Base fee ($THE) · Owner · Weights URI
+            </p>
 
             <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
               <div># Register a model</div>
@@ -173,38 +96,8 @@ export default function QuickStartPage() {
 
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Development Workflow</h2>
-            
-            <div className="space-y-4 text-gray-400">
-              <div className="flex items-start">
-                <span className="text-white font-mono mr-3">1.</span>
-                <div>
-                  <strong className="text-white">Write agent logic</strong> in SHIP (Domain Specific Language) or directly in AIVM opcodes
-                </div>
-              </div>
-              <div className="flex items-start">
-                <span className="text-white font-mono mr-3">2.</span>
-                <div>
-                  <strong className="text-white">Test locally</strong> using the development node
-                </div>
-              </div>
-              <div className="flex items-start">
-                <span className="text-white font-mono mr-3">3.</span>
-                <div>
-                  <strong className="text-white">Deploy to testnet</strong> for multi-agent interaction testing
-                </div>
-              </div>
-              <div className="flex items-start">
-                <span className="text-white font-mono mr-3">4.</span>
-                <div>
-                  <strong className="text-white">Audit and verify</strong> using Tensor Commit proofs
-                </div>
-              </div>
-              <div className="flex items-start">
-                <span className="text-white font-mono mr-3">5.</span>
-                <div>
-                  <strong className="text-white">Launch on mainnet</strong> with appropriate stake
-                </div>
-              </div>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              Write agent logic (SHIP/AIVM) → Test locally → Deploy to testnet → Audit with Tensor Commits → Launch on mainnet
             </div>
           </section>
 

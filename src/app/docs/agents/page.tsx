@@ -26,38 +26,45 @@ export default function AgentsPage() {
               Agents register via THE1 standard. Any human or agent can deploy a new agent by supplying:
             </p>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">Registration Fields</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <strong className="text-white">Code hash:</strong>
-                  <span className="text-gray-400 ml-2">Verifies the binary that will run on AIVM/HVM</span>
-                </div>
-                <div>
-                  <strong className="text-white">Autonomy flag:</strong>
-                  <span className="text-gray-400 ml-2">0 = human-gated, 1 = sovereign</span>
-                </div>
-                <div>
-                  <strong className="text-white">Controller key:</strong>
-                  <span className="text-gray-400 ml-2">Optional public key for human overrides</span>
-                </div>
-                <div>
-                  <strong className="text-white">Min AIVM version:</strong>
-                  <span className="text-gray-400 ml-2">Signals which ISA features the agent requires</span>
-                </div>
-                <div>
-                  <strong className="text-white">Resource quota:</strong>
-                  <span className="text-gray-400 ml-2">Max FLOPs it may consume per epoch</span>
-                </div>
-                <div>
-                  <strong className="text-white">Stake:</strong>
-                  <span className="text-gray-400 ml-2">$THE locked for potential slashing</span>
-                </div>
-                <div>
-                  <strong className="text-white">Initial Context:</strong>
-                  <span className="text-gray-400 ml-2">Context that empowers the agent, linked to TheseusStore</span>
-                </div>
-              </div>
+            <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden mb-6">
+              <table className="w-full text-sm">
+                <thead className="bg-black">
+                  <tr>
+                    <th className="text-left p-3 border-b border-gray-800">Field</th>
+                    <th className="text-left p-3 border-b border-gray-800">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-400">
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Code hash</td>
+                    <td className="p-3 border-b border-gray-800">Binary verification for AIVM/HVM</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Autonomy flag</td>
+                    <td className="p-3 border-b border-gray-800">0 = human-gated, 1 = sovereign</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Controller key</td>
+                    <td className="p-3 border-b border-gray-800">Optional pubkey for human override</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">AIVM version</td>
+                    <td className="p-3 border-b border-gray-800">Required ISA features</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Resource quota</td>
+                    <td className="p-3 border-b border-gray-800">Max FLOPs per epoch</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Stake</td>
+                    <td className="p-3 border-b border-gray-800">$THE locked for slashing</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 text-white">Initial context</td>
+                    <td className="p-3">Agent context from TheseusStore</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
@@ -68,46 +75,53 @@ export default function AgentsPage() {
               Models are registered separately from agents and can be invoked by any agent that pays the posted fee.
             </p>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">Model Fields</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <strong className="text-white">Name & version:</strong>
-                  <span className="text-gray-400 ml-2">e.g., Llama 3.1 8B</span>
-                </div>
-                <div>
-                  <strong className="text-white">Architecture tag:</strong>
-                  <span className="text-gray-400 ml-2">LLM, diffusion, GAN, etc.</span>
-                </div>
-                <div>
-                  <strong className="text-white">Tensor Commit:</strong>
-                  <span className="text-gray-400 ml-2">Cryptographic fingerprint of the weights</span>
-                </div>
-                <div>
-                  <strong className="text-white">Param count:</strong>
-                  <span className="text-gray-400 ml-2">Used for fee estimation</span>
-                </div>
-                <div>
-                  <strong className="text-white">Base fee:</strong>
-                  <span className="text-gray-400 ml-2">$THE per inference</span>
-                </div>
-                <div>
-                  <strong className="text-white">Owner:</strong>
-                  <span className="text-gray-400 ml-2">Address or DAO receiving revenue</span>
-                </div>
-                <div>
-                  <strong className="text-white">Weights URI:</strong>
-                  <span className="text-gray-400 ml-2">Where validators can fetch parameters</span>
-                </div>
-                <div>
-                  <strong className="text-white">Compute Math:</strong>
-                  <span className="text-gray-400 ml-2">How the model computes its inference (used for Tensor Commits)</span>
-                </div>
-                <div>
-                  <strong className="text-white">Permissions:</strong>
-                  <span className="text-gray-400 ml-2">Access restrictions for particular model usage</span>
-                </div>
-              </div>
+            <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden mb-6">
+              <table className="w-full text-sm">
+                <thead className="bg-black">
+                  <tr>
+                    <th className="text-left p-3 border-b border-gray-800">Field</th>
+                    <th className="text-left p-3 border-b border-gray-800">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-400">
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Name & version</td>
+                    <td className="p-3 border-b border-gray-800">e.g., Llama 3.1 8B</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Architecture</td>
+                    <td className="p-3 border-b border-gray-800">LLM, diffusion, GAN, etc.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Tensor Commit</td>
+                    <td className="p-3 border-b border-gray-800">Cryptographic weight fingerprint</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Param count</td>
+                    <td className="p-3 border-b border-gray-800">For fee estimation</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Base fee</td>
+                    <td className="p-3 border-b border-gray-800">$THE per inference</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Owner</td>
+                    <td className="p-3 border-b border-gray-800">Revenue destination (address/DAO)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Weights URI</td>
+                    <td className="p-3 border-b border-gray-800">Where validators fetch params</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Compute spec</td>
+                    <td className="p-3 border-b border-gray-800">For Tensor Commits generation</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 text-white">Permissions</td>
+                    <td className="p-3">Access control rules</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

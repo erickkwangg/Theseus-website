@@ -116,32 +116,21 @@ export default function ArchitecturePage() {
               TheseusStore is the availability layer, handling gigabytes of model weights and agent context on-chain.
             </p>
 
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-medium mb-3">Model Storage</h3>
-                <p className="text-gray-400 mb-4">
-                  Immutable weights addressed by content hash:
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                <h3 className="text-lg font-medium mb-3">Model Storage</h3>
+                <p className="text-gray-400 text-sm">
+                  Immutable weights (Reed-Solomon encoded) addressed by content hash. Cold storage optimized, enforced by miner staking. Tensor Commits require minimal liveness.
                 </p>
-                <ul className="space-y-2 text-gray-400">
-                  <li>• Split into Reed-Solomon encoded blobs</li>
-                  <li>• Enforced by storage-miner staking</li>
-                  <li>• Cold storage optimization (retrieval latency tolerated)</li>
-                  <li>• Minimal liveness needed with Tensor Commits</li>
-                </ul>
               </div>
 
-              <div>
-                <h3 className="text-xl font-medium mb-3">Context Storage</h3>
-                <p className="text-gray-400 mb-4">
-                  Mutable agent contexts with faster retrieval:
+              <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                <h3 className="text-lg font-medium mb-3">Context Storage</h3>
+                <p className="text-gray-400 text-sm">
+                  Mutable agent data (conversations, embeddings, RAG, fine-tuning). Reed-Solomon encoded with faster retrieval. Updates as agents evolve.
                 </p>
-                <ul className="space-y-2 text-gray-400">
-                  <li>• Conversation history, embeddings, policy checkpoints</li>
-                  <li>• RAG databases, fine-tuning data</li>
-                  <li>• Reed-Solomon encoded</li>
-                  <li>• Updated as agents evolve</li>
-                </ul>
               </div>
+            </div>
 
               <div>
                 <h3 className="text-xl font-medium mb-3">Agent State Synchronization</h3>
@@ -172,33 +161,25 @@ export default function ArchitecturePage() {
             <h2 className="text-3xl font-light mb-6">Prover and Verifier Selection</h2>
             
             <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-medium mb-3">Provers</h3>
-                <p className="text-gray-400 mb-4">
-                  Run full forward passes, selected via VRF lottery by capacity:
-                </p>
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                  <ul className="space-y-2 text-gray-400">
-                    <li>• Publish hardware specs (VRAM, RAM, bandwidth)</li>
-                    <li>• Capacity Registry tracks resources on-chain</li>
-                    <li>• VRF filters by RAM ≥ model size, stake-weighted</li>
-                    <li>• Cache popular models in RAM</li>
-                  </ul>
+                  <h3 className="text-lg font-medium mb-3">Provers</h3>
+                  <p className="text-gray-400 text-sm mb-3">
+                    Run full forward passes. VRF selects by capacity + stake.
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    Publish hardware specs → Registry tracks on-chain → VRF filters (RAM ≥ model size) → Cache popular models
+                  </p>
                 </div>
-              </div>
 
-              <div>
-                <h3 className="text-xl font-medium mb-3">Verifiers</h3>
-                <p className="text-gray-400 mb-4">
-                  All active verifiers check every inference:
-                </p>
                 <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                  <ul className="space-y-2 text-gray-400">
-                    <li>• Never download model weights</li>
-                    <li>• ~2ms proof verification per check</li>
-                    <li>• 1,000 validators verify 100 jobs in &lt;1 second</li>
-                    <li>• 2/3 agreement required for finality</li>
-                  </ul>
+                  <h3 className="text-lg font-medium mb-3">Verifiers</h3>
+                  <p className="text-gray-400 text-sm mb-3">
+                    All active verifiers check every inference.
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    Never download weights · ~2ms per check · 1,000 validators verify 100 jobs &lt;1s · 2/3 agreement required
+                  </p>
                 </div>
               </div>
 

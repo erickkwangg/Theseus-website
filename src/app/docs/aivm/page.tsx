@@ -21,51 +21,39 @@ export default function AIVMPage() {
           </p>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Architecture Overview</h2>
-            <p className="text-gray-400 mb-6">
-              The AIVM comprises tightly modular subsystems designed specifically for AI workloads:
-            </p>
-
-            <div className="space-y-4">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3">Execution Layer</h3>
-                <p className="text-gray-400">
-                  Evaluates tensor opcodes deterministically using a stack-based dispatch and fixed-point arithmetic. 
-                  This ensures that every node running the same computation produces identical results.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3">Memory Layer</h3>
-                <p className="text-gray-400">
-                  Manages sandboxed memory for quick information retrieval. Agent contexts, embeddings, and temporary 
-                  tensors are stored here during execution.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3">Proof Interface</h3>
-                <p className="text-gray-400">
-                  Generates a succinct Tensor Commit receipt so any validator can check the result in milliseconds. 
-                  This is the bridge between execution and verification.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3">Syscall Gateway</h3>
-                <p className="text-gray-400">
-                  Provides secure boundary crossing for external calls (e.g., agent messaging, external state anchoring). 
-                  All cross-boundary operations are verified and metered.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3">State Anchoring Layer</h3>
-                <p className="text-gray-400">
-                  Emits a Merkle root each block, giving auditors a single hash to verify full execution traces. 
-                  This enables light clients and cross-chain verification.
-                </p>
-              </div>
+            <h2 className="text-3xl font-light mb-6">Architecture</h2>
+            
+            <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-black">
+                  <tr>
+                    <th className="text-left p-3 border-b border-gray-800">Layer</th>
+                    <th className="text-left p-3 border-b border-gray-800">Function</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-400">
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Execution</td>
+                    <td className="p-3 border-b border-gray-800">Stack-based dispatch, fixed-point arithmetic for deterministic tensor ops</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Memory</td>
+                    <td className="p-3 border-b border-gray-800">Sandboxed storage for contexts, embeddings, temp tensors</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Proof Interface</td>
+                    <td className="p-3 border-b border-gray-800">Generates Tensor Commit receipts for validators (~ms verification)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-800 text-white">Syscall Gateway</td>
+                    <td className="p-3 border-b border-gray-800">Verified, metered boundary crossing for external calls</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 text-white">State Anchoring</td>
+                    <td className="p-3">Merkle root per block for light clients and cross-chain verification</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
@@ -175,38 +163,15 @@ export default function AIVMPage() {
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">How It Works</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span>Every agent gets a priority score based on stake, recent latency, and fairness</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span>Calls to AGENT_TICK() or MODEL_INFER() land in epoch-bound queues, so nothing starves</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-white mr-3">•</span>
-                  <span>The AIVM ships with a minimal, on-chain scheduler that respects latency classes</span>
-                </li>
-              </ul>
+              <p className="text-gray-400 text-sm">
+                Priority score (stake + latency + fairness) → Epoch-bound queues prevent starvation → On-chain scheduler respects latency classes
+              </p>
             </div>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-4">Latency Classes</h3>
-              <div className="space-y-3">
-                <div>
-                  <strong className="text-white">RT (Real-Time):</strong>
-                  <span className="text-gray-400 ml-2">≤ 1 epoch deadline</span>
-                </div>
-                <div>
-                  <strong className="text-white">Interactive:</strong>
-                  <span className="text-gray-400 ml-2">≤ 3 epochs deadline</span>
-                </div>
-                <div>
-                  <strong className="text-white">Bulk:</strong>
-                  <span className="text-gray-400 ml-2">Unbounded (best-effort)</span>
-                </div>
+              <h3 className="text-lg font-medium mb-3">Latency Classes</h3>
+              <div className="text-sm text-gray-400">
+                <strong className="text-white">RT:</strong> ≤1 epoch · <strong className="text-white">Interactive:</strong> ≤3 epochs · <strong className="text-white">Bulk:</strong> best-effort
               </div>
             </div>
           </section>

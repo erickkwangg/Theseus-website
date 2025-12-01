@@ -42,116 +42,42 @@ export default function SHIPPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Unpredictability</h3>
-                <p className="text-gray-400">
-                  LLMs may hallucinate functions, misplace parameters, or generate unsafe constructs
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Unbounded Execution</h3>
-                <p className="text-gray-400">
-                  Outputs may contain Turing-complete logic or fail to terminate, creating DoS risks
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Lack of Proof Anchoring</h3>
-                <p className="text-gray-400">
-                  Free-form outputs cannot be cleanly tied to proof anchors, making verification infeasible
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Opaque Intent</h3>
-                <p className="text-gray-400">
-                  The economic or operational intention behind raw outputs is implicit
-                </p>
-              </div>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              <strong className="text-white">Unpredictability</strong> (hallucinations, unsafe constructs) · 
+              <strong className="text-white"> Unbounded execution</strong> (DoS risks) · 
+              <strong className="text-white"> No proof anchoring</strong> (verification impossible) · 
+              <strong className="text-white"> Opaque intent</strong> (implicit goals)
             </div>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">SHIP Design Principles</h2>
+            <h2 className="text-3xl font-light mb-6">Design Principles</h2>
             
-            <p className="text-gray-400 mb-6">
-              To overcome these limitations, SHIP adheres to the following principles:
-            </p>
-
-            <div className="space-y-4">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Determinism</h3>
-                <p className="text-gray-400">
-                  All constructs are statically bounded and compiled to verifiable opcode sequences with known gas 
-                  and memory profiles.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Verifiability</h3>
-                <p className="text-gray-400">
-                  SHIP programs are compatible with Theseus&apos; backends and generate Tensor Commit proofs alongside 
-                  inference outputs.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Traceability</h3>
-                <p className="text-gray-400">
-                  Each program is uniquely tied to its originating agent context and is traceable.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Composability</h3>
-                <p className="text-gray-400">
-                  SHIP fragments can be staged, delegated, or templated by meta-agents.
-                </p>
-              </div>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              <strong className="text-white">Determinism</strong> (static bounds, known gas/memory) · 
+              <strong className="text-white"> Verifiability</strong> (Tensor Commit proofs) · 
+              <strong className="text-white"> Traceability</strong> (tied to agent context) · 
+              <strong className="text-white"> Composability</strong> (staged, delegated, templated)
             </div>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">SHIP Execution Flow</h2>
+            <h2 className="text-3xl font-light mb-6">Execution Flow</h2>
             
-            <div className="space-y-6">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">1. Inference</h3>
-                <p className="text-gray-400">
-                  The agent runs a model and produces outputs (e.g., a token string).
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">2. Compilation</h3>
-                <p className="text-gray-400">
-                  SHIP is used to translate natural language into structured outputs in two ways:
-                </p>
-                <ul className="mt-3 space-y-2 text-gray-400 list-none">
-                  <li>• The agent itself is fine-tuned on the SHIP language or provided context on the DSL</li>
-                  <li>• There is a &quot;meta-model&quot; whose specific task is to transform natural language from an initial 
-                    model into an output</li>
-                </ul>
-                <p className="text-gray-400 mt-3">
-                  The SHIP compiler transforms structured outputs into a valid, bounded sequence of operations.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">3. Verification</h3>
-                <p className="text-gray-400">
-                  Tensor Commit proves inference integrity, and SHIP bytecode is cross-validated against execution 
-                  constraints.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">4. Execution</h3>
-                <p className="text-gray-400">
-                  Upon finalization, the program is submitted to the runtime.
-                </p>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              <div className="space-y-3">
+                <div>
+                  <strong className="text-white">1. Inference:</strong> Agent runs model, generates output
+                </div>
+                <div>
+                  <strong className="text-white">2. Compilation:</strong> NL→SHIP via fine-tuned agent or meta-model, then SHIP→bounded opcodes
+                </div>
+                <div>
+                  <strong className="text-white">3. Verification:</strong> Tensor Commit proves inference integrity, bytecode validated
+                </div>
+                <div>
+                  <strong className="text-white">4. Execution:</strong> Program submitted to runtime
+                </div>
               </div>
             </div>
           </section>
@@ -186,20 +112,10 @@ export default function SHIPPage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">SHIP Integration with AIVM</h2>
+            <h2 className="text-3xl font-light mb-6">Integration with AIVM</h2>
             
-            <div className="space-y-4 text-gray-400">
-              <p>
-                SHIP programs are compiled to AIVM opcodes and executed via AGENT_TICK() or MODEL_INFER() syscall 
-                extensions.
-              </p>
-              <p>
-                Each SHIP construct maps directly to safe AIVM primitives, such as TLOAD, TCUSTOM, STATE_EXPORT, or 
-                TRANSFER_TOKEN.
-              </p>
-              <p>
-                Proofs are attached via Tensor Commit to anchor the linkage between inference and outcome.
-              </p>
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
+              SHIP→AIVM opcodes via AGENT_TICK()/MODEL_INFER() · Maps to safe primitives (TLOAD, TCUSTOM, STATE_EXPORT, TRANSFER_TOKEN) · Tensor Commits link inference to outcome
             </div>
           </section>
 
