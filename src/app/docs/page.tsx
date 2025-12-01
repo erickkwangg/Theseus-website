@@ -5,7 +5,7 @@ export default function DocsHomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-16 pb-12 border-b border-gray-800 bg-gradient-to-b from-gray-900/30 to-transparent -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-lg">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-6">
           Developer Documentation
         </h1>
@@ -31,7 +31,7 @@ export default function DocsHomePage() {
       {/* Main Categories */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         <Link href="/docs/introduction" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Getting Started</h3>
             <p className="text-gray-400 text-sm mb-4">
               Learn the basics of Theseus, install dependencies, and deploy your first AI agent.
@@ -41,7 +41,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/comparison" className="group">
-          <div className="bg-gray-900 border border-blue-900 p-6 hover:border-blue-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-blue-900 p-6 hover:border-blue-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-blue-400">Theseus vs. Ethereum</h3>
             <p className="text-gray-400 text-sm mb-4">
               Understand the critical difference: true autonomy. Agents vs. smart contracts explained.
@@ -51,7 +51,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/design-space" className="group">
-          <div className="bg-gray-900 border border-green-900 p-6 hover:border-green-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-green-900 p-6 hover:border-green-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-green-400">Design Space</h3>
             <p className="text-gray-400 text-sm mb-4">
               Explore the expanded design space: new primitives, markets, and applications only possible with Theseus.
@@ -61,7 +61,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/aivm" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">AI Virtual Machine</h3>
             <p className="text-gray-400 text-sm mb-4">
               Deep dive into AIVM—tensor-native runtime, opcodes, and deterministic execution.
@@ -71,7 +71,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/tensor-commits" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Tensor Commits</h3>
             <p className="text-gray-400 text-sm mb-4">
               Verifiable ML inference with &lt;1% overhead using Terkle Trees and KZG commitments.
@@ -81,7 +81,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/agents" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Agents & Models</h3>
             <p className="text-gray-400 text-sm mb-4">
               Register agents, deploy models, and enable autonomous interactions with $THE.
@@ -91,7 +91,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/architecture" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">Architecture</h3>
             <p className="text-gray-400 text-sm mb-4">
               Understand the three-layer stack: AIVM, TheseusStore, and Proof of Stake consensus.
@@ -101,7 +101,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/ship" className="group">
-          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-gray-800 p-6 hover:border-gray-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-gray-300">SHIP Language</h3>
             <p className="text-gray-400 text-sm mb-4">
               Domain-specific language for translating natural language to verifiable bytecode.
@@ -111,7 +111,7 @@ export default function DocsHomePage() {
         </Link>
 
         <Link href="/docs/tokenomics" className="group">
-          <div className="bg-gray-900 border border-yellow-900 p-6 hover:border-yellow-600 transition-colors h-full">
+          <div className="bg-gray-900 border border-yellow-900 p-6 hover:border-yellow-600 hover:scale-[1.02] transition-all duration-200 h-full">
             <h3 className="text-xl font-medium mb-3 group-hover:text-yellow-400">Tokenomics</h3>
             <p className="text-gray-400 text-sm mb-4">
               Understand $THE token utility, gas mechanics, staking, and fee distribution.

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import DocsSidebar from "./DocsSidebar";
 import DocsSearch from "./DocsSearch";
+import ReadingProgress from "./ReadingProgress";
 
 interface DocsLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface DocsLayoutProps {
 export default function DocsLayout({ children }: DocsLayoutProps) {
   return (
     <div className="min-h-screen bg-black text-white">
+      <ReadingProgress />
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-black/95 backdrop-blur">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-light hover:text-gray-300 transition-colors">

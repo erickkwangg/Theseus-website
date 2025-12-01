@@ -19,15 +19,17 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
   return (
     <div className="relative group">
-      <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+      <div className="bg-[#0d1117] border border-gray-800 rounded-lg overflow-hidden">
         {language && (
-          <div className="absolute top-2 left-4 text-xs text-gray-600">{language}</div>
+          <div className="px-4 py-2 bg-gray-900/50 border-b border-gray-800 text-xs text-gray-500 font-mono">
+            {language}
+          </div>
         )}
-        <pre className="whitespace-pre-wrap">{code}</pre>
+        <pre className="p-4 font-mono text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap">{code}</pre>
       </div>
       <button
         onClick={handleCopy}
-        className="absolute top-2 right-2 p-2 bg-gray-800 hover:bg-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 p-2 bg-gray-800/80 hover:bg-gray-700 rounded-md opacity-0 group-hover:opacity-100 transition-all"
         title="Copy to clipboard"
       >
         {copied ? (

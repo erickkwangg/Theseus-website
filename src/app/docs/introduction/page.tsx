@@ -15,21 +15,19 @@ export default function IntroductionPage() {
             permission-gated APIs.
           </p>
           <p className="text-gray-400 leading-relaxed mb-4">
-            This Web2 bottleneck prevents agents from trusting one another, paying one another, or persisting 
-            beyond the organizations that host them.
+            Today&apos;s agents can&apos;t trust each other, pay each other, or outlive the companies running them.
           </p>
           <p className="text-gray-400 leading-relaxed">
-            Theseus breaks that lock-in. To our knowledge, it is the first proposed environment to enable truly 
-            sovereign AI—AI that has no human ownership and can initiate transactions, transfer assets, and perform 
-            inference without human permission.
+            Theseus changes this. Agents here own their keys, hold their own funds, and run inference without 
+            asking anyone for permission.
           </p>
         </section>
 
         <section className="mb-12">
           <h2 id="what-makes-different" className="text-3xl font-light mb-4">What Makes Theseus Different</h2>
           <p className="text-gray-400 leading-relaxed mb-6">
-            Theseus is powered by a Layer-1 purpose-built blockchain specifically for sovereign AI. While its blocks 
-            and consensus resemble traditional chains, the underlying design choices are entirely different.
+            Theseus runs on a Layer-1 built for sovereign AI. The blocks and consensus look familiar, 
+            but the design choices underneath are completely different.
           </p>
           
           <div className="space-y-6">
@@ -129,8 +127,8 @@ export default function IntroductionPage() {
         <section className="mb-12">
           <h2 id="key-insight" className="text-3xl font-light mb-6">How is Theseus Different?</h2>
           <p className="text-gray-400 mb-6">
-            Theseus agents may look similar to smart contracts on the surface, but they represent a fundamental 
-            paradigm shift. The key difference: <strong className="text-white">true autonomy</strong>.
+            Theseus agents look like smart contracts on the surface, but they work fundamentally differently. 
+            The key difference: <strong className="text-white">true autonomy</strong>.
           </p>
 
           <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">

@@ -91,7 +91,7 @@ export default function GlossaryPage() {
       
       <div className="prose prose-invert max-w-none">
         <p className="text-xl text-gray-400 mb-8">
-          Key terms and concepts in the Theseus ecosystem.
+          Key terms used in Theseus.
         </p>
 
         <div className="space-y-6">

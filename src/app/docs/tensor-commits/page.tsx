@@ -212,7 +212,7 @@ export default function TensorCommitsPage() {
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-4">Token and Positional Embeddings</h3>
                 <p className="text-gray-400">
-                  Input embeddings for tokens are committed polynomially with positional encoding leveraging 
+                  Input embeddings for tokens are committed polynomially with positional encoding using 
                   homomorphic properties, allowing efficient verification without revealing input content.
                 </p>
               </div>
@@ -237,7 +237,7 @@ export default function TensorCommitsPage() {
                 <h3 className="text-lg font-medium mb-4">Residual Connections</h3>
                 <p className="text-gray-400">
                   Residual paths are easily handled via commitment homomorphism: Comᵣ = Comₓ₍ℓ₎ · ComA. Each 
-                  subsequent layer leverages prior commitments, enabling efficient recursive proof verification.
+                  each layer reuses prior commitments for efficient recursive proof verification.
                 </p>
               </div>
 

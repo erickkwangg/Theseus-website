@@ -57,10 +57,10 @@ export default function DocsSidebar() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`block py-1.5 px-3 text-sm rounded transition-colors ${
+                      className={`block py-1.5 px-3 text-sm rounded-r transition-all ${
                         isActive
-                          ? "bg-white text-black font-medium"
-                          : "text-gray-400 hover:text-white hover:bg-gray-900"
+                          ? "bg-gray-900 text-white font-medium border-l-2 border-white -ml-[2px]"
+                          : "text-gray-400 hover:text-white hover:bg-gray-900/50"
                       }`}
                     >
                       {item.label}
