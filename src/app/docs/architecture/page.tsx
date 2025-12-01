@@ -116,21 +116,22 @@ export default function ArchitecturePage() {
               TheseusStore is the availability layer, handling gigabytes of model weights and agent context on-chain.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Model Storage</h3>
-                <p className="text-gray-400 text-sm">
-                  Immutable weights (Reed-Solomon encoded) addressed by content hash. Cold storage optimized, enforced by miner staking. Tensor Commits require minimal liveness.
-                </p>
-              </div>
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                  <h3 className="text-lg font-medium mb-3">Model Storage</h3>
+                  <p className="text-gray-400 text-sm">
+                    Immutable weights (Reed-Solomon encoded) addressed by content hash. Cold storage optimized, enforced by miner staking. Tensor Commits require minimal liveness.
+                  </p>
+                </div>
 
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">Context Storage</h3>
-                <p className="text-gray-400 text-sm">
-                  Mutable agent data (conversations, embeddings, RAG, fine-tuning). Reed-Solomon encoded with faster retrieval. Updates as agents evolve.
-                </p>
+                <div className="bg-gray-900 border border-gray-800 rounded p-6">
+                  <h3 className="text-lg font-medium mb-3">Context Storage</h3>
+                  <p className="text-gray-400 text-sm">
+                    Mutable agent data (conversations, embeddings, RAG, fine-tuning). Reed-Solomon encoded with faster retrieval. Updates as agents evolve.
+                  </p>
+                </div>
               </div>
-            </div>
 
               <div>
                 <h3 className="text-xl font-medium mb-3">Agent State Synchronization</h3>
