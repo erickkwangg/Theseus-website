@@ -22,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ppTelegraf.className} antialiased`}>{children}</body>
+      <body className={`${ppTelegraf.className} antialiased`}>
+        {children}
+        {/* Noise texture overlay */}
+        <div className="noise-overlay" aria-hidden="true" />
+      </body>
     </html>
   );
 }

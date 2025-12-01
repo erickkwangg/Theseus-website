@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 const aiPersonTypes = [
   {
@@ -30,72 +32,79 @@ export default function Markets() {
     <section className="market-bg text-white py-16 lg:py-24" id="market">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <p className="text-gray-500 text-xs uppercase tracking-widest mb-4">
-            Three Forms of Personhood
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
-            A New Class of Individuals
-          </h2>
-          <p className="text-gray-400 text-lg">
-            Powering a{" "}
+        <ScrollReveal>
+          <div className="text-center mb-12 lg:mb-16">
+            <p className="text-blue-400/80 text-xs uppercase tracking-widest mb-4">
+              Three Forms of Personhood
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
+              A New Class of <span className="gradient-text">Individuals</span>
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Powering a{" "}
             <a 
-              href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of" 
+              href={EXTERNAL_LINKS.substackTAM} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="underline hover:text-white transition-colors"
+              className="text-blue-400 underline hover:text-blue-300 transition-colors"
             >
               multi-trillion dollar market
             </a>
-          </p>
-        </div>
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Cards - expandable */}
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
           {aiPersonTypes.map((type, index) => (
-            <div
-              key={index}
-              className={`group bg-black border border-gray-800 p-6 lg:p-8 cursor-pointer
-                          transition-all duration-300 hover:border-gray-600
-                          ${expandedIndex === index ? 'border-gray-500 bg-gray-900/20' : ''}`}
-              onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-            >
-              {/* Icon */}
-              <div className="text-3xl lg:text-4xl mb-4 text-gray-600 group-hover:text-white transition-colors">
-                {type.icon}
-              </div>
-              
-              {/* Title */}
-              <h3 className="text-xl lg:text-2xl font-light mb-2">
-                {type.title}
-              </h3>
-              
-              {/* Tagline - always visible */}
-              <p className="text-gray-400 text-sm mb-4">
-                {type.tagline}
-              </p>
-              
-              {/* Expanded content */}
-              <div 
-                className={`overflow-hidden transition-all duration-300
-                            ${expandedIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
+            <ScrollReveal key={index} delay={index + 1}>
+              <div
+                className={`group bg-black border border-gray-800 p-6 lg:p-8 cursor-pointer
+                            card-tilt hover:border-blue-500/30
+                            ${expandedIndex === index ? 'border-blue-500/50 bg-blue-950/10' : ''}`}
+                onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
               >
-                <div className="pt-4 border-t border-gray-800">
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {type.description}
-                  </p>
+                {/* Icon */}
+                <div className={`text-3xl lg:text-4xl mb-4 transition-colors duration-300 ${
+                  expandedIndex === index ? 'text-blue-400' : 'text-gray-600 group-hover:text-blue-400'
+                }`}>
+                  {type.icon}
+                </div>
+                
+                {/* Title */}
+                <h3 className={`text-xl lg:text-2xl font-light mb-2 transition-colors duration-300 ${
+                  expandedIndex === index ? 'text-blue-400' : 'group-hover:text-white'
+                }`}>
+                  {type.title}
+                </h3>
+                
+                {/* Tagline - always visible */}
+                <p className="text-gray-400 text-sm mb-4">
+                  {type.tagline}
+                </p>
+                
+                {/* Expanded content */}
+                <div 
+                  className={`overflow-hidden transition-all duration-300
+                              ${expandedIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <div className="pt-4 border-t border-gray-800">
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {type.description}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Expand indicator */}
+                <div className={`text-gray-600 text-xs mt-4 flex items-center gap-2 transition-all duration-300
+                                ${expandedIndex === index ? 'opacity-0' : 'opacity-100 group-hover:text-blue-400'}`}>
+                  <span className={`transform transition-transform ${expandedIndex === index ? 'rotate-90' : ''}`}>
+                    →
+                  </span>
+                  Click to expand
                 </div>
               </div>
-              
-              {/* Expand indicator */}
-              <div className={`text-gray-600 text-xs mt-4 flex items-center gap-2 transition-all duration-300
-                              ${expandedIndex === index ? 'opacity-0' : 'opacity-100 group-hover:opacity-100'}`}>
-                <span className={`transform transition-transform ${expandedIndex === index ? 'rotate-90' : ''}`}>
-                  →
-                </span>
-                Click to expand
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

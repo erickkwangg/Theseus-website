@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 interface InteractiveTooltipProps {
@@ -18,23 +18,25 @@ export default function InteractiveTooltip({
   children,
 }: InteractiveTooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleMouseEnter = () => {
-    if (window.innerWidth >= 768) {
-      setIsVisible(true);
-    }
+    if (!isMobile) setIsVisible(true);
   };
 
   const handleMouseLeave = () => {
-    if (window.innerWidth >= 768) {
-      setIsVisible(false);
-    }
+    if (!isMobile) setIsVisible(false);
   };
 
   const handleClick = () => {
-    if (window.innerWidth < 768) {
-      setIsVisible(!isVisible);
-    }
+    if (isMobile) setIsVisible(!isVisible);
   };
 
   const handleClose = () => {

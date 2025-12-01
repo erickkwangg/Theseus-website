@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu, Github } from "lucide-react";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export default function Header() {
   return (
@@ -18,41 +19,29 @@ export default function Header() {
       <nav className="flex items-center justify-between">
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className="text-white hover:text-gray-300 transition-colors text-sm"
-          >
+          <Link href="/" className="text-white hover:text-blue-400 transition-colors text-sm">
             HOME
           </Link>
-          <Link
-            href="#about"
-            className="text-white hover:text-gray-300 transition-colors text-sm"
-          >
+          <Link href="#about" className="text-white hover:text-blue-400 transition-colors text-sm">
             ABOUT
           </Link>
-          <Link
-            href="#market"
-            className="text-white hover:text-gray-300 transition-colors text-sm"
-          >
+          <Link href="#market" className="text-white hover:text-blue-400 transition-colors text-sm">
             MARKET
           </Link>
-          <Link
-            href="/docs"
-            className="text-white hover:text-gray-300 transition-colors text-sm"
-          >
+          <Link href="/docs" className="text-white hover:text-blue-400 transition-colors text-sm">
             DOCS
           </Link>
           <a
-            href="https://theseuschain.substack.com"
-            className="text-white hover:text-gray-300 transition-colors text-sm"
+            href={EXTERNAL_LINKS.substack}
+            className="text-white hover:text-blue-400 transition-colors text-sm"
             target="_blank"
             rel="noopener noreferrer"
           >
             BLOG
           </a>
           <a
-            href="https://github.com/ob-theseus/theseuschain"
-            className="text-white hover:text-gray-300 transition-colors text-sm flex items-center gap-2"
+            href={EXTERNAL_LINKS.github}
+            className="text-white hover:text-blue-400 transition-colors text-sm flex items-center gap-2"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -96,7 +85,7 @@ export default function Header() {
                   DOCS
                 </Link>
                 <a
-                  href="https://theseuschain.substack.com"
+                  href={EXTERNAL_LINKS.substack}
                   className="text-white hover:text-gray-300 transition-colors text-lg"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -104,7 +93,7 @@ export default function Header() {
                   BLOG
                 </a>
                 <a
-                  href="https://github.com/ob-theseus/theseuschain"
+                  href={EXTERNAL_LINKS.github}
                   className="text-white hover:text-gray-300 transition-colors text-lg flex items-center gap-2"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -117,13 +106,13 @@ export default function Header() {
           </Sheet>
         </div>
         {/* Logo */}
-        <div>
+        <div className="logo-pulse cursor-pointer">
           <Image
             src={logo}
             alt="Logo"
             height={100}
             width={100}
-            className="size-12"
+            className="size-12 transition-transform duration-300 hover:scale-110"
           />
         </div>
 

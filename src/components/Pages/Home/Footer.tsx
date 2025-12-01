@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/logo.svg";
 import { Github } from "lucide-react";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export default function Footer() {
   return (
@@ -22,12 +23,12 @@ export default function Footer() {
                   DEVELOPER DOCS
                 </Button>
               </Link>
-              <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
+              <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
                   DOWNLOAD WHITEPAPER
                 </Button>
               </a>
-              <a href="https://github.com/ob-theseus/theseuschain" target="_blank" rel="noopener noreferrer">
+              <a href={EXTERNAL_LINKS.github} target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base flex items-center gap-2 w-full sm:w-auto">
                   <Github className="h-4 w-4" />
                   VIEW ON GITHUB
@@ -109,7 +110,7 @@ export default function Footer() {
                 DOCS
               </Link>
               <a
-                href="https://theseuschain.substack.com"
+                href={EXTERNAL_LINKS.substack}
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -117,7 +118,7 @@ export default function Footer() {
                 BLOG
               </a>
               <a
-                href="https://docsend.com/view/p9fw7vh3ygrrnwgg"
+                href={EXTERNAL_LINKS.whitepaper}
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -125,7 +126,7 @@ export default function Footer() {
                 WHITEPAPER
               </a>
               <a
-                href="https://github.com/ob-theseus/theseuschain"
+                href={EXTERNAL_LINKS.github}
                 className="text-gray-400 hover:text-white transition-colors text-xs lg:text-sm flex items-center gap-1"
                 target="_blank"
                 rel="noopener noreferrer"

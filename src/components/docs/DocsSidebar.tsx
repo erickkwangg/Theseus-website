@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 const sections = [
   {
@@ -74,7 +75,7 @@ export default function DocsSidebar() {
         
         <div className="pt-4 border-t border-gray-800">
           <a
-            href="https://github.com/ob-theseus/theseuschain"
+            href={EXTERNAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
             className="block py-1.5 px-3 text-sm text-gray-400 hover:text-white transition-colors"
@@ -82,7 +83,7 @@ export default function DocsSidebar() {
             GitHub →
           </a>
           <a
-            href="https://docsend.com/view/qtgq5w6ehdy5dkyd"
+            href={EXTERNAL_LINKS.whitepaper}
             target="_blank"
             rel="noopener noreferrer"
             className="block py-1.5 px-3 text-sm text-gray-400 hover:text-white transition-colors"
