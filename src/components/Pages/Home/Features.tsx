@@ -7,7 +7,7 @@ import InteractiveTooltip from "./InteractiveTooltip";
 
 export default function Features() {
   return (
-    <section className="bg-black text-white py-12 lg:py-20" id="about">
+    <section className="bg-black text-white py-12 lg:py-20 grid-bg" id="about">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-16 items-start">
           <div className="w-full h-full flex lg:flex-col items-center lg:items-start justify-between">
@@ -30,10 +30,10 @@ export default function Features() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+              <div className="space-y-4 sm:col-span-2 lg:col-span-1 p-6 -m-6 rounded-lg card-hover border border-transparent">
                 <Image src={machineIcon} alt="icon" className="size-8" />
                 <h4 className="text-base lg:text-lg font-medium">AI Virtual Machine (AIVM)</h4>
-                <p className="text-gray-400 text-sm">
+                <div className="text-gray-400 text-sm">
                   The first ever representation of full{" "}
                   <InteractiveTooltip
                     word="stateful agents"
@@ -44,10 +44,10 @@ export default function Features() {
                   </InteractiveTooltip>{" "}
                   as smart contracts, without the private keys that would control them. 
                   Not your weights, not your brain.
-                </p>
+                </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 p-6 -m-6 rounded-lg card-hover border border-transparent">
                 <Image src={commitmentIcon} alt="icon" className="size-8" />
                 <h4 className="text-base lg:text-lg font-medium">
                   Tensor Commits Protocol
@@ -59,7 +59,7 @@ export default function Features() {
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 p-6 -m-6 rounded-lg card-hover border border-transparent">
                 <Image src={treesIcon} alt="icon" className="size-8" />
                 <h4 className="text-base lg:text-lg font-medium">
                   Terkle Trees

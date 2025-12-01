@@ -11,12 +11,12 @@ export default function Hero() {
       <div className="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
         <div className="space-y-6 lg:space-y-8 pl-6 lg:pl-12 pt-20">
           <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight fade-in-up">
               The Cloud for
               <br />
               AI Personhood
             </h1>
-            <div className="text-gray-400 text-base lg:text-lg max-w-md">
+            <div className="text-gray-400 text-base lg:text-lg max-w-md fade-in-up-delay-1">
               The first blockchain purpose-built for{" "}
               <InteractiveTooltip
                 word="AI Persons"
@@ -33,13 +33,13 @@ export default function Hero() {
             </div>
           </div>
 
-          <div>
+          <div className="fade-in-up-delay-2">
             <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
-              <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base">
+              <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base glow-button">
                 DOWNLOAD THE WHITEPAPER
               </Button>
             </a>
-            <p className="font-semibold text-gray-500 uppercase tracking-wider mt-4">
+            <p className="font-semibold text-gray-500 uppercase tracking-wider mt-4 text-xs">
               PASSWORD PROTECTED
             </p>
           </div>
@@ -50,7 +50,7 @@ export default function Hero() {
             alt="3D Shapes of logo"
             width={800}
             height={800}
-            className="w-full"
+            className="w-full float-animation"
             priority
           />
         </div>

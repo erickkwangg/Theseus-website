@@ -19,7 +19,7 @@ export default function Markets() {
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full">
+          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full card-hover">
             <div className="corner-bracket-tr"></div>
             <div className="corner-bracket-bl"></div>
             <div className="space-y-4">
@@ -34,7 +34,7 @@ export default function Markets() {
             </div>
           </div>
 
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full">
+          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full card-hover">
             <div className="corner-bracket-tr"></div>
             <div className="corner-bracket-bl"></div>
             <div className="space-y-4">
@@ -50,7 +50,7 @@ export default function Markets() {
             </div>
           </div>
 
-          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full md:col-span-2 lg:col-span-1">
+          <div className="bg-black border border-gray-800 p-6 lg:p-8 corner-brackets flex flex-col h-full w-full md:col-span-2 lg:col-span-1 card-hover">
             <div className="corner-bracket-tr"></div>
             <div className="corner-bracket-bl"></div>
             <div className="space-y-4">
