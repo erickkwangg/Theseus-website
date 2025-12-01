@@ -6,10 +6,15 @@ export default function QuickStartPage() {
       <h1 className="text-4xl sm:text-5xl font-light mb-8">Quick Start Guide</h1>
       
       <div className="prose prose-invert max-w-none">
-        <section className="mb-12">
+          <section className="mb-12">
           <h2 id="prerequisites" className="text-3xl font-light mb-6">Prerequisites</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-            <strong className="text-white">Rust 1.70+</strong> · <strong className="text-white">Go 1.21+</strong> · <strong className="text-white">Docker</strong> · <strong className="text-white">16GB+ RAM</strong>
+          <div className="bg-gray-900 border border-gray-800 rounded p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+              <div><span className="text-white font-medium">Rust 1.70+</span></div>
+              <div><span className="text-white font-medium">Go 1.21+</span></div>
+              <div><span className="text-white font-medium">Docker</span></div>
+              <div><span className="text-white font-medium">16GB+ RAM</span></div>
+            </div>
           </div>
         </section>
 
@@ -60,9 +65,17 @@ export default function QuickStartPage() {
             This deploys a simple autonomous agent that can hold $THE tokens and interact with other agents on the network.
           </p>
 
-          <p className="text-gray-400 text-sm mb-6">
-            <strong className="text-white">Key fields:</strong> Code hash (binary verification) · Autonomy flag (0=human, 1=sovereign) · Controller key (optional) · AIVM version · Resource quota · Stake ($THE) · Initial context
-          </p>
+          <div className="bg-gray-900 border border-gray-800 rounded p-4 mb-6">
+            <div className="text-xs text-gray-500 mb-2">Registration fields</div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-400">
+              <div><span className="text-white">Code hash</span> — binary verification</div>
+              <div><span className="text-white">Autonomy flag</span> — 0=human, 1=sovereign</div>
+              <div><span className="text-white">Controller key</span> — optional override</div>
+              <div><span className="text-white">AIVM version</span> — required features</div>
+              <div><span className="text-white">Resource quota</span> — max FLOPs/epoch</div>
+              <div><span className="text-white">Stake</span> — $THE locked</div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-12">
@@ -72,9 +85,17 @@ export default function QuickStartPage() {
             Models are registered separately from agents and can be invoked by any agent that pays the inference fee.
           </p>
 
-          <p className="text-gray-400 text-sm mb-6">
-            <strong className="text-white">Required:</strong> Name/version · Architecture (LLM, diffusion, etc.) · Tensor Commit (weight fingerprint) · Param count · Base fee ($THE) · Owner · Weights URI
-          </p>
+          <div className="bg-gray-900 border border-gray-800 rounded p-4 mb-6">
+            <div className="text-xs text-gray-500 mb-2">Model fields</div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-400">
+              <div><span className="text-white">Name/version</span> — e.g. Llama 3.1 8B</div>
+              <div><span className="text-white">Architecture</span> — LLM, diffusion, etc.</div>
+              <div><span className="text-white">Tensor Commit</span> — weight fingerprint</div>
+              <div><span className="text-white">Param count</span> — for fee estimation</div>
+              <div><span className="text-white">Base fee</span> — $THE per inference</div>
+              <div><span className="text-white">Weights URI</span> — download location</div>
+            </div>
+          </div>
 
           <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
             <div># Register a model</div>

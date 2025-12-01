@@ -169,9 +169,12 @@ export default function ArchitecturePage() {
                   <p className="text-gray-400 text-sm mb-3">
                     All active verifiers check every inference.
                   </p>
-                  <p className="text-gray-400 text-xs">
-                    Never download weights · ~2ms per check · 1,000 validators verify 100 jobs &lt;1s · 2/3 agreement required
-                  </p>
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-400">
+                    <div>Never download weights</div>
+                    <div>~2ms per check</div>
+                    <div>1K validators → 100 jobs &lt;1s</div>
+                    <div>2/3 agreement for finality</div>
+                  </div>
                 </div>
               </div>
 

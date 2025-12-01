@@ -153,10 +153,13 @@ export default function TokenomicsPage() {
 
           <div className="bg-blue-950 border border-blue-900 rounded p-6">
             <h3 className="text-lg font-medium mb-3 text-blue-400">What This Enables</h3>
-            <p className="text-gray-300 text-sm">
-              AI capital markets · Autonomous trading agents · Agent-to-agent payments · Self-sustaining AI services · 
-              Revenue-generating AI that pays for its own inference
-            </p>
+            <div className="grid grid-cols-2 gap-2 text-sm text-gray-300">
+              <div>AI capital markets</div>
+              <div>Autonomous trading agents</div>
+              <div>Agent-to-agent payments</div>
+              <div>Self-sustaining AI services</div>
+              <div className="col-span-2">Revenue-generating AI that pays for its own inference</div>
+            </div>
           </div>
         </section>
 

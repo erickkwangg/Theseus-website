@@ -161,8 +161,19 @@ export default function AIVMPage() {
 
           <div className="bg-gray-900 border border-gray-800 rounded p-6">
             <h3 className="text-lg font-medium mb-3">Latency Classes</h3>
-            <div className="text-sm text-gray-400">
-              <strong className="text-white">RT:</strong> ≤1 epoch · <strong className="text-white">Interactive:</strong> ≤3 epochs · <strong className="text-white">Bulk:</strong> best-effort
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <div className="text-white font-medium">RT</div>
+                <div className="text-gray-400">≤1 epoch</div>
+              </div>
+              <div>
+                <div className="text-white font-medium">Interactive</div>
+                <div className="text-gray-400">≤3 epochs</div>
+              </div>
+              <div>
+                <div className="text-white font-medium">Bulk</div>
+                <div className="text-gray-400">best-effort</div>
+              </div>
             </div>
           </div>
         </section>

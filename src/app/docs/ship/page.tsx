@@ -33,22 +33,50 @@ export default function SHIPPage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-              <strong className="text-white">Unpredictability</strong> (hallucinations, unsafe constructs) · 
-              <strong className="text-white"> Unbounded execution</strong> (DoS risks) · 
-              <strong className="text-white"> No proof anchoring</strong> (verification impossible) · 
-              <strong className="text-white"> Opaque intent</strong> (implicit goals)
+            <div className="bg-gray-900 border border-gray-800 rounded p-6">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <div className="text-white font-medium">Unpredictability</div>
+                  <div className="text-gray-400">Hallucinations, unsafe constructs</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">Unbounded execution</div>
+                  <div className="text-gray-400">DoS risks</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">No proof anchoring</div>
+                  <div className="text-gray-400">Verification impossible</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">Opaque intent</div>
+                  <div className="text-gray-400">Implicit goals</div>
+                </div>
+              </div>
             </div>
           </section>
 
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Design Principles</h2>
             
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-              <strong className="text-white">Determinism</strong> (static bounds, known gas/memory) · 
-              <strong className="text-white"> Verifiability</strong> (Tensor Commit proofs) · 
-              <strong className="text-white"> Traceability</strong> (tied to agent context) · 
-              <strong className="text-white"> Composability</strong> (staged, delegated, templated)
+            <div className="bg-gray-900 border border-gray-800 rounded p-6">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <div className="text-white font-medium">Determinism</div>
+                  <div className="text-gray-400">Static bounds, known gas/memory</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">Verifiability</div>
+                  <div className="text-gray-400">Tensor Commit proofs</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">Traceability</div>
+                  <div className="text-gray-400">Tied to agent context</div>
+                </div>
+                <div>
+                  <div className="text-white font-medium">Composability</div>
+                  <div className="text-gray-400">Staged, delegated, templated</div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -106,7 +134,9 @@ export default function SHIPPage() {
             <h2 className="text-3xl font-light mb-6">Integration with AIVM</h2>
             
             <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-              SHIP→AIVM opcodes via AGENT_TICK()/MODEL_INFER() · Maps to safe primitives (TLOAD, TCUSTOM, STATE_EXPORT, TRANSFER_TOKEN) · Tensor Commits link inference to outcome
+              <p className="mb-2">SHIP compiles to AIVM opcodes, executed via <code className="text-white">AGENT_TICK()</code> or <code className="text-white">MODEL_INFER()</code>.</p>
+              <p className="mb-2">Each construct maps to safe primitives: <code className="text-white">TLOAD</code>, <code className="text-white">TCUSTOM</code>, <code className="text-white">STATE_EXPORT</code>, <code className="text-white">TRANSFER_TOKEN</code>.</p>
+              <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
             </div>
           </section>
 
