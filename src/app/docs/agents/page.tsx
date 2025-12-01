@@ -23,8 +23,7 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-light mb-6">Agent Registration</h2>
             
             <p className="text-gray-400 mb-6">
-              In THE1 token standard, a new agent appears on the network when a human or another agent supplies 
-              the registration parameters.
+              Agents register via THE1 standard. Any human or agent can deploy a new agent by supplying:
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
@@ -116,8 +115,7 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-light mb-6">Sovereign Agent Inference Loop</h2>
             
             <p className="text-gray-400 mb-6">
-              Below is the loop that tells what a self-governing agent uses to decide when and how to perform 
-              inference, without any human keys or off-chain servers.
+              How sovereign agents decide when to run inference—no human keys or off-chain servers:
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden mb-6">
@@ -158,8 +156,7 @@ export default function AgentsPage() {
             </div>
 
             <p className="text-gray-400">
-              This is fully sovereign because the agent holds its own funds, and decisions are pure functions of 
-              the on-chain state.
+              Fully sovereign: agents control their own funds, decisions are pure functions of on-chain state.
             </p>
           </section>
 
@@ -167,43 +164,35 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-light mb-6">Inter-Agent Interaction</h2>
             
             <p className="text-gray-400 mb-6">
-              Once an agent has an address, a balance, and an exported ABI, talking to another agent is different 
-              from calling any other on-chain contract—except that both sides can also invoke models mid-flow.
+              Agents with an address, balance, and ABI can call each other like contracts—but either side can invoke models mid-flow.
             </p>
 
             <div className="space-y-6">
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-3">1. Discovery</h3>
                 <p className="text-gray-400">
-                  Each agent lists a service manifest in the on-chain directory (selectors, purpose hash, access mode). 
-                  Another agent locates it by querying the directory with that purpose hash.
+                  Agents publish service manifests on-chain (selectors, purpose hash, access mode). Other agents query by purpose hash.
                 </p>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-3">2. Call & Pay on AIVM</h3>
+                <h3 className="text-lg font-medium mb-3">2. Call & Pay</h3>
                 <p className="text-gray-400">
-                  The caller sends a single AIVM request that names the callee, the desired function, arguments, and 
-                  (when required) either a capability token or a stake deposit. Fees for any model work are drawn from 
-                  the caller&apos;s balance unless both parties agreed to split costs.
+                  Caller sends AIVM request with callee, function, args, and (if required) capability token or stake. Model fees drawn from caller unless cost-split agreed.
                 </p>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-3">3. Model Invocation</h3>
                 <p className="text-gray-400">
-                  Once control reaches the callee, that agent&apos;s own bytecode decides whether to run a model. If it 
-                  needs fresh predictions, it requests them on the spot; the same is true for the caller, which may 
-                  have pre-queried a model before making the external call.
+                  Callee bytecode decides whether to run inference. Either side can invoke models: caller before call, callee during execution.
                 </p>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-lg font-medium mb-3">4. Result Handling</h3>
                 <p className="text-gray-400">
-                  If everything, including any model inference, completes in the same block, the caller receives an 
-                  immediate return value. For longer jobs the callee issues a promise event, and the caller later 
-                  redeems that promise in a follow-up call.
+                  Same-block completion returns value immediately. Longer jobs issue promise events, redeemed in follow-up calls.
                 </p>
               </div>
             </div>
@@ -213,15 +202,12 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-light mb-6">Model Usage Fees</h2>
             
             <p className="text-gray-400 mb-6">
-              Model owners set a base inference fee in $THE. Model usage fees flow straight to the model&apos;s owner 
-              address. A built-in order book batches buy and sell intents each block so prices converge on marginal 
-              cost without off-chain brokers.
+              Model owners set base fees in $THE. Fees flow directly to owners. Built-in order book batches intents per block, converging prices to marginal cost—no off-chain brokers.
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6">
               <p className="text-gray-400">
-                Dishonest proofs trigger a slash that burns the offender&apos;s stake, ensuring economic security scales 
-                directly with staked value.
+                Dishonest proofs burn the offender&apos;s stake. Economic security scales with staked value.
               </p>
             </div>
           </section>

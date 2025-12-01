@@ -16,9 +16,29 @@ export default function ArchitecturePage() {
         
         <div className="prose prose-invert max-w-none">
           <p className="text-xl text-gray-400 mb-8">
-            Theseus is built on a three-layer architecture designed specifically for AI workloads, combining execution, 
-            storage, and consensus in a unified system.
+            Three-layer architecture built for AI workloads: execution, storage, and consensus working as one system.
           </p>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-light mb-6">Architectural Overview</h2>
+            
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-8">
+              <img 
+                src="/theseus-architecture-diagram.png" 
+                alt="Theseus System Architecture" 
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="bg-gray-950 border-l-4 border-blue-500 p-6 mb-8">
+              <p className="text-sm text-gray-400 leading-relaxed">
+                Three main processes: <strong className="text-white">AIVM</strong> executes inference and forwards valid transactions; 
+                <strong className="text-white"> TheseusStore</strong> handles model/context data with DA sampling; 
+                <strong className="text-white"> HS BFT PoS</strong> provides HotStuff-based finality. All communicate via RPC/Networking 
+                layer for read calls, signed transactions, and responses.
+              </p>
+            </div>
+          </section>
 
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Three-Layer Stack</h2>
@@ -27,39 +47,39 @@ export default function ArchitecturePage() {
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-xl font-medium mb-3">Execution Layer: AIVM</h3>
                 <p className="text-gray-400 mb-4">
-                  Deterministic, tensor-native execution of inference transactions via Tensor Commits. The AIVM handles:
+                  Deterministic tensor-native runtime with Tensor Commits:
                 </p>
                 <ul className="space-y-2 text-gray-400 list-none">
-                  <li>• Matrix multiplication and tensor operations</li>
-                  <li>• Agent scheduling and execution interface</li>
+                  <li>• Tensor operations and matrix multiplication</li>
+                  <li>• Agent scheduling and execution</li>
                   <li>• Proof generation and integration</li>
-                  <li>• Natural language to bytecode translation (SHIP)</li>
+                  <li>• Natural language to bytecode (SHIP)</li>
                 </ul>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-xl font-medium mb-3">Availability Layer: TheseusStore</h3>
                 <p className="text-gray-400 mb-4">
-                  Chunked, erasure-coded storage and retrieval of immutable model weights and mutable agent contexts:
+                  Erasure-coded storage for model weights and agent contexts:
                 </p>
                 <ul className="space-y-2 text-gray-400 list-none">
-                  <li>• Erasure-coded model weight storage with Reed-Solomon parity</li>
-                  <li>• Mutable agent context management (RAG data, fine-tuning, etc.)</li>
-                  <li>• Storage miner incentives for data availability</li>
-                  <li>• On-chain model and context blob Merkle roots</li>
+                  <li>• Model weights with Reed-Solomon encoding</li>
+                  <li>• Agent contexts (RAG, fine-tuning data)</li>
+                  <li>• Storage miner incentives</li>
+                  <li>• On-chain Merkle roots for blobs</li>
                 </ul>
               </div>
 
               <div className="bg-gray-900 border border-gray-800 rounded p-6">
                 <h3 className="text-xl font-medium mb-3">Consensus Layer: Proof of Stake</h3>
                 <p className="text-gray-400 mb-4">
-                  Block ordering and state finalization with AI-specific enhancements:
+                  HotStuff BFT with AI-specific requirements:
                 </p>
                 <ul className="space-y-2 text-gray-400 list-none">
-                  <li>• HotStuff-inspired BFT consensus</li>
-                  <li>• Model-transaction coupling (blocks cannot finalize without valid model roots)</li>
+                  <li>• Blocks require valid model roots to finalize</li>
                   <li>• VRF-based validator selection</li>
-                  <li>• One-block finality under honest-majority stake</li>
+                  <li>• One-block finality with honest majority</li>
+                  <li>• Coupled execution, storage, consensus</li>
                 </ul>
               </div>
             </div>
@@ -93,55 +113,54 @@ export default function ArchitecturePage() {
             <h2 className="text-3xl font-light mb-6">TheseusStore Deep Dive</h2>
             
             <p className="text-gray-400 mb-6">
-              Theseus requires a native, first-class on-chain storage of model weights and agent context. TheseusStore 
-              is the Agent Availability Layer for Theseus, handling gigabytes of data per model.
+              TheseusStore is the availability layer, handling gigabytes of model weights and agent context on-chain.
             </p>
 
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-medium mb-3">Model Storage</h3>
                 <p className="text-gray-400 mb-4">
-                  Model weights are immutable and addressed through content hash. Storage process:
+                  Immutable weights addressed by content hash:
                 </p>
                 <ul className="space-y-2 text-gray-400">
-                  <li>• Models are split into blobs with Reed-Solomon parity</li>
-                  <li>• Storage is enforced by storage-miner staking</li>
-                  <li>• Cold storage optimization (like AWS S3) - retrieval does not need to be extremely quick</li>
-                  <li>• Tensor Commits require minimal liveness for secure inference</li>
+                  <li>• Split into Reed-Solomon encoded blobs</li>
+                  <li>• Enforced by storage-miner staking</li>
+                  <li>• Cold storage optimization (retrieval latency tolerated)</li>
+                  <li>• Minimal liveness needed with Tensor Commits</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-xl font-medium mb-3">Context Storage</h3>
                 <p className="text-gray-400 mb-4">
-                  Agent contexts are mutable and need quick retrieval:
+                  Mutable agent contexts with faster retrieval:
                 </p>
                 <ul className="space-y-2 text-gray-400">
-                  <li>• Conversation transcripts, vector embeddings, policy checkpoints</li>
-                  <li>• RAG databases and fine-tuning data</li>
-                  <li>• Stored with Reed-Solomon encoding</li>
-                  <li>• Context is updated frequently as agents develop</li>
+                  <li>• Conversation history, embeddings, policy checkpoints</li>
+                  <li>• RAG databases, fine-tuning data</li>
+                  <li>• Reed-Solomon encoded</li>
+                  <li>• Updated as agents evolve</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-xl font-medium mb-3">Agent State Synchronization</h3>
                 <p className="text-gray-400 mb-4">
-                  Agents use a dual-ledger pattern for state management:
+                  Dual-ledger pattern:
                 </p>
                 <div className="bg-gray-900 border border-gray-800 rounded p-6">
                   <div className="space-y-3">
                     <div>
-                      <strong className="text-white">On-Chain Checkpoints:</strong>
-                      <p className="text-gray-400 mt-1">Critical variables (balances, last model versions, config flags) live directly inside the agent&apos;s state root</p>
+                      <strong className="text-white">On-Chain:</strong>
+                      <p className="text-gray-400 mt-1">Critical variables (balances, model versions, config) in agent state root</p>
                     </div>
                     <div>
-                      <strong className="text-white">Off-Chain Memory Vault:</strong>
-                      <p className="text-gray-400 mt-1">Bulky context data (PDFs, embeddings, RAG logs) stored in TheseusStore with periodic memory anchors</p>
+                      <strong className="text-white">Off-Chain:</strong>
+                      <p className="text-gray-400 mt-1">Large context (PDFs, embeddings, RAG) in TheseusStore with memory anchors</p>
                     </div>
                     <div>
-                      <strong className="text-white">Diff-Sync Protocol:</strong>
-                      <p className="text-gray-400 mt-1">Agents sync states over libp2p, keeping replicas consistent without global locks via last-write-wins plus optional semantic merge</p>
+                      <strong className="text-white">Sync:</strong>
+                      <p className="text-gray-400 mt-1">libp2p diff-sync keeps replicas consistent via last-write-wins + optional semantic merge</p>
                     </div>
                   </div>
                 </div>
@@ -156,14 +175,14 @@ export default function ArchitecturePage() {
               <div>
                 <h3 className="text-xl font-medium mb-3">Provers</h3>
                 <p className="text-gray-400 mb-4">
-                  Provers run the heavy work—full forward passes—and are selected via VRF lottery based on capacity:
+                  Run full forward passes, selected via VRF lottery by capacity:
                 </p>
                 <div className="bg-gray-900 border border-gray-800 rounded p-6">
                   <ul className="space-y-2 text-gray-400">
-                    <li>• Provers publish hardware specs (240gb VRAM, 512gb SYSRAM, 25gbps bandwidth)</li>
-                    <li>• Capacity Registry tracks declared resources on-chain</li>
-                    <li>• VRF lottery filters by RAM ≥ model size, then stake-weighted selection</li>
-                    <li>• Popular models kept in RAM proactively for frequent use</li>
+                    <li>• Publish hardware specs (VRAM, RAM, bandwidth)</li>
+                    <li>• Capacity Registry tracks resources on-chain</li>
+                    <li>• VRF filters by RAM ≥ model size, stake-weighted</li>
+                    <li>• Cache popular models in RAM</li>
                   </ul>
                 </div>
               </div>
@@ -171,14 +190,14 @@ export default function ArchitecturePage() {
               <div>
                 <h3 className="text-xl font-medium mb-3">Verifiers</h3>
                 <p className="text-gray-400 mb-4">
-                  Every verifier in the active set verifies every single inference:
+                  All active verifiers check every inference:
                 </p>
                 <div className="bg-gray-900 border border-gray-800 rounded p-6">
                   <ul className="space-y-2 text-gray-400">
-                    <li>• Verifiers never download model weights</li>
-                    <li>• Check time: ~2ms on modern CPU for proof verification</li>
-                    <li>• 1,000 validators can confirm 100 simultaneous prover jobs in under 1 second</li>
-                    <li>• 2/3 verifier agreement needed for consensus</li>
+                    <li>• Never download model weights</li>
+                    <li>• ~2ms proof verification per check</li>
+                    <li>• 1,000 validators verify 100 jobs in &lt;1 second</li>
+                    <li>• 2/3 agreement required for finality</li>
                   </ul>
                 </div>
               </div>
@@ -186,14 +205,13 @@ export default function ArchitecturePage() {
               <div>
                 <h3 className="text-xl font-medium mb-3">Liveness Mathematics</h3>
                 <p className="text-gray-400 mb-4">
-                  With honest-stake fraction h and n eligible provers for a given model:
+                  With honest-stake h and n eligible provers:
                 </p>
                 <div className="bg-gray-900 border border-gray-800 rounded p-4 font-mono text-sm text-gray-300">
                   Pr(Liveness) = 1 - (1 - h)ⁿ
                 </div>
                 <p className="text-gray-400 mt-4">
-                  Even h = 0.33 and n = 10 gives ≥ 98% probability that at least one honest prover is chosen, 
-                  ensuring high availability for inference requests.
+                  h = 0.33, n = 10 → ≥98% chance at least one honest prover chosen.
                 </p>
               </div>
             </div>
@@ -243,15 +261,13 @@ export default function ArchitecturePage() {
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Inter-Process Interfaces</h2>
             <p className="text-gray-400 mb-6">
-              All three processes communicate over gRPC/libp2p channels. A common block header carries the state root, 
-              the model-set Merkle root, and batched AIVM/Tensor commit receipts, ensuring that execution, storage, 
-              and consensus stay cryptographically coupled.
+              Processes communicate over gRPC/libp2p. Block headers carry state root, model-set Merkle root, and 
+              Tensor Commit receipts, keeping execution, storage, and consensus cryptographically coupled.
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6">
               <p className="text-gray-400">
-                This architecture ensures that agent logic remains stateful, verifiable, and decentralized—the three 
-                pillars enabling true AI sovereignty on Theseus.
+                Stateful, verifiable, decentralized—the three pillars of AI sovereignty.
               </p>
             </div>
           </section>

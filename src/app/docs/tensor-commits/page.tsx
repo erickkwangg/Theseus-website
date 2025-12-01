@@ -35,6 +35,35 @@ export default function TensorCommitsPage() {
           </section>
 
           <section className="mb-12">
+            <h2 className="text-3xl font-light mb-6">How Tensor Commits Work</h2>
+            
+            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
+              <img 
+                src="/tensor-commits-diagram.png" 
+                alt="Tensor Commits Verification Process" 
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="bg-gray-950 border-l-4 border-blue-500 p-6 mb-6">
+              <p className="text-sm text-gray-400 leading-relaxed">
+                <strong className="text-white">Figure:</strong> One proof to verify AGI-scale LLM inference. A sovereign agent&apos;s token stream 
+                (e.g., &quot;The → ship → of&quot;) is fed auto-regressively into an LM Transformer whose every weight tensor and 
+                intermediate activation is bound by a single tensor commitment. At each decoding step, the new token 
+                embedding is appended (shifted right) and committed as a multivariate polynomial P<sub>π</sub>(i, j), combined 
+                with a positional-encoding commitment. Within each layer, the model&apos;s linear kernels (Q, K, V, feed-forward 
+                weights) and residual summations are each committed via polynomial openings (dotted arrows) while mask-aware 
+                softmax and LayerNorm steps employ low-degree polynomial approximations with provable error bounds. All 
+                per-block commitments live in a Terkle &quot;tensor-commit&quot; tree, so a small set of Merkle-path openings plus 
+                KZG pairings suffices to verify every attention score, residual update, non-linearity, and final logit 
+                computation. The resulting succinct proof π cryptographically certifies that the claimed output token 
+                (e.g., &quot;Theseus&quot;) truly follows from the committed model and its prior context—without re-execution or 
+                revealing any hidden parameters.
+              </p>
+            </div>
+          </section>
+
+          <section className="mb-12">
             <h2 className="text-3xl font-light mb-6">Key Achievements</h2>
             
             <div className="grid md:grid-cols-2 gap-6 mb-6">
