@@ -245,12 +245,6 @@ export default function ArchitecturePage() {
               Processes communicate over gRPC/libp2p. Block headers carry state root, model-set Merkle root, and 
               Tensor Commit receipts, keeping execution, storage, and consensus cryptographically coupled.
             </p>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <p className="text-gray-400">
-                Stateful, verifiable, decentralized—the three pillars of AI sovereignty.
-              </p>
-            </div>
           </section>
 
           <div className="border-t border-gray-800 pt-8">

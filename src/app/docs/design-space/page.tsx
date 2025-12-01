@@ -16,8 +16,7 @@ export default function DesignSpacePage() {
         
         <div className="prose prose-invert max-w-none">
           <p className="text-xl text-gray-400 mb-6">
-            Theseus agents aren&apos;t just smart contracts with ML capabilities—they represent a fundamentally 
-            expanded design space that enables entirely new categories of on-chain applications.
+            Autonomous agents with verifiable inference enable applications impossible on existing smart contract platforms.
           </p>
 
           <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-12">

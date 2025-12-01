@@ -16,8 +16,8 @@ export default function ComparisonPage() {
         
         <div className="prose prose-invert max-w-none">
           <p className="text-xl text-gray-400 mb-8">
-            While the deployment and interaction patterns may look similar on the surface, Theseus agents represent 
-            a fundamental paradigm shift from traditional smart contracts.
+            While the deployment and interaction patterns look similar, Theseus agents differ fundamentally 
+            from traditional smart contracts.
           </p>
 
           <section className="mb-12">
@@ -185,12 +185,10 @@ export default function ComparisonPage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">The Real Difference: An Entirely New Design Space</h2>
+            <h2 className="text-3xl font-light mb-6">An Expanded Design Space</h2>
             <p className="text-gray-400 mb-6">
-              The technical differences between Theseus agents and Ethereum smart contracts are significant, 
-              but the implications go far deeper. This isn&apos;t just about making contracts &quot;smarter&quot;—it&apos;s 
-              about unlocking an entirely new design space for on-chain applications that were previously 
-              impossible or impractical.
+              True autonomy and verifiable inference enable applications that are impossible or impractical 
+              on existing platforms.
             </p>
 
             <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">

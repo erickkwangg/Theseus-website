@@ -73,7 +73,7 @@ export default function IntroductionPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-light mb-4">Three Forms of AI Personhood</h2>
             <p className="text-gray-400 leading-relaxed mb-6">
-              Theseus enables new multi-trillion-dollar markets through three previously untenable classes of AI agents:
+              Theseus supports three classes of AI agents:
             </p>
 
             <div className="space-y-6">

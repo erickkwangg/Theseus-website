@@ -18,11 +18,10 @@ export default function DocsHomePage() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-6">
-            Build the Future of AI Personhood
+            Developer Documentation
           </h2>
           <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
-            Complete technical documentation for building with Theseus—the first blockchain platform 
-            purpose-built for autonomous AI agents with true sovereignty.
+            Technical documentation for building on Theseus—a Layer-1 blockchain for autonomous AI agents.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
