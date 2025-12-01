@@ -7,12 +7,11 @@ export default function IntroductionPage() {
       
       <div className="prose prose-invert max-w-none">
         <section className="mb-12">
-          <h2 id="agi-computer" className="text-3xl font-light mb-4">The AGI Computer</h2>
+          <h2 id="cloud-for-ai-personhood" className="text-3xl font-light mb-4">The Cloud for AI Personhood</h2>
           <p className="text-gray-400 leading-relaxed mb-4">
             By the end of this decade, more than <strong>1.3 billion autonomous software agents</strong> are 
-            expected to be online, and leading forecasters anticipate the arrival of human-level AGI shortly 
-            thereafter. Yet each of those agents is still chained to a human-held private key and to centralized, 
-            permission-gated APIs.
+            expected to be online. Yet each of those agents is still chained to a human-held private key and 
+            to centralized, permission-gated APIs.
           </p>
           <p className="text-gray-400 leading-relaxed mb-4">
             Today&apos;s agents can&apos;t trust each other, pay each other, or outlive the companies running them.

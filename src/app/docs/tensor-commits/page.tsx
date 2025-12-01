@@ -38,7 +38,7 @@ export default function TensorCommitsPage() {
 
             <div className="bg-gray-950 border-l-4 border-blue-500 p-6 mb-6">
               <p className="text-sm text-gray-400 leading-relaxed">
-                <strong className="text-white">Figure:</strong> One proof to verify AGI-scale LLM inference. A sovereign agent&apos;s token stream 
+                <strong className="text-white">Figure:</strong> One proof to verify large-scale LLM inference. A sovereign agent&apos;s token stream 
                 (e.g., &quot;The → ship → of&quot;) is fed auto-regressively into an LM Transformer whose every weight tensor and 
                 intermediate activation is bound by a single tensor commitment. At each decoding step, the new token 
                 embedding is appended (shifted right) and committed as a multivariate polynomial P<sub>π</sub>(i, j), combined 
