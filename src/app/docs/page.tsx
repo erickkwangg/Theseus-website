@@ -13,8 +13,11 @@ import {
   Github, 
   FileText,
   BookOpen,
-  Puzzle
+  Puzzle,
+  Lock,
+  ExternalLink
 } from "lucide-react";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export default function DocsHomePage() {
   return (
@@ -210,24 +213,24 @@ export default function DocsHomePage() {
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <a 
-            href="https://github.com/ob-theseus/theseuschain" 
+            href={EXTERNAL_LINKS.github}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-gray-800 rounded-lg hover:border-gray-700 hover:bg-gray-900/50 transition-all group"
           >
             <Github className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
             <span className="text-sm text-gray-400 group-hover:text-white transition-colors">GitHub</span>
-            <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
           </a>
           <a 
-            href="https://docsend.com/view/qtgq5w6ehdy5dkyd" 
+            href={EXTERNAL_LINKS.whitepaper}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-gray-800 rounded-lg hover:border-gray-700 hover:bg-gray-900/50 transition-all group"
           >
             <FileText className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
             <span className="text-sm text-gray-400 group-hover:text-white transition-colors">Whitepaper</span>
-            <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Lock className="h-3 w-3 text-gray-600 ml-auto" />
           </a>
           <Link 
             href="/docs/glossary"
@@ -238,14 +241,14 @@ export default function DocsHomePage() {
             <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
           <a 
-            href="https://theseuschain.substack.com" 
+            href={EXTERNAL_LINKS.substack}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-gray-800 rounded-lg hover:border-gray-700 hover:bg-gray-900/50 transition-all group"
           >
             <FileText className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
             <span className="text-sm text-gray-400 group-hover:text-white transition-colors">Substack</span>
-            <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
           </a>
         </div>
       </div>

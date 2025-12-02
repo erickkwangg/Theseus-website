@@ -62,6 +62,17 @@ export default function DocsSidebar() {
   return (
     <aside className="hidden lg:block w-64 shrink-0">
       <nav className="sticky top-24 space-y-6">
+        {/* Version badge */}
+        <div className="px-3 pb-4 border-b border-gray-800">
+          <span className="text-xs text-gray-500">Version</span>
+          <div className="flex items-center gap-2 mt-1">
+            <span className="text-sm font-medium text-white">0.1.0</span>
+            <span className="px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-400 rounded font-medium">
+              BETA
+            </span>
+          </div>
+        </div>
+        
         {sections.map((section) => (
           <div key={section.title}>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-3">

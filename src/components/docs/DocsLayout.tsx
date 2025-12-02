@@ -7,6 +7,8 @@ import DocsSearch from "./DocsSearch";
 import ReadingProgress from "./ReadingProgress";
 import Breadcrumbs from "./Breadcrumbs";
 import TableOfContents from "./TableOfContents";
+import BackToTop from "./BackToTop";
+import MobileSidebar from "./MobileSidebar";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 interface DocsLayoutProps {
@@ -38,9 +40,12 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
             <div className="hidden sm:block h-5 w-px bg-gray-700" />
             <Link 
               href="/docs" 
-              className="hidden sm:block text-sm text-blue-400 font-medium"
+              className="hidden sm:flex items-center gap-2 text-sm text-blue-400 font-medium"
             >
               Documentation
+              <span className="px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-400 rounded font-medium">
+                BETA
+              </span>
             </Link>
           </div>
           <div className="flex items-center gap-4">
@@ -77,6 +82,12 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           <TableOfContents />
         </div>
       </div>
+
+      {/* Mobile sidebar */}
+      <MobileSidebar />
+      
+      {/* Back to top button */}
+      <BackToTop />
     </div>
   );
 }

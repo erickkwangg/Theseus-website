@@ -653,10 +653,15 @@
 }
 
 /* Docs table */
+.docs-table-wrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgb(31 41 55);
+}
 .docs-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 0;
 }
 .docs-table th {
   text-align: left;
@@ -667,14 +672,36 @@
   font-size: 0.875rem;
   color: rgb(156 163 175);
 }
+.docs-table th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+.docs-table th:last-child {
+  border-top-right-radius: 0.75rem;
+}
 .docs-table td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid rgb(31 41 55 / 0.5);
   font-size: 0.875rem;
   color: rgb(209 213 219);
 }
+.docs-table tr:nth-child(even) td {
+  background: rgb(17 24 39 / 0.2);
+}
 .docs-table tr:hover td {
-  background: rgb(17 24 39 / 0.3);
+  background: rgb(17 24 39 / 0.5);
+}
+.docs-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Auto-wrap tables in overflow container */
+.docs-content .overflow-x-auto {
+  border-radius: 0.75rem;
+  border: 1px solid rgb(31 41 55);
+  margin: 1.5rem 0;
+}
+.docs-content .overflow-x-auto .docs-table {
+  margin: 0;
 }
 
 /* Section divider with text */

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Particle {
   x: number;
@@ -13,8 +13,15 @@ interface Particle {
 
 export default function Particles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -25,23 +32,28 @@ export default function Particles() {
     const setSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      checkMobile();
     };
     setSize();
     window.addEventListener("resize", setSize);
 
+    // Mobile-aware settings
+    const mobile = window.innerWidth < 768;
+    const particleCount = mobile ? 20 : 50;
+    const connectionDistance = mobile ? 80 : 150;
+    const lineOpacityMultiplier = mobile ? 0.08 : 0.15;
+
     // Create particles
-    const particleCount = 50;
     const particles: Particle[] = [];
-    const connectionDistance = 150;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: mobile ? Math.random() * 1.5 + 0.5 : Math.random() * 2 + 1,
+        opacity: mobile ? Math.random() * 0.3 + 0.1 : Math.random() * 0.5 + 0.2,
       });
     }
 
@@ -66,7 +78,7 @@ export default function Particles() {
         ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
         ctx.fill();
 
-        // Draw connections
+        // Draw connections (fewer on mobile)
         for (let j = i + 1; j < particles.length; j++) {
           const other = particles[j];
           const dx = particle.x - other.x;
@@ -74,12 +86,12 @@ export default function Particles() {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.15;
+            const opacity = (1 - distance / connectionDistance) * lineOpacityMultiplier;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
             ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = mobile ? 0.5 : 1;
             ctx.stroke();
           }
         }
@@ -100,8 +112,7 @@ export default function Particles() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: isMobile ? 0.3 : 0.6 }}
     />
   );
 }
-

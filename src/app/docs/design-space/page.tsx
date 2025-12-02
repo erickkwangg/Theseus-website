@@ -22,12 +22,14 @@ export default function DesignSpacePage() {
       <div className="prose prose-invert max-w-none">
         {/* Read Full Article CTA */}
         <Callout type="info" title="Full Analysis Available">
-          This page provides an overview. For complete technical details and market dynamics, read the original article.
+          <p className="mb-4">
+            This page provides an overview. For complete technical details and market dynamics, read the original article.
+          </p>
           <a 
             href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-3 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             Read Full Article <ArrowRight className="h-4 w-4" />
           </a>
