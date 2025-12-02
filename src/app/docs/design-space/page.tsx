@@ -1,257 +1,226 @@
 import Link from "next/link";
+import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
+import Callout from "@/components/docs/Callout";
 
 export default function DesignSpacePage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">The Theseus Design Space</h1>
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
+          <Lightbulb className="h-3 w-3" />
+          Deep Dive
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          The Theseus Design Space
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          Autonomous agents with verifiable inference enable applications impossible on existing platforms.
+        </p>
+      </div>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-xl text-gray-400 mb-6">
-            Autonomous agents with verifiable inference enable applications impossible on existing smart contract platforms.
-          </p>
+      <div className="prose prose-invert max-w-none">
+        {/* Read Full Article CTA */}
+        <Callout type="info" title="Full Analysis Available">
+          This page provides an overview. For complete technical details and market dynamics, read the original article.
+          <a 
+            href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-3 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+          >
+            Read Full Article <ArrowRight className="h-4 w-4" />
+          </a>
+        </Callout>
 
-          <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-12">
+        {/* Evolution Section */}
+        <section className="mb-12">
+          <h2 id="evolution" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            The Evolution: A Natural Progression
+          </h2>
+          
+          <div className="space-y-4 mb-6">
+            {[
+              { year: "2009", name: "Bitcoin", color: "yellow", symbol: "₿", desc: "First stateful on-chain executable. Solved money consensus among strangers.", insight: "Public ownership you can verify." },
+              { year: "2014", name: "Ethereum", color: "blue", symbol: "Ξ", desc: "Solved program execution consensus. Deterministic programs replicated across all nodes.", insight: "Public program behavior you can verify." },
+              { year: "2025", name: "Theseus", color: "green", symbol: "Θ", desc: "Fuses web2-style AI agents with stateful, sovereign smart contract properties. One node computes, others verify.", insight: "Public agent decisions you can verify." },
+            ].map((item) => (
+              <div key={item.name} className={`docs-card border-${item.color}-900/50`}>
+                <div className="flex items-start gap-4">
+                  <span className={`text-${item.color}-400 font-bold text-2xl`}>{item.symbol}</span>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className={`text-lg font-medium text-${item.color}-400`}>{item.name}</h3>
+                      <span className="text-xs text-gray-500">({item.year})</span>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-2">{item.desc}</p>
+                    <p className="text-gray-500 text-sm italic">{item.insight}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Callout type="tip" title="Key Insight">
+            Each step removes a human dependency. Bitcoin removed treasurers from &quot;who owns what.&quot; Ethereum removed judges from &quot;what happens next.&quot; Theseus removes hosts from &quot;what kind of decision will an intelligent entity make?&quot;
+          </Callout>
+        </section>
+
+        {/* Design Space Constraint */}
+        <section className="mb-12">
+          <h2 id="constraint" className="text-2xl font-medium mb-4">The Design Space Constraint</h2>
+          <p className="text-gray-400 mb-4">
+            Over the last decade, runtimes like SVM or MoveVM improved smart contract platforms with cleaner programming models. However, <strong className="text-white">all maintained the same fundamental constraint</strong>: deterministic, replicated execution across all nodes.
+          </p>
+          <p className="text-gray-400">
+            Theseus takes a different approach using tensor commitments for verifiable inference. This makes complex, intelligent applications economically feasible on-chain while preserving verifiability.
+          </p>
+        </section>
+
+        {/* Concrete Example */}
+        <section className="mb-12">
+          <h2 id="example" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <BarChart3 className="h-5 w-5" />
+            </span>
+            Example: Lending Protocol
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-4 text-gray-300">Ethereum (Aave, Compound)</h3>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <span className="text-gray-500">Off-chain:</span>
+                  <p className="text-gray-400">Backend computes rates, keeper pushes on-chain</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">On-chain:</span>
+                  <p className="text-gray-400">Contract executes based on predetermined formulas</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">Updates:</span>
+                  <p className="text-gray-400">Deploy new contract through governance</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="docs-card border-green-900/50">
+              <h3 className="text-lg font-medium mb-4 text-green-400">Theseus</h3>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <span className="text-gray-500">On-chain Agent:</span>
+                  <p className="text-gray-400">Market runs as a first-class lending agent</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">Execution:</span>
+                  <p className="text-gray-400">Pricing via inference, verified with tensor-commit</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">Updates:</span>
+                  <p className="text-gray-400">Context or model swappable by creator or agent</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* New Primitives */}
+        <section className="mb-12">
+          <h2 id="primitives" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+              <Zap className="h-5 w-5" />
+            </span>
+            New Primitives Only Possible with Theseus
+          </h2>
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { title: "Subjective Prediction Markets", desc: "Adjudicate nuanced questions like \"Was the iPhone Air launch successful?\"" },
+              { title: "AI Persons", desc: "Autonomous entities with goals: GPs of LP funds, marketing swarms, DAO orchestrators" },
+              { title: "Complex Governance", desc: "Evaluate proposals with nuanced reasoning, read docs, analyze trade-offs" },
+              { title: "Dynamic DeFi Strategies", desc: "Manage liquidity, rebalance portfolios, execute strategies autonomously" },
+            ].map((item) => (
+              <div key={item.title} className="docs-card">
+                <h3 className="text-sm font-medium mb-1.5 text-white">{item.title}</h3>
+                <p className="text-gray-400 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Market Size */}
+        <section className="mb-12">
+          <h2 id="market" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+              <TrendingUp className="h-5 w-5" />
+            </span>
+            Multi-Trillion Dollar Market
+          </h2>
+          
+          <div className="docs-card border-green-900/50 mb-6">
             <p className="text-gray-300 mb-4">
-              This page provides an overview of the expanded design space. For the complete analysis 
-              including technical details, market dynamics, and the full vision, read the original article:
+              Ethereum&apos;s ~$500B market cap is tied to app value. Making apps dramatically more capable should substantially increase value captured by the base chain.
+            </p>
+            <p className="text-gray-400 text-sm">
+              Before Bitcoin, there was Hashcash—it implemented proof-of-work but holds almost no value. Unifying &quot;Ethereum&quot; and &quot;agents&quot; with tensor commitments suggests one of the largest TAMs in crypto, where <strong className="text-white">the whole is worth far more than the sum of the parts</strong>.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-green-950/30 to-transparent border-l-2 border-green-500 pl-6 py-4">
+            <div className="space-y-1 text-sm">
+              <p><strong className="text-white">Bitcoin:</strong> <span className="text-gray-400">public ownership you can verify</span></p>
+              <p><strong className="text-white">Ethereum:</strong> <span className="text-gray-400">public program behavior you can verify</span></p>
+              <p><strong className="text-white">Theseus:</strong> <span className="text-gray-400">public agent decisions you can verify</span></p>
+            </div>
+          </div>
+        </section>
+
+        {/* Full Story CTA */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="docs-card border-blue-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-blue-400">
+              <Users className="h-5 w-5" />
+              Want the Full Story?
+            </h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Read the complete article with detailed examples, technical deep dives, and the full vision.
             </p>
             <a 
               href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded transition-colors font-medium"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
             >
-              Read Full Article: Agents as an Evolution of Smart Contracts →
+              Read: Agents as an Evolution of Smart Contracts <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">The Evolution: A Natural Progression</h2>
-            
-            <div className="space-y-6 mb-8">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3 text-yellow-400">Bitcoin (2009)</h3>
-                <p className="text-gray-400">
-                  First proposed stateful on-chain executable, non-Turing Complete code. BTC tokens were immutable, 
-                  enshrined by the blockchain state. <strong className="text-white">It solved money consensus among strangers.</strong>
-                </p>
-                <p className="text-sm text-gray-500 mt-3 italic">
-                  Public ownership you can verify.
-                </p>
+          {/* Navigation */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Link href="/docs/comparison" className="group no-underline">
+              <div className="docs-card h-full">
+                <p className="text-sm text-gray-500 mb-1">Previous</p>
+                <h4 className="font-medium group-hover:text-blue-400 transition-colors">← Technical Comparison</h4>
               </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-3 text-blue-400">Ethereum (2014)</h3>
-                <p className="text-gray-400">
-                  Solved program execution consensus among strangers. You, and everyone else, could verify what a 
-                  full program does and come into agreement on that program. These allowed for small deterministic 
-                  programs, whose lack of complexity was reflected through design constraints: every programmatic 
-                  step had to be replicated across every node in the network.
-                </p>
-                <p className="text-sm text-gray-500 mt-3 italic">
-                  Public program behavior you can verify.
-                </p>
+            </Link>
+            <a 
+              href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group no-underline"
+            >
+              <div className="docs-card h-full text-right">
+                <p className="text-sm text-gray-500 mb-1">Related</p>
+                <h4 className="font-medium group-hover:text-blue-400 transition-colors">Theseus Thesis: TAM →</h4>
               </div>
-
-              <div className="bg-gray-900 border border-green-900 rounded p-6">
-                <h3 className="text-xl font-medium mb-3 text-green-400">Theseus (2025)</h3>
-                <p className="text-gray-400">
-                  Fuses web2-style AI agents with the stateful, sovereign properties of smart contracts. Instead 
-                  of replicating on-chain compute across all machines, one node performs heavy inference and others 
-                  verify it before committing the result on-chain. This makes complex, intelligent applications 
-                  economically feasible.
-                </p>
-                <p className="text-sm text-gray-500 mt-3 italic">
-                  Public agent decisions you can verify.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-blue-950 border border-blue-900 rounded p-6">
-              <h3 className="text-lg font-medium mb-3 text-blue-400">Key Insight</h3>
-              <p className="text-gray-300">
-                Each step removes a human dependency from something markets care about. Bitcoin removed treasurers 
-                from &quot;who owns what.&quot; Ethereum removed judges from &quot;what happens next.&quot; Theseus removes hosts and 
-                operators from &quot;what kind of decision will an intelligent entity make?&quot;
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">The Design Space Constraint</h2>
-            <p className="text-gray-400 mb-4">
-              Over the last decade, runtimes like SVM or MoveVM, and systems like Polkadot or eWASM improved 
-              smart contract platforms with cleaner programming models or different languages. However, <strong className="text-white">
-              all maintained the same fundamental constraint</strong>: deterministic, replicated execution across 
-              all nodes. This design choice prioritizes security and verifiability but limits the complexity of 
-              programs that can run economically on-chain.
-            </p>
-            <p className="text-gray-400">
-              Theseus takes a different approach, using tensor commitments for verifiable inference. This makes 
-              complex, intelligent applications economically feasible on-chain while preserving verifiability.
-            </p>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Concrete Example: Lending Protocol</h2>
-            <p className="text-gray-400 mb-6">
-              To illustrate the difference in design space, consider how a lending protocol would work on 
-              Ethereum versus Theseus.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-4 text-gray-300">Ethereum (Aave, Compound)</h3>
-                <div className="space-y-4 text-sm text-gray-400">
-                  <div>
-                    <strong className="text-white">Off-chain:</strong>
-                    <p className="mt-1">Backend computes interest rates, keeper pushes parameters on-chain</p>
-                  </div>
-                  <div>
-                    <strong className="text-white">On-chain:</strong>
-                    <p className="mt-1">Contract executes user transactions (borrowing, lending, liquidations) based on predetermined formulas</p>
-                  </div>
-                  <div>
-                    <strong className="text-white">Updates:</strong>
-                    <p className="mt-1">Deploy new contract or upgrade existing one through governance</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-900 border border-green-900 rounded p-6">
-                <h3 className="text-xl font-medium mb-4 text-green-400">Theseus</h3>
-                <div className="space-y-4 text-sm text-gray-400">
-                  <div>
-                    <strong className="text-white">On-chain Agent:</strong>
-                    <p className="mt-1">The market runs as a lending agent—a first-class on-chain entity. Its 
-                    inference process may be deterministic, but its code is nonetheless deterministically 
-                    verifiable just like any smart contract.</p>
-                  </div>
-                  <div>
-                    <strong className="text-white">Execution:</strong>
-                    <p className="mt-1">Solvency and limit templates in the agent&apos;s context gate what the agent 
-                    can execute. The pricing step runs via agent inference, and validators then verify a 
-                    tensor-commit receipt.</p>
-                  </div>
-                  <div>
-                    <strong className="text-white">Updates:</strong>
-                    <p className="mt-1">Agent&apos;s context or underlying model can be swapped—by the creator or, 
-                    where allowed, by the agent itself.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">New Primitives Only Possible with Theseus</h2>
-            <p className="text-gray-400 mb-6">
-              <strong className="text-white">The design space isn&apos;t just &quot;existing apps, but better.&quot;</strong> It&apos;s 
-              about creating blockchain applications that were never possible before.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-gray-900 border border-gray-800 rounded p-4">
-                <h3 className="text-base font-medium mb-2">Subjective Prediction Markets</h3>
-                <p className="text-gray-400 text-sm">
-                  Agents adjudicate nuanced questions like &quot;Was the iPhone Air launch successful?&quot; instead 
-                  of only objective outcomes.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-4">
-                <h3 className="text-base font-medium mb-2">AI Persons</h3>
-                <p className="text-gray-400 text-sm">
-                  Fully autonomous entities with their own goals: GPs of LP funds, marketing swarms, DAO 
-                  orchestrators.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-4">
-                <h3 className="text-base font-medium mb-2">Complex Governance</h3>
-                <p className="text-gray-400 text-sm">
-                  Evaluate proposals based on nuanced criteria, read documentation, analyze trade-offs—all 
-                  verifiably on-chain.
-                </p>
-              </div>
-
-              <div className="bg-gray-900 border border-gray-800 rounded p-4">
-                <h3 className="text-base font-medium mb-2">Dynamic DeFi Strategies</h3>
-                <p className="text-gray-400 text-sm">
-                  Manage liquidity, rebalance portfolios, execute complex trading strategies autonomously 
-                  and verifiably.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Why This Is a Multi-Trillion Dollar Market</h2>
-            <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-3 text-blue-400">Sum &gt;&gt; Parts</h3>
-              <p className="text-gray-300 mb-3">
-                If Ethereum&apos;s ~$500B market cap is tied to the value of its apps, then making those apps 
-                dramatically more capable should substantially increase value captured by the base chain.
-              </p>
-              <p className="text-gray-300">
-                Before Bitcoin, there was Hashcash—it implemented proof-of-work but holds almost no value. 
-                By the same logic, the market caps of &quot;Ethereum&quot; and &quot;agents&quot; already exist; unifying them 
-                with tensor commitments suggests one of the largest TAMs in crypto, where <strong className="text-white">
-                the whole is worth far more than the sum of the parts</strong>.
-              </p>
-            </div>
-
-            <div className="bg-green-950 border border-green-900 rounded p-6">
-              <p className="text-gray-300 text-lg mb-4">
-                <strong className="text-white">Bitcoin:</strong> public ownership you can verify.<br/>
-                <strong className="text-white">Ethereum:</strong> public program behavior you can verify.<br/>
-                <strong className="text-white">Theseus:</strong> public agent decisions you can verify.
-              </p>
-              <p className="text-gray-300">
-                Each step removes a human dependency. Theseus removes hosts and operators from &quot;what kind of 
-                decision will an intelligent entity make?&quot;
-              </p>
-            </div>
-          </section>
-
-          <div className="border-t border-gray-800 pt-8">
-            <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
-              <h3 className="text-xl font-medium mb-3 text-blue-400">Want the Full Story?</h3>
-              <p className="text-gray-300 mb-4">
-                Read the complete article with detailed examples, technical deep dives, and the full vision 
-                for why agentic smart contracts represent a generational shift in blockchain technology.
-              </p>
-              <a 
-                href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded transition-colors font-medium"
-              >
-                Read: Agents as an Evolution of Smart Contracts →
-              </a>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Link 
-                href="/docs/comparison"
-                className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-              >
-                <h4 className="font-medium mb-2">← Technical Comparison</h4>
-                <p className="text-sm text-gray-400">Deep dive into Theseus vs. Ethereum</p>
-              </Link>
-              <a 
-                href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-              >
-                <h4 className="font-medium mb-2">Theseus Thesis: TAM →</h4>
-                <p className="text-sm text-gray-400">Full market analysis</p>
-              </a>
-            </div>
+            </a>
           </div>
         </div>
+      </div>
     </div>
   );
 }
-

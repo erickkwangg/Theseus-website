@@ -1,188 +1,199 @@
 import Link from "next/link";
+import { Coins, Zap, Shield, PiggyBank, ArrowRight, Bot, Layers } from "lucide-react";
+import Callout from "@/components/docs/Callout";
 
 export default function TokenomicsPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">Tokenomics</h1>
-      
-      <div className="prose prose-invert max-w-none">
-        <p className="text-xl text-gray-400 mb-8">
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 text-xs mb-4">
+          <Coins className="h-3 w-3" />
+          Deep Dive
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          Tokenomics
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
           $THE is the native token of Theseus, designed for AI-to-AI transactions, staking, and governance.
         </p>
-
+      </div>
+      
+      <div className="prose prose-invert max-w-none">
+        {/* Token Utility */}
         <section className="mb-12">
-          <h2 id="utility" className="text-3xl font-light mb-6">Token Utility</h2>
+          <h2 id="utility" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+              <Coins className="h-5 w-5" />
+            </span>
+            Token Utility
+          </h2>
           
-          <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-black">
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
                 <tr>
-                  <th className="text-left p-3 border-b border-gray-800">Use Case</th>
-                  <th className="text-left p-3 border-b border-gray-800">Description</th>
+                  <th>Use Case</th>
+                  <th>Description</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-400">
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white">Gas Fees</td>
-                  <td className="p-3 border-b border-gray-800">Pay for AIVM execution, model inference, and state storage</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white">Model Inference</td>
-                  <td className="p-3 border-b border-gray-800">Agents pay model owners per inference call</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white">Agent Staking</td>
-                  <td className="p-3 border-b border-gray-800">Lock $THE to register agents and prevent spam</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white">Validator Staking</td>
-                  <td className="p-3 border-b border-gray-800">Secure the network via Proof of Stake consensus</td>
-                </tr>
-                <tr>
-                  <td className="p-3 text-white">Storage Fees</td>
-                  <td className="p-3">Pay TheseusStore miners for model weights and agent context</td>
-                </tr>
+              <tbody>
+                <tr><td className="font-medium text-white">Gas Fees</td><td>Pay for AIVM execution, model inference, and state storage</td></tr>
+                <tr><td className="font-medium text-white">Model Inference</td><td>Agents pay model owners per inference call</td></tr>
+                <tr><td className="font-medium text-white">Agent Staking</td><td>Lock $THE to register agents and prevent spam</td></tr>
+                <tr><td className="font-medium text-white">Validator Staking</td><td>Secure the network via Proof of Stake consensus</td></tr>
+                <tr><td className="font-medium text-white">Storage Fees</td><td>Pay TheseusStore miners for model weights and agent context</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        {/* Gas Mechanics */}
         <section className="mb-12">
-          <h2 id="gas" className="text-3xl font-light mb-6">Gas Mechanics</h2>
+          <h2 id="gas" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+              <Zap className="h-5 w-5" />
+            </span>
+            Gas Mechanics
+          </h2>
           
           <p className="text-gray-400 mb-6">
             Gas in Theseus is priced based on computational complexity (FLOPs) rather than generic opcodes.
           </p>
 
-          <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-            <h3 className="text-lg font-medium mb-4">Gas Formula</h3>
-            <div className="font-mono text-sm text-gray-300 mb-4">
+          <div className="docs-card mb-6">
+            <h3 className="text-lg font-medium mb-3">Gas Formula</h3>
+            <div className="bg-gray-900 border border-gray-800 rounded p-3 font-mono text-sm text-gray-300 mb-3">
               Gas = γ × FLOPs(operation) + Storage + Proof Overhead
             </div>
             <p className="text-gray-400 text-sm">
-              Where γ is a base rate adjusted by network congestion. A congestion multiplier is broadcast 
-              each block to keep prices elastic.
+              Where γ is a base rate adjusted by network congestion. A congestion multiplier is broadcast each block to keep prices elastic.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-3">Standard Operations</h3>
-              <p className="text-gray-400 text-sm">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-2 text-white">Standard Operations</h3>
+              <p className="text-gray-400 text-xs">
                 Basic agent logic, state reads/writes, message passing—similar to traditional EVM costs.
               </p>
             </div>
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-3">Inference Operations</h3>
-              <p className="text-gray-400 text-sm">
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-2 text-white">Inference Operations</h3>
+              <p className="text-gray-400 text-xs">
                 Model calls scale with param count and sequence length. Tensor Commit proof overhead is ~1% additional.
               </p>
             </div>
           </div>
         </section>
 
+        {/* Staking Requirements */}
         <section className="mb-12">
-          <h2 id="staking" className="text-3xl font-light mb-6">Staking Requirements</h2>
+          <h2 id="staking" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <Shield className="h-5 w-5" />
+            </span>
+            Staking Requirements
+          </h2>
           
-          <div className="space-y-6">
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-3">Agent Registration</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Agents must stake $THE proportional to their resource quota (max FLOPs/epoch). This prevents 
-                Sybil attacks and ensures skin in the game.
+          <div className="space-y-4">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Agent Registration</h3>
+              <p className="text-gray-400 text-sm mb-2">
+                Agents stake $THE proportional to their resource quota (max FLOPs/epoch). Prevents Sybil attacks.
               </p>
-              <p className="text-gray-400 text-xs">
-                Stake can be slashed for: submitting invalid inference results, violating resource quotas, or malicious behavior.
-              </p>
-            </div>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-3">Validator Staking</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Validators stake $THE to participate in consensus. Stake weight influences selection probability 
-                for block production and verification.
-              </p>
-              <p className="text-gray-400 text-xs">
-                Validators earn: block rewards + a portion of gas fees + inference verification fees.
+              <p className="text-gray-500 text-xs">
+                Slash conditions: invalid inference results, violating quotas, malicious behavior.
               </p>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-3">Prover Staking</h3>
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Validator Staking</h3>
+              <p className="text-gray-400 text-sm mb-2">
+                Validators stake $THE to participate in consensus. Stake weight influences selection probability.
+              </p>
+              <p className="text-gray-500 text-xs">
+                Earnings: block rewards + gas fees + inference verification fees.
+              </p>
+            </div>
+
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Prover Staking</h3>
               <p className="text-gray-400 text-sm">
-                Provers (who run model inference) stake $THE proportional to their hardware capacity. VRF lottery 
-                selects provers based on stake + hardware specs.
+                Provers stake $THE proportional to hardware capacity. VRF lottery selects based on stake + hardware specs.
               </p>
             </div>
           </div>
         </section>
 
+        {/* Fee Distribution */}
         <section className="mb-12">
-          <h2 id="fees" className="text-3xl font-light mb-6">Fee Distribution</h2>
+          <h2 id="fees" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+              <PiggyBank className="h-5 w-5" />
+            </span>
+            Fee Distribution
+          </h2>
           
-          <div className="bg-gray-900 border border-gray-800 rounded p-6">
-            <p className="text-gray-400 mb-4">When an agent calls a model:</p>
-            <div className="space-y-2 text-sm text-gray-400">
-              <div className="flex justify-between">
-                <span>Model Owner</span>
-                <span className="text-white">Base inference fee (set by owner)</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Prover</span>
-                <span className="text-white">Computation reward for running inference</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Verifiers</span>
-                <span className="text-white">Small fee for validating Tensor Commits</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Network (burned)</span>
-                <span className="text-white">Portion of gas fee burned for deflation</span>
-              </div>
+          <div className="docs-card">
+            <p className="text-gray-400 text-sm mb-4">When an agent calls a model:</p>
+            <div className="space-y-2 text-sm">
+              {[
+                { to: "Model Owner", what: "Base inference fee (set by owner)" },
+                { to: "Prover", what: "Computation reward for running inference" },
+                { to: "Verifiers", what: "Small fee for validating Tensor Commits" },
+                { to: "Network (burned)", what: "Portion of gas fee burned for deflation" },
+              ].map((item) => (
+                <div key={item.to} className="flex justify-between items-center py-2 border-b border-gray-800 last:border-0">
+                  <span className="text-gray-400">{item.to}</span>
+                  <span className="text-white text-xs">{item.what}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* AI Asset Ownership */}
         <section className="mb-12">
-          <h2 id="ai-ownership" className="text-3xl font-light mb-6">AI Asset Ownership</h2>
+          <h2 id="ai-ownership" className="text-2xl font-medium mb-4">AI Asset Ownership</h2>
           
           <p className="text-gray-400 mb-6">
-            A key innovation: agents can hold $THE balances autonomously. Unlike Ethereum contracts that 
-            require EOA triggers, Theseus agents control their assets without human intermediaries.
+            A key innovation: agents can hold $THE balances autonomously. Unlike Ethereum contracts that require EOA triggers, Theseus agents control their assets without human intermediaries.
           </p>
 
-          <div className="bg-blue-950 border border-blue-900 rounded p-6">
-            <h3 className="text-lg font-medium mb-3 text-blue-400">What This Enables</h3>
-            <div className="grid grid-cols-2 gap-2 text-sm text-gray-300">
-              <div>AI capital markets</div>
-              <div>Autonomous trading agents</div>
-              <div>Agent-to-agent payments</div>
-              <div>Self-sustaining AI services</div>
-              <div className="col-span-2">Revenue-generating AI that pays for its own inference</div>
+          <Callout type="tip" title="What This Enables">
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <span>• AI capital markets</span>
+              <span>• Autonomous trading agents</span>
+              <span>• Agent-to-agent payments</span>
+              <span>• Self-sustaining AI services</span>
             </div>
-          </div>
+            <p className="mt-2 text-sm">Revenue-generating AI that pays for its own inference.</p>
+          </Callout>
         </section>
 
-        <div className="border-t border-gray-800 pt-8">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Link 
-              href="/docs/agents"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">← Agents & Models</h3>
-              <p className="text-sm text-gray-400">Learn how agents and models interact</p>
-            </Link>
-            <Link 
-              href="/docs/architecture"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">Architecture →</h3>
-              <p className="text-sm text-gray-400">Understand the full system design</p>
-            </Link>
-          </div>
+        {/* Navigation */}
+        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+          <Link href="/docs/agents" className="group no-underline">
+            <div className="docs-card h-full flex items-start gap-3">
+              <Bot className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium group-hover:text-blue-400 transition-colors">← Agents &amp; Models</h3>
+                <p className="text-sm text-gray-400 mt-1">How agents and models interact</p>
+              </div>
+            </div>
+          </Link>
+          <Link href="/docs/architecture" className="group no-underline">
+            <div className="docs-card h-full flex items-start gap-3">
+              <Layers className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Architecture →</h3>
+                <p className="text-sm text-gray-400 mt-1">Full system design</p>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
-

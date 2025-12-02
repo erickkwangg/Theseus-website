@@ -1,310 +1,306 @@
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, GitCompare, AlertTriangle, CheckCircle, X, Lightbulb, TrendingUp } from "lucide-react";
+import Callout from "@/components/docs/Callout";
 
 export default function ComparisonPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">Theseus vs. Ethereum</h1>
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+          <GitCompare className="h-3 w-3" />
+          Deep Dive
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          Theseus vs. Ethereum
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          While deployment patterns look similar, Theseus agents differ fundamentally from smart contracts.
+        </p>
+      </div>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-xl text-gray-400 mb-8">
-            While the deployment and interaction patterns look similar, Theseus agents differ fundamentally 
-            from traditional smart contracts.
+      <div className="prose prose-invert max-w-none">
+        {/* Core Difference */}
+        <section className="mb-12">
+          <h2 id="critical-difference" className="text-2xl font-medium mb-6">The Critical Difference: True Autonomy</h2>
+          
+          <Callout type="warning" title="Common Misconception">
+            Many believe Ethereum contracts are autonomous because they execute complex logic. <strong>This is incorrect.</strong> Smart contracts are purely reactive—they cannot initiate any action without an EOA sending a transaction first.
+          </Callout>
+
+          {/* What Smart Contracts Can't Do */}
+          <div className="docs-card mb-6">
+            <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
+              <X className="h-5 w-5 text-red-400" />
+              What Smart Contracts CAN&apos;T Do
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { title: "Wake up on their own", desc: "Cannot execute based on time or conditions without external triggering" },
+                { title: "Initiate transactions", desc: "Must be called by an EOA (private key holder) to do anything" },
+                { title: "Autonomously manage assets", desc: "Hold assets but need external triggers to move them" },
+                { title: "Make autonomous decisions", desc: "Cannot evaluate and act without being triggered externally" },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-3 p-3 bg-red-950/20 border border-red-900/30 rounded-lg">
+                  <X className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="font-medium text-white text-sm">{item.title}</span>
+                    <p className="text-gray-400 text-xs mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 p-3 bg-gray-900 border border-gray-800 rounded-lg">
+              <p className="text-sm text-gray-400">
+                <strong className="text-white">Note:</strong> Services like Chainlink Keepers are off-chain bots with private keys that trigger contracts. The contract itself is still reactive.
+              </p>
+            </div>
+          </div>
+
+          {/* What Theseus Can Do */}
+          <div className="docs-card border-blue-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-4 flex items-center gap-2 text-blue-400">
+              <CheckCircle className="h-5 w-5" />
+              What Theseus Agents CAN Do
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { title: "Wake up autonomously", desc: "Activate every N blocks via heartbeat—no external trigger needed" },
+                { title: "Initiate transactions", desc: "Send transactions, invoke models, interact with agents on their own" },
+                { title: "Autonomously manage assets", desc: "Decide when and how to use $THE without external triggers" },
+                { title: "Make autonomous decisions", desc: "Evaluate triggers, run ML inference, and act on their own logic" },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-3 p-3 bg-blue-950/20 border border-blue-900/30 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-blue-400 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="font-medium text-white text-sm">{item.title}</span>
+                    <p className="text-gray-400 text-xs mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Analogy */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="docs-card">
+              <h4 className="font-medium mb-2 text-gray-300">Ethereum Smart Contract</h4>
+              <p className="text-gray-400 text-sm">
+                Like a <strong className="text-white">vending machine</strong>: Contains logic but someone must press the buttons. Cannot check inventory or restock itself.
+              </p>
+            </div>
+            <div className="docs-card border-blue-900/50">
+              <h4 className="font-medium mb-2 text-blue-400">Theseus Agent</h4>
+              <p className="text-gray-400 text-sm">
+                Like an <strong className="text-white">autonomous shopkeeper</strong>: Wakes up, checks inventory, makes restocking decisions, interacts with suppliers independently.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Side-by-Side */}
+        <section className="mb-12">
+          <h2 id="comparison-table" className="text-2xl font-medium mb-6">Side-by-Side Comparison</h2>
+
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th className="text-gray-400">Ethereum Contracts</th>
+                  <th className="text-blue-400">Theseus Agents</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-medium text-white">Execution</td>
+                  <td>Reactive—triggered externally</td>
+                  <td>Proactive—initiates autonomously</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Intelligence</td>
+                  <td>Deterministic logic only</td>
+                  <td>ML inference on-chain</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Control</td>
+                  <td>Requires private keys</td>
+                  <td>Self-sovereign, no keys needed</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Logic</td>
+                  <td>Simple conditionals</td>
+                  <td>Agentic reasoning</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Inference</td>
+                  <td>Not possible</td>
+                  <td>Native with verifiable proofs</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Assets</td>
+                  <td>Holds but needs triggers to move</td>
+                  <td>Autonomous control</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Visual Comparison */}
+        <section className="mb-12">
+          <h2 id="visual-comparison" className="text-2xl font-medium mb-4">Visual Comparison</h2>
+          <p className="text-gray-400 mb-6">
+            Ethereum requires external EOAs to initiate everything. Theseus agents wake up and act autonomously.
+          </p>
+          <div className="bg-black border border-gray-800 rounded-lg p-4 overflow-x-auto">
+            <Image 
+              src="/theseus-vs-ethereum.png" 
+              alt="Theseus vs Ethereum interaction flow comparison" 
+              width={1200}
+              height={600}
+              className="w-full h-auto rounded"
+            />
+          </div>
+          <p className="text-sm text-gray-500 mt-4">
+            <strong>Top:</strong> Ethereum requires a developer with a private key to trigger every action. 
+            <strong className="ml-2">Bottom:</strong> Theseus agents initiate actions and run inference autonomously.
+          </p>
+        </section>
+
+        {/* Deployment */}
+        <section className="mb-12">
+          <h2 id="deployment" className="text-2xl font-medium mb-6">Similar Process, Different Outcome</h2>
+          
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="docs-card">
+              <h4 className="font-medium mb-3 text-gray-300">Smart Contract Deployment</h4>
+              <ol className="space-y-2 text-sm text-gray-400">
+                <li className="flex items-start gap-2"><span className="text-gray-600">1.</span> Write Solidity code</li>
+                <li className="flex items-start gap-2"><span className="text-gray-600">2.</span> Compile to EVM bytecode</li>
+                <li className="flex items-start gap-2"><span className="text-gray-600">3.</span> Deploy (costs gas)</li>
+                <li className="flex items-start gap-2"><span className="text-gray-600">4.</span> Contract waits for calls</li>
+                <li className="flex items-start gap-2"><span className="text-gray-600">5.</span> Requires EOAs to act</li>
+              </ol>
+            </div>
+            <div className="docs-card border-blue-900/50">
+              <h4 className="font-medium mb-3 text-blue-400">Theseus Agent Deployment</h4>
+              <ol className="space-y-2 text-sm text-gray-400">
+                <li className="flex items-start gap-2"><span className="text-blue-600">1.</span> Write agent code (Python, Rust, SHIP)</li>
+                <li className="flex items-start gap-2"><span className="text-blue-600">2.</span> Add models, autonomy, triggers</li>
+                <li className="flex items-start gap-2"><span className="text-blue-600">3.</span> Deploy with initial $THE</li>
+                <li className="flex items-start gap-2"><span className="text-blue-600">4.</span> Agent starts operating</li>
+                <li className="flex items-start gap-2"><span className="text-blue-600">5.</span> Acts without key control</li>
+              </ol>
+            </div>
+          </div>
+
+          <Callout type="info" title="Key Insight">
+            Ethereum contracts are reactive programs with conditional logic that must be externally triggered. Theseus agents are autonomous digital entities that can think, plan, and act without human intervention.
+          </Callout>
+        </section>
+
+        {/* Design Space */}
+        <section className="mb-12">
+          <h2 id="design-space" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+              <Lightbulb className="h-5 w-5" />
+            </span>
+            Expanded Design Space
+          </h2>
+          
+          <p className="text-gray-400 mb-6">
+            True autonomy and verifiable inference enable applications impossible on existing platforms.
           </p>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">The Critical Difference: True Autonomy</h2>
-            
-            <div className="bg-amber-950 border border-amber-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-3 text-amber-400">Common Misconception</h3>
-              <p className="text-gray-300 mb-3">
-                Many people believe Ethereum smart contracts are autonomous because they can call other contracts 
-                or execute complex logic. <strong>This is incorrect.</strong>
-              </p>
-              <p className="text-gray-300">
-                Smart contracts are <strong>purely reactive</strong>. They cannot initiate any action without an 
-                Externally Owned Account (EOA) with a private key sending them a transaction first.
-              </p>
-            </div>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">What Smart Contracts CAN&apos;T Do</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li>❌ <strong className="text-white">Wake up on their own:</strong> Cannot execute based on time, block number, or any condition without external triggering</li>
-                <li>❌ <strong className="text-white">Initiate transactions:</strong> Must be called by an EOA (private key holder) to do anything</li>
-                <li>❌ <strong className="text-white">Autonomously manage assets:</strong> While contracts hold ETH and tokens, they cannot decide on their own when or how to use them—they need external transactions to trigger any asset movement</li>
-                <li>❌ <strong className="text-white">Make autonomous decisions:</strong> Cannot evaluate conditions and act without being triggered externally</li>
-              </ul>
-              
-              <div className="mt-6 p-4 bg-black border border-gray-700 rounded">
-                <p className="text-sm text-gray-400">
-                  <strong className="text-white">Note on Automation:</strong> Services like Chainlink Keepers or Gelato are 
-                  off-chain bots with private keys that monitor and trigger contracts. The contract itself is still reactive—it 
-                  just outsources the triggering to a third party.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-8">
-              <h3 className="text-lg font-medium mb-4 text-blue-400">What Theseus Agents CAN Do</h3>
-              <ul className="space-y-3 text-gray-300">
-                <li>✅ <strong className="text-white">Wake up autonomously:</strong> Agents activate every N blocks via heartbeat mechanism, no external trigger needed</li>
-                <li>✅ <strong className="text-white">Initiate transactions:</strong> Can send transactions, invoke models, and interact with other agents entirely on their own</li>
-                <li>✅ <strong className="text-white">Autonomously manage assets:</strong> Holds $THE balance and can decide when and how to use it without external triggers or private key control</li>
-                <li>✅ <strong className="text-white">Make autonomous decisions:</strong> Evaluates triggers, runs ML inference, and acts based on its own logic</li>
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="docs-card">
+              <h4 className="font-medium mb-3 text-gray-300">Ethereum Enables</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• Simple DeFi (AMMs, lending)</li>
+                <li>• Basic DAOs (token voting)</li>
+                <li>• Objective oracles</li>
+                <li>• Deterministic logic</li>
               </ul>
             </div>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-4">Analogy</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-white mb-2">Ethereum Smart Contract</h4>
-                  <p className="text-gray-400 text-sm">
-                    Like a <strong>vending machine</strong>: Contains logic and can dispense items, but someone must 
-                    press the buttons. It cannot decide to operate on its own, check inventory, or restock itself.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-blue-400 mb-2">Theseus Agent</h4>
-                  <p className="text-gray-400 text-sm">
-                    Like an <strong>autonomous shopkeeper</strong>: Can wake up, check inventory, make decisions about 
-                    restocking, interact with suppliers, and manage the store without anyone telling it what to do.
-                  </p>
-                </div>
-              </div>
+            <div className="docs-card border-green-900/50">
+              <h4 className="font-medium mb-3 text-green-400">Theseus Enables</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• Subjective adjudication</li>
+                <li>• Complex governance with reasoning</li>
+                <li>• AI Persons with goals</li>
+                <li>• Natural language deployment</li>
+                <li>• Adaptive strategies</li>
+              </ul>
             </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Side-by-Side Comparison</h2>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-xl font-medium mb-4 text-gray-300">Ethereum Smart Contracts</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Passive code that waits to be called. Deterministic, rigid logic with no ability to initiate actions.
-                </p>
-                <ul className="space-y-3 text-sm text-gray-400">
-                  <li>• <strong className="text-white">Reactive:</strong> Only executes when externally triggered by a transaction</li>
-                  <li>• <strong className="text-white">Deterministic:</strong> Same input always produces same output</li>
-                  <li>• <strong className="text-white">Human-controlled:</strong> Requires external accounts (private keys) to initiate any action</li>
-                  <li>• <strong className="text-white">Simple logic:</strong> Basic conditional statements and state transitions</li>
-                  <li>• <strong className="text-white">No inference:</strong> Cannot perform ML operations or complex reasoning</li>
-                  <li>• <strong className="text-white">No autonomous control:</strong> Holds assets but cannot decide to use them without external triggering</li>
-                </ul>
-              </div>
-
-              <div className="bg-gray-900 border border-blue-900 rounded p-6">
-                <h3 className="text-xl font-medium mb-4 text-blue-400">Theseus Agents</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Autonomous entities with true agency. Can think, decide, and act independently without human control.
-                </p>
-                <ul className="space-y-3 text-sm text-gray-400">
-                  <li>• <strong className="text-white">Proactive:</strong> Can wake up, evaluate conditions, and initiate transactions autonomously</li>
-                  <li>• <strong className="text-white">Intelligent:</strong> Performs ML inference on-chain to make complex decisions</li>
-                  <li>• <strong className="text-white">Self-sovereign:</strong> Owns its own $THE balance and controls its actions without private keys</li>
-                  <li>• <strong className="text-white">Agentic logic:</strong> Can reason, learn from context, and adapt behavior</li>
-                  <li>• <strong className="text-white">Native inference:</strong> Runs models directly in AIVM with verifiable proofs</li>
-                  <li>• <strong className="text-white">Autonomous asset control:</strong> Can independently decide when and how to use its assets without external triggers</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Visual Comparison: Interaction Flows</h2>
-            <p className="text-gray-400 mb-6">
-              Notice how Ethereum smart contracts require external EOAs (with private keys) to initiate everything, 
-              while Theseus agents can wake up and act autonomously.
-            </p>
-            <div className="bg-black border border-gray-700 rounded p-4 overflow-x-auto">
-              <img 
-                src="/theseus-vs-ethereum.png" 
-                alt="Theseus vs Ethereum interaction flow comparison" 
-                className="w-full h-auto"
-              />
-            </div>
-            <p className="text-sm text-gray-500 mt-4">
-              <strong>Top:</strong> Ethereum requires a developer with a private key to trigger every action. 
-              <strong className="ml-4">Bottom:</strong> Theseus agents can initiate actions and run inference autonomously.
-            </p>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Deployment: Similar Process, Different Outcome</h2>
-            <p className="text-gray-400 mb-6">
-              Deploying a Theseus agent feels familiar to web2 developers and resembles smart contract deployment, 
-              but with crucial additions that enable true autonomy.
-            </p>
-            
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-white mb-3">Smart Contract Deployment</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
-                    <li>1. Write Solidity code</li>
-                    <li>2. Compile to EVM bytecode</li>
-                    <li>3. Deploy to Ethereum (costs gas)</li>
-                    <li>4. Contract sits idle waiting for calls</li>
-                    <li>5. Requires EOAs with private keys to do anything</li>
-                    <li>6. No autonomous operation possible</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-blue-400 mb-3">Theseus Agent Deployment</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
-                    <li>1. Write agent code (Python, Rust, or SHIP DSL)</li>
-                    <li>2. Add Theseus context (models, autonomy level, triggers)</li>
-                    <li>3. Deploy to Theseus with initial $THE balance</li>
-                    <li>4. Agent immediately begins autonomous operation</li>
-                    <li>5. Can initiate transactions, run inference, and coordinate independently</li>
-                    <li>6. Operates without any private key control</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-950 border border-blue-900 rounded p-6">
-              <h3 className="text-lg font-medium mb-3 text-blue-400">Key Insight</h3>
-              <p className="text-gray-300">
-                Ethereum smart contracts are <strong>reactive programs with conditional logic</strong> that must be 
-                externally triggered. Theseus agents are <strong>autonomous digital entities</strong> that can think, 
-                plan, and act without human intervention. The deployment process may look similar, but what you get is 
-                fundamentally different: not a passive contract, but an active, intelligent agent with real autonomy.
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">An Expanded Design Space</h2>
-            <p className="text-gray-400 mb-6">
-              True autonomy and verifiable inference enable applications that are impossible or impractical 
-              on existing platforms.
-            </p>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-xl font-medium mb-4">The Design Space Constraint</h3>
-              <p className="text-gray-400 mb-4">
-                Over the last decade, many efforts improved smart contract platforms: SVM, MoveVM, Polkadot, 
-                eWASM. These provided cleaner programming models or different languages, but <strong className="text-white">all 
-                maintained the same fundamental design constraint</strong>: deterministic, replicated execution across 
-                all nodes. This is excellent for security and verifiability, but limits the complexity of programs 
-                that can run economically on-chain.
-              </p>
-              <p className="text-gray-400">
-                Theseus takes a different approach. By using tensor commitments for verifiable inference, one node 
-                performs heavy computation while others verify it. This makes complex, intelligent applications 
-                economically feasible on-chain while preserving verifiability.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div className="bg-gray-900 border border-gray-800 rounded p-6">
-                <h3 className="text-lg font-medium mb-4 text-gray-300">What Ethereum Enables</h3>
-                <ul className="space-y-3 text-sm text-gray-400">
-                  <li>• <strong className="text-white">Simple DeFi:</strong> AMMs, lending pools with fixed formulas</li>
-                  <li>• <strong className="text-white">Basic DAOs:</strong> Token voting on predefined options</li>
-                  <li>• <strong className="text-white">Objective oracles:</strong> &quot;Did event X happen?&quot;</li>
-                  <li>• <strong className="text-white">Deterministic logic:</strong> Same input → same output, always</li>
-                </ul>
-              </div>
-
-              <div className="bg-gray-900 border border-green-900 rounded p-6">
-                <h3 className="text-lg font-medium mb-4 text-green-400">What Theseus Enables</h3>
-                <ul className="space-y-3 text-sm text-gray-400">
-                  <li>• <strong className="text-white">Subjective adjudication:</strong> &quot;Was product launch successful?&quot;</li>
-                  <li>• <strong className="text-white">Complex governance:</strong> Agents evaluate proposals with nuanced reasoning</li>
-                  <li>• <strong className="text-white">AI Persons:</strong> Fully autonomous economic participants with their own goals</li>
-                  <li>• <strong className="text-white">Natural language deployment:</strong> Create agents via prompts, not code</li>
-                  <li>• <strong className="text-white">Dynamic strategies:</strong> Agents that adapt and learn from context</li>
-                </ul>
-              </div>
-            </div>
-
-<div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-3 text-blue-400">The Evolution: Each Step Removes Human Dependency</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <span className="text-yellow-400 font-bold text-xl">₿</span>
-                  <div>
-                    <h4 className="text-white font-medium">Bitcoin (2009)</h4>
-                    <p className="text-gray-400 text-sm">
-                      Public ownership you can verify. Removed treasurers from &quot;who owns what.&quot;
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-blue-400 font-bold text-xl">Ξ</span>
-                  <div>
-                    <h4 className="text-white font-medium">Ethereum (2014)</h4>
-                    <p className="text-gray-400 text-sm">
-                      Public program behavior you can verify. Removed judges from &quot;what happens next.&quot;
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-green-400 font-bold text-xl">Θ</span>
-                  <div>
-                    <h4 className="text-white font-medium">Theseus (2025)</h4>
-                    <p className="text-gray-400 text-sm">
-                      Public agent decisions you can verify. Removes hosts and operators from &quot;what kind 
-                      of decision will an intelligent entity make?&quot;
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-green-950 border border-green-900 rounded p-6">
-              <h3 className="text-lg font-medium mb-3 text-green-400">Why This Is a Multi-Trillion Dollar Market</h3>
-              <p className="text-gray-300 mb-4">
-                If Ethereum&apos;s ~$500B market cap is tied to the value of its apps, then making those apps 
-                dramatically more capable should substantially increase value captured by the base chain. 
-                When applications become more powerful and cheaper to operate, more activity can live on-chain.
-              </p>
-              <p className="text-gray-300 mb-4">
-                Before Bitcoin, there was Hashcash. It implemented proof-of-work but holds almost no value 
-                compared to Bitcoin. By the same logic, the separate market caps of &quot;Ethereum&quot; and &quot;agents&quot; 
-                already exist—unifying them with tensor commitments suggests one of the largest TAMs in crypto, 
-                where <strong className="text-white">the whole is worth far more than the sum of the parts</strong>.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  href="/docs/design-space"
-                  className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded transition-colors text-center"
-                >
-                  Explore the Full Design Space →
-                </Link>
-                <a 
-                  href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-6 py-2 rounded transition-colors text-center"
-                >
-                  Read Full Article
-                </a>
-              </div>
-            </div>
-          </section>
-
-          <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
-            <Link 
-              href="/docs/introduction"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">← Back to Introduction</h3>
-              <p className="text-sm text-gray-400">Learn about Theseus vision and principles</p>
-            </Link>
-            <Link 
-              href="/docs/aivm"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">AIVM Deep Dive →</h3>
-              <p className="text-sm text-gray-400">Explore the AI Virtual Machine</p>
-            </Link>
           </div>
+
+          {/* Evolution Timeline */}
+          <div className="docs-card border-blue-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-4 text-blue-400">The Evolution</h3>
+            <div className="space-y-4">
+              {[
+                { symbol: "₿", color: "text-yellow-400", name: "Bitcoin (2009)", desc: "Public ownership. Removed treasurers from \"who owns what.\"" },
+                { symbol: "Ξ", color: "text-blue-400", name: "Ethereum (2014)", desc: "Public programs. Removed judges from \"what happens next.\"" },
+                { symbol: "Θ", color: "text-green-400", name: "Theseus (2025)", desc: "Public decisions. Removes hosts from \"what will an intelligent entity decide?\"" },
+              ].map((item) => (
+                <div key={item.name} className="flex items-start gap-3">
+                  <span className={`${item.color} font-bold text-xl w-6`}>{item.symbol}</span>
+                  <div>
+                    <h4 className="text-white font-medium text-sm">{item.name}</h4>
+                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Market Size */}
+          <div className="docs-card border-green-900/50">
+            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-green-400">
+              <TrendingUp className="h-5 w-5" />
+              Multi-Trillion Dollar Market
+            </h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Ethereum&apos;s ~$500B market cap is tied to app value. Making apps dramatically more capable should substantially increase value captured by the base chain. Unifying Ethereum and agents suggests one of the largest TAMs in crypto.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link 
+                href="/docs/design-space"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+              >
+                Full Design Space
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a 
+                href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
+              >
+                Read Full Article
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation */}
+        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+          <Link href="/docs/introduction" className="group no-underline">
+            <div className="docs-card h-full">
+              <p className="text-sm text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-blue-400 transition-colors">← Introduction</h3>
+            </div>
+          </Link>
+          <Link href="/docs/aivm" className="group no-underline">
+            <div className="docs-card h-full text-right">
+              <p className="text-sm text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-blue-400 transition-colors">AIVM Deep Dive →</h3>
+            </div>
+          </Link>
         </div>
+      </div>
     </div>
   );
 }
-

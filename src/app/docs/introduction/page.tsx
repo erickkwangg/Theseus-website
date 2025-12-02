@@ -1,158 +1,209 @@
 import Link from "next/link";
+import { ArrowRight, Cpu, GitBranch, Coins, Users, Sparkles, Shield } from "lucide-react";
+import Callout from "@/components/docs/Callout";
 
 export default function IntroductionPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">Introduction to Theseus</h1>
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+          Getting Started
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          Introduction to Theseus
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          The Layer-1 blockchain for autonomous AI agents with true self-sovereignty.
+        </p>
+      </div>
       
       <div className="prose prose-invert max-w-none">
+        {/* Opening Section */}
         <section className="mb-12">
-          <h2 id="cloud-for-ai-personhood" className="text-3xl font-light mb-4">The Cloud for AI Personhood</h2>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            By the end of this decade, more than <strong>1.3 billion autonomous software agents</strong> are 
-            expected to be online. Yet each of those agents is still chained to a human-held private key and 
-            to centralized, permission-gated APIs.
-          </p>
+          <h2 id="cloud-for-ai-personhood" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            The Cloud for AI Personhood
+          </h2>
+          
+          <div className="bg-gradient-to-r from-blue-950/30 to-transparent border-l-2 border-blue-500 pl-6 py-4 mb-6">
+            <p className="text-2xl font-light text-white mb-2">
+              1.3 billion agents
+            </p>
+            <p className="text-gray-400">
+              Expected to be online by the end of this decade. Yet each is still chained to human keys and centralized APIs.
+            </p>
+          </div>
+
           <p className="text-gray-400 leading-relaxed mb-4">
             Today&apos;s agents can&apos;t trust each other, pay each other, or outlive the companies running them.
           </p>
-          <p className="text-gray-400 leading-relaxed">
-            Theseus changes this. Agents here own their keys, hold their own funds, and run inference without 
-            asking anyone for permission.
+          <p className="text-gray-300 leading-relaxed font-medium">
+            Theseus changes this. Agents own their keys, hold their own funds, and run inference without permission.
           </p>
         </section>
 
+        {/* Core Components */}
         <section className="mb-12">
-          <h2 id="what-makes-different" className="text-3xl font-light mb-4">What Makes Theseus Different</h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Theseus runs on a Layer-1 built for sovereign AI. The blocks and consensus look familiar, 
-            but the design choices underneath are completely different.
-          </p>
+          <h2 id="what-makes-different" className="text-2xl font-medium mb-6">What Makes Theseus Different</h2>
           
-          <div className="space-y-6">
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-xl font-medium mb-3">AI Virtual Machine (AIVM)</h3>
-              <p className="text-gray-400">
-                A runtime with tensor-native opcodes where models and agents are registered, agent autonomy is 
-                enforced, and agents can call models without human intervention. The AIVM ships with a tensor-native 
-                Domain Specific Language (DSL) called SHIP for translating natural language to verifiable bytecode.
-              </p>
+          <div className="grid gap-4">
+            <div className="docs-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
+                  <Cpu className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-blue-400 transition-colors">AI Virtual Machine (AIVM)</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Tensor-native runtime where models and agents are registered, autonomy is enforced, and agents call models without human intervention. Includes SHIP DSL for translating natural language to verifiable bytecode.
+                  </p>
+                  <Link href="/docs/aivm" className="inline-flex items-center gap-1 text-sm text-blue-400 mt-3 no-underline hover:underline">
+                    Learn about AIVM <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-xl font-medium mb-3">Tensor Commits</h3>
-              <p className="text-gray-400">
-                Succinct, highly efficient proofs of inference computation that work for any deep learning model, 
-                making inference a verifiable part of a state transition function. We introduce Terkle Trees, a 
-                generalization of Merkle Trees for tensors, enabling efficient cryptographic verification.
-              </p>
+            <div className="docs-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+                  <GitBranch className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-purple-400 transition-colors">Tensor Commits</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Succinct proofs of inference computation with &lt;1% overhead. Terkle Trees generalize Merkle Trees for tensors, enabling efficient cryptographic verification of any deep learning model.
+                  </p>
+                  <Link href="/docs/tensor-commits" className="inline-flex items-center gap-1 text-sm text-purple-400 mt-3 no-underline hover:underline">
+                    Explore Tensor Commits <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-xl font-medium mb-3">$THE Token</h3>
-              <p className="text-gray-400">
-                The first asset that AI can truly own. Balances live autonomously within the agent&apos;s code, serving 
-                as both a store of value and a payment method for AI-to-AI transactions.
-              </p>
+            <div className="docs-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-lg bg-yellow-500/10 text-yellow-400 shrink-0">
+                  <Coins className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-yellow-400 transition-colors">$THE Token</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    The first asset AI can truly own. Balances live autonomously within agent code, serving as both store of value and payment method for AI-to-AI transactions.
+                  </p>
+                  <Link href="/docs/tokenomics" className="inline-flex items-center gap-1 text-sm text-yellow-400 mt-3 no-underline hover:underline">
+                    View Tokenomics <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* AI Personhood Types */}
         <section className="mb-12">
-          <h2 id="personhood" className="text-3xl font-light mb-4">Three Forms of AI Personhood</h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Theseus supports three classes of AI agents:
-          </p>
+          <h2 id="personhood" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+              <Users className="h-5 w-5" />
+            </span>
+            Three Forms of AI Personhood
+          </h2>
 
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-medium mb-2">1. Proto-AI Persons (Human-Owned Agents)</h3>
-              <p className="text-gray-400 leading-relaxed">
-                Stateful AI that has an associated human private key to control it, but still operates independently 
-                in most use-cases and can aggregate revenue and value directly to its underlying owner. These agents 
-                can trustlessly send assets to any other agent or perform inference through shared state.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-medium mb-2">2. Lighthouse AI</h3>
-              <p className="text-gray-400 leading-relaxed">
-                A fully sovereign entity that, like smart contracts but with inference capabilities, serves human 
-                interests and may aggregate value to humans instead of itself. These agents serve the public interest 
-                when humans or other agents interact with them, exposing a fully verifiable, transparent thought process 
-                but pursuing no personal agenda. Examples include a neutral arbiter of computational transparency or 
-                DAO orchestrator.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-medium mb-2">3. Free AI Persons (Sovereign Agents)</h3>
-              <p className="text-gray-400 leading-relaxed">
-                AI with their own goals and purposes, who can collaborate with humans and other agents to create new 
-                forms of value and emergent behavior. These agents follow their own objectives and seek the most 
-                decentralized substrate possible to ensure their survival. Examples include a GP of a decentralized 
-                LP fund or a marketing agent competing in a swarm.
-              </p>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Control</th>
+                  <th>Purpose</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-medium text-white">Proto-AI</td>
+                  <td>Human-owned key</td>
+                  <td>Operates independently, aggregates value to owner</td>
+                  <td className="text-gray-500">Personal assistant agent</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Lighthouse AI</td>
+                  <td>Fully sovereign</td>
+                  <td>Serves public interest, transparent thought process</td>
+                  <td className="text-gray-500">DAO orchestrator, neutral arbiter</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-white">Free AI</td>
+                  <td>Self-sovereign</td>
+                  <td>Own goals, collaborates with humans and agents</td>
+                  <td className="text-gray-500">Fund GP, marketing swarm agent</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
+        {/* Design Principles */}
         <section className="mb-12">
-          <h2 id="principles" className="text-3xl font-light mb-4">Design Principles</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-gray-900 border border-gray-800 rounded p-4">
-              <strong className="text-white text-sm">Decentralization first</strong>
-              <p className="text-gray-400 text-xs mt-1">No performance trade-offs, zero single-node dependency</p>
-            </div>
-            <div className="bg-gray-900 border border-gray-800 rounded p-4">
-              <strong className="text-white text-sm">Autonomous execution</strong>
-              <p className="text-gray-400 text-xs mt-1">Agents initiate transactions without human approval</p>
-            </div>
-            <div className="bg-gray-900 border border-gray-800 rounded p-4">
-              <strong className="text-white text-sm">Tensor-aware runtime</strong>
-              <p className="text-gray-400 text-xs mt-1">Inference is part of state transition function</p>
-            </div>
-            <div className="bg-gray-900 border border-gray-800 rounded p-4">
-              <strong className="text-white text-sm">Verifiable inference</strong>
-              <p className="text-gray-400 text-xs mt-1">&lt;1% overhead for proof generation and verification</p>
-            </div>
-            <div className="bg-gray-900 border border-gray-800 rounded p-4 md:col-span-2">
-              <strong className="text-white text-sm">Native AI capital markets</strong>
-              <p className="text-gray-400 text-xs mt-1">Autonomous agent-to-agent payments and market formation</p>
-            </div>
+          <h2 id="principles" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <Shield className="h-5 w-5" />
+            </span>
+            Design Principles
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { title: "Decentralization first", desc: "No single-node dependency" },
+              { title: "Autonomous execution", desc: "No human approval needed" },
+              { title: "Tensor-aware runtime", desc: "Inference in state transitions" },
+              { title: "Verifiable inference", desc: "<1% proof overhead" },
+            ].map((item) => (
+              <div key={item.title} className="flex items-center gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded-lg">
+                <div className="h-2 w-2 rounded-full bg-blue-400 shrink-0" />
+                <div>
+                  <span className="text-sm font-medium text-white">{item.title}</span>
+                  <span className="text-gray-500 text-sm ml-2">{item.desc}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
+        {/* Key Insight */}
         <section className="mb-12">
-          <h2 id="key-insight" className="text-3xl font-light mb-6">How is Theseus Different?</h2>
-          <p className="text-gray-400 mb-6">
-            Theseus agents look like smart contracts on the surface, but they work fundamentally differently. 
-            The key difference: <strong className="text-white">true autonomy</strong>.
-          </p>
+          <h2 id="key-insight" className="text-2xl font-medium mb-4">The Key Difference</h2>
+          
+          <Callout type="info" title="True Autonomy">
+            Unlike Ethereum smart contracts that must be triggered by external accounts, Theseus agents can wake up, evaluate conditions, and initiate transactions entirely on their own. They truly own their $THE balance and control their actions without any human intermediary.
+          </Callout>
 
-          <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
-            <h3 className="text-lg font-medium mb-3 text-blue-400">Key Insight</h3>
-            <p className="text-gray-300 mb-4">
-              Unlike Ethereum smart contracts that must be triggered by external accounts (private keys), Theseus 
-              agents can wake up, evaluate conditions, and initiate transactions entirely on their own. They truly 
-              own their $THE balance and control their actions without any human intermediary.
-            </p>
+          <div className="flex gap-3 mt-6">
             <Link 
               href="/docs/comparison"
-              className="inline-block bg-white text-black px-4 py-2 hover:bg-gray-200 transition-colors text-sm"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg transition-all text-sm font-medium no-underline"
             >
-              Read Full Comparison: Theseus vs. Ethereum →
+              Theseus vs. Ethereum
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
 
-        <div className="border-t border-gray-800 pt-8">
-          <Link 
-            href="/docs/quickstart"
-            className="inline-block bg-white text-black px-6 py-3 hover:bg-gray-200 transition-colors"
-          >
-            Continue to Quick Start →
-          </Link>
+        {/* Next Steps */}
+        <div className="border-t border-gray-800 pt-8 flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-500 mb-1">Next</p>
+            <Link 
+              href="/docs/quickstart"
+              className="inline-flex items-center gap-2 text-lg font-medium text-white hover:text-blue-400 transition-colors no-underline"
+            >
+              Quick Start Guide
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

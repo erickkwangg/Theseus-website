@@ -29,13 +29,9 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
         ? "bg-black/95 backdrop-blur-md border-b border-gray-800" 
-        : "bg-transparent mt-4"
+        : "bg-black/50 backdrop-blur-sm"
     }`}>
-      <div className={`max-w-[1600px] mx-auto transition-all duration-300 ${
-        isScrolled 
-          ? "px-4 sm:px-8 py-3" 
-          : "mx-4 sm:mx-8 bg-black/80 backdrop-blur-sm border border-gray-800 rounded-lg px-4 sm:px-6 py-4"
-      }`}>
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-4">
         <nav className="flex items-center justify-between">
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
@@ -135,15 +131,6 @@ export default function Header() {
             className="size-12 transition-transform duration-300 hover:scale-110"
           />
         </div>
-
-        {/* Desktop Whitepaper Button */}
-        {/* <Button
-          variant="ghost"
-          className="rounded-none border-white text-white hover:bg-white hover:text-black bg-transparent text-xs sm:text-sm px-3 sm:px-4 py-2"
-        >
-          <span className="hidden sm:inline">DOWNLOAD THE WHITEPAPER</span>
-          <span className="sm:hidden">WHITEPAPER</span>
-        </Button> */}
         </nav>
       </div>
     </header>

@@ -604,3 +604,90 @@
 }
 
 /* Particles - handled by canvas in Particles.tsx */
+
+/* ============================================
+   DOCS PAGE STYLES
+   ============================================ */
+
+/* Docs grid background */
+.docs-grid-bg {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Docs code inline */
+.docs-content code:not(pre code) {
+  background: rgba(59, 130, 246, 0.1);
+  color: #93c5fd;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: ui-monospace, monospace;
+}
+
+/* Docs links */
+.docs-content a:not(.no-underline) {
+  color: #60a5fa;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(96, 165, 250, 0.3);
+  transition: all 0.15s ease;
+}
+.docs-content a:not(.no-underline):hover {
+  text-decoration-color: #60a5fa;
+}
+
+/* Docs section card */
+.docs-card {
+  background: linear-gradient(to bottom right, rgb(17 24 39 / 0.5), rgb(3 7 18 / 0.5));
+  border: 1px solid rgb(31 41 55);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+.docs-card:hover {
+  border-color: rgb(55 65 81);
+  background: linear-gradient(to bottom right, rgb(17 24 39 / 0.8), rgb(3 7 18 / 0.8));
+}
+
+/* Docs table */
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.docs-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: rgb(17 24 39);
+  border-bottom: 1px solid rgb(31 41 55);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: rgb(156 163 175);
+}
+.docs-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgb(31 41 55 / 0.5);
+  font-size: 0.875rem;
+  color: rgb(209 213 219);
+}
+.docs-table tr:hover td {
+  background: rgb(17 24 39 / 0.3);
+}
+
+/* Section divider with text */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(31 41 55), transparent);
+}

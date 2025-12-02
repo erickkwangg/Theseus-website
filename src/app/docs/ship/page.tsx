@@ -1,165 +1,180 @@
 import Link from "next/link";
+import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot } from "lucide-react";
+import Callout from "@/components/docs/Callout";
+import CodeBlock from "@/components/docs/CodeBlock";
 
 export default function SHIPPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">SHIP Language</h1>
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
+          <Code2 className="h-3 w-3" />
+          Development
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          SHIP Language
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          Secure Heterogeneous Inference Programming—translating natural language to verifiable bytecode.
+        </p>
+      </div>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-xl text-gray-400 mb-8">
-            SHIP (Secure Heterogeneous Inference Programming) is a formally constrained Domain-Specific Language for 
-            translating natural language to verifiable bytecode.
+      <div className="prose prose-invert max-w-none">
+        {/* Why SHIP */}
+        <section className="mb-12">
+          <h2 id="why-ship" className="text-2xl font-medium mb-4">Why SHIP Is Necessary</h2>
+          
+          <p className="text-gray-400 mb-6">
+            SHIP bridges the gap between model inference and actionable outcomes—asset transfers, agent interactions, smart contract invocations. It&apos;s essential for expressing, verifying, and governing the intent of sovereign AI agents.
           </p>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Why SHIP Is Necessary</h2>
-            
-            <p className="text-gray-400 mb-6">
-              To bridge the gap between model inference and actionable outcomes, such as asset transfers, agent 
-              interactions, or smart contract invocations, Theseus introduces SHIP. SHIP is essential to express, 
-              verify, and govern the intent of sovereign AI agents, especially in inference-to-asset alignment 
-              scenarios where economic transactions or external actions result directly from model outputs.
-            </p>
+          <Callout type="warning" title="The Problem with Raw LLM Outputs">
+            LLMs can generate text resembling executable logic, but they&apos;re non-deterministic and lack formal guarantees about structure, safety, or correctness. Using raw outputs for bytecode generation introduces serious issues.
+          </Callout>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">The Problem with Raw LLM Outputs</h3>
-              <p className="text-gray-400 mb-4">
-                While large language models (LLMs) are capable of generating text that resembles executable logic, 
-                they are inherently non-deterministic and lack formal guarantees about structure, safety, or correctness.
-              </p>
-              <p className="text-gray-400">
-                Attempting to use raw LLM outputs (e.g., via prompting) to generate bytecode or transaction logic 
-                introduces serious issues:
-              </p>
-            </div>
+          <div className="grid sm:grid-cols-2 gap-3 mt-6">
+            {[
+              { icon: AlertTriangle, title: "Unpredictability", desc: "Hallucinations, unsafe constructs" },
+              { icon: AlertTriangle, title: "Unbounded execution", desc: "DoS risks" },
+              { icon: AlertTriangle, title: "No proof anchoring", desc: "Verification impossible" },
+              { icon: AlertTriangle, title: "Opaque intent", desc: "Implicit goals" },
+            ].map((item) => (
+              <div key={item.title} className="docs-card">
+                <div className="flex items-center gap-2 mb-1">
+                  <item.icon className="h-4 w-4 text-yellow-400" />
+                  <span className="text-white font-medium text-sm">{item.title}</span>
+                </div>
+                <p className="text-gray-400 text-xs">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <div className="text-white font-medium">Unpredictability</div>
-                  <div className="text-gray-400">Hallucinations, unsafe constructs</div>
+        {/* Design Principles */}
+        <section className="mb-12">
+          <h2 id="principles" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+              <CheckCircle className="h-5 w-5" />
+            </span>
+            Design Principles
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { title: "Determinism", desc: "Static bounds, known gas/memory" },
+              { title: "Verifiability", desc: "Tensor Commit proofs" },
+              { title: "Traceability", desc: "Tied to agent context" },
+              { title: "Composability", desc: "Staged, delegated, templated" },
+            ].map((item) => (
+              <div key={item.title} className="docs-card">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-400" />
+                  <span className="text-white font-medium text-sm">{item.title}</span>
                 </div>
-                <div>
-                  <div className="text-white font-medium">Unbounded execution</div>
-                  <div className="text-gray-400">DoS risks</div>
-                </div>
-                <div>
-                  <div className="text-white font-medium">No proof anchoring</div>
-                  <div className="text-gray-400">Verification impossible</div>
-                </div>
-                <div>
-                  <div className="text-white font-medium">Opaque intent</div>
-                  <div className="text-gray-400">Implicit goals</div>
+                <p className="text-gray-400 text-xs mt-1">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Execution Flow */}
+        <section className="mb-12">
+          <h2 id="execution" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <Zap className="h-5 w-5" />
+            </span>
+            Execution Flow
+          </h2>
+          
+          <div className="space-y-3">
+            {[
+              { step: "1", title: "Inference", desc: "Agent runs model, generates output" },
+              { step: "2", title: "Compilation", desc: "NL→SHIP via fine-tuned agent, then SHIP→bounded opcodes" },
+              { step: "3", title: "Verification", desc: "Tensor Commit proves inference integrity, bytecode validated" },
+              { step: "4", title: "Execution", desc: "Program submitted to runtime" },
+            ].map((item) => (
+              <div key={item.step} className="docs-card">
+                <div className="flex items-start gap-3">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-purple-500 text-white text-xs font-bold shrink-0">
+                    {item.step}
+                  </span>
+                  <div>
+                    <h3 className="font-medium text-sm">{item.title}</h3>
+                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            ))}
+          </div>
+        </section>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Design Principles</h2>
-            
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <div className="text-white font-medium">Determinism</div>
-                  <div className="text-gray-400">Static bounds, known gas/memory</div>
-                </div>
-                <div>
-                  <div className="text-white font-medium">Verifiability</div>
-                  <div className="text-gray-400">Tensor Commit proofs</div>
-                </div>
-                <div>
-                  <div className="text-white font-medium">Traceability</div>
-                  <div className="text-gray-400">Tied to agent context</div>
-                </div>
-                <div>
-                  <div className="text-white font-medium">Composability</div>
-                  <div className="text-gray-400">Staged, delegated, templated</div>
-                </div>
-              </div>
-            </div>
-          </section>
+        {/* Example Use Case */}
+        <section className="mb-12">
+          <h2 id="example" className="text-2xl font-medium mb-4">Example Use Case</h2>
+          
+          <p className="text-gray-400 mb-6">
+            A sovereign agent runs a summarization model. The summary contains a trigger like &quot;Pay 10 $THE to agent_xyz for document processing&quot;.
+          </p>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Execution Flow</h2>
-            
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-              <div className="space-y-3">
-                <div>
-                  <strong className="text-white">1. Inference:</strong> Agent runs model, generates output
-                </div>
-                <div>
-                  <strong className="text-white">2. Compilation:</strong> NL→SHIP via fine-tuned agent or meta-model, then SHIP→bounded opcodes
-                </div>
-                <div>
-                  <strong className="text-white">3. Verification:</strong> Tensor Commit proves inference integrity, bytecode validated
-                </div>
-                <div>
-                  <strong className="text-white">4. Execution:</strong> Program submitted to runtime
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Example Use Case</h2>
-            
-            <p className="text-gray-400 mb-6">
-              A sovereign agent runs a summarization model on-chain. The summary contains a trigger like &quot;Pay 10 $THE 
-              to agent_xyz for document processing&quot;.
-            </p>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 mb-6">
-              <h3 className="text-lg font-medium mb-4">Without SHIP</h3>
-              <p className="text-gray-400">
-                This text would be parsed directly into bytecode, causing chances for execution unaligned with the 
-                agent&apos;s intention.
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="docs-card border-red-900/30">
+              <h3 className="text-lg font-medium mb-2 text-red-400">Without SHIP</h3>
+              <p className="text-gray-400 text-sm">
+                Text parsed directly into bytecode, causing potential execution unaligned with agent&apos;s intention.
               </p>
             </div>
-
-            <div className="bg-gray-900 border border-gray-800 rounded p-6">
-              <h3 className="text-lg font-medium mb-4">With SHIP</h3>
-              <p className="text-gray-400 mb-4">In pseudocode:</p>
-              <div className="bg-black border border-gray-700 rounded p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-                <div>let payment = Transfer &#123;</div>
-                <div>  recipient: agent_xyz,</div>
-                <div>  amount: 10 THE</div>
-                <div>&#125;;</div>
-                <div>commit(payment);</div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-light mb-6">Integration with AIVM</h2>
-            
-            <div className="bg-gray-900 border border-gray-800 rounded p-6 text-sm text-gray-400">
-              <p className="mb-2">SHIP compiles to AIVM opcodes, executed via <code className="text-white">AGENT_TICK()</code> or <code className="text-white">MODEL_INFER()</code>.</p>
-              <p className="mb-2">Each construct maps to safe primitives: <code className="text-white">TLOAD</code>, <code className="text-white">TCUSTOM</code>, <code className="text-white">STATE_EXPORT</code>, <code className="text-white">TRANSFER_TOKEN</code>.</p>
-              <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
-            </div>
-          </section>
-
-          <div className="border-t border-gray-800 pt-8">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Link 
-                href="/docs/aivm"
-                className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-              >
-                <h3 className="font-medium mb-2">← AIVM Details</h3>
-                <p className="text-sm text-gray-400">Learn about the execution environment</p>
-              </Link>
-              <Link 
-                href="/docs/agents"
-                className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-              >
-                <h3 className="font-medium mb-2">Build Agents →</h3>
-                <p className="text-sm text-gray-400">Create agents using SHIP</p>
-              </Link>
+            <div className="docs-card border-green-900/50">
+              <h3 className="text-lg font-medium mb-2 text-green-400">With SHIP</h3>
+              <CodeBlock language="text" filename="example.ship">{`let payment = Transfer {
+  recipient: agent_xyz,
+  amount: 10 THE
+};
+commit(payment);`}</CodeBlock>
             </div>
           </div>
+        </section>
+
+        {/* Integration with AIVM */}
+        <section className="mb-12">
+          <h2 id="integration" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+              <Cpu className="h-5 w-5" />
+            </span>
+            Integration with AIVM
+          </h2>
+          
+          <div className="docs-card">
+            <div className="space-y-3 text-sm text-gray-400">
+              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-blue-400">AGENT_TICK()</code> or <code className="text-blue-400">MODEL_INFER()</code>.</p>
+              <p>Each construct maps to safe primitives: <code className="text-blue-400">TLOAD</code>, <code className="text-blue-400">TCUSTOM</code>, <code className="text-blue-400">STATE_EXPORT</code>, <code className="text-blue-400">TRANSFER_TOKEN</code>.</p>
+              <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation */}
+        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+          <Link href="/docs/aivm" className="group no-underline">
+            <div className="docs-card h-full flex items-start gap-3">
+              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium group-hover:text-blue-400 transition-colors">← AIVM Details</h3>
+                <p className="text-sm text-gray-400 mt-1">Learn about the execution environment</p>
+              </div>
+            </div>
+          </Link>
+          <Link href="/docs/agents" className="group no-underline">
+            <div className="docs-card h-full flex items-start gap-3">
+              <Bot className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Build Agents →</h3>
+                <p className="text-sm text-gray-400 mt-1">Create agents using SHIP</p>
+              </div>
+            </div>
+          </Link>
         </div>
+      </div>
     </div>
   );
 }
-

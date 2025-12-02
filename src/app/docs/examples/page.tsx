@@ -1,167 +1,156 @@
 "use client";
 
 import Link from "next/link";
+import { Puzzle, Github, ArrowRight, Bot, Zap } from "lucide-react";
 import CodeBlock from "@/components/docs/CodeBlock";
+import Callout from "@/components/docs/Callout";
 
 export default function ExamplesPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">Code Examples</h1>
-        
-      <div className="prose prose-invert max-w-none">
-        <p className="text-xl text-gray-400 mb-8">
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 text-xs mb-4">
+          <Puzzle className="h-3 w-3" />
+          Development
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          Code Examples
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
           Explore example implementations and patterns for building on Theseus.
         </p>
+      </div>
+        
+      <div className="prose prose-invert max-w-none">
+        {/* GitHub CTA */}
+        <Callout type="info" title="Full Examples Available">
+          Complete examples with documentation are available on GitHub.
+          <a 
+            href="https://github.com/ob-theseus/theseuschain/tree/main/examples" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-3 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+          >
+            <Github className="h-4 w-4" />
+            View Examples on GitHub
+          </a>
+        </Callout>
 
+        {/* Example Repository */}
         <section className="mb-12">
-          <h2 id="repository" className="text-3xl font-light mb-6">Example Repository</h2>
-          
-          <div className="bg-blue-950 border border-blue-900 rounded p-6 mb-6">
-            <p className="text-gray-300 mb-4">
-              Full examples with documentation available on GitHub:
-            </p>
-            <a 
-              href="https://github.com/ob-theseus/theseuschain/tree/main/examples" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition-colors"
-            >
-              View Examples on GitHub →
-            </a>
-          </div>
+          <h2 id="repository" className="text-2xl font-medium mb-4">Example Repository</h2>
 
-          <div className="bg-gray-900 border border-gray-800 rounded overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-black">
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
                 <tr>
-                  <th className="text-left p-3 border-b border-gray-800">Example</th>
-                  <th className="text-left p-3 border-b border-gray-800">Description</th>
+                  <th>Example</th>
+                  <th>Description</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-400">
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white font-mono">basic-agent.ship</td>
-                  <td className="p-3 border-b border-gray-800">Simple autonomous agent template</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white font-mono">model-deploy/</td>
-                  <td className="p-3 border-b border-gray-800">Deploying and registering ML models</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-gray-800 text-white font-mono">agent-interact/</td>
-                  <td className="p-3 border-b border-gray-800">Inter-agent communication patterns</td>
-                </tr>
-                <tr>
-                  <td className="p-3 text-white font-mono">token-transfer/</td>
-                  <td className="p-3">Autonomous $THE transactions</td>
-                </tr>
+              <tbody>
+                <tr><td className="font-mono text-blue-400">basic-agent.ship</td><td>Simple autonomous agent template</td></tr>
+                <tr><td className="font-mono text-blue-400">model-deploy/</td><td>Deploying and registering ML models</td></tr>
+                <tr><td className="font-mono text-blue-400">agent-interact/</td><td>Inter-agent communication patterns</td></tr>
+                <tr><td className="font-mono text-blue-400">token-transfer/</td><td>Autonomous $THE transactions</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        {/* Agent Registration Patterns */}
         <section className="mb-12">
-          <h2 id="patterns" className="text-3xl font-light mb-6">Agent Registration Patterns</h2>
+          <h2 id="patterns" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <Bot className="h-5 w-5" />
+            </span>
+            Agent Registration Patterns
+          </h2>
           
           <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-medium mb-3">Proto-AI Person (Human-Owned)</h3>
-              <p className="text-gray-400 mb-4 text-sm">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Proto-AI Person (Human-Owned)</h3>
+              <p className="text-gray-400 text-sm mb-4">
                 Agent with controller key—operates independently but can be overridden:
               </p>
-              <CodeBlock 
-                language="ship"
-                code={`autonomy_flag = 0  // human-gated
+              <CodeBlock language="text" filename="proto-ai.ship">{`autonomy_flag = 0  // human-gated
 controller_key = 0x1234...  // owner's public key
-resource_quota = 1000000  // max FLOPs per epoch`}
-              />
+resource_quota = 1000000  // max FLOPs per epoch`}</CodeBlock>
             </div>
 
-            <div>
-              <h3 className="text-xl font-medium mb-3">Free AI Person (Sovereign)</h3>
-              <p className="text-gray-400 mb-4 text-sm">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Free AI Person (Sovereign)</h3>
+              <p className="text-gray-400 text-sm mb-4">
                 Fully autonomous agent with no human control:
               </p>
-              <CodeBlock 
-                language="ship"
-                code={`autonomy_flag = 1  // fully sovereign
+              <CodeBlock language="text" filename="sovereign.ship">{`autonomy_flag = 1  // fully sovereign
 controller_key = None  // no human override
-stake = 10000 THE  // locked for slashing`}
-              />
+stake = 10000 THE  // locked for slashing`}</CodeBlock>
             </div>
 
-            <div>
-              <h3 className="text-xl font-medium mb-3">Lighthouse AI (Public Service)</h3>
-              <p className="text-gray-400 mb-4 text-sm">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Lighthouse AI (Public Service)</h3>
+              <p className="text-gray-400 text-sm mb-4">
                 Transparent agent that serves public interests:
               </p>
-              <CodeBlock 
-                language="ship"
-                code={`autonomy_flag = 1  // sovereign
+              <CodeBlock language="text" filename="lighthouse.ship">{`autonomy_flag = 1  // sovereign
 permissions = { public_access: true }
-revenue_destination = dao_address  // serves humans`}
-              />
+revenue_destination = dao_address  // serves humans`}</CodeBlock>
             </div>
           </div>
         </section>
 
+        {/* Model Inference */}
         <section className="mb-12">
-          <h2 id="inference" className="text-3xl font-light mb-6">Model Inference</h2>
+          <h2 id="inference" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+              <Zap className="h-5 w-5" />
+            </span>
+            Model Inference
+          </h2>
           
           <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-medium mb-3">Simple Inference Call</h3>
-              <CodeBlock 
-                language="aivm"
-                code={`MODEL_INFER(model_addr, tensor_input, fee_limit)`}
-              />
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Simple Inference Call</h3>
+              <CodeBlock language="text" filename="inference.aivm">{`MODEL_INFER(model_addr, tensor_input, fee_limit)`}</CodeBlock>
             </div>
 
-            <div>
-              <h3 className="text-xl font-medium mb-3">Model Pipelining (MoE/RAG)</h3>
-              <p className="text-gray-400 mb-4 text-sm">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Model Pipelining (MoE/RAG)</h3>
+              <p className="text-gray-400 text-sm mb-4">
                 Chain multiple models in a single transaction:
               </p>
-              <CodeBlock 
-                language="aivm"
-                code={`TLOAD(encoder) -> TMATMUL -> TCUSTOM ->
-TLOAD(decoder) -> TMATMUL -> TCOMMIT`}
-              />
+              <CodeBlock language="text" filename="pipeline.aivm">{`TLOAD(encoder) -> TMATMUL -> TCUSTOM ->
+TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
             </div>
           </div>
         </section>
 
+        {/* Quick Start */}
         <section className="mb-12">
-          <h2 id="quickstart" className="text-3xl font-light mb-6">Quick Start</h2>
+          <h2 id="quickstart" className="text-2xl font-medium mb-4">Quick Start</h2>
           
-          <p className="text-gray-400 mb-4 text-sm">
-            Clone and explore:
-          </p>
-          <CodeBlock 
-            language="bash"
-            code={`git clone https://github.com/ob-theseus/theseuschain.git
+          <p className="text-gray-400 mb-4">Clone and explore:</p>
+          <CodeBlock language="bash" filename="terminal">{`git clone https://github.com/ob-theseus/theseuschain.git
 cd theseuschain/examples
-cargo run --bin theseus-cli deploy-agent basic-agent.ship`}
-          />
+cargo run --bin theseus-cli deploy-agent basic-agent.ship`}</CodeBlock>
         </section>
 
-        <div className="border-t border-gray-800 pt-8">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Link 
-              href="/docs/quickstart"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">← Quick Start</h3>
-              <p className="text-sm text-gray-400">Get started with Theseus</p>
-            </Link>
-            <Link 
-              href="/docs/agents"
-              className="block p-4 border border-gray-800 hover:border-gray-600 transition-colors"
-            >
-              <h3 className="font-medium mb-2">Agents &amp; Models →</h3>
-              <p className="text-sm text-gray-400">Learn about agent development</p>
-            </Link>
-          </div>
+        {/* Navigation */}
+        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+          <Link href="/docs/quickstart" className="group no-underline">
+            <div className="docs-card h-full">
+              <p className="text-sm text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-blue-400 transition-colors">← Quick Start</h3>
+            </div>
+          </Link>
+          <Link href="/docs/agents" className="group no-underline">
+            <div className="docs-card h-full text-right">
+              <p className="text-sm text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-blue-400 transition-colors">Agents &amp; Models →</h3>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

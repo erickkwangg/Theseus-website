@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BookOpen, ArrowRight, Search } from "lucide-react";
 
 const glossaryTerms = [
   {
@@ -86,45 +87,67 @@ const glossaryTerms = [
 
 export default function GlossaryPage() {
   return (
-    <div>
-      <h1 className="text-4xl sm:text-5xl font-light mb-8">Glossary</h1>
+    <div className="docs-content">
+      {/* Page Header */}
+      <div className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+          <BookOpen className="h-3 w-3" />
+          Reference
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+          Glossary
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          Key terms and definitions used in Theseus.
+        </p>
+      </div>
       
       <div className="prose prose-invert max-w-none">
-        <p className="text-xl text-gray-400 mb-8">
-          Key terms used in Theseus.
-        </p>
+        {/* Quick Stats */}
+        <div className="docs-card mb-8">
+          <div className="flex items-center gap-2 text-sm text-gray-400">
+            <Search className="h-4 w-4" />
+            <span>{glossaryTerms.length} terms defined</span>
+          </div>
+        </div>
 
-        <div className="space-y-6">
+        {/* Glossary Terms */}
+        <div className="space-y-4">
           {glossaryTerms
             .sort((a, b) => a.term.localeCompare(b.term))
             .map((item) => (
               <div 
                 key={item.term} 
                 id={item.term.toLowerCase().replace(/[^a-z0-9]/g, "-")}
-                className="border-b border-gray-800 pb-6"
+                className="docs-card group"
               >
-                <h2 className="text-xl font-medium mb-2 text-white">
-                  {item.term}
-                </h2>
-                <p className="text-gray-400 text-sm mb-2">
-                  {item.definition}
-                </p>
-                {item.link && (
-                  <Link 
-                    href={item.link}
-                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Learn more →
-                  </Link>
-                )}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h2 className="text-lg font-medium mb-2 text-white group-hover:text-blue-400 transition-colors">
+                      {item.term}
+                    </h2>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {item.definition}
+                    </p>
+                  </div>
+                  {item.link && (
+                    <Link 
+                      href={item.link}
+                      className="text-sm text-blue-400 hover:text-blue-300 transition-colors shrink-0 no-underline flex items-center gap-1"
+                    >
+                      Learn more <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  )}
+                </div>
               </div>
             ))}
         </div>
 
+        {/* Navigation */}
         <div className="border-t border-gray-800 pt-8 mt-12">
           <Link 
             href="/docs"
-            className="inline-block bg-white text-black px-6 py-3 hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg transition-all font-medium no-underline"
           >
             ← Back to Docs Home
           </Link>
@@ -133,4 +156,3 @@ export default function GlossaryPage() {
     </div>
   );
 }
-
