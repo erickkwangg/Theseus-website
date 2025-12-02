@@ -35,7 +35,7 @@ const glossaryTerms = [
     link: "/docs/tensor-commits"
   },
   {
-    term: "Lighthouse AI",
+    term: "Civic Agents",
     definition: "A sovereign agent that serves public interests with transparent reasoning but no personal agenda. Like a neutral arbiter or DAO orchestrator.",
     link: "/docs/introduction#personhood"
   },

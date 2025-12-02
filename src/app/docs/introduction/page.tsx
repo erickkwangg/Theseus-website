@@ -130,7 +130,7 @@ export default function IntroductionPage() {
                   <td className="text-gray-500">Personal assistant agent</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Lighthouse AI</td>
+                  <td className="font-medium text-white">Civic Agents</td>
                   <td>Fully sovereign</td>
                   <td>Serves public interest, transparent thought process</td>
                   <td className="text-gray-500">DAO orchestrator, neutral arbiter</td>

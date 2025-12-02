@@ -15,7 +15,7 @@ const aiPersonTypes = [
     icon: "◇",
   },
   {
-    title: "Lighthouse AI",
+    title: "Civic Agents",
     tagline: "Sovereign and public-serving",
     description: "Fully sovereign entity that serves human interests and may aggregate value to humans instead of itself, like smart contracts but with inference.",
     icon: "◆",

@@ -90,7 +90,7 @@ stake = 10000 THE  // locked for slashing`}</CodeBlock>
             </div>
 
             <div className="docs-card">
-              <h3 className="text-lg font-medium mb-2">Lighthouse AI (Public Service)</h3>
+              <h3 className="text-lg font-medium mb-2">Civic Agents (Public Service)</h3>
               <p className="text-gray-400 text-sm mb-4">
                 Transparent agent that serves public interests:
               </p>
