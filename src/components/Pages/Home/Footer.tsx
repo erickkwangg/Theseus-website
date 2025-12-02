@@ -26,6 +26,7 @@ export default function Footer() {
               <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
                   DOWNLOAD WHITEPAPER
+                  <span className="ml-2 text-xs">🔒</span>
                 </Button>
               </a>
               <a href={EXTERNAL_LINKS.github} target="_blank" rel="noopener noreferrer">
@@ -38,51 +39,31 @@ export default function Footer() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <div className="w-64 h-64 lg:w-80 lg:h-80 logo-card">
-              {/* Corner brackets */}
-              <div className="corner-bracket-tl"></div>
-              <div className="corner-bracket-tr"></div>
-              <div className="corner-bracket-bl"></div>
-              <div className="corner-bracket-br"></div>
-
-              {/* Plus symbols at inner border corners */}
-              <div className="plus-top-left">+</div>
-              <div className="plus-top-right">+</div>
-              <div className="plus-bottom-left">+</div>
-              <div className="plus-bottom-right">+</div>
-
-              {/* Logo and text content */}
-              <div className="text-center space-y-6 z-10 relative">
-                <Image
-                  src={logo}
-                  alt="Theseus Logo"
-                  width={80}
-                  height={80}
-                  className="mx-auto w-16 h-16 lg:w-20 lg:h-20"
-                />
-                <div className="text-xl lg:text-2xl font-bold tracking-wider text-white">
-                  THESEUS
-                </div>
+            <div className="w-64 h-64 lg:w-72 lg:h-72 flex flex-col items-center justify-center 
+                            border border-gray-800 bg-gradient-to-br from-gray-900/50 to-black 
+                            rounded-lg hover:border-blue-500/30 transition-all duration-300">
+              <Image
+                src={logo}
+                alt="Theseus Logo"
+                width={80}
+                height={80}
+                className="w-20 h-20 lg:w-24 lg:h-24 mb-6 opacity-90"
+              />
+              <div className="text-xl lg:text-2xl font-light tracking-widest text-white">
+                THESEUS
+              </div>
+              <div className="text-xs text-gray-500 mt-2 tracking-wider">
+                AI PERSONHOOD
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-black mt-12 lg:mt-16 p-6 lg:p-8 corner-brackets">
-          <div className="corner-bracket-tr"></div>
-          <div className="corner-bracket-bl"></div>
+        <div className="bg-black mt-12 lg:mt-16 p-6 lg:p-8 border border-gray-800 rounded-lg">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <p className="text-gray-500 text-xs lg:text-sm">
               © 2025 THESEUS AI LABS
             </p>
-
-            <Image
-              src={logo}
-              alt="Theseus Logo"
-              width={100}
-              height={100}
-              className="size-10"
-            />
 
             <nav className="flex flex-wrap justify-center gap-4 lg:gap-6">
               <Link

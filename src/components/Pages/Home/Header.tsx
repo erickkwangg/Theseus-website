@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -10,13 +12,31 @@ import {
 } from "@/components/ui/sheet";
 import { Menu, Github } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { useState, useEffect } from "react";
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="mt-4 mx-8 bg-black px-4 sm:px-6 py-4 corner-brackets">
-      <div className="corner-bracket-tr"></div>
-      <div className="corner-bracket-bl"></div>
-      <nav className="flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "bg-black/95 backdrop-blur-md border-b border-gray-800" 
+        : "bg-transparent mt-4"
+    }`}>
+      <div className={`max-w-[1600px] mx-auto transition-all duration-300 ${
+        isScrolled 
+          ? "px-4 sm:px-8 py-3" 
+          : "mx-4 sm:mx-8 bg-black/80 backdrop-blur-sm border border-gray-800 rounded-lg px-4 sm:px-6 py-4"
+      }`}>
+        <nav className="flex items-center justify-between">
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           <Link href="/" className="text-white hover:text-blue-400 transition-colors text-sm">
@@ -124,7 +144,8 @@ export default function Header() {
           <span className="hidden sm:inline">DOWNLOAD THE WHITEPAPER</span>
           <span className="sm:hidden">WHITEPAPER</span>
         </Button> */}
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

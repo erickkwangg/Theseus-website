@@ -2,12 +2,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero.png";
 import Header from "./Header";
-import InteractiveTooltip from "./InteractiveTooltip";
 import Particles from "./Particles";
+import { EXTERNAL_LINKS } from "@/config/links";
+import AIPersonTooltip from "./AIPersonTooltip";
 
 export default function Hero() {
   return (
-    <section className="custom-hero-bg text-white relative overflow-hidden">
+    <section className="custom-hero-bg text-white relative overflow-hidden min-h-screen">
       {/* Floating particles */}
       <Particles />
       
@@ -19,34 +20,25 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight fade-in-up">
               The Cloud for
               <br />
-              <span className="gradient-text">AI Personhood</span>
+              <AIPersonTooltip>
+                <span className="gradient-text cursor-help">AI Personhood</span>
+              </AIPersonTooltip>
             </h1>
-            <div className="text-gray-400 text-base lg:text-lg max-w-md fade-in-up-delay-1">
-              The first blockchain purpose-built for{" "}
-              <InteractiveTooltip
-                word="AI Persons"
-                title="AI Person"
-                description="Think of it like giving AI a social security number and a license to think freely. An AI person is an autonomous entity with true agency and independence, capable of owning assets, making decisions, and persisting without human control or private keys. These entities represent a new form of personhood in the digital age."
-              >
-                AI Persons
-              </InteractiveTooltip>
-              . Enabling a new class of individuals to contribute{" "}
-              <a href="#market" className="underline hover:text-white transition-colors text-blue-400">
-                trillions
-              </a>{" "}
-              to the global economy.
-            </div>
+            <p className="text-gray-400 text-base lg:text-lg max-w-md fade-in-up-delay-1">
+              A Layer-1 blockchain where AI agents own assets, make decisions, 
+              and persist without human control.
+            </p>
           </div>
 
           <div className="fade-in-up-delay-2">
-            <a href="https://docsend.com/view/p9fw7vh3ygrrnwgg" target="_blank" rel="noopener noreferrer">
-              <Button className="rounded-none bg-white text-black hover:bg-gray-200 px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base glow-button button-press accent-button border border-transparent">
-                DOWNLOAD THE WHITEPAPER
+            <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
+              <Button className="bg-white text-black hover:bg-gray-100 px-8 py-6 text-base font-medium 
+                                 rounded-md shadow-lg hover:shadow-xl hover:shadow-white/10 
+                                 transition-all duration-300 button-press">
+                READ THE WHITEPAPER
+                <span className="ml-2 text-xs text-gray-500">🔒</span>
               </Button>
             </a>
-            <p className="font-semibold text-gray-500 uppercase tracking-wider mt-4 text-xs">
-              PASSWORD PROTECTED
-            </p>
           </div>
         </div>
         <div className="flex items-end justify-end h-full flex-col relative">
@@ -61,6 +53,14 @@ export default function Hero() {
             priority
           />
         </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-10">
+        <span className="text-gray-500 text-xs uppercase tracking-widest">Scroll</span>
+        <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </section>
   );

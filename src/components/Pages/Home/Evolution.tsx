@@ -85,24 +85,24 @@ export default function Evolution() {
           </div>
           
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-16">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-12 max-w-4xl mx-auto">
             {evolutions.map((item, index) => (
               <div key={index} className="text-center relative">
                 {/* Icon */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-5">
                   <div 
-                    className={`w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center 
+                    className={`w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center 
                                 bg-gray-900/50 rounded-full border transition-all duration-500
                                 ${activeIndex >= index 
-                                  ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.4)] scale-110' 
+                                  ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.4)] scale-105' 
                                   : 'border-gray-800'}`}
                   >
                     <Image 
                       src={item.icon} 
                       alt={item.name}
-                      width={40}
-                      height={40}
-                      className={`w-8 h-8 lg:w-10 lg:h-10 transition-all duration-500 ${
+                      width={48}
+                      height={48}
+                      className={`w-10 h-10 lg:w-12 lg:h-12 transition-all duration-500 ${
                         activeIndex >= index ? 'opacity-100' : 'opacity-50'
                       }`}
                     />

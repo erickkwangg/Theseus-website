@@ -1,11 +1,10 @@
-"use client";
-
 import commitmentIcon from "@/assets/icon/commitment.svg";
 import machineIcon from "@/assets/icon/machine.svg";
 import treesIcon from "@/assets/icon/trees.svg";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
+import CountUp from "@/components/CountUp";
 
 const features = [
   {
@@ -13,34 +12,40 @@ const features = [
     title: "AIVM",
     subtitle: "AI Virtual Machine",
     description: "Full stateful agents as smart contracts, without the private keys that would control them. Not your weights, not your brain.",
+    href: "/docs/aivm",
   },
   {
     icon: commitmentIcon,
     title: "Tensor Commits",
     subtitle: "Verification Protocol",
     description: "<1% proof generation overhead. <0.1% verification time. The most efficient verification for shared-state AI.",
+    href: "/docs/tensor-commits",
   },
   {
     icon: treesIcon,
     title: "Terkle Trees",
     subtitle: "Data Structures",
     description: "Merkle Trees generalized to tensor operations. Efficient cryptographic commitments for multi-dimensional AI data.",
+    href: "/docs/tensor-commits",
   },
 ];
 
 export default function Features() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <section className="bg-black text-white py-16 lg:py-24 grid-bg" id="about">
+      {/* Section divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent mb-16 lg:mb-24" />
+      
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
         {/* Big stat + tagline */}
         <ScrollReveal>
           <div className="text-center mb-16 lg:mb-20">
             <div className="mb-4">
-              <span className="text-7xl sm:text-8xl lg:text-9xl font-extralight tracking-tight gradient-text">
-                1.3B
-              </span>
+              <CountUp 
+                end={13} 
+                suffix="B" 
+                className="text-7xl sm:text-8xl lg:text-9xl font-extralight tracking-tight gradient-text"
+              />
             </div>
             <p className="text-gray-500 text-sm uppercase tracking-widest mb-6">
               AI agents by 2028
@@ -51,48 +56,35 @@ export default function Features() {
           </div>
         </ScrollReveal>
 
-        {/* Feature cards - icon-forward, hover to reveal */}
+        {/* Feature cards - linked to docs */}
         <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <ScrollReveal key={index} delay={index + 1}>
-              <div
-                className="group relative p-8 lg:p-10 rounded-lg border border-gray-800 bg-black/50 
-                           card-tilt cursor-pointer hover:border-blue-500/30"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {/* Icon - large and centered */}
-                <div className="flex flex-col items-center text-center">
-                  <Image 
-                    src={feature.icon} 
-                    alt={feature.title} 
-                    className="size-16 lg:size-20 mb-6 opacity-80 group-hover:opacity-100 
-                               group-hover:scale-110 transition-all duration-300" 
-                  />
-                  <h3 className="text-xl lg:text-2xl font-medium mb-1 group-hover:text-blue-400 transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">
-                    {feature.subtitle}
-                  </p>
-                  
-                  {/* Description - fades in on hover */}
-                  <div 
-                    className={`text-gray-400 text-sm leading-relaxed transition-all duration-300
-                                ${hoveredIndex === index ? 'opacity-100 max-h-32' : 'opacity-0 max-h-0 overflow-hidden'}`}
-                  >
-                    {feature.description}
-                  </div>
-                  
-                  {/* Hover hint */}
-                  <div 
-                    className={`text-gray-600 text-xs mt-4 transition-opacity duration-300
-                                ${hoveredIndex === index ? 'opacity-0' : 'opacity-100'}`}
-                  >
-                    Hover to learn more
+              <Link href={feature.href} className="block h-full">
+                <div className="group relative p-8 lg:p-10 rounded-lg border border-gray-800 bg-black/50 
+                               card-tilt hover:border-blue-500/30 h-full cursor-pointer">
+                  <div className="flex flex-col items-center text-center h-full">
+                    <Image 
+                      src={feature.icon} 
+                      alt={feature.title} 
+                      className="size-14 lg:size-16 mb-5 opacity-80 group-hover:opacity-100 
+                                 group-hover:scale-110 transition-all duration-300" 
+                    />
+                    <h3 className="text-xl lg:text-2xl font-medium mb-1 group-hover:text-blue-400 transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">
+                      {feature.subtitle}
+                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                      {feature.description}
+                    </p>
+                    <span className="text-blue-400/0 group-hover:text-blue-400/100 text-xs transition-all duration-300 mt-auto">
+                      Learn more →
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>
