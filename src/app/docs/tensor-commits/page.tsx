@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
+import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 
 export default function TensorCommitsPage() {

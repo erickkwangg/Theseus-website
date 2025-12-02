@@ -4,22 +4,27 @@ import { useState, useRef, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 
 interface CodeBlockProps {
-  code: string;
+  code?: string;
+  children?: string;
   language?: string;
+  filename?: string;
 }
 
-export default function CodeBlock({ code, language }: CodeBlockProps) {
+export default function CodeBlock({ code, children, language, filename }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const currentTimeout = timeoutRef.current;
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (currentTimeout) clearTimeout(currentTimeout);
     };
   }, []);
 
+  const displayCode = code || children || "";
+
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
+    await navigator.clipboard.writeText(displayCode);
     setCopied(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setCopied(false), 2000);
@@ -28,12 +33,12 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   return (
     <div className="relative group">
       <div className="bg-[#0d1117] border border-gray-800 rounded-lg overflow-hidden">
-        {language && (
+        {(filename || language) && (
           <div className="px-4 py-2 bg-gray-900/50 border-b border-gray-800 text-xs text-gray-500 font-mono">
-            {language}
+            {filename || language}
           </div>
         )}
-        <pre className="p-4 font-mono text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap">{code}</pre>
+        <pre className="p-4 font-mono text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap">{displayCode}</pre>
       </div>
       <button
         onClick={handleCopy}
@@ -49,4 +54,3 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
     </div>
   );
 }
-

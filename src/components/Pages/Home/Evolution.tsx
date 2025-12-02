@@ -34,6 +34,9 @@ export default function Evolution() {
 
   // Animate icons sequentially when section comes into view
   useEffect(() => {
+    const currentSection = sectionRef.current;
+    const timeouts = timeoutsRef.current;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -42,20 +45,20 @@ export default function Evolution() {
             const timeout = setTimeout(() => {
               setActiveIndex(index);
             }, index * 400);
-            timeoutsRef.current.push(timeout);
+            timeouts.push(timeout);
           });
         }
       },
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
     return () => {
       observer.disconnect();
-      timeoutsRef.current.forEach(clearTimeout);
+      timeouts.forEach(clearTimeout);
     };
   }, []);
 

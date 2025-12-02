@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Coins, Zap, Shield, PiggyBank, ArrowRight, Bot, Layers } from "lucide-react";
+import { Coins, Zap, Shield, PiggyBank, Bot, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 
 export default function TokenomicsPage() {
