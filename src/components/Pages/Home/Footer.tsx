@@ -25,7 +25,7 @@ export default function Footer() {
               </Link>
               <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
                 <Button className="rounded-none bg-transparent border border-white text-white hover:bg-white hover:text-black px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
-                  DOWNLOAD WHITEPAPER
+                  READ WHITEPAPER
                   <span className="ml-2 text-xs">🔒</span>
                 </Button>
               </a>
