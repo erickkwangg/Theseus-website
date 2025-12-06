@@ -47,10 +47,10 @@ export default function Features() {
                 className="text-7xl sm:text-8xl lg:text-9xl font-extralight tracking-tight gradient-text"
               />
             </div>
-            <p className="text-gray-500 text-sm uppercase tracking-widest mb-6">
+            <p className="text-gray-500 text-sm sm:text-base uppercase tracking-widest mb-6">
               AI agents by 2028
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-light max-w-2xl mx-auto">
               Theseus gives them <span className="text-blue-400">personhood</span>.
             </h2>
           </div>
@@ -61,8 +61,10 @@ export default function Features() {
           {features.map((feature, index) => (
             <ScrollReveal key={index} delay={index + 1}>
               <Link href={feature.href} className="block h-full">
-                <div className="group relative p-8 lg:p-10 rounded-lg border border-gray-800 bg-black/50 
-                               card-tilt hover:border-blue-500/30 h-full cursor-pointer">
+                <div className="group relative p-8 lg:p-10 rounded-xl border border-gray-800 
+                               bg-gradient-to-br from-blue-950/30 via-gray-950/50 to-black
+                               card-tilt hover:border-blue-500/40 hover:from-blue-950/40 h-full cursor-pointer
+                               transition-all duration-300">
                   <div className="flex flex-col items-center text-center h-full">
                     <Image 
                       src={feature.icon} 
@@ -73,13 +75,13 @@ export default function Features() {
                     <h3 className="text-xl lg:text-2xl font-medium mb-1 group-hover:text-blue-400 transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">
+                    <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mb-4">
                       {feature.subtitle}
                     </p>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-4">
                       {feature.description}
                     </p>
-                    <span className="text-blue-400/0 group-hover:text-blue-400/100 text-xs transition-all duration-300 mt-auto">
+                    <span className="text-blue-400/0 group-hover:text-blue-400/100 text-sm transition-all duration-300 mt-auto">
                       Learn more →
                     </span>
                   </div>

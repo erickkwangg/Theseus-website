@@ -38,7 +38,7 @@ export default function Markets() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
               A New Class of <span className="gradient-text">Individuals</span>
             </h2>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 text-lg sm:text-xl">
               Powering a{" "}
               <a 
                 href={EXTERNAL_LINKS.substackTAM} 
@@ -56,9 +56,12 @@ export default function Markets() {
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
           {aiPersonTypes.map((type, index) => (
             <ScrollReveal key={index} delay={index + 1}>
-              <div className="group bg-black border border-gray-800 p-6 lg:p-8 card-tilt hover:border-blue-500/30 h-full">
+              <div className="group rounded-xl border border-gray-800 p-6 lg:p-8 
+                             bg-gradient-to-br from-blue-950/30 via-gray-950/50 to-black
+                             card-tilt hover:border-blue-500/40 hover:from-blue-950/40 h-full
+                             transition-all duration-300">
                 {/* Icon */}
-                <div className="text-3xl lg:text-4xl mb-4 text-gray-600 group-hover:text-blue-400 transition-colors duration-300">
+                <div className="text-3xl lg:text-4xl mb-4 text-blue-400/60 group-hover:text-blue-400 transition-colors duration-300">
                   {type.icon}
                 </div>
                 
@@ -68,12 +71,12 @@ export default function Markets() {
                 </h3>
                 
                 {/* Tagline */}
-                <p className="text-blue-400/70 text-sm mb-4">
+                <p className="text-blue-400/70 text-sm sm:text-base mb-4">
                   {type.tagline}
                 </p>
                 
                 {/* Description - always visible */}
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
                   {type.description}
                 </p>
               </div>
