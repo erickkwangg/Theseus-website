@@ -168,11 +168,11 @@ export function OnChainAgentsSection() {
                   <div>
                     <span className="text-[#4BD3FF]">tools</span> <span className="text-[#FFD166]">{"{"}</span>
                   </div>
-                  <div className="pl-4 text-[#B794F4]">"""Get the current weather for a city"""</div>
+                  <div className="pl-4 text-[#B794F4]">{`"""Get the current weather for a city"""`}</div>
                   <div className="pl-4">
                     <span className="text-[#5AE3FF]">get_weather</span>(<span className="text-gray-300">city:</span>{" "}
                     <span className="text-[#4BD3FF]">string</span>, <span className="text-gray-300">unit?:</span>{" "}
-                    <span className="text-[#B794F4]">"c"</span> | <span className="text-[#B794F4]">"f"</span>)
+                    <span className="text-[#B794F4]">&quot;c&quot;</span> | <span className="text-[#B794F4]">&quot;f&quot;</span>)
                   </div>
                   <div className="mb-2">
                     <span className="text-[#FFD166]">{"}"}</span>
@@ -181,10 +181,10 @@ export function OnChainAgentsSection() {
                   <div>
                     <span className="text-[#4BD3FF]">graph</span> <span className="text-[#FFD166]">{"{"}</span>
                   </div>
-                  <div className="pl-4 text-gray-500">// 1. Agent Entrypoint</div>
+                  <div className="pl-4 text-gray-500">{`// 1. Agent Entrypoint`}</div>
                   <div className="pl-4">
                     <span className="text-[#5AE3FF]">model_main</span>:{" "}
-                    <span className="text-[#5AE3FF]">model_call</span>(<span className="text-[#B794F4]">"gpt-oss"</span>
+                    <span className="text-[#5AE3FF]">model_call</span>(<span className="text-[#B794F4]">&quot;gpt-oss&quot;</span>
                     ) <span className="text-[#FFD166]">{"{"}</span>
                   </div>
                   <div className="pl-8">
@@ -198,14 +198,14 @@ export function OnChainAgentsSection() {
                     <span className="text-[#FFD166]">{"}"}</span>
                   </div>
                   <div className="mb-2"></div>
-                  <div className="pl-4 text-gray-500">// 2. Check if the model response has tool calls.</div>
+                  <div className="pl-4 text-gray-500">{`// 2. Check if the model response has tool calls.`}</div>
                   <div className="pl-4">
                     <span className="text-[#5AE3FF]">check_tools</span>:{" "}
                     <span className="text-[#5AE3FF]">has_tool_calls</span> ?{" "}
                     <span className="text-[#5AE3FF]">tool_exec</span> : <span className="text-[#5AE3FF]">end</span>
                   </div>
                   <div className="mb-2"></div>
-                  <div className="pl-4 text-gray-500">// 3. Execute the tool call.</div>
+                  <div className="pl-4 text-gray-500">{`// 3. Execute the tool call.`}</div>
                   <div className="pl-4">
                     <span className="text-[#5AE3FF]">tool_exec</span>: <span className="text-[#5AE3FF]">tool_call</span>{" "}
                     <span className="text-[#FFD166]">{"{"}</span>
@@ -420,7 +420,7 @@ export function OnChainAgentsSection() {
               <div className="flex flex-col gap-1">
                 <div className="text-sm text-gray-400 font-medium">Alice</div>
                 <div className="bg-gray-800/50 rounded-2xl rounded-tl-sm px-5 py-3 max-w-md border border-gray-700/50">
-                  <p className="text-white">What's the weather in San Francisco?</p>
+                  <p className="text-white">What&apos;s the weather in San Francisco?</p>
                 </div>
               </div>
             </div>
@@ -432,7 +432,7 @@ export function OnChainAgentsSection() {
               const event = events[index]
               const isVerified = verifiedStates[index]
               const isFirstEvent = index === 0
-              const isLastEvent = index === events.length - 1
+              const _isLastEvent = index === events.length - 1
               const isPending = isFirstEvent ? agentCallPending : event.dual && !isVerified
               const hasGreenPulse = greenPulseStates[index]
 
