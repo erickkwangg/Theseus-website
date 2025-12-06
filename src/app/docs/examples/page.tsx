@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Puzzle, Github, ArrowRight, Bot, Zap } from "lucide-react";
+import { Puzzle, Github, Bot, Zap } from "lucide-react";
 import CodeBlock from "@/components/docs/CodeBlock";
 import Callout from "@/components/docs/Callout";
 

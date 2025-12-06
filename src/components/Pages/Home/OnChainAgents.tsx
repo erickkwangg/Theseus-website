@@ -51,6 +51,7 @@ export function OnChainAgentsSection() {
     setAgentCallPending(true)
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const interval = setInterval(() => {
       setVisibleEvents((prev) => {
@@ -65,6 +66,7 @@ export function OnChainAgentsSection() {
     return () => clearInterval(interval)
   }, [visibleEvents.length])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     visibleEvents.forEach((index) => {
       const event = events[index]
@@ -147,7 +149,7 @@ export function OnChainAgentsSection() {
                   <div className="mb-2"></div>
                   <div>
                     <span className="text-[#4BD3FF]">agent</span>{" "}
-                    <span className="text-[#B794F4]">"Weather Agent"</span>
+                    <span className="text-[#B794F4]">&quot;Weather Agent&quot;</span>
                   </div>
                   <div>
                     <span className="text-[#4BD3FF]">version</span> <span className="text-[#FFD166]">1</span>
@@ -156,13 +158,13 @@ export function OnChainAgentsSection() {
                     <span className="text-[#4BD3FF]">entry</span> <span className="text-[#5AE3FF]">model_main</span>
                   </div>
                   <div>
-                    <span className="text-[#4BD3FF]">system</span> <span className="text-[#B794F4]">"""</span>
+                    <span className="text-[#4BD3FF]">system</span> <span className="text-[#B794F4]">&quot;&quot;&quot;</span>
                   </div>
                   <div className="pl-4 text-[#B794F4]">
                     You are a concise weather assistant. Use tools when necessary.
                   </div>
                   <div className="mb-2">
-                    <span className="text-[#B794F4]">"""</span>
+                    <span className="text-[#B794F4]">&quot;&quot;&quot;</span>
                   </div>
                   <div className="mb-2"></div>
                   <div>
@@ -432,7 +434,6 @@ export function OnChainAgentsSection() {
               const event = events[index]
               const isVerified = verifiedStates[index]
               const isFirstEvent = index === 0
-              const _isLastEvent = index === events.length - 1
               const isPending = isFirstEvent ? agentCallPending : event.dual && !isVerified
               const hasGreenPulse = greenPulseStates[index]
 
