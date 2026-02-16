@@ -50,9 +50,12 @@ const sections = [
     items: [
       { href: "/docs/comparison", label: "Theseus vs Ethereum", icon: GitCompare },
       { href: "/docs/design-space", label: "Design Space", icon: Lightbulb },
-      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/glossary", label: "Glossary", icon: List },
     ],
+  },
+  {
+    title: "Network Economics",
+    items: [{ href: "/docs/tokenomics", label: "Tokenomics", icon: Coins }],
   },
 ];
 
@@ -63,19 +66,19 @@ export default function DocsSidebar() {
     <aside className="hidden lg:block w-64 shrink-0">
       <nav className="sticky top-24 space-y-6">
         {/* Version badge */}
-        <div className="px-3 pb-4 border-b border-gray-800">
-          <span className="text-xs text-gray-500">Version</span>
+        <div className="px-3 pb-4 border-b border-slate-700/60">
+          <span className="text-xs text-slate-400">Version</span>
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-sm font-medium text-white">0.1.0</span>
-            <span className="px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-400 rounded font-medium">
-              BETA
+            <span className="text-sm font-medium text-slate-100">0.1.0</span>
+            <span className="px-1.5 py-0.5 text-[10px] bg-indigo-500/20 text-indigo-300 rounded font-medium">
+              Preview
             </span>
           </div>
         </div>
         
         {sections.map((section) => (
           <div key={section.title}>
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-3">
+            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">
               {section.title}
             </h3>
             <ul className="space-y-0.5">
@@ -88,11 +91,11 @@ export default function DocsSidebar() {
                       href={item.href}
                       className={`flex items-center gap-2.5 py-2 px-3 text-sm rounded-lg transition-all ${
                         isActive
-                          ? "bg-blue-500/10 text-blue-400 font-medium"
-                          : "text-gray-400 hover:text-white hover:bg-gray-900/50"
+                          ? "bg-indigo-500/15 text-indigo-300 font-medium"
+                          : "text-slate-300 hover:text-white hover:bg-slate-900/60"
                       }`}
                     >
-                      <Icon className={`h-4 w-4 ${isActive ? "text-blue-400" : "text-gray-600"}`} />
+                      <Icon className={`h-4 w-4 ${isActive ? "text-indigo-300" : "text-slate-500"}`} />
                       {item.label}
                     </Link>
                   </li>
@@ -102,24 +105,24 @@ export default function DocsSidebar() {
           </div>
         ))}
         
-        <div className="pt-4 border-t border-gray-800">
+        <div className="pt-4 border-t border-slate-700/60">
           <div className="space-y-0.5">
             <a
               href={EXTERNAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 py-2 px-3 text-sm text-gray-400 hover:text-white hover:bg-gray-900/50 rounded-lg transition-all"
+              className="flex items-center gap-2.5 py-2 px-3 text-sm text-slate-300 hover:text-indigo-300 hover:bg-slate-900/60 rounded-lg transition-all"
             >
-              <ExternalLink className="h-4 w-4 text-gray-600" />
-              GitHub
+              <ExternalLink className="h-4 w-4 text-slate-500" />
+              GitHub (Private)
             </a>
             <a
               href={EXTERNAL_LINKS.whitepaper}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 py-2 px-3 text-sm text-gray-400 hover:text-white hover:bg-gray-900/50 rounded-lg transition-all"
+              className="flex items-center gap-2.5 py-2 px-3 text-sm text-slate-300 hover:text-indigo-300 hover:bg-slate-900/60 rounded-lg transition-all"
             >
-              <ExternalLink className="h-4 w-4 text-gray-600" />
+              <ExternalLink className="h-4 w-4 text-slate-500" />
               Whitepaper
             </a>
           </div>

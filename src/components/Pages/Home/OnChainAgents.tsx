@@ -107,20 +107,21 @@ export function OnChainAgentsSection() {
   }, [showResponse])
 
   return (
-    <section className="relative py-32 px-6 bg-black overflow-hidden">
+    <section className="relative py-24 lg:py-32 px-6 overflow-hidden section-soft-divider">
+      <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
       {/* Title Section */}
-      <div className="max-w-7xl mx-auto mb-20 text-center">
+      <div className="max-w-7xl mx-auto mb-20 text-center relative z-10">
         <h2 className="text-5xl md:text-6xl font-light text-white mb-4 tracking-tight">On-Chain Agents</h2>
-        <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
           Agents powered by SHIP DSL, executed and verified on Theseus Chain.
         </p>
       </div>
 
       {/* Two Column Layout */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
         {/* Left Column - IDE Window */}
         <div className="relative">
-          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-gray-800/50 shadow-2xl">
+          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-slate-700/60 shadow-2xl">
             {/* IDE Chrome */}
             <div className="bg-[#111115] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
               <div className="flex gap-2">

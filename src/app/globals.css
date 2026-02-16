@@ -120,6 +120,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    background:
+      radial-gradient(circle at 20% 8%, rgba(129, 140, 248, 0.14), transparent 34%),
+      radial-gradient(circle at 82% 12%, rgba(148, 163, 184, 0.1), transparent 30%),
+      radial-gradient(circle at 50% 88%, rgba(99, 102, 241, 0.08), transparent 34%),
+      #060b16;
+    min-height: 100vh;
   }
 }
 .tooltip-arrow {
@@ -132,16 +138,14 @@
   background-size: cover;
 }
 .market-bg {
-  background-image: url(/market-bg.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background:
+    radial-gradient(55rem 32rem at 10% 0%, rgba(99, 102, 241, 0.1), transparent 60%),
+    radial-gradient(55rem 32rem at 100% 100%, rgba(148, 163, 184, 0.08), transparent 60%);
 }
 .footer-section-bg {
-  background-image: url(/footer-section-bg.png);
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background:
+    linear-gradient(to top, rgba(10, 15, 30, 0.95), rgba(9, 14, 26, 0.9)),
+    radial-gradient(circle at 80% 0%, rgba(129, 140, 248, 0.12), transparent 40%);
 }
 
 .card-corner {
@@ -513,17 +517,13 @@
 .gradient-text {
   background: linear-gradient(
     90deg,
-    #ffffff 0%,
-    #60a5fa 25%,
-    #ffffff 50%,
-    #60a5fa 75%,
-    #ffffff 100%
+    #f8fafc 0%,
+    #c7d2fe 45%,
+    #e2e8f0 100%
   );
-  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
 }
 
 /* Hero glow effect */
@@ -564,11 +564,10 @@
 /* Card 3D tilt hover */
 .card-tilt {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform-style: preserve-3d;
 }
 .card-tilt:hover {
-  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59, 130, 246, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
 }
 
 /* Scroll reveal - handled by React ScrollReveal component */
@@ -579,9 +578,9 @@
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.008;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
+  mix-blend-mode: soft-light;
 }
 
 /* Evolution timeline - handled inline in component */
@@ -612,15 +611,15 @@
 /* Docs grid background */
 .docs-grid-bg {
   background-image: 
-    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(129, 140, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 /* Docs code inline */
 .docs-content code:not(pre code) {
-  background: rgba(59, 130, 246, 0.1);
-  color: #93c5fd;
+  background: rgba(129, 140, 248, 0.14);
+  color: #c7d2fe;
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
@@ -629,27 +628,27 @@
 
 /* Docs links */
 .docs-content a:not(.no-underline) {
-  color: #60a5fa;
+  color: #a5b4fc;
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(96, 165, 250, 0.3);
+  text-decoration-color: rgba(165, 180, 252, 0.35);
   transition: all 0.15s ease;
 }
 .docs-content a:not(.no-underline):hover {
-  text-decoration-color: #60a5fa;
+  text-decoration-color: #c7d2fe;
 }
 
 /* Docs section card */
 .docs-card {
-  background: linear-gradient(to bottom right, rgb(17 24 39 / 0.5), rgb(3 7 18 / 0.5));
-  border: 1px solid rgb(31 41 55);
+  background: linear-gradient(to bottom right, rgb(15 23 42 / 0.55), rgb(2 6 23 / 0.55));
+  border: 1px solid rgb(51 65 85 / 0.7);
   border-radius: 0.75rem;
   padding: 1.5rem;
   transition: all 0.2s ease;
 }
 .docs-card:hover {
-  border-color: rgb(55 65 81);
-  background: linear-gradient(to bottom right, rgb(17 24 39 / 0.8), rgb(3 7 18 / 0.8));
+  border-color: rgb(129 140 248 / 0.35);
+  background: linear-gradient(to bottom right, rgb(15 23 42 / 0.82), rgb(2 6 23 / 0.82));
 }
 
 /* Docs table */
@@ -666,11 +665,11 @@
 .docs-table th {
   text-align: left;
   padding: 0.75rem 1rem;
-  background: rgb(17 24 39);
-  border-bottom: 1px solid rgb(31 41 55);
+  background: rgb(15 23 42 / 0.9);
+  border-bottom: 1px solid rgb(51 65 85 / 0.7);
   font-weight: 500;
   font-size: 0.875rem;
-  color: rgb(156 163 175);
+  color: rgb(148 163 184);
 }
 .docs-table th:first-child {
   border-top-left-radius: 0.75rem;
@@ -680,15 +679,15 @@
 }
 .docs-table td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgb(31 41 55 / 0.5);
+  border-bottom: 1px solid rgb(51 65 85 / 0.45);
   font-size: 0.875rem;
-  color: rgb(209 213 219);
+  color: rgb(203 213 225);
 }
 .docs-table tr:nth-child(even) td {
-  background: rgb(17 24 39 / 0.2);
+  background: rgb(15 23 42 / 0.22);
 }
 .docs-table tr:hover td {
-  background: rgb(17 24 39 / 0.5);
+  background: rgb(30 41 59 / 0.45);
 }
 .docs-table tr:last-child td {
   border-bottom: none;
@@ -717,4 +716,89 @@
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgb(31 41 55), transparent);
+}
+
+/* ============================================
+   HOMEPAGE VISUAL REFRESH
+   ============================================ */
+
+.site-shell {
+  background:
+    radial-gradient(80rem 40rem at 8% -8%, rgba(99, 102, 241, 0.14), transparent 60%),
+    radial-gradient(70rem 35rem at 98% 0%, rgba(148, 163, 184, 0.1), transparent 60%),
+    linear-gradient(to bottom, #060b16 0%, #060b16 36%, #0a1326 100%);
+}
+
+.section-soft-divider {
+  position: relative;
+}
+
+.section-soft-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.25), transparent);
+}
+
+.section-soft-divider.no-top-divider::before {
+  display: none;
+}
+
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.72),
+    rgba(10, 15, 30, 0.76)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  box-shadow:
+    0 10px 35px rgba(2, 6, 23, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.blue-chip {
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  color: rgb(199 210 254);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.hero-title-gradient {
+  background: linear-gradient(100deg, #f8fafc 15%, #c7d2fe 45%, #e2e8f0 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.soft-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.primary-cta {
+  border: 1px solid rgba(129, 140, 248, 0.45);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #e2e8f0;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.22);
+}
+
+.primary-cta:hover {
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.3);
+  filter: brightness(1.04);
+}
+
+.ghost-cta {
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  background: rgba(15, 23, 42, 0.35);
+  color: rgb(226 232 240);
+}
+
+.ghost-cta:hover {
+  border-color: rgba(199, 210, 254, 0.55);
+  background: rgba(99, 102, 241, 0.13);
 }

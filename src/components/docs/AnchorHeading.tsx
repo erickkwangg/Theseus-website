@@ -32,16 +32,19 @@ export default function AnchorHeading({ id, level = 2, children, className = "" 
       <a
         href={`#${id}`}
         onClick={handleCopy}
-        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-800 rounded"
+        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-slate-800 rounded"
         title="Copy link to section"
       >
         {copied ? (
           <Check className="h-4 w-4 text-green-400" />
         ) : (
-          <LinkIcon className="h-4 w-4 text-gray-500 hover:text-blue-400" />
+          <LinkIcon className="h-4 w-4 text-slate-500 hover:text-indigo-300" />
         )}
       </a>
     </Tag>
   );
 }
+
+
+
 

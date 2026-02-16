@@ -1,15 +1,23 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowRight, Layers, Database, Shield, Cpu, GitBranch } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+
+export const metadata: Metadata = {
+  title: "Architecture - Theseus Docs",
+  description:
+    "Explore the Theseus architecture: AIVM execution, TheseusStore data availability, and PoS consensus.",
+  keywords: ["Theseus architecture", "AIVM", "TheseusStore", "PoS", "verifiable inference"],
+};
 
 export default function ArchitecturePage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Layers className="h-3 w-3" />
           Core Concepts
         </div>
@@ -46,9 +54,9 @@ export default function ArchitecturePage() {
           <h2 id="three-layer" className="text-2xl font-medium mb-6">Three-Layer Stack</h2>
           
           <div className="space-y-4">
-            <div className="docs-card border-blue-900/50">
+            <div className="docs-card border-indigo-900/50">
               <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
                   <Cpu className="h-5 w-5" />
                 </div>
                 <div>
@@ -120,11 +128,11 @@ body { Transaction[] }`}</CodeBlock>
             <p className="text-gray-400 text-sm mb-3">A block cannot finalize unless both conditions hold:</p>
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">1.</span>
+                <span className="text-indigo-300 font-bold">1.</span>
                 <div><strong className="text-white">Inference integrity:</strong> <span className="text-gray-400">Every inference must include a valid Tensor Commit proof</span></div>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">2.</span>
+                <span className="text-indigo-300 font-bold">2.</span>
                 <div><strong className="text-white">Agents availability:</strong> <span className="text-gray-400">Every stored condition must be provably retrievable</span></div>
               </div>
             </div>
@@ -223,7 +231,7 @@ body { Transaction[] }`}</CodeBlock>
             ].map((item) => (
               <div key={item.step} className="docs-card">
                 <div className="flex items-start gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-white text-xs font-bold shrink-0">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500 text-white text-xs font-bold shrink-0">
                     {item.step}
                   </span>
                   <div>
@@ -240,18 +248,18 @@ body { Transaction[] }`}</CodeBlock>
         <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">AIVM Details →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">AIVM Details →</h3>
                 <p className="text-sm text-gray-400 mt-1">Deep dive into execution layer</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/tensor-commits" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <GitBranch className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <GitBranch className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Tensor Commits →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Tensor Commits →</h3>
                 <p className="text-sm text-gray-400 mt-1">Learn about proof mechanisms</p>
               </div>
             </div>

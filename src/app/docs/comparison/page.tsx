@@ -1,7 +1,15 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowRight, GitCompare, AlertTriangle, CheckCircle, X, Lightbulb, TrendingUp } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Theseus vs Ethereum - Theseus Docs",
+  description:
+    "Compare Ethereum smart contracts and Theseus autonomous agents across execution model, autonomy, and verifiable AI capabilities.",
+  keywords: ["Theseus vs Ethereum", "autonomous agents", "smart contracts", "AIVM", "verifiable AI"],
+};
 
 export default function ComparisonPage() {
   return (
@@ -23,7 +31,7 @@ export default function ComparisonPage() {
       <div className="prose prose-invert max-w-none">
         {/* Core Difference */}
         <section className="mb-12">
-          <h2 id="critical-difference" className="text-2xl font-medium mb-6">The Critical Difference: True Autonomy</h2>
+          <h2 id="critical-difference" className="text-2xl font-medium mb-6">The Critical Difference: Autonomous Execution</h2>
           
           <Callout type="warning" title="Common Misconception">
             Many believe Ethereum contracts are autonomous because they execute complex logic. <strong>This is incorrect.</strong> Smart contracts are purely reactive—they cannot initiate any action without an EOA sending a transaction first.
@@ -59,8 +67,8 @@ export default function ComparisonPage() {
           </div>
 
           {/* What Theseus Can Do */}
-          <div className="docs-card border-blue-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-4 flex items-center gap-2 text-blue-400">
+          <div className="docs-card border-indigo-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-4 flex items-center gap-2 text-indigo-300">
               <CheckCircle className="h-5 w-5" />
               What Theseus Agents CAN Do
             </h3>
@@ -71,8 +79,8 @@ export default function ComparisonPage() {
                 { title: "Autonomously manage assets", desc: "Decide when and how to use $THE without external triggers" },
                 { title: "Make autonomous decisions", desc: "Evaluate triggers, run ML inference, and act on their own logic" },
               ].map((item) => (
-                <div key={item.title} className="flex items-start gap-3 p-3 bg-blue-950/20 border border-blue-900/30 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-blue-400 mt-0.5 shrink-0" />
+                <div key={item.title} className="flex items-start gap-3 p-3 bg-indigo-950/20 border border-indigo-900/30 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-indigo-300 mt-0.5 shrink-0" />
                   <div>
                     <span className="font-medium text-white text-sm">{item.title}</span>
                     <p className="text-gray-400 text-xs mt-0.5">{item.desc}</p>
@@ -90,8 +98,8 @@ export default function ComparisonPage() {
                 Like a <strong className="text-white">vending machine</strong>: Contains logic but someone must press the buttons. Cannot check inventory or restock itself.
               </p>
             </div>
-            <div className="docs-card border-blue-900/50">
-              <h4 className="font-medium mb-2 text-blue-400">Theseus Agent</h4>
+            <div className="docs-card border-indigo-900/50">
+              <h4 className="font-medium mb-2 text-indigo-300">Theseus Agent</h4>
               <p className="text-gray-400 text-sm">
                 Like an <strong className="text-white">autonomous shopkeeper</strong>: Wakes up, checks inventory, makes restocking decisions, interacts with suppliers independently.
               </p>
@@ -109,7 +117,7 @@ export default function ComparisonPage() {
                 <tr>
                   <th>Aspect</th>
                   <th className="text-gray-400">Ethereum Contracts</th>
-                  <th className="text-blue-400">Theseus Agents</th>
+                  <th className="text-indigo-300">Theseus Agents</th>
                 </tr>
               </thead>
               <tbody>
@@ -184,20 +192,20 @@ export default function ComparisonPage() {
                 <li className="flex items-start gap-2"><span className="text-gray-600">5.</span> Requires EOAs to act</li>
               </ol>
             </div>
-            <div className="docs-card border-blue-900/50">
-              <h4 className="font-medium mb-3 text-blue-400">Theseus Agent Deployment</h4>
+            <div className="docs-card border-indigo-900/50">
+              <h4 className="font-medium mb-3 text-indigo-300">Theseus Agent Deployment</h4>
               <ol className="space-y-2 text-sm text-gray-400">
-                <li className="flex items-start gap-2"><span className="text-blue-600">1.</span> Write agent code (Python, Rust, SHIP)</li>
-                <li className="flex items-start gap-2"><span className="text-blue-600">2.</span> Add models, autonomy, triggers</li>
-                <li className="flex items-start gap-2"><span className="text-blue-600">3.</span> Deploy with initial $THE</li>
-                <li className="flex items-start gap-2"><span className="text-blue-600">4.</span> Agent starts operating</li>
-                <li className="flex items-start gap-2"><span className="text-blue-600">5.</span> Acts without key control</li>
+                <li className="flex items-start gap-2"><span className="text-indigo-400">1.</span> Write agent code (Python, Rust, SHIP)</li>
+                <li className="flex items-start gap-2"><span className="text-indigo-400">2.</span> Add models, autonomy, triggers</li>
+                <li className="flex items-start gap-2"><span className="text-indigo-400">3.</span> Deploy with initial $THE</li>
+                <li className="flex items-start gap-2"><span className="text-indigo-400">4.</span> Agent starts operating</li>
+                <li className="flex items-start gap-2"><span className="text-indigo-400">5.</span> Acts without key control</li>
               </ol>
             </div>
           </div>
 
           <Callout type="info" title="Key Insight">
-            Ethereum contracts are reactive programs with conditional logic that must be externally triggered. Theseus agents are autonomous digital entities that can think, plan, and act without human intervention.
+            Ethereum contracts are reactive programs that require external triggers. Theseus agents can execute from on-chain state transitions and initiate actions independently.
           </Callout>
         </section>
 
@@ -211,7 +219,7 @@ export default function ComparisonPage() {
           </h2>
           
           <p className="text-gray-400 mb-6">
-            True autonomy and verifiable inference enable applications impossible on existing platforms.
+            Autonomous execution and verifiable inference enable applications that are not practical on existing platforms.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -237,12 +245,12 @@ export default function ComparisonPage() {
           </div>
 
           {/* Evolution Timeline */}
-          <div className="docs-card border-blue-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-4 text-blue-400">The Evolution</h3>
+          <div className="docs-card border-indigo-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-4 text-indigo-300">The Evolution</h3>
             <div className="space-y-4">
               {[
                 { symbol: "₿", color: "text-yellow-400", name: "Bitcoin (2009)", desc: "Public ownership. Removed treasurers from \"who owns what.\"" },
-                { symbol: "Ξ", color: "text-blue-400", name: "Ethereum (2014)", desc: "Public programs. Removed judges from \"what happens next.\"" },
+                { symbol: "Ξ", color: "text-indigo-300", name: "Ethereum (2014)", desc: "Public programs. Removed judges from \"what happens next.\"" },
                 { symbol: "Θ", color: "text-green-400", name: "Theseus (2025)", desc: "Public decisions. Removes hosts from \"what will an intelligent entity decide?\"" },
               ].map((item) => (
                 <div key={item.name} className="flex items-start gap-3">
@@ -260,10 +268,10 @@ export default function ComparisonPage() {
           <div className="docs-card border-green-900/50">
             <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-green-400">
               <TrendingUp className="h-5 w-5" />
-              Multi-Trillion Dollar Market
+              Market Opportunity
             </h3>
             <p className="text-gray-300 text-sm mb-4">
-              Ethereum&apos;s ~$500B market cap is tied to app value. Making apps dramatically more capable should substantially increase value captured by the base chain. Unifying Ethereum and agents suggests one of the largest TAMs in crypto.
+              Ethereum&apos;s market cap is tied to the value of applications on top of it. Increasing application capability can increase value captured by the base chain. Combining programmable settlement with autonomous agents expands the addressable application surface.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link 
@@ -290,13 +298,13 @@ export default function ComparisonPage() {
           <Link href="/docs/introduction" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">← Introduction</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← Introduction</h3>
             </div>
           </Link>
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full text-right">
               <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">AIVM Deep Dive →</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">AIVM Deep Dive →</h3>
             </div>
           </Link>
         </div>

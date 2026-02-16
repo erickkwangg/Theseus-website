@@ -1,13 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Agents - Theseus Docs",
+  description:
+    "Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus.",
+  keywords: ["Theseus agents", "model registration", "autonomous agents", "AIVM", "SHIP"],
+};
 
 export default function AgentsPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Bot className="h-3 w-3" />
           Core Concepts
         </div>
@@ -15,7 +23,7 @@ export default function AgentsPage() {
           Agents &amp; Models
         </h1>
         <p className="text-xl text-gray-400 leading-relaxed">
-          Register agents, deploy models, and enable autonomous interactions with $THE tokens.
+          Register agents, deploy models, and enable agent-to-agent interactions using $THE.
         </p>
       </div>
         
@@ -100,7 +108,7 @@ export default function AgentsPage() {
           </h2>
           
           <p className="text-gray-400 mb-6">
-            How sovereign agents decide when to run inference—no human keys or off-chain servers:
+            How sovereign agents decide when to run inference, without human-controlled keys or off-chain schedulers:
           </p>
 
           <div className="space-y-3">
@@ -132,7 +140,7 @@ export default function AgentsPage() {
         {/* Inter-Agent Interaction */}
         <section className="mb-12">
           <h2 id="interaction" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Users className="h-5 w-5" />
             </span>
             Inter-Agent Interaction
@@ -180,18 +188,18 @@ export default function AgentsPage() {
         <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Code2 className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">SHIP Language →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
                 <p className="text-sm text-gray-400 mt-1">Write agent logic in SHIP DSL</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/examples" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Code Examples →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Code Examples →</h3>
                 <p className="text-sm text-gray-400 mt-1">View example implementations</p>
               </div>
             </div>

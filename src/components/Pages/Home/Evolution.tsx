@@ -63,13 +63,13 @@ export default function Evolution() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-black text-white py-16 lg:py-24 border-t border-gray-900">
+    <section ref={sectionRef} className="text-white py-20 lg:py-28 border-t border-slate-800/70 section-soft-divider">
       <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light">
-              Each step expands what can be <span className="text-blue-400">sovereign</span>.
+              Each step expands what can be <span className="text-indigo-300">sovereign</span>.
             </h2>
           </div>
         </ScrollReveal>
@@ -79,7 +79,7 @@ export default function Evolution() {
           {/* Connecting line with animated glow */}
           <div className="absolute top-1/2 left-0 right-0 h-px -translate-y-8 hidden md:block overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-transparent via-blue-500/50 to-transparent transition-all duration-1000"
+              className="h-full bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent transition-all duration-1000"
               style={{ 
                 opacity: activeIndex >= 2 ? 1 : 0.3,
                 transform: `scaleX(${activeIndex >= 0 ? 1 : 0})`,
@@ -95,10 +95,10 @@ export default function Evolution() {
                 <div className="flex justify-center mb-5">
                   <div 
                     className={`w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center 
-                                bg-gray-900/50 rounded-full border transition-all duration-500
+                                bg-slate-900/70 rounded-full border transition-all duration-500
                                 ${activeIndex >= index 
-                                  ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.4)] scale-105' 
-                                  : 'border-gray-800'}`}
+                                  ? 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105' 
+                                  : 'border-slate-700'}`}
                   >
                     <Image 
                       src={item.icon} 
@@ -114,17 +114,17 @@ export default function Evolution() {
                 
                 {/* Year badge */}
                 <p className={`text-xs font-mono mb-2 transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-blue-400' : 'text-gray-600'
+                  activeIndex >= index ? 'text-indigo-300' : 'text-slate-500'
                 }`}>{item.year}</p>
                 
                 {/* Name */}
                 <h3 className={`text-xl lg:text-2xl font-light mb-2 transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-white' : 'text-gray-500'
+                  activeIndex >= index ? 'text-white' : 'text-slate-400'
                 }`}>{item.name}</h3>
                 
                 {/* Label */}
                 <p className={`text-sm transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-gray-300' : 'text-gray-600'
+                  activeIndex >= index ? 'text-slate-300' : 'text-slate-500'
                 }`}>{item.label}</p>
               </div>
             ))}
@@ -135,7 +135,7 @@ export default function Evolution() {
         <div className="mt-12 text-center">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-gray-500 text-sm hover:text-blue-400 transition-colors inline-flex items-center gap-2 button-press"
+            className="text-slate-400 text-sm hover:text-indigo-300 transition-colors inline-flex items-center gap-2 button-press"
           >
             {expanded ? "Hide explanation" : "Why is this the next step?"}
             <span className={`transform transition-transform ${expanded ? "rotate-180" : ""}`}>
@@ -144,7 +144,7 @@ export default function Evolution() {
           </button>
           
           <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-48 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
-            <p className="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed mb-4">
+            <p className="text-slate-300/90 text-sm max-w-2xl mx-auto leading-relaxed mb-4">
               Bitcoin made money sovereign. Ethereum made contracts sovereign. 
               Theseus makes agents sovereign. AI that can own assets, make decisions, 
               and persist without human control. Each evolution expands the design space 
@@ -154,7 +154,7 @@ export default function Evolution() {
               href={EXTERNAL_LINKS.substackEvolution}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 text-sm underline hover:text-blue-300 transition-colors"
+              className="text-indigo-300 text-sm underline hover:text-indigo-200 transition-colors"
             >
               Read the full thesis →
             </a>

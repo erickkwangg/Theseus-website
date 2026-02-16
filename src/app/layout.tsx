@@ -12,7 +12,8 @@ const ppTelegraf = localFont({
 
 export const metadata: Metadata = {
   title: "THESEUS - The Cloud for AI Personhood",
-  description: "The first blockchain platform purpose-built for AI personhood. Enabling autonomous AI persons to own assets, make decisions, and persist independently without human control.",
+  description:
+    "Runtime infrastructure for autonomous AI agents to own assets, make decisions, and persist independently. Implemented as an L1 chain with verifiable AI execution.",
 };
 
 export default function RootLayout({

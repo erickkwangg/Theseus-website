@@ -1,14 +1,22 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Tensor Commits - Theseus Docs",
+  description:
+    "Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus.",
+  keywords: ["Tensor Commits", "proofs", "verifiable AI", "KZG", "Terkle tree"],
+};
 
 export default function TensorCommitsPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <GitBranch className="h-3 w-3" />
           Core Concepts
         </div>
@@ -29,7 +37,7 @@ export default function TensorCommitsPage() {
             { stat: "~2ms", label: "Check time per proof" },
           ].map((item) => (
             <div key={item.label} className="docs-card text-center">
-              <div className="text-2xl font-light text-blue-400">{item.stat}</div>
+              <div className="text-2xl font-light text-indigo-300">{item.stat}</div>
               <div className="text-gray-500 text-xs mt-1">{item.label}</div>
             </div>
           ))}
@@ -92,19 +100,19 @@ export default function TensorCommitsPage() {
             </h3>
             <div className="grid sm:grid-cols-2 gap-2 text-sm text-gray-400">
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <div className="h-1.5 w-1.5 rounded-full bg-indigo-300" />
                 O(log n) verification complexity
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <div className="h-1.5 w-1.5 rounded-full bg-indigo-300" />
                 Proof size &lt;1MB for frontier models
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <div className="h-1.5 w-1.5 rounded-full bg-indigo-300" />
                 1000+ simultaneous verifiers
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <div className="h-1.5 w-1.5 rounded-full bg-indigo-300" />
                 Sublinear scaling with model size
               </div>
             </div>
@@ -149,7 +157,7 @@ export default function TensorCommitsPage() {
         {/* Verification Process */}
         <section className="mb-12">
           <h2 id="verification" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Shield className="h-5 w-5" />
             </span>
             Verification Process
@@ -163,7 +171,7 @@ export default function TensorCommitsPage() {
             ].map((item) => (
               <div key={item.step} className="docs-card">
                 <div className="flex items-start gap-4">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-bold shrink-0">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500 text-white text-sm font-bold shrink-0">
                     {item.step}
                   </span>
                   <div>
@@ -249,13 +257,13 @@ export default function TensorCommitsPage() {
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">← AIVM Architecture</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← AIVM Architecture</h3>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full text-right">
               <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">Build Agents →</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Build Agents →</h3>
             </div>
           </Link>
         </div>

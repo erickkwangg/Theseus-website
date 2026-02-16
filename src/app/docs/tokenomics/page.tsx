@@ -1,13 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Coins, Zap, Shield, PiggyBank, Bot, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Tokenomics - Theseus Docs",
+  description:
+    "Understand $THE utility, staking, fee flows, and AI-native economic primitives in the Theseus network.",
+  keywords: ["Theseus tokenomics", "$THE", "staking", "fees", "AI economics"],
+};
 
 export default function TokenomicsPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Coins className="h-3 w-3" />
           Deep Dive
         </div>
@@ -51,7 +59,7 @@ export default function TokenomicsPage() {
         {/* Gas Mechanics */}
         <section className="mb-12">
           <h2 id="gas" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Zap className="h-5 w-5" />
             </span>
             Gas Mechanics
@@ -158,7 +166,7 @@ export default function TokenomicsPage() {
           <h2 id="ai-ownership" className="text-2xl font-medium mb-4">AI Asset Ownership</h2>
           
           <p className="text-gray-400 mb-6">
-            A key innovation: agents can hold $THE balances autonomously. Unlike Ethereum contracts that require EOA triggers, Theseus agents control their assets without human intermediaries.
+            A key innovation: agents can hold $THE balances autonomously. Unlike Ethereum contracts that require EOA triggers, Theseus agents can control assets without human-controlled accounts.
           </p>
 
           <Callout type="tip" title="What This Enables">
@@ -176,18 +184,18 @@ export default function TokenomicsPage() {
         <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">← Agents &amp; Models</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← Agents &amp; Models</h3>
                 <p className="text-sm text-gray-400 mt-1">How agents and models interact</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/architecture" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Layers className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Layers className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Architecture →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Architecture →</h3>
                 <p className="text-sm text-gray-400 mt-1">Full system design</p>
               </div>
             </div>

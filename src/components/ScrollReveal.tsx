@@ -49,3 +49,6 @@ export default function ScrollReveal({ children, className = "", delay = 0 }: Sc
   );
 }
 
+
+
+

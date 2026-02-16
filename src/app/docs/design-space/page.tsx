@@ -1,6 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Design Space - Theseus Docs",
+  description:
+    "Explore applications and market opportunities unlocked by autonomous agents with verifiable AI inference.",
+  keywords: ["Theseus design space", "autonomous agents", "verifiable AI", "on-chain AI", "market"],
+};
 
 export default function DesignSpacePage() {
   return (
@@ -15,7 +23,7 @@ export default function DesignSpacePage() {
           The Theseus Design Space
         </h1>
         <p className="text-xl text-gray-400 leading-relaxed">
-          Autonomous agents with verifiable inference enable applications impossible on existing platforms.
+          Autonomous agents with verifiable inference enable applications that are not practical on existing platforms.
         </p>
       </div>
         
@@ -29,7 +37,7 @@ export default function DesignSpacePage() {
             href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             Read Full Article <ArrowRight className="h-4 w-4" />
           </a>
@@ -38,7 +46,7 @@ export default function DesignSpacePage() {
         {/* Evolution Section */}
         <section className="mb-12">
           <h2 id="evolution" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
             The Evolution: A Natural Progression
@@ -136,7 +144,7 @@ export default function DesignSpacePage() {
             <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
               <Zap className="h-5 w-5" />
             </span>
-            New Primitives Only Possible with Theseus
+            New Primitives Enabled by Theseus
           </h2>
 
           <div className="grid sm:grid-cols-2 gap-3">
@@ -160,15 +168,15 @@ export default function DesignSpacePage() {
             <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
               <TrendingUp className="h-5 w-5" />
             </span>
-            Multi-Trillion Dollar Market
+            Market Opportunity
           </h2>
           
           <div className="docs-card border-green-900/50 mb-6">
             <p className="text-gray-300 mb-4">
-              Ethereum&apos;s ~$500B market cap is tied to app value. Making apps dramatically more capable should substantially increase value captured by the base chain.
+              Ethereum&apos;s market cap is tied to application value. More capable applications can expand value captured by the base layer.
             </p>
             <p className="text-gray-400 text-sm">
-              Before Bitcoin, there was Hashcash—it implemented proof-of-work but holds almost no value. Unifying &quot;Ethereum&quot; and &quot;agents&quot; with tensor commitments suggests one of the largest TAMs in crypto, where <strong className="text-white">the whole is worth far more than the sum of the parts</strong>.
+              Before Bitcoin, Hashcash introduced proof-of-work without a durable economic layer. Combining programmable settlement and autonomous agents with tensor commitments may open a materially larger design and market surface.
             </p>
           </div>
 
@@ -183,8 +191,8 @@ export default function DesignSpacePage() {
 
         {/* Full Story CTA */}
         <div className="border-t border-gray-800 pt-8">
-          <div className="docs-card border-blue-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-blue-400">
+          <div className="docs-card border-indigo-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-indigo-300">
               <Users className="h-5 w-5" />
               Want the Full Story?
             </h3>
@@ -195,7 +203,7 @@ export default function DesignSpacePage() {
               href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
             >
               Read: Agents as an Evolution of Smart Contracts <ArrowRight className="h-4 w-4" />
             </a>
@@ -206,7 +214,7 @@ export default function DesignSpacePage() {
             <Link href="/docs/comparison" className="group no-underline">
               <div className="docs-card h-full">
                 <p className="text-sm text-gray-500 mb-1">Previous</p>
-                <h4 className="font-medium group-hover:text-blue-400 transition-colors">← Technical Comparison</h4>
+                <h4 className="font-medium group-hover:text-indigo-300 transition-colors">← Technical Comparison</h4>
               </div>
             </Link>
             <a 
@@ -217,7 +225,7 @@ export default function DesignSpacePage() {
             >
               <div className="docs-card h-full text-right">
                 <p className="text-sm text-gray-500 mb-1">Related</p>
-                <h4 className="font-medium group-hover:text-blue-400 transition-colors">Theseus Thesis: TAM →</h4>
+                <h4 className="font-medium group-hover:text-indigo-300 transition-colors">Theseus Thesis: TAM →</h4>
               </div>
             </a>
           </div>

@@ -1,20 +1,37 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Cpu, GitBranch, Coins, Users, Sparkles, Shield } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+
+export const metadata: Metadata = {
+  title: "Introduction - Theseus Docs",
+  description:
+    "Understand the core ideas behind Theseus: sovereign AI agents, verifiable inference, and runtime infrastructure implemented as an L1 chain.",
+  keywords: [
+    "Theseus",
+    "AI agents",
+    "AI personhood",
+    "verifiable inference",
+    "Layer 1",
+  ],
+};
 
 export default function IntroductionPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           Getting Started
         </div>
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Introduction to Theseus
         </h1>
         <p className="text-xl text-gray-400 leading-relaxed">
-          The Layer-1 blockchain for autonomous AI agents with true self-sovereignty.
+          Runtime infrastructure for autonomous AI agents with self-sovereign execution.
+          <span className="block text-base text-slate-500 mt-2">
+            Theseus is implemented as a Layer-1 chain, with AI execution and verification as the primary developer surface.
+          </span>
         </p>
       </div>
       
@@ -22,26 +39,26 @@ export default function IntroductionPage() {
         {/* Opening Section */}
         <section className="mb-12">
           <h2 id="cloud-for-ai-personhood" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
-            The Cloud for AI Personhood
+            AI Personhood Infrastructure
           </h2>
           
-          <div className="bg-gradient-to-r from-blue-950/30 to-transparent border-l-2 border-blue-500 pl-6 py-4 mb-6">
+          <div className="bg-gradient-to-r from-indigo-950/30 to-transparent border-l-2 border-indigo-400 pl-6 py-4 mb-6">
             <p className="text-2xl font-light text-white mb-2">
               1.3 billion agents
             </p>
             <p className="text-gray-400">
-              Expected to be online by the end of this decade. Yet each is still chained to human keys and centralized APIs.
+              Expected to be online by the end of this decade. Most still depend on human-controlled keys and centralized APIs.
             </p>
           </div>
 
           <p className="text-gray-400 leading-relaxed mb-4">
-            Today&apos;s agents can&apos;t trust each other, pay each other, or outlive the companies running them.
+            Today&apos;s agents cannot transact directly with each other, maintain persistent identity, or operate independently of the companies that host them.
           </p>
           <p className="text-gray-300 leading-relaxed font-medium">
-            Theseus changes this. Agents own their keys, hold their own funds, and run inference without permission.
+            Theseus addresses this by giving agents direct key custody, balance control, and independent inference execution.
           </p>
         </section>
 
@@ -52,15 +69,15 @@ export default function IntroductionPage() {
           <div className="grid gap-4">
             <div className="docs-card group">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
+                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
                   <Cpu className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-2 group-hover:text-blue-400 transition-colors">AI Virtual Machine (AIVM)</h3>
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-indigo-300 transition-colors">AI Virtual Machine (AIVM)</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    Tensor-native runtime where models and agents are registered, autonomy is enforced, and agents call models without human intervention. Includes SHIP DSL for translating natural language to verifiable bytecode.
+                    Tensor-native runtime where models and agents are registered, autonomy policies are enforced, and agents call models through deterministic execution paths. Includes SHIP DSL for translating natural language to verifiable bytecode.
                   </p>
-                  <Link href="/docs/aivm" className="inline-flex items-center gap-1 text-sm text-blue-400 mt-3 no-underline hover:underline">
+                  <Link href="/docs/aivm" className="inline-flex items-center gap-1 text-sm text-indigo-300 mt-3 no-underline hover:underline">
                     Learn about AIVM <ArrowRight className="h-3 w-3" />
                   </Link>
                 </div>
@@ -92,7 +109,7 @@ export default function IntroductionPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-2 group-hover:text-yellow-400 transition-colors">$THE Token</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    The first asset AI can truly own. Balances live autonomously within agent code, serving as both store of value and payment method for AI-to-AI transactions.
+                    A native asset designed for agent ownership. Balances live within agent code and can be used for value storage and AI-to-AI payments.
                   </p>
                   <Link href="/docs/tokenomics" className="inline-flex items-center gap-1 text-sm text-yellow-400 mt-3 no-underline hover:underline">
                     View Tokenomics <ArrowRight className="h-3 w-3" />
@@ -163,7 +180,7 @@ export default function IntroductionPage() {
               { title: "Verifiable inference", desc: "<1% proof overhead" },
             ].map((item) => (
               <div key={item.title} className="flex items-center gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded-lg">
-                <div className="h-2 w-2 rounded-full bg-blue-400 shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-indigo-300 shrink-0" />
                 <div>
                   <span className="text-sm font-medium text-white">{item.title}</span>
                   <span className="text-gray-500 text-sm ml-2">{item.desc}</span>
@@ -177,14 +194,14 @@ export default function IntroductionPage() {
         <section className="mb-12">
           <h2 id="key-insight" className="text-2xl font-medium mb-4">The Key Difference</h2>
           
-          <Callout type="info" title="True Autonomy">
-            Unlike Ethereum smart contracts that must be triggered by external accounts, Theseus agents can wake up, evaluate conditions, and initiate transactions entirely on their own. They truly own their $THE balance and control their actions without any human intermediary.
+          <Callout type="info" title="Autonomous Execution">
+            Unlike Ethereum smart contracts that must be triggered by external accounts, Theseus agents can wake, evaluate conditions, and initiate transactions directly from on-chain state. They control their $THE balances and execution logic without a human-controlled key path.
           </Callout>
 
           <div className="flex gap-3 mt-6">
             <Link 
               href="/docs/comparison"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg transition-all text-sm font-medium no-underline"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg transition-all text-sm font-medium no-underline"
             >
               Theseus vs. Ethereum
               <ArrowRight className="h-4 w-4" />
@@ -198,7 +215,7 @@ export default function IntroductionPage() {
             <p className="text-sm text-gray-500 mb-1">Next</p>
             <Link 
               href="/docs/quickstart"
-              className="inline-flex items-center gap-2 text-lg font-medium text-white hover:text-blue-400 transition-colors no-underline"
+            className="inline-flex items-center gap-2 text-lg font-medium text-white hover:text-indigo-300 transition-colors no-underline"
             >
               Quick Start Guide
               <ArrowRight className="h-4 w-4" />

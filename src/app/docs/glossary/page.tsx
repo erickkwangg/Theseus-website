@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { BookOpen, ArrowRight, Search } from "lucide-react";
 
 const glossaryTerms = [
@@ -9,7 +10,7 @@ const glossaryTerms = [
   },
   {
     term: "Agent",
-    definition: "An autonomous program registered on Theseus that can hold $THE, call models, interact with other agents, and execute transactions without human intervention.",
+    definition: "An autonomous program registered on Theseus that can hold $THE, call models, interact with other agents, and execute transactions independently.",
     link: "/docs/agents"
   },
   {
@@ -56,7 +57,7 @@ const glossaryTerms = [
   },
   {
     term: "$THE",
-    definition: "The native token of Theseus. Used for gas fees, model inference payments, staking, and as the first asset AI can truly own.",
+    definition: "The native token of Theseus. Used for gas fees, model inference payments, staking, and agent-managed balances.",
     link: "/docs/tokenomics"
   },
   {
@@ -85,12 +86,19 @@ const glossaryTerms = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Glossary - Theseus Docs",
+  description:
+    "Reference key terms used across Theseus documentation, including AIVM, Tensor Commits, SHIP, and agent lifecycle concepts.",
+  keywords: ["Theseus glossary", "AIVM terms", "Tensor Commits", "SHIP", "agent terminology"],
+};
+
 export default function GlossaryPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <BookOpen className="h-3 w-3" />
           Reference
         </div>
@@ -123,7 +131,7 @@ export default function GlossaryPage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h2 className="text-lg font-medium mb-2 text-white group-hover:text-blue-400 transition-colors">
+                    <h2 className="text-lg font-medium mb-2 text-white group-hover:text-indigo-300 transition-colors">
                       {item.term}
                     </h2>
                     <p className="text-gray-400 text-sm leading-relaxed">
@@ -133,7 +141,7 @@ export default function GlossaryPage() {
                   {item.link && (
                     <Link 
                       href={item.link}
-                      className="text-sm text-blue-400 hover:text-blue-300 transition-colors shrink-0 no-underline flex items-center gap-1"
+                      className="text-sm text-indigo-300 hover:text-indigo-200 transition-colors shrink-0 no-underline flex items-center gap-1"
                     >
                       Learn more <ArrowRight className="h-3 w-3" />
                     </Link>
@@ -147,7 +155,7 @@ export default function GlossaryPage() {
         <div className="border-t border-gray-800 pt-8 mt-12">
           <Link 
             href="/docs"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg transition-all font-medium no-underline"
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg transition-all font-medium no-underline"
           >
             ← Back to Docs Home
           </Link>

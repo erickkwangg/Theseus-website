@@ -1,14 +1,22 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+
+export const metadata: Metadata = {
+  title: "SHIP Language - Theseus Docs",
+  description:
+    "Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution.",
+  keywords: ["SHIP", "Theseus DSL", "AIVM bytecode", "verifiable agent programming"],
+};
 
 export default function SHIPPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Code2 className="h-3 w-3" />
           Development
         </div>
@@ -26,7 +34,7 @@ export default function SHIPPage() {
           <h2 id="why-ship" className="text-2xl font-medium mb-4">Why SHIP Is Necessary</h2>
           
           <p className="text-gray-400 mb-6">
-            SHIP bridges the gap between model inference and actionable outcomes—asset transfers, agent interactions, smart contract invocations. It&apos;s essential for expressing, verifying, and governing the intent of sovereign AI agents.
+            SHIP translates model inference outputs into executable operations: asset transfers, agent interactions, and contract calls. It provides a constrained, verifiable layer between model output and runtime execution.
           </p>
 
           <Callout type="warning" title="The Problem with Raw LLM Outputs">
@@ -51,10 +59,48 @@ export default function SHIPPage() {
           </div>
         </section>
 
+        {/* Ecosystem Examples */}
+        <section className="mb-12">
+          <h2 id="ecosystem-examples" className="text-2xl font-medium mb-4">Ecosystem Examples</h2>
+          <p className="text-gray-400 mb-6">
+            Public repositories in the Theseus ecosystem show how SHIP is used in deployed applications.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">proof-of-lobster</h3>
+              <p className="text-gray-400 text-sm mb-3">
+                Demonstrates persistent agent identity, scheduled execution, and social interaction flows.
+              </p>
+              <a
+                href="https://github.com/Theseuschain/proof-of-lobster"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-300 hover:underline text-sm no-underline"
+              >
+                View repository →
+              </a>
+            </div>
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">the-prediction-market</h3>
+              <p className="text-gray-400 text-sm mb-3">
+                Demonstrates agent-to-contract calls, contract-to-agent callbacks, and resolver workflows.
+              </p>
+              <a
+                href="https://github.com/Theseuschain/the-prediction-market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-300 hover:underline text-sm no-underline"
+              >
+                View repository →
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Design Principles */}
         <section className="mb-12">
           <h2 id="principles" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <CheckCircle className="h-5 w-5" />
             </span>
             Design Principles
@@ -138,7 +184,7 @@ commit(payment);`}</CodeBlock>
         {/* Integration with AIVM */}
         <section className="mb-12">
           <h2 id="integration" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Cpu className="h-5 w-5" />
             </span>
             Integration with AIVM
@@ -146,8 +192,8 @@ commit(payment);`}</CodeBlock>
           
           <div className="docs-card">
             <div className="space-y-3 text-sm text-gray-400">
-              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-blue-400">AGENT_TICK()</code> or <code className="text-blue-400">MODEL_INFER()</code>.</p>
-              <p>Each construct maps to safe primitives: <code className="text-blue-400">TLOAD</code>, <code className="text-blue-400">TCUSTOM</code>, <code className="text-blue-400">STATE_EXPORT</code>, <code className="text-blue-400">TRANSFER_TOKEN</code>.</p>
+              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-indigo-300">AGENT_TICK()</code> or <code className="text-indigo-300">MODEL_INFER()</code>.</p>
+              <p>Each construct maps to safe primitives: <code className="text-indigo-300">TLOAD</code>, <code className="text-indigo-300">TCUSTOM</code>, <code className="text-indigo-300">STATE_EXPORT</code>, <code className="text-indigo-300">TRANSFER_TOKEN</code>.</p>
               <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
             </div>
           </div>
@@ -157,18 +203,18 @@ commit(payment);`}</CodeBlock>
         <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">← AIVM Details</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← AIVM Details</h3>
                 <p className="text-sm text-gray-400 mt-1">Learn about the execution environment</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 mt-0.5" />
+              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-blue-400 transition-colors">Build Agents →</h3>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Build Agents →</h3>
                 <p className="text-sm text-gray-400 mt-1">Create agents using SHIP</p>
               </div>
             </div>

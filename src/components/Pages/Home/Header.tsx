@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Github } from "lucide-react";
+import { Menu } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { useState, useEffect } from "react";
 
@@ -28,94 +28,76 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-black/95 backdrop-blur-md border-b border-gray-800" 
-        : "bg-black/50 backdrop-blur-sm"
+        ? "bg-slate-950/85 backdrop-blur-xl border-b border-slate-700/50" 
+        : "bg-slate-950/35 backdrop-blur-md"
     }`}>
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-4">
         <nav className="flex items-center justify-between">
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-white hover:text-blue-400 transition-colors text-sm">
-            HOME
+          <Link href="/" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+            Home
           </Link>
-          <Link href="#about" className="text-white hover:text-blue-400 transition-colors text-sm">
-            ABOUT
+          <Link href="#about" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+            About
           </Link>
-          <Link href="#market" className="text-white hover:text-blue-400 transition-colors text-sm">
-            MARKET
+          <Link href="#market" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+            Use Cases
           </Link>
-          <Link href="/docs" className="text-white hover:text-blue-400 transition-colors text-sm">
-            DOCS
+          <Link href="/docs" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+            Docs
           </Link>
           <a
             href={EXTERNAL_LINKS.substack}
-            className="text-white hover:text-blue-400 transition-colors text-sm"
+            className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium"
             target="_blank"
             rel="noopener noreferrer"
           >
-            BLOG
-          </a>
-          <a
-            href={EXTERNAL_LINKS.github}
-            className="text-white hover:text-blue-400 transition-colors text-sm flex items-center gap-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="h-4 w-4" />
-            GITHUB
+            Blog
           </a>
         </div>
         {/* Mobile Hamburger Menu */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white">
+              <Button variant="ghost" size="icon" className="text-slate-100 hover:bg-slate-800/70">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-black text-white">
+            <SheetContent side="left" className="bg-slate-950 text-white border-r border-slate-800">
               <SheetTitle hidden />
               <nav className="flex flex-col space-y-4 mt-8 px-4">
                 <Link
                   href="/"
-                  className="hover:text-gray-300 transition-colors text-lg"
+                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
                 >
-                  HOME
+                  Home
                 </Link>
                 <Link
                   href="#about"
-                  className="hover:text-gray-300 transition-colors text-lg"
+                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
                 >
-                  ABOUT
+                  About
                 </Link>
                 <Link
                   href="#market"
-                  className="hover:text-gray-300 transition-colors text-lg"
+                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
                 >
-                  MARKET
+                  Use Cases
                 </Link>
                 <Link
                   href="/docs"
-                  className="hover:text-gray-300 transition-colors text-lg"
+                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
                 >
-                  DOCS
+                  Docs
                 </Link>
                 <a
                   href={EXTERNAL_LINKS.substack}
-                  className="text-white hover:text-gray-300 transition-colors text-lg"
+                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  BLOG
-                </a>
-                <a
-                  href={EXTERNAL_LINKS.github}
-                  className="text-white hover:text-gray-300 transition-colors text-lg flex items-center gap-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="h-5 w-5" />
-                  GITHUB
+                  Blog
                 </a>
               </nav>
             </SheetContent>
@@ -128,7 +110,7 @@ export default function Header() {
             alt="Logo"
             height={100}
             width={100}
-            className="size-12 transition-transform duration-300 hover:scale-110"
+            className="size-12 transition-transform duration-300 hover:scale-110 drop-shadow-[0_0_16px_rgba(125,211,252,0.35)]"
           />
         </div>
         </nav>

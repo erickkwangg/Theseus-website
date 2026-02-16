@@ -3,8 +3,9 @@ import DocsLayoutWrapper from "@/components/docs/DocsLayout";
 
 export const metadata: Metadata = {
   title: "Developer Documentation - Theseus",
-  description: "Complete developer guide for building with Theseus - the first blockchain platform for AI personhood. Learn about AIVM, Tensor Commits Protocol, and building autonomous AI agents.",
-  keywords: ["Theseus", "AI personhood", "AIVM", "Tensor Commits", "blockchain", "developer docs", "AI agents", "stateful agents"],
+  description:
+    "Complete developer guide for building autonomous AI agents on Theseus. Learn AIVM, Tensor Commits, and the runtime architecture implemented as an L1 chain.",
+  keywords: ["Theseus", "AI runtime", "AIVM", "Tensor Commits", "developer docs", "AI agents", "Layer 1"],
 };
 
 export default function DocsLayout({

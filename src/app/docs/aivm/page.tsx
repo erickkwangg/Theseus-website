@@ -1,14 +1,22 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Cpu, Zap, Gauge, Clock, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+
+export const metadata: Metadata = {
+  title: "AIVM - Theseus Docs",
+  description:
+    "Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation.",
+  keywords: ["AIVM", "Theseus VM", "tensor opcodes", "verifiable inference", "AI runtime"],
+};
 
 export default function AIVMPage() {
   return (
     <div className="docs-content">
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Cpu className="h-3 w-3" />
           Core Concepts
         </div>
@@ -131,17 +139,17 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
         {/* Agent Scheduling */}
         <section className="mb-12">
           <h2 id="scheduling" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Clock className="h-5 w-5" />
             </span>
             Agent Scheduling
           </h2>
           
           <p className="text-gray-400 mb-6">
-            Theseus juggles thousands of simultaneous model calls without favoring whales or spiking gas fees.
+            Theseus schedules thousands of simultaneous model calls with fair queuing and stable gas behavior.
           </p>
 
-          <div className="bg-gradient-to-r from-blue-950/30 to-transparent border-l-2 border-blue-500 pl-6 py-4 mb-6">
+          <div className="bg-gradient-to-r from-indigo-950/30 to-transparent border-l-2 border-indigo-400 pl-6 py-4 mb-6">
             <p className="text-gray-300 text-sm">
               Priority score (stake + latency + fairness) → Epoch-bound queues prevent starvation → On-chain scheduler respects latency classes
             </p>
@@ -187,7 +195,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
                 <tr>
                   <th>Feature</th>
                   <th className="text-gray-400">EVM</th>
-                  <th className="text-blue-400">AIVM</th>
+                  <th className="text-indigo-300">AIVM</th>
                 </tr>
               </thead>
               <tbody>
@@ -205,14 +213,14 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
           <Link href="/docs/tensor-commits" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">Tensor Commits →</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Tensor Commits →</h3>
               <p className="text-sm text-gray-400 mt-1">Proof generation and verification</p>
             </div>
           </Link>
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Related</p>
-              <h3 className="font-medium group-hover:text-blue-400 transition-colors">SHIP Language →</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
               <p className="text-sm text-gray-400 mt-1">Write verifiable agent code</p>
             </div>
           </Link>

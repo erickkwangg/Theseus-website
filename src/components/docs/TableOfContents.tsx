@@ -44,10 +44,10 @@ export default function TableOfContents() {
   return (
     <nav className="hidden xl:block w-56 shrink-0">
       <div className="sticky top-24">
-        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+        <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
           On this page
         </h4>
-        <ul className="space-y-2 text-sm border-l border-gray-800">
+        <ul className="space-y-2 text-sm border-l border-slate-700/60">
           {headings.map((heading) => (
             <li key={heading.id}>
               <a
@@ -56,8 +56,8 @@ export default function TableOfContents() {
                   heading.level === 3 ? "pl-6" : "pl-3"
                 } ${
                   activeId === heading.id
-                    ? "text-blue-400 border-l-2 border-blue-400 -ml-[1px]"
-                    : "text-gray-400 hover:text-white"
+                    ? "text-indigo-300 border-l-2 border-indigo-300 -ml-[1px]"
+                    : "text-slate-300 hover:text-white"
                 }`}
               >
                 {heading.text}
@@ -69,4 +69,7 @@ export default function TableOfContents() {
     </nav>
   );
 }
+
+
+
 

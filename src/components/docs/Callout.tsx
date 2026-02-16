@@ -13,9 +13,9 @@ interface CalloutProps {
 const styles: Record<CalloutType, { icon: React.ReactNode; bg: string; border: string; iconColor: string }> = {
   info: {
     icon: <Info className="h-5 w-5" />,
-    bg: "bg-blue-950/30",
-    border: "border-blue-500/30",
-    iconColor: "text-blue-400",
+    bg: "bg-indigo-950/30",
+    border: "border-indigo-400/30",
+    iconColor: "text-indigo-300",
   },
   warning: {
     icon: <AlertTriangle className="h-5 w-5" />,
@@ -50,7 +50,7 @@ export default function Callout({ type = "info", title, children }: CalloutProps
           {title && (
             <p className={`font-medium ${style.iconColor}`}>{title}</p>
           )}
-          <div className="text-gray-300 text-sm leading-relaxed">
+          <div className="text-slate-300 text-sm leading-relaxed">
             {children}
           </div>
         </div>
@@ -58,4 +58,7 @@ export default function Callout({ type = "info", title, children }: CalloutProps
     </div>
   );
 }
+
+
+
 
