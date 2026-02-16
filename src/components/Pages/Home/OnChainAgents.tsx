@@ -11,34 +11,46 @@ export function OnChainAgentsSection() {
 
   const events = [
     {
-      title: "AgentCallQueued",
-      desc: "Weather Agent initiated with user request.",
+      title: "MarketCreatorAgentCallQueued",
+      desc: "Market Creator agent initiated with user prompt.",
       indent: 0,
     },
     {
       title: "InferenceQueued",
       titleVerified: "Verified",
-      desc: "GPT-OSS processes query and returns verified output.",
+      desc: "SHIP agent structures market options, deadline, and resolution rule.",
       indent: 1,
       dual: true,
+    },
+    {
+      title: "ContractCallQueued",
+      titleVerified: "Verified",
+      desc: "create_market(...) submitted to prediction_market contract.",
+      indent: 1,
+      dual: true,
+    },
+    {
+      title: "ResolverAgentCallQueued",
+      desc: "Contract requests Resolver Oracle agent after deadline.",
+      indent: 0,
     },
     {
       title: "ToolCallQueued",
       titleVerified: "Verified",
-      desc: 'get_weather("San Francisco") executed and result posted.',
+      desc: 'Resolver executes get_price("BTC") and returns signed resolution.',
       indent: 1,
       dual: true,
     },
     {
-      title: "InferenceQueued",
+      title: "CallbackSubmitted",
       titleVerified: "Verified",
-      desc: "Model integrates weather data into final response.",
+      desc: "Resolver callback posted to contract with final outcome.",
       indent: 1,
       dual: true,
     },
     {
       title: "AgentCallCompleted",
-      desc: "Execution finalized, ready for user delivery.",
+      desc: "Market finalized by contract and committed to chain state.",
       indent: 0,
     },
   ]
@@ -130,7 +142,7 @@ export function OnChainAgentsSection() {
                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
               </div>
               <div className="ml-4 px-3 py-0.5 bg-[#0A0A0C] rounded text-sm text-gray-400 font-mono">
-                weather_agent.ship
+                market_creator.ship
               </div>
             </div>
 
@@ -146,86 +158,87 @@ export function OnChainAgentsSection() {
 
                 {/* Code */}
                 <div className="flex-1">
-                  <div className="text-[#4BD3FF]">ship 0.1</div>
+                  <div className="text-[#4BD3FF]">{`#[agent(name = "MarketCreator", version = 1, ship = "1.0")]`}</div>
                   <div className="mb-2"></div>
                   <div>
-                    <span className="text-[#4BD3FF]">agent</span>{" "}
-                    <span className="text-[#B794F4]">&quot;Weather Agent&quot;</span>
+                    <span className="text-[#4BD3FF]">const</span>{" "}
+                    <span className="text-[#5AE3FF]">gpt_5_1</span>:{" "}
+                    <span className="text-[#4BD3FF]">bytes32</span> ={" "}
+                    <span className="text-[#FFD166]">0xe496...f117</span>;
                   </div>
                   <div>
-                    <span className="text-[#4BD3FF]">version</span> <span className="text-[#FFD166]">1</span>
-                  </div>
-                  <div>
-                    <span className="text-[#4BD3FF]">entry</span> <span className="text-[#5AE3FF]">model_main</span>
-                  </div>
-                  <div>
-                    <span className="text-[#4BD3FF]">system</span> <span className="text-[#B794F4]">&quot;&quot;&quot;</span>
-                  </div>
-                  <div className="pl-4 text-[#B794F4]">
-                    You are a concise weather assistant. Use tools when necessary.
-                  </div>
-                  <div className="mb-2">
-                    <span className="text-[#B794F4]">&quot;&quot;&quot;</span>
+                    <span className="text-[#4BD3FF]">const</span>{" "}
+                    <span className="text-[#5AE3FF]">CREATE_MARKET_SELECTOR</span>:{" "}
+                    <span className="text-[#4BD3FF]">bytes4</span> ={" "}
+                    <span className="text-[#FFD166]">0x01000001</span>;
                   </div>
                   <div className="mb-2"></div>
                   <div>
-                    <span className="text-[#4BD3FF]">tools</span> <span className="text-[#FFD166]">{"{"}</span>
+                    <span className="text-[#4BD3FF]">struct</span>{" "}
+                    <span className="text-[#5AE3FF]">MarketParams</span> {"{"}
                   </div>
-                  <div className="pl-4 text-[#B794F4]">{`"""Get the current weather for a city"""`}</div>
                   <div className="pl-4">
-                    <span className="text-[#5AE3FF]">get_weather</span>(<span className="text-gray-300">city:</span>{" "}
-                    <span className="text-[#4BD3FF]">string</span>, <span className="text-gray-300">unit?:</span>{" "}
-                    <span className="text-[#B794F4]">&quot;c&quot;</span> | <span className="text-[#B794F4]">&quot;f&quot;</span>)
+                    <span className="text-gray-300">question:</span>{" "}
+                    <span className="text-[#4BD3FF]">string</span>,
                   </div>
-                  <div className="mb-2">
-                    <span className="text-[#FFD166]">{"}"}</span>
+                  <div className="pl-4">
+                    <span className="text-gray-300">options:</span>{" "}
+                    <span className="text-[#4BD3FF]">string[]</span>,
                   </div>
+                  <div className="pl-4">
+                    <span className="text-gray-300">deadline_blocks:</span>{" "}
+                    <span className="text-[#4BD3FF]">number</span>
+                  </div>
+                  <div>{"}"}</div>
                   <div className="mb-2"></div>
+                  <div className="text-gray-500">{`// Entry: parse prompt and route through model + contract call`}</div>
                   <div>
-                    <span className="text-[#4BD3FF]">graph</span> <span className="text-[#FFD166]">{"{"}</span>
-                  </div>
-                  <div className="pl-4 text-gray-500">{`// 1. Agent Entrypoint`}</div>
-                  <div className="pl-4">
-                    <span className="text-[#5AE3FF]">model_main</span>:{" "}
-                    <span className="text-[#5AE3FF]">model_call</span>(<span className="text-[#B794F4]">&quot;gpt-oss&quot;</span>
-                    ) <span className="text-[#FFD166]">{"{"}</span>
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-gray-300">next</span> {"->"}{" "}
-                    <span className="text-[#5AE3FF]">check_tools</span>
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-gray-300">on_error</span> {"->"} <span className="text-[#5AE3FF]">end</span>
-                  </div>
-                  <div className="pl-4">
-                    <span className="text-[#FFD166]">{"}"}</span>
-                  </div>
-                  <div className="mb-2"></div>
-                  <div className="pl-4 text-gray-500">{`// 2. Check if the model response has tool calls.`}</div>
-                  <div className="pl-4">
-                    <span className="text-[#5AE3FF]">check_tools</span>:{" "}
-                    <span className="text-[#5AE3FF]">has_tool_calls</span> ?{" "}
-                    <span className="text-[#5AE3FF]">tool_exec</span> : <span className="text-[#5AE3FF]">end</span>
-                  </div>
-                  <div className="mb-2"></div>
-                  <div className="pl-4 text-gray-500">{`// 3. Execute the tool call.`}</div>
-                  <div className="pl-4">
-                    <span className="text-[#5AE3FF]">tool_exec</span>: <span className="text-[#5AE3FF]">tool_call</span>{" "}
-                    <span className="text-[#FFD166]">{"{"}</span>
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-gray-300">next</span> {"->"}{" "}
-                    <span className="text-[#5AE3FF]">model_main</span>
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-gray-300">on_error</span> {"->"} <span className="text-[#5AE3FF]">end</span>
-                  </div>
-                  <div className="pl-4">
-                    <span className="text-[#FFD166]">{"}"}</span>
+                    <span className="text-[#4BD3FF]">#[entry]</span>
                   </div>
                   <div>
-                    <span className="text-[#FFD166]">{"}"}</span>
+                    <span className="text-[#4BD3FF]">node</span>{" "}
+                    <span className="text-[#5AE3FF]">start</span>(request: string) {"{"}
                   </div>
+                  <div className="pl-4">
+                    <span className="text-[#5AE3FF]">messages.push</span>(<span className="text-[#4BD3FF]">system</span>(
+                    <span className="text-[#B794F4]">&quot;Generate structured market params&quot;</span>));
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-[#5AE3FF]">messages.push</span>(<span className="text-[#4BD3FF]">user</span>(request));
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-[#5AE3FF]">goto</span>(analyze);
+                  </div>
+                  <div>{"}"}</div>
+                  <div className="mb-2"></div>
+                  <div>
+                    <span className="text-[#4BD3FF]">#[model]</span>
+                  </div>
+                  <div>
+                    <span className="text-[#4BD3FF]">node</span>{" "}
+                    <span className="text-[#5AE3FF]">analyze</span>() {"{"}
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-[#4BD3FF]">let</span> params ={" "}
+                    <span className="text-[#5AE3FF]">model</span>(gpt_5_1).schema(MarketParams).invoke(messages);
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-[#5AE3FF]">goto</span>(call_contract);
+                  </div>
+                  <div>{"}"}</div>
+                  <div className="mb-2"></div>
+                  <div>
+                    <span className="text-[#4BD3FF]">node</span>{" "}
+                    <span className="text-[#5AE3FF]">call_contract</span>() {"{"}
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-[#4BD3FF]">let</span> call_data = contracts.encode_call(CREATE_MARKET_SELECTOR, ...);
+                  </div>
+                  <div className="pl-4">
+                    contracts.call(<span className="text-[#FFD166]">PREDICTION_MARKET_CONTRACT</span>, call_data, 0n, 10000000000n);
+                  </div>
+                  <div className="pl-4 text-gray-500">{`// Contract later triggers resolver_oracle.ship for final resolution`}</div>
+                  <div>{"}"}</div>
                 </div>
               </div>
             </div>
@@ -423,7 +436,7 @@ export function OnChainAgentsSection() {
               <div className="flex flex-col gap-1">
                 <div className="text-sm text-gray-400 font-medium">Alice</div>
                 <div className="bg-gray-800/50 rounded-2xl rounded-tl-sm px-5 py-3 max-w-md border border-gray-700/50">
-                  <p className="text-white">What&apos;s the weather in San Francisco?</p>
+                  <p className="text-white">Create a market: Will BTC close above $100k by Friday UTC?</p>
                 </div>
               </div>
             </div>
@@ -499,30 +512,69 @@ export function OnChainAgentsSection() {
 
           {/* Final Response */}
           {showResponse && (
-            <div className="flex items-start gap-3 animate-in slide-in-from-bottom duration-500 ease-out relative z-10">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[#4BD3FF] to-[#5AE3FF] flex items-center justify-center shadow-lg shadow-[#4BD3FF]/30">
-                <svg
-                  className="w-5 h-5 text-black"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className="text-sm text-[#4BD3FF] font-medium">Weather Agent</div>
-                <div className="bg-gradient-to-br from-[#4BD3FF]/10 to-[#5AE3FF]/5 border border-[#4BD3FF]/30 rounded-2xl rounded-tl-sm px-6 py-4 max-w-md shadow-lg shadow-[#4BD3FF]/10">
-                  <div className="flex items-center gap-3">
-                    <div className="text-4xl">☀️</div>
-                    <div>
-                      <p className="text-white font-medium">San Francisco: 18°C and sunny.</p>
+            <div className="space-y-3 relative z-10">
+              <div className="flex items-start gap-3 animate-in slide-in-from-bottom duration-500 ease-out">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[#4BD3FF] to-[#5AE3FF] flex items-center justify-center shadow-lg shadow-[#4BD3FF]/30">
+                  <svg
+                    className="w-5 h-5 text-black"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="text-sm text-[#4BD3FF] font-medium">Market Creator Agent</div>
+                  <div className="bg-gradient-to-br from-[#4BD3FF]/10 to-[#5AE3FF]/5 border border-[#4BD3FF]/30 rounded-2xl rounded-tl-sm px-6 py-4 max-w-md shadow-lg shadow-[#4BD3FF]/10">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">📈</div>
+                      <div>
+                        <p className="text-white font-medium">Market created (ID #42): BTC &gt; $100k at Friday close.</p>
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 animate-in slide-in-from-bottom duration-500 ease-out">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-violet-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                  <svg
+                    className="w-5 h-5 text-black"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M7 20h10a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="text-sm text-indigo-300 font-medium">Resolver Oracle Agent</div>
+                  <div className="bg-gradient-to-br from-indigo-500/10 to-violet-500/5 border border-indigo-400/30 rounded-2xl rounded-tl-sm px-6 py-4 max-w-md shadow-lg shadow-indigo-500/10">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">✅</div>
+                      <div>
+                        <p className="text-white font-medium">Resolved: BTC closed at $101,240. Winning option: Yes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                  <span className="text-black font-bold text-sm">C</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="text-sm text-emerald-300 font-medium">Prediction Market Contract</div>
+                  <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/5 border border-emerald-400/30 rounded-2xl rounded-tl-sm px-6 py-3 max-w-md shadow-lg shadow-emerald-500/10">
+                    <p className="text-white font-medium text-sm">Settlement complete and state root updated on-chain.</p>
                   </div>
                 </div>
               </div>
