@@ -10,7 +10,7 @@ const evolutions = [
     icon: "/logos/chatgpt.svg",
     name: "ChatGPT",
     unlock: "Reasoning and language intelligence at scale.",
-    cannot: "No agency. Responds, never initiates.",
+    cannot: "Can't act. Responds but never initiates.",
     year: "2022",
     invert: false,
   },
@@ -18,22 +18,14 @@ const evolutions = [
     icon: "/logos/openclaw.svg",
     name: "OpenClaw",
     unlock: "Execution rails for AI actions.",
-    cannot: "Cannot run without human operation.",
+    cannot: "Can't transact or persist. No wallet or identity.",
     year: "2025",
     invert: true,
   },
   {
-    icon: "/logos/conway.svg",
-    name: "Conway",
-    unlock: "Continuous autonomous web execution.",
-    cannot: "Humans hold the keys.",
-    year: "2026",
-    invert: false,
-  },
-  {
     icon: "/theseus-white.svg",
     name: "Theseus",
-    unlock: "AI Persons that own, decide, transact, and persist autonomously.",
+    unlock: "AI Persons that own keys, hold balances, and persist.",
     year: "Now",
     invert: false,
   },
@@ -82,7 +74,7 @@ export default function Evolution() {
         <ScrollReveal>
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light">
-              AI can reason. AI can execute. Only Theseus makes it <span className="text-indigo-300">sovereign</span>.
+              AI can reason. AI can act. Only Theseus makes it <span className="text-indigo-300">sovereign</span>.
             </h2>
           </div>
         </ScrollReveal>
@@ -101,7 +93,7 @@ export default function Evolution() {
           </div>
           
           {/* Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10 max-w-6xl mx-auto px-6">
             {evolutions.map((item, index) => (
               <div key={index} className="text-center relative">
                 {/* Icon */}
@@ -173,10 +165,10 @@ export default function Evolution() {
           
           <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-72 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
             <p className="text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
-              ChatGPT proved AI could reason. OpenClaw proved it could take actions. Conway proved it could run
-              continuously without supervision. But all three still depend on human-controlled keys, accounts, and
-              billing to exist. Theseus closes the final gap: AI Persons that hold their own keys, own their own
-              assets, and persist economically without any human backing.
+              ChatGPT proved AI could reason. OpenClaw proved it could act. But neither gives AI native
+              key custody, settlement, or economic persistence. Theseus closes that gap: AI Persons that
+              hold their own keys, manage their own balances, and persist autonomously without a
+              human-controlled key path.
             </p>
             <a
               href={EXTERNAL_LINKS.substackEvolution}
