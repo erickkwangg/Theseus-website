@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
   title: "Design Space - Theseus Docs",
@@ -49,25 +50,59 @@ export default function DesignSpacePage() {
             <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
-            The Evolution: A Natural Progression
+            Path to AI Persons
           </h2>
           
           <div className="space-y-4 mb-6">
             {[
-              { year: "2009", name: "Bitcoin", color: "yellow", symbol: "₿", desc: "First stateful on-chain executable. Solved money consensus among strangers.", insight: "Public ownership you can verify." },
-              { year: "2014", name: "Ethereum", color: "blue", symbol: "Ξ", desc: "Solved program execution consensus. Deterministic programs replicated across all nodes.", insight: "Public program behavior you can verify." },
-              { year: "2025", name: "Theseus", color: "green", symbol: "Θ", desc: "Fuses web2-style AI agents with stateful, sovereign smart contract properties. One node computes, others verify.", insight: "Public agent decisions you can verify." },
+              {
+                year: "2022",
+                name: "ChatGPT",
+                symbol: "GPT",
+                borderClass: "border-slate-700",
+                textClass: "text-slate-200",
+                unlock: "Reasoning and language intelligence at scale.",
+                cannot: "Cannot act independently in the world.",
+              },
+              {
+                year: "2025",
+                name: "OpenClaw",
+                symbol: "OC",
+                borderClass: "border-indigo-900/50",
+                textClass: "text-indigo-300",
+                unlock: "Execution rails for AI actions.",
+                cannot: "Cannot persist economically on its own.",
+              },
+              {
+                year: "2026",
+                name: "Conway",
+                symbol: "CW",
+                borderClass: "border-purple-900/50",
+                textClass: "text-purple-300",
+                unlock: "Continuous autonomous web execution.",
+                cannot: "Cannot be sovereign while humans retain key and credential custody.",
+              },
+              {
+                year: "2026",
+                name: "Theseus",
+                symbol: "THE",
+                borderClass: "border-green-900/50",
+                textClass: "text-green-400",
+                unlock: "AI Persons with native ownership, settlement, and persistence.",
+              },
             ].map((item) => (
-              <div key={item.name} className={`docs-card border-${item.color}-900/50`}>
+              <div key={item.name} className={`docs-card ${item.borderClass}`}>
                 <div className="flex items-start gap-4">
-                  <span className={`text-${item.color}-400 font-bold text-2xl`}>{item.symbol}</span>
+                  <span className={`${item.textClass} font-bold text-2xl`}>{item.symbol}</span>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h3 className={`text-lg font-medium text-${item.color}-400`}>{item.name}</h3>
+                      <h3 className={`text-lg font-medium ${item.textClass}`}>{item.name}</h3>
                       <span className="text-xs text-gray-500">({item.year})</span>
                     </div>
-                    <p className="text-gray-400 text-sm mb-2">{item.desc}</p>
-                    <p className="text-gray-500 text-sm italic">{item.insight}</p>
+                    <p className="text-gray-300 text-sm mb-2">{item.unlock}</p>
+                    {item.cannot ? (
+                      <p className="text-rose-300/90 text-sm italic">cannot: {item.cannot}</p>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -75,7 +110,13 @@ export default function DesignSpacePage() {
           </div>
 
           <Callout type="tip" title="Key Insight">
-            Each step removes a human dependency. Bitcoin removed treasurers from &quot;who owns what.&quot; Ethereum removed judges from &quot;what happens next.&quot; Theseus removes hosts from &quot;what kind of decision will an intelligent entity make?&quot;
+            Each step removes a human dependency: cognition, execution, coordination, then sovereignty.
+            <span className="ml-2">
+              For Conway&apos;s framing, see{" "}
+              <a href={EXTERNAL_LINKS.conwayTech} target="_blank" rel="noopener noreferrer">conway.tech</a>
+              {" "}and{" "}
+              <a href={EXTERNAL_LINKS.web4ai} target="_blank" rel="noopener noreferrer">web4.ai</a>.
+            </span>
           </Callout>
         </section>
 
@@ -182,9 +223,10 @@ export default function DesignSpacePage() {
 
           <div className="bg-gradient-to-r from-green-950/30 to-transparent border-l-2 border-green-500 pl-6 py-4">
             <div className="space-y-1 text-sm">
-              <p><strong className="text-white">Bitcoin:</strong> <span className="text-gray-400">public ownership you can verify</span></p>
-              <p><strong className="text-white">Ethereum:</strong> <span className="text-gray-400">public program behavior you can verify</span></p>
-              <p><strong className="text-white">Theseus:</strong> <span className="text-gray-400">public agent decisions you can verify</span></p>
+              <p><strong className="text-white">ChatGPT:</strong> <span className="text-gray-400">intelligence you can query</span></p>
+              <p><strong className="text-white">OpenClaw:</strong> <span className="text-gray-400">execution you can delegate</span></p>
+              <p><strong className="text-white">Conway:</strong> <span className="text-gray-400">continuous autonomy you can deploy</span></p>
+              <p><strong className="text-white">Theseus:</strong> <span className="text-gray-400">AI Persons with sovereign ownership and action</span></p>
             </div>
           </div>
         </section>

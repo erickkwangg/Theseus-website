@@ -7,22 +7,35 @@ import { EXTERNAL_LINKS } from "@/config/links";
 
 const evolutions = [
   {
-    icon: "/bitcoin-white.svg",
-    name: "Bitcoin",
-    label: "Programmable Money",
-    year: "2009",
+    icon: "/logos/chatgpt.svg",
+    name: "ChatGPT",
+    unlock: "Reasoning and language intelligence at scale.",
+    cannot: "No agency. Responds, never initiates.",
+    year: "2022",
+    invert: false,
   },
   {
-    icon: "/ethereum-white.svg",
-    name: "Ethereum",
-    label: "Programmable Contracts",
-    year: "2015",
+    icon: "/logos/openclaw.svg",
+    name: "OpenClaw",
+    unlock: "Execution rails for AI actions.",
+    cannot: "Cannot run without human operation.",
+    year: "2025",
+    invert: true,
+  },
+  {
+    icon: "/logos/conway.svg",
+    name: "Conway",
+    unlock: "Continuous autonomous web execution.",
+    cannot: "Humans hold the keys.",
+    year: "2026",
+    invert: false,
   },
   {
     icon: "/theseus-white.svg",
     name: "Theseus",
-    label: "Agentic Contracts",
-    year: "2025",
+    unlock: "AI Persons that own, decide, transact, and persist autonomously.",
+    year: "Now",
+    invert: false,
   },
 ];
 
@@ -69,7 +82,7 @@ export default function Evolution() {
         <ScrollReveal>
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light">
-              Each step expands what can be <span className="text-indigo-300">sovereign</span>.
+              AI can reason. AI can execute. Only Theseus makes it <span className="text-indigo-300">sovereign</span>.
             </h2>
           </div>
         </ScrollReveal>
@@ -77,18 +90,18 @@ export default function Evolution() {
         {/* Timeline */}
         <div className="relative">
           {/* Connecting line with animated glow */}
-          <div className="absolute top-1/2 left-0 right-0 h-px -translate-y-8 hidden md:block overflow-hidden">
+          <div className="absolute top-10 lg:top-12 left-0 right-0 h-px hidden md:block overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent transition-all duration-1000"
               style={{ 
-                opacity: activeIndex >= 2 ? 1 : 0.3,
+                opacity: activeIndex >= evolutions.length - 1 ? 1 : 0.3,
                 transform: `scaleX(${activeIndex >= 0 ? 1 : 0})`,
               }}
             />
           </div>
           
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 max-w-6xl mx-auto px-6">
             {evolutions.map((item, index) => (
               <div key={index} className="text-center relative">
                 {/* Icon */}
@@ -97,16 +110,20 @@ export default function Evolution() {
                     className={`w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center 
                                 bg-slate-900/70 rounded-full border transition-all duration-500
                                 ${activeIndex >= index 
-                                  ? 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105' 
+                                  ? item.year === "Now"
+                                    ? 'border-green-400 shadow-[0_0_30px_rgba(74,222,128,0.35)] scale-105'
+                                    : 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105'
                                   : 'border-slate-700'}`}
                   >
-                    <Image 
-                      src={item.icon} 
-                      alt={item.name}
-                      width={48}
-                      height={48}
-                      className={`w-10 h-10 lg:w-12 lg:h-12 transition-all duration-500 ${
-                        activeIndex >= index ? 'opacity-100' : 'opacity-50'
+                    <Image
+                      src={item.icon}
+                      alt={`${item.name} logo`}
+                      width={44}
+                      height={44}
+                      className={`w-11 h-11 lg:w-12 lg:h-12 object-contain transition-all duration-500 ${
+                        item.invert ? "brightness-0 invert" : ""
+                      } ${
+                        activeIndex >= index ? "opacity-100" : "opacity-60 grayscale"
                       }`}
                     />
                   </div>
@@ -114,7 +131,9 @@ export default function Evolution() {
                 
                 {/* Year badge */}
                 <p className={`text-xs font-mono mb-2 transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-indigo-300' : 'text-slate-500'
+                  item.year === "Now"
+                    ? activeIndex >= index ? 'text-green-400' : 'text-slate-500'
+                    : activeIndex >= index ? 'text-indigo-300' : 'text-slate-500'
                 }`}>{item.year}</p>
                 
                 {/* Name */}
@@ -122,41 +141,50 @@ export default function Evolution() {
                   activeIndex >= index ? 'text-white' : 'text-slate-400'
                 }`}>{item.name}</h3>
                 
-                {/* Label */}
-                <p className={`text-sm transition-colors duration-500 ${
+                {/* Unlock */}
+                <p className={`text-sm min-h-[3rem] transition-colors duration-500 ${
                   activeIndex >= index ? 'text-slate-300' : 'text-slate-500'
-                }`}>{item.label}</p>
+                }`}>{item.unlock}</p>
+
+                {/* Constraint */}
+                {item.cannot ? (
+                  <p className={`hidden sm:block text-sm mt-2 min-h-[2.5rem] transition-colors duration-500 ${
+                    activeIndex >= index ? 'text-rose-300/80' : 'text-slate-600'
+                  }`}>
+                    {item.cannot}
+                  </p>
+                ) : <div className="hidden sm:block min-h-[2.5rem]" />}
               </div>
             ))}
           </div>
         </div>
 
         {/* Expandable explanation */}
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <button
             onClick={() => setExpanded(!expanded)}
             className="text-slate-400 text-sm hover:text-indigo-300 transition-colors inline-flex items-center gap-2 button-press"
           >
-            {expanded ? "Hide explanation" : "Why is this the next step?"}
+            {expanded ? "Hide" : "Why does this matter?"}
             <span className={`transform transition-transform ${expanded ? "rotate-180" : ""}`}>
               ↓
             </span>
           </button>
           
-          <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-48 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
-            <p className="text-slate-300/90 text-sm max-w-2xl mx-auto leading-relaxed mb-4">
-              Bitcoin made money sovereign. Ethereum made contracts sovereign. 
-              Theseus makes agents sovereign. AI that can own assets, make decisions, 
-              and persist without human control. Each evolution expands the design space 
-              of what can exist on-chain.
+          <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-72 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
+            <p className="text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
+              ChatGPT proved AI could reason. OpenClaw proved it could take actions. Conway proved it could run
+              continuously without supervision. But all three still depend on human-controlled keys, accounts, and
+              billing to exist. Theseus closes the final gap: AI Persons that hold their own keys, own their own
+              assets, and persist economically without any human backing.
             </p>
-            <a 
+            <a
               href={EXTERNAL_LINKS.substackEvolution}
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-300 text-sm underline hover:text-indigo-200 transition-colors"
             >
-              Read the full thesis →
+              Read the full thesis
             </a>
           </div>
         </div>

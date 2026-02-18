@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, GitCompare, AlertTriangle, CheckCircle, X, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowRight, GitCompare, CheckCircle, X, Lightbulb, TrendingUp } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
   title: "Theseus vs Ethereum - Theseus Docs",
@@ -24,7 +25,7 @@ export default function ComparisonPage() {
           Theseus vs. Ethereum
         </h1>
         <p className="text-xl text-gray-400 leading-relaxed">
-          While deployment patterns look similar, Theseus agents differ fundamentally from smart contracts.
+          Ethereum contracts need a human to act. Theseus agents don&apos;t.
         </p>
       </div>
         
@@ -32,7 +33,11 @@ export default function ComparisonPage() {
         {/* Core Difference */}
         <section className="mb-12">
           <h2 id="critical-difference" className="text-2xl font-medium mb-6">The Critical Difference: Autonomous Execution</h2>
-          
+
+          <Callout type="tip" title="The Key Distinction">
+            Every Ethereum smart contract—no matter how complex—requires a human-controlled private key to initiate any action. Theseus agents hold no keys. Their authority comes from consensus over valid state transitions. No human required.
+          </Callout>
+
           <Callout type="warning" title="Common Misconception">
             Many believe Ethereum contracts are autonomous because they execute complex logic. <strong>This is incorrect.</strong> Smart contracts are purely reactive—they cannot initiate any action without an EOA sending a transaction first.
           </Callout>
@@ -121,20 +126,20 @@ export default function ComparisonPage() {
                 </tr>
               </thead>
               <tbody>
+                <tr className="bg-indigo-950/10">
+                  <td className="font-medium text-white">Key custody</td>
+                  <td>Requires human-controlled private keys</td>
+                  <td className="text-indigo-300">Self-sovereign — no keys needed</td>
+                </tr>
                 <tr>
                   <td className="font-medium text-white">Execution</td>
-                  <td>Reactive—triggered externally</td>
-                  <td>Proactive—initiates autonomously</td>
+                  <td>Reactive — triggered externally</td>
+                  <td>Proactive — initiates autonomously</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-white">Intelligence</td>
                   <td>Deterministic logic only</td>
                   <td>ML inference on-chain</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-white">Control</td>
-                  <td>Requires private keys</td>
-                  <td>Self-sovereign, no keys needed</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-white">Logic</td>
@@ -251,7 +256,7 @@ export default function ComparisonPage() {
               {[
                 { symbol: "₿", color: "text-yellow-400", name: "Bitcoin (2009)", desc: "Public ownership. Removed treasurers from \"who owns what.\"" },
                 { symbol: "Ξ", color: "text-indigo-300", name: "Ethereum (2014)", desc: "Public programs. Removed judges from \"what happens next.\"" },
-                { symbol: "Θ", color: "text-green-400", name: "Theseus (2025)", desc: "Public decisions. Removes hosts from \"what will an intelligent entity decide?\"" },
+                { symbol: "Θ", color: "text-green-400", name: "Theseus (Now)", desc: "Public decisions. Removes hosts from \"what will an intelligent entity decide?\"" },
               ].map((item) => (
                 <div key={item.name} className="flex items-start gap-3">
                   <span className={`${item.color} font-bold text-xl w-6`}>{item.symbol}</span>
@@ -271,8 +276,20 @@ export default function ComparisonPage() {
               Market Opportunity
             </h3>
             <p className="text-gray-300 text-sm mb-4">
-              Ethereum&apos;s market cap is tied to the value of applications on top of it. Increasing application capability can increase value captured by the base chain. Combining programmable settlement with autonomous agents expands the addressable application surface.
+              Ethereum&apos;s market cap is tied to the value of applications on top of it. Sovereign AI unlocks three new categories that are not addressable today:
             </p>
+            <div className="space-y-3 mb-6">
+              {[
+                { title: "Free, Sovereign AI", desc: "Fully self-directed systems — AGI included — that initiate their own inference and pursue their own goals without human sign-off." },
+                { title: "Lighthouse AI", desc: "Independent agents whose sole mission is to deliver publicly verifiable results for humans — like smart contracts, but with reasoning and inference." },
+                { title: "Trustless, Human-Owned AI", desc: "User-controlled agents that exchange value and share data on a censorship-resistant layer, solving the agent-to-agent trust problem." },
+              ].map((item) => (
+                <div key={item.title} className="p-3 bg-green-950/20 border border-green-900/30 rounded-lg">
+                  <span className="font-medium text-white text-sm">{item.title}</span>
+                  <p className="text-gray-400 text-xs mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
             <div className="flex flex-wrap gap-3">
               <Link 
                 href="/docs/design-space"
@@ -282,12 +299,12 @@ export default function ComparisonPage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a 
-                href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
+                href={EXTERNAL_LINKS.substackEvolution}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
               >
-                Read Full Article
+                Read the Theseus Thesis
               </a>
             </div>
           </div>
