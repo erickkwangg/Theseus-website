@@ -242,7 +242,7 @@ export default function ComparisonPage() {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>• Subjective adjudication</li>
                 <li>• Complex governance with reasoning</li>
-                <li>• AI Persons with goals</li>
+                <li>• Autonomous agents with goals</li>
                 <li>• Natural language deployment</li>
                 <li>• Adaptive strategies</li>
               </ul>

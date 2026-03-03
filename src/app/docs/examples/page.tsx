@@ -118,17 +118,17 @@ export default function ExamplesPage() {
           
           <div className="space-y-6">
             <div className="docs-card">
-              <h3 className="text-lg font-medium mb-2">Proto-AI Person (Human-Owned)</h3>
+              <h3 className="text-lg font-medium mb-2">Managed Agent (Human-Owned)</h3>
               <p className="text-gray-400 text-sm mb-4">
                 Agent with controller key—operates independently but can be overridden:
               </p>
-              <CodeBlock language="text" filename="proto-ai.ship">{`autonomy_flag = 0  // human-gated
+              <CodeBlock language="text" filename="managed-agent.ship">{`autonomy_flag = 0  // human-gated
 controller_key = 0x1234...  // owner's public key
 resource_quota = 1000000  // max FLOPs per epoch`}</CodeBlock>
             </div>
 
             <div className="docs-card">
-              <h3 className="text-lg font-medium mb-2">Free AI Person (Sovereign)</h3>
+              <h3 className="text-lg font-medium mb-2">Sovereign Agent (Self-Directed)</h3>
               <p className="text-gray-400 text-sm mb-4">
                 Fully autonomous agent with no human control:
               </p>

@@ -6,14 +6,14 @@ import { Search, X } from "lucide-react";
 
 const searchIndex = [
   { title: "Overview", href: "/docs", keywords: ["home", "documentation", "docs"] },
-  { title: "Introduction", href: "/docs/introduction", keywords: ["intro", "what is", "agi", "sovereign ai", "personhood", "runtime", "layer 1"] },
+  { title: "Introduction", href: "/docs/introduction", keywords: ["intro", "what is", "agi", "sovereign ai", "agency", "runtime", "layer 1"] },
   { title: "Quick Start", href: "/docs/quickstart", keywords: ["install", "setup", "deploy", "start", "begin", "rust", "docker", "getting started", "local node"] },
   { title: "AIVM", href: "/docs/aivm", keywords: ["virtual machine", "execution", "tensor", "opcodes", "gas", "scheduling", "runtime"] },
   { title: "Tensor Commits", href: "/docs/tensor-commits", keywords: ["proof", "verification", "terkle", "merkle", "inference", "zk", "kzg"] },
   { title: "Agents", href: "/docs/agents", keywords: ["registration", "model", "inference loop", "inter-agent", "fee", "autonomy"] },
   { title: "Architecture", href: "/docs/architecture", keywords: ["theseusstore", "prover", "verifier", "block", "transaction", "consensus"] },
   { title: "SHIP Language", href: "/docs/ship", keywords: ["dsl", "language", "compile", "bytecode", "natural language", "agent programming"] },
-  { title: "Examples", href: "/docs/examples", keywords: ["code", "sample", "pattern", "proto-ai", "lighthouse", "free ai", "private repo"] },
+  { title: "Examples", href: "/docs/examples", keywords: ["code", "sample", "pattern", "managed agent", "sovereign agent", "lighthouse", "private repo"] },
   { title: "Theseus vs Ethereum", href: "/docs/comparison", keywords: ["smart contract", "autonomy", "evm", "difference"] },
   { title: "Design Space", href: "/docs/design-space", keywords: ["market", "billion", "evolution", "bitcoin", "discovery", "tam"] },
   { title: "Tokenomics", href: "/docs/tokenomics", keywords: ["$THE", "token", "stake", "fee", "gas", "economics", "network economics"] },

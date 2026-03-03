@@ -50,7 +50,7 @@ export default function DesignSpacePage() {
             <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
-            Path to AI Persons
+            Path to Full Agency
           </h2>
           
           <div className="space-y-4 mb-6">
@@ -75,20 +75,11 @@ export default function DesignSpacePage() {
               },
               {
                 year: "2026",
-                name: "Conway",
-                symbol: "CW",
-                borderClass: "border-purple-900/50",
-                textClass: "text-purple-300",
-                unlock: "Continuous autonomous web execution.",
-                cannot: "Cannot be sovereign while humans retain key and credential custody.",
-              },
-              {
-                year: "2026",
                 name: "Theseus",
                 symbol: "THE",
                 borderClass: "border-green-900/50",
                 textClass: "text-green-400",
-                unlock: "AI Persons with native ownership, settlement, and persistence.",
+                unlock: "Full agency with native ownership, settlement, and persistence.",
               },
             ].map((item) => (
               <div key={item.name} className={`docs-card ${item.borderClass}`}>
@@ -110,13 +101,7 @@ export default function DesignSpacePage() {
           </div>
 
           <Callout type="tip" title="Key Insight">
-            Each step removes a human dependency: cognition, execution, coordination, then sovereignty.
-            <span className="ml-2">
-              For Conway&apos;s framing, see{" "}
-              <a href={EXTERNAL_LINKS.conwayTech} target="_blank" rel="noopener noreferrer">conway.tech</a>
-              {" "}and{" "}
-              <a href={EXTERNAL_LINKS.web4ai} target="_blank" rel="noopener noreferrer">web4.ai</a>.
-            </span>
+            Each step removes a human dependency: cognition, execution, then full agency.
           </Callout>
         </section>
 
@@ -191,7 +176,7 @@ export default function DesignSpacePage() {
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { title: "Subjective Prediction Markets", desc: "Adjudicate nuanced questions like \"Was the iPhone Air launch successful?\"" },
-              { title: "AI Persons", desc: "Autonomous entities with goals: GPs of LP funds, marketing swarms, DAO orchestrators" },
+              { title: "Sovereign Agents", desc: "Autonomous entities with goals: GPs of LP funds, marketing swarms, DAO orchestrators" },
               { title: "Complex Governance", desc: "Evaluate proposals with nuanced reasoning, read docs, analyze trade-offs" },
               { title: "Dynamic DeFi Strategies", desc: "Manage liquidity, rebalance portfolios, execute strategies autonomously" },
             ].map((item) => (
@@ -225,8 +210,7 @@ export default function DesignSpacePage() {
             <div className="space-y-1 text-sm">
               <p><strong className="text-white">ChatGPT:</strong> <span className="text-gray-400">intelligence you can query</span></p>
               <p><strong className="text-white">OpenClaw:</strong> <span className="text-gray-400">execution you can delegate</span></p>
-              <p><strong className="text-white">Conway:</strong> <span className="text-gray-400">continuous autonomy you can deploy</span></p>
-              <p><strong className="text-white">Theseus:</strong> <span className="text-gray-400">AI Persons with sovereign ownership and action</span></p>
+              <p><strong className="text-white">Theseus:</strong> <span className="text-gray-400">agents with full agency — own keys, hold balances, persist</span></p>
             </div>
           </div>
         </section>

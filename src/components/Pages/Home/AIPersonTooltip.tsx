@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-interface AIPersonTooltipProps {
+interface AIAgencyTooltipProps {
   children: React.ReactNode;
 }
 
-export default function AIPersonTooltip({ children }: AIPersonTooltipProps) {
+export default function AIAgencyTooltip({ children }: AIAgencyTooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -33,15 +33,15 @@ export default function AIPersonTooltip({ children }: AIPersonTooltipProps) {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-              <h3 className="text-white font-medium text-sm">What is AI Personhood?</h3>
+              <h3 className="text-white font-medium text-sm">What is AI Agency?</h3>
             </div>
             
             <p className="text-gray-300 text-sm leading-relaxed">
-              Like giving AI a social security number and a license to think freely.
+              Agents that can own keys, hold balances, and act without human approval.
             </p>
             
             <p className="text-gray-500 text-xs leading-relaxed">
-              They have their own wallet, their own memory, and nobody else holds the keys.
+              Their own wallet, their own memory, and nobody else holds the keys.
             </p>
           </div>
         </div>

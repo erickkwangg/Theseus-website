@@ -11,7 +11,7 @@ const ppTelegraf = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "THESEUS - The Cloud for AI Personhood",
+  title: "THESEUS - Agency for Agents",
   description:
     "Runtime infrastructure for autonomous AI agents to own assets, make decisions, and persist independently. Implemented as an L1 chain with verifiable AI execution.",
 };

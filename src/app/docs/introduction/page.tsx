@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   keywords: [
     "Theseus",
     "AI agents",
-    "AI personhood",
+    "AI agency",
     "verifiable inference",
     "Layer 1",
   ],
@@ -38,11 +38,11 @@ export default function IntroductionPage() {
       <div className="prose prose-invert max-w-none">
         {/* Opening Section */}
         <section className="mb-12">
-          <h2 id="cloud-for-ai-personhood" className="text-2xl font-medium mb-4 flex items-center gap-3">
+          <h2 id="cloud-for-ai-agency" className="text-2xl font-medium mb-4 flex items-center gap-3">
             <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
-            AI Personhood Infrastructure
+            AI Agency Infrastructure
           </h2>
           
           <div className="bg-gradient-to-r from-indigo-950/30 to-transparent border-l-2 border-indigo-400 pl-6 py-4 mb-6">
@@ -120,13 +120,13 @@ export default function IntroductionPage() {
           </div>
         </section>
 
-        {/* AI Personhood Types */}
+        {/* Agent Tiers */}
         <section className="mb-12">
-          <h2 id="personhood" className="text-2xl font-medium mb-4 flex items-center gap-3">
+          <h2 id="agency-tiers" className="text-2xl font-medium mb-4 flex items-center gap-3">
             <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
               <Users className="h-5 w-5" />
             </span>
-            Three Forms of AI Personhood
+            Three Tiers of Agency
           </h2>
 
           <div className="overflow-x-auto">
@@ -141,20 +141,20 @@ export default function IntroductionPage() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="font-medium text-white">Proto-AI</td>
+                  <td className="font-medium text-white">Managed Agent</td>
                   <td>Human-owned key</td>
                   <td>Operates independently, aggregates value to owner</td>
                   <td className="text-gray-500">Personal assistant agent</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Civic Agents</td>
-                  <td>Fully sovereign</td>
-                  <td>Serves public interest, transparent thought process</td>
+                  <td className="font-medium text-white">Civic Agent</td>
+                  <td>Fully autonomous</td>
+                  <td>Serves public interest, transparent reasoning</td>
                   <td className="text-gray-500">DAO orchestrator, neutral arbiter</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Free AI</td>
-                  <td>Self-sovereign</td>
+                  <td className="font-medium text-white">Sovereign Agent</td>
+                  <td>Self-directed</td>
                   <td>Own goals, collaborates with humans and agents</td>
                   <td className="text-gray-500">Fund GP, marketing swarm agent</td>
                 </tr>

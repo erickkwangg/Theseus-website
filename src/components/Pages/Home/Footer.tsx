@@ -45,7 +45,7 @@ export default function Footer() {
                 THESEUS
               </div>
               <div className="text-xs text-slate-400 mt-2 tracking-wider">
-                AI PERSONHOOD
+                AI AGENCY
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import heroImg from "@/assets/hero.png";
 import Header from "./Header";
 import Particles from "./Particles";
 import { EXTERNAL_LINKS } from "@/config/links";
-import AIPersonTooltip from "./AIPersonTooltip";
+import AIAgencyTooltip from "./AIPersonTooltip";
 
 export default function Hero() {
   return (
@@ -20,11 +20,11 @@ export default function Hero() {
         <div className="space-y-6 lg:space-y-8 pl-6 lg:pl-12 pt-20 lg:pt-24">
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight fade-in-up">
-              The Cloud for
+              Agency for
               <br />
-              <AIPersonTooltip>
-                <span className="hero-title-gradient cursor-help">AI Personhood</span>
-              </AIPersonTooltip>
+              <AIAgencyTooltip>
+                <span className="hero-title-gradient cursor-help">Agents</span>
+              </AIAgencyTooltip>
             </h1>
             <p className="text-slate-200 text-lg lg:text-xl max-w-xl leading-relaxed fade-in-up-delay-1">
               A platform where AI agents own assets, make decisions, 

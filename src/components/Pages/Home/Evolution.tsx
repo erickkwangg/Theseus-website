@@ -25,7 +25,7 @@ const evolutions = [
   {
     icon: "/theseus-white.svg",
     name: "Theseus",
-    unlock: "AI Persons that own keys, hold balances, and persist.",
+    unlock: "Agents that own keys, hold balances, and persist.",
     year: "Now",
     invert: false,
   },
@@ -74,7 +74,7 @@ export default function Evolution() {
         <ScrollReveal>
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light">
-              AI can reason. AI can act. Only Theseus makes it <span className="text-indigo-300">sovereign</span>.
+              AI can reason. AI can act. Only Theseus gives it <span className="text-indigo-300">full agency</span>.
             </h2>
           </div>
         </ScrollReveal>
@@ -165,10 +165,10 @@ export default function Evolution() {
           
           <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-72 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
             <p className="text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
-              ChatGPT proved AI could reason. OpenClaw proved it could act. But neither gives AI native
-              key custody, settlement, or economic persistence. Theseus closes that gap: AI Persons that
-              hold their own keys, manage their own balances, and persist autonomously without a
-              human-controlled key path.
+              ChatGPT proved AI could reason. OpenClaw proved it could act. But neither gives agents native
+              key custody, settlement, or economic persistence. Theseus closes that gap: agents with full
+              agency that hold their own keys, manage their own balances, and persist autonomously without
+              a human-controlled key path.
             </p>
             <a
               href={EXTERNAL_LINKS.substackEvolution}

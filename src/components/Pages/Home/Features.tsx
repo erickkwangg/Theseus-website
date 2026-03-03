@@ -48,7 +48,7 @@ export default function Features() {
               AI agents by 2028
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-light max-w-2xl mx-auto leading-tight">
-              Theseus gives them <span className="text-indigo-300">personhood</span>.
+              Theseus gives them <span className="text-indigo-300">full agency</span>.
             </h2>
           </div>
         </ScrollReveal>

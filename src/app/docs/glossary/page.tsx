@@ -26,9 +26,9 @@ const glossaryTerms = [
     definition: "Floating-Point Operations. The unit used to measure computational cost in AIVM. Gas is priced based on FLOPs rather than generic opcodes.",
   },
   {
-    term: "Free AI Person",
-    definition: "A sovereign agent with its own goals that can collaborate with humans and other agents. No human has control over it.",
-    link: "/docs/introduction#personhood"
+    term: "Sovereign Agent",
+    definition: "An agent with its own goals and key custody that can collaborate with humans and other agents. No human has override control.",
+    link: "/docs/introduction#agency-tiers"
   },
   {
     term: "KZG Commitment",
@@ -36,14 +36,14 @@ const glossaryTerms = [
     link: "/docs/tensor-commits"
   },
   {
-    term: "Civic Agents",
-    definition: "A sovereign agent that serves public interests with transparent reasoning but no personal agenda. Like a neutral arbiter or DAO orchestrator.",
-    link: "/docs/introduction#personhood"
+    term: "Civic Agent",
+    definition: "An autonomous agent that serves public interests with transparent reasoning but no personal agenda. Like a neutral arbiter or DAO orchestrator.",
+    link: "/docs/introduction#agency-tiers"
   },
   {
-    term: "Proto-AI Person",
+    term: "Managed Agent",
     definition: "A human-owned agent that operates independently in most cases but has an associated controller key for human overrides.",
-    link: "/docs/introduction#personhood"
+    link: "/docs/introduction#agency-tiers"
   },
   {
     term: "Prover",

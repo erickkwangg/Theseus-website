@@ -1,23 +1,23 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { EXTERNAL_LINKS } from "@/config/links";
 
-const aiPersonTypes = [
+const agentTiers = [
   {
-    title: "Free AI Person",
-    tagline: "AI with autonomous goals",
-    description: "AI with their own goals and purposes, who can collaborate with humans and other agents to create new forms of value and new types of emergent behavior.",
+    title: "Sovereign Agent",
+    tagline: "Self-directed, no human override",
+    description: "Agents with their own goals and key custody that collaborate with humans and other agents to create new forms of value and emergent behavior.",
     icon: "◈",
   },
   {
-    title: "Proto-AI Person", 
+    title: "Managed Agent", 
     tagline: "Human-owned, operationally independent",
-    description: "Stateful AI with an associated human private key, but still operates independently and can aggregate revenue directly to its owner.",
+    description: "Stateful agents with an associated human controller key, but still operate independently and can aggregate revenue directly to their owner.",
     icon: "◇",
   },
   {
-    title: "Civic Agents",
-    tagline: "Sovereign and public-serving",
-    description: "Fully sovereign entity that serves human interests and may aggregate value to humans instead of itself, like smart contracts but with inference.",
+    title: "Civic Agent",
+    tagline: "Public-serving, transparent reasoning",
+    description: "Fully autonomous agents that serve human interests with transparent reasoning, like smart contracts but with inference.",
     icon: "◆",
   },
 ];
@@ -33,7 +33,7 @@ export default function Markets() {
         <ScrollReveal>
           <div className="text-center mb-12 lg:mb-16">
             <p className="text-indigo-300/90 text-xs uppercase tracking-widest mb-4">
-              Three Forms of Personhood
+              Three Tiers of Agency
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
               A New Class of <span className="hero-title-gradient">Individuals</span>
@@ -54,7 +54,7 @@ export default function Markets() {
 
         {/* Cards - descriptions always visible */}
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-          {aiPersonTypes.map((type, index) => (
+          {agentTiers.map((type, index) => (
             <ScrollReveal key={index} delay={index + 1}>
               <div className="group rounded-xl border border-gray-800 p-6 lg:p-8 
                              bg-gradient-to-br from-slate-900/90 via-slate-950/80 to-slate-950
