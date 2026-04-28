@@ -18,7 +18,7 @@ export default function Hero() {
               <span className="italic">are alive.</span>
             </h1>
             <p className="mt-8 text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-md">
-              Theseus is the runtime where AI agents hold balances, sign their own actions, and run inference anyone can verify.
+              The runtime for AI agents that act on their own.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <Link

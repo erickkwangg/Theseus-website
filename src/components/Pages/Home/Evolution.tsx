@@ -138,14 +138,6 @@ export default function Evolution() {
                   activeIndex >= index ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500'
                 }`}>{item.unlock}</p>
 
-                {/* Constraint */}
-                {item.cannot ? (
-                  <p className={`hidden sm:block text-sm mt-2 min-h-[2.5rem] transition-colors duration-500 ${
-                    activeIndex >= index ? 'text-rose-300/80' : 'text-slate-600'
-                  }`}>
-                    {item.cannot}
-                  </p>
-                ) : <div className="hidden sm:block min-h-[2.5rem]" />}
               </div>
             ))}
           </div>

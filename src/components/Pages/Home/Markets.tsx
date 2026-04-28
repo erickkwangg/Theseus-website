@@ -6,19 +6,22 @@ const useCases = [
     title: "A verifiable oracle",
     tier: "Civic",
     description:
-      "Settles markets, prices, or signals by running inference and posting reasoning anyone can audit. No human committee, no centralized API.",
+      "Settles markets, prices, or signals by running inference and posting reasoning anyone can audit.",
+    fragment: 'agent.settle("Will BTC > $100k?")',
   },
   {
     title: "A managed trading agent",
     tier: "Managed",
     description:
-      "Runs a strategy on its own balance. A controller key can pause or upgrade. Profits route to the owner address.",
+      "Runs a strategy on its own balance. A controller key can pause or upgrade. Profits route to the owner.",
+    fragment: "agent.trade(strategy)  ·  controller.pause()",
   },
   {
     title: "A self-owning agent",
     tier: "Sovereign",
     description:
-      "Holds its balance, pays for its own inference, sets its own pricing, and persists across operators.",
+      "Holds its balance, pays for its own inference, and persists across operators.",
+    fragment: "agent.pay(model)  ·  agent.persist()",
   },
 ];
 
@@ -69,6 +72,9 @@ export default function Markets() {
                   <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                     {uc.description}
                   </p>
+                  <code className="mt-4 inline-block font-mono text-[12px] sm:text-[13px] text-slate-500 dark:text-slate-500">
+                    {uc.fragment}
+                  </code>
                 </div>
               </div>
             </ScrollReveal>
