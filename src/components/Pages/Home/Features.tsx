@@ -21,7 +21,7 @@ export default function Features() {
 
         <ScrollReveal delay={2}>
           <p className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.015em] leading-[1.1] text-slate-900 dark:text-white">
-            Theseus is the only runtime where <span className="italic">they will.</span>
+            Theseus is the only runtime that <span className="italic">earns it.</span>
           </p>
         </ScrollReveal>
       </div>
