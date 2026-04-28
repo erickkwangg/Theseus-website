@@ -5,6 +5,7 @@ export const EXTERNAL_LINKS = {
   substack: "https://theseuschain.substack.com",
   substackEvolution: "https://theseuschain.substack.com/p/the-theseus-thesis-part-1",
   substackTAM: "https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of",
+  substackAgenticContracts: "https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts",
   conwayTech: "https://conway.tech",
   web4ai: "https://web4.ai",
 } as const;

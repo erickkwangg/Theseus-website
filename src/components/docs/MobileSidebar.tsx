@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
-import { 
-  Rocket, 
-  BookOpen, 
+import {
+  Rocket,
+  BookOpen,
   Zap,
   Cpu,
   GitBranch,
@@ -18,7 +18,8 @@ import {
   GitCompare,
   Lightbulb,
   Coins,
-  List
+  List,
+  Sparkles
 } from "lucide-react";
 
 const sections = [
@@ -50,6 +51,7 @@ const sections = [
     title: "Deep Dives",
     items: [
       { href: "/docs/comparison", label: "Theseus vs Ethereum", icon: GitCompare },
+      { href: "/docs/agentic-smart-contracts", label: "Agentic Smart Contracts", icon: Sparkles },
       { href: "/docs/design-space", label: "Design Space", icon: Lightbulb },
       { href: "/docs/glossary", label: "Glossary", icon: List },
     ],

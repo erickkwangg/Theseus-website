@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/ship",
     "/docs/examples",
     "/docs/comparison",
+    "/docs/agentic-smart-contracts",
     "/docs/design-space",
     "/docs/tokenomics",
     "/docs/glossary",
