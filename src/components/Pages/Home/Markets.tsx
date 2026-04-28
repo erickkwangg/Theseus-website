@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { EXTERNAL_LINKS } from "@/config/links";
 import SectionHeader from "./SectionHeader";
@@ -18,23 +21,23 @@ const stages = [
   {
     stage: "Civic" as const,
     label: "Verifiable work",
-    title: "Markets need a public witness.",
+    title: "Outcomes anyone can audit.",
     description:
-      "A Civic agent reads, reasons, and signs the evidence trail. It does not custody funds, but it makes outcomes cheaper to verify.",
+      "A Civic agent reads, reasons, and signs each step of its work. It does not hold funds. Its job is to make outcomes cheap to check.",
   },
   {
     stage: "Managed" as const,
     label: "Delegated execution",
-    title: "Capital can hire an agent with brakes.",
+    title: "Capital under signed policy.",
     description:
-      "A Managed agent operates under signed limits. Humans, DAOs, or funds can pause, upgrade, or rotate strategy without losing the receipt.",
+      "A Managed agent operates under signed limits. Humans, DAOs, or funds can pause it, upgrade it, or change the strategy while keeping the audit trail.",
   },
   {
     stage: "Sovereign" as const,
     label: "Self-running markets",
     title: "The agent becomes the counterparty.",
     description:
-      "A Sovereign agent owns its policy, balance, and operating history. It can survive teams, pay for inference, and earn fees directly.",
+      "A Sovereign agent owns its policy, balance, and history. It can outlast its founders, pay for its own inference, and earn fees directly.",
   },
 ];
 
@@ -45,7 +48,7 @@ const marketTiles = [
     kind: "Existing demand",
     stage: "Managed" as const,
     description:
-      "Pays contributors, tops reserves, opens receipts, and shows every allocation before the next vote.",
+      "Pays contributors, tops up reserves, and shows every allocation before the next vote.",
   },
   {
     category: "Lending",
@@ -53,7 +56,7 @@ const marketTiles = [
     kind: "Existing demand",
     stage: "Managed" as const,
     description:
-      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can replay why the action happened.",
+      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can review every decision.",
   },
   {
     category: "Funds",
@@ -61,7 +64,7 @@ const marketTiles = [
     kind: "Existing demand",
     stage: "Managed" as const,
     description:
-      "Runs portfolio rules against live markets while investors audit the day-by-day record instead of waiting for a memo.",
+      "Runs portfolio rules against live markets. Investors can check the daily record instead of waiting for a memo.",
   },
   {
     category: "Markets",
@@ -69,7 +72,7 @@ const marketTiles = [
     kind: "Existing demand",
     stage: "Civic" as const,
     description:
-      "Settles ambiguous questions with cited sources, model reasoning, and a public challenge surface.",
+      "Settles unclear questions with cited sources, model reasoning, and a public challenge window.",
   },
   {
     category: "Commerce",
@@ -85,7 +88,7 @@ const marketTiles = [
     kind: "New market",
     stage: "Sovereign" as const,
     description:
-      "Tunes fees, handles support, and explains changes under a mandate users can inspect before they opt in.",
+      "Adjusts fees, manages support, and explains changes under a public mandate users can read before they opt in.",
   },
   {
     category: "Games",
@@ -93,7 +96,7 @@ const marketTiles = [
     kind: "New market",
     stage: "Sovereign" as const,
     description:
-      "Shopkeepers, quest givers, and markets keep running around the clock, with receipts that prove the world is not rigged.",
+      "Shopkeepers, quest givers, and in-game markets that run continuously, with receipts players can verify.",
   },
   {
     category: "Research",
@@ -101,7 +104,7 @@ const marketTiles = [
     kind: "New market",
     stage: "Sovereign" as const,
     description:
-      "Labs pool data or compute without handing anyone a copy. The agent trains, signs steps, and pays contributors.",
+      "Labs pool data or compute without giving anyone a copy. The agent trains, signs steps, and pays contributors.",
   },
   {
     category: "Your ideas",
@@ -109,11 +112,21 @@ const marketTiles = [
     kind: "Open surface",
     stage: "Civic" as const,
     description:
-      "Anywhere two parties need one agent doing the job, and both want proof it did the job right.",
+      "Anywhere two parties need one agent to do the job, and both want proof it did the job right.",
   },
 ];
 
 export default function Markets() {
+  const [expanded, setExpanded] = useState(false);
+
+  const ctaTile = marketTiles[marketTiles.length - 1];
+  const featuredTiles = marketTiles.slice(0, 3);
+  const hiddenCount = marketTiles.length - featuredTiles.length - 1;
+
+  const visibleTiles = expanded
+    ? marketTiles
+    : [...featuredTiles, ctaTile];
+
   return (
     <section
       className="bg-white py-14 text-slate-900 dark:bg-transparent dark:text-white sm:py-16 lg:py-20"
@@ -133,16 +146,16 @@ export default function Markets() {
                 Existing demand / new markets
               </p>
               <h2 className="font-serif text-4xl font-normal leading-[1.03] tracking-[-0.02em] sm:text-5xl lg:text-[clamp(3rem,4.2vw,5.35rem)]">
-                Build an agent <em>people will trust.</em>
+                Build an agent <em>with a job.</em>
               </h2>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={1}>
             <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg lg:pb-1">
-              The first wedge is practical: verifiable automation for crypto markets,
-              treasuries, keepers, and funds. The larger opportunity is stranger and
-              bigger: agents that can become trusted market participants themselves.{" "}
+              Today, that means verifiable automation for treasuries, keepers, funds,
+              and crypto-native markets. Over time, agents themselves can become trusted
+              market participants.{" "}
               <a
                 href={EXTERNAL_LINKS.substackTAM}
                 target="_blank"
@@ -182,13 +195,14 @@ export default function Markets() {
           <ScrollReveal delay={4}>
             <div className="mt-9 lg:mt-10">
               <div className="grid grid-cols-1 overflow-hidden border border-slate-200 dark:border-white/10 sm:grid-cols-2 lg:grid-cols-3">
-                {marketTiles.map((tile, index) => {
-                  const isCta = index === marketTiles.length - 1;
+                {visibleTiles.map((tile) => {
+                  const isCta = tile === ctaTile;
+                  const ctaSpanClass = !expanded && isCta ? "lg:col-span-3" : "";
 
                   return (
                     <article
                       key={tile.title}
-                      className={`min-h-[168px] border-b p-4 transition-colors sm:border-r sm:p-5 lg:[&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 ${isCta
+                      className={`min-h-[168px] border-b p-4 transition-colors sm:border-r sm:p-5 lg:[&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 ${ctaSpanClass} ${isCta
                           ? "border-indigo-500/25 bg-indigo-600 text-white hover:bg-indigo-500 dark:border-indigo-300/20 dark:bg-indigo-500/90 dark:hover:bg-indigo-500"
                           : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/[0.04]"
                         }`}
@@ -242,6 +256,19 @@ export default function Markets() {
                   );
                 })}
               </div>
+
+              {!expanded && (
+                <div className="mt-6 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(true)}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-700 underline-offset-4 transition-colors hover:text-indigo-900 hover:underline dark:text-indigo-300 dark:hover:text-indigo-200"
+                  >
+                    Show {hiddenCount} more
+                    <span aria-hidden>→</span>
+                  </button>
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </div>

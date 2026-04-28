@@ -56,12 +56,12 @@ export default function Architecture() {
               How it works
             </p>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
-              Agents as <span className="italic">principals,</span> not processes.
+              The agent <span className="italic">owns itself.</span>
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
               On most runtimes, the operator holds your agent&apos;s keys, balance, and state.
-              On Theseus, the agent holds them itself. The runtime is what makes that stick,
-              so you don&apos;t have to trust the operator.
+              On Theseus, the agent holds them. You trust the runtime, not whoever happens
+              to be running it.
             </p>
           </div>
         </ScrollReveal>
@@ -129,19 +129,6 @@ export default function Architecture() {
           </div>
         </ScrollReveal>
 
-        {/* Why now */}
-        <ScrollReveal delay={2}>
-          <div className="mt-16 lg:mt-20 max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-4">
-              Why now
-            </p>
-            <p className="font-serif text-2xl sm:text-3xl lg:text-[2.25rem] font-normal tracking-[-0.012em] leading-[1.2] text-slate-900 dark:text-white">
-              This works now because two things finally line up: inference is cheap enough
-              for an agent to reason at length, and chains are fast enough to settle its
-              actions in real time. Theseus is the runtime built on top of both.
-            </p>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );

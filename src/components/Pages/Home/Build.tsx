@@ -21,7 +21,7 @@ export default function Build() {
             <div className="contents lg:flex lg:flex-col lg:gap-8">
               <ScrollReveal>
                 <h2 className="font-serif text-4xl sm:text-5xl lg:text-[clamp(2.5rem,3.4vw,4.25rem)] font-normal tracking-[-0.02em] leading-[1.04]">
-                  Build agents you can <em>trust</em>.
+                  Build agents that <em>show their work</em>.
                 </h2>
               </ScrollReveal>
 

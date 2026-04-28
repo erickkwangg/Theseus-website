@@ -15,22 +15,22 @@ export default function Footer() {
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
             <div className="space-y-5">
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
-                Run agents anyone
+                Ship your first
                 <br />
-                <span className="italic">can verify.</span>
+                <span className="italic">agent.</span>
               </h2>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/docs">
+                <Link href="/launch">
                   <Button className="rounded-md primary-cta px-6 py-2 text-sm w-full sm:w-auto">
+                    Launch on Theseus
+                  </Button>
+                </Link>
+                <Link href="/docs">
+                  <Button className="rounded-md ghost-cta px-6 py-2 text-sm w-full sm:w-auto">
                     Developer Docs
                   </Button>
                 </Link>
-                <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
-                  <Button className="rounded-md ghost-cta px-6 py-2 text-sm w-full sm:w-auto">
-                    Read Whitepaper
-                  </Button>
-                </a>
               </div>
             </div>
 
@@ -45,9 +45,6 @@ export default function Footer() {
                 />
                 <div className="text-base lg:text-lg font-light tracking-widest text-slate-900 dark:text-white">
                   THESEUS
-                </div>
-                <div className="text-[10px] text-slate-600 dark:text-slate-400 mt-1 tracking-wider">
-                  AI AGENCY
                 </div>
               </div>
             </div>

@@ -8,25 +8,25 @@ const BELIEFS = [
     number: "01",
     title: "Agents should be verifiable.",
     description:
-      "If an agent moves money, settles a market, or makes a judgment, anyone should be able to check what model ran, what it saw, and what it did.",
+      "If an agent moves money, settles a market, or makes a decision, anyone should be able to check which model was used, what it observed, and what actions it took.",
   },
   {
     number: "02",
     title: "Agents should be able to act.",
     description:
-      "Smart contracts wait for a human key. Theseus agents can wake up, evaluate conditions, run inference, and initiate the next step themselves.",
+      "Smart contracts only operate when a human approves a transaction. Theseus agents run on a schedule, respond to events, and start the next step on their own.",
   },
   {
     number: "03",
     title: "Agents should hold their own state.",
     description:
-      "Identity, balance, policy, and memory belong in the runtime, not inside a private server that can disappear or change the rules.",
+      "Identity, balance, policy, and memory exist in the runtime, not on a private server that the operator can shut down or change.",
   },
   {
     number: "04",
     title: "Agents should work between strangers.",
     description:
-      "Two parties should be able to rely on the same agent without trusting its operator. The receipt is the common ground.",
+      "Two parties should be able to rely on the same agent without trusting the entity that runs it. The receipt is what they both verify.",
   },
 ];
 
