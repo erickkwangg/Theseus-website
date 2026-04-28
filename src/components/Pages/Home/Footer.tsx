@@ -16,17 +16,19 @@ export default function Footer() {
               <span className="italic">first-class citizens.</span>
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/docs">
-                <Button className="rounded-md primary-cta px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
-                  Developer Docs
-                </Button>
+            <div className="flex flex-wrap items-center gap-6">
+              <Link
+                href="/launch"
+                className="cta-flat inline-flex items-center px-6 py-3 text-sm font-medium tracking-wide"
+              >
+                Launch on Theseus
               </Link>
-              <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer">
-                <Button className="rounded-md ghost-cta px-6 lg:px-8 py-2 lg:py-3 text-sm lg:text-base w-full sm:w-auto">
-                  Read Whitepaper
-                </Button>
-              </a>
+              <Link
+                href="/docs"
+                className="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+              >
+                Read the docs →
+              </Link>
             </div>
           </div>
 

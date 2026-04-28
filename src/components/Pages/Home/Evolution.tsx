@@ -98,13 +98,13 @@ export default function Evolution() {
               <div key={index} className="text-center relative">
                 {/* Icon */}
                 <div className="flex justify-center mb-5">
-                  <div 
-                    className={`w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center 
-                                bg-slate-900/70 rounded-full border transition-all duration-500
-                                ${activeIndex >= index 
+                  <div
+                    className={`w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center
+                                bg-slate-100 dark:bg-slate-900/70 rounded-full border transition-all duration-500
+                                ${activeIndex >= index
                                   ? item.year === "Now"
-                                    ? 'border-green-400 shadow-[0_0_30px_rgba(74,222,128,0.35)] scale-105'
-                                    : 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105'
+                                    ? 'border-green-500 dark:border-green-400 shadow-[0_0_24px_rgba(74,222,128,0.25)] dark:shadow-[0_0_30px_rgba(74,222,128,0.35)] scale-105'
+                                    : 'border-indigo-500 dark:border-indigo-400 shadow-[0_0_24px_rgba(99,102,241,0.22)] dark:shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105'
                                   : 'border-slate-200 dark:border-slate-700'}`}
                   >
                     <Image
@@ -113,7 +113,7 @@ export default function Evolution() {
                       width={44}
                       height={44}
                       className={`w-11 h-11 lg:w-12 lg:h-12 object-contain transition-all duration-500 ${
-                        item.invert ? "brightness-0 invert" : ""
+                        item.invert ? "brightness-0 dark:invert" : "brightness-0 dark:brightness-100"
                       } ${
                         activeIndex >= index ? "opacity-100" : "opacity-60 grayscale"
                       }`}
