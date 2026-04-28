@@ -90,10 +90,10 @@ export default function Markets() {
               Three ways to build
             </p>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
-              Same runtime, <span className="italic">different intent.</span>
+              Build an agent <span className="italic">people will trust.</span>
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300">
-              Theseus serves builders who want full autonomy and builders who want trust properties without it.{" "}
+              Same runtime, different intent — full autonomy, or trust properties without it.{" "}
               <a
                 href={EXTERNAL_LINKS.substackTAM}
                 target="_blank"

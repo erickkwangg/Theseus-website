@@ -15,7 +15,6 @@ export const EXTERNAL_LINKS = {
 // Navigation items shared between Header and Footer
 export const NAV_ITEMS = [
   { href: "/", label: "Home", internal: true },
-  { href: "#about", label: "About", internal: true },
   { href: "#market", label: "Use Cases", internal: true },
   { href: "/docs", label: "Docs", internal: true },
   { href: EXTERNAL_LINKS.substack, label: "Blog", internal: false },

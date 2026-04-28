@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function SovereignAgentsSection() {
   return (
-    <section className="relative py-24 lg:py-32 px-6 overflow-hidden section-soft-divider">
+    <section className="relative py-24 lg:py-32 px-6 overflow-hidden section-soft-divider no-top-divider">
       <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
 
       {/* Title */}
