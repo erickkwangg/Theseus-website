@@ -127,12 +127,21 @@ export function SovereignAgentsSection() {
           </div>
         </div>
 
-        <div className="mt-6 text-center">
-          <Link
-            href="/playground"
-            className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+        <div className="mt-6 flex flex-col items-center gap-2 text-center">
+          <span
+            aria-disabled="true"
+            className="inline-flex cursor-not-allowed items-center gap-2 rounded-sm border border-slate-300 bg-white/60 px-3 py-1.5 text-sm text-slate-500 opacity-70 dark:border-slate-700/70 dark:bg-slate-900/50 dark:text-slate-400"
           >
-            Try it in the playground →
+            Try it in the Playground
+            <span className="rounded-sm bg-slate-200 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+              Coming soon
+            </span>
+          </span>
+          <Link
+            href="#build-notify"
+            className="text-xs text-slate-500 underline underline-offset-4 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+          >
+            Notify me when it&apos;s live →
           </Link>
         </div>
       </div>

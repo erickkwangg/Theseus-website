@@ -1,0 +1,36 @@
+---
+description: Stack conventions — Next.js, React, Tailwind, shadcn/ui
+alwaysApply: true
+---
+
+# Stack
+
+- **Next.js 15 (App Router)** with Turbopack — routes live in `src/app/`.
+- **React 19** — Server Components by default; add `"use client"` only when the file truly needs browser APIs, state, or effects.
+- **Tailwind CSS v4** — single source of styling. Theme tokens live in `src/app/globals.css` (`@theme`, CSS variables). Avoid ad-hoc `<style>` blocks and inline `style={}` unless dynamic.
+- **shadcn/ui** — components live in `src/components/ui/`. Add new ones via `npx shadcn@latest add <name>`. Compose them; don't fork them unless necessary.
+- **TypeScript** — strict, no `any`. Type props explicitly.
+
+## Conventions
+
+- Class merging: use `cn()` from `@/lib/utils` (clsx + tailwind-merge) — never string-concatenate Tailwind classes.
+- Variants: use `class-variance-authority` (`cva`) for component variants, not prop-driven `className` switches.
+- Icons: `lucide-react` only.
+- Imports: use the `@/` alias for anything in `src/`.
+- File naming: kebab-case for files, PascalCase for component exports.
+
+```tsx
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+export function CTA({ className }: { className?: string }) {
+  return <Button className={cn("w-full md:w-auto", className)}>Get started</Button>;
+}
+```
+
+## Don't
+
+- Don't install a new UI library — extend shadcn/ui instead.
+- Don't reach for `styled-components`, CSS Modules, or Sass.
+- Don't add a state manager (Redux/Zustand/etc.) — start with React state and URL state.
+- Don't create a `pages/` directory — this project is App Router only.
