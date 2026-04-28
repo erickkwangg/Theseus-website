@@ -24,7 +24,7 @@ export default function ComparisonPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Theseus vs. Ethereum
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Ethereum contracts need a human to act. Theseus agents don&apos;t.
         </p>
       </div>
@@ -58,15 +58,15 @@ export default function ComparisonPage() {
                 <div key={item.title} className="flex items-start gap-3 p-3 bg-red-950/20 border border-red-900/30 rounded-lg">
                   <X className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="font-medium text-white text-sm">{item.title}</span>
-                    <p className="text-gray-400 text-xs mt-0.5">{item.desc}</p>
+                    <span className="font-medium text-slate-900 dark:text-white text-sm">{item.title}</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-4 p-3 bg-gray-900 border border-gray-800 rounded-lg">
-              <p className="text-sm text-gray-400">
-                <strong className="text-white">Note:</strong> Services like Chainlink Keepers are off-chain bots with private keys that trigger contracts. The contract itself is still reactive.
+            <div className="mt-4 p-3 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-lg">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                <strong className="text-slate-900 dark:text-white">Note:</strong> Services like Chainlink Keepers are off-chain bots with private keys that trigger contracts. The contract itself is still reactive.
               </p>
             </div>
           </div>
@@ -87,8 +87,8 @@ export default function ComparisonPage() {
                 <div key={item.title} className="flex items-start gap-3 p-3 bg-indigo-950/20 border border-indigo-900/30 rounded-lg">
                   <CheckCircle className="h-4 w-4 text-indigo-300 mt-0.5 shrink-0" />
                   <div>
-                    <span className="font-medium text-white text-sm">{item.title}</span>
-                    <p className="text-gray-400 text-xs mt-0.5">{item.desc}</p>
+                    <span className="font-medium text-slate-900 dark:text-white text-sm">{item.title}</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -98,15 +98,15 @@ export default function ComparisonPage() {
           {/* Analogy */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="docs-card">
-              <h4 className="font-medium mb-2 text-gray-300">Ethereum Smart Contract</h4>
-              <p className="text-gray-400 text-sm">
-                Like a <strong className="text-white">vending machine</strong>: Contains logic but someone must press the buttons. Cannot check inventory or restock itself.
+              <h4 className="font-medium mb-2 text-gray-700 dark:text-gray-300">Ethereum Smart Contract</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Like a <strong className="text-slate-900 dark:text-white">vending machine</strong>: Contains logic but someone must press the buttons. Cannot check inventory or restock itself.
               </p>
             </div>
             <div className="docs-card border-indigo-900/50">
               <h4 className="font-medium mb-2 text-indigo-300">Theseus Agent</h4>
-              <p className="text-gray-400 text-sm">
-                Like an <strong className="text-white">autonomous shopkeeper</strong>: Wakes up, checks inventory, makes restocking decisions, interacts with suppliers independently.
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Like an <strong className="text-slate-900 dark:text-white">autonomous shopkeeper</strong>: Wakes up, checks inventory, makes restocking decisions, interacts with suppliers independently.
               </p>
             </div>
           </div>
@@ -121,38 +121,38 @@ export default function ComparisonPage() {
               <thead>
                 <tr>
                   <th>Aspect</th>
-                  <th className="text-gray-400">Ethereum Contracts</th>
+                  <th className="text-gray-600 dark:text-gray-400">Ethereum Contracts</th>
                   <th className="text-indigo-300">Theseus Agents</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="bg-indigo-950/10">
-                  <td className="font-medium text-white">Key custody</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Key custody</td>
                   <td>Requires human-controlled private keys</td>
                   <td className="text-indigo-300">Self-sovereign — no keys needed</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Execution</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Execution</td>
                   <td>Reactive — triggered externally</td>
                   <td>Proactive — initiates autonomously</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Intelligence</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Intelligence</td>
                   <td>Deterministic logic only</td>
                   <td>ML inference on-chain</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Logic</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Logic</td>
                   <td>Simple conditionals</td>
                   <td>Agentic reasoning</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Inference</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Inference</td>
                   <td>Not possible</td>
                   <td>Native with verifiable proofs</td>
                 </tr>
                 <tr>
-                  <td className="font-medium text-white">Assets</td>
+                  <td className="font-medium text-slate-900 dark:text-white">Assets</td>
                   <td>Holds but needs triggers to move</td>
                   <td>Autonomous control</td>
                 </tr>
@@ -164,10 +164,10 @@ export default function ComparisonPage() {
         {/* Visual Comparison */}
         <section className="mb-12">
           <h2 id="visual-comparison" className="text-2xl font-medium mb-4">Visual Comparison</h2>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Ethereum requires external EOAs to initiate everything. Theseus agents wake up and act autonomously.
           </p>
-          <div className="bg-black border border-gray-800 rounded-lg p-4 overflow-x-auto">
+          <div className="bg-black border border-slate-200 dark:border-gray-800 rounded-lg p-4 overflow-x-auto">
             <Image 
               src="/theseus-vs-ethereum.png" 
               alt="Theseus vs Ethereum interaction flow comparison" 
@@ -188,8 +188,8 @@ export default function ComparisonPage() {
           
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
-              <h4 className="font-medium mb-3 text-gray-300">Smart Contract Deployment</h4>
-              <ol className="space-y-2 text-sm text-gray-400">
+              <h4 className="font-medium mb-3 text-gray-700 dark:text-gray-300">Smart Contract Deployment</h4>
+              <ol className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-2"><span className="text-gray-600">1.</span> Write Solidity code</li>
                 <li className="flex items-start gap-2"><span className="text-gray-600">2.</span> Compile to EVM bytecode</li>
                 <li className="flex items-start gap-2"><span className="text-gray-600">3.</span> Deploy (costs gas)</li>
@@ -199,7 +199,7 @@ export default function ComparisonPage() {
             </div>
             <div className="docs-card border-indigo-900/50">
               <h4 className="font-medium mb-3 text-indigo-300">Theseus Agent Deployment</h4>
-              <ol className="space-y-2 text-sm text-gray-400">
+              <ol className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-2"><span className="text-indigo-400">1.</span> Write agent code (Python, Rust, SHIP)</li>
                 <li className="flex items-start gap-2"><span className="text-indigo-400">2.</span> Add models, autonomy, triggers</li>
                 <li className="flex items-start gap-2"><span className="text-indigo-400">3.</span> Deploy with initial $THE</li>
@@ -223,14 +223,14 @@ export default function ComparisonPage() {
             Expanded Design Space
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Autonomous execution and verifiable inference enable applications that are not practical on existing platforms.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
-              <h4 className="font-medium mb-3 text-gray-300">Ethereum Enables</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <h4 className="font-medium mb-3 text-gray-700 dark:text-gray-300">Ethereum Enables</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>• Simple DeFi (AMMs, lending)</li>
                 <li>• Basic DAOs (token voting)</li>
                 <li>• Objective oracles</li>
@@ -239,7 +239,7 @@ export default function ComparisonPage() {
             </div>
             <div className="docs-card border-green-900/50">
               <h4 className="font-medium mb-3 text-green-400">Theseus Enables</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>• Subjective adjudication</li>
                 <li>• Complex governance with reasoning</li>
                 <li>• Autonomous agents with goals</li>
@@ -261,8 +261,8 @@ export default function ComparisonPage() {
                 <div key={item.name} className="flex items-start gap-3">
                   <span className={`${item.color} font-bold text-xl w-6`}>{item.symbol}</span>
                   <div>
-                    <h4 className="text-white font-medium text-sm">{item.name}</h4>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                    <h4 className="text-slate-900 dark:text-white font-medium text-sm">{item.name}</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -275,7 +275,7 @@ export default function ComparisonPage() {
               <TrendingUp className="h-5 w-5" />
               Market Opportunity
             </h3>
-            <p className="text-gray-300 text-sm mb-4">
+            <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
               Ethereum&apos;s market cap is tied to the value of applications on top of it. Sovereign AI unlocks three new categories that are not addressable today:
             </p>
             <div className="space-y-3 mb-6">
@@ -285,8 +285,8 @@ export default function ComparisonPage() {
                 { title: "Trustless, Human-Owned AI", desc: "User-controlled agents that exchange value and share data on a censorship-resistant layer, solving the agent-to-agent trust problem." },
               ].map((item) => (
                 <div key={item.title} className="p-3 bg-green-950/20 border border-green-900/30 rounded-lg">
-                  <span className="font-medium text-white text-sm">{item.title}</span>
-                  <p className="text-gray-400 text-xs mt-1">{item.desc}</p>
+                  <span className="font-medium text-slate-900 dark:text-white text-sm">{item.title}</span>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -302,7 +302,7 @@ export default function ComparisonPage() {
                 href={EXTERNAL_LINKS.substackEvolution}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
+                className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-slate-900 dark:hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
               >
                 Read the Theseus Thesis
               </a>
@@ -311,7 +311,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/introduction" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Previous</p>

@@ -68,7 +68,7 @@ export default function Evolution() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="text-white py-20 lg:py-28 border-t border-slate-800/70 section-soft-divider">
+    <section ref={sectionRef} className="text-slate-900 dark:text-white py-20 lg:py-28 border-t border-slate-200 dark:border-slate-800/70 section-soft-divider">
       <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <ScrollReveal>
@@ -105,7 +105,7 @@ export default function Evolution() {
                                   ? item.year === "Now"
                                     ? 'border-green-400 shadow-[0_0_30px_rgba(74,222,128,0.35)] scale-105'
                                     : 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.35)] scale-105'
-                                  : 'border-slate-700'}`}
+                                  : 'border-slate-200 dark:border-slate-700'}`}
                   >
                     <Image
                       src={item.icon}
@@ -130,12 +130,12 @@ export default function Evolution() {
                 
                 {/* Name */}
                 <h3 className={`text-xl lg:text-2xl font-light mb-2 transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-white' : 'text-slate-400'
+                  activeIndex >= index ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'
                 }`}>{item.name}</h3>
                 
                 {/* Unlock */}
                 <p className={`text-sm min-h-[3rem] transition-colors duration-500 ${
-                  activeIndex >= index ? 'text-slate-300' : 'text-slate-500'
+                  activeIndex >= index ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500'
                 }`}>{item.unlock}</p>
 
                 {/* Constraint */}
@@ -155,7 +155,7 @@ export default function Evolution() {
         <div className="mt-8 text-center">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-slate-400 text-sm hover:text-indigo-300 transition-colors inline-flex items-center gap-2 button-press"
+            className="text-slate-600 dark:text-slate-400 text-sm hover:text-indigo-300 transition-colors inline-flex items-center gap-2 button-press"
           >
             {expanded ? "Hide" : "Why does this matter?"}
             <span className={`transform transition-transform ${expanded ? "rotate-180" : ""}`}>
@@ -164,7 +164,7 @@ export default function Evolution() {
           </button>
           
           <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-72 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
-            <p className="text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
+            <p className="text-slate-700 dark:text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
               ChatGPT proved AI could reason. OpenClaw proved it could act. But neither gives agents native
               identity, settlement, or economic persistence. Theseus closes that gap: agents with full
               agency that hold their own credentials, manage their own balances, and persist autonomously,

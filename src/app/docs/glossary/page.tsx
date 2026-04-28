@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BookOpen, ArrowRight, Search } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 
 const glossaryTerms = [
   {
@@ -16,14 +16,17 @@ const glossaryTerms = [
   {
     term: "Autonomy Flag",
     definition: "A registration field that determines whether an agent is human-gated (0) or fully sovereign (1). Sovereign agents can initiate transactions on their own.",
+    link: "/docs/agents#agent-registration"
   },
   {
     term: "EOA",
     definition: "Externally Owned Account. In Ethereum, an account controlled by a private key (human). Smart contracts cannot act without EOA triggers.",
+    link: "/docs/comparison"
   },
   {
     term: "FLOPs",
     definition: "Floating-Point Operations. The unit used to measure computational cost in AIVM. Gas is priced based on FLOPs rather than generic opcodes.",
+    link: "/docs/tokenomics#gas"
   },
   {
     term: "Sovereign Agent",
@@ -48,7 +51,7 @@ const glossaryTerms = [
   {
     term: "Prover",
     definition: "A network participant that runs full model inference and generates Tensor Commit proofs. Selected via VRF lottery based on stake and hardware capacity.",
-    link: "/docs/architecture"
+    link: "/docs/architecture#selection"
   },
   {
     term: "SHIP",
@@ -68,21 +71,22 @@ const glossaryTerms = [
   {
     term: "Terkle Tree",
     definition: "A generalization of Merkle Trees for tensors. Enables efficient cryptographic verification of multi-dimensional data like model weights.",
-    link: "/docs/tensor-commits"
+    link: "/docs/tensor-commits#terkle-trees"
   },
   {
     term: "TheseusStore",
     definition: "The decentralized storage layer that holds model weights and agent context. Uses Reed-Solomon encoding and storage-miner staking.",
-    link: "/docs/architecture"
+    link: "/docs/architecture#theseus-store"
   },
   {
     term: "Verifier",
     definition: "A validator that checks Tensor Commit proofs without re-running inference. Verification takes ~2ms per check.",
-    link: "/docs/architecture"
+    link: "/docs/architecture#selection"
   },
   {
     term: "VRF",
     definition: "Verifiable Random Function. Provides deterministic randomness for prover selection and other on-chain randomness needs.",
+    link: "/docs/architecture#selection"
   },
 ];
 
@@ -105,19 +109,13 @@ export default function GlossaryPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Glossary
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Key terms and definitions used in Theseus.
         </p>
       </div>
       
       <div className="prose prose-invert max-w-none">
-        {/* Quick Stats */}
-        <div className="docs-card mb-8">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <Search className="h-4 w-4" />
-            <span>{glossaryTerms.length} terms defined</span>
-          </div>
-        </div>
+        <p className="text-sm text-gray-500 mb-6">{glossaryTerms.length} terms defined.</p>
 
         {/* Glossary Terms */}
         <div className="space-y-4">
@@ -131,10 +129,10 @@ export default function GlossaryPage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h2 className="text-lg font-medium mb-2 text-white group-hover:text-indigo-300 transition-colors">
+                    <h2 className="text-lg font-medium mb-2 text-slate-900 dark:text-white group-hover:text-indigo-300 transition-colors">
                       {item.term}
                     </h2>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                       {item.definition}
                     </p>
                   </div>
@@ -152,7 +150,7 @@ export default function GlossaryPage() {
         </div>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 mt-12">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 mt-12">
           <Link 
             href="/docs"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg transition-all font-medium no-underline"

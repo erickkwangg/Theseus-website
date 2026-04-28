@@ -13,6 +13,7 @@ import {
 import { Menu } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,29 +28,29 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "bg-slate-950/85 backdrop-blur-xl border-b border-slate-700/50" 
-        : "bg-slate-950/35 backdrop-blur-md"
+      isScrolled
+        ? "bg-white/85 dark:bg-slate-950/85 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700/50"
+        : "bg-white/40 dark:bg-slate-950/35 backdrop-blur-md"
     }`}>
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-4">
         <nav className="flex items-center justify-between">
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+          <Link href="/" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
             Home
           </Link>
-          <Link href="#about" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
-            About
+          <Link href="#about" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
+            Features
           </Link>
-          <Link href="#market" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+          <Link href="#market" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
             Use Cases
           </Link>
-          <Link href="/docs" className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium">
+          <Link href="/docs" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
             Docs
           </Link>
           <a
             href={EXTERNAL_LINKS.substack}
-            className="text-slate-50 hover:text-indigo-300 transition-colors text-sm font-medium"
+            className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -61,45 +62,46 @@ export default function Header() {
           >
             Launch
           </Link>
+          <ThemeToggle className="text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60" />
         </div>
         {/* Mobile Hamburger Menu */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-slate-100 hover:bg-slate-800/70">
+              <Button variant="ghost" size="icon" className="text-slate-700 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/70">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-slate-950 text-white border-r border-slate-800">
+            <SheetContent side="left" className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border-r border-slate-200 dark:border-slate-800">
               <SheetTitle hidden />
               <nav className="flex flex-col space-y-4 mt-8 px-4">
                 <Link
                   href="/"
-                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
+                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                 >
                   Home
                 </Link>
                 <Link
                   href="#about"
-                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
+                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                 >
-                  About
+                  Features
                 </Link>
                 <Link
                   href="#market"
-                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
+                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                 >
                   Use Cases
                 </Link>
                 <Link
                   href="/docs"
-                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
+                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                 >
                   Docs
                 </Link>
                 <a
                   href={EXTERNAL_LINKS.substack}
-                  className="text-slate-100 hover:text-indigo-300 transition-colors text-lg"
+                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

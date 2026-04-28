@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 
 export function SovereignAgentsSection() {
   const [visibleEvents, setVisibleEvents] = useState<number[]>([])
@@ -122,20 +123,27 @@ export function SovereignAgentsSection() {
     <section className="relative py-24 lg:py-32 px-6 overflow-hidden section-soft-divider">
       <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
       {/* Title Section */}
-      <div className="max-w-7xl mx-auto mb-20 text-center relative z-10">
-        <h2 className="text-5xl md:text-6xl font-light text-white mb-4 tracking-tight">Sovereign Agents</h2>
-        <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto mb-12 text-center relative z-10">
+        <h2 className="text-5xl md:text-6xl font-light text-slate-900 dark:text-white mb-4 tracking-tight">Sovereign Agents</h2>
+        <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto mb-6">
           Agents powered by SHIP DSL, executed and verified on Theseus.
         </p>
+        <Link
+          href="/playground"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-indigo-400/40 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 hover:text-slate-900 dark:hover:text-white transition-all text-sm"
+        >
+          Try it in the playground
+          <span aria-hidden>→</span>
+        </Link>
       </div>
 
       {/* Two Column Layout */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
         {/* Left Column - IDE Window */}
         <div className="relative">
-          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-slate-700/60 shadow-2xl">
+          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-slate-200 dark:border-slate-700/60 shadow-2xl">
             {/* IDE Chrome */}
-            <div className="bg-[#111115] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
+            <div className="bg-[#111115] px-4 py-2 flex items-center gap-2 border-b border-slate-200 dark:border-gray-800/50">
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -191,7 +199,7 @@ export function SovereignAgentsSection() {
                   </div>
                   <div>{"}"}</div>
                   <div className="mb-2"></div>
-                  <div className="text-gray-500">{`// Entry: parse prompt and route through model + contract call`}</div>
+                  <div className="text-slate-500 dark:text-gray-500">{`// Entry: parse prompt and route through model + contract call`}</div>
                   <div>
                     <span className="text-[#4BD3FF]">#[entry]</span>
                   </div>
@@ -237,7 +245,7 @@ export function SovereignAgentsSection() {
                   <div className="pl-4">
                     contracts.call(<span className="text-[#FFD166]">PREDICTION_MARKET_CONTRACT</span>, call_data, 0n, 10000000000n);
                   </div>
-                  <div className="pl-4 text-gray-500">{`// Contract later triggers resolver_oracle.ship for final resolution`}</div>
+                  <div className="pl-4 text-slate-500 dark:text-gray-500">{`// Contract later triggers resolver_oracle.ship for final resolution`}</div>
                   <div>{"}"}</div>
                 </div>
               </div>
@@ -248,7 +256,7 @@ export function SovereignAgentsSection() {
         {/* Right Column - Animated Execution Flow */}
         <div className="relative flex flex-col gap-6">
           <svg
-            className="absolute inset-0 w-full h-full opacity-30 pointer-events-none"
+            className="absolute inset-0 w-full h-full opacity-0 dark:opacity-30 pointer-events-none"
             viewBox="0 0 600 800"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -436,7 +444,7 @@ export function SovereignAgentsSection() {
               <div className="flex flex-col gap-1">
                 <div className="text-sm text-gray-400 font-medium">Alice</div>
                 <div className="bg-gray-800/50 rounded-2xl rounded-tl-sm px-5 py-3 max-w-md border border-gray-700/50">
-                  <p className="text-white">Create a market: Will BTC close above $100k by Friday UTC?</p>
+                  <p className="text-slate-900 dark:text-white">Create a market: Will BTC close above $100k by Friday UTC?</p>
                 </div>
               </div>
             </div>
@@ -493,7 +501,7 @@ export function SovereignAgentsSection() {
                             <span>{event.title}</span>
                             {isVerified && (
                               <span className="animate-in fade-in slide-in-from-left-2 duration-300 flex items-center gap-1">
-                                <span className="text-gray-500">→</span>
+                                <span className="text-slate-500 dark:text-gray-500">→</span>
                                 <span className="text-[#4BD3FF]">{event.titleVerified}</span>
                               </span>
                             )}
@@ -535,7 +543,7 @@ export function SovereignAgentsSection() {
                     <div className="flex items-center gap-3">
                       <div className="text-4xl">📈</div>
                       <div>
-                        <p className="text-white font-medium">Market created (ID #42): BTC &gt; $100k at Friday close.</p>
+                        <p className="text-slate-900 dark:text-white font-medium">Market created (ID #42): BTC &gt; $100k at Friday close.</p>
                       </div>
                     </div>
                   </div>
@@ -560,7 +568,7 @@ export function SovereignAgentsSection() {
                     <div className="flex items-center gap-3">
                       <div className="text-4xl">✅</div>
                       <div>
-                        <p className="text-white font-medium">Resolved: BTC closed at $101,240. Winning option: Yes.</p>
+                        <p className="text-slate-900 dark:text-white font-medium">Resolved: BTC closed at $101,240. Winning option: Yes.</p>
                       </div>
                     </div>
                   </div>
@@ -574,7 +582,7 @@ export function SovereignAgentsSection() {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm text-emerald-300 font-medium">Prediction Market Contract</div>
                   <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/5 border border-emerald-400/30 rounded-2xl rounded-tl-sm px-6 py-3 max-w-md shadow-lg shadow-emerald-500/10">
-                    <p className="text-white font-medium text-sm">Settlement complete and state root updated on-chain.</p>
+                    <p className="text-slate-900 dark:text-white font-medium text-sm">Settlement complete and state root updated on-chain.</p>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,7 @@ import { EXTERNAL_LINKS } from "@/config/links";
 
 export default function Footer() {
   return (
-    <footer className="footer-section-bg text-white py-14 lg:py-24 relative section-soft-divider">
+    <footer className="footer-section-bg text-slate-900 dark:text-white py-14 lg:py-24 relative section-soft-divider">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 lg:space-y-8">
@@ -31,8 +31,8 @@ export default function Footer() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <div className="w-64 h-64 lg:w-72 lg:h-72 flex flex-col items-center justify-center 
-                            border border-slate-700/70 bg-gradient-to-br from-slate-900/70 to-slate-950 
+            <div className="w-64 h-64 lg:w-72 lg:h-72 flex flex-col items-center justify-center
+                            border border-slate-200 dark:border-slate-700/70 bg-gradient-to-br from-white to-slate-100 dark:from-slate-900/70 dark:to-slate-950
                             rounded-xl hover:border-indigo-400/40 transition-all duration-300">
               <Image
                 src={logo}
@@ -41,10 +41,10 @@ export default function Footer() {
                 height={80}
                 className="w-20 h-20 lg:w-24 lg:h-24 mb-6 opacity-90"
               />
-              <div className="text-xl lg:text-2xl font-light tracking-widest text-white">
+              <div className="text-xl lg:text-2xl font-light tracking-widest text-slate-900 dark:text-white">
                 THESEUS
               </div>
-              <div className="text-xs text-slate-400 mt-2 tracking-wider">
+              <div className="text-xs text-slate-600 dark:text-slate-400 mt-2 tracking-wider">
                 AI AGENCY
               </div>
             </div>
@@ -53,44 +53,50 @@ export default function Footer() {
 
         <div className="glass-panel mt-12 lg:mt-16 p-6 lg:p-8 rounded-xl">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <p className="text-slate-400 text-xs lg:text-sm">
-              © 2025 THESEUS AI LABS
+            <p className="text-slate-600 dark:text-slate-400 text-xs lg:text-sm">
+              © 2026 THESEUS AI LABS
             </p>
 
             <nav className="flex flex-wrap justify-center gap-4 lg:gap-6">
               <Link
                 href="/"
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
               >
                 Home
               </Link>
               <Link
                 href="#about"
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
               >
-                About
+                Features
               </Link>
               <Link
                 href="#market"
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
               >
                 Use Cases
               </Link>
               <Link
                 href="/docs"
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
               >
                 Docs
               </Link>
               <Link
+                href="/playground"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+              >
+                Playground
+              </Link>
+              <Link
                 href="/launch"
-                className="text-indigo-300 hover:text-white transition-colors text-xs lg:text-sm font-medium"
+                className="text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-white transition-colors text-xs lg:text-sm font-medium"
               >
                 Launch
               </Link>
               <a
                 href={EXTERNAL_LINKS.substack}
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -98,7 +104,7 @@ export default function Footer() {
               </a>
               <a
                 href={EXTERNAL_LINKS.whitepaper}
-                className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
+                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
               >

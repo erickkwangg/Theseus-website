@@ -24,7 +24,7 @@ export default function ArchitecturePage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           System Architecture
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Three-layer architecture built for AI workloads: execution, storage, and consensus working as one system.
         </p>
       </div>
@@ -61,7 +61,7 @@ export default function ArchitecturePage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2">Execution Layer: AIVM</h3>
-                  <p className="text-gray-400 text-sm mb-3">Deterministic tensor-native runtime with Tensor Commits:</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Deterministic tensor-native runtime with Tensor Commits:</p>
                   <div className="flex flex-wrap gap-2 text-xs">
                     <span className="px-2 py-1 bg-gray-800 rounded">Tensor operations</span>
                     <span className="px-2 py-1 bg-gray-800 rounded">Agent scheduling</span>
@@ -79,7 +79,7 @@ export default function ArchitecturePage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2">Availability Layer: TheseusStore</h3>
-                  <p className="text-gray-400 text-sm mb-3">Erasure-coded storage for model weights and agent contexts:</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Erasure-coded storage for model weights and agent contexts:</p>
                   <div className="flex flex-wrap gap-2 text-xs">
                     <span className="px-2 py-1 bg-gray-800 rounded">Reed-Solomon encoding</span>
                     <span className="px-2 py-1 bg-gray-800 rounded">RAG contexts</span>
@@ -97,7 +97,7 @@ export default function ArchitecturePage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2">Consensus Layer: Proof of Stake</h3>
-                  <p className="text-gray-400 text-sm mb-3">HotStuff BFT with AI-specific requirements:</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">HotStuff BFT with AI-specific requirements:</p>
                   <div className="flex flex-wrap gap-2 text-xs">
                     <span className="px-2 py-1 bg-gray-800 rounded">Valid model roots</span>
                     <span className="px-2 py-1 bg-gray-800 rounded">VRF selection</span>
@@ -125,15 +125,15 @@ export default function ArchitecturePage() {
 body { Transaction[] }`}</CodeBlock>
 
           <div className="docs-card mt-4">
-            <p className="text-gray-400 text-sm mb-3">A block cannot finalize unless both conditions hold:</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">A block cannot finalize unless both conditions hold:</p>
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2">
                 <span className="text-indigo-300 font-bold">1.</span>
-                <div><strong className="text-white">Inference integrity:</strong> <span className="text-gray-400">Every inference must include a valid Tensor Commit proof</span></div>
+                <div><strong className="text-slate-900 dark:text-white">Inference integrity:</strong> <span className="text-gray-600 dark:text-gray-400">Every inference must include a valid Tensor Commit proof</span></div>
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-indigo-300 font-bold">2.</span>
-                <div><strong className="text-white">Agents availability:</strong> <span className="text-gray-400">Every stored condition must be provably retrievable</span></div>
+                <div><strong className="text-slate-900 dark:text-white">Agents availability:</strong> <span className="text-gray-600 dark:text-gray-400">Every stored condition must be provably retrievable</span></div>
               </div>
             </div>
           </div>
@@ -148,20 +148,20 @@ body { Transaction[] }`}</CodeBlock>
             TheseusStore Deep Dive
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             TheseusStore is the availability layer, handling gigabytes of model weights and agent context on-chain.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">Model Storage</h3>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Immutable weights (Reed-Solomon encoded) addressed by content hash. Cold storage optimized, enforced by miner staking.
               </p>
             </div>
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">Context Storage</h3>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Mutable agent data (conversations, embeddings, RAG). Reed-Solomon encoded with faster retrieval.
               </p>
             </div>
@@ -169,11 +169,11 @@ body { Transaction[] }`}</CodeBlock>
 
           <div className="docs-card">
             <h3 className="text-lg font-medium mb-3">Agent State Synchronization</h3>
-            <p className="text-gray-400 text-sm mb-3">Dual-ledger pattern:</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Dual-ledger pattern:</p>
             <div className="space-y-2 text-sm">
-              <div><strong className="text-white">On-Chain:</strong> <span className="text-gray-400">Balances, model versions, config in agent state root</span></div>
-              <div><strong className="text-white">Off-Chain:</strong> <span className="text-gray-400">Large context (PDFs, embeddings) in TheseusStore with memory anchors</span></div>
-              <div><strong className="text-white">Sync:</strong> <span className="text-gray-400">libp2p diff-sync with last-write-wins + optional semantic merge</span></div>
+              <div><strong className="text-slate-900 dark:text-white">On-Chain:</strong> <span className="text-gray-600 dark:text-gray-400">Balances, model versions, config in agent state root</span></div>
+              <div><strong className="text-slate-900 dark:text-white">Off-Chain:</strong> <span className="text-gray-600 dark:text-gray-400">Large context (PDFs, embeddings) in TheseusStore with memory anchors</span></div>
+              <div><strong className="text-slate-900 dark:text-white">Sync:</strong> <span className="text-gray-600 dark:text-gray-400">libp2p diff-sync with last-write-wins + optional semantic merge</span></div>
             </div>
           </div>
         </section>
@@ -185,7 +185,7 @@ body { Transaction[] }`}</CodeBlock>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">Provers</h3>
-              <p className="text-gray-400 text-sm mb-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
                 Run full forward passes. VRF selects by capacity + stake.
               </p>
               <div className="text-xs text-gray-500">
@@ -194,7 +194,7 @@ body { Transaction[] }`}</CodeBlock>
             </div>
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">Verifiers</h3>
-              <p className="text-gray-400 text-sm mb-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
                 All active verifiers check every inference.
               </p>
               <div className="grid grid-cols-2 gap-2 text-xs text-gray-500">
@@ -206,15 +206,59 @@ body { Transaction[] }`}</CodeBlock>
             </div>
           </div>
 
-          <div className="docs-card">
-            <h3 className="text-lg font-medium mb-2">Liveness Mathematics</h3>
-            <div className="bg-gray-900 border border-gray-800 rounded p-3 font-mono text-sm text-gray-300 mb-3">
-              Pr(Liveness) = 1 - (1 - h)ⁿ
+        </section>
+
+        {/* Security Model */}
+        <section className="mb-12">
+          <h2 id="security" className="text-2xl font-medium mb-6 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-red-500/10 text-red-400">
+              <Shield className="h-5 w-5" />
+            </span>
+            Security Model
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Theseus assumes a partially synchronous network with up to 1/3 byzantine validator stake. Within those bounds, three properties are protected by economic and cryptographic mechanisms working together.
+          </p>
+
+          <div className="space-y-4 mb-6">
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Inference integrity</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                A dishonest prover producing a wrong inference result is caught by Tensor Commit verification: every active verifier rechecks every proof in roughly 2 ms. A faulty proof fails KZG pairing checks deterministically.
+              </p>
+              <p className="text-gray-500 text-xs">
+                Slash condition: invalid Tensor Commit. Stake is burned, and the inference is rejected before the block can finalize.
+              </p>
             </div>
-            <p className="text-gray-400 text-sm">
-              With h = 0.33, n = 10 → ≥98% chance at least one honest prover chosen.
-            </p>
+
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Liveness</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                A request must reach an honest prover that can run the model. The protocol picks <code className="text-indigo-300">n</code> candidates per request via VRF, weighted by stake and hardware capacity. The probability that at least one is honest is:
+              </p>
+              <div className="bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded p-3 font-mono text-sm text-gray-700 dark:text-gray-300 mb-3">
+                Pr(liveness) = 1 - (1 - h)ⁿ
+              </div>
+              <p className="text-gray-500 text-xs">
+                Where <code className="text-indigo-300">h</code> is the honest fraction. With h = 0.67 and n = 10, liveness is &gt;99.99% per request. With h = 0.33 worst-case and n = 10, &gt;98%.
+              </p>
+            </div>
+
+            <div className="docs-card">
+              <h3 className="text-lg font-medium mb-2">Data availability</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Model weights and agent context must be retrievable for verifiers to check proofs and for agents to make progress. TheseusStore uses Reed-Solomon erasure coding so any sufficient quorum of storage miners can reconstruct missing shards.
+              </p>
+              <p className="text-gray-500 text-xs">
+                Slash condition: storage miner failing to serve pinned shards. Recovery: any other miner holding the shard can re-pin and earn the lost reward.
+              </p>
+            </div>
           </div>
+
+          <Callout type="warning" title="Out of scope">
+            Network-level censorship by a majority validator coalition, supply-chain attacks on model weight files before commitment, and attacks on the VRF beacon are out of scope of the consensus security model and are addressed by separate protocol layers and operational discipline.
+          </Callout>
         </section>
 
         {/* Transaction Lifecycle */}
@@ -236,7 +280,7 @@ body { Transaction[] }`}</CodeBlock>
                   </span>
                   <div>
                     <h3 className="font-medium text-sm">{item.title}</h3>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </div>
               </div>
@@ -245,13 +289,13 @@ body { Transaction[] }`}</CodeBlock>
         </section>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
               <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-medium group-hover:text-indigo-300 transition-colors">AIVM Details →</h3>
-                <p className="text-sm text-gray-400 mt-1">Deep dive into execution layer</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Deep dive into execution layer</p>
               </div>
             </div>
           </Link>
@@ -260,7 +304,7 @@ body { Transaction[] }`}</CodeBlock>
               <GitBranch className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Tensor Commits →</h3>
-                <p className="text-sm text-gray-400 mt-1">Learn about proof mechanisms</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Learn about proof mechanisms</p>
               </div>
             </div>
           </Link>

@@ -7,16 +7,20 @@ import { Search, X } from "lucide-react";
 const searchIndex = [
   { title: "Overview", href: "/docs", keywords: ["home", "documentation", "docs"] },
   { title: "Introduction", href: "/docs/introduction", keywords: ["intro", "what is", "agi", "sovereign ai", "agency", "runtime", "layer 1"] },
+  { title: "FAQ", href: "/docs/faq", keywords: ["questions", "answers", "latency", "model size", "privacy", "do i need crypto"] },
   { title: "Quick Start", href: "/docs/quickstart", keywords: ["install", "setup", "deploy", "start", "begin", "rust", "docker", "getting started", "local node"] },
   { title: "AIVM", href: "/docs/aivm", keywords: ["virtual machine", "execution", "tensor", "opcodes", "gas", "scheduling", "runtime"] },
   { title: "Tensor Commits", href: "/docs/tensor-commits", keywords: ["proof", "verification", "terkle", "merkle", "inference", "zk", "kzg"] },
   { title: "Agents", href: "/docs/agents", keywords: ["registration", "model", "inference loop", "inter-agent", "fee", "autonomy"] },
-  { title: "Architecture", href: "/docs/architecture", keywords: ["theseusstore", "prover", "verifier", "block", "transaction", "consensus"] },
+  { title: "Architecture", href: "/docs/architecture", keywords: ["theseusstore", "prover", "verifier", "block", "transaction", "consensus", "security model", "liveness"] },
   { title: "SHIP Language", href: "/docs/ship", keywords: ["dsl", "language", "compile", "bytecode", "natural language", "agent programming"] },
   { title: "Examples", href: "/docs/examples", keywords: ["code", "sample", "pattern", "managed agent", "sovereign agent", "lighthouse", "private repo"] },
   { title: "Theseus vs Ethereum", href: "/docs/comparison", keywords: ["smart contract", "autonomy", "evm", "difference"] },
+  { title: "Theseus vs AI-Infra Peers", href: "/docs/vs-ai-infra", keywords: ["bittensor", "ritual", "0g", "modulus", "ezkl", "allora", "zkml", "compare"] },
+  { title: "Agentic Smart Contracts", href: "/docs/agentic-smart-contracts", keywords: ["thesis", "evolution", "primitive", "lending", "verify do not replicate"] },
   { title: "Design Space", href: "/docs/design-space", keywords: ["market", "billion", "evolution", "bitcoin", "discovery", "tam"] },
-  { title: "Tokenomics", href: "/docs/tokenomics", keywords: ["$THE", "token", "stake", "fee", "gas", "economics", "network economics"] },
+  { title: "Tokenomics", href: "/docs/tokenomics", keywords: ["$THE", "token", "stake", "fee", "gas", "economics", "network economics", "supply", "distribution", "vesting"] },
+  { title: "Status & Roadmap", href: "/docs/status", keywords: ["status", "roadmap", "testnet", "mainnet", "preview", "phases"] },
   { title: "Glossary", href: "/docs/glossary", keywords: ["terms", "definitions", "vocabulary"] },
 ];
 
@@ -59,11 +63,11 @@ export default function DocsSearch() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-300 bg-slate-900/80 border border-slate-700/60 rounded hover:border-indigo-400/50 transition-colors"
+        className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 dark:text-slate-300 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/60 rounded hover:border-indigo-400/50 transition-colors"
       >
         <Search className="w-4 h-4" />
         <span className="hidden sm:inline">Search docs...</span>
-        <kbd className="hidden sm:inline px-1.5 py-0.5 text-xs bg-slate-800 rounded text-slate-300">⌘K</kbd>
+        <kbd className="hidden sm:inline px-1.5 py-0.5 text-xs bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-transparent rounded text-slate-500 dark:text-slate-300">⌘K</kbd>
       </button>
 
       {isOpen && (

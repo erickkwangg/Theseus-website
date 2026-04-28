@@ -9,6 +9,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import TableOfContents from "./TableOfContents";
 import BackToTop from "./BackToTop";
 import MobileSidebar from "./MobileSidebar";
+import ThemeToggle from "../ThemeToggle";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 interface DocsLayoutProps {
@@ -17,54 +18,53 @@ interface DocsLayoutProps {
 
 export default function DocsLayout({ children }: DocsLayoutProps) {
   return (
-    <div className="min-h-screen site-shell text-slate-100">
+    <div className="min-h-screen text-slate-900 dark:text-slate-100">
       {/* Subtle grid background */}
       <div className="fixed inset-0 docs-grid-bg pointer-events-none opacity-20" />
-      
+
       <ReadingProgress />
-      
+
       {/* Improved Header */}
-      <header className="sticky top-0 z-40 border-b border-slate-700/60 bg-slate-950/75 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-700/60 bg-white/85 dark:bg-slate-950/75 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <Image 
-                src="/theseus-white.svg" 
-                alt="Theseus" 
-                width={28} 
+              <Image
+                src="/theseus-white.svg"
+                alt="Theseus"
+                width={28}
                 height={28}
-                className="opacity-90"
+                className="opacity-90 dark:invert-0 invert"
               />
               <span className="text-xl font-light tracking-wide">Theseus</span>
             </Link>
-            <div className="hidden sm:block h-5 w-px bg-slate-700" />
-            <Link 
-              href="/docs" 
-              className="hidden sm:flex items-center gap-2 text-sm text-indigo-300 font-medium"
+            <div className="hidden sm:block h-5 w-px bg-slate-300 dark:bg-slate-700" />
+            <Link
+              href="/docs"
+              className="hidden sm:flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-300 font-medium"
             >
               Documentation
             </Link>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <DocsSearch />
             <div className="hidden md:flex items-center gap-4">
-              <a
-                href={EXTERNAL_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-slate-300 hover:text-indigo-300 transition-colors"
+              <Link
+                href="/launch"
+                className="text-sm text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-white transition-colors font-medium"
               >
-                GitHub (Private)
-              </a>
+                Launch
+              </Link>
               <a
                 href={EXTERNAL_LINKS.whitepaper}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-slate-300 hover:text-indigo-300 transition-colors"
+                className="text-sm text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors"
               >
                 Whitepaper
               </a>
             </div>
+            <ThemeToggle className="text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60" />
           </div>
         </div>
       </header>

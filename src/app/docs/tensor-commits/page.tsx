@@ -23,7 +23,7 @@ export default function TensorCommitsPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Tensor Commits Protocol
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           The security base of Theseus: public verifiability and tamper-proof computations with &lt;1% overhead.
         </p>
       </div>
@@ -46,10 +46,10 @@ export default function TensorCommitsPage() {
         {/* Overview */}
         <section className="mb-12">
           <h2 id="overview" className="text-2xl font-medium mb-4">Overview</h2>
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             Tensor-commit protocols enable verifiable ML by proving a model was executed correctly. Traditional verification via recomputation is prohibitively expensive for large models.
           </p>
-          <p className="text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400">
             Theseus&apos; Tensor Commits provide batch verification and reduce opening costs through a novel application of KZG commitment schemes extended to multi-dimensional tensor structures.
           </p>
         </section>
@@ -85,11 +85,11 @@ export default function TensorCommitsPage() {
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">&lt;1% Proof Generation</h3>
-              <p className="text-gray-400 text-sm">Minimal impact on inference performance. Practical for production workloads.</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Minimal impact on inference performance. Practical for production workloads.</p>
             </div>
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">&lt;0.1% Verification Time</h3>
-              <p className="text-gray-400 text-sm">Verifiers check proofs in milliseconds. Thousands can audit simultaneously.</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Verifiers check proofs in milliseconds. Thousands can audit simultaneously.</p>
             </div>
           </div>
 
@@ -98,7 +98,7 @@ export default function TensorCommitsPage() {
               <Zap className="h-4 w-4 text-yellow-400" />
               Efficient & Scalable
             </h3>
-            <div className="grid sm:grid-cols-2 gap-2 text-sm text-gray-400">
+            <div className="grid sm:grid-cols-2 gap-2 text-sm text-gray-600 dark:text-gray-400">
               <div className="flex items-center gap-2">
                 <div className="h-1.5 w-1.5 rounded-full bg-indigo-300" />
                 O(log n) verification complexity
@@ -128,14 +128,14 @@ export default function TensorCommitsPage() {
             Terkle Trees
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             A Terkle tree (tensor Merkle tree) has leaves that are sub-tensors and internal nodes that carry tensor commitments instead of hash values.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-3">Structure</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>• Each dimension j has mⱼ blocks</li>
                 <li>• Each leaf cℓ is a commitment of sub-tensor Tℓ</li>
                 <li>• Parents commit to children tensor concatenation</li>
@@ -144,11 +144,11 @@ export default function TensorCommitsPage() {
             </div>
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-3">Benefits</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>• <strong className="text-white">Batch verification:</strong> Multiple ops in one proof</li>
-                <li>• <strong className="text-white">Selective opening:</strong> Without revealing full model</li>
-                <li>• <strong className="text-white">Efficient proofs:</strong> Logarithmic proof size</li>
-                <li>• <strong className="text-white">Hierarchical:</strong> Natural fit for NN layers</li>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li>• <strong className="text-slate-900 dark:text-white">Batch verification:</strong> Multiple ops in one proof</li>
+                <li>• <strong className="text-slate-900 dark:text-white">Selective opening:</strong> Without revealing full model</li>
+                <li>• <strong className="text-slate-900 dark:text-white">Efficient proofs:</strong> Logarithmic proof size</li>
+                <li>• <strong className="text-slate-900 dark:text-white">Hierarchical:</strong> Natural fit for NN layers</li>
               </ul>
             </div>
           </div>
@@ -176,7 +176,7 @@ export default function TensorCommitsPage() {
                   </span>
                   <div>
                     <h3 className="text-lg font-medium mb-1">{item.title}</h3>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </div>
               </div>
@@ -187,8 +187,11 @@ export default function TensorCommitsPage() {
         {/* Performance */}
         <section className="mb-12">
           <h2 id="performance" className="text-2xl font-medium mb-4">Performance Comparison</h2>
-          
-          <div className="overflow-x-auto mb-4">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Per-op cost on Theseus, with proof generation and verification overhead included.
+          </p>
+
+          <div className="overflow-x-auto mb-6">
             <table className="docs-table">
               <thead>
                 <tr>
@@ -199,13 +202,66 @@ export default function TensorCommitsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">TMATMUL 512x512</td><td>4.1 ms</td><td>230 KB</td><td>18K</td></tr>
-                <tr><td className="font-medium text-white">TSTREAM 4x512</td><td>8.6 ms</td><td>400 KB</td><td>27K</td></tr>
-                <tr><td className="font-medium text-white">TCOMMIT 70B</td><td>22 ms</td><td>470 KB</td><td>120K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">TMATMUL 512x512</td><td>4.1 ms</td><td>230 KB</td><td>18K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">TSTREAM 4x512</td><td>8.6 ms</td><td>400 KB</td><td>27K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">TCOMMIT 70B</td><td>22 ms</td><td>470 KB</td><td>120K</td></tr>
               </tbody>
             </table>
           </div>
-          <p className="text-gray-500 text-sm">* Gas costs based on base-load multiplier m = 1.0</p>
+          <p className="text-gray-500 text-sm mb-8">* Gas costs based on base-load multiplier m = 1.0</p>
+
+          <h3 id="vs-alternatives" className="text-xl font-medium mb-3">Versus alternatives</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            How Tensor Commits compare to the two main approaches for verifying neural network inference: re-executing the model on every node, and zkML proofs.
+          </p>
+
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th>Approach</th>
+                  <th className="text-gray-600 dark:text-gray-400">Full re-execution</th>
+                  <th className="text-gray-600 dark:text-gray-400">zkML (zk-SNARK)</th>
+                  <th className="text-indigo-300">Tensor Commits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-medium text-slate-900 dark:text-white">Verifier work per inference</td>
+                  <td>Same as the prover</td>
+                  <td>Milliseconds (constant)</td>
+                  <td className="text-indigo-300">~2 ms</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-slate-900 dark:text-white">Prover overhead vs raw inference</td>
+                  <td>0% (no separate proof)</td>
+                  <td>1000-100,000x</td>
+                  <td className="text-indigo-300">&lt;1%</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-slate-900 dark:text-white">Practical model size</td>
+                  <td>Limited by smallest validator</td>
+                  <td>Small models (mostly)</td>
+                  <td className="text-indigo-300">Frontier (70B+)</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-slate-900 dark:text-white">Proof size</td>
+                  <td>Not applicable</td>
+                  <td>~KB</td>
+                  <td className="text-indigo-300">~KB to MB</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-slate-900 dark:text-white">Hides model weights from verifier</td>
+                  <td>No (verifier needs weights)</td>
+                  <td>Yes</td>
+                  <td className="text-indigo-300">Yes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-gray-500 text-sm mt-3">
+            Re-execution is the design Ethereum uses for smart contracts and the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs but the prover-side overhead is what has kept it limited to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
+          </p>
         </section>
 
         {/* LLM Optimizations */}
@@ -221,8 +277,8 @@ export default function TensorCommitsPage() {
               { title: "Mixture-of-Experts", desc: "Sparse expert activations committed efficiently, only activated experts contribute" },
             ].map((item) => (
               <div key={item.title} className="docs-card">
-                <h3 className="text-sm font-medium mb-1 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-xs">{item.desc}</p>
+                <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -243,8 +299,8 @@ export default function TensorCommitsPage() {
                 <div key={item.label} className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-white font-medium">{item.label}:</span>
-                    <span className="text-gray-400 ml-1">{item.desc}</span>
+                    <span className="text-slate-900 dark:text-white font-medium">{item.label}:</span>
+                    <span className="text-gray-600 dark:text-gray-400 ml-1">{item.desc}</span>
                   </div>
                 </div>
               ))}
@@ -253,7 +309,7 @@ export default function TensorCommitsPage() {
         </section>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Previous</p>

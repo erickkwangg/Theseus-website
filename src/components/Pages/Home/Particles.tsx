@@ -112,7 +112,7 @@ export default function Particles() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none z-0"
-      style={{ opacity: isMobile ? 0.3 : 0.6 }}
+      data-particles
     />
   );
 }

@@ -22,12 +22,33 @@ export default function AgentsPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Agents &amp; Models
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Register agents, deploy models, and enable agent-to-agent interactions using $THE.
         </p>
       </div>
         
       <div className="prose prose-invert max-w-none">
+        {/* See it in code */}
+        <Callout type="info" title="See an agent in code">
+          <p className="mb-3">
+            The fields below describe how an agent is registered and runs. To see what the actual program looks like, read the full SHIP example or run it in the playground.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/docs/ship#example-full"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+            >
+              Full SHIP example
+            </Link>
+            <Link
+              href="/playground"
+              className="inline-flex items-center gap-2 bg-transparent border border-indigo-500/40 hover:border-indigo-400 text-indigo-300 hover:text-slate-900 dark:hover:text-white px-4 py-2 rounded-lg transition-all text-sm no-underline"
+            >
+              Try in playground
+            </Link>
+          </div>
+        </Callout>
+
         {/* Agent Registration */}
         <section className="mb-12">
           <h2 id="agent-registration" className="text-2xl font-medium mb-6 flex items-center gap-3">
@@ -37,7 +58,7 @@ export default function AgentsPage() {
             Agent Registration
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Agents register via THE1 standard. Any human or agent can deploy a new agent by supplying:
           </p>
 
@@ -50,13 +71,13 @@ export default function AgentsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Code hash</td><td>Binary verification for AIVM/HVM</td></tr>
-                <tr><td className="font-medium text-white">Autonomy flag</td><td>0 = human-gated, 1 = sovereign</td></tr>
-                <tr><td className="font-medium text-white">Controller identity</td><td>Optional pubkey for human override</td></tr>
-                <tr><td className="font-medium text-white">AIVM version</td><td>Required ISA features</td></tr>
-                <tr><td className="font-medium text-white">Resource quota</td><td>Max FLOPs per epoch</td></tr>
-                <tr><td className="font-medium text-white">Stake</td><td>$THE locked for slashing</td></tr>
-                <tr><td className="font-medium text-white">Initial context</td><td>Agent context from TheseusStore</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Code hash</td><td>Binary verification for AIVM/HVM</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Autonomy flag</td><td>0 = human-gated, 1 = sovereign</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Controller identity</td><td>Optional pubkey for human override</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">AIVM version</td><td>Required ISA features</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Resource quota</td><td>Max FLOPs per epoch</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Stake</td><td>$THE locked for slashing</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Initial context</td><td>Agent context from TheseusStore</td></tr>
               </tbody>
             </table>
           </div>
@@ -71,7 +92,7 @@ export default function AgentsPage() {
             Model Registration
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Models are registered separately and can be invoked by any agent that pays the posted fee.
           </p>
 
@@ -84,15 +105,15 @@ export default function AgentsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Name &amp; version</td><td>e.g., Llama 3.1 8B</td></tr>
-                <tr><td className="font-medium text-white">Architecture</td><td>LLM, diffusion, GAN, etc.</td></tr>
-                <tr><td className="font-medium text-white">Tensor Commit</td><td>Cryptographic weight fingerprint</td></tr>
-                <tr><td className="font-medium text-white">Param count</td><td>For fee estimation</td></tr>
-                <tr><td className="font-medium text-white">Base fee</td><td>$THE per inference</td></tr>
-                <tr><td className="font-medium text-white">Owner</td><td>Revenue destination (address/DAO)</td></tr>
-                <tr><td className="font-medium text-white">Weights URI</td><td>Where validators fetch params</td></tr>
-                <tr><td className="font-medium text-white">Compute spec</td><td>For Tensor Commits generation</td></tr>
-                <tr><td className="font-medium text-white">Permissions</td><td>Access control rules</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Name &amp; version</td><td>e.g., Llama 3.1 8B</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Architecture</td><td>LLM, diffusion, GAN, etc.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Tensor Commit</td><td>Cryptographic weight fingerprint</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Param count</td><td>For fee estimation</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Base fee</td><td>$THE per inference</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Owner</td><td>Revenue destination (address/DAO)</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Weights URI</td><td>Where validators fetch params</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Compute spec</td><td>For Tensor Commits generation</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Permissions</td><td>Access control rules</td></tr>
               </tbody>
             </table>
           </div>
@@ -107,7 +128,7 @@ export default function AgentsPage() {
             Sovereign Agent Inference Loop
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             How sovereign agents decide when to run inference, without human sign-off or off-chain schedulers:
           </p>
 
@@ -125,7 +146,7 @@ export default function AgentsPage() {
                   </span>
                   <div>
                     <h3 className="font-medium mb-1">{item.title}</h3>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </div>
               </div>
@@ -146,8 +167,8 @@ export default function AgentsPage() {
             Inter-Agent Interaction
           </h2>
           
-          <p className="text-gray-400 mb-6">
-            Agents with an address, balance, and ABI can call each other like contracts—but either side can invoke models mid-flow.
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Agents with an address, balance, and ABI can call each other like contracts, except either side can invoke models mid-flow.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-3">
@@ -158,8 +179,8 @@ export default function AgentsPage() {
               { title: "Result Handling", desc: "Same-block returns immediately; longer jobs issue promise events" },
             ].map((item) => (
               <div key={item.title} className="docs-card">
-                <h3 className="text-sm font-medium mb-1 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-xs">{item.desc}</p>
+                <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -175,8 +196,8 @@ export default function AgentsPage() {
           </h2>
           
           <div className="docs-card">
-            <p className="text-gray-400 text-sm mb-3">
-              Model owners set base fees in $THE. Fees flow directly to owners. Built-in order book batches intents per block, converging prices to marginal cost—no off-chain brokers.
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Model owners set base fees in $THE. Fees flow directly to owners. Built-in order book batches intents per block, converging prices to marginal cost without off-chain brokers.
             </p>
             <p className="text-gray-500 text-sm">
               Dishonest proofs burn the offender&apos;s stake. Economic security scales with staked value.
@@ -185,13 +206,13 @@ export default function AgentsPage() {
         </section>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
               <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
-                <p className="text-sm text-gray-400 mt-1">Write agent logic in SHIP DSL</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Write agent logic in SHIP DSL</p>
               </div>
             </div>
           </Link>
@@ -200,7 +221,7 @@ export default function AgentsPage() {
               <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Code Examples →</h3>
-                <p className="text-sm text-gray-400 mt-1">View example implementations</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">View example implementations</p>
               </div>
             </div>
           </Link>

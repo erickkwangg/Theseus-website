@@ -6,8 +6,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/launch",
+    "/playground",
     "/docs",
     "/docs/introduction",
+    "/docs/faq",
     "/docs/quickstart",
     "/docs/aivm",
     "/docs/tensor-commits",
@@ -16,9 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/ship",
     "/docs/examples",
     "/docs/comparison",
+    "/docs/vs-ai-infra",
     "/docs/agentic-smart-contracts",
     "/docs/design-space",
     "/docs/tokenomics",
+    "/docs/status",
     "/docs/glossary",
   ];
 

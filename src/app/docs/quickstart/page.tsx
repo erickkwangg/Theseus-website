@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCircle } from "lucide-react";
+import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCircle, Lock, Rocket } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
@@ -24,16 +24,36 @@ export default function QuickStartPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           Quick Start Guide
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Set up a Theseus node and deploy your first agent.
         </p>
       </div>
       
       <div className="prose prose-invert max-w-none">
+        {/* Access gate */}
+        <div className="docs-card border-indigo-500/30 bg-indigo-500/5 mb-10 flex flex-col md:flex-row items-start gap-4">
+          <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
+            <Lock className="h-5 w-5" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-medium mb-2">Preview access required</h3>
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-3">
+              The repository is currently private. The instructions below assume you have the CLI binary and a testnet endpoint. If you do not yet, request access first.
+            </p>
+            <Link
+              href="/launch"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+            >
+              <Rocket className="h-4 w-4" />
+              Request preview access
+            </Link>
+          </div>
+        </div>
+
         {/* Prerequisites */}
         <section className="mb-12">
           <h2 id="prerequisites" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-gray-800 text-gray-400">
+            <span className="p-1.5 rounded-lg bg-gray-800 text-gray-600 dark:text-gray-400">
               <Box className="h-5 w-5" />
             </span>
             Prerequisites
@@ -45,7 +65,7 @@ export default function QuickStartPage() {
               "Docker (optional)",
               "16GB+ RAM (recommended)",
             ].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/50 border border-gray-800 rounded-lg text-sm">
+              <span key={item} className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg text-sm">
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 {item}
               </span>
@@ -66,10 +86,12 @@ export default function QuickStartPage() {
             <div className="docs-card">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500 text-white text-xs font-bold">1</span>
-                <h3 className="text-lg font-medium">Clone the Repository</h3>
+                <h3 className="text-lg font-medium">Clone the Repository (preview-access devs)</h3>
               </div>
-              <CodeBlock language="bash" filename="terminal">{`git clone https://github.com/Theseuschain/theseuschain.git
-cd theseuschain`}</CodeBlock>
+              <CodeBlock language="bash" filename="terminal">{`# The repository URL is provided with preview access.
+# Replace <preview-clone-url> with the value from your invite.
+git clone <preview-clone-url> theseus
+cd theseus`}</CodeBlock>
             </div>
 
             <div className="docs-card">
@@ -94,7 +116,7 @@ make node
 
 # Equivalent cargo command
 cargo run --bin theseus-node`}</CodeBlock>
-              <p className="text-gray-400 text-sm mt-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-3">
                 Your node will start syncing with the network. First sync may take time depending on network conditions.
               </p>
             </div>
@@ -110,7 +132,7 @@ cargo run --bin theseus-node`}</CodeBlock>
             Deploy Your First Agent
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Once your node is running, deploy a test agent using the Theseus CLI with a SHIP file.
           </p>
 
@@ -122,25 +144,7 @@ cargo run --bin theseus-cli deploy-agent examples/basic-agent.ship`}</CodeBlock>
           </Callout>
 
           <Callout type="tip" title="Ecosystem Examples">
-            For production-style SHIP implementations, see{" "}
-            <a
-              href="https://github.com/Theseuschain/proof-of-lobster"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-300 hover:underline"
-            >
-              proof-of-lobster
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://github.com/Theseuschain/the-prediction-market"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-300 hover:underline"
-            >
-              the-prediction-market
-            </a>
-            .
+            For production-style SHIP implementations, see proof-of-lobster and the-prediction-market. Repository links are shared with preview access.
           </Callout>
 
           <div className="overflow-x-auto mt-6">
@@ -152,12 +156,12 @@ cargo run --bin theseus-cli deploy-agent examples/basic-agent.ship`}</CodeBlock>
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Code hash</td><td>Binary verification</td></tr>
-                <tr><td className="font-medium text-white">Autonomy flag</td><td>0=human-owned, 1=sovereign</td></tr>
-                <tr><td className="font-medium text-white">Controller key</td><td>Optional override key</td></tr>
-                <tr><td className="font-medium text-white">AIVM version</td><td>Required features</td></tr>
-                <tr><td className="font-medium text-white">Resource quota</td><td>Max FLOPs per epoch</td></tr>
-                <tr><td className="font-medium text-white">Stake</td><td>$THE locked for security</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Code hash</td><td>Binary verification</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Autonomy flag</td><td>0=human-owned, 1=sovereign</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Controller key</td><td>Optional override key</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">AIVM version</td><td>Required features</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Resource quota</td><td>Max FLOPs per epoch</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Stake</td><td>$THE locked for security</td></tr>
               </tbody>
             </table>
           </div>
@@ -172,7 +176,7 @@ cargo run --bin theseus-cli deploy-agent examples/basic-agent.ship`}</CodeBlock>
             Model Registration (API-Level)
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Model registration currently appears in the codebase as runtime API flows (AIVM + store),
             not as a stable, documented one-line CLI command.
           </p>
@@ -192,10 +196,10 @@ Reference model root from agent/AIVM execution`}</CodeBlock>
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Name/version</td><td>Llama 3.1 8B</td></tr>
-                <tr><td className="font-medium text-white">Architecture</td><td>LLM, diffusion, etc.</td></tr>
-                <tr><td className="font-medium text-white">Tensor Commit</td><td>Weight fingerprint for verification</td></tr>
-                <tr><td className="font-medium text-white">Root reference</td><td>Used by agents during inference calls</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Name/version</td><td>Llama 3.1 8B</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Architecture</td><td>LLM, diffusion, etc.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Tensor Commit</td><td>Weight fingerprint for verification</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Root reference</td><td>Used by agents during inference calls</td></tr>
               </tbody>
             </table>
           </div>
@@ -213,7 +217,7 @@ Reference model root from agent/AIVM execution`}</CodeBlock>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             {["Write agent (SHIP/AIVM)", "Test locally", "Deploy to testnet", "Audit with Tensor Commits", "Launch on mainnet"].map((step, i) => (
               <div key={step} className="flex items-center gap-3">
-                <span className="px-3 py-2 bg-gray-900 border border-gray-800 rounded-lg text-gray-300">{step}</span>
+                <span className="px-3 py-2 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-lg text-gray-700 dark:text-gray-300">{step}</span>
                 {i < 4 && <ArrowRight className="h-4 w-4 text-gray-600" />}
               </div>
             ))}
@@ -251,7 +255,7 @@ make test-ship`}</CodeBlock>
                   </div>
                   <div>
                     <h3 className="font-medium mb-1 group-hover:text-indigo-300 transition-colors">{item.title}</h3>
-                    <p className="text-sm text-gray-400">{item.desc}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </div>
                 </div>
               </Link>
@@ -260,27 +264,17 @@ make test-ship`}</CodeBlock>
         </section>
 
         {/* Help */}
-        <div className="border-t border-gray-800 pt-8">
-          <p className="text-gray-400">
-            Need help? Visit{" "}
-            <a href={EXTERNAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-indigo-300 hover:underline">
-              GitHub
-            </a>{" "}
-            (private repository; access required){" "}
-            and review{" "}
-            <a
-              href={`${EXTERNAL_LINKS.github}/blob/master/docs/getting-started.md`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-300 hover:underline"
-            >
-              docs/getting-started.md
-            </a>{" "}
-            for upstream command references,{" "}
-            or read the{" "}
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8">
+          <p className="text-gray-600 dark:text-gray-400">
+            Need help? Email{" "}
+            <a href={`mailto:${EXTERNAL_LINKS.contactEmail}`} className="text-indigo-300 hover:underline">
+              {EXTERNAL_LINKS.contactEmail}
+            </a>
+            , or read the{" "}
             <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer" className="text-indigo-300 hover:underline">
               whitepaper
-            </a>.
+            </a>
+            . Once you have preview access, the invite includes upstream command references and the docs/getting-started.md file.
           </p>
         </div>
       </div>

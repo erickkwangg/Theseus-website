@@ -23,7 +23,7 @@ export default function AIVMPage() {
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
           AI Virtual Machine (AIVM)
         </h1>
-        <p className="text-xl text-gray-400 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           The execution backbone of Theseus with tensor-native opcodes, deterministic execution, and cryptographic proof generation.
         </p>
       </div>
@@ -47,11 +47,11 @@ export default function AIVMPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Execution</td><td>Stack-based dispatch, fixed-point arithmetic for deterministic tensor ops</td></tr>
-                <tr><td className="font-medium text-white">Memory</td><td>Sandboxed storage for contexts, embeddings, temp tensors</td></tr>
-                <tr><td className="font-medium text-white">Proof Interface</td><td>Generates Tensor Commit receipts for validators (~ms verification)</td></tr>
-                <tr><td className="font-medium text-white">Syscall Gateway</td><td>Verified, metered boundary crossing for external calls</td></tr>
-                <tr><td className="font-medium text-white">State Anchoring</td><td>Merkle root per block for light clients and cross-chain verification</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Execution</td><td>Stack-based dispatch, fixed-point arithmetic for deterministic tensor ops</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Memory</td><td>Sandboxed storage for contexts, embeddings, temp tensors</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Proof Interface</td><td>Generates Tensor Commit receipts for validators (~ms verification)</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Syscall Gateway</td><td>Verified, metered boundary crossing for external calls</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">State Anchoring</td><td>Merkle root per block for light clients and cross-chain verification</td></tr>
               </tbody>
             </table>
           </div>
@@ -69,7 +69,7 @@ export default function AIVMPage() {
           <div className="space-y-6">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-3">Tensor-Native Opcodes</h3>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Unlike traditional VMs, AIVM includes specialized operations for AI inference:
               </p>
               <CodeBlock language="text" filename="opcodes">{`TMATMUL    - Matrix multiplication for tensors
@@ -82,21 +82,21 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
 
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-3">Deterministic Execution</h3>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 All randomness comes from a VRF (Verifiable Random Function), and all validations require full consensus. Any full node can reproduce receipts bit-for-bit. Tensor Commitments have deterministic validations.
               </p>
             </div>
 
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-3">Gas Model</h3>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Every tensor operation carries a linear gas price based on FLOPs:
               </p>
-              <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 font-mono text-sm">
-                <div className="text-gray-300">Gas = γ × FLOPs(op)</div>
-                <div className="text-gray-300 mt-1">MODEL_FEE = Σ Gas_op + Proof Overhead</div>
+              <div className="bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-lg p-4 font-mono text-sm">
+                <div className="text-gray-700 dark:text-gray-300">Gas = γ × FLOPs(op)</div>
+                <div className="text-gray-700 dark:text-gray-300 mt-1">MODEL_FEE = Σ Gas_op + Proof Overhead</div>
               </div>
-              <p className="text-gray-400 text-sm mt-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-3">
                 A congestion multiplier keeps prices elastic depending on load.
               </p>
             </div>
@@ -122,11 +122,11 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">GPT-2</td><td>180-200</td><td>50K</td></tr>
-                <tr><td className="font-medium text-white">LLaMA-7B</td><td>90-100</td><td>150K</td></tr>
-                <tr><td className="font-medium text-white">LLaMA-13B</td><td>50-60</td><td>400K</td></tr>
-                <tr><td className="font-medium text-white">GPT-3.5</td><td>15-25</td><td>800K-1M</td></tr>
-                <tr><td className="font-medium text-white">LLaMA-65B</td><td>5-10</td><td>≥900K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">GPT-2</td><td>180-200</td><td>50K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">LLaMA-7B</td><td>90-100</td><td>150K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">LLaMA-13B</td><td>50-60</td><td>400K</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">GPT-3.5</td><td>15-25</td><td>800K-1M</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">LLaMA-65B</td><td>5-10</td><td>≥900K</td></tr>
               </tbody>
             </table>
           </div>
@@ -145,12 +145,12 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
             Agent Scheduling
           </h2>
           
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Theseus schedules thousands of simultaneous model calls with fair queuing and stable gas behavior.
           </p>
 
           <div className="bg-gradient-to-r from-indigo-950/30 to-transparent border-l-2 border-indigo-400 pl-6 py-4 mb-6">
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-700 dark:text-gray-300 text-sm">
               Priority score (stake + latency + fairness) → Epoch-bound queues prevent starvation → On-chain scheduler respects latency classes
             </p>
           </div>
@@ -162,7 +162,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
               { name: "Bulk", latency: "best-effort" },
             ].map((item) => (
               <div key={item.name} className="docs-card text-center">
-                <div className="text-white font-medium text-sm">{item.name}</div>
+                <div className="text-slate-900 dark:text-white font-medium text-sm">{item.name}</div>
                 <div className="text-gray-500 text-xs mt-1">{item.latency}</div>
               </div>
             ))}
@@ -172,11 +172,11 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
         {/* Model Pipelining */}
         <section className="mb-12">
           <h2 id="pipelining" className="text-2xl font-medium mb-4">Model Pipelining</h2>
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             AIVM allows tensor operations to feed outputs into the next in a single chaining operation:
           </p>
           <CodeBlock language="text" filename="pipeline">{`TLOAD(encoder) -> TMATMUL -> TCUSTOM -> TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
-          <p className="text-gray-400 text-sm mt-3">
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-3">
             Supports multi-model workflows (encoder-decoder, RAG, MoE) efficiently.
           </p>
         </section>
@@ -194,34 +194,34 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
               <thead>
                 <tr>
                   <th>Feature</th>
-                  <th className="text-gray-400">EVM</th>
+                  <th className="text-gray-600 dark:text-gray-400">EVM</th>
                   <th className="text-indigo-300">AIVM</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-white">Tensor operations</td><td>No native support</td><td>Built-in opcodes</td></tr>
-                <tr><td className="font-medium text-white">Inference proofs</td><td>Not supported</td><td>Tensor Commits</td></tr>
-                <tr><td className="font-medium text-white">Agent autonomy</td><td>Requires human keys</td><td>Native sovereignty</td></tr>
-                <tr><td className="font-medium text-white">Gas model</td><td>Generic opcodes</td><td>FLOPs-based for AI</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Tensor operations</td><td>No native support</td><td>Built-in opcodes</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Inference proofs</td><td>Not supported</td><td>Tensor Commits</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Agent autonomy</td><td>Requires human keys</td><td>Native sovereignty</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white">Gas model</td><td>Generic opcodes</td><td>FLOPs-based for AI</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
         {/* Navigation */}
-        <div className="border-t border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
+        <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/tensor-commits" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Next</p>
               <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Tensor Commits →</h3>
-              <p className="text-sm text-gray-400 mt-1">Proof generation and verification</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Proof generation and verification</p>
             </div>
           </Link>
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Related</p>
               <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
-              <p className="text-sm text-gray-400 mt-1">Write verifiable agent code</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Write verifiable agent code</p>
             </div>
           </Link>
         </div>
