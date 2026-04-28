@@ -31,21 +31,33 @@ export default function Footer() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <div className="w-64 h-64 lg:w-72 lg:h-72 flex flex-col items-center justify-center
+            <div className="agent-network-card relative w-64 h-64 lg:w-72 lg:h-72 flex flex-col items-center justify-center
                             border border-slate-200 dark:border-slate-700/70 bg-gradient-to-br from-white to-slate-100 dark:from-slate-900/70 dark:to-slate-950
-                            rounded-xl hover:border-indigo-400/40 transition-all duration-300">
-              <Image
-                src={logo}
-                alt="Theseus Logo"
-                width={80}
-                height={80}
-                className="w-20 h-20 lg:w-24 lg:h-24 mb-6 opacity-90"
-              />
-              <div className="text-xl lg:text-2xl font-light tracking-widest text-slate-900 dark:text-white">
-                THESEUS
-              </div>
-              <div className="text-xs text-slate-600 dark:text-slate-400 mt-2 tracking-wider">
-                AI AGENCY
+                            rounded-xl hover:border-indigo-400/40 transition-all duration-300 overflow-hidden">
+              {/* Orbital rings */}
+              <span aria-hidden className="agent-network-ring agent-network-ring--outer" />
+              <span aria-hidden className="agent-network-ring agent-network-ring--inner" />
+              {/* Agent nodes orbiting */}
+              <span aria-hidden className="agent-node agent-node--1" />
+              <span aria-hidden className="agent-node agent-node--2" />
+              <span aria-hidden className="agent-node agent-node--3" />
+              <span aria-hidden className="agent-node agent-node--4" />
+              <span aria-hidden className="agent-node agent-node--5" />
+
+              <div className="relative z-10 flex flex-col items-center">
+                <Image
+                  src={logo}
+                  alt="Theseus Logo"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 lg:w-24 lg:h-24 mb-6 brightness-0 dark:brightness-100 opacity-90"
+                />
+                <div className="text-xl lg:text-2xl font-light tracking-widest text-slate-900 dark:text-white">
+                  THESEUS
+                </div>
+                <div className="text-xs text-slate-600 dark:text-slate-400 mt-2 tracking-wider">
+                  AI AGENCY
+                </div>
               </div>
             </div>
           </div>

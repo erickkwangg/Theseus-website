@@ -573,6 +573,121 @@
 
 /* Particles - handled by canvas in Particles.tsx */
 
+/* Footer agent-network card: orbital rings + nodes */
+.agent-network-card {
+  isolation: isolate;
+}
+.agent-network-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1), transparent 55%);
+  pointer-events: none;
+}
+.dark .agent-network-card::after {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.16), transparent 55%);
+}
+
+.agent-network-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 9999px;
+  border: 1px dashed rgba(99, 102, 241, 0.22);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.dark .agent-network-ring {
+  border-color: rgba(165, 180, 252, 0.22);
+}
+.agent-network-ring--outer {
+  width: 88%;
+  height: 88%;
+  animation: agent-orbit 28s linear infinite;
+}
+.agent-network-ring--inner {
+  width: 60%;
+  height: 60%;
+  border-style: solid;
+  border-color: rgba(99, 102, 241, 0.18);
+  animation: agent-orbit 18s linear infinite reverse;
+}
+.dark .agent-network-ring--inner {
+  border-color: rgba(165, 180, 252, 0.18);
+}
+
+.agent-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.85);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.55);
+  pointer-events: none;
+  transform-origin: center center;
+}
+.dark .agent-node {
+  background: rgba(165, 180, 252, 0.95);
+  box-shadow: 0 0 10px rgba(165, 180, 252, 0.65);
+}
+/* Outer ring nodes (radius ~44%) */
+.agent-node--1 {
+  margin: -3px 0 0 -3px;
+  animation: agent-orbit-outer 14s linear infinite;
+}
+.agent-node--2 {
+  margin: -3px 0 0 -3px;
+  animation: agent-orbit-outer 14s linear infinite;
+  animation-delay: -4.6s;
+  opacity: 0.75;
+}
+.agent-node--3 {
+  margin: -3px 0 0 -3px;
+  animation: agent-orbit-outer 14s linear infinite;
+  animation-delay: -9.3s;
+  opacity: 0.55;
+}
+/* Inner ring nodes (radius ~30%) */
+.agent-node--4 {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  animation: agent-orbit-inner 10s linear infinite reverse;
+  opacity: 0.85;
+}
+.agent-node--5 {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  animation: agent-orbit-inner 10s linear infinite reverse;
+  animation-delay: -5s;
+  opacity: 0.55;
+}
+
+@keyframes agent-orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes agent-orbit-outer {
+  from { transform: rotate(0deg) translateX(44%) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(44%) rotate(-360deg); }
+}
+@keyframes agent-orbit-inner {
+  from { transform: rotate(0deg) translateX(30%) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(30%) rotate(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-network-ring,
+  .agent-node {
+    animation: none !important;
+  }
+}
+
 /* ============================================
    DOCS PAGE STYLES
    ============================================ */
