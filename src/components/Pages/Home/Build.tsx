@@ -13,7 +13,7 @@ export default function Build() {
         <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-12 lg:px-16 py-12 sm:py-14 lg:py-16">
           <SectionHeader
             label="Build"
-            number="02"
+            number="03"
             className="mb-8 lg:mb-10"
           />
 

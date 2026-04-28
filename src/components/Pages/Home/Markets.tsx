@@ -51,22 +51,6 @@ const marketTiles = [
       "Pays contributors, tops up reserves, and shows every allocation before the next vote.",
   },
   {
-    category: "Lending",
-    title: "Liquidation keeper",
-    kind: "Existing demand",
-    stage: "Managed" as const,
-    description:
-      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can review every decision.",
-  },
-  {
-    category: "Funds",
-    title: "LP fund manager",
-    kind: "Existing demand",
-    stage: "Managed" as const,
-    description:
-      "Runs portfolio rules against live markets. Investors can check the daily record instead of waiting for a memo.",
-  },
-  {
     category: "Markets",
     title: "Prediction resolver",
     kind: "Existing demand",
@@ -81,6 +65,22 @@ const marketTiles = [
     stage: "Sovereign" as const,
     description:
       "Releases money when conditions are met, without a platform, lawyer, or privileged admin key.",
+  },
+  {
+    category: "Lending",
+    title: "Liquidation keeper",
+    kind: "Existing demand",
+    stage: "Managed" as const,
+    description:
+      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can review every decision.",
+  },
+  {
+    category: "Funds",
+    title: "LP fund manager",
+    kind: "Existing demand",
+    stage: "Managed" as const,
+    description:
+      "Runs portfolio rules against live markets. Investors can check the daily record instead of waiting for a memo.",
   },
   {
     category: "Protocols",
@@ -135,7 +135,7 @@ export default function Markets() {
       <div className="mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16">
         <SectionHeader
           label="Markets"
-          number="03"
+          number="04"
           className="mb-7 lg:mb-8"
         />
 

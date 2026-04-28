@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className="min-h-screen site-shell">
       <Hero />
-      <Architecture />
       <Beliefs />
+      <Architecture />
       <Build />
       <Markets />
       <Footer />

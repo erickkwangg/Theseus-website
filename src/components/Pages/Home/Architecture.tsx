@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
+import SectionHeader from "./SectionHeader";
 
 const Chip = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/70 border border-slate-300/70 dark:border-slate-600/70 rounded-sm">
@@ -49,12 +50,15 @@ export default function Architecture() {
   return (
     <section className="text-slate-900 dark:text-white py-24 lg:py-32 section-soft-divider">
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
+        <SectionHeader
+          label="How it works"
+          number="02"
+          className="mb-8 lg:mb-10"
+        />
+
         {/* Header */}
         <ScrollReveal>
           <div className="max-w-3xl mb-14 lg:mb-20">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-6">
-              How it works
-            </p>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
               The agent <span className="italic">owns itself.</span>
             </h2>
