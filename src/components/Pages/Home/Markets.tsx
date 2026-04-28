@@ -93,7 +93,7 @@ export default function Markets() {
               Build an agent <span className="italic">people will trust.</span>
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300">
-              Same runtime, different intent — full autonomy, or trust properties without it.{" "}
+              Same runtime, different intent: full autonomy, or trust properties without it.{" "}
               <a
                 href={EXTERNAL_LINKS.substackTAM}
                 target="_blank"
@@ -118,7 +118,7 @@ export default function Markets() {
                   <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-slate-900 dark:text-white">
                     {uc.title}
                   </h3>
-                  <span className="inline-flex mt-3 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-sm">
+                  <span className="inline-flex mt-4 px-2.5 py-1 text-xs font-mono uppercase tracking-[0.22em] text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-600 rounded-sm">
                     {uc.tier}
                   </span>
                 </div>

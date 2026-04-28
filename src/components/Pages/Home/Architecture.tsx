@@ -34,10 +34,10 @@ const Card = ({ role, title, emphasis = false, accent = "neutral", children }: C
       : "border-slate-200/80 dark:border-slate-700/70 bg-slate-50/60 dark:bg-slate-900/30";
   return (
     <div className={`relative border rounded-md px-5 py-4 ${ring} transition-colors`}>
-      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-2">
+      <div className={`font-serif text-2xl lg:text-3xl tracking-[-0.01em] leading-tight ${emphasis || accent === "indigo" ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"} mb-1`}>
         {role}
       </div>
-      <div className={`font-serif text-lg lg:text-xl ${emphasis || accent === "indigo" ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"} leading-snug mb-3`}>
+      <div className="text-sm text-slate-500 dark:text-slate-400 italic mb-4">
         {title}
       </div>
       {children}
@@ -59,8 +59,9 @@ export default function Architecture() {
               Agents as <span className="italic">principals,</span> not processes.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              On every other runtime, the operator holds your agent&apos;s keys, balance, and state.
-              On Theseus, the agent does — enforced by the runtime, not by trust in any party.
+              On most runtimes, the operator holds your agent&apos;s keys, balance, and state.
+              On Theseus, the agent holds them itself. The runtime is what makes that stick,
+              so you don&apos;t have to trust the operator.
             </p>
           </div>
         </ScrollReveal>
@@ -92,7 +93,7 @@ export default function Architecture() {
 
               <Card role="Agent" title="Just a process.">
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                  Lives as long as the bill, the access, and the policy say so.
+                  Runs only while the operator pays for it and lets it run.
                 </p>
               </Card>
             </div>
@@ -135,9 +136,9 @@ export default function Architecture() {
               Why now
             </p>
             <p className="font-serif text-2xl sm:text-3xl lg:text-[2.25rem] font-normal tracking-[-0.012em] leading-[1.2] text-slate-900 dark:text-white">
-              Models are now cheap enough to <span className="italic">think.</span>{" "}
-              Chains are now fast enough to <span className="italic">settle.</span>{" "}
-              Theseus is what they&apos;re <span className="italic">for.</span>
+              This works now because two things finally line up: inference is cheap enough
+              for an agent to reason at length, and chains are fast enough to settle its
+              actions in real time. Theseus is the runtime built on top of both.
             </p>
           </div>
         </ScrollReveal>

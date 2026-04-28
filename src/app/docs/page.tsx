@@ -1,18 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { 
-  ArrowRight, 
-  Rocket, 
-  GitCompare, 
-  Cpu, 
-  GitBranch, 
-  Bot, 
-  Layers, 
-  Code2, 
+import {
+  ArrowRight,
+  Rocket,
+  GitCompare,
+  Cpu,
+  GitBranch,
+  Bot,
+  Layers,
+  Code2,
   FileText,
   BookOpen,
   Puzzle,
-  ExternalLink
+  ExternalLink,
+  PlayCircle,
+  Clock
 } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
 
@@ -59,6 +61,60 @@ export default function DocsHomePage() {
             Read Introduction
             <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+      </div>
+
+      {/* See it run */}
+      <div className="mb-12">
+        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <div className="h-px flex-1 bg-gray-800" />
+          See it run
+          <div className="h-px flex-1 bg-gray-800" />
+        </h2>
+        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 max-w-3xl">
+          Preview access is gated, so you cannot run the binary yet. These walkthroughs show the runtime end to end without a local install.
+        </p>
+        <div className="grid md:grid-cols-2 gap-4">
+          <a
+            href={EXTERNAL_LINKS.walkthroughCrypto}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
+                <PlayCircle className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-lg font-medium text-white group-hover:text-indigo-300 transition-colors">Walkthrough · crypto-native</h3>
+                <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-400">Loom · external</span>
+              </div>
+            </div>
+            <p className="text-slate-300 text-sm leading-relaxed mb-4">
+              Assumes familiarity with L1 chains, signing, and gas. Walks through deploying a SHIP agent, registering it on-chain, and watching it execute against the runtime.
+            </p>
+            <span className="text-sm text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+              Watch <ExternalLink className="h-3 w-3" />
+            </span>
+          </a>
+
+          <div
+            aria-disabled="true"
+            className="relative bg-slate-100/60 dark:bg-slate-900/30 border border-dashed border-slate-300 dark:border-slate-700/60 rounded-xl p-6 opacity-80"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2.5 rounded-lg bg-slate-200/70 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400">
+                <Clock className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-lg font-medium text-slate-700 dark:text-slate-300">Walkthrough · non-crypto</h3>
+                <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Coming soon</span>
+              </div>
+            </div>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              Same flow, framed for AI engineers who have not built on a chain before. No prior assumption about signing, gas, or wallets.
+            </p>
+          </div>
         </div>
       </div>
 
