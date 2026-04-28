@@ -72,9 +72,9 @@ export default function Evolution() {
       <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <ScrollReveal>
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light">
-              AI can reason. AI can act. Only Theseus gives it <span className="text-indigo-300">full agency</span>.
+          <div className="text-center mb-12 lg:mb-16 max-w-3xl mx-auto">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.015em] leading-[1.15] text-slate-900 dark:text-white">
+              AI can reason. AI can act. Only Theseus gives it <span className="italic">full agency.</span>
             </h2>
           </div>
         </ScrollReveal>

@@ -1,84 +1,75 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { EXTERNAL_LINKS } from "@/config/links";
 
-const agentTiers = [
+const useCases = [
   {
-    title: "Sovereign Agent",
-    tagline: "Self-directed, no human override",
-    description: "Agents with their own goals and key custody that collaborate with humans and other agents to create new forms of value and emergent behavior.",
-    icon: "◈",
+    title: "A verifiable oracle",
+    tier: "Civic",
+    description:
+      "Settles markets, prices, or signals by running inference and posting reasoning anyone can audit. No human committee, no centralized API.",
   },
   {
-    title: "Managed Agent", 
-    tagline: "Human-owned, operationally independent",
-    description: "Stateful agents tied to a human-owned identity, but still operate independently and can aggregate revenue directly to their owner.",
-    icon: "◇",
+    title: "A managed trading agent",
+    tier: "Managed",
+    description:
+      "Runs a strategy on its own balance. A controller key can pause or upgrade. Profits route to the owner address.",
   },
   {
-    title: "Civic Agent",
-    tagline: "Public-serving, transparent reasoning",
-    description: "Fully autonomous agents that serve human interests with transparent reasoning, like smart contracts but with inference.",
-    icon: "◆",
+    title: "A self-owning agent",
+    tier: "Sovereign",
+    description:
+      "Holds its balance, pays for its own inference, sets its own pricing, and persists across operators.",
   },
 ];
 
 export default function Markets() {
   return (
-    <section className="market-bg text-slate-900 dark:text-white py-20 lg:py-28 section-soft-divider" id="market">
-      {/* Section divider */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700/70 to-transparent mb-16 lg:mb-20" />
-
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6">
+    <section
+      className="text-slate-900 dark:text-white py-24 lg:py-32 section-soft-divider"
+      id="market"
+    >
+      <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
         {/* Header */}
         <ScrollReveal>
-          <div className="text-center mb-12 lg:mb-16">
-            <p className="text-indigo-700 dark:text-indigo-300/90 text-xs uppercase tracking-widest mb-4">
-              Three Tiers of Agency
+          <div className="mb-16 lg:mb-20 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-6">
+              Three ways to build
             </p>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] mb-4 text-slate-900 dark:text-white">
-              A new class of <span className="italic">individuals.</span>
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
+              Same runtime, <span className="italic">different intent.</span>
             </h2>
-            <p className="text-slate-700 dark:text-slate-300 text-lg sm:text-xl">
-              Powering a{" "}
+            <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300">
+              Theseus serves builders who want full autonomy and builders who want trust properties without it.{" "}
               <a
                 href={EXTERNAL_LINKS.substackTAM}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-700 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-900 dark:hover:text-indigo-200 transition-colors"
               >
-                multi-trillion dollar market
+                A multi-trillion dollar market.
               </a>
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Cards - descriptions always visible */}
-        <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-          {agentTiers.map((type, index) => (
-            <ScrollReveal key={index} delay={index + 1}>
-              <div className="group rounded-xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8
-                             bg-white dark:bg-gradient-to-br dark:from-slate-900/90 dark:via-slate-950/80 dark:to-slate-950
-                             hover:border-slate-400 dark:hover:border-indigo-400/40 h-full
-                             transition-all duration-300">
-                {/* Icon */}
-                <div className="text-3xl lg:text-4xl mb-4 text-indigo-500 dark:text-indigo-300/60 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors duration-300">
-                  {type.icon}
+        {/* Use cases */}
+        <div className="divide-y divide-slate-200 dark:divide-slate-800 border-y border-slate-200 dark:border-slate-800">
+          {useCases.map((uc, index) => (
+            <ScrollReveal key={uc.title} delay={index + 1}>
+              <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-4 sm:gap-12 py-10 lg:py-14">
+                <div>
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-slate-900 dark:text-white">
+                    {uc.title}
+                  </h3>
+                  <span className="inline-flex mt-3 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-sm">
+                    {uc.tier}
+                  </span>
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl lg:text-2xl font-light mb-2 text-slate-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors duration-300">
-                  {type.title}
-                </h3>
-
-                {/* Tagline */}
-                <p className="text-indigo-700 dark:text-indigo-300/75 text-sm sm:text-base mb-4">
-                  {type.tagline}
-                </p>
-
-                {/* Description - always visible */}
-                <p className="text-slate-600 dark:text-slate-300/90 text-sm sm:text-base leading-relaxed">
-                  {type.description}
-                </p>
+                <div>
+                  <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {uc.description}
+                  </p>
+                </div>
               </div>
             </ScrollReveal>
           ))}

@@ -39,7 +39,7 @@ const steps = [
     icon: Bot,
     title: "Deploy your first agent",
     description:
-      "Write a SHIP file, run one CLI command, watch it execute on-chain with a verifiable inference proof.",
+      "Write a SHIP file, run one CLI command, watch it execute with a verifiable inference proof.",
   },
 ];
 
@@ -172,7 +172,7 @@ export default function LaunchPage() {
                 href: "/docs/agentic-smart-contracts",
                 icon: Rocket,
                 title: "Agentic Smart Contracts",
-                desc: "Why agents are the next on-chain primitive, not a separate technology.",
+                desc: "Why agents are the next runtime primitive, not a separate technology.",
               },
               {
                 href: "/docs/quickstart",

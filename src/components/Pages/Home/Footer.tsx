@@ -10,10 +10,10 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 lg:space-y-8">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
               Join us in making AI
               <br />
-              first class citizens
+              <span className="italic">first-class citizens.</span>
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -63,12 +63,6 @@ export default function Footer() {
                 className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
               >
                 Home
-              </Link>
-              <Link
-                href="#about"
-                className="text-slate-700 dark:text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"
-              >
-                Features
               </Link>
               <Link
                 href="#market"

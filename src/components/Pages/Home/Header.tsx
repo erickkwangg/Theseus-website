@@ -39,9 +39,6 @@ export default function Header() {
           <Link href="/" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
             Home
           </Link>
-          <Link href="#about" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
-            Features
-          </Link>
           <Link href="#market" className="text-slate-700 dark:text-slate-50 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-sm font-medium">
             Use Cases
           </Link>
@@ -80,12 +77,6 @@ export default function Header() {
                   className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
                 >
                   Home
-                </Link>
-                <Link
-                  href="#about"
-                  className="text-slate-700 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors text-lg"
-                >
-                  Features
                 </Link>
                 <Link
                   href="#market"

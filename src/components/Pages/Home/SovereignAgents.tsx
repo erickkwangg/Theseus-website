@@ -582,7 +582,7 @@ export function SovereignAgentsSection() {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm text-emerald-300 font-medium">Prediction Market Contract</div>
                   <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/5 border border-emerald-400/30 rounded-2xl rounded-tl-sm px-6 py-3 max-w-md shadow-lg shadow-emerald-500/10">
-                    <p className="text-slate-900 dark:text-white font-medium text-sm">Settlement complete and state root updated on-chain.</p>
+                    <p className="text-slate-900 dark:text-white font-medium text-sm">Settlement complete. Result and proof committed to consensus.</p>
                   </div>
                 </div>
               </div>
