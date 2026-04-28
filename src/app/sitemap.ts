@@ -5,6 +5,7 @@ const BASE_URL = "https://theseus.network";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/launch",
     "/docs",
     "/docs/introduction",
     "/docs/quickstart",

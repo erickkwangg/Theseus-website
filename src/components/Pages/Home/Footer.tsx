@@ -82,6 +82,12 @@ export default function Footer() {
               >
                 Docs
               </Link>
+              <Link
+                href="/launch"
+                className="text-indigo-300 hover:text-white transition-colors text-xs lg:text-sm font-medium"
+              >
+                Launch
+              </Link>
               <a
                 href={EXTERNAL_LINKS.substack}
                 className="text-slate-300 hover:text-indigo-300 transition-colors text-xs lg:text-sm"

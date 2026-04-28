@@ -212,16 +212,14 @@ export default function DocsHomePage() {
           Resources
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <a 
-            href={EXTERNAL_LINKS.github}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-4 border border-gray-800 rounded-lg hover:border-gray-700 hover:bg-gray-900/50 transition-all group"
+          <Link
+            href="/launch"
+            className="flex items-center gap-3 p-4 border border-indigo-500/30 bg-indigo-500/5 rounded-lg hover:border-indigo-400/60 hover:bg-indigo-500/10 transition-all group"
           >
-            <ExternalLink className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
-            <span className="text-sm text-gray-400 group-hover:text-white transition-colors">GitHub (Private)</span>
-            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
-          </a>
+            <Rocket className="h-5 w-5 text-indigo-300 group-hover:text-white transition-colors" />
+            <span className="text-sm text-indigo-300 group-hover:text-white transition-colors font-medium">Launch on Theseus</span>
+            <ArrowRight className="h-3 w-3 text-indigo-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Link>
           <a 
             href={EXTERNAL_LINKS.whitepaper}
             target="_blank" 

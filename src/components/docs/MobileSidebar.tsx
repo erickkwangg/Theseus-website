@@ -134,15 +134,14 @@ export default function MobileSidebar() {
           
           <div className="pt-4 border-t border-slate-700/60">
             <div className="space-y-0.5">
-              <a
-                href={EXTERNAL_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2.5 py-2 px-3 text-sm text-slate-300 hover:text-indigo-300 hover:bg-slate-900/60 rounded-lg transition-all"
+              <Link
+                href="/launch"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2.5 py-2 px-3 text-sm text-indigo-300 hover:text-white hover:bg-indigo-500/15 rounded-lg transition-all"
               >
-                <ExternalLink className="h-4 w-4 text-slate-500" />
-                GitHub (Private)
-              </a>
+                <Rocket className="h-4 w-4" />
+                Launch
+              </Link>
               <a
                 href={EXTERNAL_LINKS.whitepaper}
                 target="_blank"

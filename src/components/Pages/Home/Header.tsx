@@ -55,6 +55,12 @@ export default function Header() {
           >
             Blog
           </a>
+          <Link
+            href="/launch"
+            className="text-indigo-300 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-md border border-indigo-400/40 hover:bg-indigo-500/15"
+          >
+            Launch
+          </Link>
         </div>
         {/* Mobile Hamburger Menu */}
         <div className="md:hidden">
@@ -99,6 +105,12 @@ export default function Header() {
                 >
                   Blog
                 </a>
+                <Link
+                  href="/launch"
+                  className="text-indigo-300 hover:text-white transition-colors text-lg font-medium"
+                >
+                  Launch
+                </Link>
               </nav>
             </SheetContent>
           </Sheet>

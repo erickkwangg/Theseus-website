@@ -8,6 +8,8 @@ export const EXTERNAL_LINKS = {
   substackAgenticContracts: "https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts",
   conwayTech: "https://conway.tech",
   web4ai: "https://web4.ai",
+  contactEmail: "hello@theseus.network",
+  discord: "",
 } as const;
 
 // Navigation items shared between Header and Footer
