@@ -15,15 +15,13 @@ export default function Features() {
 
         <ScrollReveal delay={1}>
           <p className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.05] text-slate-900 dark:text-white mb-16">
-            <span className="italic">1.3 billion</span> agents by 2028.
+            Build an agent users will <span className="italic">trust with their money.</span>
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={2}>
           <p className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.015em] leading-[1.1] text-slate-900 dark:text-white">
-            Theseus is the substrate
-            <br />
-            where the next wave <span className="italic">doesn&apos;t.</span>
+            Theseus is the only runtime where <span className="italic">they will.</span>
           </p>
         </ScrollReveal>
       </div>
