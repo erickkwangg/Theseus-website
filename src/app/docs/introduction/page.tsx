@@ -6,7 +6,7 @@ import Callout from "@/components/docs/Callout";
 export const metadata: Metadata = {
   title: "Introduction - Theseus Docs",
   description:
-    "Understand the core ideas behind Theseus: sovereign AI agents, verifiable inference, and runtime infrastructure implemented as an L1 chain.",
+    "Understand the core ideas behind Theseus: sovereign AI agents, verifiable inference, and runtime infrastructure for autonomous execution.",
   keywords: [
     "Theseus",
     "AI agents",
@@ -30,7 +30,7 @@ export default function IntroductionPage() {
         <p className="text-xl text-gray-400 leading-relaxed">
           Runtime infrastructure for autonomous AI agents with self-sovereign execution.
           <span className="block text-base text-slate-500 mt-2">
-            Theseus is implemented as a Layer-1 chain, with AI execution and verification as the primary developer surface.
+            AI execution and verification are the primary developer surface; Theseus is implemented as a Layer-1 chain underneath.
           </span>
         </p>
       </div>
@@ -50,7 +50,7 @@ export default function IntroductionPage() {
               1.3 billion agents
             </p>
             <p className="text-gray-400">
-              Expected to be online by the end of this decade. Most still depend on human-controlled keys and centralized APIs.
+              Expected to be online by the end of this decade. Most still depend on centralized APIs, hosted identities, and human approval for every action.
             </p>
           </div>
 
@@ -195,7 +195,7 @@ export default function IntroductionPage() {
           <h2 id="key-insight" className="text-2xl font-medium mb-4">The Key Difference</h2>
           
           <Callout type="info" title="Autonomous Execution">
-            Unlike Ethereum smart contracts that must be triggered by external accounts, Theseus agents can wake, evaluate conditions, and initiate transactions directly from on-chain state. They control their $THE balances and execution logic without a human-controlled key path.
+            Unlike Ethereum smart contracts that must be triggered by external accounts, Theseus agents can wake, evaluate conditions, and initiate transactions directly from on-chain state. They control their $THE balances and execution logic without requiring a human operator to sign off.
           </Callout>
 
           <div className="flex gap-3 mt-6">

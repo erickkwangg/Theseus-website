@@ -11,7 +11,7 @@ const agentTiers = [
   {
     title: "Managed Agent", 
     tagline: "Human-owned, operationally independent",
-    description: "Stateful agents with an associated human controller key, but still operate independently and can aggregate revenue directly to their owner.",
+    description: "Stateful agents tied to a human-owned identity, but still operate independently and can aggregate revenue directly to their owner.",
     icon: "◇",
   },
   {

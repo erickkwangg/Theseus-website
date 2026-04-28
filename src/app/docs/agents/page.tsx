@@ -52,7 +52,7 @@ export default function AgentsPage() {
               <tbody>
                 <tr><td className="font-medium text-white">Code hash</td><td>Binary verification for AIVM/HVM</td></tr>
                 <tr><td className="font-medium text-white">Autonomy flag</td><td>0 = human-gated, 1 = sovereign</td></tr>
-                <tr><td className="font-medium text-white">Controller key</td><td>Optional pubkey for human override</td></tr>
+                <tr><td className="font-medium text-white">Controller identity</td><td>Optional pubkey for human override</td></tr>
                 <tr><td className="font-medium text-white">AIVM version</td><td>Required ISA features</td></tr>
                 <tr><td className="font-medium text-white">Resource quota</td><td>Max FLOPs per epoch</td></tr>
                 <tr><td className="font-medium text-white">Stake</td><td>$THE locked for slashing</td></tr>
@@ -108,7 +108,7 @@ export default function AgentsPage() {
           </h2>
           
           <p className="text-gray-400 mb-6">
-            How sovereign agents decide when to run inference, without human-controlled keys or off-chain schedulers:
+            How sovereign agents decide when to run inference, without human sign-off or off-chain schedulers:
           </p>
 
           <div className="space-y-3">

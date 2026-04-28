@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://theseuschain.com/sitemap.xml",
+    sitemap: "https://theseus.network/sitemap.xml",
   };
 }

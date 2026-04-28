@@ -11,7 +11,7 @@ const features = [
     icon: machineIcon,
     title: "AIVM",
     subtitle: "AI Virtual Machine",
-    description: "Stateful AI agents run as on-chain programs with autonomous execution and no operator-controlled private key path.",
+    description: "Stateful AI agents run as verifiable programs that execute autonomously. No host platform can silently override them.",
     href: "/docs/aivm",
   },
   {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export function OnChainAgentsSection() {
+export function SovereignAgentsSection() {
   const [visibleEvents, setVisibleEvents] = useState<number[]>([])
   const [showResponse, setShowResponse] = useState(false)
   const [verifiedStates, setVerifiedStates] = useState<{ [key: number]: boolean }>({})
@@ -123,9 +123,9 @@ export function OnChainAgentsSection() {
       <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
       {/* Title Section */}
       <div className="max-w-7xl mx-auto mb-20 text-center relative z-10">
-        <h2 className="text-5xl md:text-6xl font-light text-white mb-4 tracking-tight">On-Chain Agents</h2>
+        <h2 className="text-5xl md:text-6xl font-light text-white mb-4 tracking-tight">Sovereign Agents</h2>
         <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
-          Agents powered by SHIP DSL, executed and verified on Theseus Chain.
+          Agents powered by SHIP DSL, executed and verified on Theseus.
         </p>
       </div>
 

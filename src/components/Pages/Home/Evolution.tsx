@@ -166,9 +166,9 @@ export default function Evolution() {
           <div className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-72 opacity-100 mt-6" : "max-h-0 opacity-0"}`}>
             <p className="text-slate-300/90 text-sm max-w-3xl mx-auto leading-relaxed mb-4">
               ChatGPT proved AI could reason. OpenClaw proved it could act. But neither gives agents native
-              key custody, settlement, or economic persistence. Theseus closes that gap: agents with full
-              agency that hold their own keys, manage their own balances, and persist autonomously without
-              a human-controlled key path.
+              identity, settlement, or economic persistence. Theseus closes that gap: agents with full
+              agency that hold their own credentials, manage their own balances, and persist autonomously,
+              and no host platform can revoke them.
             </p>
             <a
               href={EXTERNAL_LINKS.substackEvolution}
