@@ -1,4 +1,4 @@
-import Evolution from "@/components/Pages/Home/Evolution";
+import Architecture from "@/components/Pages/Home/Architecture";
 import Footer from "@/components/Pages/Home/Footer";
 import Hero from "@/components/Pages/Home/Hero";
 import Markets from "@/components/Pages/Home/Markets";
@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen site-shell">
       <Hero />
       <SovereignAgentsSection />
-      <Evolution />
+      <Architecture />
       <Markets />
       <Footer />
     </main>
