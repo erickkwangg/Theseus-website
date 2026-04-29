@@ -4,6 +4,9 @@ import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import FlowDiagram from "@/components/docs/FlowDiagram";
+import BarChart from "@/components/docs/BarChart";
+import PageHero from "@/components/docs/PageHero";
+import { TensorCommitsIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 import { EXTERNAL_LINKS } from "@/config/links";
@@ -19,35 +22,21 @@ export default function TensorCommitsPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="Tensor Commits" description="Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus." slug="tensor-commits" />
-      {/* Page Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
-          <GitBranch className="h-3 w-3" />
-          Core Concepts
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          Tensor Commits Protocol
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          The security base of Theseus: public verifiability and tamper-proof computations with &lt;1% overhead.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Core Concepts"
+        eyebrowIcon={GitBranch}
+        title="Tensor Commits"
+        subtitle="Succinct cryptographic proofs that an inference ran honestly. Generated in under 1% overhead, checked in milliseconds, scale to frontier-size models."
+        accent="purple"
+        illustration={<TensorCommitsIllustration />}
+        stats={[
+          { value: "<1%", label: "Prover overhead" },
+          { value: "~2ms", label: "Verifier check" },
+          { value: "70B+", label: "Models" },
+        ]}
+      />
         
       <div className="prose prose-invert max-w-none">
-        {/* Key Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-12">
-          {[
-            { stat: "<1%", label: "Proof generation overhead" },
-            { stat: "<0.1%", label: "Verification time" },
-            { stat: "~2ms", label: "Check time per proof" },
-          ].map((item) => (
-            <div key={item.label} className="docs-card text-center">
-              <div className="text-2xl font-light text-indigo-700 dark:text-indigo-300">{item.stat}</div>
-              <div className="text-slate-600 dark:text-gray-500 text-xs mt-1">{item.label}</div>
-            </div>
-          ))}
-        </div>
-
         {/* Overview */}
         <section className="mb-12">
           <h2 id="overview" className="text-2xl font-medium mb-4">Overview</h2>
@@ -217,56 +206,61 @@ export default function TensorCommitsPage() {
           <p className="text-slate-600 dark:text-gray-500 text-sm mb-8">* Gas costs based on base-load multiplier m = 1.0</p>
 
           <h3 id="vs-alternatives" className="text-xl font-medium mb-3">Versus alternatives</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            How Tensor Commits compare to the two main approaches for verifying neural network inference: re-executing the model on every node, and zkML proofs.
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            How Tensor Commits compare to the two main approaches for verifying neural network inference. The chart below shows prover overhead — the cost a prover pays to produce a proof, on top of the raw inference itself.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>Approach</th>
-                  <th className="text-gray-600 dark:text-gray-400">Full re-execution</th>
-                  <th className="text-gray-600 dark:text-gray-400">zkML (zk-SNARK)</th>
-                  <th className="text-indigo-700 dark:text-indigo-300">Tensor Commits</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Verifier work per inference</td>
-                  <td>Same as the prover</td>
-                  <td>Milliseconds (constant)</td>
-                  <td className="text-indigo-700 dark:text-indigo-300">~2 ms</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Prover overhead vs raw inference</td>
-                  <td>0% (no separate proof)</td>
-                  <td>1000-100,000x</td>
-                  <td className="text-indigo-700 dark:text-indigo-300">&lt;1%</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Practical model size</td>
-                  <td>Limited by smallest validator</td>
-                  <td>Small models (mostly)</td>
-                  <td className="text-indigo-700 dark:text-indigo-300">Frontier (70B+)</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Proof size</td>
-                  <td>Not applicable</td>
-                  <td>~KB</td>
-                  <td className="text-indigo-700 dark:text-indigo-300">~KB to MB</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Hides model weights from verifier</td>
-                  <td>No (verifier needs weights)</td>
-                  <td>Yes</td>
-                  <td className="text-indigo-700 dark:text-indigo-300">Yes</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="docs-card mb-6">
+            <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-1">Prover overhead vs raw inference</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-500 mb-4">Lower is better. Log scale — values span four orders of magnitude.</p>
+            <BarChart
+              log
+              rows={[
+                { label: "Tensor Commits", value: 1, display: "<1%", variant: "highlight", sublabel: "Theseus" },
+                { label: "zkML (zk-SNARK)", value: 1000, display: "1,000–100,000×", variant: "muted", sublabel: "EZKL, Modulus, etc." },
+                { label: "Full re-execution", value: 0, display: "0% (but every node pays)", variant: "muted", sublabel: "Ethereum-style" },
+              ]}
+            />
           </div>
+
+          <div className="docs-card">
+            <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-4">Other dimensions, side by side</h4>
+            <div className="overflow-x-auto">
+              <table className="docs-table">
+                <thead>
+                  <tr>
+                    <th>Aspect</th>
+                    <th className="text-gray-600 dark:text-gray-400">Re-execution</th>
+                    <th className="text-gray-600 dark:text-gray-400">zkML</th>
+                    <th className="text-indigo-700 dark:text-indigo-300">Tensor Commits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="font-medium text-slate-900 dark:text-white">Verifier work / inference</td>
+                    <td>Same as prover</td>
+                    <td>~ms (constant)</td>
+                    <td className="text-indigo-700 dark:text-indigo-300">~2 ms</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-slate-900 dark:text-white">Practical model size</td>
+                    <td>Smallest validator</td>
+                    <td>Small (mostly)</td>
+                    <td className="text-indigo-700 dark:text-indigo-300">Frontier (70B+)</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-slate-900 dark:text-white">Hides model weights</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td className="text-indigo-700 dark:text-indigo-300">Yes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <p className="text-slate-600 dark:text-gray-500 text-sm mt-3">
-            Re-execution is the design Ethereum uses for smart contracts and the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs but the prover-side overhead is what has kept it limited to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
+            Re-execution is what Ethereum uses for smart contracts — and the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs but the prover-side overhead has kept it confined to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
           </p>
         </section>
 

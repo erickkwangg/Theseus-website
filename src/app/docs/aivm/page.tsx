@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Cpu, Zap, Gauge, Clock, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import PageHero from "@/components/docs/PageHero";
+import { AivmIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -17,19 +19,14 @@ export default function AIVMPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="AIVM" description="Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation." slug="aivm" />
-      {/* Page Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
-          <Cpu className="h-3 w-3" />
-          Core Concepts
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          AI Virtual Machine (AIVM)
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          The execution backbone of Theseus with tensor-native opcodes, deterministic execution, and cryptographic proof generation.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Core Concepts"
+        eyebrowIcon={Cpu}
+        title="AI Virtual Machine"
+        subtitle="A tensor-native runtime where models register, agents call models through deterministic execution paths, and every model call produces a verifiable proof."
+        accent="indigo"
+        illustration={<AivmIllustration />}
+      />
       
       <div className="prose prose-invert max-w-none">
         {/* Architecture */}

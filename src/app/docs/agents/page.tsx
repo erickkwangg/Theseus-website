@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import FlowDiagram from "@/components/docs/FlowDiagram";
+import PageHero from "@/components/docs/PageHero";
+import { AgentsIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -17,19 +19,14 @@ export default function AgentsPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="Agents" description="Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus." slug="agents" />
-      {/* Page Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
-          <Bot className="h-3 w-3" />
-          Core Concepts
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          Agents &amp; Models
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          Register agents, deploy models, and enable agent-to-agent interactions using $THE.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Core Concepts"
+        eyebrowIcon={Bot}
+        title="Agents & models"
+        subtitle="Agents on Theseus hold their own keys, balance, and state. They wake up on triggers, call models, pay for their own inference, and settle on-chain — without a human in the loop."
+        accent="green"
+        illustration={<AgentsIllustration />}
+      />
         
       <div className="prose prose-invert max-w-none">
         {/* ABG vs AKG */}

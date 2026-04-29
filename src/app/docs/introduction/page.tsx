@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Cpu, GitBranch, Coins, Users, Shield } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import AgentSpectrum from "@/components/docs/AgentSpectrum";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -164,38 +165,7 @@ export default function IntroductionPage() {
             to fully self-directed. Different applications want different tiers.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Control</th>
-                  <th>Purpose</th>
-                  <th>Concrete example</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Managed Agent</td>
-                  <td>Human-owned key</td>
-                  <td>Runs by itself, returns value to its owner</td>
-                  <td className="text-slate-600 dark:text-gray-500">A trading agent that runs strategies on its own and routes profits to the owner&apos;s address. The controller key can pause it.</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Civic Agent</td>
-                  <td>Fully autonomous</td>
-                  <td>Public-good work with transparent reasoning</td>
-                  <td className="text-slate-600 dark:text-gray-500">A prediction-market resolver that decides outcomes via inference and posts the verifiable reasoning on-chain. See <Link href="/docs/examples#market" className="text-indigo-700 dark:text-indigo-300 hover:underline no-underline">the-prediction-market example</Link>.</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Sovereign Agent</td>
-                  <td>Self-directed</td>
-                  <td>Owns its policy, balance, and history</td>
-                  <td className="text-slate-600 dark:text-gray-500">An agent that holds its own balance, pays for its own inference, and decides when to act based on on-chain triggers. The agent becomes the counterparty.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <AgentSpectrum />
         </section>
 
         {/* Design Principles */}

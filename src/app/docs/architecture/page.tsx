@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ArrowRight, Layers, Database, Shield, Cpu, GitBranch } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import FlowDiagram from "@/components/docs/FlowDiagram";
+import LayeredStack from "@/components/docs/LayeredStack";
+import PageHero from "@/components/docs/PageHero";
+import { ArchitectureIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -19,99 +21,28 @@ export default function ArchitecturePage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="Architecture" description="Explore the Theseus architecture: AIVM execution, TheseusStore data availability, and PoS consensus." slug="architecture" />
-      {/* Page Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
-          <Layers className="h-3 w-3" />
-          Core Concepts
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          System Architecture
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          Three-layer architecture built for AI workloads: execution, storage, and consensus working as one system.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Core Concepts"
+        eyebrowIcon={Layers}
+        title="System architecture"
+        subtitle="Execution, storage, and consensus designed as one system. Each layer earns and stakes separately, but a block only finalizes when all three agree."
+        accent="indigo"
+        illustration={<ArchitectureIllustration />}
+        stats={[
+          { value: "AIVM", label: "Execution" },
+          { value: "TheseusStore", label: "Availability" },
+          { value: "HotStuff BFT", label: "Consensus" },
+        ]}
+      />
         
       <div className="prose prose-invert max-w-none">
-        {/* Overview */}
+        {/* Three-Layer Stack — interactive */}
         <section className="mb-12">
-          <h2 id="overview" className="text-2xl font-medium mb-4">Architectural Overview</h2>
-          
-          <div className="docs-card mb-6">
-            <Image 
-              src="/theseus-architecture-diagram.png" 
-              alt="Theseus System Architecture" 
-              width={1200}
-              height={600}
-              className="w-full h-auto rounded"
-            />
-          </div>
-
-          <Callout type="info" title="Three Main Processes">
-            <strong>AIVM</strong> executes inference and forwards valid transactions; <strong>TheseusStore</strong> handles model/context data with DA sampling; <strong>HS BFT PoS</strong> provides HotStuff-based finality. All communicate via RPC/Networking layer.
-          </Callout>
-        </section>
-
-        {/* Three-Layer Stack */}
-        <section className="mb-12">
-          <h2 id="three-layer" className="text-2xl font-medium mb-6">Three-Layer Stack</h2>
-          
-          <div className="space-y-4">
-            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shrink-0">
-                  <Cpu className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium mb-2">Execution Layer: AIVM</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Deterministic tensor-native runtime with Tensor Commits:</p>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Tensor operations</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Agent scheduling</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Proof generation</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">SHIP DSL</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="docs-card border-green-200 dark:border-green-900/50">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400 shrink-0">
-                  <Database className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium mb-2">Availability Layer: TheseusStore</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Erasure-coded storage for model weights and agent contexts:</p>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Reed-Solomon encoding</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">RAG contexts</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Storage miners</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Merkle roots</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="docs-card border-purple-200 dark:border-purple-900/50">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400 shrink-0">
-                  <Shield className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium mb-2">Consensus Layer: Proof of Stake</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">HotStuff BFT with AI-specific requirements:</p>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Valid model roots</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">VRF selection</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">One-block finality</span>
-                    <span className="px-2 py-1 bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-200 rounded">Coupled layers</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2 id="three-layer" className="text-2xl font-medium mb-3">Three-layer stack</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Theseus separates execution, availability, and consensus, but couples them at the block level: a block can&apos;t finalize unless every Tensor Commit verifies and every required shard is available.
+          </p>
+          <LayeredStack />
         </section>
 
         {/* Block Structure */}
