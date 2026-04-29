@@ -1012,3 +1012,23 @@
   border-color: rgba(199, 210, 254, 0.55);
   background: rgba(99, 102, 241, 0.13);
 }
+
+/* Visual hint that horizontally-overflowing scrollers have more content.
+   Applied only at narrower viewports where the overflow is real and code
+   blocks visually clip. Right edge fades over 32px. */
+@media (max-width: 1023px) {
+  .scroll-fade-right {
+    mask-image: linear-gradient(
+      to right,
+      black 0,
+      black calc(100% - 32px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      black 0,
+      black calc(100% - 32px),
+      transparent 100%
+    );
+  }
+}
