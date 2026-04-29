@@ -73,6 +73,14 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
+    // Animated GIF first for Discord/LinkedIn/Slack which animate or use the
+    // first frame; PNG second as a static fallback for scrapers (Telegram in
+    // particular) that refuse animated previews.
+    // Single canonical og:image: middleware rewrites this URL to /og/root.png
+    // for scrapers that don't animate (currently Facebook/Messenger/Instagram
+    // via facebookexternalhit), while every other platform receives the GIF
+    // bytes directly. Omitting og:image:type so scrapers that cross-check
+    // declared MIME against response Content-Type don't reject the rewrite.
     images: [
       {
         url: "/og/root.gif",
@@ -86,9 +94,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    // Twitter does not reliably render animated GIFs as link-preview images
+    // even though their docs claim "first frame supported". Always serve PNG.
     images: [
       {
-        url: "/og/root.gif",
+        url: "/og/root.png",
         alt: "Theseus — Agents that are verified, autonomous, sovereign.",
       },
     ],
