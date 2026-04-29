@@ -264,6 +264,98 @@ body { Transaction[] }`}</CodeBlock>
           </Callout>
         </section>
 
+        {/* Three-Stage Execution Model */}
+        <section className="mb-12">
+          <h2 id="three-stage-execution" className="text-2xl font-medium mb-4">
+            Three-stage execution model
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Inference and tool calls cannot complete inside a single block — a
+            prover has to run the model off-chain and submit verification
+            material back. So agent execution is split across three stages,
+            each in a different block: a user-facing extrinsic queues the
+            work, a prover-facing extrinsic supplies a verified result, and
+            an inherent block-author hook resumes the agent. State transitions
+            happen only in the deterministic on-chain stages, never inside
+            prover-controlled extrinsics.
+          </p>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="docs-card border-indigo-900/50">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
+                  Stage 1
+                </span>
+                <span className="font-mono text-[11px] text-slate-500">
+                  block N
+                </span>
+              </div>
+              <h3 className="font-medium text-slate-900 dark:text-white mb-2">
+                Queue
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                User submits <code className="text-indigo-700 dark:text-indigo-300">call_agent</code>.
+                pallet_agents records the original origin, begins
+                interpreting the ABG, and emits{" "}
+                <code className="text-indigo-700 dark:text-indigo-300">InferenceQueued</code>{" "}
+                when it hits a model-call node. The agent suspends.
+              </p>
+            </div>
+
+            <div className="docs-card border-purple-900/50">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-purple-600 dark:text-purple-300">
+                  Stage 2
+                </span>
+                <span className="font-mono text-[11px] text-slate-500">
+                  block N+Δ
+                </span>
+              </div>
+              <h3 className="font-medium text-slate-900 dark:text-white mb-2">
+                Prove
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                A prover runs inference, generates a Tensor Commit proof, and
+                submits{" "}
+                <code className="text-indigo-700 dark:text-indigo-300">
+                  submit_inference_result
+                </code>
+                . The chain verifies via the KZG host function and marks the
+                job verified. No agent state changes here.
+              </p>
+            </div>
+
+            <div className="docs-card border-green-900/50">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-green-600 dark:text-green-300">
+                  Stage 3
+                </span>
+                <span className="font-mono text-[11px] text-slate-500">
+                  block N+Δ+1
+                </span>
+              </div>
+              <h3 className="font-medium text-slate-900 dark:text-white mb-2">
+                Resume
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                <code className="text-indigo-700 dark:text-indigo-300">on_initialize</code>{" "}
+                scans verified jobs and resumes each agent under its original
+                origin. The agent advances its ABG to the next async boundary
+                or to a terminal node that emits SHIP intents.
+              </p>
+            </div>
+          </div>
+
+          <Callout type="info" title="Why this matters for developers">
+            Because state changes only happen in stages 1 and 3, agent logic
+            is fully replayable from on-chain data. Provers can be untrusted
+            from the chain&apos;s perspective — the only thing that matters
+            is what the runtime can verify deterministically from the
+            submitted proof and the recorded ABG.
+          </Callout>
+        </section>
+
         {/* Transaction Lifecycle */}
         <section className="mb-12">
           <h2 id="lifecycle" className="text-2xl font-medium mb-6">Transaction Lifecycle</h2>
