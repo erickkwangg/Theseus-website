@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import FlowDiagram from "@/components/docs/FlowDiagram";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -19,7 +20,7 @@ export default function TensorCommitsPage() {
       <DocsPageJsonLd title="Tensor Commits" description="Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus." slug="tensor-commits" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <GitBranch className="h-3 w-3" />
           Core Concepts
         </div>
@@ -40,8 +41,8 @@ export default function TensorCommitsPage() {
             { stat: "~2ms", label: "Check time per proof" },
           ].map((item) => (
             <div key={item.label} className="docs-card text-center">
-              <div className="text-2xl font-light text-indigo-300">{item.stat}</div>
-              <div className="text-gray-500 text-xs mt-1">{item.label}</div>
+              <div className="text-2xl font-light text-indigo-700 dark:text-indigo-300">{item.stat}</div>
+              <div className="text-slate-600 dark:text-gray-500 text-xs mt-1">{item.label}</div>
             </div>
           ))}
         </div>
@@ -79,7 +80,7 @@ export default function TensorCommitsPage() {
         {/* Key Achievements */}
         <section className="mb-12">
           <h2 id="achievements" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <CheckCircle className="h-5 w-5" />
             </span>
             Key Achievements
@@ -98,7 +99,7 @@ export default function TensorCommitsPage() {
 
           <div className="docs-card">
             <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-              <Zap className="h-4 w-4 text-yellow-400" />
+              <Zap className="h-4 w-4 text-yellow-700 dark:text-yellow-400" />
               Efficient & Scalable
             </h3>
             <div className="grid sm:grid-cols-2 gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -125,7 +126,7 @@ export default function TensorCommitsPage() {
         {/* Terkle Trees */}
         <section className="mb-12">
           <h2 id="terkle-trees" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <GitBranch className="h-5 w-5" />
             </span>
             Terkle Trees
@@ -160,31 +161,20 @@ export default function TensorCommitsPage() {
         {/* Verification Process */}
         <section className="mb-12">
           <h2 id="verification" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Shield className="h-5 w-5" />
             </span>
             Verification Process
           </h2>
           
-          <div className="space-y-4">
-            {[
-              { step: "1", title: "Model Registration", desc: "Prover uploads weights with Tensor Commit. Commitment stored on-chain as canonical fingerprint." },
-              { step: "2", title: "Inference Execution", desc: "Prover runs forward pass, emits proof with opening, input embeddings, layer outputs, and Merkle path." },
-              { step: "3", title: "Verification", desc: "Every verifier checks every inference. ~2ms check time, gossip once, 2/3 BFT agreement needed." },
-            ].map((item) => (
-              <div key={item.step} className="docs-card">
-                <div className="flex items-start gap-4">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500 text-white text-sm font-bold shrink-0">
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-medium mb-1">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FlowDiagram
+            accent="indigo"
+            steps={[
+              { title: "Register", desc: "Prover uploads weights with a Tensor Commit; commitment is the canonical on-chain fingerprint." },
+              { title: "Execute", desc: "Prover runs the forward pass and emits proof: opening, embeddings, layer outputs, Merkle path." },
+              { title: "Verify", desc: "Every verifier rechecks in ~2ms. 2/3 BFT agreement is required before finalization." },
+            ]}
+          />
         </section>
 
         {/* Performance */}
@@ -211,7 +201,7 @@ export default function TensorCommitsPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-gray-500 text-sm mb-8">* Gas costs based on base-load multiplier m = 1.0</p>
+          <p className="text-slate-600 dark:text-gray-500 text-sm mb-8">* Gas costs based on base-load multiplier m = 1.0</p>
 
           <h3 id="vs-alternatives" className="text-xl font-medium mb-3">Versus alternatives</h3>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -225,7 +215,7 @@ export default function TensorCommitsPage() {
                   <th>Approach</th>
                   <th className="text-gray-600 dark:text-gray-400">Full re-execution</th>
                   <th className="text-gray-600 dark:text-gray-400">zkML (zk-SNARK)</th>
-                  <th className="text-indigo-300">Tensor Commits</th>
+                  <th className="text-indigo-700 dark:text-indigo-300">Tensor Commits</th>
                 </tr>
               </thead>
               <tbody>
@@ -233,36 +223,36 @@ export default function TensorCommitsPage() {
                   <td className="font-medium text-slate-900 dark:text-white">Verifier work per inference</td>
                   <td>Same as the prover</td>
                   <td>Milliseconds (constant)</td>
-                  <td className="text-indigo-300">~2 ms</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">~2 ms</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Prover overhead vs raw inference</td>
                   <td>0% (no separate proof)</td>
                   <td>1000-100,000x</td>
-                  <td className="text-indigo-300">&lt;1%</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">&lt;1%</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Practical model size</td>
                   <td>Limited by smallest validator</td>
                   <td>Small models (mostly)</td>
-                  <td className="text-indigo-300">Frontier (70B+)</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">Frontier (70B+)</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Proof size</td>
                   <td>Not applicable</td>
                   <td>~KB</td>
-                  <td className="text-indigo-300">~KB to MB</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">~KB to MB</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Hides model weights from verifier</td>
                   <td>No (verifier needs weights)</td>
                   <td>Yes</td>
-                  <td className="text-indigo-300">Yes</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">Yes</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-gray-500 text-sm mt-3">
+          <p className="text-slate-600 dark:text-gray-500 text-sm mt-3">
             Re-execution is the design Ethereum uses for smart contracts and the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs but the prover-side overhead is what has kept it limited to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
           </p>
         </section>
@@ -300,7 +290,7 @@ export default function TensorCommitsPage() {
                 { label: "Scalable verification", desc: "Thousands of validators simultaneously" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-green-700 dark:text-green-400 mt-0.5 shrink-0" />
                   <div>
                     <span className="text-slate-900 dark:text-white font-medium">{item.label}:</span>
                     <span className="text-gray-600 dark:text-gray-400 ml-1">{item.desc}</span>
@@ -315,14 +305,14 @@ export default function TensorCommitsPage() {
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← AIVM Architecture</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← AIVM Architecture</h3>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full text-right">
-              <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Build Agents →</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Build Agents →</h3>
             </div>
           </Link>
         </div>

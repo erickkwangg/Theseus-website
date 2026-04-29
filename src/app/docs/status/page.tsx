@@ -142,7 +142,7 @@ export default function StatusPage() {
         slug="status"
       />
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-400 text-xs mb-4">
           <Activity className="h-3 w-3" />
           Network
         </div>
@@ -178,7 +178,7 @@ export default function StatusPage() {
                 <div className="text-2xl font-light text-slate-700 dark:text-slate-300">
                   {s.value}
                 </div>
-                <div className="text-gray-500 text-xs mt-1">{s.label}</div>
+                <div className="text-slate-600 dark:text-gray-500 text-xs mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -209,7 +209,7 @@ export default function StatusPage() {
                   <div className="flex items-start gap-4">
                     <div
                       className={`mt-1 ${
-                        isLive ? "text-green-400" : "text-slate-500"
+                        isLive ? "text-green-700 dark:text-green-400" : "text-slate-500"
                       }`}
                     >
                       {isLive ? (
@@ -222,13 +222,13 @@ export default function StatusPage() {
                       <div className="flex items-center gap-3 mb-1">
                         <span
                           className={`text-xs uppercase tracking-widest ${
-                            isLive ? "text-green-400" : "text-slate-500"
+                            isLive ? "text-green-700 dark:text-green-400" : "text-slate-500"
                           }`}
                         >
                           {phase.label}
                         </span>
                         {isLive && (
-                          <span className="text-[10px] uppercase tracking-widest text-green-400 bg-green-500/10 px-2 py-0.5 rounded">
+                          <span className="text-[10px] uppercase tracking-widest text-green-700 dark:text-green-400 bg-green-500/10 px-2 py-0.5 rounded">
                             Live
                           </span>
                         )}
@@ -334,27 +334,27 @@ export default function StatusPage() {
         <section className="mb-12 grid sm:grid-cols-2 gap-4">
           <Link href="/launch" className="group no-underline">
             <div className="docs-card h-full border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-400/60 transition-all">
-              <h3 className="font-medium text-slate-900 dark:text-white group-hover:text-indigo-300 transition-colors">
+              <h3 className="font-medium text-slate-900 dark:text-white group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
                 Want preview access?
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-3">
                 Skip the queue by telling us what you are building.
               </p>
-              <span className="inline-flex items-center gap-1 text-sm text-indigo-300">
+              <span className="inline-flex items-center gap-1 text-sm text-indigo-700 dark:text-indigo-300">
                 Request access <ArrowRight className="h-3 w-3" />
               </span>
             </div>
           </Link>
           <Link href="/docs/faq" className="group no-underline">
             <div className="docs-card h-full hover:border-indigo-400/40 transition-all">
-              <h3 className="font-medium text-slate-900 dark:text-white group-hover:text-indigo-300 transition-colors">
+              <h3 className="font-medium text-slate-900 dark:text-white group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
                 Have a question?
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-3">
                 The FAQ covers latency, model size, privacy, and how this differs
                 from peers.
               </p>
-              <span className="inline-flex items-center gap-1 text-sm text-indigo-300">
+              <span className="inline-flex items-center gap-1 text-sm text-indigo-700 dark:text-indigo-300">
                 Read the FAQ <ArrowRight className="h-3 w-3" />
               </span>
             </div>

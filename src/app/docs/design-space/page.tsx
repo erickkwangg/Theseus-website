@@ -19,7 +19,7 @@ export default function DesignSpacePage() {
       <DocsPageJsonLd title="Design Space" description="Explore applications and market opportunities unlocked by autonomous agents with verifiable AI inference." slug="design-space" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-400 text-xs mb-4">
           <Lightbulb className="h-3 w-3" />
           Deep Dive
         </div>
@@ -50,7 +50,7 @@ export default function DesignSpacePage() {
         {/* Evolution Section */}
         <section className="mb-12">
           <h2 id="evolution" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Sparkles className="h-5 w-5" />
             </span>
             Path to Full Agency
@@ -71,8 +71,8 @@ export default function DesignSpacePage() {
                 year: "2025",
                 name: "OpenClaw",
                 symbol: "OC",
-                borderClass: "border-indigo-900/50",
-                textClass: "text-indigo-300",
+                borderClass: "border-indigo-200 dark:border-indigo-900/50",
+                textClass: "text-indigo-700 dark:text-indigo-300",
                 unlock: "Execution rails for AI actions.",
                 cannot: "Cannot persist economically on its own.",
               },
@@ -80,8 +80,8 @@ export default function DesignSpacePage() {
                 year: "2026",
                 name: "Theseus",
                 symbol: "THE",
-                borderClass: "border-green-900/50",
-                textClass: "text-green-400",
+                borderClass: "border-green-200 dark:border-green-900/50",
+                textClass: "text-green-700 dark:text-green-400",
                 unlock: "Full agency with native ownership, settlement, and persistence.",
               },
             ].map((item) => (
@@ -91,7 +91,7 @@ export default function DesignSpacePage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className={`text-lg font-medium ${item.textClass}`}>{item.name}</h3>
-                      <span className="text-xs text-gray-500">({item.year})</span>
+                      <span className="text-xs text-slate-600 dark:text-gray-500">({item.year})</span>
                     </div>
                     <p className="text-gray-700 dark:text-gray-300 text-sm mb-2">{item.unlock}</p>
                     {item.cannot ? (
@@ -122,7 +122,7 @@ export default function DesignSpacePage() {
         {/* Concrete Example */}
         <section className="mb-12">
           <h2 id="example" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <BarChart3 className="h-5 w-5" />
             </span>
             Example: Lending Protocol
@@ -133,33 +133,33 @@ export default function DesignSpacePage() {
               <h3 className="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Ethereum (Aave, Compound)</h3>
               <div className="space-y-3 text-sm">
                 <div>
-                  <span className="text-gray-500">Off-chain:</span>
+                  <span className="text-slate-600 dark:text-gray-500">Off-chain:</span>
                   <p className="text-gray-600 dark:text-gray-400">Backend computes rates, keeper pushes on-chain</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">On-chain:</span>
+                  <span className="text-slate-600 dark:text-gray-500">On-chain:</span>
                   <p className="text-gray-600 dark:text-gray-400">Contract executes based on predetermined formulas</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Updates:</span>
+                  <span className="text-slate-600 dark:text-gray-500">Updates:</span>
                   <p className="text-gray-600 dark:text-gray-400">Deploy new contract through governance</p>
                 </div>
               </div>
             </div>
 
-            <div className="docs-card border-green-900/50">
-              <h3 className="text-lg font-medium mb-4 text-green-400">Theseus</h3>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h3 className="text-lg font-medium mb-4 text-green-700 dark:text-green-400">Theseus</h3>
               <div className="space-y-3 text-sm">
                 <div>
-                  <span className="text-gray-500">On-chain Agent:</span>
+                  <span className="text-slate-600 dark:text-gray-500">On-chain Agent:</span>
                   <p className="text-gray-600 dark:text-gray-400">Market runs as a first-class lending agent</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Execution:</span>
+                  <span className="text-slate-600 dark:text-gray-500">Execution:</span>
                   <p className="text-gray-600 dark:text-gray-400">Pricing via inference, verified with tensor-commit</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Updates:</span>
+                  <span className="text-slate-600 dark:text-gray-500">Updates:</span>
                   <p className="text-gray-600 dark:text-gray-400">Context or model swappable by creator or agent</p>
                 </div>
               </div>
@@ -170,7 +170,7 @@ export default function DesignSpacePage() {
         {/* New Primitives */}
         <section className="mb-12">
           <h2 id="primitives" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-700 dark:text-yellow-400">
               <Zap className="h-5 w-5" />
             </span>
             New Primitives Enabled by Theseus
@@ -194,13 +194,13 @@ export default function DesignSpacePage() {
         {/* Market Size */}
         <section className="mb-12">
           <h2 id="market" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <TrendingUp className="h-5 w-5" />
             </span>
             Market Opportunity
           </h2>
           
-          <div className="docs-card border-green-900/50 mb-6">
+          <div className="docs-card border-green-200 dark:border-green-900/50 mb-6">
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               Ethereum&apos;s market cap is tied to application value. More capable applications can expand value captured by the base layer.
             </p>
@@ -220,8 +220,8 @@ export default function DesignSpacePage() {
 
         {/* Full Story CTA */}
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8">
-          <div className="docs-card border-indigo-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-indigo-300">
+          <div className="docs-card border-indigo-200 dark:border-indigo-900/50 mb-6">
+            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-indigo-700 dark:text-indigo-300">
               <Users className="h-5 w-5" />
               Want the Full Story?
             </h3>
@@ -242,8 +242,8 @@ export default function DesignSpacePage() {
           <div className="grid sm:grid-cols-2 gap-4">
             <Link href="/docs/comparison" className="group no-underline">
               <div className="docs-card h-full">
-                <p className="text-sm text-gray-500 mb-1">Previous</p>
-                <h4 className="font-medium group-hover:text-indigo-300 transition-colors">← Technical Comparison</h4>
+                <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
+                <h4 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← Technical Comparison</h4>
               </div>
             </Link>
             <a 
@@ -253,8 +253,8 @@ export default function DesignSpacePage() {
               className="group no-underline"
             >
               <div className="docs-card h-full text-right">
-                <p className="text-sm text-gray-500 mb-1">Related</p>
-                <h4 className="font-medium group-hover:text-indigo-300 transition-colors">Theseus Thesis: TAM →</h4>
+                <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Related</p>
+                <h4 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Theseus Thesis: TAM →</h4>
               </div>
             </a>
           </div>

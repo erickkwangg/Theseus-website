@@ -19,7 +19,7 @@ export default function TokenomicsPage() {
       <DocsPageJsonLd title="Tokenomics" description="Understand $THE utility, staking, fee flows, and AI-native economic primitives in the Theseus network." slug="tokenomics" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <Coins className="h-3 w-3" />
           Deep Dive
         </div>
@@ -35,7 +35,7 @@ export default function TokenomicsPage() {
         {/* Token Utility */}
         <section className="mb-12">
           <h2 id="utility" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-700 dark:text-yellow-400">
               <Coins className="h-5 w-5" />
             </span>
             Token Utility
@@ -63,7 +63,7 @@ export default function TokenomicsPage() {
         {/* Gas Mechanics */}
         <section className="mb-12">
           <h2 id="gas" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Zap className="h-5 w-5" />
             </span>
             Gas Mechanics
@@ -117,7 +117,7 @@ Storage gas (input/output blobs, ~10 KB):
 
 Total:
   Gas_total = Gas_inf + Gas_tc + Gas_stor`}</CodeBlock>
-            <p className="text-gray-500 text-xs mt-3">
+            <p className="text-slate-600 dark:text-gray-500 text-xs mt-3">
               The base rate γ and congestion multiplier are network parameters set by consensus and broadcast each block. Once the testnet is public, this section will include numeric γ values and a current $-equivalent.
             </p>
           </div>
@@ -126,7 +126,7 @@ Total:
         {/* Staking Requirements */}
         <section className="mb-12">
           <h2 id="staking" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Shield className="h-5 w-5" />
             </span>
             Staking Requirements
@@ -138,7 +138,7 @@ Total:
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                 Agents stake $THE proportional to their resource quota (max FLOPs/epoch). Prevents Sybil attacks.
               </p>
-              <p className="text-gray-500 text-xs">
+              <p className="text-slate-600 dark:text-gray-500 text-xs">
                 Slash conditions: invalid inference results, violating quotas, malicious behavior.
               </p>
             </div>
@@ -148,7 +148,7 @@ Total:
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                 Validators stake $THE to participate in consensus. Stake weight influences selection probability.
               </p>
-              <p className="text-gray-500 text-xs">
+              <p className="text-slate-600 dark:text-gray-500 text-xs">
                 Earnings: block rewards + gas fees + inference verification fees.
               </p>
             </div>
@@ -165,7 +165,7 @@ Total:
         {/* Fee Distribution */}
         <section className="mb-12">
           <h2 id="fees" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <PiggyBank className="h-5 w-5" />
             </span>
             Fee Distribution
@@ -192,7 +192,7 @@ Total:
         {/* Supply & Distribution */}
         <section className="mb-12">
           <h2 id="supply" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Wallet className="h-5 w-5" />
             </span>
             Supply &amp; Distribution
@@ -215,37 +215,37 @@ Total:
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Total supply</td>
                   <td>Cap on $THE issuance</td>
-                  <td className="text-gray-500">Set at mainnet</td>
+                  <td className="text-slate-600 dark:text-gray-500">Set at mainnet</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Validator &amp; prover rewards</td>
                   <td>Block subsidy and inference verification fees</td>
-                  <td className="text-gray-500">Emission curve set at mainnet</td>
+                  <td className="text-slate-600 dark:text-gray-500">Emission curve set at mainnet</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Storage miner rewards</td>
                   <td>Pinning model weights and agent context</td>
-                  <td className="text-gray-500">Emission curve set at mainnet</td>
+                  <td className="text-slate-600 dark:text-gray-500">Emission curve set at mainnet</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Ecosystem fund</td>
                   <td>Builder grants, model partnerships, hackathons</td>
-                  <td className="text-gray-500">Allocation TBD</td>
+                  <td className="text-slate-600 dark:text-gray-500">Allocation TBD</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Team &amp; contributors</td>
                   <td>Long-term contributor alignment</td>
-                  <td className="text-gray-500">Allocation and vesting TBD</td>
+                  <td className="text-slate-600 dark:text-gray-500">Allocation and vesting TBD</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Investor allocation</td>
                   <td>Capital partners</td>
-                  <td className="text-gray-500">Allocation and vesting TBD</td>
+                  <td className="text-slate-600 dark:text-gray-500">Allocation and vesting TBD</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Treasury</td>
                   <td>Long-horizon protocol operations</td>
-                  <td className="text-gray-500">Allocation TBD</td>
+                  <td className="text-slate-600 dark:text-gray-500">Allocation TBD</td>
                 </tr>
               </tbody>
             </table>
@@ -275,18 +275,18 @@ Total:
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
+              <Bot className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← Agents &amp; Models</h3>
+                <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← Agents &amp; Models</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">How agents and models interact</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/architecture" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Layers className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
+              <Layers className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Architecture →</h3>
+                <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Architecture →</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Full system design</p>
               </div>
             </div>

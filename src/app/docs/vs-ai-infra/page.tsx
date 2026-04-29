@@ -71,7 +71,7 @@ export default function VsAIInfraPage() {
     <div className="docs-content">
       <DocsPageJsonLd title="Theseus vs AI-Infra Peers" description="How Theseus compares to Bittensor, Ritual, 0G, Modulus, Allora, and other AI-infrastructure projects." slug="vs-ai-infra" />
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-400 text-xs mb-4">
           <Network className="h-3 w-3" />
           Why Theseus
         </div>
@@ -99,7 +99,7 @@ export default function VsAIInfraPage() {
               <thead>
                 <tr>
                   <th>Dimension</th>
-                  <th className="text-indigo-300">Theseus</th>
+                  <th className="text-indigo-700 dark:text-indigo-300">Theseus</th>
                   <th className="text-gray-600 dark:text-gray-400">AI-infra peers</th>
                 </tr>
               </thead>
@@ -107,7 +107,7 @@ export default function VsAIInfraPage() {
                 {dimensions.map((d) => (
                   <tr key={d.dim}>
                     <td className="font-medium text-slate-900 dark:text-white">{d.dim}</td>
-                    <td className="text-indigo-300">{d.theseus}</td>
+                    <td className="text-indigo-700 dark:text-indigo-300">{d.theseus}</td>
                     <td>{d.peers}</td>
                   </tr>
                 ))}
@@ -153,14 +153,14 @@ export default function VsAIInfraPage() {
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/comparison" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← Theseus vs Ethereum</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← Theseus vs Ethereum</h3>
             </div>
           </Link>
           <Link href="/docs/agentic-smart-contracts" className="group no-underline">
             <div className="docs-card h-full text-right">
-              <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Agentic Smart Contracts →</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Agentic Smart Contracts →</h3>
             </div>
           </Link>
         </div>

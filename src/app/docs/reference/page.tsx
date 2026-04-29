@@ -200,7 +200,7 @@ export default function ReferencePage() {
           These values are accurate for the current preview build. The runtime
           is upgraded forklessly via governance, so individual parameters can
           change between releases. Status changes are announced on{" "}
-          <a href="/docs/status" className="text-indigo-300 hover:underline no-underline">
+          <a href="/docs/status" className="text-indigo-700 dark:text-indigo-300 hover:underline no-underline">
             Status &amp; Roadmap
           </a>
           .
@@ -266,7 +266,7 @@ export default function ReferencePage() {
                     <td className="text-gray-600 dark:text-gray-400 text-sm">
                       {e.desc}
                     </td>
-                    <td className="text-sm text-gray-500">{e.caller}</td>
+                    <td className="text-sm text-slate-600 dark:text-gray-500">{e.caller}</td>
                   </tr>
                 ))}
               </tbody>
