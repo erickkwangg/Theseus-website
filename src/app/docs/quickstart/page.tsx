@@ -6,7 +6,7 @@ import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
-  title: "Quick Start - Theseus Docs",
+  title: "Quick Start",
   description:
     "Set up a Theseus node and deploy your first autonomous agent with this step-by-step quickstart.",
   keywords: ["Theseus quickstart", "install Theseus", "deploy AI agent", "AIVM", "SHIP"],

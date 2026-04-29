@@ -17,9 +17,9 @@ import {
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
-  title: "Docs Home - Theseus",
+  title: { absolute: "Theseus Developer Docs" },
   description:
-    "Developer documentation hub for Theseus: architecture, AIVM, SHIP language, examples, and quickstart guides.",
+    "Developer documentation for Theseus: architecture, AIVM, SHIP language, Tensor Commits, examples, and quickstart guides.",
   keywords: ["Theseus docs", "AIVM", "SHIP", "quickstart", "Tensor Commits"],
 };
 

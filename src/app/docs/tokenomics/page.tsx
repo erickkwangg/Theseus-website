@@ -5,7 +5,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 
 export const metadata: Metadata = {
-  title: "Tokenomics - Theseus Docs",
+  title: "Tokenomics",
   description:
     "Understand $THE utility, staking, fee flows, and AI-native economic primitives in the Theseus network.",
   keywords: ["Theseus tokenomics", "$THE", "staking", "fees", "AI economics"],

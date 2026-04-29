@@ -1,15 +1,14 @@
 import { OG_SIZE, renderOG } from "@/lib/og-template";
 
-export const alt =
-  "Theseus — An open runtime where AI agents hold their own keys, balance, and state.";
+export const alt = "Launch on Theseus — Build your first verifiable agent.";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
   return renderOG({
     eyebrow: "Theseus",
-    headline: "Agents that",
-    headlineEmphasis: "own themselves.",
-    footerLeft: "An open runtime",
+    headline: "Launch your",
+    headlineEmphasis: "first agent.",
+    footerLeft: "Preview access",
   });
 }

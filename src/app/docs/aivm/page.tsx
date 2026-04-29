@@ -5,7 +5,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 
 export const metadata: Metadata = {
-  title: "AIVM - Theseus Docs",
+  title: "AIVM",
   description:
     "Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation.",
   keywords: ["AIVM", "Theseus VM", "tensor opcodes", "verifiable inference", "AI runtime"],

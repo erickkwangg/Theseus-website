@@ -1,15 +1,14 @@
 import { OG_SIZE, renderOG } from "@/lib/og-template";
 
-export const alt =
-  "Theseus — An open runtime where AI agents hold their own keys, balance, and state.";
+export const alt = "Theseus Playground — Run a SHIP agent live.";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
   return renderOG({
     eyebrow: "Theseus",
-    headline: "Agents that",
-    headlineEmphasis: "own themselves.",
-    footerLeft: "An open runtime",
+    headline: "Run an agent.",
+    headlineEmphasis: "Watch it sign.",
+    footerLeft: "Live playground",
   });
 }

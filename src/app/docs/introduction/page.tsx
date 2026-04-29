@@ -4,7 +4,7 @@ import { ArrowRight, Cpu, GitBranch, Coins, Users, Sparkles, Shield } from "luci
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Introduction - Theseus Docs",
+  title: "Introduction",
   description:
     "Understand the core ideas behind Theseus: sovereign AI agents, verifiable inference, and runtime infrastructure for autonomous execution.",
   keywords: [

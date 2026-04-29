@@ -91,7 +91,7 @@ const glossaryTerms = [
 ];
 
 export const metadata: Metadata = {
-  title: "Glossary - Theseus Docs",
+  title: "Glossary",
   description:
     "Reference key terms used across Theseus documentation, including AIVM, Tensor Commits, SHIP, and agent lifecycle concepts.",
   keywords: ["Theseus glossary", "AIVM terms", "Tensor Commits", "SHIP", "agent terminology"],

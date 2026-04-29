@@ -6,7 +6,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 
 export const metadata: Metadata = {
-  title: "Architecture - Theseus Docs",
+  title: "Architecture",
   description:
     "Explore the Theseus architecture: AIVM execution, TheseusStore data availability, and PoS consensus.",
   keywords: ["Theseus architecture", "AIVM", "TheseusStore", "PoS", "verifiable inference"],
