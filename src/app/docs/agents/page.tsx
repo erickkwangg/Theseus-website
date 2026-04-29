@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Agents",
@@ -229,6 +230,8 @@ export default function AgentsPage() {
           </Link>
         </div>
       </div>
+      <PrevNext current="agents" />
+
     </div>
   );
 }

@@ -36,13 +36,11 @@ export default function DocsHomePage() {
         </div>
         
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-6 tracking-tight">
-          Build with <span className="text-indigo-300">Theseus</span>
+          Write an agent. Sign every step.
+          <span className="block text-indigo-300">Settle on-chain.</span>
         </h1>
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Technical documentation for the Theseus runtime and agent execution stack.
-          <span className="block text-base text-slate-600 dark:text-slate-400 mt-2">
-            Theseus is implemented as a Layer-1 chain, with AI execution and verification as the primary developer surface.
-          </span>
+          Reference, walkthroughs, and SHIP — the language for agents that hold their own keys.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 

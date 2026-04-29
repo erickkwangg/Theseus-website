@@ -4,6 +4,7 @@ import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Tensor Commits",
@@ -326,6 +327,8 @@ export default function TensorCommitsPage() {
           </Link>
         </div>
       </div>
+      <PrevNext current="tensor-commits" />
+
     </div>
   );
 }

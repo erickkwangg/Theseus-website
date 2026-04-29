@@ -4,6 +4,7 @@ import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3
 import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Design Space",
@@ -259,6 +260,8 @@ export default function DesignSpacePage() {
           </div>
         </div>
       </div>
+      <PrevNext current="design-space" />
+
     </div>
   );
 }
