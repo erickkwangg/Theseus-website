@@ -175,7 +175,7 @@ export default function PlaygroundPage() {
                 Read only
               </div>
             </div>
-            <pre className="p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-200 max-h-[480px]">
+            <pre className="scroll-fade-right p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-200 max-h-[480px]">
               <code>{CODE}</code>
             </pre>
           </div>

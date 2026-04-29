@@ -74,7 +74,7 @@ export default function FileTree({ selected, onSelect }: Props) {
 
       <div
         aria-label="Agent files"
-        className="flex gap-2 overflow-x-auto border-b border-slate-200 px-3 py-3 dark:border-slate-800/70 lg:hidden"
+        className="scroll-fade-right flex gap-2 overflow-x-auto border-b border-slate-200 px-3 py-3 dark:border-slate-800/70 lg:hidden"
       >
         {ALL_FILES.map((f) => (
           <button
