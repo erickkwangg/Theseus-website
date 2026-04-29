@@ -4,7 +4,7 @@ import { Activity, ArrowRight, Circle, Calendar } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Status & Roadmap - Theseus Docs",
+  title: "Status & Roadmap",
   description:
     "Current network state and roadmap for Theseus: what is live, what is in private preview, and what is planned next.",
   keywords: ["Theseus status", "Theseus roadmap", "testnet", "mainnet", "preview"],

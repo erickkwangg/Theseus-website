@@ -6,7 +6,7 @@ import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
-  title: "Theseus vs Ethereum - Theseus Docs",
+  title: "Theseus vs Ethereum",
   description:
     "Compare Ethereum smart contracts and Theseus autonomous agents across execution model, autonomy, and verifiable AI capabilities.",
   keywords: ["Theseus vs Ethereum", "autonomous agents", "smart contracts", "AIVM", "verifiable AI"],

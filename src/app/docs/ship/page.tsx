@@ -5,7 +5,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 
 export const metadata: Metadata = {
-  title: "SHIP Language - Theseus Docs",
+  title: "SHIP Language",
   description:
     "Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution.",
   keywords: ["SHIP", "Theseus DSL", "AIVM bytecode", "verifiable agent programming"],

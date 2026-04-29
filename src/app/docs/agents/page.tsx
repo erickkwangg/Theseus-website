@@ -4,7 +4,7 @@ import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react"
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Agents - Theseus Docs",
+  title: "Agents",
   description:
     "Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus.",
   keywords: ["Theseus agents", "model registration", "autonomous agents", "AIVM", "SHIP"],

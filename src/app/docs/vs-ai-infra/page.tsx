@@ -4,7 +4,7 @@ import { Network, ArrowRight, AlertTriangle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Theseus vs AI-Infra Peers - Theseus Docs",
+  title: "Theseus vs AI-Infra Peers",
   description:
     "How Theseus compares to Bittensor, Ritual, 0G, Modulus, Allora, and other AI-infrastructure projects.",
   keywords: [

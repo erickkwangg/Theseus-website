@@ -5,7 +5,7 @@ import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
-  title: "Design Space - Theseus Docs",
+  title: "Design Space",
   description:
     "Explore applications and market opportunities unlocked by autonomous agents with verifiable AI inference.",
   keywords: ["Theseus design space", "autonomous agents", "verifiable AI", "on-chain AI", "market"],

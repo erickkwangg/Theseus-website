@@ -5,7 +5,7 @@ import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Tensor Commits - Theseus Docs",
+  title: "Tensor Commits",
   description:
     "Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus.",
   keywords: ["Tensor Commits", "proofs", "verifiable AI", "KZG", "Terkle tree"],

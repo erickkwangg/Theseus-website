@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { HelpCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "FAQ - Theseus Docs",
+  title: "FAQ",
   description:
     "Common questions about Theseus from AI developers and crypto developers: latency, cost, model support, privacy, and more.",
   keywords: ["Theseus FAQ", "AI agent questions", "verifiable inference", "on-chain AI"],

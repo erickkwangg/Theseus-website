@@ -5,7 +5,7 @@ import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
-  title: "Agentic Smart Contracts - Theseus Docs",
+  title: "Agentic Smart Contracts",
   description:
     "Why agents are the next evolution of smart contracts: a thesis on stateful, sovereign on-chain AI as a first-class primitive.",
   keywords: [

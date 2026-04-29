@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   description:
     "Build agents on the Theseus runtime. Request preview access, install the CLI, and deploy your first verifiable agent.",
   keywords: ["Theseus launch", "Theseus CLI", "preview access", "deploy agent", "verifiable AI"],
+  alternates: { canonical: "/launch" },
+  openGraph: {
+    type: "website",
+    title: "Launch on Theseus",
+    description:
+      "Build agents on the Theseus runtime. Request preview access, install the CLI, and deploy your first verifiable agent.",
+    url: "/launch",
+  },
 };
 
 const accessHref = `mailto:${EXTERNAL_LINKS.contactEmail}?subject=${encodeURIComponent(

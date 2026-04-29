@@ -5,7 +5,7 @@ import CodeBlock from "@/components/docs/CodeBlock";
 import Callout from "@/components/docs/Callout";
 
 export const metadata: Metadata = {
-  title: "Examples - Theseus Docs",
+  title: "Examples",
   description:
     "Full SHIP examples and ecosystem walkthroughs for building autonomous agents on Theseus.",
   keywords: ["Theseus examples", "agent examples", "SHIP examples", "AIVM patterns"],
