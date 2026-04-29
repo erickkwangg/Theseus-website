@@ -60,11 +60,17 @@ const sections = [
     ],
   },
   {
+    title: "Reference",
+    items: [
+      { href: "/docs/reference", label: "Runtime reference", icon: BookOpen },
+      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
+      { href: "/docs/glossary", label: "Glossary", icon: List },
+    ],
+  },
+  {
     title: "Network",
     items: [
-      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
-      { href: "/docs/glossary", label: "Glossary", icon: List },
     ],
   },
 ];

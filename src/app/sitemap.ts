@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/vs-ai-infra",
     "/docs/agentic-smart-contracts",
     "/docs/design-space",
+    "/docs/reference",
     "/docs/tokenomics",
     "/docs/status",
     "/docs/glossary",
