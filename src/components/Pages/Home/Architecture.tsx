@@ -49,12 +49,12 @@ const Card = ({ role, title, emphasis = false, accent = "neutral", children }: C
 export default function Architecture() {
   return (
     <section
-      id="sovereignty"
+      id="agents"
       className="bg-white py-24 lg:py-32 text-slate-900 dark:bg-transparent dark:text-white"
     >
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
         <SectionHeader
-          label="Sovereignty"
+          label="Agents"
           number="02"
           className="mb-8 lg:mb-10"
         />
