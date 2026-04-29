@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const ppTelegraf = localFont({
@@ -28,28 +30,98 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://theseus.network";
-const SITE_TITLE = "THESEUS - Agency for Agents";
+const SITE_NAME = "Theseus";
+const SITE_TITLE = "Theseus — Open runtime for autonomous AI agents";
 const SITE_DESCRIPTION =
-  "Runtime infrastructure for autonomous AI agents to own assets, make decisions, and persist independently. Built on a verifiable execution layer with cryptographic inference proofs.";
+  "An open runtime where AI agents hold their own keys, balance, and state. Build agents for treasuries, markets, and self-running protocols.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: SITE_TITLE,
+  title: {
+    default: SITE_TITLE,
+    template: "%s — Theseus",
+  },
   description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "AI agents",
+    "autonomous agents",
+    "agent runtime",
+    "verifiable AI",
+    "Theseus",
+    "open runtime",
+    "AI infrastructure",
+    "agentic protocols",
+    "smart contracts",
+    "on-chain agents",
+  ],
+  alternates: {
+    canonical: SITE_URL,
+  },
+  authors: [{ name: "Theseus AI Labs", url: SITE_URL }],
+  creator: "Theseus AI Labs",
+  publisher: "Theseus AI Labs",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
-    siteName: "Theseus",
+    siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Theseus" }],
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og.png"],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
+  colorScheme: "dark light",
+  width: "device-width",
+  initialScale: 1,
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  legalName: "Theseus AI Labs",
+  url: SITE_URL,
+  logo: `${SITE_URL}/theseus-white.svg`,
+  description: SITE_DESCRIPTION,
+  sameAs: [
+    "https://github.com/Theseuschain/theseuschain",
+    "https://theseuschain.substack.com",
+  ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
 };
 
 const themeInitScript = `
@@ -71,11 +143,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
       </head>
       <body className={`${ppTelegraf.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
         {/* Noise texture overlay */}
         <div className="noise-overlay" aria-hidden="true" />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

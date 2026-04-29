@@ -1,18 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { 
-  ArrowRight, 
-  Rocket, 
-  GitCompare, 
-  Cpu, 
-  GitBranch, 
-  Bot, 
-  Layers, 
-  Code2, 
+import {
+  ArrowRight,
+  Rocket,
+  GitCompare,
+  Cpu,
+  GitBranch,
+  Bot,
+  Layers,
+  Code2,
   FileText,
   BookOpen,
   Puzzle,
-  ExternalLink
+  ExternalLink,
 } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
 
@@ -60,6 +60,26 @@ export default function DocsHomePage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+      </div>
+
+      {/* See it run */}
+      <div className="mb-12">
+        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <div className="h-px flex-1 bg-gray-800" />
+          See it run
+          <div className="h-px flex-1 bg-gray-800" />
+        </h2>
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-900 dark:border-slate-700/60">
+          <iframe
+            src="https://www.loom.com/embed/6f75cb6b3b6f496aa199db71df814fc9?hideEmbedTopBar=true&hide_owner=true&hide_share=true&hide_title=true"
+            title="Theseus walkthrough"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+          />
+        </div>
+        <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+          Non-crypto walkthrough coming soon
+        </p>
       </div>
 
       {/* Featured Cards - Top 3 */}

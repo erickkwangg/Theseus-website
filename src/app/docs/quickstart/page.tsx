@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCircle, Lock, Rocket } from "lucide-react";
+import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCircle, Lock, Rocket, PlayCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
@@ -38,15 +38,26 @@ export default function QuickStartPage() {
           <div className="flex-1">
             <h3 className="text-lg font-medium mb-2">Preview access required</h3>
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-3">
-              The repository is currently private. The instructions below assume you have the CLI binary and a testnet endpoint. If you do not yet, request access first.
+              The repository is currently private. The instructions below assume you have the CLI binary and a testnet endpoint. If you do not yet, request access first, or watch the walkthrough to see the same flow run end to end.
             </p>
-            <Link
-              href="/launch"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
-            >
-              <Rocket className="h-4 w-4" />
-              Request preview access
-            </Link>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/launch"
+                className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+              >
+                <Rocket className="h-4 w-4" />
+                Request preview access
+              </Link>
+              <a
+                href={EXTERNAL_LINKS.walkthroughCrypto}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-slate-300 dark:border-slate-700 hover:border-indigo-400/60 text-slate-900 dark:text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+              >
+                <PlayCircle className="h-4 w-4" />
+                Watch walkthrough (crypto-native)
+              </a>
+            </div>
           </div>
         </div>
 

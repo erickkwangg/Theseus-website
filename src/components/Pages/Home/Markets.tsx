@@ -1,138 +1,276 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { EXTERNAL_LINKS } from "@/config/links";
+import SectionHeader from "./SectionHeader";
 
-const TierGlyph = ({ tier }: { tier: "Civic" | "Managed" | "Sovereign" }) => {
-  const common = {
-    width: 44,
-    height: 44,
-    viewBox: "0 0 44 44",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    stroke: "currentColor",
-    strokeWidth: 1.25,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  };
-  if (tier === "Civic") {
-    // Audit / scales
-    return (
-      <svg {...common}>
-        <circle cx="22" cy="22" r="20" opacity="0.35" />
-        <path d="M22 11v22" />
-        <path d="M14 16h16" />
-        <path d="M11 22l3-6 3 6a3 3 0 0 1-6 0z" opacity="0.85" />
-        <path d="M27 22l3-6 3 6a3 3 0 0 1-6 0z" opacity="0.85" />
-      </svg>
-    );
-  }
-  if (tier === "Managed") {
-    // Controller / dial with hand
-    return (
-      <svg {...common}>
-        <circle cx="22" cy="22" r="20" opacity="0.35" />
-        <circle cx="22" cy="22" r="9" />
-        <path d="M22 14v4" />
-        <path d="M30 22h-4" />
-        <path d="M22 30v-4" />
-        <path d="M14 22h4" />
-        <path d="M22 22l5-3" />
-      </svg>
-    );
-  }
-  // Sovereign — key
-  return (
-    <svg {...common}>
-      <circle cx="22" cy="22" r="20" opacity="0.35" />
-      <circle cx="17" cy="22" r="5" />
-      <path d="M22 22h12" />
-      <path d="M30 22v4" />
-      <path d="M34 22v3" />
-    </svg>
-  );
+type Stage = "Civic" | "Managed" | "Sovereign";
+
+const stageStyles: Record<Stage, string> = {
+  Civic:
+    "border-amber-500/35 bg-amber-500/10 text-amber-800 dark:border-amber-300/30 dark:bg-amber-300/10 dark:text-amber-100",
+  Managed:
+    "border-indigo-500/35 bg-indigo-500/10 text-indigo-800 dark:border-indigo-300/30 dark:bg-indigo-300/10 dark:text-indigo-100",
+  Sovereign:
+    "border-slate-900/20 bg-slate-900 text-white dark:border-white/20 dark:bg-white dark:text-slate-950",
 };
 
-const useCases = [
+const stages = [
   {
-    title: "A verifiable oracle",
-    tier: "Civic" as const,
+    stage: "Civic" as const,
+    label: "Verifiable work",
+    title: "Outcomes anyone can audit.",
     description:
-      "Settles markets, prices, or signals by running inference and posting reasoning anyone can audit.",
-    fragment: 'agent.settle("Will BTC > $100k?")',
+      "A Civic agent reads, reasons, and signs each step of its work. It does not hold funds. Its job is to make outcomes cheap to check.",
   },
   {
-    title: "A managed trading agent",
-    tier: "Managed" as const,
+    stage: "Managed" as const,
+    label: "Delegated execution",
+    title: "Capital under signed policy.",
     description:
-      "Runs a strategy on its own balance. A controller key can pause or upgrade. Profits route to the owner.",
-    fragment: "agent.trade(strategy)  ·  controller.pause()",
+      "A Managed agent operates under signed limits. Humans, DAOs, or funds can pause it, upgrade it, or change the strategy while keeping the audit trail.",
   },
   {
-    title: "A self-owning agent",
-    tier: "Sovereign" as const,
+    stage: "Sovereign" as const,
+    label: "Self-running markets",
+    title: "The agent becomes the counterparty.",
     description:
-      "Holds its balance, pays for its own inference, and persists across operators.",
-    fragment: "agent.pay(model)  ·  agent.persist()",
+      "A Sovereign agent owns its policy, balance, and history. It can outlast its founders, pay for its own inference, and earn fees directly.",
+  },
+];
+
+const marketTiles = [
+  {
+    category: "Treasury",
+    title: "DAO treasury operator",
+    kind: "Existing demand",
+    stage: "Managed" as const,
+    description:
+      "Pays contributors, tops up reserves, and shows every allocation before the next vote.",
+  },
+  {
+    category: "Markets",
+    title: "Prediction resolver",
+    kind: "Existing demand",
+    stage: "Civic" as const,
+    description:
+      "Settles unclear questions with cited sources, model reasoning, and a public challenge window.",
+  },
+  {
+    category: "Commerce",
+    title: "Escrow between strangers",
+    kind: "New market",
+    stage: "Sovereign" as const,
+    description:
+      "Releases money when conditions are met, without a platform, lawyer, or privileged admin key.",
+  },
+  {
+    category: "Lending",
+    title: "Liquidation keeper",
+    kind: "Existing demand",
+    stage: "Managed" as const,
+    description:
+      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can review every decision.",
+  },
+  {
+    category: "Funds",
+    title: "LP fund manager",
+    kind: "Existing demand",
+    stage: "Managed" as const,
+    description:
+      "Runs portfolio rules against live markets. Investors can check the daily record instead of waiting for a memo.",
+  },
+  {
+    category: "Protocols",
+    title: "Self-running protocol",
+    kind: "New market",
+    stage: "Sovereign" as const,
+    description:
+      "Adjusts fees, manages support, and explains changes under a public mandate users can read before they opt in.",
+  },
+  {
+    category: "Games",
+    title: "Agent-run economies",
+    kind: "New market",
+    stage: "Sovereign" as const,
+    description:
+      "Shopkeepers, quest givers, and in-game markets that run continuously, with receipts players can verify.",
+  },
+  {
+    category: "Research",
+    title: "Shared model training",
+    kind: "New market",
+    stage: "Sovereign" as const,
+    description:
+      "Labs pool data or compute without giving anyone a copy. The agent trains, signs steps, and pays contributors.",
+  },
+  {
+    category: "Your ideas",
+    title: "Compose your own",
+    kind: "Open surface",
+    stage: "Civic" as const,
+    description:
+      "Anywhere two parties need one agent to do the job, and both want proof it did the job right.",
   },
 ];
 
 export default function Markets() {
+  const [expanded, setExpanded] = useState(false);
+
+  const ctaTile = marketTiles[marketTiles.length - 1];
+  const featuredTiles = marketTiles.slice(0, 3);
+  const hiddenCount = marketTiles.length - featuredTiles.length - 1;
+
+  const visibleTiles = expanded
+    ? marketTiles
+    : [...featuredTiles, ctaTile];
+
   return (
     <section
-      className="text-slate-900 dark:text-white py-24 lg:py-32 section-soft-divider"
+      className="bg-white py-14 text-slate-900 dark:bg-transparent dark:text-white sm:py-16 lg:py-20"
       id="market"
     >
-      <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
-        {/* Header */}
-        <ScrollReveal>
-          <div className="mb-16 lg:mb-20 max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-6">
-              Three ways to build
-            </p>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
-              Build an agent <span className="italic">people will trust.</span>
-            </h2>
-            <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300">
-              Same runtime, different intent — full autonomy, or trust properties without it.{" "}
+      <div className="mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16">
+        <SectionHeader
+          label="Markets"
+          number="04"
+          className="mb-7 lg:mb-8"
+        />
+
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 xl:gap-20">
+          <ScrollReveal>
+            <div>
+              <p className="mb-5 text-xs font-medium uppercase tracking-[0.22em] text-indigo-700 dark:text-indigo-300">
+                Existing demand / new markets
+              </p>
+              <h2 className="font-serif text-4xl font-normal leading-[1.03] tracking-[-0.02em] sm:text-5xl lg:text-[clamp(3rem,4.2vw,5.35rem)]">
+                Build an agent <em>with a job.</em>
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={1}>
+            <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg lg:pb-1">
+              Today, that means verifiable automation for treasuries, keepers, funds,
+              and crypto-native markets. Over time, agents themselves can become trusted
+              market participants.{" "}
               <a
                 href={EXTERNAL_LINKS.substackTAM}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-700 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-900 dark:hover:text-indigo-200 transition-colors"
+                className="text-indigo-700 underline underline-offset-4 transition-colors hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-200"
               >
                 A multi-trillion dollar market.
               </a>
             </p>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
-        {/* Use cases */}
-        <div className="divide-y divide-slate-200 dark:divide-slate-800 border-y border-slate-200 dark:border-slate-800">
-          {useCases.map((uc, index) => (
-            <ScrollReveal key={uc.title} delay={index + 1}>
-              <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-4 sm:gap-12 py-10 lg:py-14">
-                <div>
-                  <div className="text-indigo-500/80 dark:text-indigo-300/85 mb-4 sm:mb-5">
-                    <TierGlyph tier={uc.tier} />
-                  </div>
-                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-slate-900 dark:text-white">
-                    {uc.title}
-                  </h3>
-                  <span className="inline-flex mt-3 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-sm">
-                    {uc.tier}
+        <div className="mt-7 lg:px-8 xl:px-12 2xl:px-16">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+            {stages.map((item, index) => (
+              <ScrollReveal key={item.stage} delay={index + 1}>
+                <article className="h-full rounded-2xl border border-slate-200 bg-slate-50/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
+                  <span
+                    className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] ${stageStyles[item.stage]}`}
+                  >
+                    {item.stage}
                   </span>
-                </div>
-                <div>
-                  <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {uc.description}
+                  <p className="mt-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    {item.label}
                   </p>
-                  <code className="mt-4 inline-block font-mono text-[12px] sm:text-[13px] text-slate-500 dark:text-slate-500">
-                    {uc.fragment}
-                  </code>
-                </div>
+                  <h3 className="mt-4 max-w-[13rem] font-serif text-xl font-normal leading-tight tracking-[-0.01em] sm:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {item.description}
+                  </p>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal delay={4}>
+            <div className="mt-9 lg:mt-10">
+              <div className="grid grid-cols-1 overflow-hidden border border-slate-200 dark:border-white/10 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleTiles.map((tile) => {
+                  const isCta = tile === ctaTile;
+                  const ctaSpanClass = !expanded && isCta ? "lg:col-span-3" : "";
+
+                  return (
+                    <article
+                      key={tile.title}
+                      className={`min-h-[168px] border-b p-4 transition-colors sm:border-r sm:p-5 lg:[&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 ${ctaSpanClass} ${isCta
+                          ? "border-indigo-500/25 bg-indigo-600 text-white hover:bg-indigo-500 dark:border-indigo-300/20 dark:bg-indigo-500/90 dark:hover:bg-indigo-500"
+                          : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/[0.04]"
+                        }`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <p
+                          className={`font-mono text-[10px] uppercase tracking-[0.2em] ${isCta
+                              ? "text-indigo-100"
+                              : "text-indigo-700 dark:text-indigo-300"
+                            }`}
+                        >
+                          {tile.category}
+                        </p>
+                        {!isCta && (
+                          <span
+                            className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ${stageStyles[tile.stage]}`}
+                          >
+                            {tile.stage}
+                          </span>
+                        )}
+                      </div>
+                      <h4
+                        className={`mt-4 font-serif text-xl font-normal leading-tight tracking-[-0.01em] sm:text-2xl ${isCta ? "text-white" : "text-slate-950 dark:text-white"
+                          }`}
+                      >
+                        {tile.title}
+                      </h4>
+                      <div
+                        className={`mt-2 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] ${isCta
+                            ? "text-indigo-100/80"
+                            : "text-slate-500 dark:text-slate-400"
+                          }`}
+                      >
+                        <span>{tile.kind}</span>
+                      </div>
+                      <p
+                        className={`mt-3 text-sm leading-relaxed ${isCta ? "text-indigo-50" : "text-slate-600 dark:text-slate-300"
+                          }`}
+                      >
+                        {tile.description}
+                      </p>
+                      {isCta && (
+                        <Link
+                          href="/launch"
+                          className="mt-5 inline-flex rounded-md bg-white px-4 py-2 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-50"
+                        >
+                          Launch an agent
+                        </Link>
+                      )}
+                    </article>
+                  );
+                })}
               </div>
-            </ScrollReveal>
-          ))}
+
+              {!expanded && (
+                <div className="mt-6 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(true)}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-700 underline-offset-4 transition-colors hover:text-indigo-900 hover:underline dark:text-indigo-300 dark:hover:text-indigo-200"
+                  >
+                    Show {hiddenCount} more
+                    <span aria-hidden>→</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

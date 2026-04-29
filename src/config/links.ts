@@ -10,6 +10,7 @@ export const EXTERNAL_LINKS = {
   web4ai: "https://web4.ai",
   contactEmail: "hello@theseus.network",
   discord: "",
+  walkthroughCrypto: "https://www.loom.com/share/6f75cb6b3b6f496aa199db71df814fc9",
 } as const;
 
 // Navigation items shared between Header and Footer

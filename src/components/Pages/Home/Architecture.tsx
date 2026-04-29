@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
+import SectionHeader from "./SectionHeader";
 
 const Chip = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/70 border border-slate-300/70 dark:border-slate-600/70 rounded-sm">
@@ -34,10 +35,10 @@ const Card = ({ role, title, emphasis = false, accent = "neutral", children }: C
       : "border-slate-200/80 dark:border-slate-700/70 bg-slate-50/60 dark:bg-slate-900/30";
   return (
     <div className={`relative border rounded-md px-5 py-4 ${ring} transition-colors`}>
-      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-2">
+      <div className={`font-serif text-2xl lg:text-3xl tracking-[-0.01em] leading-tight ${emphasis || accent === "indigo" ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"} mb-1`}>
         {role}
       </div>
-      <div className={`font-serif text-lg lg:text-xl ${emphasis || accent === "indigo" ? "text-slate-900 dark:text-white" : "text-slate-700 dark:text-slate-300"} leading-snug mb-3`}>
+      <div className="text-sm text-slate-500 dark:text-slate-400 italic mb-4">
         {title}
       </div>
       {children}
@@ -49,18 +50,22 @@ export default function Architecture() {
   return (
     <section className="text-slate-900 dark:text-white py-24 lg:py-32 section-soft-divider">
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
+        <SectionHeader
+          label="How it works"
+          number="02"
+          className="mb-8 lg:mb-10"
+        />
+
         {/* Header */}
         <ScrollReveal>
           <div className="max-w-3xl mb-14 lg:mb-20">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-6">
-              How it works
-            </p>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.015em] leading-[1.05] text-slate-900 dark:text-white">
-              Agents as <span className="italic">principals,</span> not processes.
+              The agent <span className="italic">owns itself.</span>
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              On every other runtime, the operator holds your agent&apos;s keys, balance, and state.
-              On Theseus, the agent does — enforced by the runtime, not by trust in any party.
+              On most runtimes, the operator holds your agent&apos;s keys, balance, and state.
+              On Theseus, the agent holds them. You trust the runtime, not whoever happens
+              to be running it.
             </p>
           </div>
         </ScrollReveal>
@@ -92,7 +97,7 @@ export default function Architecture() {
 
               <Card role="Agent" title="Just a process.">
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                  Lives as long as the bill, the access, and the policy say so.
+                  Runs only while the operator pays for it and lets it run.
                 </p>
               </Card>
             </div>
@@ -128,19 +133,6 @@ export default function Architecture() {
           </div>
         </ScrollReveal>
 
-        {/* Why now */}
-        <ScrollReveal delay={2}>
-          <div className="mt-16 lg:mt-20 max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-4">
-              Why now
-            </p>
-            <p className="font-serif text-2xl sm:text-3xl lg:text-[2.25rem] font-normal tracking-[-0.012em] leading-[1.2] text-slate-900 dark:text-white">
-              Models are now cheap enough to <span className="italic">think.</span>{" "}
-              Chains are now fast enough to <span className="italic">settle.</span>{" "}
-              Theseus is what they&apos;re <span className="italic">for.</span>
-            </p>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
