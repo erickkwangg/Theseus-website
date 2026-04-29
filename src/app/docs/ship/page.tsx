@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot, Play } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "SHIP Language",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function SHIPPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="SHIP Language" description="Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution." slug="ship" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

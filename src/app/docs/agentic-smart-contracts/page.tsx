@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Bot, GitBranch, Layers, Sparkles, TrendingUp, Zap } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Agentic Smart Contracts",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function AgenticSmartContractsPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Agentic Smart Contracts" description="Why agents are the next evolution of smart contracts: a thesis on stateful, sovereign on-chain AI as a first-class primitive." slug="agentic-smart-contracts" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">

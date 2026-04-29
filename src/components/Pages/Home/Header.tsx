@@ -112,7 +112,7 @@ export default function Header() {
         <div className="logo-pulse cursor-pointer">
           <Image
             src={logo}
-            alt="Logo"
+            alt="Theseus"
             height={100}
             width={100}
             className="size-12 transition-transform duration-300 hover:scale-110 brightness-0 dark:brightness-100 drop-shadow-[0_0_12px_rgba(99,102,241,0.25)] dark:drop-shadow-[0_0_16px_rgba(125,211,252,0.35)]"

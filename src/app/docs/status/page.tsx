@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Activity, ArrowRight, Circle, Calendar } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Status & Roadmap",
@@ -65,6 +66,7 @@ const liveStats = [
 export default function StatusPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Status & Roadmap" description="Current network state and roadmap for Theseus: what is live, what is in private preview, and what is planned next." slug="status" />
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">
           <Activity className="h-3 w-3" />

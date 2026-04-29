@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight, GitCompare, CheckCircle, X, Lightbulb, TrendingUp } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Theseus vs Ethereum",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function ComparisonPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Theseus vs Ethereum" description="Compare Ethereum smart contracts and Theseus autonomous agents across execution model, autonomy, and verifiable AI capabilities." slug="comparison" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">

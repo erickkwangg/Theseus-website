@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Design Space",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function DesignSpacePage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Design Space" description="Explore applications and market opportunities unlocked by autonomous agents with verifiable AI inference." slug="design-space" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs mb-4">

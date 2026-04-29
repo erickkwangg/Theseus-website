@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Cpu, Zap, Gauge, Clock, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "AIVM",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function AIVMPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="AIVM" description="Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation." slug="aivm" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

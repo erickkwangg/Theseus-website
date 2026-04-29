@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Agents",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function AgentsPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Agents" description="Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus." slug="agents" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
