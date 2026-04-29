@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Network, ArrowRight, AlertTriangle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Theseus vs AI-Infra Peers",
@@ -67,6 +68,7 @@ const dimensions = [
 export default function VsAIInfraPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Theseus vs AI-Infra Peers" description="How Theseus compares to Bittensor, Ritual, 0G, Modulus, Allora, and other AI-infrastructure projects." slug="vs-ai-infra" />
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
           <Network className="h-3 w-3" />

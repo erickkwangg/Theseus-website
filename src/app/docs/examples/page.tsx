@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Puzzle, Bot, Zap, Rocket, Play, Lock } from "lucide-react";
 import CodeBlock from "@/components/docs/CodeBlock";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Examples",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function ExamplesPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Examples" description="Full SHIP examples and ecosystem walkthroughs for building autonomous agents on Theseus." slug="examples" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

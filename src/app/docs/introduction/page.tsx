@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Cpu, GitBranch, Coins, Users, Sparkles, Shield } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 export default function IntroductionPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Introduction" description="Understand the core ideas behind Theseus: sovereign AI agents, verifiable inference, and runtime infrastructure for autonomous execution." slug="introduction" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Coins, Zap, Shield, PiggyBank, Bot, Layers, Wallet } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Tokenomics",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function TokenomicsPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Tokenomics" description="Understand $THE utility, staking, fee flows, and AI-native economic primitives in the Theseus network." slug="tokenomics" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

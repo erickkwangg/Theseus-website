@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { HelpCircle, ArrowRight } from "lucide-react";
+import { DocsPageJsonLd, FaqJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -104,6 +105,12 @@ const groups = [
 export default function FAQPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="FAQ" description="Common questions about Theseus from AI developers and crypto developers: latency, cost, model support, privacy, and more." slug="faq" />
+      <FaqJsonLd
+        faqs={groups.flatMap((g) =>
+          g.questions.map((item) => ({ question: item.q, answer: item.a })),
+        )}
+      />
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <HelpCircle className="h-3 w-3" />

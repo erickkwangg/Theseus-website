@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Tensor Commits",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function TensorCommitsPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Tensor Commits" description="Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus." slug="tensor-commits" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

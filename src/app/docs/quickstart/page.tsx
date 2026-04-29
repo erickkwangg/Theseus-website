@@ -4,6 +4,7 @@ import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCir
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Quick Start",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function QuickStartPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Quick Start" description="Set up a Theseus node and deploy your first autonomous agent with this step-by-step quickstart." slug="quickstart" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

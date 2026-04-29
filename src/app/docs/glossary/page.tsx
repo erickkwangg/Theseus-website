@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BookOpen, ArrowRight } from "lucide-react";
+import { DocsPageJsonLd } from "@/components/JsonLd";
 
 const glossaryTerms = [
   {
@@ -100,6 +101,7 @@ export const metadata: Metadata = {
 export default function GlossaryPage() {
   return (
     <div className="docs-content">
+      <DocsPageJsonLd title="Glossary" description="Reference key terms used across Theseus documentation, including AIVM, Tensor Commits, SHIP, and agent lifecycle concepts." slug="glossary" />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
