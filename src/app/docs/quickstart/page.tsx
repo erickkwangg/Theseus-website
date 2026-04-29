@@ -5,6 +5,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Quick Start",
@@ -291,6 +292,8 @@ make test-ship`}</CodeBlock>
           </p>
         </div>
       </div>
+      <PrevNext current="quickstart" />
+
     </div>
   );
 }

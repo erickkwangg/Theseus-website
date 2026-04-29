@@ -4,6 +4,7 @@ import { ArrowRight, Cpu, Zap, Gauge, Clock, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "AIVM",
@@ -228,6 +229,8 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <PrevNext current="aivm" />
+
     </div>
   );
 }

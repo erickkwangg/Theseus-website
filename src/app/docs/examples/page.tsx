@@ -4,6 +4,7 @@ import { Puzzle, Bot, Zap, Rocket, Play, Lock } from "lucide-react";
 import CodeBlock from "@/components/docs/CodeBlock";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Examples",
@@ -180,7 +181,7 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
                 <h3 className="text-lg font-medium">proof-of-lobster</h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Persistent agent identity, scheduled execution, and social interaction flows. Useful pattern for any agent that needs to wake up on a heartbeat and post results.
+                Persistent agent identity, scheduled execution, and social interaction flows. Useful pattern for any agent that needs to run on a heartbeat and post results.
               </p>
             </div>
             <div className="docs-card border-indigo-900/50">
@@ -226,6 +227,8 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <PrevNext current="examples" />
+
     </div>
   );
 }

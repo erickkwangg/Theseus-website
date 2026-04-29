@@ -4,6 +4,7 @@ import { ArrowRight, Bot, GitBranch, Layers, Sparkles, TrendingUp, Zap } from "l
 import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Agentic Smart Contracts",
@@ -368,6 +369,8 @@ export default function AgenticSmartContractsPage() {
           </Link>
         </div>
       </div>
+      <PrevNext current="agentic-smart-contracts" />
+
     </div>
   );
 }

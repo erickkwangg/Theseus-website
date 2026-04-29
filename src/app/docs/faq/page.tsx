@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { HelpCircle, ArrowRight } from "lucide-react";
 import { DocsPageJsonLd, FaqJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -146,6 +147,8 @@ export default function FAQPage() {
           </section>
         ))}
       </div>
+      <PrevNext current="faq" />
+
     </div>
   );
 }

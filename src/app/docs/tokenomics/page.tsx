@@ -4,6 +4,7 @@ import { Coins, Zap, Shield, PiggyBank, Bot, Layers, Wallet } from "lucide-react
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Tokenomics",
@@ -292,6 +293,8 @@ Total:
           </Link>
         </div>
       </div>
+      <PrevNext current="tokenomics" />
+
     </div>
   );
 }

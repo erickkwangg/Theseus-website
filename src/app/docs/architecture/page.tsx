@@ -5,6 +5,7 @@ import { ArrowRight, Layers, Database, Shield, Cpu, GitBranch } from "lucide-rea
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Architecture",
@@ -312,6 +313,8 @@ body { Transaction[] }`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <PrevNext current="architecture" />
+
     </div>
   );
 }

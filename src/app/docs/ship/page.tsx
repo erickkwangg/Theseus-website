@@ -4,6 +4,7 @@ import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot, Play } from "lucide-r
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "SHIP Language",
@@ -323,6 +324,8 @@ node call_contract() {
           </Link>
         </div>
       </div>
+      <PrevNext current="ship" />
+
     </div>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Network, ArrowRight, AlertTriangle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
+import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
   title: "Theseus vs AI-Infra Peers",
@@ -169,6 +170,8 @@ export default function VsAIInfraPage() {
           Last reviewed for the public positioning of each project. Open to updates.
         </p>
       </div>
+      <PrevNext current="vs-ai-infra" />
+
     </div>
   );
 }
