@@ -124,8 +124,8 @@ export default function AgenticSmartContractsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             A smart contract is, in the original definition, a digital contract stored on a
             blockchain that automatically executes when predetermined terms are met. It applies
-            narrow, predefined rules deterministically. An AI agent does the opposite: it ingests
-            varied inputs through a foundation model and produces sophisticated, non-deterministic
+            narrow, predefined rules deterministically. An AI agent does the opposite: it takes
+            varied inputs through a foundation model and produces complex, non-deterministic
             outputs informed by context and external data.
           </p>
 
@@ -144,7 +144,7 @@ export default function AgenticSmartContractsPage() {
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>Reasoning over open-ended inputs</li>
                 <li>Access to real-world context</li>
-                <li>Sophisticated, non-deterministic outputs</li>
+                <li>Complex, non-deterministic outputs</li>
                 <li>No native statefulness or sovereignty</li>
               </ul>
             </div>
@@ -170,8 +170,7 @@ export default function AgenticSmartContractsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             Over the last decade, several runtimes have promised to extend what smart contracts can
             do. SVM, MoveVM, eWASM, and parallel execution layers like Polkadot all delivered real
-            engineering improvements. None of them, however, broke out of the same design space the
-            EVM defined.
+            engineering improvements. None broke out of the design space the EVM defined.
           </p>
 
           <div className="docs-card mb-6">
@@ -184,9 +183,9 @@ export default function AgenticSmartContractsPage() {
             </p>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Vitalik&apos;s original whitepaper described general-purpose, trust-minimized
-              programs powerful enough to host DAOs and programmable finance. Full state
+              programs general enough to host DAOs and programmable finance. Full state
               replication makes that vision practically out of reach for most non-trivial
-              applications. Agentic smart contracts unlock it without requiring Ethereum to hard
+              applications. Agentic smart contracts open it up without requiring Ethereum to hard
               fork.
             </p>
           </div>

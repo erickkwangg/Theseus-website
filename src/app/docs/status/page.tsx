@@ -68,7 +68,7 @@ const phases: Phase[] = [
       "Fully decentralized target state. Every inference cryptographically verified, decentralized enclave network, community governance.",
     config: [
       { k: "Provers", v: "Full TensorCommitment verification on all provers" },
-      { k: "Lite provers", v: "Phased out — signature-only no longer accepted" },
+      { k: "Lite provers", v: "Phased out; signature-only no longer accepted" },
       { k: "Enclaves", v: "Decentralized network (no single party holds the key)" },
       { k: "Governance", v: "Community proposals, token-weighted voting, longer deliberation" },
       { k: "$THE token", v: "Used for staking across all roles" },
@@ -151,15 +151,15 @@ export default function StatusPage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Three phases with concrete transition criteria. Each phase ships
-          when its criteria land — not on a fixed calendar.
+          when its criteria land, not on a fixed calendar.
         </p>
       </div>
 
       <div className="prose prose-invert max-w-none">
         <Callout type="info" title="Honest preview">
           Alpha trade-offs are explicit, bounded, and listed. The path off
-          each one — multi-party enclaves, full verification, open
-          registration, community governance — is in the Beta and Mainnet
+          each one (multi-party enclaves, full verification, open
+          registration, community governance) is in the Beta and Mainnet
           criteria below.
         </Callout>
 
@@ -192,7 +192,7 @@ export default function StatusPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Progressive decentralization across operator sets, verification
             modes, and governance. Each phase has explicit{" "}
-            <strong className="text-slate-700 dark:text-slate-300">transition criteria</strong> —
+            <strong className="text-slate-700 dark:text-slate-300">transition criteria</strong>:
             measurable conditions that must be met before moving forward.
           </p>
 

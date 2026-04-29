@@ -219,7 +219,7 @@ make test-ship`}</CodeBlock>
           <h2 id="next-steps" className="text-2xl font-medium mb-6">Next Steps</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { href: "/docs/agents", title: "Build Agents", desc: "Create sophisticated autonomous agents", icon: Bot },
+              { href: "/docs/agents", title: "Build Agents", desc: "Build autonomous agents end to end", icon: Bot },
               { href: "/docs/ship", title: "SHIP Language", desc: "Master the DSL for AI agents", icon: Code2 },
               { href: "/docs/aivm", title: "AIVM Deep Dive", desc: "Understand the VM internals", icon: Layers },
               { href: "/docs/tensor-commits", title: "Tensor Commits", desc: "Learn about verifiable ML", icon: GitBranch },

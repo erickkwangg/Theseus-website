@@ -32,7 +32,7 @@ const tiers: Tier[] = [
     title: "Civic",
     control: "Fully autonomous, public reasoning",
     example:
-      "A prediction-market resolver that decides outcomes via inference and posts the verifiable reasoning on-chain. No private key, no owner — only public verification.",
+      "A prediction-market resolver that decides outcomes via inference and posts the verifiable reasoning on-chain. No private key, no owner; only public verification.",
     icon: Eye,
     accent: {
       dot: "bg-indigo-500",

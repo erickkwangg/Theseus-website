@@ -191,7 +191,7 @@ export default function ReferencePage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Pallets, extrinsics, and network parameters as configured at alpha.
-          Authoritative source — taken directly from the runtime.
+          Authoritative source, taken directly from the runtime.
         </p>
       </div>
 

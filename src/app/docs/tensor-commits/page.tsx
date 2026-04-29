@@ -4,7 +4,7 @@ import Image from "next/image";
 import { GitBranch, Shield, Zap, CheckCircle } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import FlowDiagram from "@/components/docs/FlowDiagram";
-import BarChart from "@/components/docs/BarChart";
+import ComparisonGrid from "@/components/docs/ComparisonGrid";
 import PageHero from "@/components/docs/PageHero";
 import { TensorCommitsIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
@@ -207,60 +207,53 @@ export default function TensorCommitsPage() {
 
           <h3 id="vs-alternatives" className="text-xl font-medium mb-3">Versus alternatives</h3>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            How Tensor Commits compare to the two main approaches for verifying neural network inference. The chart below shows prover overhead — the cost a prover pays to produce a proof, on top of the raw inference itself.
+            Three ways to verify neural network inference on a chain. They make very different trade-offs on who pays the cost and how big a model can practically be.
           </p>
 
-          <div className="docs-card mb-6">
-            <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-1">Prover overhead vs raw inference</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-500 mb-4">Lower is better. Log scale — values span four orders of magnitude.</p>
-            <BarChart
-              log
-              rows={[
-                { label: "Tensor Commits", value: 1, display: "<1%", variant: "highlight", sublabel: "Theseus" },
-                { label: "zkML (zk-SNARK)", value: 1000, display: "1,000–100,000×", variant: "muted", sublabel: "EZKL, Modulus, etc." },
-                { label: "Full re-execution", value: 0, display: "0% (but every node pays)", variant: "muted", sublabel: "Ethereum-style" },
-              ]}
-            />
-          </div>
+          <ComparisonGrid
+            columns={[
+              { title: "Re-execution", subtitle: "Ethereum-style" },
+              { title: "zkML", subtitle: "EZKL, Modulus" },
+              { title: "Tensor Commits", subtitle: "Theseus", highlight: true },
+            ]}
+            rows={[
+              {
+                label: "Prover overhead",
+                cells: [
+                  { value: "N/A", verdict: "neutral", note: "no separate prover" },
+                  { value: "1,000–100,000×", verdict: "bad" },
+                  { value: "<1%", verdict: "good" },
+                ],
+              },
+              {
+                label: "Verifier work / inference",
+                cells: [
+                  { value: "Full inference", verdict: "bad", note: "every validator" },
+                  { value: "~ms", verdict: "good" },
+                  { value: "~2 ms", verdict: "good" },
+                ],
+              },
+              {
+                label: "Practical model size",
+                cells: [
+                  { value: "Smallest validator", verdict: "bad" },
+                  { value: "Small (mostly)", verdict: "neutral" },
+                  { value: "Frontier (70B+)", verdict: "good" },
+                ],
+              },
+              {
+                label: "Hides model weights",
+                cells: [
+                  { value: "No", verdict: "bad" },
+                  { value: "Yes", verdict: "good" },
+                  { value: "Yes", verdict: "good" },
+                ],
+              },
+            ]}
+          />
 
-          <div className="docs-card">
-            <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-4">Other dimensions, side by side</h4>
-            <div className="overflow-x-auto">
-              <table className="docs-table">
-                <thead>
-                  <tr>
-                    <th>Aspect</th>
-                    <th className="text-gray-600 dark:text-gray-400">Re-execution</th>
-                    <th className="text-gray-600 dark:text-gray-400">zkML</th>
-                    <th className="text-indigo-700 dark:text-indigo-300">Tensor Commits</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="font-medium text-slate-900 dark:text-white">Verifier work / inference</td>
-                    <td>Same as prover</td>
-                    <td>~ms (constant)</td>
-                    <td className="text-indigo-700 dark:text-indigo-300">~2 ms</td>
-                  </tr>
-                  <tr>
-                    <td className="font-medium text-slate-900 dark:text-white">Practical model size</td>
-                    <td>Smallest validator</td>
-                    <td>Small (mostly)</td>
-                    <td className="text-indigo-700 dark:text-indigo-300">Frontier (70B+)</td>
-                  </tr>
-                  <tr>
-                    <td className="font-medium text-slate-900 dark:text-white">Hides model weights</td>
-                    <td>No</td>
-                    <td>Yes</td>
-                    <td className="text-indigo-700 dark:text-indigo-300">Yes</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <p className="text-slate-600 dark:text-gray-500 text-sm mt-3">
-            Re-execution is what Ethereum uses for smart contracts — and the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs but the prover-side overhead has kept it confined to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
+          <p className="text-slate-600 dark:text-gray-500 text-sm mt-4">
+            Re-execution is what Ethereum uses for smart contracts. It&apos;s also the reason on-chain inference at frontier sizes is impractical there. zkML produces succinct proofs, but the prover-side overhead has kept it confined to small networks. Tensor Commits target the same proof-size benefit as zkML with overhead that does not break the economics for production-sized models.
           </p>
         </section>
 

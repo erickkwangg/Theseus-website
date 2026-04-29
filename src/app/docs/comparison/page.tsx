@@ -44,7 +44,7 @@ export default function ComparisonPage() {
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-            Every Ethereum smart contract — no matter how complex — needs an
+            Every Ethereum smart contract, no matter how complex, needs an
             externally owned account (EOA) to call it. The contract holds logic
             and state, but it cannot start work on its own. Services like
             Chainlink Keepers are off-chain bots with private keys that trigger
@@ -60,7 +60,7 @@ export default function ComparisonPage() {
           <Callout type="tip" title="The shape of the difference">
             Smart contract: a vending machine. Holds inventory and logic, but
             someone has to put a coin in. Theseus agent: an autonomous shopkeeper.
-            Checks inventory, restocks, sets prices, transacts with suppliers —
+            Checks inventory, restocks, sets prices, transacts with suppliers,
             all without anyone walking up to it.
           </Callout>
         </section>

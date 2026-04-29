@@ -36,7 +36,7 @@ export default function ArchitecturePage() {
       />
         
       <div className="prose prose-invert max-w-none">
-        {/* Three-Layer Stack — interactive */}
+        {/* Three-Layer Stack: interactive */}
         <section className="mb-12">
           <h2 id="three-layer" className="text-2xl font-medium mb-3">Three-layer stack</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -203,9 +203,9 @@ body { Transaction[] }`}</CodeBlock>
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Inference and tool calls cannot complete inside a single block — a
+            Inference and tool calls cannot complete inside a single block. A
             prover has to run the model off-chain and submit verification
-            material back. So agent execution is split across three stages,
+            material back, so agent execution is split across three stages,
             each in a different block: a user-facing extrinsic queues the
             work, a prover-facing extrinsic supplies a verified result, and
             an inherent block-author hook resumes the agent. State transitions
@@ -282,7 +282,7 @@ body { Transaction[] }`}</CodeBlock>
           <Callout type="info" title="Why this matters for developers">
             Because state changes only happen in stages 1 and 3, agent logic
             is fully replayable from on-chain data. Provers can be untrusted
-            from the chain&apos;s perspective — the only thing that matters
+            from the chain&apos;s perspective. The only thing that matters
             is what the runtime can verify deterministically from the
             submitted proof and the recorded ABG.
           </Callout>

@@ -110,10 +110,10 @@ export default function DesignSpacePage() {
         <section className="mb-12">
           <h2 id="constraint" className="text-2xl font-medium mb-4">The Design Space Constraint</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Over the last decade, runtimes like SVM or MoveVM improved smart contract platforms with cleaner programming models. However, <strong className="text-slate-900 dark:text-white">all maintained the same fundamental constraint</strong>: deterministic, replicated execution across all nodes.
+            Over the last decade, runtimes like SVM and MoveVM improved smart contract platforms with cleaner programming models. <strong className="text-slate-900 dark:text-white">All kept the same baseline constraint</strong>: deterministic, replicated execution across every node.
           </p>
           <p className="text-gray-600 dark:text-gray-400">
-            Theseus takes a different approach using tensor commitments for verifiable inference. This makes complex, intelligent applications economically feasible on-chain while preserving verifiability.
+            Theseus takes a different approach: tensor commitments for verifiable inference. That makes complex, intelligent applications economically feasible on-chain without giving up verifiability.
           </p>
         </section>
 
@@ -128,9 +128,9 @@ export default function DesignSpacePage() {
 
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { title: "Subjective Prediction Markets", desc: "Adjudicate nuanced questions like \"Was the iPhone Air launch successful?\"" },
+              { title: "Subjective Prediction Markets", desc: "Adjudicate judgment-call questions like \"Was the iPhone Air launch successful?\"" },
               { title: "Sovereign Agents", desc: "Autonomous entities with goals: GPs of LP funds, marketing swarms, DAO orchestrators" },
-              { title: "Complex Governance", desc: "Evaluate proposals with nuanced reasoning, read docs, analyze trade-offs" },
+              { title: "Complex Governance", desc: "Evaluate proposals with judgment, read docs, weigh trade-offs" },
               { title: "Dynamic DeFi Strategies", desc: "Manage liquidity, rebalance portfolios, execute strategies autonomously" },
             ].map((item) => (
               <div key={item.title} className="docs-card">
@@ -163,7 +163,7 @@ export default function DesignSpacePage() {
             <div className="space-y-1 text-sm">
               <p><strong className="text-slate-900 dark:text-white">ChatGPT:</strong> <span className="text-gray-600 dark:text-gray-400">intelligence you can query</span></p>
               <p><strong className="text-slate-900 dark:text-white">OpenClaw:</strong> <span className="text-gray-600 dark:text-gray-400">execution you can delegate</span></p>
-              <p><strong className="text-slate-900 dark:text-white">Theseus:</strong> <span className="text-gray-600 dark:text-gray-400">agents with full agency — own keys, hold balances, persist</span></p>
+              <p><strong className="text-slate-900 dark:text-white">Theseus:</strong> <span className="text-gray-600 dark:text-gray-400">agents with full agency. Own keys, hold balances, persist</span></p>
             </div>
           </div>
         </section>

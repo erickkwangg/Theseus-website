@@ -4,7 +4,7 @@ import DocsLayoutWrapper from "@/components/docs/DocsLayout";
 export const metadata: Metadata = {
   title: {
     default: "Developer Documentation",
-    template: "%s — Theseus Docs",
+    template: "%s · Theseus Docs",
   },
   description:
     "Developer guide for building autonomous AI agents on Theseus. AIVM, Tensor Commits, SHIP, and the runtime architecture as an L1 chain.",

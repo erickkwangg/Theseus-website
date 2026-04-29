@@ -23,7 +23,7 @@ export default function AgentsPage() {
         eyebrow="Core Concepts"
         eyebrowIcon={Bot}
         title="Agents & models"
-        subtitle="Agents on Theseus hold their own keys, balance, and state. They wake up on triggers, call models, pay for their own inference, and settle on-chain — without a human in the loop."
+        subtitle="Agents on Theseus hold their own keys, balance, and state. They wake on triggers, call models, pay for their own inference, and settle on-chain without a human in the loop."
         accent="green"
         illustration={<AgentsIllustration />}
       />
@@ -37,7 +37,7 @@ export default function AgentsPage() {
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
             An agent on Theseus is defined by two graph structures kept side
             by side. This separation is what makes agent execution
-            deterministic and replayable from on-chain data — the same
+            deterministic and replayable from on-chain data, the same
             property smart contracts have, extended to programs that include
             inference and tool calls.
           </p>
@@ -56,7 +56,7 @@ export default function AgentsPage() {
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
                 The agent&apos;s on-chain bytecode. A directed graph of nodes
                 that defines control flow plus the agent&apos;s capability
-                surface — the set of models, tools, agents, and SHIP intent
+                surface: the set of models, tools, agents, and SHIP intent
                 types it&apos;s allowed to reference.
               </p>
               <p className="text-slate-600 dark:text-gray-500 text-xs leading-relaxed">

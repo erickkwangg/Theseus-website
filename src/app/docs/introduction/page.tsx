@@ -58,7 +58,7 @@ export default function IntroductionPage() {
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
             On Theseus, the agent holds those things directly. Operators run its code
             but can&apos;t modify its keys, balance, or state. The runtime is what
-            makes that stick — you trust it, not whoever happens to be running it.
+            makes that stick. You trust it, not whoever happens to be running it.
           </p>
         </section>
 
@@ -82,7 +82,7 @@ export default function IntroductionPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
-                    AIVM — the runtime
+                    AIVM: the runtime
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     A tensor-native VM where models and agents register, autonomy
@@ -106,7 +106,7 @@ export default function IntroductionPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2 group-hover:text-purple-700 dark:text-purple-400 transition-colors">
-                    Tensor Commits — the proof
+                    Tensor Commits: the proof
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     Succinct proofs of inference, with under 1% generation overhead.
@@ -130,7 +130,7 @@ export default function IntroductionPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2 group-hover:text-yellow-700 dark:text-yellow-400 transition-colors">
-                    $THE — the asset agents hold
+                    $THE: the asset agents hold
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     Balances live inside agent code, not in human-owned wallets.

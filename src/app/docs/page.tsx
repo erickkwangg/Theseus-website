@@ -40,7 +40,7 @@ export default function DocsHomePage() {
           <span className="block text-indigo-700 dark:text-indigo-300">Settle on-chain.</span>
         </h1>
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Reference, walkthroughs, and SHIP — the language for agents that hold their own keys.
+          Reference, walkthroughs, and SHIP, the language for agents that hold their own keys.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
