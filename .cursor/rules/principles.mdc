@@ -1,0 +1,54 @@
+---
+description: Core design and engineering principles for this project
+alwaysApply: true
+---
+
+# Principles
+
+Three rules govern every change in this codebase. When in doubt, default to the simpler option.
+
+## 1. Keep It Simple
+
+- Prefer the most boring solution that works. No clever tricks.
+- Use the framework's defaults (Next.js App Router conventions, shadcn primitives as-is) before reaching for custom code.
+- One file, one purpose. Don't introduce abstractions until there are at least two concrete callers.
+- Inline a value or component until duplication forces extraction — not before.
+
+```tsx
+// BAD — premature abstraction, custom hook for one consumer
+const useHeading = (text: string) => useMemo(() => text.toUpperCase(), [text]);
+
+// GOOD — inline, obvious
+<h1>{title.toUpperCase()}</h1>
+```
+
+## 2. Less Is More
+
+- Ship fewer components, fewer props, fewer dependencies.
+- Reuse existing shadcn/ui components and Tailwind utilities before writing new CSS or installing new packages.
+- Trim props with sensible defaults; avoid optional booleans that toggle styling — compose instead.
+- Delete dead code, unused imports, and commented-out blocks as you go.
+- Resist adding a new file when an existing one is the right home.
+
+```tsx
+// BAD — flag soup
+<Card padded bordered shadow rounded fullWidth />
+
+// GOOD — sane defaults, compose when needed
+<Card className="w-full" />
+```
+
+## 3. Mobile First
+
+- Design and write layouts for the smallest viewport first, then layer up with Tailwind breakpoint prefixes (`sm:`, `md:`, `lg:`).
+- Unprefixed utilities are the mobile baseline. Never start from desktop and patch downwards.
+- Use fluid sizing (`%`, `rem`, `min()`/`max()`/`clamp()`) over fixed pixel widths.
+- Tap targets ≥ 44px, readable body text ≥ 16px, no horizontal scroll on narrow screens.
+
+```tsx
+// BAD — desktop-first, fights itself on mobile
+<div className="flex flex-row gap-8 max-md:flex-col max-md:gap-2" />
+
+// GOOD — mobile-first, scales up
+<div className="flex flex-col gap-2 md:flex-row md:gap-8" />
+```

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import LiveActivityLog from "./LiveActivityLog";
+import SectionHeader from "./SectionHeader";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 const ROTATING_WORDS = ["Verified.", "Autonomous.", "Sovereign."];
@@ -61,6 +62,12 @@ export default function Hero() {
         <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-12 lg:px-16 py-12 lg:py-16">
           <div className="grid lg:grid-cols-[1.7fr_1fr] gap-12 lg:gap-20 items-start">
             <div>
+              <SectionHeader
+                label="Theseus Network"
+                number="00"
+                className="mb-10 lg:mb-14"
+              />
+
               <h1 className="font-serif text-5xl sm:text-7xl lg:text-[clamp(4.5rem,7vw,9rem)] font-normal tracking-[-0.02em] leading-[1.02] text-slate-900 dark:text-white">
                 Agents that are
                 <br />

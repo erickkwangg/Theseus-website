@@ -48,10 +48,13 @@ const Card = ({ role, title, emphasis = false, accent = "neutral", children }: C
 
 export default function Architecture() {
   return (
-    <section className="text-slate-900 dark:text-white py-24 lg:py-32 section-soft-divider">
+    <section
+      id="sovereignty"
+      className="bg-white py-24 lg:py-32 text-slate-900 dark:bg-transparent dark:text-white"
+    >
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
         <SectionHeader
-          label="How it works"
+          label="Sovereignty"
           number="02"
           className="mb-8 lg:mb-10"
         />
