@@ -177,7 +177,7 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
               <div className="flex items-center gap-2 mb-2">
-                <Lock className="h-4 w-4 text-slate-500" />
+                <Lock className="h-4 w-4 text-slate-600 dark:text-slate-400" />
                 <h3 className="text-lg font-medium">proof-of-lobster</h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -186,7 +186,7 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
             </div>
             <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
               <div className="flex items-center gap-2 mb-2">
-                <Lock className="h-4 w-4 text-slate-500" />
+                <Lock className="h-4 w-4 text-slate-600 dark:text-slate-400" />
                 <h3 className="text-lg font-medium">the-prediction-market</h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm">

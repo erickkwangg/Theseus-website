@@ -1,8 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
+import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap } from "lucide-react";
 import Callout from "@/components/docs/Callout";
-import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -119,54 +117,6 @@ export default function DesignSpacePage() {
           </p>
         </section>
 
-        {/* Concrete Example */}
-        <section className="mb-12">
-          <h2 id="example" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
-              <BarChart3 className="h-5 w-5" />
-            </span>
-            Example: Lending Protocol
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="docs-card">
-              <h3 className="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Ethereum (Aave, Compound)</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">Off-chain:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Backend computes rates, keeper pushes on-chain</p>
-                </div>
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">On-chain:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Contract executes based on predetermined formulas</p>
-                </div>
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">Updates:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Deploy new contract through governance</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="docs-card border-green-200 dark:border-green-900/50">
-              <h3 className="text-lg font-medium mb-4 text-green-700 dark:text-green-400">Theseus</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">On-chain Agent:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Market runs as a first-class lending agent</p>
-                </div>
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">Execution:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Pricing via inference, verified with tensor-commit</p>
-                </div>
-                <div>
-                  <span className="text-slate-600 dark:text-gray-500">Updates:</span>
-                  <p className="text-gray-600 dark:text-gray-400">Context or model swappable by creator or agent</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* New Primitives */}
         <section className="mb-12">
           <h2 id="primitives" className="text-2xl font-medium mb-6 flex items-center gap-3">
@@ -218,47 +168,6 @@ export default function DesignSpacePage() {
           </div>
         </section>
 
-        {/* Full Story CTA */}
-        <div className="border-t border-slate-200 dark:border-gray-800 pt-8">
-          <div className="docs-card border-indigo-200 dark:border-indigo-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-indigo-700 dark:text-indigo-300">
-              <Users className="h-5 w-5" />
-              Want the Full Story?
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-              Read the complete article with detailed examples, technical deep dives, and the full vision.
-            </p>
-            <a 
-              href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
-            >
-              Read: Agents as an Evolution of Smart Contracts <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-
-          {/* Navigation */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Link href="/docs/comparison" className="group no-underline">
-              <div className="docs-card h-full">
-                <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
-                <h4 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← Technical Comparison</h4>
-              </div>
-            </Link>
-            <a 
-              href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group no-underline"
-            >
-              <div className="docs-card h-full text-right">
-                <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Related</p>
-                <h4 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Theseus Thesis: TAM →</h4>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
       <PrevNext current="design-space" />
 

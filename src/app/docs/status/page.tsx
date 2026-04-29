@@ -209,7 +209,7 @@ export default function StatusPage() {
                   <div className="flex items-start gap-4">
                     <div
                       className={`mt-1 ${
-                        isLive ? "text-green-700 dark:text-green-400" : "text-slate-500"
+                        isLive ? "text-green-700 dark:text-green-400" : "text-slate-600 dark:text-slate-400"
                       }`}
                     >
                       {isLive ? (
@@ -222,7 +222,7 @@ export default function StatusPage() {
                       <div className="flex items-center gap-3 mb-1">
                         <span
                           className={`text-xs uppercase tracking-widest ${
-                            isLive ? "text-green-700 dark:text-green-400" : "text-slate-500"
+                            isLive ? "text-green-700 dark:text-green-400" : "text-slate-600 dark:text-slate-400"
                           }`}
                         >
                           {phase.label}
@@ -241,7 +241,7 @@ export default function StatusPage() {
                       </p>
 
                       <div className="rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50 p-3 mb-4">
-                        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 mb-2">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400 mb-2">
                           Configuration
                         </p>
                         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
@@ -250,7 +250,7 @@ export default function StatusPage() {
                               key={c.k}
                               className="flex flex-col sm:flex-row sm:gap-2"
                             >
-                              <dt className="text-slate-500 sm:min-w-[110px]">
+                              <dt className="text-slate-600 dark:text-slate-400 sm:min-w-[110px]">
                                 {c.k}
                               </dt>
                               <dd className="text-gray-700 dark:text-gray-300">
@@ -263,7 +263,7 @@ export default function StatusPage() {
 
                       {phase.transition && (
                         <div>
-                          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 mb-2">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400 mb-2">
                             Transition criteria (to enter this phase)
                           </p>
                           <ul className="space-y-1.5 text-sm">
@@ -272,7 +272,7 @@ export default function StatusPage() {
                                 key={t}
                                 className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
                               >
-                                <CheckCircle2 className="h-3.5 w-3.5 text-slate-400 mt-0.5 shrink-0" />
+                                <CheckCircle2 className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400 mt-0.5 shrink-0" />
                                 <span>{t}</span>
                               </li>
                             ))}

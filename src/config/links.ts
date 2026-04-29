@@ -6,6 +6,7 @@ export const EXTERNAL_LINKS = {
   substackEvolution: "https://theseuschain.substack.com/p/the-theseus-thesis-part-1",
   substackTAM: "https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of",
   substackAgenticContracts: "https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts",
+  arxivPaper: "https://arxiv.org/abs/2602.12630v1",
   conwayTech: "https://conway.tech",
   web4ai: "https://web4.ai",
   contactEmail: "hello@theseus.network",

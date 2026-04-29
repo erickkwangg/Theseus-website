@@ -128,9 +128,9 @@ export default function VsAIInfraPage() {
                 <h3 className="text-lg font-medium mb-2">{p.name}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">{p.summary}</p>
                 <div className="grid sm:grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-                  <span className="text-slate-500">Primary focus:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Primary focus:</span>
                   <span className="text-slate-800 dark:text-slate-200">{p.primary}</span>
-                  <span className="text-slate-500">Where Theseus differs:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Where Theseus differs:</span>
                   <span className="text-slate-700 dark:text-slate-300">{p.differs}</span>
                 </div>
               </div>

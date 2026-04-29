@@ -51,7 +51,7 @@ export default function AgentsPage() {
                 <span className="rounded bg-indigo-500/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
                   ABG
                 </span>
-                <span className="text-xs text-slate-500">static · versioned</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">static · versioned</span>
               </div>
               <h3 className="font-medium text-slate-900 dark:text-white mb-2">
                 Agent Behavior Graph
@@ -75,7 +75,7 @@ export default function AgentsPage() {
                 <span className="rounded bg-green-500/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.18em] text-green-700 dark:text-green-300">
                   AKG
                 </span>
-                <span className="text-xs text-slate-500">dynamic · grows</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">dynamic · grows</span>
               </div>
               <h3 className="font-medium text-slate-900 dark:text-white mb-2">
                 Agent Knowledge Graph

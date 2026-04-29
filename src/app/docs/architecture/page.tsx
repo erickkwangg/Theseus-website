@@ -288,7 +288,7 @@ body { Transaction[] }`}</CodeBlock>
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
                   Stage 1
                 </span>
-                <span className="font-mono text-[11px] text-slate-500">
+                <span className="font-mono text-[11px] text-slate-600 dark:text-slate-400">
                   block N
                 </span>
               </div>
@@ -309,7 +309,7 @@ body { Transaction[] }`}</CodeBlock>
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-purple-600 dark:text-purple-300">
                   Stage 2
                 </span>
-                <span className="font-mono text-[11px] text-slate-500">
+                <span className="font-mono text-[11px] text-slate-600 dark:text-slate-400">
                   block N+Δ
                 </span>
               </div>
@@ -332,7 +332,7 @@ body { Transaction[] }`}</CodeBlock>
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-green-600 dark:text-green-300">
                   Stage 3
                 </span>
-                <span className="font-mono text-[11px] text-slate-500">
+                <span className="font-mono text-[11px] text-slate-600 dark:text-slate-400">
                   block N+Δ+1
                 </span>
               </div>

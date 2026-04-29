@@ -36,7 +36,7 @@ export default function IntroductionPage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           An open runtime where AI agents hold their own keys, balance, and state.
-          <span className="block text-base text-slate-500 mt-2">
+          <span className="block text-base text-slate-600 dark:text-slate-400 mt-2">
             Theseus is a Layer-1 chain. AI execution and verification are the primary developer surface.
           </span>
         </p>

@@ -6,6 +6,7 @@ import Callout from "@/components/docs/Callout";
 import FlowDiagram from "@/components/docs/FlowDiagram";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
   title: "Tensor Commits",
@@ -53,9 +54,21 @@ export default function TensorCommitsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Tensor-commit protocols enable verifiable ML by proving a model was executed correctly. Traditional verification via recomputation is prohibitively expensive for large models.
           </p>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             Theseus&apos; Tensor Commits provide batch verification and reduce opening costs through a novel application of KZG commitment schemes extended to multi-dimensional tensor structures.
           </p>
+          <Callout type="info" title="Read the paper">
+            Full construction, security proofs, and benchmarks are in the{" "}
+            <a
+              href={EXTERNAL_LINKS.arxivPaper}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium"
+            >
+              Tensor Commits paper on arXiv
+            </a>
+            .
+          </Callout>
         </section>
 
         {/* How it Works */}
