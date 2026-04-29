@@ -5,7 +5,7 @@ import { Resend } from "resend";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const apiKey = process.env.RESEND_API_KEY;
-const audienceId = process.env.RESEND_AUDIENCE_ID;
+const segmentId = process.env.RESEND_SEGMENT_ID;
 const resend = apiKey ? new Resend(apiKey) : null;
 
 export type NotifyState = {
@@ -23,16 +23,19 @@ export async function notify(
     return { ok: false, message: "Enter a valid email." };
   }
 
-  if (!resend || !audienceId) {
+  if (!resend || !segmentId) {
     console.warn(
-      "[notify] RESEND_API_KEY or RESEND_AUDIENCE_ID not set — falling back to log",
+      "[notify] RESEND_API_KEY or RESEND_SEGMENT_ID not set — falling back to log",
       email,
     );
     return { ok: true, message: "We'll let you know." };
   }
 
   try {
-    const { error } = await resend.contacts.create({ email, audienceId });
+    const { error } = await resend.contacts.create({
+      email,
+      segments: [{ id: segmentId }],
+    });
 
     if (error) {
       const msg = (error.message ?? "").toLowerCase();
