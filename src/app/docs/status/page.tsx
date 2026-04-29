@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Current network state and roadmap for Theseus: what is live, what is in private preview, and what is planned next.",
   keywords: ["Theseus status", "Theseus roadmap", "testnet", "mainnet", "preview"],
+  alternates: { canonical: "/docs/status" },
 };
 
 const phases = [

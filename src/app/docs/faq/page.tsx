@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Common questions about Theseus from AI developers and crypto developers: latency, cost, model support, privacy, and more.",
   keywords: ["Theseus FAQ", "AI agent questions", "verifiable inference", "on-chain AI"],
+  alternates: { canonical: "/docs/faq" },
 };
 
 const groups = [

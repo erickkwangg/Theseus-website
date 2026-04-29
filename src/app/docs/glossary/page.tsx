@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BookOpen, ArrowRight } from "lucide-react";
-import { DocsPageJsonLd } from "@/components/JsonLd";
+import { DocsPageJsonLd, DefinedTermSetJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
 const glossaryTerms = [
@@ -97,12 +97,22 @@ export const metadata: Metadata = {
   description:
     "Reference key terms used across Theseus documentation, including AIVM, Tensor Commits, SHIP, and agent lifecycle concepts.",
   keywords: ["Theseus glossary", "AIVM terms", "Tensor Commits", "SHIP", "agent terminology"],
+  alternates: { canonical: "/docs/glossary" },
 };
 
 export default function GlossaryPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="Glossary" description="Reference key terms used across Theseus documentation, including AIVM, Tensor Commits, SHIP, and agent lifecycle concepts." slug="glossary" />
+      <DefinedTermSetJsonLd
+        name="Theseus Glossary"
+        url="https://theseus.network/docs/glossary"
+        terms={glossaryTerms.map((t) => ({
+          term: t.term,
+          definition: t.definition,
+          link: t.link,
+        }))}
+      />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">

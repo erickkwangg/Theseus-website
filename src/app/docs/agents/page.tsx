@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus.",
   keywords: ["Theseus agents", "model registration", "autonomous agents", "AIVM", "SHIP"],
+  alternates: { canonical: "/docs/agents" },
 };
 
 export default function AgentsPage() {

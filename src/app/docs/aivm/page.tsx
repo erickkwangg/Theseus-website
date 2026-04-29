@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation.",
   keywords: ["AIVM", "Theseus VM", "tensor opcodes", "verifiable inference", "AI runtime"],
+  alternates: { canonical: "/docs/aivm" },
 };
 
 export default function AIVMPage() {

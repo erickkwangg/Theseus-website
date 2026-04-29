@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "verifiable inference",
     "Layer 1",
   ],
+  alternates: { canonical: "/docs/introduction" },
 };
 
 export default function IntroductionPage() {

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Understand $THE utility, staking, fee flows, and AI-native economic primitives in the Theseus network.",
   keywords: ["Theseus tokenomics", "$THE", "staking", "fees", "AI economics"],
+  alternates: { canonical: "/docs/tokenomics" },
 };
 
 export default function TokenomicsPage() {

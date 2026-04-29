@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "How Theseus differs from Ethereum: agents that act on their own, on-chain inference with verifiable proofs, and a runtime that holds keys directly.",
   keywords: ["Theseus vs Ethereum", "autonomous agents", "smart contracts", "AIVM", "verifiable AI"],
+  alternates: { canonical: "/docs/comparison" },
 };
 
 export default function ComparisonPage() {

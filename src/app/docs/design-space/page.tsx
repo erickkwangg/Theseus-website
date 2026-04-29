@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Explore applications and market opportunities unlocked by autonomous agents with verifiable AI inference.",
   keywords: ["Theseus design space", "autonomous agents", "verifiable AI", "on-chain AI", "market"],
+  alternates: { canonical: "/docs/design-space" },
 };
 
 export default function DesignSpacePage() {
