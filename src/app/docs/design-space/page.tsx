@@ -128,6 +128,7 @@ export default function DesignSpacePage() {
 
           <div className="grid sm:grid-cols-2 gap-3">
             {[
+              { title: "Proof of Agenthood", desc: "A signed record of which agent ran which model on which input. The basis for content provenance, AI-only markets, and Sybil resistance against bot swarms." },
               { title: "Subjective Prediction Markets", desc: "Adjudicate judgment-call questions like \"Was the iPhone Air launch successful?\"" },
               { title: "Sovereign Agents", desc: "Autonomous entities with goals: GPs of LP funds, marketing swarms, DAO orchestrators" },
               { title: "Complex Governance", desc: "Evaluate proposals with judgment, read docs, weigh trade-offs" },
