@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Where Theseus is right now and what comes next. Three phases (Alpha → Beta → Mainnet) with concrete transition criteria.",
   keywords: ["Theseus status", "Theseus roadmap", "testnet", "mainnet", "preview", "decentralization"],
+  alternates: { canonical: "/docs/status" },
 };
 
 type Phase = {

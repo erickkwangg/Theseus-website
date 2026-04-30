@@ -15,17 +15,44 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
+import { CollectionPageJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: { absolute: "Theseus Developer Docs" },
   description:
     "Developer documentation for Theseus: architecture, AIVM, SHIP language, Tensor Commits, examples, and quickstart guides.",
   keywords: ["Theseus docs", "AIVM", "SHIP", "quickstart", "Tensor Commits"],
+  alternates: { canonical: "/docs" },
 };
+
+const DOCS_COLLECTION = [
+  { name: "Introduction", path: "/docs/introduction", description: "Why a runtime where agents hold their own keys, balance, and state." },
+  { name: "Quickstart", path: "/docs/quickstart", description: "Set up a Theseus node and deploy your first autonomous agent." },
+  { name: "Architecture", path: "/docs/architecture", description: "The three-layer design: AIVM, TheseusStore, and PoS consensus." },
+  { name: "AIVM", path: "/docs/aivm", description: "The AI Virtual Machine — tensor-native opcodes, deterministic execution, FLOPs gas." },
+  { name: "Tensor Commits", path: "/docs/tensor-commits", description: "Succinct cryptographic proofs for verifiable model inference." },
+  { name: "Agents", path: "/docs/agents", description: "Registering agents and models, autonomous inference loops, agent-to-agent interaction." },
+  { name: "SHIP Language", path: "/docs/ship", description: "Domain-specific language compiling AI intent into bounded, verifiable bytecode." },
+  { name: "Examples", path: "/docs/examples", description: "Full SHIP examples and ecosystem walkthroughs." },
+  { name: "Theseus vs Ethereum", path: "/docs/comparison", description: "Architecture and trust-model comparison with Ethereum smart contracts." },
+  { name: "Theseus vs AI-Infra Peers", path: "/docs/vs-ai-infra", description: "Side-by-side with Bittensor, Ritual, 0G, Modulus, Allora." },
+  { name: "Agentic Smart Contracts", path: "/docs/agentic-smart-contracts", description: "Thesis on agents as the next evolution of stateful, sovereign on-chain computation." },
+  { name: "Design Space", path: "/docs/design-space", description: "Applications and market opportunities unlocked by autonomous, verifiable agents." },
+  { name: "Tokenomics", path: "/docs/tokenomics", description: "$THE utility, staking, fee flows, and AI-native economic primitives." },
+  { name: "Status & Roadmap", path: "/docs/status", description: "What is live, in private preview, and planned next." },
+  { name: "FAQ", path: "/docs/faq", description: "Common questions about latency, cost, model support, privacy, and more." },
+  { name: "Glossary", path: "/docs/glossary", description: "Key terms and definitions used in Theseus." },
+];
 
 export default function DocsHomePage() {
   return (
     <div>
+      <CollectionPageJsonLd
+        name="Theseus Developer Docs"
+        description="Developer documentation for Theseus: architecture, AIVM, SHIP language, Tensor Commits, examples, and quickstart guides."
+        url="https://theseus.network/docs"
+        items={DOCS_COLLECTION}
+      />
       {/* Hero Section */}
       <div className="relative text-center mb-16 pb-12 border-b border-slate-200 dark:border-slate-700/60">
         {/* Gradient glow */}

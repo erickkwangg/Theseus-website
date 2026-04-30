@@ -4,7 +4,7 @@ import { ArrowRight, Terminal, Box, Zap, Bot, Code2, Layers, GitBranch, CheckCir
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
-import { DocsPageJsonLd } from "@/components/JsonLd";
+import { DocsPageJsonLd, HowToJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
@@ -12,12 +12,46 @@ export const metadata: Metadata = {
   description:
     "Set up a Theseus node and deploy your first autonomous agent with this step-by-step quickstart.",
   keywords: ["Theseus quickstart", "install Theseus", "deploy AI agent", "AIVM", "SHIP"],
+  alternates: { canonical: "/docs/quickstart" },
 };
 
 export default function QuickStartPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="Quick Start" description="Set up a Theseus node and deploy your first autonomous agent with this step-by-step quickstart." slug="quickstart" />
+      <HowToJsonLd
+        name="Deploy your first Theseus agent"
+        description="Set up a Theseus node and deploy your first verifiable, autonomous AI agent."
+        url="https://theseus.network/docs/quickstart"
+        totalTime="PT30M"
+        supplies={[
+          "Preview access to the Theseus repository",
+          "16GB+ RAM (recommended)",
+        ]}
+        tools={["Rust 1.70+", "Go 1.21+ (optional)", "Docker (optional)"]}
+        steps={[
+          {
+            name: "Clone the repository",
+            text: "Clone the Theseus repository using the preview-access URL provided with your invite.",
+            url: "https://theseus.network/docs/quickstart#installation",
+          },
+          {
+            name: "Install tooling and build",
+            text: "Run `make install-dev` to install development dependencies, then `make build` to compile the project.",
+            url: "https://theseus.network/docs/quickstart#installation",
+          },
+          {
+            name: "Run a local node",
+            text: "Start a local Theseus node with `make node` (or `cargo run --bin theseus-node`). The node will sync with the testnet.",
+            url: "https://theseus.network/docs/quickstart#installation",
+          },
+          {
+            name: "Deploy your first agent",
+            text: "Write a SHIP file and run a single CLI command to deploy your agent. The agent runs with a verifiable inference proof attached to each step.",
+            url: "https://theseus.network/docs/quickstart#deploy-agent",
+          },
+        ]}
+      />
       {/* Page Header */}
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">

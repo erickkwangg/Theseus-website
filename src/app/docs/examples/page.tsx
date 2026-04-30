@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Full SHIP examples and ecosystem walkthroughs for building autonomous agents on Theseus.",
   keywords: ["Theseus examples", "agent examples", "SHIP examples", "AIVM patterns"],
+  alternates: { canonical: "/docs/examples" },
 };
 
 export default function ExamplesPage() {

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     "Explore the Theseus architecture: AIVM execution, TheseusStore data availability, and PoS consensus.",
   keywords: ["Theseus architecture", "AIVM", "TheseusStore", "PoS", "verifiable inference"],
+  alternates: { canonical: "/docs/architecture" },
 };
 
 export default function ArchitecturePage() {

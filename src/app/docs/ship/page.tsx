@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution.",
   keywords: ["SHIP", "Theseus DSL", "AIVM bytecode", "verifiable agent programming"],
+  alternates: { canonical: "/docs/ship" },
 };
 
 export default function SHIPPage() {

@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     "AI infrastructure",
     "verifiable inference",
   ],
+  alternates: { canonical: "/docs/vs-ai-infra" },
 };
 
 const peers = [

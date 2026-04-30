@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     "on-chain agents",
   ],
   alternates: {
-    canonical: SITE_URL,
+    canonical: "/",
   },
   authors: [{ name: "Theseus AI Labs", url: SITE_URL }],
   creator: "Theseus AI Labs",
@@ -73,11 +73,37 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
+    // Animated GIF first for Discord/LinkedIn/Slack which animate or use the
+    // first frame; PNG second as a static fallback for scrapers (Telegram in
+    // particular) that refuse animated previews.
+    // Single canonical og:image: middleware rewrites this URL to /og/root.png
+    // for scrapers that don't animate (currently Facebook/Messenger/Instagram
+    // via facebookexternalhit), while every other platform receives the GIF
+    // bytes directly. Omitting og:image:type so scrapers that cross-check
+    // declared MIME against response Content-Type don't reject the rewrite.
+    images: [
+      {
+        url: "/og/root.gif",
+        width: 1200,
+        height: 630,
+        alt: "Theseus — Agents that are verified, autonomous, sovereign.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    // Twitter does not reliably render animated GIFs as link-preview images
+    // even though their docs claim "first frame supported". Always serve PNG.
+    images: [
+      {
+        url: "/og/root.png",
+        alt: "Theseus — Agents that are verified, autonomous, sovereign.",
+      },
+    ],
+    // site: "@theseus_xyz",     // TODO: add when an X handle is registered
+    // creator: "@theseus_xyz",  // TODO: add when an X handle is registered
   },
   robots: {
     index: true,
@@ -122,6 +148,30 @@ const websiteJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/docs?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE_NAME,
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Cross-platform",
+  description: SITE_DESCRIPTION,
+  url: SITE_URL,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: {
+    "@type": "Organization",
+    name: "Theseus AI Labs",
+    url: SITE_URL,
+  },
 };
 
 const themeInitScript = `
@@ -150,6 +200,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
         />
       </head>
       <body className={`${ppTelegraf.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>

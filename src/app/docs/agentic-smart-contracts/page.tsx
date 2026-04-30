@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "tensor commits",
     "verifiable inference",
   ],
+  alternates: { canonical: "/docs/agentic-smart-contracts" },
 };
 
 export default function AgenticSmartContractsPage() {

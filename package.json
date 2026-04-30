@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen:og": "tsx scripts/gen-og-animated.tsx"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",
@@ -24,13 +25,18 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.8",
+    "gif-encoder-2": "^1.0.5",
+    "gifsicle": "^7.0.1",
+    "satori": "^0.26.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
   }

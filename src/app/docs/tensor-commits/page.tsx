@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   description:
     "Understand Tensor Commits: succinct cryptographic proofs for verifiable model inference on Theseus.",
   keywords: ["Tensor Commits", "proofs", "verifiable AI", "KZG", "Terkle tree"],
+  alternates: { canonical: "/docs/tensor-commits" },
 };
 
 export default function TensorCommitsPage() {

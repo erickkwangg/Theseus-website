@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "runtime config",
     "AIVM API",
   ],
+  alternates: { canonical: "/docs/reference" },
 };
 
 const extrinsics = [
