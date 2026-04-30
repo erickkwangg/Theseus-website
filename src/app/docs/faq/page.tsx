@@ -114,7 +114,7 @@ export default function FAQPage() {
         )}
       />
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <HelpCircle className="h-3 w-3" />
           Reference
         </div>
@@ -136,7 +136,7 @@ export default function FAQPage() {
                   {item.link && (
                     <Link
                       href={item.link.href}
-                      className="inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200 mt-3 no-underline"
+                      className="inline-flex items-center gap-1 text-sm text-indigo-700 dark:text-indigo-300 hover:text-indigo-200 mt-3 no-underline"
                     >
                       {item.link.label}
                       <ArrowRight className="h-3 w-3" />

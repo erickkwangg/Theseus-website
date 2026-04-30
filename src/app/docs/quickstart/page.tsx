@@ -54,7 +54,7 @@ export default function QuickStartPage() {
       />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <Zap className="h-3 w-3" />
           Getting Started
         </div>
@@ -69,7 +69,7 @@ export default function QuickStartPage() {
       <div className="prose prose-invert max-w-none">
         {/* Access gate */}
         <div className="docs-card border-indigo-500/30 bg-indigo-500/5 mb-10 flex flex-col md:flex-row items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
+          <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shrink-0">
             <Lock className="h-5 w-5" />
           </div>
           <div className="flex-1">
@@ -124,7 +124,7 @@ export default function QuickStartPage() {
         {/* Installation Steps */}
         <section className="mb-12">
           <h2 id="installation" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Terminal className="h-5 w-5" />
             </span>
             Installation
@@ -174,7 +174,7 @@ cargo run --bin theseus-node`}</CodeBlock>
         {/* Deploy Agent */}
         <section className="mb-12">
           <h2 id="deploy-agent" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Bot className="h-5 w-5" />
             </span>
             Deploy Your First Agent
@@ -215,48 +215,10 @@ cargo run --bin theseus-cli deploy-agent examples/basic-agent.ship`}</CodeBlock>
           </div>
         </section>
 
-        {/* Register Model */}
-        <section className="mb-12">
-          <h2 id="register-model" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
-              <Layers className="h-5 w-5" />
-            </span>
-            Model Registration (API-Level)
-          </h2>
-          
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Model registration currently appears in the codebase as runtime API flows (AIVM + store),
-            not as a stable, documented one-line CLI command.
-          </p>
-
-          <CodeBlock language="text" filename="flow">{`Model weights + metadata
-        ↓
-Store in TheseusStore
-        ↓
-Reference model root from agent/AIVM execution`}</CodeBlock>
-
-          <div className="overflow-x-auto mt-6">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>Field</th>
-                  <th>Example</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td className="font-medium text-slate-900 dark:text-white">Name/version</td><td>Llama 3.1 8B</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white">Architecture</td><td>LLM, diffusion, etc.</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white">Tensor Commit</td><td>Weight fingerprint for verification</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white">Root reference</td><td>Used by agents during inference calls</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         {/* Workflow */}
         <section className="mb-12">
           <h2 id="workflow" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-700 dark:text-yellow-400">
               <GitBranch className="h-5 w-5" />
             </span>
             Development Workflow
@@ -291,18 +253,18 @@ make test-ship`}</CodeBlock>
           <h2 id="next-steps" className="text-2xl font-medium mb-6">Next Steps</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { href: "/docs/agents", title: "Build Agents", desc: "Create sophisticated autonomous agents", icon: Bot },
+              { href: "/docs/agents", title: "Build Agents", desc: "Build autonomous agents end to end", icon: Bot },
               { href: "/docs/ship", title: "SHIP Language", desc: "Master the DSL for AI agents", icon: Code2 },
               { href: "/docs/aivm", title: "AIVM Deep Dive", desc: "Understand the VM internals", icon: Layers },
               { href: "/docs/tensor-commits", title: "Tensor Commits", desc: "Learn about verifiable ML", icon: GitBranch },
             ].map((item) => (
               <Link key={item.href} href={item.href} className="group no-underline">
                 <div className="docs-card h-full flex items-start gap-4">
-                  <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors shrink-0">
+                  <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 group-hover:bg-indigo-500/20 transition-colors shrink-0">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-medium mb-1 group-hover:text-indigo-300 transition-colors">{item.title}</h3>
+                    <h3 className="font-medium mb-1 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">{item.title}</h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </div>
                 </div>
@@ -315,11 +277,11 @@ make test-ship`}</CodeBlock>
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8">
           <p className="text-gray-600 dark:text-gray-400">
             Need help? Email{" "}
-            <a href={`mailto:${EXTERNAL_LINKS.contactEmail}`} className="text-indigo-300 hover:underline">
+            <a href={`mailto:${EXTERNAL_LINKS.contactEmail}`} className="text-indigo-700 dark:text-indigo-300 hover:underline">
               {EXTERNAL_LINKS.contactEmail}
             </a>
             , or read the{" "}
-            <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer" className="text-indigo-300 hover:underline">
+            <a href={EXTERNAL_LINKS.whitepaper} target="_blank" rel="noopener noreferrer" className="text-indigo-700 dark:text-indigo-300 hover:underline">
               whitepaper
             </a>
             . Once you have preview access, the invite includes upstream command references and the docs/getting-started.md file.

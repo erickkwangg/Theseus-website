@@ -60,11 +60,17 @@ const sections = [
     ],
   },
   {
+    title: "Reference",
+    items: [
+      { href: "/docs/reference", label: "Runtime reference", icon: BookOpen },
+      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
+      { href: "/docs/glossary", label: "Glossary", icon: List },
+    ],
+  },
+  {
     title: "Network",
     items: [
-      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
-      { href: "/docs/glossary", label: "Glossary", icon: List },
     ],
   },
 ];
@@ -132,6 +138,15 @@ export default function DocsSidebar() {
             >
               <ExternalLink className="h-4 w-4 text-slate-400 dark:text-slate-500" />
               Whitepaper
+            </a>
+            <a
+              href={EXTERNAL_LINKS.arxivPaper}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 py-2 px-3 text-sm text-slate-700 hover:text-indigo-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-indigo-300 dark:hover:bg-slate-900/60 rounded-lg transition-all"
+            >
+              <ExternalLink className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+              arXiv paper
             </a>
           </div>
         </div>

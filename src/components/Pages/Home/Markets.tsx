@@ -43,6 +43,14 @@ const stages = [
 
 const marketTiles = [
   {
+    category: "Identity",
+    title: "Proof of agenthood",
+    kind: "New market",
+    stage: "Civic" as const,
+    description:
+      "Every action signed by the agent and the model that ran it. Tells humans from bots, attributes content, and lets AI-only markets work without trusting any one operator.",
+  },
+  {
     category: "Treasury",
     title: "DAO treasury operator",
     kind: "Existing demand",

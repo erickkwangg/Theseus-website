@@ -20,7 +20,7 @@ export default function ExamplesPage() {
       <DocsPageJsonLd title="Examples" description="Full SHIP examples and ecosystem walkthroughs for building autonomous agents on Theseus." slug="examples" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <Puzzle className="h-3 w-3" />
           Development
         </div>
@@ -91,7 +91,7 @@ node call_contract() {
     10000000000n           // gas budget
   );
 }`}</CodeBlock>
-          <p className="text-gray-500 text-sm mt-3">
+          <p className="text-slate-600 dark:text-gray-500 text-sm mt-3">
             <strong className="text-slate-900 dark:text-white">What to notice:</strong> the agent and the contract are
             separate on-chain entities. The agent does the reasoning; the contract enforces the rules
             for accepting markets. Either side can re-invoke the other in subsequent blocks.
@@ -101,14 +101,14 @@ node call_contract() {
         {/* Registration patterns */}
         <section className="mb-12">
           <h2 id="registration" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Bot className="h-5 w-5" />
             </span>
             Registration patterns
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             The same SHIP code can be deployed in three modes by changing the registration fields.
-            See <Link href="/docs/agents" className="text-indigo-300 hover:underline no-underline">Agents &amp; Models</Link> for the full field list.
+            See <Link href="/docs/agents" className="text-indigo-700 dark:text-indigo-300 hover:underline no-underline">Agents &amp; Models</Link> for the full field list.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4">
@@ -117,7 +117,7 @@ node call_contract() {
               <CodeBlock language="text" filename="managed">{`autonomy_flag = 0
 controller_key = 0x1234...
 resource_quota = 1000000`}</CodeBlock>
-              <p className="text-gray-500 text-xs mt-2">
+              <p className="text-slate-600 dark:text-gray-500 text-xs mt-2">
                 Operates independently but the controller key can pause or upgrade.
               </p>
             </div>
@@ -126,7 +126,7 @@ resource_quota = 1000000`}</CodeBlock>
               <CodeBlock language="text" filename="sovereign">{`autonomy_flag = 1
 controller_key = None
 stake = 10000 THE`}</CodeBlock>
-              <p className="text-gray-500 text-xs mt-2">
+              <p className="text-slate-600 dark:text-gray-500 text-xs mt-2">
                 No human override. Stake is slashable on dishonest behavior.
               </p>
             </div>
@@ -135,7 +135,7 @@ stake = 10000 THE`}</CodeBlock>
               <CodeBlock language="text" filename="civic">{`autonomy_flag = 1
 permissions = { public: true }
 revenue_destination = dao_address`}</CodeBlock>
-              <p className="text-gray-500 text-xs mt-2">
+              <p className="text-slate-600 dark:text-gray-500 text-xs mt-2">
                 Sovereign in execution; revenue accrues to a public destination.
               </p>
             </div>
@@ -145,7 +145,7 @@ revenue_destination = dao_address`}</CodeBlock>
         {/* AIVM-level snippets */}
         <section className="mb-12">
           <h2 id="aivm-level" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <Zap className="h-5 w-5" />
             </span>
             AIVM-level patterns
@@ -176,18 +176,18 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
             preview access.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="docs-card border-indigo-900/50">
+            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
               <div className="flex items-center gap-2 mb-2">
-                <Lock className="h-4 w-4 text-slate-500" />
+                <Lock className="h-4 w-4 text-slate-600 dark:text-slate-400" />
                 <h3 className="text-lg font-medium">proof-of-lobster</h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Persistent agent identity, scheduled execution, and social interaction flows. Useful pattern for any agent that needs to run on a heartbeat and post results.
               </p>
             </div>
-            <div className="docs-card border-indigo-900/50">
+            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
               <div className="flex items-center gap-2 mb-2">
-                <Lock className="h-4 w-4 text-slate-500" />
+                <Lock className="h-4 w-4 text-slate-600 dark:text-slate-400" />
                 <h3 className="text-lg font-medium">the-prediction-market</h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -216,14 +216,14 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4 mt-12">
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← SHIP Language</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← SHIP Language</h3>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full text-right">
-              <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Agents &amp; Models →</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Agents &amp; Models →</h3>
             </div>
           </Link>
         </div>

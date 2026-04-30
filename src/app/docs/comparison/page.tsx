@@ -1,9 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, GitCompare, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowRight, GitCompare, Lightbulb } from "lucide-react";
 import Callout from "@/components/docs/Callout";
-import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -25,7 +24,7 @@ export default function ComparisonPage() {
       />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-400 text-xs mb-4">
           <GitCompare className="h-3 w-3" />
           Deep Dive
         </div>
@@ -46,7 +45,7 @@ export default function ComparisonPage() {
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-            Every Ethereum smart contract — no matter how complex — needs an
+            Every Ethereum smart contract, no matter how complex, needs an
             externally owned account (EOA) to call it. The contract holds logic
             and state, but it cannot start work on its own. Services like
             Chainlink Keepers are off-chain bots with private keys that trigger
@@ -62,7 +61,7 @@ export default function ComparisonPage() {
           <Callout type="tip" title="The shape of the difference">
             Smart contract: a vending machine. Holds inventory and logic, but
             someone has to put a coin in. Theseus agent: an autonomous shopkeeper.
-            Checks inventory, restocks, sets prices, transacts with suppliers —
+            Checks inventory, restocks, sets prices, transacts with suppliers,
             all without anyone walking up to it.
           </Callout>
         </section>
@@ -79,14 +78,14 @@ export default function ComparisonPage() {
                 <tr>
                   <th>Aspect</th>
                   <th className="text-gray-600 dark:text-gray-400">Ethereum contracts</th>
-                  <th className="text-indigo-300">Theseus agents</th>
+                  <th className="text-indigo-700 dark:text-indigo-300">Theseus agents</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="bg-indigo-950/10">
                   <td className="font-medium text-slate-900 dark:text-white">Key custody</td>
                   <td>Held by a human-controlled EOA</td>
-                  <td className="text-indigo-300">Held by the agent itself</td>
+                  <td className="text-indigo-700 dark:text-indigo-300">Held by the agent itself</td>
                 </tr>
                 <tr>
                   <td className="font-medium text-slate-900 dark:text-white">Execution</td>
@@ -136,7 +135,7 @@ export default function ComparisonPage() {
               className="w-full h-auto rounded"
             />
           </div>
-          <p className="text-sm text-gray-500 mt-4">
+          <p className="text-sm text-slate-600 dark:text-gray-500 mt-4">
             <strong>Top:</strong> Ethereum requires a developer with a private key
             to trigger every action.
             <strong className="ml-2">Bottom:</strong> Theseus agents initiate
@@ -161,8 +160,8 @@ export default function ComparisonPage() {
                 <li className="flex items-start gap-2"><span className="text-gray-600">5.</span> An EOA must trigger anything</li>
               </ol>
             </div>
-            <div className="docs-card border-indigo-900/50">
-              <h4 className="font-medium mb-3 text-indigo-300">Theseus agent</h4>
+            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
+              <h4 className="font-medium mb-3 text-indigo-700 dark:text-indigo-300">Theseus agent</h4>
               <ol className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-2"><span className="text-indigo-400">1.</span> Write the agent (Python, Rust, or SHIP)</li>
                 <li className="flex items-start gap-2"><span className="text-indigo-400">2.</span> Declare model bindings, policies, triggers</li>
@@ -180,7 +179,7 @@ export default function ComparisonPage() {
             id="design-space"
             className="text-2xl font-medium mb-4 flex items-center gap-3"
           >
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <Lightbulb className="h-5 w-5" />
             </span>
             What this opens up
@@ -201,8 +200,8 @@ export default function ComparisonPage() {
                 <li>• Deterministic logic</li>
               </ul>
             </div>
-            <div className="docs-card border-green-900/50">
-              <h4 className="font-medium mb-3 text-green-400">Theseus adds</h4>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h4 className="font-medium mb-3 text-green-700 dark:text-green-400">Theseus adds</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>• Subjective resolution (prediction markets, disputes)</li>
                 <li>• Governance with reasoning, not just votes</li>
@@ -212,74 +211,20 @@ export default function ComparisonPage() {
             </div>
           </div>
 
-          {/* Evolution Timeline */}
-          <div className="docs-card border-indigo-900/50 mb-6">
-            <h3 className="text-lg font-medium mb-4 text-indigo-300">A short lineage</h3>
-            <div className="space-y-4">
-              {[
-                { symbol: "₿", color: "text-yellow-400", name: "Bitcoin (2009)", desc: "Public ownership. Removed treasurers from \"who owns what.\"" },
-                { symbol: "Ξ", color: "text-indigo-300", name: "Ethereum (2014)", desc: "Public programs. Removed judges from \"what happens next.\"" },
-                { symbol: "Θ", color: "text-green-400", name: "Theseus (Now)", desc: "Public decisions. Removes hosts from \"what will an intelligent entity decide?\"" },
-              ].map((item) => (
-                <div key={item.name} className="flex items-start gap-3">
-                  <span className={`${item.color} font-bold text-xl w-6`}>{item.symbol}</span>
-                  <div>
-                    <h4 className="text-slate-900 dark:text-white font-medium text-sm">{item.name}</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Market categories — aligned with homepage Civic / Managed / Sovereign */}
-          <div className="docs-card border-green-900/50">
-            <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-green-400">
-              <TrendingUp className="h-5 w-5" />
-              Three categories of agent
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-              Theseus supports a spectrum from human-controlled to fully self-directed.
-              The three categories on the homepage map to distinct application classes:
-            </p>
-            <div className="space-y-3 mb-6">
-              {[
-                {
-                  title: "Civic agents",
-                  desc: "Public-good agents that read, reason, and sign their work. They don't hold funds — their job is to make outcomes cheap to verify (prediction-market resolvers, dispute arbitration, content provenance).",
-                },
-                {
-                  title: "Managed agents",
-                  desc: "User-controlled agents that operate under signed policy. Humans, DAOs, or funds can pause, upgrade, or change strategy without losing the audit trail (treasuries, keepers, fund managers).",
-                },
-                {
-                  title: "Sovereign agents",
-                  desc: "Self-directed agents that own their policy, balance, and history. They can outlast their founders, pay for their own inference, and earn fees directly. The agent becomes the counterparty.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="p-3 bg-green-950/20 border border-green-900/30 rounded-lg">
-                  <span className="font-medium text-slate-900 dark:text-white text-sm">{item.title}</span>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/docs/design-space"
-                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
-              >
-                Full design space
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a
-                href={EXTERNAL_LINKS.substackEvolution}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-slate-900 dark:hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
-              >
-                Read the Theseus thesis
-              </a>
-            </div>
+          <div className="flex flex-wrap gap-3 mt-6">
+            <Link
+              href="/docs/design-space"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
+            >
+              Full design space
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/docs/agentic-smart-contracts"
+              className="inline-flex items-center gap-2 bg-transparent border border-indigo-600 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
+            >
+              The thesis
+            </Link>
           </div>
         </section>
       </div>

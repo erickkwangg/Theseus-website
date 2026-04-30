@@ -115,7 +115,7 @@ export default function GlossaryPage() {
       />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <BookOpen className="h-3 w-3" />
           Reference
         </div>
@@ -128,7 +128,7 @@ export default function GlossaryPage() {
       </div>
       
       <div className="prose prose-invert max-w-none">
-        <p className="text-sm text-gray-500 mb-6">{glossaryTerms.length} terms defined.</p>
+        <p className="text-sm text-slate-600 dark:text-gray-500 mb-6">{glossaryTerms.length} terms defined.</p>
 
         {/* Glossary Terms */}
         <div className="space-y-4">
@@ -142,7 +142,7 @@ export default function GlossaryPage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h2 className="text-lg font-medium mb-2 text-slate-900 dark:text-white group-hover:text-indigo-300 transition-colors">
+                    <h2 className="text-lg font-medium mb-2 text-slate-900 dark:text-white group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
                       {item.term}
                     </h2>
                     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
@@ -152,7 +152,7 @@ export default function GlossaryPage() {
                   {item.link && (
                     <Link 
                       href={item.link}
-                      className="text-sm text-indigo-300 hover:text-indigo-200 transition-colors shrink-0 no-underline flex items-center gap-1"
+                      className="text-sm text-indigo-700 dark:text-indigo-300 hover:text-indigo-200 transition-colors shrink-0 no-underline flex items-center gap-1"
                     >
                       Learn more <ArrowRight className="h-3 w-3" />
                     </Link>

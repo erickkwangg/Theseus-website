@@ -28,7 +28,7 @@ export default function AgenticSmartContractsPage() {
       <DocsPageJsonLd title="Agentic Smart Contracts" description="Why agents are the next evolution of smart contracts: a thesis on stateful, sovereign on-chain AI as a first-class primitive." slug="agentic-smart-contracts" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-400 text-xs mb-4">
           <Sparkles className="h-3 w-3" />
           Thesis
         </div>
@@ -59,7 +59,7 @@ export default function AgenticSmartContractsPage() {
         {/* Historical Lineage */}
         <section className="mb-12">
           <h2 id="lineage" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Layers className="h-5 w-5" />
             </span>
             A short history of on-chain primitives
@@ -71,24 +71,24 @@ export default function AgenticSmartContractsPage() {
             contracts are the next step in that lineage.
           </p>
 
-          <div className="docs-card border-indigo-900/50 mb-6">
+          <div className="docs-card border-indigo-200 dark:border-indigo-900/50 mb-6">
             <div className="space-y-5">
               {[
                 {
                   symbol: "₿",
-                  color: "text-yellow-400",
+                  color: "text-yellow-700 dark:text-yellow-400",
                   name: "Bitcoin (2009)",
                   desc: "Stateful, on-chain executable, non-Turing-complete code. Solved consensus over money among strangers and removed treasurers from ownership.",
                 },
                 {
                   symbol: "Ξ",
-                  color: "text-indigo-300",
+                  color: "text-indigo-700 dark:text-indigo-300",
                   name: "Ethereum (2014)",
                   desc: "Stateful, Turing-complete program execution replicated across every node. Removed judges from program behavior. Practical only for narrow, deterministic logic.",
                 },
                 {
                   symbol: "Θ",
-                  color: "text-green-400",
+                  color: "text-green-700 dark:text-green-400",
                   name: "Theseus (Now)",
                   desc: "Stateful, sovereign agents whose reasoning is publicly verifiable via Tensor Commits. Removes hosts from the question of what an intelligent entity will decide.",
                 },
@@ -116,7 +116,7 @@ export default function AgenticSmartContractsPage() {
         {/* What Smart Contracts Do, What Agents Do */}
         <section className="mb-12">
           <h2 id="contracts-vs-agents" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Bot className="h-5 w-5" />
             </span>
             Smart contracts and AI agents are complementary
@@ -125,8 +125,8 @@ export default function AgenticSmartContractsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             A smart contract is, in the original definition, a digital contract stored on a
             blockchain that automatically executes when predetermined terms are met. It applies
-            narrow, predefined rules deterministically. An AI agent does the opposite: it ingests
-            varied inputs through a foundation model and produces sophisticated, non-deterministic
+            narrow, predefined rules deterministically. An AI agent does the opposite: it takes
+            varied inputs through a foundation model and produces complex, non-deterministic
             outputs informed by context and external data.
           </p>
 
@@ -140,12 +140,12 @@ export default function AgenticSmartContractsPage() {
                 <li>Narrow, deterministic logic</li>
               </ul>
             </div>
-            <div className="docs-card border-indigo-900/50">
-              <h4 className="font-medium mb-3 text-indigo-300">AI agents have</h4>
+            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
+              <h4 className="font-medium mb-3 text-indigo-700 dark:text-indigo-300">AI agents have</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>Reasoning over open-ended inputs</li>
                 <li>Access to real-world context</li>
-                <li>Sophisticated, non-deterministic outputs</li>
+                <li>Complex, non-deterministic outputs</li>
                 <li>No native statefulness or sovereignty</li>
               </ul>
             </div>
@@ -162,7 +162,7 @@ export default function AgenticSmartContractsPage() {
         {/* Prior runtime attempts */}
         <section className="mb-12">
           <h2 id="prior-attempts" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <GitBranch className="h-5 w-5" />
             </span>
             Why prior runtime attempts did not unlock the design space
@@ -171,8 +171,7 @@ export default function AgenticSmartContractsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             Over the last decade, several runtimes have promised to extend what smart contracts can
             do. SVM, MoveVM, eWASM, and parallel execution layers like Polkadot all delivered real
-            engineering improvements. None of them, however, broke out of the same design space the
-            EVM defined.
+            engineering improvements. None broke out of the design space the EVM defined.
           </p>
 
           <div className="docs-card mb-6">
@@ -185,9 +184,9 @@ export default function AgenticSmartContractsPage() {
             </p>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Vitalik&apos;s original whitepaper described general-purpose, trust-minimized
-              programs powerful enough to host DAOs and programmable finance. Full state
+              programs general enough to host DAOs and programmable finance. Full state
               replication makes that vision practically out of reach for most non-trivial
-              applications. Agentic smart contracts unlock it without requiring Ethereum to hard
+              applications. Agentic smart contracts open it up without requiring Ethereum to hard
               fork.
             </p>
           </div>
@@ -196,7 +195,7 @@ export default function AgenticSmartContractsPage() {
         {/* The architectural shift */}
         <section className="mb-12">
           <h2 id="architecture" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <Zap className="h-5 w-5" />
             </span>
             The architectural shift: verify, do not replicate
@@ -217,8 +216,8 @@ export default function AgenticSmartContractsPage() {
                 <li>3. Cost scales with what the heaviest node can run</li>
               </ol>
             </div>
-            <div className="docs-card border-green-900/50">
-              <h4 className="font-medium mb-3 text-green-400">Theseus consensus</h4>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h4 className="font-medium mb-3 text-green-700 dark:text-green-400">Theseus consensus</h4>
               <ol className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>1. One node runs the inference</li>
                 <li>2. A Tensor Commit proves it ran honestly</li>
@@ -237,7 +236,7 @@ export default function AgenticSmartContractsPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/docs/tensor-commits"
-              className="inline-flex items-center gap-2 bg-transparent border border-indigo-600 text-indigo-300 hover:bg-indigo-600 hover:text-slate-900 dark:hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
+              className="inline-flex items-center gap-2 bg-transparent border border-indigo-600 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:text-slate-900 dark:hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
             >
               How Tensor Commits work
               <ArrowRight className="h-4 w-4" />
@@ -272,8 +271,8 @@ export default function AgenticSmartContractsPage() {
                 <li>Updating logic means deploying a new contract or governance upgrade</li>
               </ul>
             </div>
-            <div className="docs-card border-indigo-900/50">
-              <h4 className="font-medium mb-3 text-indigo-300">Lending as an agentic smart contract</h4>
+            <div className="docs-card border-indigo-200 dark:border-indigo-900/50">
+              <h4 className="font-medium mb-3 text-indigo-700 dark:text-indigo-300">Lending as an agentic smart contract</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>The market itself is a first-class on-chain agent</li>
                 <li>Pricing comes from the agent&apos;s own inference</li>
@@ -294,7 +293,7 @@ export default function AgenticSmartContractsPage() {
         {/* Market */}
         <section className="mb-12">
           <h2 id="market" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <TrendingUp className="h-5 w-5" />
             </span>
             Why this is a separate market, not an upgrade
@@ -314,16 +313,16 @@ export default function AgenticSmartContractsPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <div className="docs-card border-green-900/50">
-              <h4 className="font-medium mb-2 text-green-400">Subjective prediction markets</h4>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h4 className="font-medium mb-2 text-green-700 dark:text-green-400">Subjective prediction markets</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Outcomes that depend on judgment, not lookups. &quot;Was the iPhone Air launch a
                 flop?&quot; can be adjudicated by a publicly verifiable agent rather than a human
                 committee or a centralized oracle.
               </p>
             </div>
-            <div className="docs-card border-green-900/50">
-              <h4 className="font-medium mb-2 text-green-400">AI Persons</h4>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h4 className="font-medium mb-2 text-green-700 dark:text-green-400">AI Persons</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Fully autonomous on-chain entities that own assets, sign their own actions, and
                 participate in the economy as first-class agents rather than as proxies for a
@@ -354,16 +353,16 @@ export default function AgenticSmartContractsPage() {
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/comparison" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Previous</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
                 ← Theseus vs. Ethereum
               </h3>
             </div>
           </Link>
           <Link href="/docs/design-space" className="group no-underline">
             <div className="docs-card h-full text-right">
-              <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
                 Design Space →
               </h3>
             </div>

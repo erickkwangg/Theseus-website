@@ -58,16 +58,16 @@ export default function DocsHomePage() {
         {/* Gradient glow */}
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/25 via-transparent to-transparent -z-10 rounded-2xl" />
         
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-sm mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-sm mb-6">
           Developer Documentation
         </div>
         
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-6 tracking-tight">
           Write an agent. Sign every step.
-          <span className="block text-indigo-300">Settle on-chain.</span>
+          <span className="block text-indigo-700 dark:text-indigo-300">Settle on-chain.</span>
         </h1>
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Reference, walkthroughs, and SHIP — the language for agents that hold their own keys.
+          Reference, walkthroughs, and SHIP, the language for agents that hold their own keys.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
@@ -89,10 +89,10 @@ export default function DocsHomePage() {
 
       {/* See it run */}
       <div className="mb-12">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <div className="h-px flex-1 bg-gray-800" />
+        <h2 className="text-xs font-semibold text-slate-600 dark:text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
           See it run
-          <div className="h-px flex-1 bg-gray-800" />
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
         </h2>
         <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-900 dark:border-slate-700/60">
           <iframe
@@ -102,7 +102,7 @@ export default function DocsHomePage() {
             className="absolute inset-0 h-full w-full"
           />
         </div>
-        <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400 dark:text-slate-400">
           Non-crypto walkthrough coming soon
         </p>
       </div>
@@ -110,51 +110,51 @@ export default function DocsHomePage() {
       {/* Featured Cards - Top 3 */}
       <div className="grid md:grid-cols-3 gap-4 mb-8">
         <Link href="/docs/introduction" className="group">
-          <div className="relative h-full bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
+          <div className="relative h-full bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
+              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
                 <Rocket className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-medium group-hover:text-indigo-300 transition-colors">Getting Started</h3>
+              <h3 className="text-lg font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Getting Started</h3>
             </div>
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
               Learn Theseus fundamentals and deploy your first agent.
             </p>
-            <span className="text-sm text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+            <span className="text-sm text-indigo-700 dark:text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
               Start here <ArrowRight className="h-3 w-3" />
             </span>
           </div>
         </Link>
 
         <Link href="/docs/ship" className="group">
-          <div className="relative h-full bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
+          <div className="relative h-full bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
+              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
                 <Code2 className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-medium group-hover:text-indigo-300 transition-colors">SHIP Language</h3>
+              <h3 className="text-lg font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">SHIP Language</h3>
             </div>
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
               Build agent workflows using SHIP, the domain-specific language for Theseus.
             </p>
-            <span className="text-sm text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+            <span className="text-sm text-indigo-700 dark:text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
               Start building <ArrowRight className="h-3 w-3" />
             </span>
           </div>
         </Link>
 
         <Link href="/docs/architecture" className="group">
-          <div className="relative h-full bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
+          <div className="relative h-full bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
+              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
                 <Layers className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-medium group-hover:text-indigo-300 transition-colors">Architecture</h3>
+              <h3 className="text-lg font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Architecture</h3>
             </div>
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
               Understand the core execution and verification pipeline end-to-end.
             </p>
-            <span className="text-sm text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+            <span className="text-sm text-indigo-700 dark:text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
               Explore <ArrowRight className="h-3 w-3" />
             </span>
           </div>
@@ -163,48 +163,48 @@ export default function DocsHomePage() {
 
       {/* Core Concepts */}
       <div className="mb-12">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <div className="h-px flex-1 bg-gray-800" />
+        <h2 className="text-xs font-semibold text-slate-600 dark:text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
           Core Concepts
-          <div className="h-px flex-1 bg-gray-800" />
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <Link href="/docs/aivm" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <Cpu className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">AIVM</span>
-                <p className="text-xs text-gray-500">Virtual machine</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">AIVM</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">Virtual machine</p>
               </div>
             </div>
           </Link>
 
           <Link href="/docs/tensor-commits" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <GitBranch className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <GitBranch className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">Tensor Commits</span>
-                <p className="text-xs text-gray-500">Verifiable inference</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Tensor Commits</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">Verifiable inference</p>
               </div>
             </div>
           </Link>
 
           <Link href="/docs/agents" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <Bot className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">Agents</span>
-                <p className="text-xs text-gray-500">Registration & lifecycle</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Agents</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">Registration & lifecycle</p>
               </div>
             </div>
           </Link>
 
           <Link href="/docs/architecture" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <Layers className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <Layers className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">Architecture</span>
-                <p className="text-xs text-gray-500">System overview</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Architecture</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">System overview</p>
               </div>
             </div>
           </Link>
@@ -213,38 +213,38 @@ export default function DocsHomePage() {
 
       {/* Development */}
       <div className="mb-12">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <div className="h-px flex-1 bg-gray-800" />
+        <h2 className="text-xs font-semibold text-slate-600 dark:text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
           Development
-          <div className="h-px flex-1 bg-gray-800" />
+          <div className="h-px flex-1 bg-slate-200 dark:bg-gray-800" />
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <Link href="/docs/ship" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <Code2 className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">SHIP Language</span>
-                <p className="text-xs text-gray-500">DSL for agents</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">SHIP Language</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">DSL for agents</p>
               </div>
             </div>
           </Link>
 
           <Link href="/docs/examples" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <Puzzle className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <Puzzle className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">Examples</span>
-                <p className="text-xs text-gray-500">Code samples</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Examples</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">Code samples</p>
               </div>
             </div>
           </Link>
 
           <Link href="/docs/comparison" className="group">
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
-              <GitCompare className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
+              <GitCompare className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">Theseus vs Ethereum</span>
-                <p className="text-xs text-gray-500">Architecture and trust model comparison</p>
+                <span className="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Theseus vs Ethereum</span>
+                <p className="text-xs text-slate-600 dark:text-gray-500">Architecture and trust model comparison</p>
               </div>
             </div>
           </Link>
@@ -253,16 +253,16 @@ export default function DocsHomePage() {
 
       {/* Resources */}
       <div className="border-t border-slate-200 dark:border-gray-800 pt-8">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
+        <h2 className="text-xs font-semibold text-slate-600 dark:text-gray-500 uppercase tracking-wider mb-4">
           Resources
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
           <Link
             href="/launch"
             className="flex items-center gap-3 p-4 border border-indigo-500/30 bg-indigo-500/5 rounded-lg hover:border-indigo-400/60 hover:bg-indigo-500/10 transition-all group"
           >
-            <Rocket className="h-5 w-5 text-indigo-300 group-hover:text-white transition-colors" />
-            <span className="text-sm text-indigo-300 group-hover:text-white transition-colors font-medium">Launch on Theseus</span>
+            <Rocket className="h-5 w-5 text-indigo-700 dark:text-indigo-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+            <span className="text-sm text-indigo-700 dark:text-indigo-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors font-medium">Launch on Theseus</span>
             <ArrowRight className="h-3 w-3 text-indigo-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
           <a 
@@ -271,27 +271,37 @@ export default function DocsHomePage() {
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100/80 dark:bg-gray-900/50 transition-all group"
           >
-            <FileText className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
-            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors">Whitepaper</span>
-            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
+            <FileText className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Whitepaper</span>
+            <ExternalLink className="h-3 w-3 text-slate-600 dark:text-gray-600 ml-auto" />
           </a>
           <Link 
             href="/docs/glossary"
             className="flex items-center gap-3 p-4 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100/80 dark:bg-gray-900/50 transition-all group"
           >
-            <BookOpen className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
-            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors">Glossary</span>
-            <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+            <BookOpen className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Glossary</span>
+            <ArrowRight className="h-3 w-3 text-slate-600 dark:text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
-          <a 
-            href={EXTERNAL_LINKS.substack}
-            target="_blank" 
+          <a
+            href={EXTERNAL_LINKS.arxivPaper}
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100/80 dark:bg-gray-900/50 transition-all group"
           >
-            <FileText className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
-            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors">Blog</span>
-            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
+            <FileText className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">arXiv paper</span>
+            <ExternalLink className="h-3 w-3 text-slate-600 dark:text-gray-600 ml-auto" />
+          </a>
+          <a
+            href={EXTERNAL_LINKS.substack}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100/80 dark:bg-gray-900/50 transition-all group"
+          >
+            <FileText className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+            <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Blog</span>
+            <ExternalLink className="h-3 w-3 text-slate-600 dark:text-gray-600 ml-auto" />
           </a>
         </div>
       </div>

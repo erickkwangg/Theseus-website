@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Cpu, GitBranch, Coins, Users, Shield } from "lucide-react";
 import Callout from "@/components/docs/Callout";
+import AgentSpectrum from "@/components/docs/AgentSpectrum";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -29,7 +30,7 @@ export default function IntroductionPage() {
       />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           Getting Started
         </div>
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
@@ -37,7 +38,7 @@ export default function IntroductionPage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           An open runtime where AI agents hold their own keys, balance, and state.
-          <span className="block text-base text-slate-500 mt-2">
+          <span className="block text-base text-slate-600 dark:text-slate-400 mt-2">
             Theseus is a Layer-1 chain. AI execution and verification are the primary developer surface.
           </span>
         </p>
@@ -58,7 +59,7 @@ export default function IntroductionPage() {
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
             On Theseus, the agent holds those things directly. Operators run its code
             but can&apos;t modify its keys, balance, or state. The runtime is what
-            makes that stick — you trust it, not whoever happens to be running it.
+            makes that stick. You trust it, not whoever happens to be running it.
           </p>
         </section>
 
@@ -77,12 +78,12 @@ export default function IntroductionPage() {
           <div className="grid gap-4">
             <div className="docs-card group">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
+                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shrink-0">
                   <Cpu className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-2 group-hover:text-indigo-300 transition-colors">
-                    AIVM — the runtime
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">
+                    AIVM: the runtime
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     A tensor-native VM where models and agents register, autonomy
@@ -91,7 +92,7 @@ export default function IntroductionPage() {
                   </p>
                   <Link
                     href="/docs/aivm"
-                    className="inline-flex items-center gap-1 text-sm text-indigo-300 mt-3 no-underline hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-indigo-700 dark:text-indigo-300 mt-3 no-underline hover:underline"
                   >
                     Read about AIVM <ArrowRight className="h-3 w-3" />
                   </Link>
@@ -101,12 +102,12 @@ export default function IntroductionPage() {
 
             <div className="docs-card group">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+                <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400 shrink-0">
                   <GitBranch className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-2 group-hover:text-purple-400 transition-colors">
-                    Tensor Commits — the proof
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-purple-700 dark:text-purple-400 transition-colors">
+                    Tensor Commits: the proof
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     Succinct proofs of inference, with under 1% generation overhead.
@@ -115,7 +116,7 @@ export default function IntroductionPage() {
                   </p>
                   <Link
                     href="/docs/tensor-commits"
-                    className="inline-flex items-center gap-1 text-sm text-purple-400 mt-3 no-underline hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-purple-700 dark:text-purple-400 mt-3 no-underline hover:underline"
                   >
                     Read about Tensor Commits <ArrowRight className="h-3 w-3" />
                   </Link>
@@ -125,12 +126,12 @@ export default function IntroductionPage() {
 
             <div className="docs-card group">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-yellow-500/10 text-yellow-400 shrink-0">
+                <div className="p-2.5 rounded-lg bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 shrink-0">
                   <Coins className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-2 group-hover:text-yellow-400 transition-colors">
-                    $THE — the asset agents hold
+                  <h3 className="text-lg font-medium mb-2 group-hover:text-yellow-700 dark:text-yellow-400 transition-colors">
+                    $THE: the asset agents hold
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     Balances live inside agent code, not in human-owned wallets.
@@ -139,7 +140,7 @@ export default function IntroductionPage() {
                   </p>
                   <Link
                     href="/docs/tokenomics"
-                    className="inline-flex items-center gap-1 text-sm text-yellow-400 mt-3 no-underline hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-yellow-700 dark:text-yellow-400 mt-3 no-underline hover:underline"
                   >
                     Read tokenomics <ArrowRight className="h-3 w-3" />
                   </Link>
@@ -155,7 +156,7 @@ export default function IntroductionPage() {
             id="agency-tiers"
             className="text-2xl font-medium mb-4 flex items-center gap-3"
           >
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <Users className="h-5 w-5" />
             </span>
             Three tiers of control
@@ -165,38 +166,7 @@ export default function IntroductionPage() {
             to fully self-directed. Different applications want different tiers.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Control</th>
-                  <th>Purpose</th>
-                  <th>Concrete example</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Managed Agent</td>
-                  <td>Human-owned key</td>
-                  <td>Runs by itself, returns value to its owner</td>
-                  <td className="text-gray-500">A trading agent that runs strategies on its own and routes profits to the owner&apos;s address. The controller key can pause it.</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Civic Agent</td>
-                  <td>Fully autonomous</td>
-                  <td>Public-good work with transparent reasoning</td>
-                  <td className="text-gray-500">A prediction-market resolver that decides outcomes via inference and posts the verifiable reasoning on-chain. See <Link href="/docs/examples#market" className="text-indigo-300 hover:underline no-underline">the-prediction-market example</Link>.</td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-slate-900 dark:text-white">Sovereign Agent</td>
-                  <td>Self-directed</td>
-                  <td>Owns its policy, balance, and history</td>
-                  <td className="text-gray-500">An agent that holds its own balance, pays for its own inference, and decides when to act based on on-chain triggers. The agent becomes the counterparty.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <AgentSpectrum />
         </section>
 
         {/* Design Principles */}
@@ -205,7 +175,7 @@ export default function IntroductionPage() {
             id="principles"
             className="text-2xl font-medium mb-4 flex items-center gap-3"
           >
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Shield className="h-5 w-5" />
             </span>
             Design principles
@@ -240,7 +210,7 @@ export default function IntroductionPage() {
                     {item.title}
                   </span>
                 </div>
-                <p className="text-gray-500 text-xs leading-relaxed pl-4">{item.desc}</p>
+                <p className="text-slate-600 dark:text-gray-500 text-xs leading-relaxed pl-4">{item.desc}</p>
               </div>
             ))}
           </div>

@@ -27,10 +27,10 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 z-50 p-3 bg-gray-900 border border-gray-700 rounded-full shadow-lg hover:bg-gray-800 hover:border-gray-600 transition-all group"
+      className="fixed bottom-8 right-8 z-50 p-3 bg-white dark:bg-gray-900 border border-slate-300 dark:border-gray-700 rounded-full shadow-lg hover:bg-slate-100 dark:hover:bg-gray-800 hover:border-slate-400 dark:hover:border-gray-600 transition-all group"
       aria-label="Back to top"
     >
-      <ArrowUp className="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" />
+      <ArrowUp className="h-5 w-5 text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
     </button>
   );
 }

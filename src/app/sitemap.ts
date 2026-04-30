@@ -27,6 +27,7 @@ const ROUTES: Route[] = [
   { path: "/docs/vs-ai-infra", priority: 0.7, changeFrequency: "monthly" },
   { path: "/docs/agentic-smart-contracts", priority: 0.7, changeFrequency: "monthly" },
   { path: "/docs/design-space", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/docs/reference", priority: 0.7, changeFrequency: "monthly" },
   { path: "/docs/tokenomics", priority: 0.7, changeFrequency: "monthly" },
   { path: "/docs/status", priority: 0.6, changeFrequency: "weekly" },
   { path: "/docs/faq", priority: 0.7, changeFrequency: "monthly" },

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Cpu, Zap, Gauge, Clock, Layers } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import PageHero from "@/components/docs/PageHero";
+import { AivmIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -18,25 +20,20 @@ export default function AIVMPage() {
   return (
     <div className="docs-content">
       <DocsPageJsonLd title="AIVM" description="Learn how the AI Virtual Machine executes tensor-native workloads with deterministic verification and proof generation." slug="aivm" />
-      {/* Page Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
-          <Cpu className="h-3 w-3" />
-          Core Concepts
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          AI Virtual Machine (AIVM)
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          The execution backbone of Theseus with tensor-native opcodes, deterministic execution, and cryptographic proof generation.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Core Concepts"
+        eyebrowIcon={Cpu}
+        title="AI Virtual Machine"
+        subtitle="A tensor-native runtime where models register, agents call models through deterministic execution paths, and every model call produces a verifiable proof."
+        accent="indigo"
+        illustration={<AivmIllustration />}
+      />
       
       <div className="prose prose-invert max-w-none">
         {/* Architecture */}
         <section className="mb-12">
           <h2 id="architecture" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Layers className="h-5 w-5" />
             </span>
             Architecture
@@ -64,7 +61,7 @@ export default function AIVMPage() {
         {/* Key Features */}
         <section className="mb-12">
           <h2 id="features" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-400">
+            <span className="p-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400">
               <Zap className="h-5 w-5" />
             </span>
             Key Features
@@ -110,7 +107,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
         {/* Performance */}
         <section className="mb-12">
           <h2 id="performance" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-400">
+            <span className="p-1.5 rounded-lg bg-yellow-500/10 text-yellow-700 dark:text-yellow-400">
               <Gauge className="h-5 w-5" />
             </span>
             Performance Metrics
@@ -135,7 +132,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
             </table>
           </div>
 
-          <p className="text-gray-500 text-sm">
+          <p className="text-slate-600 dark:text-gray-500 text-sm">
             GPT-3 (175B) forward pass on 1024 tokens takes ~40-60ms on A100, generating ~1.2M FLOPs/token.
           </p>
         </section>
@@ -143,7 +140,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
         {/* Agent Scheduling */}
         <section className="mb-12">
           <h2 id="scheduling" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Clock className="h-5 w-5" />
             </span>
             Agent Scheduling
@@ -167,7 +164,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
             ].map((item) => (
               <div key={item.name} className="docs-card text-center">
                 <div className="text-slate-900 dark:text-white font-medium text-sm">{item.name}</div>
-                <div className="text-gray-500 text-xs mt-1">{item.latency}</div>
+                <div className="text-slate-600 dark:text-gray-500 text-xs mt-1">{item.latency}</div>
               </div>
             ))}
           </div>
@@ -199,7 +196,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
                 <tr>
                   <th>Feature</th>
                   <th className="text-gray-600 dark:text-gray-400">EVM</th>
-                  <th className="text-indigo-300">AIVM</th>
+                  <th className="text-indigo-700 dark:text-indigo-300">AIVM</th>
                 </tr>
               </thead>
               <tbody>
@@ -216,15 +213,15 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/tensor-commits" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Next</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Tensor Commits →</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Next</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Tensor Commits →</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Proof generation and verification</p>
             </div>
           </Link>
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
-              <p className="text-sm text-gray-500 mb-1">Related</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
+              <p className="text-sm text-slate-600 dark:text-gray-500 mb-1">Related</p>
+              <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">SHIP Language →</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Write verifiable agent code</p>
             </div>
           </Link>

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot, Play } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
+import FlowDiagram from "@/components/docs/FlowDiagram";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -20,7 +21,7 @@ export default function SHIPPage() {
       <DocsPageJsonLd title="SHIP Language" description="Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution." slug="ship" />
       {/* Page Header */}
       <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs mb-4">
           <Code2 className="h-3 w-3" />
           Development
         </div>
@@ -68,7 +69,7 @@ export default function SHIPPage() {
             ].map((item) => (
               <div key={item.title} className="docs-card">
                 <div className="flex items-center gap-2 mb-1">
-                  <item.icon className="h-4 w-4 text-yellow-400" />
+                  <item.icon className="h-4 w-4 text-yellow-700 dark:text-yellow-400" />
                   <span className="text-slate-900 dark:text-white font-medium text-sm">{item.title}</span>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-xs">{item.desc}</p>
@@ -93,7 +94,7 @@ export default function SHIPPage() {
                 href="https://github.com/Theseuschain/proof-of-lobster"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-300 hover:underline text-sm no-underline"
+                className="text-indigo-700 dark:text-indigo-300 hover:underline text-sm no-underline"
               >
                 View repository →
               </a>
@@ -107,7 +108,7 @@ export default function SHIPPage() {
                 href="https://github.com/Theseuschain/the-prediction-market"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-300 hover:underline text-sm no-underline"
+                className="text-indigo-700 dark:text-indigo-300 hover:underline text-sm no-underline"
               >
                 View repository →
               </a>
@@ -118,7 +119,7 @@ export default function SHIPPage() {
         {/* Design Principles */}
         <section className="mb-12">
           <h2 id="principles" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <CheckCircle className="h-5 w-5" />
             </span>
             Design Principles
@@ -133,7 +134,7 @@ export default function SHIPPage() {
             ].map((item) => (
               <div key={item.title} className="docs-card">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400" />
+                  <CheckCircle className="h-4 w-4 text-green-700 dark:text-green-400" />
                   <span className="text-slate-900 dark:text-white font-medium text-sm">{item.title}</span>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{item.desc}</p>
@@ -145,32 +146,21 @@ export default function SHIPPage() {
         {/* Execution Flow */}
         <section className="mb-12">
           <h2 id="execution" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400">
               <Zap className="h-5 w-5" />
             </span>
             Execution Flow
           </h2>
           
-          <div className="space-y-3">
-            {[
-              { step: "1", title: "Inference", desc: "Agent runs model, generates output" },
-              { step: "2", title: "Compilation", desc: "NL→SHIP via fine-tuned agent, then SHIP→bounded opcodes" },
-              { step: "3", title: "Verification", desc: "Tensor Commit proves inference integrity, bytecode validated" },
-              { step: "4", title: "Execution", desc: "Program submitted to runtime" },
-            ].map((item) => (
-              <div key={item.step} className="docs-card">
-                <div className="flex items-start gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-purple-500 text-white text-xs font-bold shrink-0">
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3 className="font-medium text-sm">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FlowDiagram
+            accent="purple"
+            steps={[
+              { title: "Inference", desc: "Agent runs the model and generates output." },
+              { title: "Compilation", desc: "NL → SHIP via fine-tuned agent, then SHIP → bounded opcodes." },
+              { title: "Verification", desc: "Tensor Commit proves inference integrity; bytecode validated." },
+              { title: "Execution", desc: "Program submitted to the runtime." },
+            ]}
+          />
         </section>
 
         {/* Why SHIP, simple example */}
@@ -182,14 +172,14 @@ export default function SHIPPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="docs-card border-red-900/30">
-              <h3 className="text-lg font-medium mb-2 text-red-400">Without SHIP</h3>
+            <div className="docs-card border-red-200 dark:border-red-900/30">
+              <h3 className="text-lg font-medium mb-2 text-red-700 dark:text-red-400">Without SHIP</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Text parsed directly into bytecode, causing potential execution unaligned with agent&apos;s intention.
               </p>
             </div>
-            <div className="docs-card border-green-900/50">
-              <h3 className="text-lg font-medium mb-2 text-green-400">With SHIP</h3>
+            <div className="docs-card border-green-200 dark:border-green-900/50">
+              <h3 className="text-lg font-medium mb-2 text-green-700 dark:text-green-400">With SHIP</h3>
               <CodeBlock language="text" filename="example.ship">{`let payment = Transfer {
   recipient: agent_xyz,
   amount: 10 THE
@@ -248,7 +238,7 @@ node call_contract() {
           <div className="grid md:grid-cols-2 gap-4 mt-6">
             <div className="docs-card">
               <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[agent]</code> declaration
+                <code className="text-indigo-700 dark:text-indigo-300">#[agent]</code> declaration
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-xs">
                 Identifies the program as an agent and locks the SHIP version. Runtime uses this to validate ABI and assign an on-chain identity.
@@ -256,23 +246,23 @@ node call_contract() {
             </div>
             <div className="docs-card">
               <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[entry]</code> and <code className="text-indigo-300">node</code> blocks
+                <code className="text-indigo-700 dark:text-indigo-300">#[entry]</code> and <code className="text-indigo-700 dark:text-indigo-300">node</code> blocks
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-xs">
-                <code className="text-indigo-300">node</code> is the basic unit of control flow. <code className="text-indigo-300">#[entry]</code> marks the public entry point. <code className="text-indigo-300">goto</code> transitions between nodes deterministically.
+                <code className="text-indigo-700 dark:text-indigo-300">node</code> is the basic unit of control flow. <code className="text-indigo-700 dark:text-indigo-300">#[entry]</code> marks the public entry point. <code className="text-indigo-700 dark:text-indigo-300">goto</code> transitions between nodes deterministically.
               </p>
             </div>
             <div className="docs-card">
               <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[model]</code> nodes
+                <code className="text-indigo-700 dark:text-indigo-300">#[model]</code> nodes
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-xs">
-                Mark a node as performing inference. The runtime emits a Tensor Commit for any <code className="text-indigo-300">model(...)</code> call inside, and the result is constrained by <code className="text-indigo-300">.schema(...)</code> so downstream code reads typed fields, not free text.
+                Mark a node as performing inference. The runtime emits a Tensor Commit for any <code className="text-indigo-700 dark:text-indigo-300">model(...)</code> call inside, and the result is constrained by <code className="text-indigo-700 dark:text-indigo-300">.schema(...)</code> so downstream code reads typed fields, not free text.
               </p>
             </div>
             <div className="docs-card">
               <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">contracts.call(...)</code>
+                <code className="text-indigo-700 dark:text-indigo-300">contracts.call(...)</code>
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-xs">
                 Same calling convention as Ethereum-style contracts: selector, encoded args, value, gas budget. Agents can call contracts, contracts can callback agents in later blocks.
@@ -280,15 +270,15 @@ node call_contract() {
             </div>
           </div>
 
-          <p className="text-gray-500 text-sm mt-6">
-            See the <Link href="/docs/examples" className="text-indigo-300 hover:underline no-underline">Examples page</Link> for the registration patterns and AIVM-level snippets. Try this exact agent live in the <Link href="/playground" className="text-indigo-300 hover:underline no-underline">playground</Link>.
+          <p className="text-slate-600 dark:text-gray-500 text-sm mt-6">
+            See the <Link href="/docs/examples" className="text-indigo-700 dark:text-indigo-300 hover:underline no-underline">Examples page</Link> for the registration patterns and AIVM-level snippets. Try this exact agent live in the <Link href="/playground" className="text-indigo-700 dark:text-indigo-300 hover:underline no-underline">playground</Link>.
           </p>
         </section>
 
         {/* Integration with AIVM */}
         <section className="mb-12">
           <h2 id="integration" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-700 dark:text-indigo-300">
               <Cpu className="h-5 w-5" />
             </span>
             Integration with AIVM
@@ -296,8 +286,8 @@ node call_contract() {
           
           <div className="docs-card">
             <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-indigo-300">AGENT_TICK()</code> or <code className="text-indigo-300">MODEL_INFER()</code>.</p>
-              <p>Each construct maps to safe primitives: <code className="text-indigo-300">TLOAD</code>, <code className="text-indigo-300">TCUSTOM</code>, <code className="text-indigo-300">STATE_EXPORT</code>, <code className="text-indigo-300">TRANSFER_TOKEN</code>.</p>
+              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-indigo-700 dark:text-indigo-300">AGENT_TICK()</code> or <code className="text-indigo-700 dark:text-indigo-300">MODEL_INFER()</code>.</p>
+              <p>Each construct maps to safe primitives: <code className="text-indigo-700 dark:text-indigo-300">TLOAD</code>, <code className="text-indigo-700 dark:text-indigo-300">TCUSTOM</code>, <code className="text-indigo-700 dark:text-indigo-300">STATE_EXPORT</code>, <code className="text-indigo-700 dark:text-indigo-300">TRANSFER_TOKEN</code>.</p>
               <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
             </div>
           </div>
@@ -307,18 +297,18 @@ node call_contract() {
         <div className="border-t border-slate-200 dark:border-gray-800 pt-8 grid sm:grid-cols-2 gap-4">
           <Link href="/docs/aivm" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
+              <Cpu className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← AIVM Details</h3>
+                <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">← AIVM Details</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Learn about the execution environment</p>
               </div>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">
             <div className="docs-card h-full flex items-start gap-3">
-              <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
+              <Bot className="h-5 w-5 text-slate-600 dark:text-gray-500 group-hover:text-indigo-700 dark:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Build Agents →</h3>
+                <h3 className="font-medium group-hover:text-indigo-700 dark:text-indigo-300 transition-colors">Build Agents →</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Create agents using SHIP</p>
               </div>
             </div>
