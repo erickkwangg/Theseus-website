@@ -12,6 +12,7 @@ const ALG = "EdDSA";
 
 export type SigningKey = {
   privateKey: CryptoKey;
+  publicKey: CryptoKey;
   publicJwk: JWK;
   kid: string;
 };
@@ -27,10 +28,21 @@ export async function getSigningKey(): Promise<SigningKey> {
     );
   }
   const privateJwk = JSON.parse(jwkString) as JWK;
+  if (privateJwk.kty !== "OKP" || privateJwk.crv !== "Ed25519") {
+    throw new Error(
+      `POA_SIGNING_KEY_JWK has unexpected algorithm: kty=${privateJwk.kty} crv=${privateJwk.crv}; expected Ed25519`,
+    );
+  }
   const privateKey = (await importJWK(privateJwk, ALG)) as CryptoKey;
   const { kty, crv, x } = privateJwk;
-  const publicJwk: JWK = { kty: kty!, crv: crv!, x: x!, alg: ALG, kid: KID, use: "sig" };
-  cached = { privateKey, publicJwk, kid: KID };
+  if (!kty || !crv || !x) {
+    throw new Error("POA_SIGNING_KEY_JWK is missing required fields (kty/crv/x)");
+  }
+  const publicJwk: JWK = { kty, crv, x, alg: ALG, kid: KID, use: "sig" };
+  // Pre-import the public key once so verifyCredential doesn't re-import on
+  // every request.
+  const publicKey = (await importJWK(publicJwk, ALG)) as CryptoKey;
+  cached = { privateKey, publicKey, publicJwk, kid: KID };
   return cached;
 }
 
@@ -63,8 +75,12 @@ export async function verifyCredential(
 ): Promise<{ claims: PoACredentialClaims; valid: true } | { valid: false; reason: string }> {
   try {
     const key = await getSigningKey();
-    const publicKey = (await importJWK(key.publicJwk, ALG)) as CryptoKey;
-    const { payload } = await compactVerify(jws, publicKey);
+    // Pin the algorithm explicitly. compactVerify already rejects "none", but
+    // without `algorithms` it would also accept any other alg the supplied
+    // key happens to support — a confused-deputy hardening concern.
+    const { payload } = await compactVerify(jws, key.publicKey, {
+      algorithms: [ALG],
+    });
     const claims = JSON.parse(new TextDecoder().decode(payload)) as PoACredentialClaims;
     return { claims, valid: true };
   } catch (err) {

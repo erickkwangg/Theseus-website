@@ -8,6 +8,7 @@ import { credentialStore } from "@/lib/poa/store";
 import { getChainReader, chainMode } from "@/lib/poa/chain";
 import { evaluateRevocation } from "@/lib/poa/revocation";
 import { groupIntents, type IntentCategory } from "@/lib/poa/intents";
+import { LIMITS } from "@/lib/poa/validation";
 
 type VerifyBody = { jws?: unknown };
 
@@ -55,6 +56,12 @@ export async function POST(req: Request) {
   if (!jws) {
     return NextResponse.json({ valid: false, reason: "jws-required" }, { status: 400 });
   }
+  if (jws.length > LIMITS.jws) {
+    return NextResponse.json(
+      { valid: false, reason: "jws-too-large" },
+      { status: 413 },
+    );
+  }
 
   const result = await verifyCredential(jws);
   if (!result.valid) {
@@ -77,7 +84,8 @@ export async function POST(req: Request) {
 
   // Derive bundle classification for display — never part of the signed JWS.
   // Marked `derived: true` so consumers can't mistake this for a signed claim.
-  const grouped = groupIntents(claims.agent.capabilities.intentTypes);
+  // groupIntents tolerates any shape; missing/malformed intentTypes → empty list.
+  const grouped = groupIntents(claims.agent?.capabilities?.intentTypes);
   out.bundles = {
     derived: true,
     list: grouped.map(({ bundle, intentTypes }) => ({

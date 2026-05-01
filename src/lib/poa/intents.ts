@@ -193,6 +193,7 @@ export const BUNDLES: Record<IntentCategory, IntentBundle> = {
 // Classify a raw intent string into a bundle. First substring match wins;
 // unknown strings fall through to "generic".
 export function classifyIntent(intentType: string): IntentCategory {
+  if (typeof intentType !== "string") return "generic";
   const t = intentType.toLowerCase();
   for (const cat of INTENT_CATEGORIES) {
     if (cat === "generic") continue;
@@ -208,9 +209,13 @@ export type GroupedIntents = {
   intentTypes: string[];
 }[];
 
-export function groupIntents(intentTypes: string[]): GroupedIntents {
+export function groupIntents(intentTypes: unknown): GroupedIntents {
+  // Defensive: callers may hand us deserialised JSON of unknown shape.
+  // Coerce to an array of strings; anything else yields an empty grouping.
+  if (!Array.isArray(intentTypes)) return [];
+  const safe = intentTypes.filter((t): t is string => typeof t === "string");
   const map = new Map<IntentCategory, string[]>();
-  for (const t of intentTypes) {
+  for (const t of safe) {
     const cat = classifyIntent(t);
     const list = map.get(cat) ?? [];
     if (!list.includes(t)) list.push(t);

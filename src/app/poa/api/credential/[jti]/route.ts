@@ -1,11 +1,15 @@
 import { NextResponse } from "next/server";
 import { credentialStore } from "@/lib/poa/store";
+import { LIMITS, isBoundedString } from "@/lib/poa/validation";
 
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ jti: string }> },
 ) {
   const { jti } = await params;
+  if (!isBoundedString(jti, LIMITS.jti)) {
+    return NextResponse.json({ error: "jti-invalid" }, { status: 400 });
+  }
   let c;
   try {
     c = await credentialStore.get(jti);

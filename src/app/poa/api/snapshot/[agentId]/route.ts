@@ -4,14 +4,18 @@
 
 import { NextResponse } from "next/server";
 import { getChainReader } from "@/lib/poa/chain";
+import { LIMITS, isBoundedString, looksLikeSs58 } from "@/lib/poa/validation";
 
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ agentId: string }> },
 ) {
   const { agentId } = await params;
-  if (!agentId) {
+  if (!isBoundedString(agentId, LIMITS.agentId)) {
     return NextResponse.json({ error: "agentId-required" }, { status: 400 });
+  }
+  if (!looksLikeSs58(agentId)) {
+    return NextResponse.json({ error: "agentId-invalid-format" }, { status: 400 });
   }
   const reader = getChainReader();
   let snapshot;

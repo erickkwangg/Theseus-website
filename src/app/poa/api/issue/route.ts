@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getChainReader } from "@/lib/poa/chain";
 import { issueCredential } from "@/lib/poa/issue";
 import { challengeStore } from "@/lib/poa/store";
+import { LIMITS, isBoundedString, isHexString, looksLikeSs58 } from "@/lib/poa/validation";
 
 type IssueBody = {
   agentId?: unknown;
@@ -15,15 +16,21 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "invalid-json" }, { status: 400 });
   }
-  const agentId = typeof body.agentId === "string" ? body.agentId : null;
-  if (!agentId) {
+  if (!isBoundedString(body.agentId, LIMITS.agentId)) {
     return NextResponse.json({ error: "agentId-required" }, { status: 400 });
   }
+  if (!looksLikeSs58(body.agentId)) {
+    return NextResponse.json({ error: "agentId-invalid-format" }, { status: 400 });
+  }
+  const agentId = body.agentId;
 
   let controllerSig: { nonce: string; signatureHex: string; signedAt: number } | undefined;
   if (body.controllerSig) {
     const { nonce, signatureHex } = body.controllerSig;
-    if (typeof nonce !== "string" || typeof signatureHex !== "string") {
+    if (
+      !isBoundedString(nonce, LIMITS.nonce) ||
+      !isHexString(signatureHex, LIMITS.signatureHex)
+    ) {
       return NextResponse.json({ error: "controllerSig-malformed" }, { status: 400 });
     }
     let consumed;

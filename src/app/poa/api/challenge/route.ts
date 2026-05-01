@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { challengeStore } from "@/lib/poa/store";
+import { LIMITS, isBoundedString, looksLikeSs58 } from "@/lib/poa/validation";
 
 const CHALLENGE_TTL_MS = 5 * 60 * 1000;
 
@@ -17,10 +18,13 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "invalid-json" }, { status: 400 });
   }
-  const agentId = typeof body.agentId === "string" ? body.agentId : null;
-  if (!agentId) {
+  if (!isBoundedString(body.agentId, LIMITS.agentId)) {
     return NextResponse.json({ error: "agentId-required" }, { status: 400 });
   }
+  if (!looksLikeSs58(body.agentId)) {
+    return NextResponse.json({ error: "agentId-invalid-format" }, { status: 400 });
+  }
+  const agentId = body.agentId;
   const nonce = crypto.randomBytes(16).toString("hex");
   const now = Date.now();
   try {
