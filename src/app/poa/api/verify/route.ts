@@ -67,7 +67,12 @@ export async function POST(req: Request) {
   // Try to assess freshness against the local revocation list and against the
   // chain (if reachable). Failure here doesn't invalidate the credential —
   // the JWS is signature-valid; we just can't say whether it's still current.
-  const stored = credentialStore.get(claims.jti);
+  let stored: Awaited<ReturnType<typeof credentialStore.get>> = undefined;
+  try {
+    stored = await credentialStore.get(claims.jti);
+  } catch {
+    // Store unreachable — we'll mark freshness as unknown below.
+  }
   if (stored?.revoked) {
     out.freshness = { status: "revoked", reason: stored.revoked.reason };
   } else {

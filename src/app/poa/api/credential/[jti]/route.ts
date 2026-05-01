@@ -6,7 +6,21 @@ export async function GET(
   { params }: { params: Promise<{ jti: string }> },
 ) {
   const { jti } = await params;
-  const c = credentialStore.get(jti);
+  let c;
+  try {
+    c = await credentialStore.get(jti);
+  } catch (err) {
+    return NextResponse.json(
+      {
+        error: "store-unreachable",
+        detail:
+          err && typeof err === "object" && "message" in err
+            ? String((err as { message: unknown }).message)
+            : String(err),
+      },
+      { status: 503 },
+    );
+  }
   if (!c) {
     return NextResponse.json({ error: "credential-not-found" }, { status: 404 });
   }

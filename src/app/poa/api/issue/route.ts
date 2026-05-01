@@ -26,7 +26,21 @@ export async function POST(req: Request) {
     if (typeof nonce !== "string" || typeof signatureHex !== "string") {
       return NextResponse.json({ error: "controllerSig-malformed" }, { status: 400 });
     }
-    const consumed = challengeStore.consume(nonce);
+    let consumed;
+    try {
+      consumed = await challengeStore.consume(nonce);
+    } catch (err) {
+      return NextResponse.json(
+        {
+          error: "store-unreachable",
+          detail:
+            err && typeof err === "object" && "message" in err
+              ? String((err as { message: unknown }).message)
+              : String(err),
+        },
+        { status: 503 },
+      );
+    }
     if (!consumed) {
       return NextResponse.json({ error: "challenge-expired-or-unknown" }, { status: 400 });
     }

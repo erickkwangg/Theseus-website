@@ -25,7 +25,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PoaCredentialPage({ params }: Props) {
   const { agentId } = await params;
-  const stored = credentialStore.latestByAgent(agentId);
+  let stored: Awaited<ReturnType<typeof credentialStore.latestByAgent>> =
+    undefined;
+  try {
+    stored = await credentialStore.latestByAgent(agentId);
+  } catch {
+    // Store unreachable — page still renders without a credential body.
+  }
   const reader = getChainReader();
   const mode = chainMode();
 
@@ -56,7 +62,7 @@ export default async function PoaCredentialPage({ params }: Props) {
     } else {
       try {
         revocation = await evaluateRevocation(reader, stored);
-        if (revocation) credentialStore.revoke(stored.jti, revocation);
+        if (revocation) await credentialStore.revoke(stored.jti, revocation);
       } catch {
         // Don't kill the page if revocation eval fails — surface chainError instead.
       }

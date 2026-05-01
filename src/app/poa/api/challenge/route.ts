@@ -4,6 +4,12 @@ import { challengeStore } from "@/lib/poa/store";
 
 const CHALLENGE_TTL_MS = 5 * 60 * 1000;
 
+function errMsg(err: unknown): string {
+  return err && typeof err === "object" && "message" in err
+    ? String((err as { message: unknown }).message)
+    : String(err);
+}
+
 export async function POST(req: Request) {
   let body: { agentId?: unknown };
   try {
@@ -17,12 +23,22 @@ export async function POST(req: Request) {
   }
   const nonce = crypto.randomBytes(16).toString("hex");
   const now = Date.now();
-  challengeStore.put({
-    nonce,
-    agentId,
-    issuedAt: now,
-    expiresAt: now + CHALLENGE_TTL_MS,
-  });
+  try {
+    await challengeStore.put({
+      nonce,
+      agentId,
+      issuedAt: now,
+      expiresAt: now + CHALLENGE_TTL_MS,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      {
+        error: "store-unreachable",
+        detail: errMsg(err),
+      },
+      { status: 503 },
+    );
+  }
   return NextResponse.json({
     nonce,
     agentId,

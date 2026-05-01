@@ -80,6 +80,6 @@ export async function issueCredential(
     issuedAt: Date.now(),
     revoked: false,
   };
-  credentialStore.put(stored);
+  await credentialStore.put(stored);
   return { ok: true, credential: stored };
 }
