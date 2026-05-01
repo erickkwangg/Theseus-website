@@ -4,6 +4,7 @@
 
 import { cn } from "@/lib/utils";
 import type { AgentSnapshot } from "@/lib/poa/types";
+import { groupIntents } from "@/lib/poa/intents";
 import Sigil, { checksumFromSeed } from "./Sigil";
 
 type Props = { snapshot: AgentSnapshot; className?: string };
@@ -51,14 +52,10 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
 
       <div className="border-t border-slate-300/70 px-4 py-2 dark:border-slate-700/55">
         <Row k="Mode" v={snapshot.sovereign ? "sovereign · immutable" : "controller-retained"} accent={snapshot.sovereign} />
+        <Row k="Skills" v={skillsSummary(snapshot.capabilities.intentTypes)} />
         <Row
-          k="Capabilities"
-          v={
-            [
-              ...snapshot.capabilities.tools.slice(0, 3),
-              ...(snapshot.capabilities.tools.length > 3 ? ["…"] : []),
-            ].join(" · ") || "—"
-          }
+          k="Tools"
+          v={snapshot.capabilities.tools.join(" · ") || "—"}
         />
         <Row k="Verification" v={gradeLabel(snapshot.recentRuns.grade)} />
         <Row k="Funding" v={fmtSeus(snapshot.funding.seusBalance)} />
@@ -106,6 +103,12 @@ function gradeLabel(g: string): string {
     default:
       return "unknown · indexer not wired";
   }
+}
+
+function skillsSummary(intentTypes: string[]): string {
+  if (intentTypes.length === 0) return "—";
+  const grouped = groupIntents(intentTypes);
+  return grouped.map((g) => g.bundle.name).join(" · ");
 }
 
 function fmtSeus(raw: string): string {

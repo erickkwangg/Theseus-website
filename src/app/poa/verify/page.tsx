@@ -61,11 +61,20 @@ export default function VerifyPage() {
             number="03"
             className="mb-8"
           />
-          <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mb-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
             The credential is a standard compact JWS signed by the PoA service&apos;s
             Ed25519 key. The public JWK is at{" "}
             <code className="font-mono">/poa/.well-known/jwks.json</code>. Any
             JOSE-compatible library will verify it.
+          </p>
+          <p className="mb-8 max-w-2xl text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
+            For programmatic gating, match against{" "}
+            <code className="font-mono">claims.agent.capabilities.intentTypes</code>{" "}
+            (the signed array of raw strings). The{" "}
+            <code className="font-mono">bundles</code> field returned by{" "}
+            <code className="font-mono">/poa/api/verify</code> is a derived
+            display helper — it can change without revoking credentials, so
+            don&apos;t treat it as a contract.
           </p>
           <VerificationRecipes />
         </div>

@@ -25,6 +25,10 @@ type VerifyResponse = {
   issuedAt?: number;
   freshness?: Freshness;
   kid?: string;
+  bundles?: {
+    derived: true;
+    list: { category: string; name: string; intentTypes: string[] }[];
+  };
 };
 
 export default function VerifyForm() {
@@ -223,6 +227,40 @@ function ResultCard({ data }: { data: VerifyResponse }) {
           v={data.issuedAt ? new Date(data.issuedAt).toISOString() : "—"}
         />
       </div>
+
+      {data.bundles && data.bundles.list.length > 0 && (
+        <div className="border-t border-slate-300/70 px-4 py-4 dark:border-slate-700/55">
+          <div className="flex items-baseline justify-between">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
+              skills (derived)
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+              not signed
+            </span>
+          </div>
+          <p className="mt-2 text-[12px] leading-relaxed text-slate-600 dark:text-slate-300">
+            Computed by this server from the signed{" "}
+            <code className="font-mono">intentTypes</code>. Convenient for
+            humans; gate on the raw strings inside <code className="font-mono">claims</code> for
+            anything programmatic.
+          </p>
+          <div className="mt-3 space-y-1.5">
+            {data.bundles.list.map((b) => (
+              <div
+                key={b.category}
+                className="grid grid-cols-1 gap-y-0.5 sm:grid-cols-[160px_1fr] sm:gap-x-4"
+              >
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-indigo-700 dark:text-indigo-300">
+                  {b.name}
+                </span>
+                <code className="font-mono text-[12px] text-slate-700 dark:text-slate-200">
+                  {b.intentTypes.join(" · ")}
+                </code>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className={cn("border-t px-4 py-3", freshClass)}>
         <span className="font-mono text-[10.5px] uppercase tracking-[0.18em]">
           freshness · {freshLabel}

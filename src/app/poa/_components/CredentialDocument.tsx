@@ -5,6 +5,7 @@
 
 import { cn } from "@/lib/utils";
 import type { StoredCredential, RevocationReason } from "@/lib/poa/types";
+import { groupIntents } from "@/lib/poa/intents";
 import Sigil, { checksumFromSeed } from "./Sigil";
 import CopyButton from "./CopyButton";
 
@@ -82,10 +83,7 @@ export default function CredentialDocument({
       <Section number="01" title="Capability surface">
         <KvRow k="Models" v={agent.capabilities.models.join(" · ") || "—"} />
         <KvRow k="Tools" v={agent.capabilities.tools.join(" · ") || "—"} />
-        <KvRow
-          k="Intent types"
-          v={agent.capabilities.intentTypes.join(" · ") || "—"}
-        />
+        <IntentRow intentTypes={agent.capabilities.intentTypes} />
         <KvRow
           k="Sub-agents"
           v={
@@ -290,6 +288,51 @@ function SectionHeading({ number, title }: { number: string; title: string }) {
       <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
         {number}
       </span>
+    </div>
+  );
+}
+
+function IntentRow({ intentTypes }: { intentTypes: string[] }) {
+  if (intentTypes.length === 0) {
+    return <KvRow k="Skills" v="—" />;
+  }
+  const grouped = groupIntents(intentTypes);
+  return (
+    <div className="grid grid-cols-1 items-baseline gap-y-1 border-b border-slate-200/70 py-2 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
+      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+        Skills
+      </span>
+      <div className="flex flex-col gap-1.5">
+        {grouped.map(({ bundle, intentTypes: intents }) => (
+          <details key={bundle.category} className="group">
+            <summary
+              className="flex cursor-pointer flex-wrap items-baseline gap-x-3 gap-y-1 list-none"
+              title={bundle.useWhen}
+            >
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-indigo-700 dark:text-indigo-300">
+                {bundle.name}
+              </span>
+              <span className="font-mono text-[12px] text-slate-700 dark:text-slate-200">
+                {intents.join(" · ")}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500 group-open:hidden">
+                ?
+              </span>
+            </summary>
+            <div className="mt-1.5 ml-0 sm:ml-1 text-[12px] leading-relaxed text-slate-600 dark:text-slate-300">
+              <p>{bundle.description}</p>
+              <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                use when · {bundle.useWhen}
+              </p>
+              {bundle.protocols && bundle.protocols.length > 0 && (
+                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                  protocols · {bundle.protocols.join(" · ")}
+                </p>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
     </div>
   );
 }

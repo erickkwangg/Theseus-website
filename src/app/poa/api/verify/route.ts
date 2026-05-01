@@ -7,17 +7,28 @@ import { verifyCredential } from "@/lib/poa/credential";
 import { credentialStore } from "@/lib/poa/store";
 import { getChainReader, chainMode } from "@/lib/poa/chain";
 import { evaluateRevocation } from "@/lib/poa/revocation";
+import { groupIntents, type IntentCategory } from "@/lib/poa/intents";
 
 type VerifyBody = { jws?: unknown };
 
 type VerifyResult = {
   valid: boolean;
   reason?: string;
-  // Present when valid is true
+  // Present when valid is true.
+  // `claims` is the SIGNED truth — gate on `claims.agent.capabilities.intentTypes`
+  // when consuming programmatically. `bundles` below is a derived display-only
+  // helper computed by this server; do not rely on its structure for security.
   claims?: unknown;
   jti?: string;
   agentId?: string;
   issuedAt?: number;
+  // Derived display helpers — not in the signed JWS. Bundles can change over
+  // time without revoking credentials. If you need a stable contract, gate on
+  // the raw intent strings in `claims.agent.capabilities.intentTypes`.
+  bundles?: {
+    derived: true;
+    list: { category: IntentCategory; name: string; intentTypes: string[] }[];
+  };
   // Present if we can also reach the chain to assess freshness
   freshness?:
     | { status: "current" }
@@ -62,6 +73,18 @@ export async function POST(req: Request) {
     issuedAt: claims.iat * 1000,
     issuer: claims.iss,
     kid: "theseus-poa-2026-04",
+  };
+
+  // Derive bundle classification for display — never part of the signed JWS.
+  // Marked `derived: true` so consumers can't mistake this for a signed claim.
+  const grouped = groupIntents(claims.agent.capabilities.intentTypes);
+  out.bundles = {
+    derived: true,
+    list: grouped.map(({ bundle, intentTypes }) => ({
+      category: bundle.category,
+      name: bundle.name,
+      intentTypes,
+    })),
   };
 
   // Try to assess freshness against the local revocation list and against the

@@ -22,7 +22,14 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     capabilities: {
       models: ["gpt-oss-120b"],
       tools: ["buy_sell_tokens"],
-      intentTypes: ["transfer", "context_update"],
+      intentTypes: [
+        "transfer",
+        "approve",
+        "supply",
+        "withdraw",
+        "swap",
+        "context_update",
+      ],
       subAgents: [],
     },
     registration: {
@@ -49,7 +56,14 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     capabilities: {
       models: ["gpt-oss-120b", "claude-haiku-4-5"],
       tools: ["buy_sell_tokens", "web_search", "auth_http"],
-      intentTypes: ["transfer", "context_update", "contract_call"],
+      intentTypes: [
+        "create_market",
+        "settle_market",
+        "place_bet",
+        "transfer",
+        "web_search",
+        "context_update",
+      ],
       subAgents: [],
     },
     registration: {
@@ -76,7 +90,13 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     capabilities: {
       models: ["external-hosted-model"],
       tools: ["web_search"],
-      intentTypes: ["context_update"],
+      intentTypes: [
+        "web_search",
+        "fetch_url",
+        "summarize",
+        "context_update",
+        "x402",
+      ],
       subAgents: [],
     },
     registration: {

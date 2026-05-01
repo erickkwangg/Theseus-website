@@ -14,7 +14,8 @@ const SPECIMEN_SEED = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQYa3f9";
 
 const ROWS: Row[] = [
   ["Mode", "sovereign · immutable", true],
-  ["Capabilities", "gpt-oss-120b · transfer · context_update"],
+  ["Skills", "Token Ops · Lending · DEX Trading"],
+  ["Tools", "buy_sell_tokens"],
   ["Verification", "full · all KZG-proven"],
   ["Funding", "150 seus · active"],
 ];
