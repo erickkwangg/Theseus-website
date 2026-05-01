@@ -8,15 +8,27 @@ import { cn } from "@/lib/utils";
 // to /poa/<addr>. Used on the landing for quick-check, and also embeddable
 // on the verify page as the "look up" half of the verification UI.
 
-type Props = { className?: string; placeholder?: string };
+type Props = {
+  className?: string;
+  placeholder?: string;
+  variant?: "compact" | "prominent";
+  showLabel?: boolean;
+  autoFocus?: boolean;
+};
 
 export default function AgentLookupBar({
   className,
   placeholder = "Paste an SS58 address — 5GrwvaEF…",
+  variant = "compact",
+  showLabel = true,
+  autoFocus = false,
 }: Props) {
   const [agentId, setAgentId] = useState("");
   const router = useRouter();
   const [pending, start] = useTransition();
+
+  const isProminent = variant === "prominent";
+
   return (
     <form
       onSubmit={(e) => {
@@ -30,25 +42,37 @@ export default function AgentLookupBar({
       )}
     >
       <label className="flex-1">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-          Look up an agent
-        </span>
+        {showLabel && (
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+            Look up an agent
+          </span>
+        )}
         <input
           value={agentId}
           onChange={(e) => setAgentId(e.target.value.trim())}
           placeholder={placeholder}
-          className="mt-2 w-full border-b border-slate-400/60 bg-transparent py-2 font-mono text-[13px] text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:border-slate-600/60 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300"
+          autoFocus={autoFocus}
+          className={cn(
+            "w-full border-b bg-transparent text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300",
+            showLabel ? "mt-2" : "",
+            isProminent
+              ? "border-slate-400/70 py-3 font-mono text-[16px] sm:text-[18px] dark:border-slate-600/70"
+              : "border-slate-400/60 py-2 font-mono text-[13px] dark:border-slate-600/60",
+          )}
         />
       </label>
       <button
         type="submit"
         disabled={pending || !agentId.trim()}
         className={cn(
-          "ghost-cta inline-flex items-center rounded-md px-5 py-2.5 text-sm font-medium tracking-wide",
+          "inline-flex items-center rounded-md font-medium tracking-wide",
+          isProminent
+            ? "primary-cta px-7 py-3.5 text-base"
+            : "ghost-cta px-5 py-2.5 text-sm",
           (pending || !agentId.trim()) && "opacity-60",
         )}
       >
-        {pending ? "Loading…" : "Open agent page →"}
+        {pending ? "Loading…" : isProminent ? "Open →" : "Open agent page →"}
       </button>
     </form>
   );

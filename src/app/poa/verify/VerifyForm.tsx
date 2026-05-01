@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 type FreshnessOk = { status: "current" };
 type FreshnessRevoked = { status: "revoked"; reason: string };
@@ -31,63 +30,11 @@ type VerifyResponse = {
   };
 };
 
-export default function VerifyForm() {
-  return (
-    <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-      <LookupForm />
-      <JwsForm />
-    </div>
-  );
-}
+// /poa/verify is the "advanced" verify surface — JWS paste + recipes. The
+// quick "look up by address" path lives on the /poa landing instead.
 
-function LookupForm() {
-  const [agentId, setAgentId] = useState("");
-  const router = useRouter();
-  const [pending, start] = useTransition();
-  return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!agentId.trim()) return;
-        start(() => router.push(`/poa/${agentId.trim()}`));
-      }}
-      className="flex flex-col gap-4"
-    >
-      <div className="flex items-baseline justify-between border-b border-slate-300/70 pb-3 dark:border-slate-700/55">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-          Look up an agent
-        </span>
-        <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
-          01
-        </span>
-      </div>
-      <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-        Paste an SS58 address to see whether it&apos;s a registered agent and
-        whether a Proof of Agenthood credential has been issued for it.
-      </p>
-      <label className="block">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-          Agent address
-        </span>
-        <input
-          value={agentId}
-          onChange={(e) => setAgentId(e.target.value.trim())}
-          placeholder="5GrwvaEF…"
-          className="mt-2 w-full border-b border-slate-400/60 bg-transparent py-2 font-mono text-[13px] text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:border-slate-600/60 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300"
-        />
-      </label>
-      <button
-        type="submit"
-        disabled={pending || !agentId.trim()}
-        className={cn(
-          "primary-cta inline-flex w-fit items-center rounded-md px-6 py-3 text-sm font-medium tracking-wide",
-          (pending || !agentId.trim()) && "opacity-60",
-        )}
-      >
-        {pending ? "Loading…" : "Open agent page →"}
-      </button>
-    </form>
-  );
+export default function VerifyForm() {
+  return <JwsForm />;
 }
 
 function JwsForm() {
@@ -123,10 +70,10 @@ function JwsForm() {
     <form onSubmit={onVerify} className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between border-b border-slate-300/70 pb-3 dark:border-slate-700/55">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-          Verify a credential
+          Verify a JWS credential
         </span>
         <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
-          02
+          01
         </span>
       </div>
       <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">

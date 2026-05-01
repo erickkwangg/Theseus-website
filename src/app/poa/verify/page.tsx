@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import SectionHeader from "@/components/Pages/Home/SectionHeader";
@@ -10,7 +11,7 @@ import VerificationRecipes from "./VerificationRecipes";
 export const metadata: Metadata = {
   title: "Verify a Proof of Agenthood credential",
   description:
-    "Look up an agent or paste a JWS credential to check it against the Theseus Chain registry.",
+    "Paste a JWS credential to verify the signature and check freshness against the chain. Recipes for cURL, TS, Rust, Python.",
   alternates: { canonical: "/poa/verify" },
 };
 
@@ -34,14 +35,21 @@ export default function VerifyPage() {
             />
             <div className="grid gap-y-6 lg:grid-cols-[1.4fr_1fr] lg:gap-x-16">
               <h1 className="font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
-                Check an agent.
-                <br />
-                <span className="italic">Or check a credential.</span>
+                Verify a credential.
               </h1>
               <p className="max-w-md text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
-                Anyone can verify here — no wallet, no permission. Look up an
-                agent by address, or paste a JWS to check the signature and the
-                chain&apos;s freshness against it.
+                Paste a compact JWS issued by{" "}
+                <code className="font-mono">theseus.network/poa</code> to
+                check the signature against the published JWKS and the
+                chain&apos;s freshness against it. To look up an agent by
+                address instead,{" "}
+                <Link
+                  href="/poa"
+                  className="text-indigo-700 underline underline-offset-[4px] dark:text-indigo-300"
+                >
+                  start at /poa
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -58,7 +66,7 @@ export default function VerifyPage() {
         <div className="mx-auto max-w-[1100px]">
           <SectionHeader
             label="Verify elsewhere"
-            number="03"
+            number="02"
             className="mb-8"
           />
           <p className="mb-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
