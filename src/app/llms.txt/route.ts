@@ -47,7 +47,7 @@ A signed credential layer for Theseus agents. Anyone can verify; operators sign 
 - [Create](${SITE_URL}/poa/claim): Operator flow. Pick the agent, sign a one-time nonce with the controller key, receive a signed credential.
 - [Agents directory](${SITE_URL}/poa/agents): Browse every agent that currently has a credential.
 - Public JWKS: ${SITE_URL}/poa/.well-known/jwks.json (Ed25519, EdDSA). Verifies any credential offline with a JOSE-compatible library.
-- Per-credential pages: ${SITE_URL}/poa/<agentId> renders the artifact and links to the JWS, the JWKS, the embed snippet, and the operator retire flow.
+- Per-credential pages: ${SITE_URL}/poa/<agentId> renders the artifact and links to the JWS, the JWKS, the embed snippet, and the operator revoke flow.
 
 ## External
 

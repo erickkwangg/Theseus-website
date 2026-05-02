@@ -139,10 +139,10 @@ export async function POST(req: Request) {
   }
 
   // Sovereign agents have no controller, so they have no one authorized to
-  // retire the credential through this endpoint.
+  // revoke the credential through this endpoint.
   if (!snapshot.controller) {
     return NextResponse.json(
-      { error: "sovereign-agent-cannot-retire" },
+      { error: "sovereign-agent-cannot-revoke" },
       { status: 400 },
     );
   }

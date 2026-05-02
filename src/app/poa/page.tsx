@@ -70,7 +70,7 @@ export default function PoaLanding() {
             style={{ borderRadius: "2px" }}
           >
             <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
-              <p className="poa-stamp">01 &middot; Verify &middot; Anyone</p>
+              <p className="poa-stamp">01 &middot; Look up &middot; Anyone</p>
               <h2 className="mt-5 font-serif text-[clamp(2rem,4.6vw,3.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
                 Look up an
                 <span className="italic"> agent.</span>
@@ -185,7 +185,7 @@ export default function PoaLanding() {
                 <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
                   <span className="poa-stamp">Revocable</span>
                   <span className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
-                    Retire it any time; verifiers see the status update on
+                    Revoke it any time; verifiers see the status update on
                     the next check.
                   </span>
                 </li>

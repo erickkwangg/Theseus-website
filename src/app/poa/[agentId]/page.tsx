@@ -128,7 +128,7 @@ export default async function PoaCredentialPage({ params }: Props) {
                 <div className="max-w-md">
                   <p className="poa-stamp">Operator</p>
                   <p className="mt-1 text-[12.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-                    Connect the controller wallet to retire this credential.
+                    Connect the controller wallet to revoke this credential.
                     Verifiers see the change on their next check.
                   </p>
                 </div>

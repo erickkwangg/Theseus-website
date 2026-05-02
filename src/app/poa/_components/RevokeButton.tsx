@@ -13,7 +13,7 @@ import { track } from "./analytics";
 //   - sovereign agents: never (no controller exists)
 //   - controller-retained agents: show only after the wallet is connected and
 //     the connected account list contains the controller address. We don't
-//     pop the wallet open on page load; the user clicks "Connect to retire".
+//     pop the wallet open on page load; the user clicks "Connect to revoke".
 
 type Mode = "fixture" | "polkadot";
 
@@ -120,7 +120,7 @@ export default function RevokeButton({
     }
   }
 
-  // Initial state: a quiet "Connect to retire" affordance. Only after the
+  // Initial state: a quiet "Connect to revoke" affordance. Only after the
   // user opts in do we touch the wallet.
   if (state.kind === "idle") {
     return (
@@ -128,9 +128,9 @@ export default function RevokeButton({
         type="button"
         onClick={connect}
         className="cta-shareLink"
-        aria-label="Connect wallet to retire this credential"
+        aria-label="Connect wallet to revoke this credential"
       >
-        Retire credential
+        Revoke credential
       </button>
     );
   }
@@ -151,7 +151,7 @@ export default function RevokeButton({
           aria-live="polite"
         >
           The controller key for this agent isn&apos;t in your connected
-          wallet. Switch accounts and reload to retire.
+          wallet. Switch accounts and reload to revoke.
         </p>
       );
     }
@@ -163,7 +163,7 @@ export default function RevokeButton({
             onClick={() => setConfirming(true)}
             className={cn("cta-shareLink", "cta-shareLink-fail")}
           >
-            Retire credential
+            Revoke credential
           </button>
         ) : (
           <>
@@ -173,7 +173,7 @@ export default function RevokeButton({
               onClick={runRevoke}
               className={cn("cta-shareLink", "cta-shareLink-fail")}
             >
-              Yes, retire
+              Yes, revoke
             </button>
             <button
               type="button"
@@ -200,7 +200,7 @@ export default function RevokeButton({
   if (state.kind === "done") {
     return (
       <span className="poa-stamp" style={{ color: "var(--poa-wax)" }}>
-        Retired. Refreshing…
+        Revoked. Refreshing…
       </span>
     );
   }
@@ -212,7 +212,7 @@ export default function RevokeButton({
       role="alert"
       className="text-[12.5px] leading-relaxed text-[var(--poa-wax)]"
     >
-      Couldn&apos;t retire: <code className="font-mono">{state.message}</code>{" "}
+      Couldn&apos;t revoke: <code className="font-mono">{state.message}</code>{" "}
       <button
         type="button"
         onClick={() => setState({ kind: "idle" })}

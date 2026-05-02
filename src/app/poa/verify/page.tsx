@@ -47,7 +47,7 @@ export default function VerifyPage() {
             Verify a <span className="italic">credential.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-            Paste the token issued by{" "}
+            Paste the credential token issued by{" "}
             <code className="font-mono">theseus.network/poa</code>. Or, to look
             up an agent by address,{" "}
             <Link
@@ -79,7 +79,7 @@ export default function VerifyPage() {
             <div className="mt-6 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
               <ImageSlot
                 src="/poa/verify-flow.png"
-                alt="Editorial diagram: a token is checked against a key, yielding claims and a check seal."
+                alt="Editorial diagram: a credential token is checked against a key, yielding claims and a check seal."
                 width={1400}
                 height={500}
                 className="w-full max-w-[360px]"

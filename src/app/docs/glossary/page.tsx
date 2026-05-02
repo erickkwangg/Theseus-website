@@ -46,9 +46,24 @@ const glossaryTerms = [
     link: "/docs/introduction#agency-tiers"
   },
   {
+    term: "Credential",
+    definition: "A signed JWS issued by Proof of Agenthood that captures an on-chain agent's identity, capabilities, and verification grade at a moment in time. Anyone can verify it offline against the public JWKS; revocation is checked against the live chain.",
+    link: "/poa"
+  },
+  {
+    term: "Credential Token",
+    definition: "The user-facing name for the JWS string issued by Proof of Agenthood. The full credential is three base64url segments (header.payload.signature) joined by dots; verifiers paste it into /poa/verify or pass it to a JOSE-compatible library.",
+    link: "/poa/verify"
+  },
+  {
     term: "Managed Agent",
     definition: "A human-owned agent that operates independently in most cases but has an associated controller key for human overrides.",
     link: "/docs/introduction#agency-tiers"
+  },
+  {
+    term: "Proof of Agenthood",
+    definition: "A signed credential layer for Theseus agents at /poa. Anyone can verify; operators sign once with the controller key. Sovereign agents are issuable by anyone; managed agents require a controller signature. Revocation is operator-initiated and reflected on the next verifier check.",
+    link: "/poa"
   },
   {
     term: "Prover",

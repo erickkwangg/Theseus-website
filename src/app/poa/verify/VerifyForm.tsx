@@ -163,7 +163,7 @@ function JwsForm() {
             </ToolbarButton>
             <ToolbarButton
               onClick={onClear}
-              aria-label="Clear token"
+              aria-label="Clear credential token"
               disabled={!jws}
             >
               Clear
@@ -189,7 +189,7 @@ function JwsForm() {
             ? shape?.ok
               ? "shape ok · 3 base64url segments"
               : `shape: ${shape?.count ?? 0} segment${shape?.count === 1 ? "" : "s"} (expected 3, base64url)`
-            : "no token? create one at /poa/claim, or look up an agent at /poa"}
+            : "no credential token? create one at /poa/claim, or look up an agent at /poa"}
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -310,7 +310,7 @@ function ResultCard({ data }: { data: VerifyResponse }) {
               invalid
             </span>
             <p className="mt-2 text-[13px] text-rose-800 dark:text-rose-200">
-              The signature on this token isn&apos;t one we issued.
+              The signature on this credential token isn&apos;t one we issued.
             </p>
             <code className="mt-2 block break-all font-mono text-[11px] text-rose-700 dark:text-rose-200">
               {data.reason}
