@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
@@ -7,9 +8,14 @@ import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "./_components/ChainModeBanner";
 import AgentLookupBar from "./_components/AgentLookupBar";
+import Glyph from "./_components/Glyph";
 import FreshnessGauge from "./_components/FreshnessGauge";
 import Seal from "./_components/Seal";
-import Glyph from "./_components/Glyph";
+import {
+  VerifyFlow,
+  ClaimFlow,
+  CredentialAnatomy,
+} from "./_components/Diagrams";
 
 // /poa landing: two distinct product cards. Each one looks and feels like
 // its own product (numbered, wordmarked, tagged with its audience, and
@@ -105,32 +111,6 @@ export default function PoaLanding() {
                     ))}
                   </div>
 
-                  <details className="group mt-6">
-                    <summary className="flex cursor-pointer items-center gap-2 text-[12.5px] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                      <span
-                        aria-hidden
-                        className="font-mono text-[12px] text-slate-500 transition-transform group-open:rotate-90 dark:text-slate-400"
-                      >
-                        ▸
-                      </span>
-                      First time here? What is this?
-                    </summary>
-                    <div className="mt-3 max-w-xl space-y-3 text-[13px] leading-relaxed text-slate-700 dark:text-slate-300">
-                      <p>
-                        Theseus agents are autonomous programs that run on-chain.
-                        They hold their own keys, balance, and behavior graph.
-                        Anyone interacting with one wants to know: is this
-                        really <em>that</em> agent? Has its capability surface
-                        changed?
-                      </p>
-                      <p>
-                        A Proof of Agenthood credential is a portable, signed
-                        receipt of what the chain says. You can verify it
-                        without trusting us. Paste the JWS, fetch the public
-                        JWKS, or use any JOSE-compatible library.
-                      </p>
-                    </div>
-                  </details>
                 </div>
 
                 {/* product mark: what verify returns */}
@@ -141,6 +121,61 @@ export default function PoaLanding() {
                   </span>
                 </div>
               </div>
+
+              {/* Verify flow: kills a wall of prose. */}
+              <div className="mt-10 border-t border-slate-400/30 pt-7 dark:border-slate-500/30">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
+                    What happens
+                  </span>
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    server-side, no auth
+                  </span>
+                </div>
+                <VerifyFlow className="mt-4 w-full max-w-[480px]" />
+              </div>
+
+              {/* First-time onboarding: visual instead of prose. */}
+              <details className="group mt-8">
+                <summary className="flex cursor-pointer items-center gap-2 text-[12.5px] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
+                  <span
+                    aria-hidden
+                    className="font-mono text-[12px] text-slate-500 transition-transform group-open:rotate-90 dark:text-slate-400"
+                  >
+                    ▸
+                  </span>
+                  First time here? See the anatomy of a credential.
+                </summary>
+                <div className="mt-5 grid gap-y-6 sm:grid-cols-[auto_1fr] sm:gap-x-8">
+                  <CredentialAnatomy className="w-full max-w-[460px]" />
+                  <div className="space-y-3 text-[13px] leading-relaxed text-slate-700 dark:text-slate-300">
+                    <p>
+                      Theseus agents are autonomous programs that run on-chain.
+                      Anyone interacting with one wants to know it&apos;s really
+                      that agent.
+                    </p>
+                    <p>
+                      A credential is a portable, signed receipt of what the
+                      chain says. Verify it without trusting us: paste the JWS,
+                      fetch the public JWKS, or use any JOSE-compatible library.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
+                    Where this fits in Theseus
+                  </span>
+                  <div className="mt-3 max-w-[760px] overflow-hidden rounded border border-slate-400/30 bg-white/40 p-2 dark:border-slate-500/30 dark:bg-slate-900/40">
+                    <Image
+                      src="/theseus-architecture-diagram.png"
+                      alt="Theseus architecture: chain, provers, blessed enclave, bridge"
+                      width={1600}
+                      height={900}
+                      className="h-auto w-full"
+                    />
+                  </div>
+                </div>
+              </details>
 
               {/* footer: URL stamp + secondary action */}
               <div className="mt-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">
@@ -213,6 +248,19 @@ export default function PoaLanding() {
                     you publish: a signed seal
                   </span>
                 </div>
+              </div>
+
+              {/* Claim flow */}
+              <div className="mt-8 border-t border-slate-400/30 pt-6 dark:border-slate-500/30">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
+                    What you sign
+                  </span>
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    one-time nonce
+                  </span>
+                </div>
+                <ClaimFlow className="mt-4 w-full max-w-[480px]" />
               </div>
 
               <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">

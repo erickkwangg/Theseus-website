@@ -7,6 +7,7 @@ import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import VerifyForm from "./VerifyForm";
 import VerificationRecipes from "./VerificationRecipes";
+import { JwsShape, BadgeMockup } from "../_components/Diagrams";
 
 export const metadata: Metadata = {
   title: "Verify a Proof of Agenthood credential",
@@ -58,6 +59,15 @@ export default function VerifyPage() {
 
       <section className="px-6 py-12 lg:py-20">
         <div className="mx-auto max-w-[1100px]">
+          {/* JWS shape ahead of the form, so users know what they're pasting. */}
+          <div className="mb-10 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
+            <JwsShape className="w-full max-w-[420px] text-slate-700 dark:text-slate-200" />
+            <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
+              A compact JWS is three base64url segments joined by dots. Header
+              and payload are public; the signature is what we check against
+              the published JWKS.
+            </p>
+          </div>
           <VerifyForm />
         </div>
       </section>
@@ -85,6 +95,19 @@ export default function VerifyPage() {
             don&apos;t treat it as a contract.
           </p>
           <VerificationRecipes />
+
+          {/* Badge mockup: shows what consumers do with verified credentials. */}
+          <div className="mt-12 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
+            <BadgeMockup className="w-full max-w-[360px] text-slate-700 dark:text-slate-200" />
+            <p className="max-w-md text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
+              The point of a verified credential is that someone else uses it.
+              A protocol fronting your agent on its own page can embed a small
+              &ldquo;verified&rdquo; badge that links back to{" "}
+              <code className="font-mono">/poa/&lt;agentId&gt;</code>. We don&apos;t
+              ship a hosted widget yet. Render whatever you like from the
+              signed claims.
+            </p>
+          </div>
         </div>
       </section>
 
