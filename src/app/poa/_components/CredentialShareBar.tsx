@@ -88,9 +88,9 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
             void nativeShare();
           }}
           className="cta-shareLink"
-          aria-label="Share this credential"
+          aria-label="Share this credential to social or system share sheet"
         >
-          Share
+          Post / Share via…
         </button>
 
         <button

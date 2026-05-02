@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -26,8 +26,18 @@ export default function AgentLookupBar({
   const [agentId, setAgentId] = useState("");
   const router = useRouter();
   const [pending, start] = useTransition();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const isProminent = variant === "prominent";
+
+  // autoFocus on desktop only. On mobile (< 768px) auto-focusing the input
+  // pops the soft keyboard immediately, hiding half the page on first paint.
+  useEffect(() => {
+    if (!autoFocus) return;
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+    inputRef.current?.focus();
+  }, [autoFocus]);
 
   return (
     <form
@@ -46,10 +56,10 @@ export default function AgentLookupBar({
           <span className="poa-stamp">Look up an agent</span>
         )}
         <input
+          ref={inputRef}
           value={agentId}
           onChange={(e) => setAgentId(e.target.value.trim())}
           placeholder={placeholder}
-          autoFocus={autoFocus}
           style={{
             borderColor: "var(--poa-rule, rgba(20,17,13,0.20))",
             color: "var(--poa-ink, #14110D)",

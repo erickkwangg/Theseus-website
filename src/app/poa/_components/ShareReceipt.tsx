@@ -67,6 +67,12 @@ export default function ShareReceipt({
             View public page →
           </Link>
           <Link
+            href="/poa/claim"
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-700 underline decoration-slate-400/60 underline-offset-[4px] hover:text-indigo-700 dark:text-slate-200 dark:hover:text-indigo-300"
+          >
+            Create another →
+          </Link>
+          <Link
             href={credentialUrl}
             target="_blank"
             className="font-mono text-[11px] underline decoration-slate-400/60 underline-offset-[4px] hover:text-indigo-700 dark:hover:text-indigo-300"
