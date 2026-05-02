@@ -42,8 +42,10 @@ export default function PoaLanding() {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <ChainModeBanner mode={chainMode()} />
-      <PoaNav />
+      <div className="pt-16">
+        <ChainModeBanner mode={chainMode()} />
+        <PoaNav />
+      </div>
 
       {/* Hero: title and tagline. The specimen lives in the lookup section
           below, not as a separate artifact above. */}

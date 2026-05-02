@@ -55,6 +55,12 @@ export default function RevokeButton({
   if (alreadyRevoked) return null;
 
   async function connect() {
+    // Fixture mode has no real controller wallet; dev-sign vouches for the
+    // fixture controllers. Skip the wallet connect entirely.
+    if (mode === "fixture") {
+      setState({ kind: "ready", controllerInWallet: true });
+      return;
+    }
     setState({ kind: "connecting" });
     try {
       const wallet = await import("./walletClient");

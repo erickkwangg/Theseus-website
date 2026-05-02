@@ -10,13 +10,8 @@ import { PoaCredentialJsonLd } from "@/components/JsonLd";
 import CredentialDocument from "../_components/CredentialDocument";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
-import ImageSlot from "../_components/ImageSlot";
 import CredentialShareBar from "../_components/CredentialShareBar";
 import RevokeButton from "../_components/RevokeButton";
-
-function portraitSlug(name: string): string {
-  return name.toLowerCase().split(" ")[0];
-}
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +32,16 @@ export default async function PoaCredentialPage({ params }: Props) {
     undefined;
   try {
     stored = await credentialStore.latestByAgent(agentId);
+    // latestByAgent filters out revoked credentials, but a public
+    // credential URL that's been revoked should still show the artifact
+    // with a VOID watermark instead of falling back to "no credential
+    // yet". Reach into byAgent if there's nothing active.
+    if (!stored) {
+      const all = await credentialStore.byAgent(agentId);
+      if (all.length > 0) {
+        stored = all.sort((a, b) => b.issuedAt - a.issuedAt)[0];
+      }
+    }
   } catch {
     // Store unreachable. Page still renders without a credential body.
   }
@@ -81,35 +86,21 @@ export default async function PoaCredentialPage({ params }: Props) {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <ChainModeBanner
-        mode={mode}
-        chainError={chainError}
-        livePolkadotBlock={liveBlock}
-        pollAgentId={mode === "polkadot" ? agentId : undefined}
-      />
-      <PoaNav />
+      <div className="pt-16">
+        <ChainModeBanner
+          mode={mode}
+          chainError={chainError}
+          livePolkadotBlock={liveBlock}
+          pollAgentId={mode === "polkadot" ? agentId : undefined}
+        />
+        <PoaNav />
+      </div>
 
-      {/* Top signage: tiny stamp + portrait. No outer card. */}
-      <section className="px-4 pt-28 pb-4 lg:pt-32">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <p className="poa-stamp">Proof of Agenthood</p>
-          {liveSnapshot && !chainError && (
-            <ImageSlot
-              src={`/poa/agents/${portraitSlug(liveSnapshot.name)}.png`}
-              alt={`Portrait of ${liveSnapshot.name}`}
-              width={400}
-              height={400}
-              className="mt-5 w-[72px]"
-              imgClassName="rounded-full [filter:drop-shadow(0_8px_18px_rgb(20_17_13_/_0.18))]"
-              fallback={null}
-            />
-          )}
-        </div>
-      </section>
-
-      {/* The credential, centered. */}
+      {/* The credential, centered. The card's own header rail carries the
+          "Proof of Agenthood" wordmark; no redundant top signage above it.
+          When there's no credential we render the empty-state strip instead. */}
       {stored && !chainError && (
-        <section className="px-3 sm:px-4 lg:px-6 pb-4">
+        <section className="px-3 sm:px-4 lg:px-6 pt-10 pb-4 lg:pt-16">
           <PoaCredentialJsonLd
             agentId={agentId}
             agentName={stored.claims.agent.name}
@@ -129,7 +120,7 @@ export default async function PoaCredentialPage({ params }: Props) {
               />
             </div>
 
-            {stored.claims.agent.controller && (
+            {stored.claims.agent.controller && !revocation && (
               <div
                 className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5 print:hidden"
                 style={{ borderColor: "var(--poa-rule)" }}
@@ -145,7 +136,7 @@ export default async function PoaCredentialPage({ params }: Props) {
                   agentId={agentId}
                   controller={stored.claims.agent.controller}
                   mode={mode}
-                  alreadyRevoked={!!revocation}
+                  alreadyRevoked={false}
                 />
               </div>
             )}

@@ -51,8 +51,10 @@ export default async function AgentsDirectory() {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <ChainModeBanner mode={chainMode()} />
-      <PoaNav />
+      <div className="pt-16">
+        <ChainModeBanner mode={chainMode()} />
+        <PoaNav />
+      </div>
 
       <section className="px-6 pt-20 pb-6 lg:pt-28">
         <div className="mx-auto max-w-5xl">

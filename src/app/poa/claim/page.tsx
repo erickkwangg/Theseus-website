@@ -44,8 +44,10 @@ export default function ClaimPage() {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <ChainModeBanner mode={chainMode()} />
-      <PoaNav />
+      <div className="pt-16">
+        <ChainModeBanner mode={chainMode()} />
+        <PoaNav />
+      </div>
 
       <section className="px-6 pt-28 pb-2 lg:pt-36">
         <div className="mx-auto max-w-3xl text-center">

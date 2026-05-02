@@ -34,8 +34,10 @@ export default function VerifyPage() {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <ChainModeBanner mode={chainMode()} />
-      <PoaNav />
+      <div className="pt-16">
+        <ChainModeBanner mode={chainMode()} />
+        <PoaNav />
+      </div>
 
       {/* Hero: a single instruction. No diagram, no chrome. */}
       <section className="px-6 pt-28 pb-2 lg:pt-36">

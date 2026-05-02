@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import logo from "@/assets/logo.svg";
@@ -69,14 +70,11 @@ const LABEL_MOBILE_CLASS = [
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const pathname = usePathname() ?? "/";
+  // Homepage section anchors (01 Mission, 02 Agents, etc.) only resolve on
+  // "/", so hide them on every other route. Off-home pages get logo + theme
+  // toggle, plus a hamburger that still opens the full nav from the sheet.
+  const isHome = pathname === "/";
 
   return (
     <header
@@ -157,34 +155,36 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
-            <ul className="pointer-events-auto flex items-center gap-8">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.label}>
-                  {item.external ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={DESKTOP_LINK_CLASS}
-                    >
-                      <span className={NUMBER_DESKTOP_CLASS}>
-                        {item.number}
-                      </span>{" "}
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link href={item.href} className={DESKTOP_LINK_CLASS}>
-                      <span className={NUMBER_DESKTOP_CLASS}>
-                        {item.number}
-                      </span>{" "}
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {isHome && (
+            <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+              <ul className="pointer-events-auto flex items-center gap-8">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.label}>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={DESKTOP_LINK_CLASS}
+                      >
+                        <span className={NUMBER_DESKTOP_CLASS}>
+                          {item.number}
+                        </span>{" "}
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={item.href} className={DESKTOP_LINK_CLASS}>
+                        <span className={NUMBER_DESKTOP_CLASS}>
+                          {item.number}
+                        </span>{" "}
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="flex items-center gap-3">
             <Link
