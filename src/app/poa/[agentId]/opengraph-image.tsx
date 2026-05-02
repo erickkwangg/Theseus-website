@@ -34,8 +34,19 @@ export default async function OgImage({ params }: Props) {
     // OG image is best-effort; fall back to defaults if chain is unreachable.
   }
 
-  const cells = sigilCells(agentId + abgHash, 6, 56);
-  const checksum = checksum6(agentId + abgHash);
+  const seed = agentId + abgHash;
+  const sigilSize = 360;
+  const cells = sigilCells(seed, 8, sigilSize);
+  const checksum = checksum6(seed);
+  const badge: { letter: string; fill: "solid" | "half" | "outline" } | null =
+    grade === "full"
+      ? { letter: "K", fill: "solid" }
+      : grade === "mixed"
+        ? { letter: "M", fill: "half" }
+        : grade === "lite"
+          ? { letter: "S", fill: "outline" }
+          : null;
+  const badgeR = sigilSize * 0.13;
 
   return new ImageResponse(
     (
@@ -125,11 +136,13 @@ export default async function OgImage({ params }: Props) {
           >
             <div
               style={{
-                width: 56 * 6,
-                height: 56 * 6,
+                width: sigilSize,
+                height: sigilSize,
                 position: "relative",
                 display: "flex",
-                background: "#E2D8C8",
+                background: "#F1EAE1",
+                border: "2px solid rgba(20,17,13,0.18)",
+                borderRadius: 2,
               }}
             >
               {cells.map((c, i) => (
@@ -141,10 +154,35 @@ export default async function OgImage({ params }: Props) {
                     top: c.y,
                     width: c.size,
                     height: c.size,
-                    background: `rgba(67, 56, 202, ${c.opacity})`,
+                    background: "rgba(20,17,13,0.82)",
                   }}
                 />
               ))}
+              {badge && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: 18,
+                    top: 18,
+                    width: badgeR * 2,
+                    height: badgeR * 2,
+                    borderRadius: "50%",
+                    border: "2px solid #7B1E1E",
+                    background:
+                      badge.fill === "solid" ? "#7B1E1E" : "#F1EAE1",
+                    color:
+                      badge.fill === "solid" ? "#F1EAE1" : "#7B1E1E",
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    fontSize: badgeR * 1.2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {badge.letter}
+                </div>
+              )}
             </div>
             <div
               style={{
@@ -191,7 +229,7 @@ function fnv1a(seed: string): number[] {
     h = Math.imul(h, 0x01000193) >>> 0;
     bytes.push(h & 0xff);
   }
-  while (bytes.length < 36) {
+  while (bytes.length < 64) {
     h = Math.imul(h ^ bytes.length, 0x01000193) >>> 0;
     bytes.push(h & 0xff);
   }
@@ -207,24 +245,22 @@ function checksum6(seed: string): string {
     .toUpperCase();
 }
 
-function sigilCells(seed: string, grid: number, cellSize: number) {
+// Same algorithm as Sigil v3 in src/app/poa/_components/Sigil.tsx: an 8x8
+// mirrored grid with binary cells (drawn only when the hash byte clears the
+// threshold). Keeps social preview visuals in sync with the credential page.
+function sigilCells(seed: string, grid: number, totalSize: number) {
   const bytes = fnv1a(seed);
-  const cells: { x: number; y: number; size: number; opacity: number }[] = [];
+  const cellSize = totalSize / grid;
+  const cells: { x: number; y: number; size: number }[] = [];
   for (let y = 0; y < grid; y++) {
     for (let x = 0; x < grid / 2; x++) {
-      const v = bytes[y * (grid / 2) + x];
-      const opacity = (v / 255) * 0.95;
-      cells.push({
-        x: x * cellSize,
-        y: y * cellSize,
-        size: cellSize,
-        opacity,
-      });
+      const v = bytes[16 + y * (grid / 2) + x];
+      if (v < 128) continue;
+      cells.push({ x: x * cellSize, y: y * cellSize, size: cellSize });
       cells.push({
         x: (grid - 1 - x) * cellSize,
         y: y * cellSize,
         size: cellSize,
-        opacity,
       });
     }
   }
