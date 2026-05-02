@@ -8,6 +8,7 @@ import {
   looksLikeSs58,
 } from "@/lib/poa/validation";
 import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
+import { checkRateLimit, rateLimited } from "@/lib/poa/ratelimit";
 
 // POST /poa/api/revoke
 //
@@ -42,6 +43,21 @@ type Body = {
 };
 
 export async function POST(req: Request) {
+  // Revoke is gated by a controller signature already; the rate limit is
+  // mostly to avoid challenge-spamming. 10 per 5 minutes is plenty.
+  const rl = await checkRateLimit(req, {
+    route: "revoke",
+    limit: 10,
+    windowSec: 300,
+  });
+  if (!rl.allowed) {
+    const out = rateLimited(rl);
+    return NextResponse.json(out.body, {
+      status: out.status,
+      headers: out.headers,
+    });
+  }
+
   let body: Body;
   try {
     body = await req.json();

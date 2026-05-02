@@ -10,6 +10,7 @@ import { evaluateRevocation } from "@/lib/poa/revocation";
 import { groupIntents, type IntentCategory } from "@/lib/poa/intents";
 import { LIMITS } from "@/lib/poa/validation";
 import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
+import { checkRateLimit, rateLimited } from "@/lib/poa/ratelimit";
 
 type VerifyBody = { jws?: unknown };
 
@@ -42,6 +43,22 @@ type VerifyResult = {
 };
 
 export async function POST(req: Request) {
+  // 60 verifies per minute per IP. Verify is the most-hit endpoint; the
+  // limit is generous enough for a developer hammering recipes but not for
+  // abuse traffic.
+  const rl = await checkRateLimit(req, {
+    route: "verify",
+    limit: 60,
+    windowSec: 60,
+  });
+  if (!rl.allowed) {
+    const out = rateLimited(rl);
+    return NextResponse.json(out.body, {
+      status: out.status,
+      headers: out.headers,
+    });
+  }
+
   let jws: string | null = null;
   const ct = (req.headers.get("content-type") ?? "").toLowerCase();
   try {

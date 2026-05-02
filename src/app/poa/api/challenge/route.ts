@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import { challengeStore } from "@/lib/poa/store";
 import { LIMITS, isBoundedString, looksLikeSs58 } from "@/lib/poa/validation";
 import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
+import { checkRateLimit, rateLimited } from "@/lib/poa/ratelimit";
 
 const CHALLENGE_TTL_MS = 5 * 60 * 1000;
 
@@ -13,6 +14,21 @@ function errMsg(err: unknown): string {
 }
 
 export async function POST(req: Request) {
+  // 20 challenges per 5 minutes. Each mint or revoke needs one challenge,
+  // and developers iterating the recipes might burn a few.
+  const rl = await checkRateLimit(req, {
+    route: "challenge",
+    limit: 20,
+    windowSec: 300,
+  });
+  if (!rl.allowed) {
+    const out = rateLimited(rl);
+    return NextResponse.json(out.body, {
+      status: out.status,
+      headers: out.headers,
+    });
+  }
+
   let body: { agentId?: unknown };
   try {
     body = await req.json();

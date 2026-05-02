@@ -4,6 +4,7 @@ import { issueCredential } from "@/lib/poa/issue";
 import { challengeStore } from "@/lib/poa/store";
 import { LIMITS, isBoundedString, isHexString, looksLikeSs58 } from "@/lib/poa/validation";
 import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
+import { checkRateLimit, rateLimited } from "@/lib/poa/ratelimit";
 
 type IssueBody = {
   agentId?: unknown;
@@ -11,6 +12,21 @@ type IssueBody = {
 };
 
 export async function POST(req: Request) {
+  // 5 mints per 5-minute window per IP. Mint touches the chain reader and
+  // writes a credential; tighter than verify.
+  const rl = await checkRateLimit(req, {
+    route: "issue",
+    limit: 5,
+    windowSec: 300,
+  });
+  if (!rl.allowed) {
+    const out = rateLimited(rl);
+    return NextResponse.json(out.body, {
+      status: out.status,
+      headers: out.headers,
+    });
+  }
+
   let body: IssueBody;
   try {
     body = await req.json();
