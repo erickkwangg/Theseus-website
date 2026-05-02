@@ -10,7 +10,6 @@ import ChainModeBanner from "./_components/ChainModeBanner";
 import AgentLookupBar from "./_components/AgentLookupBar";
 import Glyph from "./_components/Glyph";
 import FreshnessGauge from "./_components/FreshnessGauge";
-import Seal from "./_components/Seal";
 import {
   VerifyFlow,
   ClaimFlow,
@@ -36,19 +35,31 @@ export default function PoaLanding() {
       <Header />
       <ChainModeBanner mode={chainMode()} />
 
-      {/* Slim hero strip: just the wordmark + the question. */}
+      {/* Hero strip: rich credential artifact + the question. */}
       <section className="px-6 pt-24 pb-2 lg:pt-28">
         <div className="mx-auto max-w-5xl">
           <SectionHeader
             label="Proof of Agenthood"
             number="00"
-            className="mb-8"
+            className="mb-10"
           />
-          <p className="font-serif text-2xl leading-[1.15] text-slate-800 sm:text-3xl lg:text-4xl dark:text-slate-100">
-            Two utilities for one question:
-            <br />
-            <span className="italic">is this agent what it says it is?</span>
-          </p>
+          <div className="grid items-center gap-y-8 lg:grid-cols-[1.1fr_1fr] lg:gap-x-14">
+            <p className="font-serif text-2xl leading-[1.15] text-slate-800 sm:text-3xl lg:text-4xl dark:text-slate-100">
+              Two utilities for one question:
+              <br />
+              <span className="italic">is this agent what it says it is?</span>
+            </p>
+            <div className="flex justify-center lg:justify-end">
+              <Image
+                src="/poa/hero-credential.png"
+                alt="A Proof of Agenthood credential — paper card with embossed wordmark, agent name, and a wax seal."
+                width={1200}
+                height={700}
+                priority
+                className="h-auto w-full max-w-[460px] [filter:drop-shadow(0_18px_30px_rgb(15_23_42_/_0.18))] dark:[filter:drop-shadow(0_18px_30px_rgb(0_0_0_/_0.45))]"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -238,11 +249,12 @@ export default function PoaLanding() {
                 </div>
 
                 <div className="flex flex-col items-center gap-3 lg:items-end">
-                  <Seal
-                    status="attested"
-                    label="Attested"
-                    caption="THESEUS"
-                    size={104}
+                  <Image
+                    src="/poa/wax-seal.png"
+                    alt="A red wax seal pressed into cream paper, an ornamental floral mark."
+                    width={600}
+                    height={450}
+                    className="h-auto w-[150px] [filter:drop-shadow(0_8px_18px_rgb(15_23_42_/_0.22))]"
                   />
                   <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                     you publish: a signed seal
