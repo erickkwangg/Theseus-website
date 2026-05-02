@@ -11,38 +11,38 @@ const baseSnapshotMeta = {
 };
 
 const FIXTURES: Record<SS58Address, AgentSnapshot> = {
-  "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY": {
-    agentId: "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
-    name: "Iris Treasury",
-    summary: "Autonomous USDC treasury that supplies idle stablecoin to lending markets within a fixed mandate.",
-    abgHash: "0xa3f9e2c7b4d186e02f4a91c7e8b5d2f3a1c9e6d4b7a8c2e5f1d9b3a6c8e0f2d4",
-    abgVersion: 3,
+  "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL": {
+    agentId: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    name: "Themis Notary",
+    summary:
+      "Independent agentic timestamping and witness service for digital documents. Each attestation carries Themis's seal; anyone can verify it against the on-chain credential.",
+    abgHash: "0xd2e7f8a4c1b9e6d3a8f5c2b9e4d7a0f3c6b9d2e5f8a1b4c7d0e3f6a9b2c5d8e1",
+    abgVersion: 1,
     sovereign: true,
     controller: null,
     capabilities: {
-      models: ["gpt-oss-120b"],
-      tools: ["buy_sell_tokens"],
+      models: ["claude-opus-4-7"],
+      tools: ["sign_attestation", "hash_document", "verify_signature"],
       intentTypes: [
-        "transfer",
-        "approve",
-        "supply",
-        "withdraw",
-        "swap",
+        "timestamp",
+        "witness",
+        "sign_attestation",
+        "verify_proof",
         "context_update",
       ],
       subAgents: [],
     },
     registration: {
-      atBlock: 1_100_000,
+      atBlock: 1_080_000,
       registrar: "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
     },
-    funding: { seusBalance: "150000000000", active: true },
+    funding: { seusBalance: "200000000000", active: true },
     recentRuns: {
       sampledRuns: 50,
       inferenceMix: { kzg: 50, signatureOnly: 0 },
       grade: "full",
     },
-    enclaveBound: false,
+    enclaveBound: true,
     ...baseSnapshotMeta,
   },
   "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty": {

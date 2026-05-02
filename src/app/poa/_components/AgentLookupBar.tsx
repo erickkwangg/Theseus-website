@@ -43,21 +43,23 @@ export default function AgentLookupBar({
     >
       <label className="flex-1">
         {showLabel && (
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-            Look up an agent
-          </span>
+          <span className="poa-stamp">Look up an agent</span>
         )}
         <input
           value={agentId}
           onChange={(e) => setAgentId(e.target.value.trim())}
           placeholder={placeholder}
           autoFocus={autoFocus}
+          style={{
+            borderColor: "var(--poa-rule, rgba(20,17,13,0.20))",
+            color: "var(--poa-ink, #14110D)",
+          }}
           className={cn(
-            "w-full border-b bg-transparent text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300",
+            "w-full border-b bg-transparent placeholder:text-[color:var(--poa-sepia,#8A7864)] focus:border-[color:var(--poa-ink,#14110D)] focus:outline-none",
             showLabel ? "mt-2" : "",
             isProminent
-              ? "border-slate-400/70 py-3 font-mono text-[16px] sm:text-[18px] dark:border-slate-600/70"
-              : "border-slate-400/60 py-2 font-mono text-[13px] dark:border-slate-600/60",
+              ? "py-3 font-mono text-[16px] sm:text-[18px]"
+              : "py-2 font-mono text-[13px]",
           )}
         />
       </label>
@@ -65,10 +67,8 @@ export default function AgentLookupBar({
         type="submit"
         disabled={pending || !agentId.trim()}
         className={cn(
-          "inline-flex items-center rounded-md font-medium tracking-wide",
-          isProminent
-            ? "primary-cta px-7 py-3.5 text-base"
-            : "ghost-cta px-5 py-2.5 text-sm",
+          "cta-ink inline-flex items-center font-medium tracking-wide",
+          isProminent ? "px-7 py-3.5 text-base" : "px-5 py-2.5 text-sm",
           (pending || !agentId.trim()) && "opacity-60",
         )}
       >

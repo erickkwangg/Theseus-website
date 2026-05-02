@@ -21,7 +21,7 @@ type Props = {
 };
 
 const SECTION_GAP =
-  "px-4 py-4 sm:px-6 sm:py-5 border-t border-slate-300/70 dark:border-slate-700/55";
+  "px-4 py-4 sm:px-6 sm:py-5 border-t border-[color:var(--poa-rule)]";
 
 export default function CredentialDocument({
   credential,
@@ -42,51 +42,56 @@ export default function CredentialDocument({
   return (
     <article
       aria-label="Proof of Agenthood credential"
+      style={{
+        backgroundColor: "var(--poa-paper-card)",
+        borderColor: agent.sovereign
+          ? "color-mix(in srgb, var(--poa-ink) 28%, transparent)"
+          : "var(--poa-rule)",
+      }}
       className={cn(
-        "poa-paper poa-materialize relative border bg-white/72 backdrop-blur-[2px]",
-        // Sovereign agents get a quiet double-frame. Controller-retained get
-        // a single rule.
-        agent.sovereign
-          ? "border-indigo-700/30 poa-double-frame dark:border-indigo-300/30"
-          : "border-slate-300/70 dark:border-slate-700/55",
+        "poa-paper poa-materialize relative border",
+        agent.sovereign && "poa-double-frame",
         // Lite-grade agents read as "less verified" via subtle desaturation.
         agent.recentRuns.grade === "lite" && "poa-lite",
-        "dark:bg-slate-900/45",
+        // Revoked credentials carry a diagonal VOID watermark.
+        revocation && "poa-void",
         className,
       )}
     >
       {/* Top bar: file header */}
-      <header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-slate-300/70 px-4 py-3 sm:px-6 dark:border-slate-700/55">
-        <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
-          <Glyph name="scroll" size={14} className="text-slate-500 dark:text-slate-400" />
+      <header
+        className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b px-4 py-3 sm:px-6"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
+        <span className="flex items-center gap-2 poa-stamp">
+          <Glyph name="scroll" size={14} />
           Proof of Agenthood
         </span>
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-          kid · theseus-poa-2026-04
-        </span>
+        <span className="poa-stamp">kid · theseus-poa-2026-04</span>
       </header>
 
       {/* Identity block: name + summary lead, big sigil + checksum on the side. */}
       <section className="border-t-0 px-6 py-9 sm:px-10 sm:py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-[1fr_auto] sm:gap-12">
           <div className="min-w-0">
-            <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+            <span className="flex items-center gap-2 poa-stamp">
               <Glyph
                 name={agent.sovereign ? "sovereign" : "controller"}
                 size={13}
               />
               {agent.sovereign ? "Sovereign agent" : "Agent"}
             </span>
-            <h2 className="mt-3 font-serif text-3xl leading-[1.1] tracking-tight text-slate-900 [text-wrap:balance] sm:text-4xl lg:text-[44px] dark:text-slate-50">
+            <h2 className="poa-write-in mt-3 font-serif text-3xl leading-[1.1] tracking-tight text-[var(--poa-ink)] [text-wrap:balance] sm:text-4xl lg:text-[44px]">
               {agent.name}
             </h2>
             {/* Tiny ornamental rule under the name. */}
             <div
-              className="mt-4 h-px w-12 bg-indigo-700/40 dark:bg-indigo-300/40"
+              className="mt-4 h-px w-12"
+              style={{ backgroundColor: "var(--poa-wax)" }}
               aria-hidden
             />
             {agent.summary && (
-              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--poa-ink-soft)]">
                 {agent.summary}
               </p>
             )}
@@ -99,7 +104,7 @@ export default function CredentialDocument({
               grade={agent.recentRuns.grade}
               shimmer={status === "attested"}
             />
-            <span className="font-serif text-[34px] italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
+            <span className="font-serif text-[34px] italic leading-none tracking-tight text-[var(--poa-ink)]">
               {checksum}
             </span>
           </div>
@@ -157,7 +162,10 @@ export default function CredentialDocument({
           }
         />
         {agent.recentRuns.grade === "unknown" ? (
-          <p className="mt-1 text-[12px] leading-relaxed text-slate-500 dark:text-slate-400">
+          <p
+            className="mt-1 text-[12px] leading-relaxed"
+            style={{ color: "var(--poa-ink-soft)" }}
+          >
             Verification grade requires aggregating recent{" "}
             <code className="font-mono">AgentRuns</code> against{" "}
             <code className="font-mono">Aivm</code> proof results. That&apos;s
@@ -196,13 +204,22 @@ export default function CredentialDocument({
               : "controller-attested · controller signed nonce"
           }
         />
-        <div className="grid grid-cols-1 items-baseline gap-y-0.5 border-b border-slate-200/70 py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+        <div
+          className="grid grid-cols-1 items-baseline gap-y-0.5 border-b py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6"
+          style={{ borderColor: "var(--poa-rule-soft)" }}
+        >
+          <span
+            className="font-mono text-[11px] uppercase tracking-[0.16em]"
+            style={{ color: "var(--poa-sepia)" }}
+          >
             Issued
           </span>
-          <span className="text-[13.5px] leading-relaxed text-slate-800 dark:text-slate-100">
+          <span
+            className="text-[13.5px] leading-relaxed"
+            style={{ color: "var(--poa-ink)" }}
+          >
             {issuedDate} · {issuedTime}{" "}
-            <span className="text-slate-500 dark:text-slate-400">
+            <span style={{ color: "var(--poa-sepia)" }}>
               (
               <RelativeTime epochMs={credential.issuedAt} />)
             </span>
@@ -215,26 +232,23 @@ export default function CredentialDocument({
         <summary
           className={cn(
             SECTION_GAP,
-            "list-none cursor-pointer flex items-baseline justify-between hover:bg-slate-50/60 dark:hover:bg-slate-900/40",
+            "list-none cursor-pointer flex items-baseline justify-between transition-colors hover:bg-[color:var(--poa-rule-soft)]",
           )}
         >
           <span className="flex items-baseline gap-3">
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
+            <span className="poa-stamp" style={{ color: "var(--poa-ink-soft)" }}>
               Machine-readable identity
             </span>
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500 group-open:hidden">
-              expand →
-            </span>
-            <span className="hidden font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500 group-open:inline">
-              ↓ collapse
-            </span>
+            <span className="poa-stamp group-open:hidden">expand →</span>
+            <span className="poa-stamp hidden group-open:inline">↓ collapse</span>
           </span>
-          <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
-            05 · 06
-          </span>
+          <span className="poa-stamp tabular-nums">05 · 06</span>
         </summary>
 
-        <div className="border-t border-slate-300/70 dark:border-slate-700/55">
+        <div
+          className="border-t"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
           <Section number="05" title="Identity">
             <KvRow k="Address" v={agent.agentId} mono copyable />
             <KvRow
@@ -281,9 +295,7 @@ export default function CredentialDocument({
           <section className={SECTION_GAP}>
             <SectionHeading number="06" title="Signature" />
             <div className="mt-2 mb-4 flex items-center gap-3">
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                full JWS
-              </span>
+              <span className="poa-stamp">full JWS</span>
               <CopyButton value={jws} label="JWS" />
             </div>
             <div className="space-y-2">
@@ -296,38 +308,41 @@ export default function CredentialDocument({
       </details>
 
       {/* Footer: real seal */}
-      <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-slate-300/70 px-4 py-5 sm:px-6 dark:border-slate-700/55">
+      <footer
+        className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t px-4 py-5 sm:px-6"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
         <div className="flex items-center gap-4">
-          <Seal
-            status={status}
-            label={status === "attested" ? "Attested" : "Revoked"}
-            caption={
-              status === "attested"
-                ? `BLOCK ${agent.snapshotAtBlock.toLocaleString()}`
-                : (revocation ?? "").replace(/-/g, " ")
-            }
-            size={84}
-          />
+          <div className="poa-seal-press">
+            <Seal
+              status={status}
+              label={status === "attested" ? "Attested" : "Revoked"}
+              caption={
+                status === "attested"
+                  ? `BLOCK ${agent.snapshotAtBlock.toLocaleString()}`
+                  : (revocation ?? "").replace(/-/g, " ")
+              }
+              size={84}
+            />
+          </div>
           <div className="flex flex-col gap-0.5">
             <span
-              className={cn(
-                "font-mono text-[11px] uppercase tracking-[0.18em]",
-                status === "attested"
-                  ? "text-indigo-700 dark:text-indigo-300"
-                  : "text-rose-700 dark:text-rose-300",
-              )}
+              className="font-mono text-[11px] uppercase tracking-[0.18em]"
+              style={{
+                color: status === "attested"
+                  ? "var(--poa-ink)"
+                  : "var(--poa-wax)",
+              }}
             >
               {status === "attested" ? "attested" : "revoked"} ·{" "}
               {issuedDate}
             </span>
-            <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
+            <span className="poa-stamp tabular-nums">
               <RelativeTime epochMs={credential.issuedAt} />
             </span>
           </div>
         </div>
-        <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
-          theseus.network/poa
-        </span>
+        <span className="poa-stamp tabular-nums">theseus.network/poa</span>
       </footer>
     </article>
   );
@@ -353,12 +368,10 @@ function Section({
 function SectionHeading({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-baseline justify-between">
-      <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
+      <span className="poa-stamp" style={{ color: "var(--poa-ink-soft)" }}>
         {title}
       </span>
-      <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
-        {number}
-      </span>
+      <span className="poa-stamp tabular-nums">{number}</span>
     </div>
   );
 }
@@ -369,8 +382,14 @@ function IntentRow({ intentTypes }: { intentTypes: string[] }) {
   }
   const grouped = groupIntents(intentTypes);
   return (
-    <div className="grid grid-cols-1 items-baseline gap-y-1 border-b border-slate-200/70 py-2 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
-      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+    <div
+      className="grid grid-cols-1 items-baseline gap-y-1 border-b py-2 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6"
+      style={{ borderColor: "var(--poa-rule-soft)" }}
+    >
+      <span
+        className="font-mono text-[11px] uppercase tracking-[0.16em]"
+        style={{ color: "var(--poa-sepia)" }}
+      >
         Skills
       </span>
       <div className="flex flex-col gap-1.5">
@@ -380,23 +399,41 @@ function IntentRow({ intentTypes }: { intentTypes: string[] }) {
               className="flex cursor-pointer flex-wrap items-baseline gap-x-3 gap-y-1 list-none"
               title={bundle.useWhen}
             >
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-indigo-700 dark:text-indigo-300">
+              <span
+                className="font-mono text-[10.5px] uppercase tracking-[0.16em]"
+                style={{ color: "var(--poa-wax)" }}
+              >
                 {bundle.name}
               </span>
-              <span className="font-mono text-[12px] text-slate-700 dark:text-slate-200">
+              <span
+                className="font-mono text-[12px]"
+                style={{ color: "var(--poa-ink)" }}
+              >
                 {intents.join(" · ")}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500 group-open:hidden">
+              <span
+                className="font-mono text-[10px] uppercase tracking-[0.16em] group-open:hidden"
+                style={{ color: "var(--poa-sepia)" }}
+              >
                 ?
               </span>
             </summary>
-            <div className="mt-1.5 ml-0 sm:ml-1 text-[12px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <div
+              className="mt-1.5 ml-0 sm:ml-1 text-[12px] leading-relaxed"
+              style={{ color: "var(--poa-ink-soft)" }}
+            >
               <p>{bundle.description}</p>
-              <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+              <p
+                className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em]"
+                style={{ color: "var(--poa-sepia)" }}
+              >
                 use when · {bundle.useWhen}
               </p>
               {bundle.protocols && bundle.protocols.length > 0 && (
-                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                <p
+                  className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em]"
+                  style={{ color: "var(--poa-sepia)" }}
+                >
                   protocols · {bundle.protocols.join(" · ")}
                 </p>
               )}
@@ -426,30 +463,32 @@ function KvRow({
   glyph?: GlyphName;
 }) {
   return (
-    <div className="grid grid-cols-1 items-baseline gap-y-0.5 border-b border-slate-200/70 py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
-      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+    <div
+      className="grid grid-cols-1 items-baseline gap-y-0.5 border-b py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6"
+      style={{ borderColor: "var(--poa-rule-soft)" }}
+    >
+      <span
+        className="font-mono text-[11px] uppercase tracking-[0.16em]"
+        style={{ color: "var(--poa-sepia)" }}
+      >
         {k}
       </span>
       <span
         className={cn(
           "flex flex-wrap items-baseline gap-x-2 break-words text-[13.5px] leading-relaxed",
           mono ? "font-mono text-[12px]" : "",
-          accent
-            ? "text-indigo-700 dark:text-indigo-300"
-            : "text-slate-800 dark:text-slate-100",
         )}
+        style={{
+          color: accent ? "var(--poa-wax)" : "var(--poa-ink)",
+        }}
       >
         {glyph && (
-          <Glyph
-            name={glyph}
-            size={14}
-            className={cn(
-              "shrink-0 self-center",
-              accent
-                ? "text-indigo-700 dark:text-indigo-300"
-                : "text-slate-500 dark:text-slate-400",
-            )}
-          />
+          <span
+            className="inline-flex shrink-0 self-center"
+            style={{ color: accent ? "var(--poa-wax)" : "var(--poa-sepia)" }}
+          >
+            <Glyph name={glyph} size={14} />
+          </span>
         )}
         <span className="break-all">{v}</span>
         {copyable && <CopyButton value={v} label={typeof k === "string" ? k : undefined} />}
@@ -469,16 +508,10 @@ function JwsSegment({
 }) {
   return (
     <div className="grid grid-cols-1 gap-1 sm:grid-cols-[110px_1fr] sm:gap-4">
-      <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-        {label}
-      </span>
+      <span className="poa-stamp">{label}</span>
       <code
-        className={cn(
-          "block break-all font-mono text-[10.5px] leading-relaxed",
-          accent
-            ? "text-indigo-700 dark:text-indigo-300"
-            : "text-slate-700 dark:text-slate-300",
-        )}
+        className="block break-all font-mono text-[10.5px] leading-relaxed"
+        style={{ color: accent ? "var(--poa-wax)" : "var(--poa-ink-soft)" }}
       >
         {value}
       </code>

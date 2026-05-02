@@ -152,20 +152,20 @@ export default function Sigil({
         </radialGradient>
       </defs>
 
-      {/* ground */}
+      {/* ground — blend with cream paper (or warm-dark in dark mode) */}
       <rect
         x={0}
         y={0}
         width={size}
         height={size}
-        className="fill-slate-100 dark:fill-slate-900/60"
+        fill="var(--poa-paper-card, #F1EAE1)"
       />
       <circle
         cx={cx}
         cy={cy}
         r={ringR + 1}
         fill={`url(#sg-${seed.slice(0, 6)})`}
-        className="text-indigo-500"
+        style={{ color: "var(--poa-wax, #7B1E1E)" }}
       />
 
       {/* outer ring (single or double) */}
@@ -175,7 +175,7 @@ export default function Sigil({
         r={ringR}
         fill="none"
         strokeWidth={ringWidth}
-        className="stroke-indigo-700/55 dark:stroke-indigo-300/55"
+        className="stroke-[color:var(--poa-ink,#14110D)]/55"
       />
       {showDoubleRing && (
         <circle
@@ -184,7 +184,8 @@ export default function Sigil({
           r={ringR - 3}
           fill="none"
           strokeWidth={0.6}
-          className="stroke-indigo-700/35 dark:stroke-indigo-300/35"
+          stroke="var(--poa-ink, #14110D)"
+          style={{ opacity: 0.35 }}
         />
       )}
 
@@ -197,7 +198,7 @@ export default function Sigil({
           x2={t.x2}
           y2={t.y2}
           strokeWidth={0.7}
-          className="stroke-indigo-700 dark:stroke-indigo-300"
+          stroke="var(--poa-ink, #14110D)"
           style={{ opacity: t.opacity * fillOpacity }}
         />
       ))}
@@ -210,8 +211,8 @@ export default function Sigil({
           y={c.y}
           width={cell}
           height={cell}
-          className="fill-indigo-600 dark:fill-indigo-300"
-          style={{ opacity: c.opacity * fillOpacity }}
+          fill="var(--poa-ink, #14110D)"
+          style={{ opacity: c.opacity * fillOpacity * 0.85 }}
         />
       ))}
 
@@ -222,8 +223,10 @@ export default function Sigil({
             cx={size - innerPad - 6}
             cy={innerPad + 6}
             r={7}
-            className="fill-slate-100 stroke-indigo-700/60 dark:fill-slate-900 dark:stroke-indigo-300/60"
+            fill="var(--poa-paper-card, #F1EAE1)"
+            stroke="var(--poa-wax, #7B1E1E)"
             strokeWidth={0.8}
+            style={{ opacity: 0.85 }}
           />
           <text
             x={size - innerPad - 6}
@@ -231,7 +234,7 @@ export default function Sigil({
             textAnchor="middle"
             fontSize={8}
             fontFamily="var(--font-mono, ui-monospace, SFMono-Regular, monospace)"
-            className="fill-indigo-700 dark:fill-indigo-300"
+            fill="var(--poa-wax, #7B1E1E)"
             style={{ fontWeight: 600 }}
           >
             {badge}

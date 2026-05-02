@@ -1138,3 +1138,242 @@
 @media (prefers-reduced-motion: reduce) {
   .poa-result-press { animation: none; }
 }
+
+/* ============================================
+   PROOF OF AGENTHOOD: editorial-luxe register
+   Scoped to .poa-shell so the rest of the site's
+   indigo/slate palette is untouched.
+   ============================================ */
+
+.poa-shell {
+  --poa-paper: #FBF7F1;
+  --poa-paper-card: #F1EAE1;
+  --poa-ink: #14110D;
+  --poa-ink-soft: #4A4339;
+  --poa-rule: rgba(20, 17, 13, 0.12);
+  --poa-rule-soft: rgba(20, 17, 13, 0.06);
+  --poa-wax: #7B1E1E;
+  --poa-wax-soft: rgba(123, 30, 30, 0.12);
+  --poa-sepia: #8A7864;
+
+  background: var(--poa-paper);
+  color: var(--poa-ink);
+  position: relative;
+}
+.dark .poa-shell {
+  --poa-paper: #14110D;
+  --poa-paper-card: #1C1812;
+  --poa-ink: #F5EDE0;
+  --poa-ink-soft: #B7AB99;
+  --poa-rule: rgba(245, 237, 224, 0.12);
+  --poa-rule-soft: rgba(245, 237, 224, 0.06);
+  --poa-wax: #C45757;
+  --poa-wax-soft: rgba(196, 87, 87, 0.16);
+  --poa-sepia: #A39482;
+
+  background: var(--poa-paper);
+  color: var(--poa-ink);
+}
+
+/* Suppress the body-level indigo radial gradients while a poa-shell page is mounted. */
+body:has(.poa-shell) {
+  background: var(--poa-paper, #FBF7F1) !important;
+}
+
+/* Header chrome scoped for poa surfaces: ink palette, no indigo, no glow. */
+.poa-shell header { background: color-mix(in srgb, var(--poa-paper) 85%, transparent) !important; backdrop-filter: blur(12px); border-bottom: 1px solid var(--poa-rule); }
+.poa-shell header a { color: var(--poa-ink-soft) !important; text-decoration-color: var(--poa-rule) !important; }
+.poa-shell header a:hover { color: var(--poa-ink) !important; text-decoration-color: var(--poa-ink) !important; }
+.poa-shell header .font-mono { color: var(--poa-sepia) !important; }
+.poa-shell header a:hover .font-mono { color: var(--poa-ink) !important; }
+/* Strip the purple drop-shadow from the logo. */
+.poa-shell header img { filter: brightness(0) opacity(0.85) !important; }
+.dark .poa-shell header img { filter: brightness(0) invert(1) opacity(0.88) !important; }
+
+/* Footer chrome scoped for poa surfaces: drop the violet "Ship your first
+   agent" CTA, neutralize the cool gradient, ink the wordmark. The footer
+   has a nested <div class="hero-card ... bg-[#F1EAE1] dark:bg-slate-900">
+   inner panel — both the outer footer and the inner panel need overriding. */
+.poa-shell footer,
+.poa-shell footer .hero-card {
+  background: var(--poa-paper) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.poa-shell footer .hero-card::before,
+.poa-shell footer .hero-card::after { display: none !important; }
+.poa-shell footer { border-top: 1px solid var(--poa-rule) !important; }
+.poa-shell footer * { background-image: none !important; }
+.poa-shell footer a,
+.poa-shell footer p,
+.poa-shell footer span,
+.poa-shell footer h2,
+.poa-shell footer h3,
+.poa-shell footer div { color: var(--poa-ink-soft) !important; }
+.poa-shell footer h2,
+.poa-shell footer h3 { color: var(--poa-ink) !important; }
+.poa-shell footer a:hover { color: var(--poa-ink) !important; }
+/* Buttons in the footer: ink/paper variables auto-invert across light/dark,
+   so a single rule gives "dark button on cream" in light mode and
+   "cream button on dark" in dark mode. */
+.poa-shell footer button,
+.poa-shell footer .primary-cta {
+  background: var(--poa-ink) !important;
+  color: var(--poa-paper) !important;
+  border: 1px solid var(--poa-ink) !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+}
+.poa-shell footer .ghost-cta {
+  background: transparent !important;
+  color: var(--poa-ink) !important;
+  border: 1px solid var(--poa-ink) !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+}
+.poa-shell footer button:hover,
+.poa-shell footer .primary-cta:hover {
+  background: color-mix(in srgb, var(--poa-ink) 88%, var(--poa-wax) 12%) !important;
+  filter: none !important;
+}
+.poa-shell footer .ghost-cta:hover {
+  background: color-mix(in srgb, var(--poa-ink) 8%, transparent) !important;
+}
+/* Footer logo: flat ink in light, flat cream in dark. */
+.poa-shell footer img { filter: brightness(0) opacity(0.85) !important; }
+.dark .poa-shell footer img { filter: brightness(0) invert(1) opacity(0.88) !important; }
+/* Italic "Think. Act. Verify." accent — wax-red. */
+.poa-shell footer .italic { color: var(--poa-wax) !important; opacity: 0.8; }
+
+/* Inside poa-shell: drop the cool glossy finish on hero-card so the cream
+   feels like paper, not laminate. Keep a thin ink rule + soft drop. */
+.poa-shell .hero-card { box-shadow: 0 0 0 1px var(--poa-rule), 0 22px 44px -28px rgba(20, 17, 13, 0.22); }
+.poa-shell .hero-card::before,
+.poa-shell .hero-card::after { display: none; }
+.dark .poa-shell .hero-card { box-shadow: 0 0 0 1px var(--poa-rule), 0 22px 44px -28px rgba(0, 0, 0, 0.6); }
+
+/* Flat ink CTA — replaces indigo gradient on poa surfaces. */
+.cta-ink {
+  background: var(--poa-ink);
+  color: var(--poa-paper);
+  border: 1px solid var(--poa-ink);
+  border-radius: 2px;
+  transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
+}
+.cta-ink:hover { background: #000; color: #FBF7F1; }
+.cta-ink:active { transform: translateY(1px); }
+.dark .cta-ink:hover { background: #FFFFFF; color: #14110D; }
+
+/* Sepia "watermark" stamp — for URL captions and tiny anchor labels. */
+.poa-stamp {
+  color: var(--poa-sepia);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+/* Diagonal VOID watermark across revoked credentials. */
+.poa-void { position: relative; }
+.poa-void::after {
+  content: "VOID";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif, Georgia, serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(7rem, 18vw, 14rem);
+  color: var(--poa-wax);
+  opacity: 0.12;
+  letter-spacing: 0.18em;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+.dark .poa-void::after { opacity: 0.18; }
+
+/* Drifting light pass on the wax-seal hero artifact. ~9s, soft-light. */
+.poa-light-wrap { position: relative; isolation: isolate; overflow: hidden; }
+.poa-light-wrap::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 35%;
+  height: 120%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  pointer-events: none;
+  animation: poa-light-pass 9s ease-in-out infinite;
+  mix-blend-mode: soft-light;
+  z-index: 2;
+}
+@keyframes poa-light-pass {
+  0%   { transform: translateX(-110%) rotate(20deg); opacity: 0; }
+  20%  { opacity: 0.55; }
+  60%  { opacity: 0.55; }
+  100% { transform: translateX(420%) rotate(20deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .poa-light-wrap::after { animation: none; opacity: 0; }
+}
+
+/* Cinematic focus: hovering one item dims its siblings.
+   Apply to a parent; immediate children dim on parent hover, the hovered
+   child stays at full opacity. */
+.poa-focus-group > * {
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+.poa-focus-group:hover > * { opacity: 0.55; }
+.poa-focus-group:hover > *:hover { opacity: 1; transform: translateY(-1px); }
+
+/* Subtle 2-degree perspective tilt on hover. CSS-only, no JS dependency. */
+.poa-hover-tilt {
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 320ms ease;
+  transform-origin: 50% 70%;
+  will-change: transform;
+}
+.poa-hover-tilt:hover {
+  transform: perspective(1400px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+  filter: drop-shadow(0 24px 36px rgba(20, 17, 13, 0.22));
+}
+
+/* Choreographed stagger for the credential page. The article fades up via
+   poa-materialize; immediate descendants then cascade in. */
+@keyframes poa-cascade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.poa-materialize > * {
+  animation: poa-cascade-in 520ms ease-out both;
+}
+.poa-materialize > *:nth-child(1) { animation-delay: 120ms; }
+.poa-materialize > *:nth-child(2) { animation-delay: 240ms; }
+.poa-materialize > *:nth-child(3) { animation-delay: 360ms; }
+.poa-materialize > *:nth-child(4) { animation-delay: 480ms; }
+.poa-materialize > *:nth-child(5) { animation-delay: 560ms; }
+.poa-materialize > *:nth-child(6) { animation-delay: 640ms; }
+.poa-materialize > *:nth-child(7) { animation-delay: 720ms; }
+.poa-materialize > *:nth-child(n+8) { animation-delay: 800ms; }
+@media (prefers-reduced-motion: reduce) {
+  .poa-materialize > * { animation: none; opacity: 1; transform: none; }
+}
+
+/* Seal press: a slight overshoot when the seal lands. */
+@keyframes poa-seal-press {
+  0%   { transform: scale(0.6) rotate(-8deg); opacity: 0; }
+  55%  { transform: scale(1.06) rotate(0deg); opacity: 1; }
+  80%  { transform: scale(0.98) rotate(0.8deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.poa-seal-press {
+  animation: poa-seal-press 720ms cubic-bezier(0.18, 0.7, 0.2, 1.05) both;
+  animation-delay: 700ms;
+  transform-origin: 50% 50%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .poa-seal-press { animation: none; }
+}

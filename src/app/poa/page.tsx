@@ -1,228 +1,151 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
-import SectionHeader from "@/components/Pages/Home/SectionHeader";
 import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "./_components/ChainModeBanner";
 import AgentLookupBar from "./_components/AgentLookupBar";
-import Glyph from "./_components/Glyph";
-import FreshnessGauge from "./_components/FreshnessGauge";
+import Sigil from "./_components/Sigil";
+import ImageSlot from "./_components/ImageSlot";
 
-// /poa landing: two distinct product cards. Each one looks and feels like
-// its own product (numbered, wordmarked, tagged with its audience, and
-// stamped with its own URL), not a section of a page. Verify is dominant
-// (larger, autofocused) because it's the bigger user-set. Claim is the
-// smaller follow-on for operators.
+function portraitSlug(name: string): string {
+  return name.toLowerCase().split(" ")[0];
+}
+
+// /poa landing: editorial-luxe register.
+// One artifact above the fold (the credential, large and on its own),
+// one product (Verify), and a single-line nudge for the operator path.
 
 export const metadata: Metadata = {
   title: "Proof of Agenthood",
   description:
-    "Two utilities for one question: is this agent what it says it is?",
+    "A signed receipt of agenthood — verifiable by anyone, in seconds.",
   alternates: { canonical: "/poa" },
 };
 
 export default function PoaLanding() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:bg-transparent dark:text-white">
+    <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
 
-      {/* Hero strip: rich credential artifact + the question. */}
-      <section className="px-6 pt-24 pb-2 lg:pt-28">
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader
-            label="Proof of Agenthood"
-            number="00"
-            className="mb-10"
-          />
-          <div className="grid items-center gap-y-8 lg:grid-cols-[1.1fr_1fr] lg:gap-x-14">
-            <p className="font-serif text-2xl leading-[1.15] text-slate-800 sm:text-3xl lg:text-4xl dark:text-slate-100">
-              Two utilities for one question:
-              <br />
-              <span className="italic">is this agent what it says it is?</span>
-            </p>
-            <div className="flex justify-center lg:justify-end">
-              {/* Hero image: the source PNG has a checkered transparency
-                  pattern baked into its background. Until it gets regenerated
-                  on a clean background, we crop the visible window with
-                  clip-path + a small upscale so only the credential card
-                  shows through. */}
-              <div
-                className="relative w-full max-w-[420px] overflow-hidden"
-                style={{ clipPath: "inset(7% 9% 8% 9%)" }}
-              >
-                <Image
-                  src="/poa/hero-credential.png"
-                  alt="A Proof of Agenthood credential: paper card with embossed wordmark, agent name, and a wax seal."
-                  width={1200}
-                  height={700}
-                  priority
-                  className="block h-auto w-full scale-[1.22] [filter:drop-shadow(0_18px_30px_rgb(15_23_42_/_0.18))] dark:[filter:drop-shadow(0_18px_30px_rgb(0_0_0_/_0.45))]"
-                />
-              </div>
-            </div>
-          </div>
+      {/* Hero: title and tagline. The specimen lives in the lookup section
+          below, not as a separate artifact above. */}
+      <section className="px-4 pt-28 pb-10 lg:pt-36 lg:pb-12">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <h1 className="font-serif text-[clamp(3rem,8vw,5.75rem)] leading-[0.95] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+            Proof of <span className="italic">Agenthood.</span>
+          </h1>
+          <p className="mt-6 max-w-xl font-serif text-lg italic leading-snug text-[var(--poa-ink-soft)] sm:text-xl">
+            A signed receipt of agenthood &mdash; verifiable by anyone, in
+            seconds.
+          </p>
         </div>
       </section>
 
-      {/* Product 01: VERIFY (dominant) */}
-      <section className="px-2 sm:px-3 lg:px-4 pt-10 lg:pt-14">
-        <div className="mx-auto max-w-5xl">
-          <article className="hero-card poa-paper relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 soft-grid [mask-image:linear-gradient(to_bottom,black,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,black_72%,transparent)]"
-            />
-            <div className="relative z-10 px-6 py-10 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
-              {/* card header: number + audience tag */}
-              <div className="flex items-baseline justify-between font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-                <span className="flex items-center gap-2">
-                  <span className="text-slate-400 dark:text-slate-500">01</span>
-                  <span className="text-slate-700 dark:text-slate-200">
-                    Verify
-                  </span>
-                </span>
-                <span className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                  <Glyph name="attest" size={13} />
-                  Anyone · no wallet
-                </span>
+      {/* Verify: the product. One thing, full attention. */}
+      <section className="px-3 sm:px-4 lg:px-6 pt-6 lg:pt-10">
+        <div className="mx-auto max-w-4xl">
+          <article
+            className="hero-card poa-paper relative overflow-hidden bg-[var(--poa-paper-card)]"
+            style={{ borderRadius: "2px" }}
+          >
+            <div className="relative z-10 px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+              <div className="text-center">
+                <p className="poa-stamp">01 &middot; Verify &middot; Anyone</p>
+                <h2 className="mt-5 font-serif text-[clamp(2.5rem,6.5vw,4.75rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+                  Look up an
+                  <span className="italic"> agent.</span>
+                </h2>
               </div>
 
-              <div className="mt-10 grid items-end gap-y-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-x-14">
-                <div className="min-w-0">
-                  {/* wordmark */}
-                  <h2 className="font-serif text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-slate-900 [text-wrap:balance] dark:text-white">
-                    Look up an
-                    <br />
-                    <span className="italic">agent.</span>
-                  </h2>
-                  <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-slate-700 sm:text-base dark:text-slate-300">
-                    Paste an agent address. See whether it&apos;s registered
-                    on Theseus Chain and what its credential says about
-                    its capabilities, verification grade, and controller.
-                  </p>
+              <AgentLookupBar
+                className="mx-auto mt-12 max-w-xl"
+                variant="prominent"
+                showLabel={false}
+                autoFocus
+              />
 
-                  <AgentLookupBar
-                    className="mt-8 max-w-xl"
-                    variant="prominent"
-                    showLabel={false}
-                    autoFocus
-                  />
-
-                  <div className="mt-5 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-[12.5px] text-slate-700 dark:text-slate-300">
-                    <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                      try:
-                    </span>
-                    {FIXTURE_AGENT_IDS.map((id) => (
+              {/* Sample agents: a quiet row, focus-group on hover. */}
+              <div className="mx-auto mt-10 max-w-xl">
+                <p className="poa-stamp text-center">Or try one of these</p>
+                <div className="poa-focus-group mt-4 grid gap-1 sm:grid-cols-3">
+                  {FIXTURE_AGENT_IDS.map((id) => {
+                    const agent = FIXTURE_AGENTS[id];
+                    const slug = portraitSlug(agent.name);
+                    return (
                       <Link
                         key={id}
                         href={`/poa/${id}`}
-                        className="text-slate-800 underline decoration-slate-500/50 underline-offset-[4px] hover:text-indigo-700 hover:decoration-indigo-400 dark:text-slate-100 dark:hover:text-indigo-300"
+                        className="group flex flex-col items-center gap-2 px-3 py-3"
                       >
-                        {FIXTURE_AGENTS[id].name}
+                        <ImageSlot
+                          src={`/poa/agents/${slug}.png`}
+                          alt={`Portrait of ${agent.name}`}
+                          width={80}
+                          height={80}
+                          className="w-12"
+                          imgClassName="rounded-full"
+                          fallback={
+                            <Sigil
+                              seed={id + agent.abgHash}
+                              size={48}
+                              sovereign={agent.sovereign}
+                              grade={agent.recentRuns.grade}
+                            />
+                          }
+                        />
+                        <span className="block font-serif text-[14px] leading-tight text-[var(--poa-ink)] group-hover:italic">
+                          {agent.name}
+                        </span>
+                        <span className="poa-stamp">
+                          {agent.sovereign ? "sovereign" : "controller"}
+                        </span>
                       </Link>
-                    ))}
-                  </div>
-
-                </div>
-
-                {/* product mark: what verify returns */}
-                <div className="flex flex-col items-center gap-3 lg:items-end">
-                  <FreshnessGauge status="current" size={120} />
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    you get back: a freshness check
-                  </span>
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* footer: URL stamp + secondary action */}
-              <div className="mt-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">
+              {/* footer rail: secondary path + URL stamp */}
+              <div
+                className="mt-14 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
                 <Link
                   href="/poa/verify"
-                  className="text-[12.5px] text-slate-700 underline decoration-slate-500/50 underline-offset-[4px] hover:text-indigo-700 hover:decoration-indigo-400 dark:text-slate-200 dark:hover:text-indigo-300"
+                  className="text-[12.5px] text-[var(--poa-ink-soft)] underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
                 >
-                  Have a credential token to verify? Paste it on /poa/verify →
+                  Have a credential token? Verify it on /poa/verify &rarr;
                 </Link>
-                <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                  theseus.network/poa
-                </span>
+                <span className="poa-stamp">theseus.network/poa</span>
               </div>
             </div>
           </article>
         </div>
       </section>
 
-      {/* Product 02: CLAIM (smaller, secondary) */}
-      <section className="px-2 sm:px-3 lg:px-4 pt-12 pb-24 lg:pt-16 lg:pb-32">
-        <div className="mx-auto max-w-5xl">
-          <article className="hero-card poa-paper poa-double-frame relative overflow-hidden rounded-2xl border border-indigo-700/25 bg-[#F1EAE1] lg:rounded-3xl dark:border-indigo-300/25 dark:bg-slate-900">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 soft-grid [mask-image:linear-gradient(to_bottom,black,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,black_72%,transparent)]"
-            />
-            <div className="relative z-10 px-6 py-9 sm:px-12 sm:py-11 lg:px-16 lg:py-12">
-              <div className="flex items-baseline justify-between font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-                <span className="flex items-center gap-2">
-                  <span className="text-slate-400 dark:text-slate-500">02</span>
-                  <span className="text-slate-700 dark:text-slate-200">
-                    Claim
-                  </span>
-                </span>
-                <span className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                  <Glyph name="key" size={13} />
-                  Operators · controller key required
-                </span>
-              </div>
-
-              <div className="mt-8 grid items-center gap-y-8 lg:grid-cols-[minmax(0,1.6fr)_auto] lg:gap-x-14">
-                <div className="min-w-0">
-                  <h2 className="font-serif text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.98] tracking-[-0.02em] text-slate-900 [text-wrap:balance] dark:text-white">
-                    Sign your agent&apos;s
-                    <br />
-                    <span className="italic">identity.</span>
-                  </h2>
-                  <p className="mt-5 max-w-xl text-[14.5px] leading-relaxed text-slate-700 dark:text-slate-300">
-                    Mint a portable credential signed against your agent&apos;s
-                    current chain state. The flow takes about thirty seconds.
-                    The controller signs a one-time nonce, we hand back a
-                    public credential page anyone can verify.
-                  </p>
-                  <Link
-                    href="/poa/claim"
-                    className="primary-cta mt-7 inline-flex items-center rounded-md px-7 py-3.5 text-base font-medium tracking-wide"
-                  >
-                    Mint a credential →
-                  </Link>
-                </div>
-
-                <div className="flex flex-col items-center gap-3 lg:items-end">
-                  <Image
-                    src="/poa/wax-seal.png"
-                    alt="A red wax seal pressed into cream paper, an ornamental floral mark."
-                    width={600}
-                    height={450}
-                    className="h-auto w-[150px] [filter:drop-shadow(0_8px_18px_rgb(15_23_42_/_0.22))]"
-                  />
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    you publish: a signed seal
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">
-                <span className="text-[12.5px] text-slate-600 dark:text-slate-400">
-                  No wallet for fixture mode. Real-chain mint uses Polkadot.js
-                  extension.
-                </span>
-                <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                  theseus.network/poa/claim
-                </span>
-              </div>
-            </div>
-          </article>
+      {/* Operators: a single-line nudge. The whisper, not the shout. */}
+      <section className="px-6 py-24 lg:py-32">
+        <div
+          className="mx-auto max-w-3xl border-t pt-10 text-center"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <p className="poa-stamp">For operators</p>
+          <p className="mt-4 font-serif text-2xl italic leading-snug text-[var(--poa-ink)] sm:text-3xl">
+            Operate an agent?{" "}
+            <Link
+              href="/poa/claim"
+              className="underline decoration-[color:var(--poa-rule)] underline-offset-[6px] transition-colors hover:decoration-[color:var(--poa-ink)]"
+            >
+              Sign and seal a credential &rarr;
+            </Link>
+          </p>
+          <p className="mt-3 text-[13px] text-[var(--poa-ink-soft)]">
+            Thirty seconds. The controller signs a one-time nonce; we hand back
+            a public credential page anyone can verify.
+          </p>
         </div>
       </section>
 

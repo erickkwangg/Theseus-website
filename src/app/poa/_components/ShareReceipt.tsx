@@ -62,7 +62,7 @@ export default function ShareReceipt({
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link
             href={pageUrl}
-            className="primary-cta inline-flex items-center rounded-md px-5 py-2 text-sm font-medium tracking-wide"
+            className="cta-ink inline-flex items-center  px-5 py-2 text-sm font-medium tracking-wide"
           >
             View public page →
           </Link>

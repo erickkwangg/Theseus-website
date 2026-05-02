@@ -1,113 +1,106 @@
-// SpecimenCard: a compact preview of what a credential looks like, used as
-// the hero specimen on /poa. Mirrors CredentialDocument's typography but in a
-// reduced, "swatch" form so it reads as an example, not a real document.
+// SpecimenCard: the hero artifact on /poa. A condensed, factual credential
+// card — same primitives as CredentialDocument, fewer rows, plain language.
+// No vintage-diploma copy: this is product chrome, not LARP.
 
 import { cn } from "@/lib/utils";
-import Sigil, { checksumFromSeed } from "./Sigil";
+import Seal from "./Seal";
 
-type Row = [string, string, boolean?];
+// A notary is the cleanest fit for an on-chain AI agent: its job IS to be
+// a verified third party, and its attestations only have value if relying
+// parties can independently check them. AI judgment matters (validity of
+// signatures, identity of parties, formal requirements); on-chain identity
+// matters (cross-jurisdiction verification without a central authority).
+const SPECIMEN_NAME = "Themis Notary";
+const SPECIMEN_DESC =
+  "Independent timestamping and witness service for digital documents. Each attestation carries Themis's seal; anyone can verify it against the on-chain credential.";
+// Theseus uses Polkadot SS58 addresses. Truncated head…tail for display.
+const SPECIMEN_ADDR = "5HpG9w8E…WBz3K8nL";
 
-const SPECIMEN_NAME = "Iris Treasury";
-const SPECIMEN_SUMMARY =
-  "Autonomous USDC treasury within a fixed mandate.";
-const SPECIMEN_SEED = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQYa3f9";
-
+type Row = { k: string; v: string };
 const ROWS: Row[] = [
-  ["Mode", "sovereign · immutable", true],
-  ["Skills", "Token Ops · Lending · DEX Trading"],
-  ["Tools", "buy_sell_tokens"],
-  ["Verification", "full · all KZG-proven"],
-  ["Funding", "150 seus · active"],
+  { k: "Issued", v: "1 May 2026" },
+  { k: "Issuer", v: "Theseus" },
+  { k: "Operator", v: "Themis Labs" },
+  { k: "Status", v: "Active" },
 ];
 
 export default function SpecimenCard({ className }: { className?: string }) {
-  const checksum = checksumFromSeed(SPECIMEN_SEED);
   return (
     <article
-      aria-label="Specimen credential"
+      aria-label="Proof of Agenthood specimen credential"
+      style={{
+        backgroundColor: "var(--poa-paper-card)",
+        borderColor: "color-mix(in srgb, var(--poa-ink) 28%, transparent)",
+      }}
       className={cn(
-        "border border-slate-300/70 bg-white/70 backdrop-blur-[2px]",
-        "dark:border-slate-700/55 dark:bg-slate-900/40",
+        "poa-paper poa-double-frame relative border",
+        "shadow-[0_30px_60px_-32px_rgba(20,17,13,0.32)]",
         className,
       )}
     >
-      <header className="flex items-center justify-between border-b border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
-          specimen · poa
-        </span>
-        <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
-          v0
+      {/* Top rail — spare. Wordmark left, serial right. */}
+      <header
+        className="flex items-center justify-between border-b px-6 py-3 sm:px-8"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
+        <span className="poa-stamp">Proof of Agenthood</span>
+        <span className="font-mono text-[11px] tabular-nums" style={{ color: "var(--poa-sepia)" }}>
+          {SPECIMEN_ADDR}
         </span>
       </header>
 
-      <div className="grid grid-cols-[1fr_auto] items-start gap-6 px-5 py-6">
-        <div className="min-w-0">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-            Agent
-          </span>
-          <p className="mt-1 font-serif text-2xl leading-tight tracking-tight text-slate-900 dark:text-slate-50">
-            {SPECIMEN_NAME}
-          </p>
-          <p className="mt-2 text-[12.5px] leading-relaxed text-slate-700 dark:text-slate-300">
-            {SPECIMEN_SUMMARY}
-          </p>
-        </div>
-        <div className="flex flex-col items-end gap-2">
-          <Sigil
-            seed={SPECIMEN_SEED}
-            size={80}
-            sovereign
-            grade="full"
-            shimmer
-          />
-          <span className="font-serif text-2xl italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
-            {checksum}
-          </span>
-        </div>
-      </div>
-
-      <div className="border-t border-slate-300/70 px-4 py-2 dark:border-slate-700/55">
-        {ROWS.map(([k, v, accent], i) => (
-          <div
-            key={k}
-            className={cn(
-              "grid grid-cols-1 gap-y-0.5 border-b border-slate-200/70 py-2 last:border-b-0 sm:grid-cols-[110px_1fr] sm:gap-x-4 dark:border-slate-700/40",
-              i === ROWS.length - 1 && "border-b-0",
-            )}
-          >
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
-              {k}
-            </span>
-            <span
-              className={cn(
-                "text-[12.5px] break-words",
-                accent
-                  ? "text-indigo-700 dark:text-indigo-300"
-                  : "text-slate-800 dark:text-slate-100",
-              )}
+      {/* Body — name + one-line role on the left, seal on the right.
+         Below: a tight grid of facts. */}
+      <div className="px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
+        <div className="grid grid-cols-1 items-center gap-y-8 sm:grid-cols-[1fr_auto] sm:gap-x-10">
+          <div className="min-w-0">
+            <h2
+              className="font-serif tracking-[-0.02em] leading-[0.98] text-[clamp(2.25rem,5vw,3.5rem)] [text-wrap:balance]"
+              style={{ color: "var(--poa-ink)" }}
             >
-              {v}
-            </span>
+              {SPECIMEN_NAME}
+            </h2>
+            <p
+              className="mt-4 max-w-md text-[15px] leading-relaxed sm:text-base"
+              style={{ color: "var(--poa-ink-soft)" }}
+            >
+              {SPECIMEN_DESC}
+            </p>
           </div>
-        ))}
-      </div>
 
-      <footer className="flex items-center justify-between border-t border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
-        <div className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="grid h-4 w-4 place-items-center rounded-full bg-indigo-500/15 text-indigo-600 dark:bg-indigo-400/20 dark:text-indigo-300"
-          >
-            ✓
-          </span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
-            attested · 2026.05.01
-          </span>
+          <div className="flex justify-center sm:justify-end">
+            <Seal
+              status="attested"
+              label="Theseus"
+              caption="Attested"
+              size={120}
+            />
+          </div>
         </div>
-        <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
-          block 1,234,567
-        </span>
-      </footer>
+
+        {/* Facts table — fixed-width labels, mono values. Reads as data. */}
+        <dl
+          className="mt-10 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2.5 border-t pt-6 sm:grid-cols-[auto_1fr_auto_1fr] sm:gap-x-8"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          {ROWS.map((row) => (
+            <div key={row.k} className="contents">
+              <dt
+                className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
+                style={{ color: "var(--poa-sepia)" }}
+              >
+                {row.k}
+              </dt>
+              <dd
+                className="text-[14px]"
+                style={{ color: "var(--poa-ink)" }}
+              >
+                {row.v}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </article>
   );
 }

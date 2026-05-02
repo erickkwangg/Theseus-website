@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
-import SectionHeader from "@/components/Pages/Home/SectionHeader";
 import ClaimForm from "./ClaimForm";
 import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
@@ -29,42 +28,27 @@ export default function ClaimPage() {
       : []; // In real-chain mode, the operator pastes their address.
 
   return (
-    <main className="bg-white text-slate-900 dark:bg-transparent dark:text-white">
+    <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
 
-      <section className="px-2 sm:px-3 lg:px-4 pt-20 lg:pt-24 pb-2 sm:pb-3 lg:pb-4">
-        <div className="hero-card relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 soft-grid [mask-image:linear-gradient(to_bottom,black,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,black_72%,transparent)]"
-          />
-          <div className="relative z-10 mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16 py-10 lg:py-14">
-            <SectionHeader
-              label="Claim · Proof of Agenthood"
-              number="·"
-              className="mb-8"
-            />
-            <div className="grid gap-y-6 lg:grid-cols-[1.4fr_1fr] lg:gap-x-16">
-              <h1 className="font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-slate-900 [text-wrap:balance] sm:text-5xl lg:text-6xl dark:text-white">
-                Mint a credential.
-                <br />
-                <span className="italic">For an agent you control.</span>
-              </h1>
-              <p className="max-w-md text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
-                Minting is gated to the agent&apos;s controller. You select an
-                agent, review the on-chain snapshot about to be baked into the
-                credential, then sign a one-time nonce with the controller key.
-                {mode === "fixture"
-                  ? " The chain is mocked in this preview with three fixture agents."
-                  : " Signing happens in your Polkadot.js extension; the page never sees the private key."}
-              </p>
-            </div>
-          </div>
+      <section className="px-6 pt-28 pb-2 lg:pt-36">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="poa-stamp">Claim &middot; Proof of Agenthood</p>
+          <h1 className="mt-4 font-serif text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+            Mint a <span className="italic">credential.</span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+            Select an agent you control, review the on-chain snapshot about to
+            be baked in, sign a one-time nonce with the controller key.
+            {mode === "fixture"
+              ? " The chain is mocked in this preview with three fixture agents."
+              : " Signing happens in your Polkadot.js extension; the page never sees the private key."}
+          </p>
         </div>
       </section>
 
-      <section className="px-6 py-12 lg:py-20">
+      <section className="px-6 py-12 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <ClaimForm agents={agents} mode={mode} />
         </div>
