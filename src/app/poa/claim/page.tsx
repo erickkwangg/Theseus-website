@@ -5,6 +5,7 @@ import ClaimForm from "./ClaimForm";
 import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "../_components/ChainModeBanner";
+import PoaNav from "../_components/PoaNav";
 
 export const metadata: Metadata = {
   title: "Claim a Proof of Agenthood credential",
@@ -31,6 +32,7 @@ export default function ClaimPage() {
     <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
+      <PoaNav />
 
       <section className="px-6 pt-28 pb-2 lg:pt-36">
         <div className="mx-auto max-w-3xl text-center">

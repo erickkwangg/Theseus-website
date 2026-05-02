@@ -4,6 +4,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "../_components/ChainModeBanner";
+import PoaNav from "../_components/PoaNav";
 import VerifyForm from "./VerifyForm";
 import VerificationRecipes from "./VerificationRecipes";
 import { JwsShape, BadgeMockup } from "../_components/Diagrams";
@@ -21,6 +22,7 @@ export default function VerifyPage() {
     <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
+      <PoaNav />
 
       {/* Hero: a single instruction. No diagram, no chrome. */}
       <section className="px-6 pt-28 pb-2 lg:pt-36">

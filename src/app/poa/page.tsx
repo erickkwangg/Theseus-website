@@ -5,6 +5,7 @@ import Footer from "@/components/Pages/Home/Footer";
 import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "./_components/ChainModeBanner";
+import PoaNav from "./_components/PoaNav";
 import AgentLookupBar from "./_components/AgentLookupBar";
 import Sigil from "./_components/Sigil";
 import ImageSlot from "./_components/ImageSlot";
@@ -29,6 +30,7 @@ export default function PoaLanding() {
     <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
+      <PoaNav />
 
       {/* Hero: title and tagline. The specimen lives in the lookup section
           below, not as a separate artifact above. */}
