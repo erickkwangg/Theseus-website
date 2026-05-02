@@ -1,4 +1,4 @@
-// Types for Proof of Agenthood — the credential format and the on-chain snapshot it attests to.
+// Types for Proof of Agenthood: the credential format and the on-chain snapshot it attests to.
 // Aligns with Theseus Architecture v1.0 (April 2026): pallet_agents holds ABG, capability surface,
 // sovereignty, controller, seus balance; AKG holds run/step/inference history.
 

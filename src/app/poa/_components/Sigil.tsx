@@ -1,4 +1,4 @@
-// Sigil v2 — a richer, more distinctive deterministic mark.
+// Sigil v2: a richer, more distinctive deterministic mark.
 //
 // Layered structure:
 //   - outer ring with bytewise tick marks (24 ticks, modulated by hash bytes)
@@ -67,7 +67,7 @@ function saturationFor(grade: Props["grade"]): Saturation {
   }
 }
 
-// Tick marks around the outer ring — 24 evenly-spaced strokes, modulated by
+// Tick marks around the outer ring: 24 evenly-spaced strokes, modulated by
 // hash bytes (long/short/very short).
 function ringTicks(bytes: number[], cx: number, cy: number, r: number) {
   const ticks: { x1: number; y1: number; x2: number; y2: number; opacity: number }[] = [];

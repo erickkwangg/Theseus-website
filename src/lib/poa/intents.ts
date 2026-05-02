@@ -1,11 +1,11 @@
-// Intent taxonomy — general, not DeFi-only.
+// Intent taxonomy: general, not DeFi-only.
 //
 // ── Display-only, NOT signed ────────────────────────────────────────────────
 // Bundle classification is a presentation layer over the raw intent strings.
 // It is computed at render time (and at /poa/api/verify response time as a
 // convenience field), but **never baked into the signed JWS**. The signed
 // payload contains only `claims.agent.capabilities.intentTypes` as raw
-// strings — that is the load-bearing, chain-derived assertion. Consumers
+// strings, which are the load-bearing, chain-derived assertion. Consumers
 // that gate on capabilities should match against the raw intent strings;
 // `bundles` is for humans.
 //
@@ -22,7 +22,7 @@
 //
 // Structure borrowed from Theseuschain/Neuro_Symbolic_SHIP (VIC-HTN's
 // SkillCategory + SkillBundle), content broadened beyond DeFi to cover the
-// full Theseus agent surface — research, markets, storage, comms, payments,
+// full Theseus agent surface: research, markets, storage, comms, payments,
 // compute, control, plus the DeFi categories. When a new intent string shows
 // up, prefer adding a new bundle over dropping it into "generic".
 //

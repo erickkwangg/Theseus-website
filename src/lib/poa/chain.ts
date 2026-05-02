@@ -1,4 +1,4 @@
-// ChainReader interface — the only thing PoA needs from Theseus Chain.
+// ChainReader interface: the only thing PoA needs from Theseus Chain.
 // Two implementations exist: FixtureChainReader (in-memory demo agents) and
 // PolkadotChainReader (live `pallet_agents` reads via @polkadot/api). The
 // factory below picks one at runtime based on `THESEUS_RPC_URL`.
@@ -47,7 +47,7 @@ export class FixtureChainReader implements ChainReader {
   }
 }
 
-// Factory — env-toggled, fail-loud.
+// Factory: env-toggled, fail-loud.
 //
 // THESEUS_RPC_URL set → PolkadotChainReader. Connection / decode failures
 // propagate as exceptions so API routes return 503 rather than silently

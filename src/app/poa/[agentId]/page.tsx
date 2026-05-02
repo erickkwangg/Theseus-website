@@ -17,7 +17,7 @@ type Props = { params: Promise<{ agentId: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { agentId } = await params;
   return {
-    title: `Proof of Agenthood — ${agentId.slice(0, 10)}…`,
+    title: `Proof of Agenthood · ${agentId.slice(0, 10)}…`,
     description: `Verifiable credential for Theseus agent ${agentId}.`,
     alternates: { canonical: `/poa/${agentId}` },
   };
@@ -30,7 +30,7 @@ export default async function PoaCredentialPage({ params }: Props) {
   try {
     stored = await credentialStore.latestByAgent(agentId);
   } catch {
-    // Store unreachable — page still renders without a credential body.
+    // Store unreachable. Page still renders without a credential body.
   }
   const reader = getChainReader();
   const mode = chainMode();
@@ -64,7 +64,7 @@ export default async function PoaCredentialPage({ params }: Props) {
         revocation = await evaluateRevocation(reader, stored);
         if (revocation) await credentialStore.revoke(stored.jti, revocation);
       } catch {
-        // Don't kill the page if revocation eval fails — surface chainError instead.
+        // Don't kill the page if revocation eval fails. Surface chainError instead.
       }
     }
   }
@@ -86,7 +86,7 @@ export default async function PoaCredentialPage({ params }: Props) {
             className="pointer-events-none absolute inset-0 soft-grid [mask-image:linear-gradient(to_bottom,black,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,black_72%,transparent)]"
           />
           <div className="relative z-10 mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16 py-10 lg:py-14">
-            <SectionHeader label="Proof of Agenthood" number="—" className="mb-8" />
+            <SectionHeader label="Proof of Agenthood" number="·" className="mb-8" />
 
             <div className="grid items-end gap-y-6 sm:gap-y-10 lg:grid-cols-[1.4fr_1fr]">
               <div>
@@ -149,7 +149,7 @@ export default async function PoaCredentialPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Credential document — hidden when chain is unreachable so we don't
+      {/* Credential document. Hidden when chain is unreachable so we don't
           present an "ATTESTED" credential whose revocation status we couldn't
           verify. */}
       {stored && !chainError && (

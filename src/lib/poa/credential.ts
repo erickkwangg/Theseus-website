@@ -77,7 +77,7 @@ export async function verifyCredential(
     const key = await getSigningKey();
     // Pin the algorithm explicitly. compactVerify already rejects "none", but
     // without `algorithms` it would also accept any other alg the supplied
-    // key happens to support — a confused-deputy hardening concern.
+    // key happens to support, a confused-deputy hardening concern.
     const { payload } = await compactVerify(jws, key.publicKey, {
       algorithms: [ALG],
     });

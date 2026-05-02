@@ -53,7 +53,7 @@ const STEPS: { key: StepKey; n: string; label: string; subtitle: string }[] = [
     key: "attest",
     n: "03",
     label: "Attest",
-    subtitle: "Sovereign — snapshot only. Otherwise — controller signs nonce.",
+    subtitle: "Sovereign: snapshot only. Otherwise the controller signs a nonce.",
   },
   {
     key: "receive",
@@ -211,7 +211,7 @@ export default function ClaimForm({
           );
           signatureHex = sig.signatureHex;
         }
-        // Brief "signature received" beat — the moment of attestation has weight.
+        // Brief "signature received" beat. The moment of attestation has weight.
         setState({
           kind: "running",
           step: "attest",
@@ -250,7 +250,7 @@ export default function ClaimForm({
 
   return (
     <form onSubmit={onMint} className="flex flex-col gap-10">
-      {/* Step rail — active step glows on a left rail to signal liveness. */}
+      {/* Step rail: active step glows on a left rail to signal liveness. */}
       <ol className="border-y border-slate-300/70 divide-y divide-slate-300/70 dark:border-slate-700/55 dark:divide-slate-700/55">
         {STEPS.map((step) => {
           const isActive = activeStep() === step.key;
@@ -314,7 +314,7 @@ export default function ClaimForm({
             Choose an agent
           </span>
           <p className="mt-2 max-w-md text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-            Only the agent&apos;s controller can mint a credential — selecting
+            Only the agent&apos;s controller can mint a credential. Selecting
             an agent here loads its current state for review before signing.
             {mode === "polkadot" &&
               " You'll be asked to sign with the controller key in your Polkadot.js extension."}

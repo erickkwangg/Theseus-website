@@ -32,7 +32,7 @@ type VerifyResponse = {
   };
 };
 
-// /poa/verify is the "advanced" verify surface — JWS paste + recipes. The
+// /poa/verify is the "advanced" verify surface: JWS paste + recipes. The
 // quick "look up by address" path lives on the /poa landing instead.
 
 export default function VerifyForm() {
@@ -165,7 +165,7 @@ function ResultCard({ data }: { data: VerifyResponse }) {
         </span>
       </header>
 
-      {/* Freshness gauge — the verifier's "moment". */}
+      {/* Freshness gauge: the verifier's "moment". */}
       <div className="flex items-start gap-5 px-4 py-5 sm:px-6">
         <FreshnessGauge status={freshStatus} size={72} />
         <div className="flex-1">
@@ -201,7 +201,7 @@ function ResultCard({ data }: { data: VerifyResponse }) {
         <Kv k="JTI" v={data.jti ?? ""} />
         <Kv
           k="Issued"
-          v={data.issuedAt ? new Date(data.issuedAt).toISOString() : "—"}
+          v={data.issuedAt ? new Date(data.issuedAt).toISOString() : "·"}
         />
       </div>
 

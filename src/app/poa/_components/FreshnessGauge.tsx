@@ -1,4 +1,4 @@
-// FreshnessGauge — small radial indicator for the verifier result card.
+// FreshnessGauge: small radial indicator for the verifier result card.
 // Replaces the plain "current/revoked/unknown" text strip with a graphic
 // that carries weight.
 //

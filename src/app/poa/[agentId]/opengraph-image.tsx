@@ -2,12 +2,12 @@
 // agent's name + sigil + summary instead of the marketing site card.
 //
 // Uses Node runtime so it can hit the chain reader (Polkadot mode requires
-// Node — @polkadot/api isn't edge-runtime safe).
+// Node since @polkadot/api isn't edge-runtime safe).
 
 import { ImageResponse } from "next/og";
 import { getChainReader } from "@/lib/poa/chain";
 
-export const alt = "Proof of Agenthood — Theseus";
+export const alt = "Proof of Agenthood · Theseus";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

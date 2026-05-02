@@ -1,4 +1,4 @@
-// Seal — a real letterpress-feeling badge for the credential footer.
+// Seal: a real letterpress-feeling badge for the credential footer.
 // Concentric rings + arc text + center mark. Reads as an object, not a
 // status pill.
 
@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 type Props = {
   // status drives center mark + tone
   status: "attested" | "revoked" | "pending";
-  // top arc — short label like "ATTESTED" or "REVOKED"
+  // top arc: short label like "ATTESTED" or "REVOKED"
   label: string;
-  // bottom arc — short context like the date or block
+  // bottom arc: short context like the date or block
   caption?: string;
   size?: number;
   className?: string;
@@ -56,13 +56,13 @@ export default function Seal({
       className={cn(toneClass, className)}
     >
       <defs>
-        {/* Top arc — label runs along this path. */}
+        {/* Top arc: label runs along this path. */}
         <path
           id={topPathId}
           d={`M ${cx - rText},${cy} a ${rText},${rText} 0 0 1 ${rText * 2},0`}
           fill="none"
         />
-        {/* Bottom arc — caption runs along this path, flipped so text is upright. */}
+        {/* Bottom arc: caption runs along this path, flipped so text is upright. */}
         <path
           id={bottomPathId}
           d={`M ${cx - rTextBottom},${cy} a ${rTextBottom},${rTextBottom} 0 0 0 ${rTextBottom * 2},0`}

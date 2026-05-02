@@ -1,4 +1,4 @@
-// SnapshotPreviewCard — shows the on-chain state that's about to be baked
+// SnapshotPreviewCard: shows the on-chain state that's about to be baked
 // into a credential, *before* the user signs anything. Same visual language
 // as SpecimenCard but rendered from real (or fixture) AgentSnapshot data.
 
@@ -64,7 +64,7 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
         <Row k="Skills" v={skillsSummary(snapshot.capabilities.intentTypes)} />
         <Row
           k="Tools"
-          v={snapshot.capabilities.tools.join(" · ") || "—"}
+          v={snapshot.capabilities.tools.join(" · ") || "·"}
         />
         <Row k="Verification" v={gradeLabel(snapshot.recentRuns.grade)} />
         <Row k="Funding" v={fmtSeus(snapshot.funding.seusBalance)} />
@@ -79,7 +79,7 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
           />
           {requiresSig
             ? "controller will be asked to sign a nonce"
-            : "no signature required — sovereign agent"}
+            : "no signature required (sovereign agent)"}
         </p>
       </footer>
     </article>
@@ -120,7 +120,7 @@ function gradeLabel(g: string): string {
 }
 
 function skillsSummary(intentTypes: string[]): string {
-  if (intentTypes.length === 0) return "—";
+  if (intentTypes.length === 0) return "·";
   const grouped = groupIntents(intentTypes);
   return grouped.map((g) => g.bundle.name).join(" · ");
 }

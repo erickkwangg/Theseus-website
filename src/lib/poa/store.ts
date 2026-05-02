@@ -1,8 +1,8 @@
-// Credential + challenge store — async interface with two implementations:
+// Credential + challenge store. Async interface with two implementations:
 //
-//   MemoryStore — in-process Map pinned to globalThis. Used in dev when no KV
+//   MemoryStore: in-process Map pinned to globalThis. Used in dev when no KV
 //     env vars are set. State doesn't survive cold starts on Vercel.
-//   KvStore     — Vercel KV (Redis). Used in production. Survives cold starts,
+//   KvStore: Vercel KV (Redis). Used in production. Survives cold starts,
 //     scales across regions, ~free up to 30K commands/day.
 //
 // The factory picks at runtime based on `KV_REST_API_URL` (auto-provisioned
@@ -233,7 +233,7 @@ function pick(): { cred: CredentialStore; ch: ChallengeStore } {
   return { cred: cachedCred, ch: cachedCh };
 }
 
-// Public surface — same shape as before, all methods now async.
+// Public surface: same shape as before, all methods now async.
 export const credentialStore: CredentialStore = {
   put: (c) => pick().cred.put(c),
   get: (jti) => pick().cred.get(jti),

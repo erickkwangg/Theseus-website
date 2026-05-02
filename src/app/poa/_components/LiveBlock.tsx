@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-// LiveBlock — animated block-height ticker that briefly highlights when the
+// LiveBlock: animated block-height ticker that briefly highlights when the
 // number changes. Used in the trust strip on credential pages.
 //
 // Polls /poa/api/snapshot/<agentId> every 12s to refresh; in fixture mode the
@@ -59,7 +59,7 @@ export default function LiveBlock({
           return next;
         });
       } catch {
-        // ignore — the banner already conveys chain reachability
+        // ignore. The banner already conveys chain reachability
       }
     };
     const id = setInterval(tick, pollMs);

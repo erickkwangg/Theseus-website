@@ -1,4 +1,4 @@
-// CredentialDocument — the editorial centerpiece for /poa/[agentId].
+// CredentialDocument: the editorial centerpiece for /poa/[agentId].
 // v2: artifact treatment. Paper grain. Sovereign agents get a double-rule
 // frame. Lite-grade agents are subtly desaturated. The bottom carries a real
 // Seal, not a status pill. Sigil is large and central, shimmering when the
@@ -55,7 +55,7 @@ export default function CredentialDocument({
         className,
       )}
     >
-      {/* Top bar — file header */}
+      {/* Top bar: file header */}
       <header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-slate-300/70 px-4 py-3 sm:px-6 dark:border-slate-700/55">
         <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
           <Glyph name="scroll" size={14} className="text-slate-500 dark:text-slate-400" />
@@ -66,7 +66,7 @@ export default function CredentialDocument({
         </span>
       </header>
 
-      {/* Identity block — name + summary lead, big sigil + checksum on the side. */}
+      {/* Identity block: name + summary lead, big sigil + checksum on the side. */}
       <section className="border-t-0 px-6 py-9 sm:px-10 sm:py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-[1fr_auto] sm:gap-12">
           <div className="min-w-0">
@@ -108,15 +108,15 @@ export default function CredentialDocument({
 
       {/* Capability surface */}
       <Section number="01" title="Capability surface">
-        <KvRow k="Models" v={agent.capabilities.models.join(" · ") || "—"} />
-        <KvRow k="Tools" v={agent.capabilities.tools.join(" · ") || "—"} />
+        <KvRow k="Models" v={agent.capabilities.models.join(" · ") || "·"} />
+        <KvRow k="Tools" v={agent.capabilities.tools.join(" · ") || "·"} />
         <IntentRow intentTypes={agent.capabilities.intentTypes} />
         <KvRow
           k="Sub-agents"
           v={
             agent.capabilities.subAgents.length
               ? agent.capabilities.subAgents.join(" · ")
-              : "—"
+              : "·"
           }
         />
       </Section>
@@ -160,7 +160,7 @@ export default function CredentialDocument({
           <p className="mt-1 text-[12px] leading-relaxed text-slate-500 dark:text-slate-400">
             Verification grade requires aggregating recent{" "}
             <code className="font-mono">AgentRuns</code> against{" "}
-            <code className="font-mono">Aivm</code> proof results — that&apos;s
+            <code className="font-mono">Aivm</code> proof results. That&apos;s
             an indexer job, not a per-request RPC call. Not yet wired in this
             preview.
           </p>
@@ -186,7 +186,7 @@ export default function CredentialDocument({
         <KvRow k="Enclave-bound" v={agent.enclaveBound ? "yes" : "no"} />
       </Section>
 
-      {/* Attestation — what kind, when */}
+      {/* Attestation: what kind, when */}
       <Section number="04" title="Attestation">
         <KvRow
           k="Kind"
@@ -210,7 +210,7 @@ export default function CredentialDocument({
         </div>
       </Section>
 
-      {/* Machine-readable identity — disclosed by default. */}
+      {/* Machine-readable identity, disclosed by default. */}
       <details className="group">
         <summary
           className={cn(
@@ -240,9 +240,9 @@ export default function CredentialDocument({
             <KvRow
               k={
                 <PoaTooltip term="ABG hash">
-                  Hash of the agent&apos;s compiled Agent Behavior Graph — the
-                  on-chain bytecode-equivalent for what the agent can do.
-                  Changes when the controller updates the agent.
+                  Hash of the agent&apos;s compiled Agent Behavior Graph. It&apos;s
+                  the on-chain bytecode-equivalent for what the agent can do,
+                  and it changes when the controller updates the agent.
                 </PoaTooltip>
               }
               v={agent.abgHash}
@@ -252,7 +252,7 @@ export default function CredentialDocument({
             <KvRow k="ABG version" v={`v${agent.abgVersion}`} mono />
             <KvRow
               k="Controller"
-              v={agent.controller ?? "— (sovereign)"}
+              v={agent.controller ?? "· (sovereign)"}
               mono
               copyable={!!agent.controller}
             />
@@ -295,7 +295,7 @@ export default function CredentialDocument({
         </div>
       </details>
 
-      {/* Footer — real seal */}
+      {/* Footer: real seal */}
       <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-slate-300/70 px-4 py-5 sm:px-6 dark:border-slate-700/55">
         <div className="flex items-center gap-4">
           <Seal
@@ -365,7 +365,7 @@ function SectionHeading({ number, title }: { number: string; title: string }) {
 
 function IntentRow({ intentTypes }: { intentTypes: string[] }) {
   if (intentTypes.length === 0) {
-    return <KvRow k="Skills" v="—" />;
+    return <KvRow k="Skills" v="·" />;
   }
   const grouped = groupIntents(intentTypes);
   return (

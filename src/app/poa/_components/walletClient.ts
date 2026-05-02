@@ -1,4 +1,4 @@
-// Polkadot.js extension wrapper — client-only. Only imported from "use client"
+// Polkadot.js extension wrapper, client-only. Only imported from "use client"
 // components and never bundled into server routes (the dapp package touches
 // `window`).
 //

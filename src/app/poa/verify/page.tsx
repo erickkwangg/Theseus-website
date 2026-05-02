@@ -30,7 +30,7 @@ export default function VerifyPage() {
           <div className="relative z-10 mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16 py-10 lg:py-14">
             <SectionHeader
               label="Verify · Proof of Agenthood"
-              number="—"
+              number="·"
               className="mb-8"
             />
             <div className="grid gap-y-6 lg:grid-cols-[1.4fr_1fr] lg:gap-x-16">
@@ -81,7 +81,7 @@ export default function VerifyPage() {
             (the signed array of raw strings). The{" "}
             <code className="font-mono">bundles</code> field returned by{" "}
             <code className="font-mono">/poa/api/verify</code> is a derived
-            display helper — it can change without revoking credentials, so
+            display helper that can change without revoking credentials, so
             don&apos;t treat it as a contract.
           </p>
           <VerificationRecipes />

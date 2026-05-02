@@ -1,6 +1,6 @@
 // Dev-only helper: produces a "controller signature" for a fixture agent so the
 // claim flow is demonstrable without a real sr25519 wallet. Refuses to run in
-// production AND refuses to run when wired against a real Theseus node — there
+// production AND refuses to run when wired against a real Theseus node, since there
 // is no way to fake a real controller's sr25519 signature.
 
 import { NextResponse } from "next/server";

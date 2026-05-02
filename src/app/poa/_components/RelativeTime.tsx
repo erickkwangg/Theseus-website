@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-// RelativeTime — auto-updating "issued 14 min ago" string. Updates every 60s
+// RelativeTime: auto-updating "issued 14 min ago" string. Updates every 60s
 // so a credential left open in a tab feels like it's tracking time, not
 // frozen at the moment of load.
 

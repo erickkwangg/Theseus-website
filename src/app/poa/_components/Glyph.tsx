@@ -1,4 +1,4 @@
-// Glyph — a small set of original 24px SVG icons for PoA-specific concepts.
+// Glyph: a small set of original 24px SVG icons for PoA-specific concepts.
 // Hand-drawn lines, monoweight, sized to sit alongside the JetBrains Mono
 // labels. Lucide is fine for general UI, but PoA has concepts (sigil,
 // sovereignty, attestation, hash) that deserve their own marks.
@@ -38,7 +38,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
   } as const;
   switch (name) {
     case "sovereign":
-      // double-ring with a center dot — independent, immutable
+      // double-ring with a center dot (independent, immutable)
       return (
         <svg {...props}>
           <circle cx="12" cy="12" r="9" className={COMMON} strokeWidth={SW} />
@@ -47,7 +47,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "controller":
-      // shield-ish hex with a dot off-center — held by a controller
+      // shield-ish hex with a dot off-center (held by a controller)
       return (
         <svg {...props}>
           <path
@@ -59,7 +59,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "attest":
-      // checkmark inside a circle — letterpress feel
+      // checkmark inside a circle (letterpress feel)
       return (
         <svg {...props}>
           <circle cx="12" cy="12" r="9" className={COMMON} strokeWidth={SW} />
@@ -85,7 +85,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "kzg":
-      // K monogram in a small square — full KZG proof
+      // K monogram in a small square (full KZG proof)
       return (
         <svg {...props}>
           <rect x="3.5" y="3.5" width="17" height="17" className={COMMON} strokeWidth={SW} />
@@ -98,7 +98,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "lite":
-      // S monogram — signature only
+      // S monogram (signature only)
       return (
         <svg {...props}>
           <rect x="3.5" y="3.5" width="17" height="17" className={COMMON} strokeWidth={SW} />
@@ -111,7 +111,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "hash":
-      // # icon — for ABG hash, content roots
+      // # icon (for ABG hash, content roots)
       return (
         <svg {...props}>
           <path
@@ -123,7 +123,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "scroll":
-      // a folded scroll — the credential itself
+      // a folded scroll (the credential itself)
       return (
         <svg {...props}>
           <path
@@ -157,7 +157,7 @@ export default function Glyph({ name, size = 18, className }: Props) {
         </svg>
       );
     case "sigil":
-      // a small condensed sigil — outer ring + inner mirrored mark
+      // a small condensed sigil (outer ring + inner mirrored mark)
       return (
         <svg {...props}>
           <circle cx="12" cy="12" r="8" className={COMMON} strokeWidth={SW} />

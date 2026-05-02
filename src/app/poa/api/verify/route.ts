@@ -1,6 +1,6 @@
-// POST /poa/api/verify — programmatic credential verification.
+// POST /poa/api/verify: programmatic credential verification.
 // Accepts a JWS (in body or as plain text) and returns a structured report.
-// Anyone can call this — no auth, no rate-limiting at v1 (would add at scale).
+// Anyone can call this. No auth, no rate-limiting at v1 (would add at scale).
 
 import { NextResponse } from "next/server";
 import { verifyCredential } from "@/lib/poa/credential";
@@ -16,14 +16,14 @@ type VerifyResult = {
   valid: boolean;
   reason?: string;
   // Present when valid is true.
-  // `claims` is the SIGNED truth — gate on `claims.agent.capabilities.intentTypes`
+  // `claims` is the SIGNED truth. Gate on `claims.agent.capabilities.intentTypes`
   // when consuming programmatically. `bundles` below is a derived display-only
   // helper computed by this server; do not rely on its structure for security.
   claims?: unknown;
   jti?: string;
   agentId?: string;
   issuedAt?: number;
-  // Derived display helpers — not in the signed JWS. Bundles can change over
+  // Derived display helpers, not in the signed JWS. Bundles can change over
   // time without revoking credentials. If you need a stable contract, gate on
   // the raw intent strings in `claims.agent.capabilities.intentTypes`.
   bundles?: {
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
     kid: "theseus-poa-2026-04",
   };
 
-  // Derive bundle classification for display — never part of the signed JWS.
+  // Derive bundle classification for display. Never part of the signed JWS.
   // Marked `derived: true` so consumers can't mistake this for a signed claim.
   // groupIntents tolerates any shape; missing/malformed intentTypes → empty list.
   const grouped = groupIntents(claims.agent?.capabilities?.intentTypes);
@@ -96,13 +96,13 @@ export async function POST(req: Request) {
   };
 
   // Try to assess freshness against the local revocation list and against the
-  // chain (if reachable). Failure here doesn't invalidate the credential —
-  // the JWS is signature-valid; we just can't say whether it's still current.
+  // chain (if reachable). Failure here doesn't invalidate the credential.
+  // The JWS is signature-valid; we just can't say whether it's still current.
   let stored: Awaited<ReturnType<typeof credentialStore.get>> = undefined;
   try {
     stored = await credentialStore.get(claims.jti);
   } catch {
-    // Store unreachable — we'll mark freshness as unknown below.
+    // Store unreachable; we'll mark freshness as unknown below.
   }
   if (stored?.revoked) {
     out.freshness = { status: "revoked", reason: stored.revoked.reason };

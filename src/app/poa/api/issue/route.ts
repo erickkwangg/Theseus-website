@@ -62,7 +62,7 @@ export async function POST(req: Request) {
   try {
     result = await issueCredential(reader, { agentId, controllerSig });
   } catch (err) {
-    // Real-chain RPC failure — fail loud rather than fall back to fixtures.
+    // Real-chain RPC failure. Fail loud rather than fall back to fixtures.
     // `instanceof Error` can lie across module/realm boundaries (Turbopack +
     // @polkadot/api event-emitter errors), so duck-type the message instead.
     const detail =

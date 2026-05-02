@@ -1,4 +1,4 @@
-// PolkadotChainReader — connects to a running Theseus node over WebSocket and
+// PolkadotChainReader: connects to a running Theseus node over WebSocket and
 // reads `pallet_agents` storage to build an AgentSnapshot.
 //
 // Failure mode is intentionally loud: connect timeout, missing storage items,
@@ -35,7 +35,7 @@ async function getApi(url: string): Promise<ApiPromise> {
   if (cache.inflight) return cache.inflight;
   cache.inflight = (async () => {
     // If there's a stale entry for a different URL or a disconnected provider,
-    // tear it down before replacing — otherwise providers leak.
+    // tear it down before replacing, otherwise providers leak.
     if (cache.entry) {
       try {
         await cache.entry.api.disconnect();
@@ -70,7 +70,7 @@ async function getApi(url: string): Promise<ApiPromise> {
       if (!api.query.agents?.agents) {
         await api.disconnect();
         throw new Error(
-          "THESEUS_RPC_URL: chain does not expose `agents.agents` storage — wrong chain or out-of-date metadata",
+          "THESEUS_RPC_URL: chain does not expose `agents.agents` storage. Wrong chain or out-of-date metadata.",
         );
       }
       cache.entry = { url, api, provider };

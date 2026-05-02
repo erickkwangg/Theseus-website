@@ -116,7 +116,7 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
 
 export const FIXTURE_AGENTS: Record<SS58Address, AgentSnapshot> = FIXTURES;
 
-// Fixture signature scheme — controllers "sign" by hex-encoding "OK:" + message.
+// Fixture signature scheme. Controllers "sign" by hex-encoding "OK:" + message.
 // Real chain reader will swap this for sr25519 verification via @polkadot/util-crypto.
 export const FIXTURE_VALID_SIGNATURES: Record<
   SS58Address,

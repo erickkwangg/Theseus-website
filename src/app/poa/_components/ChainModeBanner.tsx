@@ -1,4 +1,4 @@
-// ChainModeBanner — a single-line strip below the header that names the
+// ChainModeBanner: a single-line strip below the header that names the
 // data source. Three states:
 //
 // - fixture mode → amber banner with mock-data warning. Shown on every PoA page
@@ -63,7 +63,7 @@ export default function ChainModeBanner({
             fixture mode
           </span>
           <span className="text-[12.5px] text-amber-800 dark:text-amber-200">
-            Chain is mocked with three demo agents — set{" "}
+            Chain is mocked with three demo agents. Set{" "}
             <code className="font-mono">THESEUS_RPC_URL</code> to read from a
             Theseus node.
           </span>
@@ -72,7 +72,7 @@ export default function ChainModeBanner({
     );
   }
 
-  // polkadot mode, no error — quiet trust strip. Only shown when we actually
+  // polkadot mode, no error: quiet trust strip. Only shown when we actually
   // have a fresh block height to display, so empty pages don't claim "live"
   // before they've talked to the chain.
   if (livePolkadotBlock != null) {
@@ -108,7 +108,7 @@ function friendlyChainErrorLine(rawError: string): string {
     return "The Theseus chain RPC didn't respond in time.";
   }
   if (lower.includes("agents.agents")) {
-    return "Connected, but the chain doesn't expose pallet_agents — wrong endpoint?";
+    return "Connected, but the chain doesn't expose pallet_agents. Wrong endpoint?";
   }
   return "We couldn't read the chain right now.";
 }

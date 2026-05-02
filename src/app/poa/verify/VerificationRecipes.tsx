@@ -9,7 +9,7 @@ type Lang = "curl" | "ts" | "rust" | "python";
 const RECIPES: Record<Lang, { label: string; body: string }> = {
   curl: {
     label: "cURL",
-    body: `# Use the PoA verify endpoint directly — easiest path.
+    body: `# Use the PoA verify endpoint directly. Easiest path.
 curl -sS https://theseus.network/poa/api/verify \\
   -H 'content-type: application/json' \\
   -d '{"jws":"eyJhbGciOi..."}'

@@ -11,10 +11,10 @@ import FreshnessGauge from "./_components/FreshnessGauge";
 import Seal from "./_components/Seal";
 import Glyph from "./_components/Glyph";
 
-// /poa landing — two distinct product cards. Each one looks and feels like
+// /poa landing: two distinct product cards. Each one looks and feels like
 // its own product (numbered, wordmarked, tagged with its audience, and
 // stamped with its own URL), not a section of a page. Verify is dominant
-// (larger, autofocused) because it's the bigger user-set; Claim is the
+// (larger, autofocused) because it's the bigger user-set. Claim is the
 // smaller follow-on for operators.
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function PoaLanding() {
       <Header />
       <ChainModeBanner mode={chainMode()} />
 
-      {/* Slim hero strip — just the wordmark + the question. */}
+      {/* Slim hero strip: just the wordmark + the question. */}
       <section className="px-6 pt-24 pb-2 lg:pt-28">
         <div className="mx-auto max-w-5xl">
           <SectionHeader
@@ -46,7 +46,7 @@ export default function PoaLanding() {
         </div>
       </section>
 
-      {/* Product 01 — VERIFY (dominant) */}
+      {/* Product 01: VERIFY (dominant) */}
       <section className="px-2 sm:px-3 lg:px-4 pt-10 lg:pt-14">
         <div className="mx-auto max-w-5xl">
           <article className="hero-card poa-paper relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
@@ -79,8 +79,8 @@ export default function PoaLanding() {
                   </h2>
                   <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-slate-700 sm:text-base dark:text-slate-300">
                     Paste an SS58 address. See whether it&apos;s a registered
-                    Theseus agent and what its credential says — capability
-                    surface, verification grade, controller key, the lot.
+                    Theseus agent and what its credential says about its
+                    capability surface, verification grade, and controller.
                   </p>
 
                   <AgentLookupBar
@@ -126,14 +126,14 @@ export default function PoaLanding() {
                       <p>
                         A Proof of Agenthood credential is a portable, signed
                         receipt of what the chain says. You can verify it
-                        without trusting us — paste the JWS, fetch the public
+                        without trusting us. Paste the JWS, fetch the public
                         JWKS, or use any JOSE-compatible library.
                       </p>
                     </div>
                   </details>
                 </div>
 
-                {/* product mark — what verify returns */}
+                {/* product mark: what verify returns */}
                 <div className="flex flex-col items-center gap-3 lg:items-end">
                   <FreshnessGauge status="current" size={120} />
                   <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
@@ -142,7 +142,7 @@ export default function PoaLanding() {
                 </div>
               </div>
 
-              {/* footer — URL stamp + secondary action */}
+              {/* footer: URL stamp + secondary action */}
               <div className="mt-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">
                 <Link
                   href="/poa/verify"
@@ -159,7 +159,7 @@ export default function PoaLanding() {
         </div>
       </section>
 
-      {/* Product 02 — CLAIM (smaller, secondary) */}
+      {/* Product 02: CLAIM (smaller, secondary) */}
       <section className="px-2 sm:px-3 lg:px-4 pt-12 pb-24 lg:pt-16 lg:pb-32">
         <div className="mx-auto max-w-5xl">
           <article className="hero-card poa-paper poa-double-frame relative overflow-hidden rounded-2xl border border-indigo-700/25 bg-[#F1EAE1] lg:rounded-3xl dark:border-indigo-300/25 dark:bg-slate-900">
@@ -190,8 +190,8 @@ export default function PoaLanding() {
                   </h2>
                   <p className="mt-5 max-w-xl text-[14.5px] leading-relaxed text-slate-700 dark:text-slate-300">
                     Mint a portable credential signed against your agent&apos;s
-                    current chain state. The flow takes about thirty seconds —
-                    the controller signs a one-time nonce, we hand back a
+                    current chain state. The flow takes about thirty seconds.
+                    The controller signs a one-time nonce, we hand back a
                     public credential page anyone can verify.
                   </p>
                   <Link

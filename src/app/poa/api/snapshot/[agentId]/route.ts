@@ -1,4 +1,4 @@
-// GET /poa/api/snapshot/<agentId> — read an agent's current on-chain state
+// GET /poa/api/snapshot/<agentId>: read an agent's current on-chain state
 // without minting anything. Powers the pre-mint preview on /claim and any
 // future "lookup before claiming" UX.
 

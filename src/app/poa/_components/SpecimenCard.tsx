@@ -1,4 +1,4 @@
-// SpecimenCard — a compact preview of what a credential looks like, used as
+// SpecimenCard: a compact preview of what a credential looks like, used as
 // the hero specimen on /poa. Mirrors CredentialDocument's typography but in a
 // reduced, "swatch" form so it reads as an example, not a real document.
 

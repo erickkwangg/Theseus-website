@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-// AgentLookupBar — single-line input that takes an SS58 address and routes
+// AgentLookupBar: single-line input that takes an SS58 address and routes
 // to /poa/<addr>. Used on the landing for quick-check, and also embeddable
 // on the verify page as the "look up" half of the verification UI.
 
@@ -18,7 +18,7 @@ type Props = {
 
 export default function AgentLookupBar({
   className,
-  placeholder = "Paste an SS58 address — 5GrwvaEF…",
+  placeholder = "Paste an SS58 address. 5GrwvaEF…",
   variant = "compact",
   showLabel = true,
   autoFocus = false,

@@ -1,4 +1,4 @@
-// PoaTooltip — a tiny inline disclosure for technical terms. Server-render-
+// PoaTooltip: a tiny inline disclosure for technical terms. Server-render-
 // safe: uses native <details> with a tooltip-flavored summary. No JS, no
 // state. Click to reveal a short plain-language explanation.
 

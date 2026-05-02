@@ -42,7 +42,7 @@ export default function ClaimPage() {
           <div className="relative z-10 mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16 py-10 lg:py-14">
             <SectionHeader
               label="Claim · Proof of Agenthood"
-              number="—"
+              number="·"
               className="mb-8"
             />
             <div className="grid gap-y-6 lg:grid-cols-[1.4fr_1fr] lg:gap-x-16">
