@@ -18,6 +18,9 @@ export interface CredentialStore {
   latestByAgent(agentId: string): Promise<StoredCredential | undefined>;
   revoke(jti: string, reason: RevocationReason): Promise<boolean>;
   allRevoked(): Promise<{ jti: string; reason: RevocationReason; at: number }[]>;
+  // listLatest returns the most recent (by issuedAt) credential per agentId,
+  // capped at `limit`. Powers the /poa/agents directory.
+  listLatest(limit?: number): Promise<StoredCredential[]>;
 }
 
 export interface ChallengeStore {
@@ -86,6 +89,16 @@ class MemoryCredentialStore implements CredentialStore {
         ...(c.revoked as { reason: RevocationReason; at: number }),
       }));
   }
+  async listLatest(limit = 100): Promise<StoredCredential[]> {
+    const byAgent = new Map<string, StoredCredential>();
+    for (const c of mem.credentials.values()) {
+      const cur = byAgent.get(c.agentId);
+      if (!cur || c.issuedAt > cur.issuedAt) byAgent.set(c.agentId, c);
+    }
+    return Array.from(byAgent.values())
+      .sort((a, b) => b.issuedAt - a.issuedAt)
+      .slice(0, limit);
+  }
 }
 
 class MemoryChallengeStore implements ChallengeStore {
@@ -111,6 +124,9 @@ class MemoryChallengeStore implements ChallengeStore {
 const K = {
   cred: (jti: string) => `poa:cred:${jti}`,
   credByAgent: (agentId: string) => `poa:cred-by-agent:${agentId}`,
+  // credAll is a SET of every jti ever stored. Read by the /poa/agents
+  // directory; stays small enough to mget against in v1.
+  credAll: "poa:cred-all",
   revoked: "poa:revoked",
   challenge: (nonce: string) => `poa:challenge:${nonce}`,
 } as const;
@@ -147,6 +163,7 @@ class KvCredentialStore implements CredentialStore {
     await Promise.all([
       kv.set(K.cred(c.jti), c),
       kv.sadd(K.credByAgent(c.agentId), c.jti),
+      kv.sadd(K.credAll, c.jti),
     ]);
   }
   async get(jti: string): Promise<StoredCredential | undefined> {
@@ -189,6 +206,23 @@ class KvCredentialStore implements CredentialStore {
         jti: c.jti,
         ...(c.revoked as { reason: RevocationReason; at: number }),
       }));
+  }
+  async listLatest(limit = 100): Promise<StoredCredential[]> {
+    const kv = getKv();
+    const ids = await kv.smembers(K.credAll);
+    if (ids.length === 0) return [];
+    const vals = await kv.mget<StoredCredential>(
+      ...ids.map((id) => K.cred(id)),
+    );
+    const byAgent = new Map<string, StoredCredential>();
+    for (const c of vals) {
+      if (!c) continue;
+      const cur = byAgent.get(c.agentId);
+      if (!cur || c.issuedAt > cur.issuedAt) byAgent.set(c.agentId, c);
+    }
+    return Array.from(byAgent.values())
+      .sort((a, b) => b.issuedAt - a.issuedAt)
+      .slice(0, limit);
   }
 }
 
@@ -241,6 +275,7 @@ export const credentialStore: CredentialStore = {
   latestByAgent: (id) => pick().cred.latestByAgent(id),
   revoke: (jti, reason) => pick().cred.revoke(jti, reason),
   allRevoked: () => pick().cred.allRevoked(),
+  listLatest: (limit) => pick().cred.listLatest(limit),
 };
 
 export const challengeStore: ChallengeStore = {
