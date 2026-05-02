@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { track } from "./analytics";
 
 // CredentialShareBar: copy-link, share-to-Twitter, and embed-snippet for
 // /poa/[agentId]. The credential page is the artifact; this is the toolbar
@@ -38,6 +39,29 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
     }
   }
 
+  // Web Share API on mobile (iOS Safari, Android Chrome) gives the user
+  // their full system share sheet. Falls back to opening the X intent in
+  // a new tab on desktop, where Web Share isn't available.
+  async function nativeShare() {
+    if (typeof navigator !== "undefined" && "share" in navigator) {
+      try {
+        await navigator.share({
+          title: `${agentName} · Proof of Agenthood`,
+          text: tweet,
+          url,
+        });
+        return;
+      } catch {
+        // user cancel or share failed; fall through to X intent
+      }
+    }
+    window.open(
+      `https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,
+      "_blank",
+      "noopener",
+    );
+  }
+
   return (
     <section
       aria-label="Share this credential"
@@ -48,24 +72,35 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
         <span className="poa-stamp mr-2">Share</span>
 
         <Button
-          onClick={() => copy(url, setCopyState)}
+          onClick={() => {
+            track("poa.share.url_copied", { agentId });
+            copy(url, setCopyState);
+          }}
           state={copyState}
           idle="Copy URL"
           aria-label="Copy public credential URL"
         />
 
-        <a
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={() => {
+            track("poa.share.native", { agentId });
+            void nativeShare();
+          }}
           className="cta-shareLink"
+          aria-label="Share this credential"
         >
-          Tweet
-        </a>
+          Share
+        </button>
 
         <button
           type="button"
-          onClick={() => setEmbedOpen((o) => !o)}
+          onClick={() => {
+            setEmbedOpen((o) => {
+              if (!o) track("poa.share.embed_opened", { agentId });
+              return !o;
+            });
+          }}
           aria-expanded={embedOpen}
           className="cta-shareLink"
         >
@@ -74,7 +109,10 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
 
         <button
           type="button"
-          onClick={() => window.print()}
+          onClick={() => {
+            track("poa.share.print", { agentId });
+            window.print();
+          }}
           aria-label="Print this credential"
           className="cta-shareLink"
         >
@@ -90,7 +128,10 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
               <code className="font-mono text-[12px]">/poa/{agentId.slice(0, 10)}…</code>.
             </p>
             <Button
-              onClick={() => copy(embed, setEmbedState)}
+              onClick={() => {
+                track("poa.share.embed_copied", { agentId });
+                copy(embed, setEmbedState);
+              }}
               state={embedState}
               idle="Copy snippet"
               aria-label="Copy embed snippet"

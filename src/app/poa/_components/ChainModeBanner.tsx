@@ -10,6 +10,7 @@
 
 import LiveBlock from "./LiveBlock";
 import Glyph from "./Glyph";
+import FixtureBannerClient from "./FixtureBannerClient";
 
 type Props = {
   mode: "fixture" | "polkadot";
@@ -53,23 +54,7 @@ export default function ChainModeBanner({
   }
 
   if (mode === "fixture") {
-    return (
-      <div
-        role="status"
-        className="border-y border-amber-400/40 bg-amber-50/60 dark:border-amber-500/30 dark:bg-amber-500/5"
-      >
-        <div className="mx-auto flex max-w-[1700px] flex-wrap items-center gap-x-4 gap-y-1 px-6 py-2 sm:px-12 lg:px-16">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-700 dark:text-amber-300">
-            fixture mode
-          </span>
-          <span className="text-[12.5px] text-amber-800 dark:text-amber-200">
-            Chain is mocked with three demo agents. Set{" "}
-            <code className="font-mono">THESEUS_RPC_URL</code> to read from a
-            Theseus node.
-          </span>
-        </div>
-      </div>
-    );
+    return <FixtureBannerClient />;
   }
 
   // polkadot mode, no error: quiet trust strip. Only shown when we actually

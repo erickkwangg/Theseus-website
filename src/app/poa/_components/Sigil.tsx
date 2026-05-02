@@ -271,23 +271,21 @@ export default function Sigil({
               strokeWidth={1.1}
             />
           )}
-          {size >= 56 && (
-            <text
-              x={badgeCx}
-              y={badgeCy + badgeR * 0.35}
-              textAnchor="middle"
-              fontSize={badgeR * 1.05}
-              fontFamily="var(--font-mono, ui-monospace, SFMono-Regular, monospace)"
-              fill={
-                badge.fill === "solid"
-                  ? "var(--poa-paper-card, #F1EAE1)"
-                  : "var(--poa-wax, #7B1E1E)"
-              }
-              style={{ fontWeight: 600 }}
-            >
-              {badge.letter}
-            </text>
-          )}
+          <text
+            x={badgeCx}
+            y={badgeCy + badgeR * 0.35}
+            textAnchor="middle"
+            fontSize={badgeR * 1.05}
+            fontFamily="var(--font-mono, ui-monospace, SFMono-Regular, monospace)"
+            fill={
+              badge.fill === "solid"
+                ? "var(--poa-paper-card, #F1EAE1)"
+                : "var(--poa-wax, #7B1E1E)"
+            }
+            style={{ fontWeight: 600 }}
+          >
+            {badge.letter}
+          </text>
         </g>
       )}
     </svg>
