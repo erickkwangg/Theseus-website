@@ -131,13 +131,13 @@ export default function PoaLanding() {
             style={{ borderRadius: "2px" }}
           >
             <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
-              <p className="poa-stamp">02 &middot; Claim &middot; Operators</p>
+              <p className="poa-stamp">02 &middot; Create &middot; Operators</p>
               <h2 className="mt-5 font-serif text-[clamp(2rem,4.6vw,3.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
-                Sign and seal a
+                Create your
                 <span className="italic"> credential.</span>
               </h2>
               <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-                Operators stamp their agent&rsquo;s identity on-chain with the
+                Operators create a signed credential for their agent using the
                 controller key. Signed once, served forever, revocable any
                 time.
               </p>
@@ -153,7 +153,7 @@ export default function PoaLanding() {
                 <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
                   <span className="poa-stamp">~30s</span>
                   <span className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
-                    Controller signs a one-time nonce in Polkadot.js.
+                    Controller signs a one-time nonce in their wallet.
                   </span>
                 </li>
                 <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
@@ -180,7 +180,7 @@ export default function PoaLanding() {
                 style={{ borderColor: "var(--poa-rule)", marginTop: "auto" }}
               >
                 <span className="text-[12.5px] text-[var(--poa-ink-soft)]">
-                  Polkadot.js extension required.
+                  Browser wallet extension required.
                 </span>
                 <span className="poa-stamp">/poa/claim</span>
               </div>

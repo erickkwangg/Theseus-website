@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       {
         error: "dev-sign-disabled-in-real-chain-mode",
         detail:
-          "THESEUS_RPC_URL is set; the controller must sign the nonce with its real sr25519 key (e.g. via the Polkadot.js extension).",
+          "THESEUS_RPC_URL is set; the controller must sign the nonce with its real sr25519 key via a browser wallet extension.",
       },
       { status: 409 },
     );

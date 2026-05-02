@@ -19,7 +19,7 @@ const APP_NAME = "Proof of Agenthood";
 
 export class NoExtensionError extends Error {
   constructor() {
-    super("polkadot.js extension not detected");
+    super("browser wallet extension not detected");
     this.name = "NoExtensionError";
   }
 }

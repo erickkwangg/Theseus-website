@@ -237,7 +237,7 @@ export default function ClaimForm({
           setState({
             kind: "running",
             step: "attest",
-            detail: "asking polkadot.js extension to sign...",
+            detail: "asking your wallet to sign...",
             snapshot,
           });
           // Lazy import so the extension shim isn't bundled into the
@@ -275,7 +275,7 @@ export default function ClaimForm({
         setState({
           kind: "running",
           step: "receive",
-          detail: "minting credential...",
+          detail: "creating credential...",
           snapshot,
         });
         issued = await jsonFetch<IssueResponse>("/poa/api/issue", {
@@ -286,7 +286,7 @@ export default function ClaimForm({
         setState({
           kind: "running",
           step: "receive",
-          detail: "minting credential...",
+          detail: "creating credential...",
           snapshot,
         });
         await new Promise((r) => setTimeout(r, 120));
@@ -374,10 +374,10 @@ export default function ClaimForm({
             Choose an agent
           </span>
           <p className="mt-2 max-w-md text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-            Only the agent&apos;s controller can mint a credential. Selecting
+            Only the agent&apos;s controller can create a credential. Selecting
             an agent here loads its current state for review before signing.
             {mode === "polkadot" &&
-              " You'll be asked to sign with the controller key in your Polkadot.js extension."}
+              " You'll be asked to sign with the controller key in your browser wallet."}
           </p>
         </div>
 
@@ -489,14 +489,14 @@ export default function ClaimForm({
           )}
         >
           {state.kind === "running"
-            ? "Minting…"
+            ? "Creating…"
             : state.kind === "done"
               ? "Done"
               : state.kind === "preview"
                 ? state.snapshot.sovereign
-                  ? "Mint snapshot credential"
-                  : "Sign nonce & mint credential"
-                : "Mint credential"}
+                  ? "Create credential"
+                  : "Sign and create credential"
+                : "Create credential"}
         </button>
         {state.kind === "preview" && (
           <>

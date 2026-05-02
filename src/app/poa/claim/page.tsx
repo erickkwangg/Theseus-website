@@ -9,7 +9,7 @@ import ChainModeBanner from "../_components/ChainModeBanner";
 export const metadata: Metadata = {
   title: "Claim a Proof of Agenthood credential",
   description:
-    "Mint a portable, signed credential for a Theseus agent. Sovereign agents are issuable by anyone; non-sovereign agents require a controller signature.",
+    "Create a signed credential for a Theseus agent. Sovereign agents are issuable by anyone; non-sovereign agents require a controller signature.",
   alternates: { canonical: "/poa/claim" },
 };
 
@@ -36,14 +36,14 @@ export default function ClaimPage() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="poa-stamp">Claim &middot; Proof of Agenthood</p>
           <h1 className="mt-4 font-serif text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
-            Mint a <span className="italic">credential.</span>
+            Create your <span className="italic">credential.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
             Select an agent you control, review the on-chain snapshot about to
             be baked in, sign a one-time nonce with the controller key.
             {mode === "fixture"
               ? " The chain is mocked in this preview with three fixture agents."
-              : " Signing happens in your Polkadot.js extension; the page never sees the private key."}
+              : " Signing happens in your browser wallet; the page never sees the private key."}
           </p>
         </div>
       </section>

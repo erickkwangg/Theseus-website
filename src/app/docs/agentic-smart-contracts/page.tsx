@@ -170,7 +170,7 @@ export default function AgenticSmartContractsPage() {
 
           <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             Over the last decade, several runtimes have promised to extend what smart contracts can
-            do. SVM, MoveVM, eWASM, and parallel execution layers like Polkadot all delivered real
+            do. SVM, MoveVM, eWASM, and various parallel execution layers all delivered real
             engineering improvements. None of them, however, broke out of the same design space the
             EVM defined.
           </p>
