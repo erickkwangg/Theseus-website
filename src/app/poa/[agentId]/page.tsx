@@ -86,7 +86,7 @@ export default async function PoaCredentialPage({ params }: Props) {
   return (
     <main className="poa-shell min-h-screen">
       <Header />
-      <div className="pt-16">
+      <div className="pt-20">
         <ChainModeBanner
           mode={mode}
           chainError={chainError}
