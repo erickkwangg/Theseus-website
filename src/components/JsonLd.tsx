@@ -178,7 +178,7 @@ type DefinedTermSetProps = {
 
 const SCHEMA_SITE_URL = "https://theseus.network";
 
-/** Schema.org DefinedTermSet — high-leverage GEO win for glossary pages. */
+/** Schema.org DefinedTermSet: high-leverage GEO win for glossary pages. */
 export function DefinedTermSetJsonLd({ name, url, terms }: DefinedTermSetProps) {
   const data = {
     "@context": "https://schema.org",
@@ -223,7 +223,7 @@ type CollectionPageJsonLdProps = {
   items: CollectionPageItem[];
 };
 
-/** Schema.org CollectionPage — for hub/index pages that list other pages. */
+/** Schema.org CollectionPage: for hub/index pages that list other pages. */
 export function CollectionPageJsonLd({
   name,
   description,

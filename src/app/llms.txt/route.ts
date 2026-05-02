@@ -6,9 +6,9 @@ const BODY = `# Theseus
 
 ## Core
 
-- [Theseus](${SITE_URL}/): An open runtime for autonomous AI agents — agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
+- [Theseus](${SITE_URL}/): An open runtime for autonomous AI agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
 - [Introduction](${SITE_URL}/docs/introduction): Why a runtime where agents hold their own keys, balance, and state, and how it differs from running an LLM in a smart contract.
-- [Architecture](${SITE_URL}/docs/architecture): The three-layer design — AIVM execution, TheseusStore data availability, and HotStuff BFT proof-of-stake consensus.
+- [Architecture](${SITE_URL}/docs/architecture): The three-layer design: AIVM execution, TheseusStore data availability, and HotStuff BFT proof-of-stake consensus.
 - [Status & Roadmap](${SITE_URL}/docs/status): What is live, what is in private preview, and what is planned next.
 
 ## Concepts

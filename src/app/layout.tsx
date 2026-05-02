@@ -31,7 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = "https://theseus.network";
 const SITE_NAME = "Theseus";
-const SITE_TITLE = "Theseus — Open runtime for autonomous AI agents";
+const SITE_TITLE = "Theseus: Open runtime for autonomous AI agents";
 const SITE_DESCRIPTION =
   "An open runtime where AI agents hold their own keys, balance, and state. Build agents for treasuries, markets, and self-running protocols.";
 
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_TITLE,
-    template: "%s — Theseus",
+    template: "%s · Theseus",
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
         url: "/og/root.gif",
         width: 1200,
         height: 630,
-        alt: "Theseus — Agents that are verified, autonomous, sovereign.",
+        alt: "Theseus. Agents that are verified, autonomous, sovereign.",
       },
     ],
   },
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og/root.png",
-        alt: "Theseus — Agents that are verified, autonomous, sovereign.",
+        alt: "Theseus. Agents that are verified, autonomous, sovereign.",
       },
     ],
     // site: "@theseus_xyz",     // TODO: add when an X handle is registered

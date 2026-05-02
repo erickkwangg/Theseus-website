@@ -169,8 +169,8 @@ export default function CredentialDocument({
             Verification grade requires aggregating recent{" "}
             <code className="font-mono">AgentRuns</code> against{" "}
             <code className="font-mono">Aivm</code> proof results. That&apos;s
-            an indexer job, not a per-request RPC call. Not yet wired in this
-            preview.
+            an indexer job, not a per-request RPC call. Not yet wired up in
+            this preview.
           </p>
         ) : (
           <>

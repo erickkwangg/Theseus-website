@@ -1,6 +1,6 @@
 import { OG_SIZE, renderOG } from "@/lib/og-template";
 
-export const alt = "Theseus Playground — Run a SHIP agent live.";
+export const alt = "Theseus Playground. Run a SHIP agent live.";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

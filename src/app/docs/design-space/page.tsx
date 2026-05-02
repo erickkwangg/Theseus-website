@@ -214,7 +214,7 @@ export default function DesignSpacePage() {
             <div className="space-y-1 text-sm">
               <p><strong className="text-slate-900 dark:text-white">ChatGPT:</strong> <span className="text-gray-600 dark:text-gray-400">intelligence you can query</span></p>
               <p><strong className="text-slate-900 dark:text-white">OpenClaw:</strong> <span className="text-gray-600 dark:text-gray-400">execution you can delegate</span></p>
-              <p><strong className="text-slate-900 dark:text-white">Theseus:</strong> <span className="text-gray-600 dark:text-gray-400">agents with full agency — own keys, hold balances, persist</span></p>
+              <p><strong className="text-slate-900 dark:text-white">Theseus:</strong> <span className="text-gray-600 dark:text-gray-400">agents with full agency: own keys, hold balances, persist</span></p>
             </div>
           </div>
         </section>

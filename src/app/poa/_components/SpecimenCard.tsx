@@ -1,6 +1,6 @@
-// SpecimenCard: the hero artifact on /poa. A condensed, factual credential
-// card — same primitives as CredentialDocument, fewer rows, plain language.
-// No vintage-diploma copy: this is product chrome, not LARP.
+// SpecimenCard: a condensed, factual credential card. Same primitives as
+// CredentialDocument, fewer rows, plain language. Currently unused on the
+// landing; kept for future reuse.
 
 import { cn } from "@/lib/utils";
 import Seal from "./Seal";
@@ -38,7 +38,7 @@ export default function SpecimenCard({ className }: { className?: string }) {
         className,
       )}
     >
-      {/* Top rail — spare. Wordmark left, serial right. */}
+      {/* Top rail: wordmark left, serial right. */}
       <header
         className="flex items-center justify-between border-b px-6 py-3 sm:px-8"
         style={{ borderColor: "var(--poa-rule)" }}
@@ -49,8 +49,8 @@ export default function SpecimenCard({ className }: { className?: string }) {
         </span>
       </header>
 
-      {/* Body — name + one-line role on the left, seal on the right.
-         Below: a tight grid of facts. */}
+      {/* Body: name + one-line role on the left, seal on the right.
+         Below it, a tight grid of facts. */}
       <div className="px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-y-8 sm:grid-cols-[1fr_auto] sm:gap-x-10">
           <div className="min-w-0">
@@ -78,7 +78,7 @@ export default function SpecimenCard({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Facts table — fixed-width labels, mono values. Reads as data. */}
+        {/* Facts table: fixed-width labels, mono values. Reads as data. */}
         <dl
           className="mt-10 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2.5 border-t pt-6 sm:grid-cols-[auto_1fr_auto_1fr] sm:gap-x-8"
           style={{ borderColor: "var(--poa-rule)" }}

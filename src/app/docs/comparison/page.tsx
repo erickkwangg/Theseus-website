@@ -46,7 +46,7 @@ export default function ComparisonPage() {
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-            Every Ethereum smart contract — no matter how complex — needs an
+            Every Ethereum smart contract, no matter how complex, needs an
             externally owned account (EOA) to call it. The contract holds logic
             and state, but it cannot start work on its own. Services like
             Chainlink Keepers are off-chain bots with private keys that trigger
@@ -62,8 +62,8 @@ export default function ComparisonPage() {
           <Callout type="tip" title="The shape of the difference">
             Smart contract: a vending machine. Holds inventory and logic, but
             someone has to put a coin in. Theseus agent: an autonomous shopkeeper.
-            Checks inventory, restocks, sets prices, transacts with suppliers —
-            all without anyone walking up to it.
+            Checks inventory, restocks, sets prices, and transacts with
+            suppliers, all without anyone walking up to it.
           </Callout>
         </section>
 
@@ -232,7 +232,7 @@ export default function ComparisonPage() {
             </div>
           </div>
 
-          {/* Market categories — aligned with homepage Civic / Managed / Sovereign */}
+          {/* Market categories: aligned with homepage Civic / Managed / Sovereign */}
           <div className="docs-card border-green-900/50">
             <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-green-400">
               <TrendingUp className="h-5 w-5" />
@@ -246,7 +246,7 @@ export default function ComparisonPage() {
               {[
                 {
                   title: "Civic agents",
-                  desc: "Public-good agents that read, reason, and sign their work. They don't hold funds — their job is to make outcomes cheap to verify (prediction-market resolvers, dispute arbitration, content provenance).",
+                  desc: "Public-good agents that read, reason, and sign their work. They don't hold funds; their job is to make outcomes cheap to verify (prediction-market resolvers, dispute arbitration, content provenance).",
                 },
                 {
                   title: "Managed agents",

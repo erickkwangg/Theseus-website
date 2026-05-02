@@ -182,7 +182,7 @@ function JwsForm() {
             ? shape?.ok
               ? "shape ok · 3 base64url segments"
               : `shape: ${shape?.count ?? 0} segment${shape?.count === 1 ? "" : "s"} (expected 3, base64url)`
-            : "no token? mint one at /poa/claim, or look up an agent at /poa"}
+            : "no token? create one at /poa/claim, or look up an agent at /poa"}
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

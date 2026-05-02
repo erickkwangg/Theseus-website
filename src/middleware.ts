@@ -5,8 +5,8 @@ import { NextResponse, type NextRequest } from "next/server";
  *
  * The site's <meta property="og:image"> always points at /og/root.gif so that
  * platforms which animate (Discord, Slack, LinkedIn, Telegram) get the
- * typewriter loop. Facebook's scraper — which also powers Messenger,
- * Instagram, and WhatsApp link previews — silently rejects animated GIFs as
+ * typewriter loop. Facebook's scraper (which also powers Messenger,
+ * Instagram, and WhatsApp link previews) silently rejects animated GIFs as
  * og:image and produces a blank preview with title only. There is no
  * encoding that changes this; it is a Meta product decision.
  *

@@ -1,6 +1,6 @@
 // Seal: a real letterpress-feeling badge for the credential footer and
 // the hero specimen. Concentric rings + arc text + a wax disc carrying
-// an emblematic device (a labyrinth — Theseus's mythological mark).
+// an emblematic device (a labyrinth, Theseus's mythological mark).
 // Reads as an object, not a status pill.
 
 import { cn } from "@/lib/utils";
@@ -184,7 +184,7 @@ export default function Seal({
         className="seal-ring"
       />
 
-      {/* Top arc label — manual letter positioning for crisp spacing. */}
+      {/* Top arc label: manual letter positioning for crisp spacing. */}
       <g transform={`translate(${cx} ${cy})`}>
         <ArcText
           text={label.toUpperCase()}
@@ -205,8 +205,8 @@ export default function Seal({
       </g>
 
       {/* Center mark: a pressed wax disc carrying an emblematic device.
-         For attested credentials, the device is a labyrinth — Theseus's
-         mythological mark. For revoked, an X cut through. For pending,
+         For attested credentials, the device is a labyrinth (Theseus's
+         mythological mark). For revoked, an X cut through. For pending,
          a quiet dot. */}
       <g transform={`translate(${cx} ${cy})`}>
         <circle

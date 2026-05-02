@@ -47,19 +47,19 @@ const STEPS: { key: StepKey; n: string; label: string; subtitle: string }[] = [
     key: "preview",
     n: "02",
     label: "Preview",
-    subtitle: "Inspect the on-chain state about to be baked into the credential.",
+    subtitle: "Look at the on-chain data we'll include in the credential.",
   },
   {
     key: "attest",
     n: "03",
     label: "Attest",
-    subtitle: "Sovereign: snapshot only. Otherwise the controller signs a nonce.",
+    subtitle: "If your agent isn't sovereign, the controller signs a one-time message.",
   },
   {
     key: "receive",
     n: "04",
     label: "Receive",
-    subtitle: "Signed credential is minted and made public.",
+    subtitle: "We sign the credential and make it public.",
   },
 ];
 

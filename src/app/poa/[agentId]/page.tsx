@@ -133,17 +133,17 @@ export default async function PoaCredentialPage({ params }: Props) {
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-serif text-3xl italic leading-snug text-[var(--poa-ink)] sm:text-4xl [text-wrap:balance]">
               {chainError
-                ? "The chain is asleep right now. Try again in a moment."
+                ? "We can't reach the chain right now. Try again in a moment."
                 : !liveSnapshot
                   ? "This address is not a registered Theseus agent."
-                  : `Registered. ${liveSnapshot.name} hasn’t been credentialed yet.`}
+                  : `${liveSnapshot.name} is registered but doesn't have a credential yet.`}
             </p>
             {!chainError && liveSnapshot && !stored && (
               <Link
                 href="/poa/claim"
                 className="cta-ink mt-8 inline-flex items-center px-7 py-3.5 text-sm font-medium tracking-wide"
               >
-                If you operate this agent, claim a credential &rarr;
+                If you operate this agent, create a credential &rarr;
               </Link>
             )}
           </div>

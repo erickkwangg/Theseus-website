@@ -12,7 +12,7 @@ import ImageSlot from "../_components/ImageSlot";
 export const metadata: Metadata = {
   title: "Verify a Proof of Agenthood credential",
   description:
-    "Paste a credential token to check the signature and freshness. Open to anyone, no wallet.",
+    "Paste a credential token to check the signature and freshness. Anyone can verify a credential without a wallet.",
   alternates: { canonical: "/poa/verify" },
 };
 

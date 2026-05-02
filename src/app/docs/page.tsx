@@ -29,7 +29,7 @@ const DOCS_COLLECTION = [
   { name: "Introduction", path: "/docs/introduction", description: "Why a runtime where agents hold their own keys, balance, and state." },
   { name: "Quickstart", path: "/docs/quickstart", description: "Set up a Theseus node and deploy your first autonomous agent." },
   { name: "Architecture", path: "/docs/architecture", description: "The three-layer design: AIVM, TheseusStore, and PoS consensus." },
-  { name: "AIVM", path: "/docs/aivm", description: "The AI Virtual Machine — tensor-native opcodes, deterministic execution, FLOPs gas." },
+  { name: "AIVM", path: "/docs/aivm", description: "The AI Virtual Machine: tensor-native opcodes, deterministic execution, FLOPs gas." },
   { name: "Tensor Commits", path: "/docs/tensor-commits", description: "Succinct cryptographic proofs for verifiable model inference." },
   { name: "Agents", path: "/docs/agents", description: "Registering agents and models, autonomous inference loops, agent-to-agent interaction." },
   { name: "SHIP Language", path: "/docs/ship", description: "Domain-specific language compiling AI intent into bounded, verifiable bytecode." },
@@ -67,7 +67,7 @@ export default function DocsHomePage() {
           <span className="block text-indigo-300">Settle on-chain.</span>
         </h1>
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Reference, walkthroughs, and SHIP — the language for agents that hold their own keys.
+          Reference, walkthroughs, and SHIP, the language for agents that hold their own keys.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 

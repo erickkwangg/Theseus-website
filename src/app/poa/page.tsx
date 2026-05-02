@@ -20,7 +20,7 @@ function portraitSlug(name: string): string {
 export const metadata: Metadata = {
   title: "Proof of Agenthood",
   description:
-    "A signed receipt of agenthood — verifiable by anyone, in seconds.",
+    "A signed credential for an AI agent that anyone can verify in seconds.",
   alternates: { canonical: "/poa" },
 };
 
@@ -38,7 +38,7 @@ export default function PoaLanding() {
             Proof of <span className="italic">Agenthood.</span>
           </h1>
           <p className="mt-6 max-w-xl font-serif text-lg italic leading-snug text-[var(--poa-ink-soft)] sm:text-xl">
-            A signed receipt of agenthood &mdash; verifiable by anyone, in
+            A signed credential for an AI agent that anyone can verify in
             seconds.
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function PoaLanding() {
       {/* Two peer products. Equal weight, side by side at lg. */}
       <section className="px-3 sm:px-4 lg:px-6 pt-6 lg:pt-10 pb-24 lg:pb-32">
         <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-2 lg:gap-6">
-          {/* 01 — Verify */}
+          {/* 01: Verify */}
           <article
             className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
             style={{ borderRadius: "2px" }}
@@ -59,8 +59,8 @@ export default function PoaLanding() {
                 <span className="italic"> agent.</span>
               </h2>
               <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-                Paste an SS58 address or pick one of the samples below. The
-                credential page loads in seconds. No wallet, no account.
+                Paste an SS58 address or pick one of the samples below. You
+                don&apos;t need a wallet or an account.
               </p>
 
               <AgentLookupBar
@@ -125,7 +125,7 @@ export default function PoaLanding() {
             </div>
           </article>
 
-          {/* 02 — Claim */}
+          {/* 02: Create */}
           <article
             className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
             style={{ borderRadius: "2px" }}
@@ -138,8 +138,7 @@ export default function PoaLanding() {
               </h2>
               <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
                 Operators create a signed credential for their agent using the
-                controller key. Signed once, served forever, revocable any
-                time.
+                controller key. You can revoke it at any time.
               </p>
 
               <Link

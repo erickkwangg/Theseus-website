@@ -152,7 +152,7 @@ export default function Sigil({
         </radialGradient>
       </defs>
 
-      {/* ground — blend with cream paper (or warm-dark in dark mode) */}
+      {/* ground: blend with cream paper (or warm-dark in dark mode) */}
       <rect
         x={0}
         y={0}

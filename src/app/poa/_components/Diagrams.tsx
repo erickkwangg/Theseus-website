@@ -73,7 +73,7 @@ export function VerifyFlow({ className }: { className?: string }) {
 
       <Arrow x1={78} y1={45} x2={104} y2={45} />
 
-      {/* JWKS — key shape */}
+      {/* JWKS: key shape */}
       <g transform="translate(108 28)">
         <circle cx="14" cy="17" r="9" stroke="currentColor" fill="none" strokeWidth={STROKE} />
         <circle cx="14" cy="17" r="3" fill="currentColor" />
@@ -138,7 +138,7 @@ export function ClaimFlow({ className }: { className?: string }) {
 
       <Arrow x1={70} y1={36} x2={102} y2={36} />
 
-      {/* snapshot — small framed card with a sigil-like mark */}
+      {/* snapshot: small framed card with a sigil-like mark */}
       <g transform="translate(106 16)">
         <rect width="68" height="44" stroke="currentColor" fill="none" strokeWidth={STROKE} />
         <circle cx="50" cy="22" r="8" stroke="currentColor" fill="none" strokeWidth={STROKE * 0.8} />
@@ -153,7 +153,7 @@ export function ClaimFlow({ className }: { className?: string }) {
 
       <Arrow x1={180} y1={36} x2={210} y2={36} />
 
-      {/* controller signing — key + small wave/signature */}
+      {/* controller signing: key + small wave/signature */}
       <g transform="translate(214 22)">
         <circle cx="10" cy="14" r="6" stroke="currentColor" fill="none" strokeWidth={STROKE} />
         <circle cx="10" cy="14" r="2" fill="currentColor" />
@@ -282,7 +282,7 @@ export function CredentialAnatomy({ className }: { className?: string }) {
 }
 
 // 4. JWS shape ────────────────────────────────────────────────────────────
-// header.payload.signature — the three segments of a compact JWS.
+// header.payload.signature: the three segments of a compact JWS.
 export function JwsShape({ className }: { className?: string }) {
   return (
     <svg

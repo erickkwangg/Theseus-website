@@ -25,7 +25,7 @@ export async function notify(
 
   if (!resend || !segmentId) {
     console.warn(
-      "[notify] RESEND_API_KEY or RESEND_SEGMENT_ID not set — falling back to log",
+      "[notify] RESEND_API_KEY or RESEND_SEGMENT_ID not set, falling back to log",
       email,
     );
     return { ok: true, message: "We'll let you know." };

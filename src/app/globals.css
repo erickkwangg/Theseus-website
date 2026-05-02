@@ -1089,7 +1089,7 @@
 }
 
 /* Materialize animation: a subtle two-stage reveal for the credential
-   document — first the frame, then the contents. Triggered via .poa-materialize
+   document. First the frame, then the contents. Triggered via .poa-materialize
    class on the article element on first render. */
 @keyframes poa-frame-in {
   from { opacity: 0; transform: translateY(6px) scale(0.997); }
@@ -1193,7 +1193,7 @@ body:has(.poa-shell) {
 /* Footer chrome scoped for poa surfaces: drop the violet "Ship your first
    agent" CTA, neutralize the cool gradient, ink the wordmark. The footer
    has a nested <div class="hero-card ... bg-[#F1EAE1] dark:bg-slate-900">
-   inner panel — both the outer footer and the inner panel need overriding. */
+   inner panel: both the outer footer and the inner panel need overriding. */
 .poa-shell footer,
 .poa-shell footer .hero-card {
   background: var(--poa-paper) !important;
@@ -1242,7 +1242,7 @@ body:has(.poa-shell) {
 /* Footer logo: flat ink in light, flat cream in dark. */
 .poa-shell footer img { filter: brightness(0) opacity(0.85) !important; }
 .dark .poa-shell footer img { filter: brightness(0) invert(1) opacity(0.88) !important; }
-/* Italic "Think. Act. Verify." accent — wax-red. */
+/* Italic "Think. Act. Verify." accent in wax-red. */
 .poa-shell footer .italic { color: var(--poa-wax) !important; opacity: 0.8; }
 
 /* Inside poa-shell: drop the cool glossy finish on hero-card so the cream
@@ -1252,7 +1252,7 @@ body:has(.poa-shell) {
 .poa-shell .hero-card::after { display: none; }
 .dark .poa-shell .hero-card { box-shadow: 0 0 0 1px var(--poa-rule), 0 22px 44px -28px rgba(0, 0, 0, 0.6); }
 
-/* Flat ink CTA — replaces indigo gradient on poa surfaces. */
+/* Flat ink CTA: replaces indigo gradient on poa surfaces. */
 .cta-ink {
   background: var(--poa-ink);
   color: var(--poa-paper);
@@ -1264,7 +1264,7 @@ body:has(.poa-shell) {
 .cta-ink:active { transform: translateY(1px); }
 .dark .cta-ink:hover { background: #FFFFFF; color: #14110D; }
 
-/* Sepia "watermark" stamp — for URL captions and tiny anchor labels. */
+/* Sepia "watermark" stamp for URL captions and tiny anchor labels. */
 .poa-stamp {
   color: var(--poa-sepia);
   font-family: var(--font-mono, ui-monospace, monospace);

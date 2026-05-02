@@ -9,7 +9,7 @@ import ChainModeBanner from "../_components/ChainModeBanner";
 export const metadata: Metadata = {
   title: "Claim a Proof of Agenthood credential",
   description:
-    "Create a signed credential for a Theseus agent. Sovereign agents are issuable by anyone; non-sovereign agents require a controller signature.",
+    "Create a signed credential for an AI agent on Theseus.",
   alternates: { canonical: "/poa/claim" },
 };
 
@@ -39,11 +39,11 @@ export default function ClaimPage() {
             Create your <span className="italic">credential.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-            Select an agent you control, review the on-chain snapshot about to
-            be baked in, sign a one-time nonce with the controller key.
+            Pick the agent you control, look at the on-chain data we&apos;ll
+            include, then sign with the controller key.
             {mode === "fixture"
-              ? " The chain is mocked in this preview with three fixture agents."
-              : " Signing happens in your browser wallet; the page never sees the private key."}
+              ? " The chain is mocked in this preview with three sample agents."
+              : " Signing happens in your browser wallet, so the page never sees your private key."}
           </p>
         </div>
       </section>

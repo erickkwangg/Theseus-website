@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/playground" },
   openGraph: {
     type: "website",
-    title: "Playground — Theseus",
+    title: "Playground · Theseus",
     description:
       "Try a SHIP agent in the Theseus playground: write the agent, run it against the runtime, and inspect the signed receipt.",
     url: "/playground",
