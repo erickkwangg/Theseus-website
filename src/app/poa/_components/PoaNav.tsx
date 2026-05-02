@@ -42,8 +42,23 @@ export default function PoaNav() {
       className="border-b"
       style={{ borderColor: "var(--poa-rule)" }}
     >
-      <div className="mx-auto flex max-w-[1700px] items-center gap-x-6 px-6 py-2 sm:px-12 lg:px-16">
-        <span className="poa-stamp">PoA</span>
+      <div className="mx-auto flex max-w-[1700px] items-center gap-x-5 px-6 py-2 sm:px-12 lg:px-16">
+        {/* Section wordmark: serif italic, wax-red. Visually distinct from
+            the mono-uppercase nav links so it doesn't read as a non-clickable
+            sibling. Static (the current section) — the Home link covers
+            the navigation use. */}
+        <span
+          aria-hidden
+          className="font-serif text-[15px] italic leading-none tracking-tight"
+          style={{ color: "var(--poa-wax)" }}
+        >
+          PoA
+        </span>
+        <span
+          aria-hidden
+          className="h-3 w-px"
+          style={{ backgroundColor: "var(--poa-rule)" }}
+        />
         <ul className="flex items-center gap-x-4 sm:gap-x-6">
           {ITEMS.map((item) => {
             const active = item.matches(pathname);
