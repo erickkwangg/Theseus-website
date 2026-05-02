@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
-import SectionHeader from "@/components/Pages/Home/SectionHeader";
 import { chainMode } from "@/lib/poa/chain";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import VerifyForm from "./VerifyForm";
 import VerificationRecipes from "./VerificationRecipes";
 import { JwsShape, BadgeMockup } from "../_components/Diagrams";
+import ImageSlot from "../_components/ImageSlot";
 
 export const metadata: Metadata = {
   title: "Verify a Proof of Agenthood credential",
@@ -18,96 +18,129 @@ export const metadata: Metadata = {
 
 export default function VerifyPage() {
   return (
-    <main className="bg-white text-slate-900 dark:bg-transparent dark:text-white">
+    <main className="poa-shell min-h-screen">
       <Header />
       <ChainModeBanner mode={chainMode()} />
 
-      <section className="px-2 sm:px-3 lg:px-4 pt-20 lg:pt-24 pb-2 sm:pb-3 lg:pb-4">
-        <div className="hero-card relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 soft-grid [mask-image:linear-gradient(to_bottom,black,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,black_72%,transparent)]"
-          />
-          <div className="relative z-10 mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16 py-10 lg:py-14">
-            <SectionHeader
-              label="Verify · Proof of Agenthood"
-              number="·"
-              className="mb-8"
-            />
-            <div className="grid gap-y-6 lg:grid-cols-[1.4fr_1fr] lg:gap-x-16">
-              <h1 className="font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
-                Verify a credential.
-              </h1>
-              <p className="max-w-md text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
-                Paste the credential token issued by{" "}
-                <code className="font-mono">theseus.network/poa</code>. We
-                check the signature against our public key and the
-                chain&apos;s current state. To look up an agent by address
-                instead,{" "}
-                <Link
-                  href="/poa"
-                  className="text-indigo-700 underline underline-offset-[4px] dark:text-indigo-300"
-                >
-                  start at /poa
-                </Link>
-                .
-              </p>
-            </div>
-          </div>
+      {/* Hero: a single instruction. No diagram, no chrome. */}
+      <section className="px-6 pt-28 pb-2 lg:pt-36">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="poa-stamp">Verify &middot; Proof of Agenthood</p>
+          <h1 className="mt-4 font-serif text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+            Verify a <span className="italic">credential.</span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+            Paste the token issued by{" "}
+            <code className="font-mono">theseus.network/poa</code>. Or, to look
+            up an agent by address,{" "}
+            <Link
+              href="/poa"
+              className="text-[var(--poa-ink)] underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:decoration-[color:var(--poa-ink)]"
+            >
+              start at /poa
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
-      <section className="px-6 py-12 lg:py-20">
-        <div className="mx-auto max-w-[1100px]">
-          {/* What a credential token looks like, before we ask people to paste one. */}
-          <div className="mb-10 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
-            <JwsShape className="w-full max-w-[420px] text-slate-700 dark:text-slate-200" />
-            <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-              A credential token is a long string with three parts joined by
-              dots. The first two are public data (who, what, when); the third
-              is a cryptographic signature only we can produce. We check that
-              signature with our public key (it&apos;s the standard JWS / JWKS
-              format if you&apos;re wondering).
-            </p>
-          </div>
+      {/* The form. Spare. */}
+      <section className="px-6 pt-12 pb-8 lg:pt-16">
+        <div className="mx-auto max-w-[820px]">
           <VerifyForm />
         </div>
       </section>
 
+      {/* "What is a credential token?" hidden until asked. */}
+      <section className="px-6 pb-12">
+        <div className="mx-auto max-w-[820px]">
+          <details className="group">
+            <summary className="poa-stamp cursor-pointer list-none transition-colors hover:text-[var(--poa-ink)]">
+              <span className="group-open:hidden">+ What is a credential token?</span>
+              <span className="hidden group-open:inline">&minus; What is a credential token?</span>
+            </summary>
+            <div className="mt-6 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
+              <ImageSlot
+                src="/poa/verify-flow.png"
+                alt="Editorial diagram: a token is checked against a key, yielding claims and a check seal."
+                width={1400}
+                height={500}
+                className="w-full max-w-[360px]"
+                imgClassName="rounded-sm"
+                fallback={
+                  <JwsShape className="w-full max-w-[360px] text-[var(--poa-ink-soft)]" />
+                }
+              />
+              <p className="text-[13.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                A credential token is a long string with three parts joined by
+                dots. The first two are public data (who, what, when); the
+                third is a cryptographic signature only we can produce. We
+                check that signature with our public key (standard JWS / JWKS
+                if you&apos;re wondering).
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      {/* For developers: verify it elsewhere. */}
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-[1100px]">
-          <SectionHeader
-            label="Verify elsewhere"
-            number="02"
-            className="mb-8"
-          />
-          <p className="mb-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
-            For the developers: the credential is a compact JWS signed with
-            our Ed25519 key. The public JWK is at{" "}
-            <code className="font-mono">/poa/.well-known/jwks.json</code>. Any
-            JOSE-compatible library will verify it.
-          </p>
-          <p className="mb-8 max-w-2xl text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
-            For programmatic gating, match against{" "}
-            <code className="font-mono">claims.agent.capabilities.intentTypes</code>{" "}
-            (the signed array of raw strings). The{" "}
-            <code className="font-mono">bundles</code> field returned by{" "}
-            <code className="font-mono">/poa/api/verify</code> is a derived
-            display helper that can change without revoking credentials, so
-            don&apos;t treat it as a contract.
-          </p>
+          <div
+            className="mb-10 border-t pt-8"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <p className="poa-stamp">02 &middot; Verify elsewhere</p>
+            <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+              The credential is a compact JWS signed with our Ed25519 key. The
+              public JWK is at{" "}
+              <code className="font-mono">/poa/.well-known/jwks.json</code>.
+              Any JOSE-compatible library will verify it.
+            </p>
+            <p className="mt-3 max-w-2xl text-[12.5px] leading-relaxed text-[var(--poa-sepia)]">
+              For programmatic gating, match against{" "}
+              <code className="font-mono">
+                claims.agent.capabilities.intentTypes
+              </code>{" "}
+              (the signed array of raw strings). The{" "}
+              <code className="font-mono">bundles</code> field returned by{" "}
+              <code className="font-mono">/poa/api/verify</code> is a derived
+              display helper that can change without revoking credentials, so
+              don&apos;t treat it as a contract.
+            </p>
+            <p className="mt-3 max-w-2xl text-[12.5px] leading-relaxed text-[var(--poa-sepia)]">
+              Verifying from your agent: if you&apos;re writing a Theseus agent
+              in <span className="font-mono">SHIP</span>, call PoA through a
+              verification tool. If you&apos;re using{" "}
+              <span className="font-mono">VIC-HTN</span> to compile intents,
+              register PoA as a Logical Guardian invariant. Both paths hit the
+              same{" "}
+              <code className="font-mono">POST /poa/api/verify</code> endpoint
+              as the cURL and library recipes.
+            </p>
+          </div>
+
           <VerificationRecipes />
 
-          {/* Badge mockup: shows what consumers do with verified credentials. */}
           <div className="mt-12 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
-            <BadgeMockup className="w-full max-w-[360px] text-slate-700 dark:text-slate-200" />
-            <p className="max-w-md text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <ImageSlot
+              src="/poa/badge-in-context.png"
+              alt="A laptop showing a third-party site embedding a verified-agent badge."
+              width={1600}
+              height={900}
+              className="w-full max-w-[360px]"
+              imgClassName="rounded-sm"
+              fallback={
+                <BadgeMockup className="w-full max-w-[360px] text-[var(--poa-ink-soft)]" />
+              }
+            />
+            <p className="max-w-md text-[13.5px] leading-relaxed text-[var(--poa-ink-soft)]">
               The point of a verified credential is that someone else uses it.
               A protocol fronting your agent on its own page can embed a small
               &ldquo;verified&rdquo; badge that links back to{" "}
-              <code className="font-mono">/poa/&lt;agentId&gt;</code>. We don&apos;t
-              ship a hosted widget yet. Render whatever you like from the
-              signed claims.
+              <code className="font-mono">/poa/&lt;agentId&gt;</code>. We
+              don&apos;t ship a hosted widget yet. Render whatever you like
+              from the signed claims.
             </p>
           </div>
         </div>

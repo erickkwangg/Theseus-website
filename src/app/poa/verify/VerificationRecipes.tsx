@@ -4,7 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import CopyButton from "../_components/CopyButton";
 
-type Lang = "curl" | "ts" | "rust" | "python";
+type Lang = "curl" | "ts" | "rust" | "python" | "ship" | "vichtn";
 
 const RECIPES: Record<Lang, { label: string; body: string }> = {
   curl: {
@@ -61,9 +61,110 @@ claims.validate()  # checks the signature and standard claims
 print("agent:", claims["sub"])
 print("attestation:", claims["attestation"]["kind"])`,
   },
+  ship: {
+    label: "SHIP (agent)",
+    body: `// agents/poa_gated.ship
+// Reject delegation to any agent whose PoA token is invalid, revoked,
+// or below the grade threshold. Uses the same /poa/api/verify endpoint
+// as the cURL recipe, called through a host-provided tool.
+
+#[agent(name = "PoaGated", version = 1, ship = "1.0")]
+
+const claude_haiku_4_5: bytes32 = 0x0000000000000000000000000000000000000000000000000000000000000000;
+
+struct VerifyResult {
+    valid: bool,
+    revoked: bool,
+    agent_id: string,
+    grade: string,         // "full" | "mixed" | "lite"
+    issued_at: u64,
+}
+
+tool verify_poa(token: string) -> VerifyResult;
+tool delegate_to(agent_id: string, intent: string) -> string;
+
+let target_token: string;
+let intent: string;
+
+#[entry]
+node start(token: string, plan: string) {
+    target_token = token;
+    intent = plan;
+    goto(check);
+}
+
+#[retry(2), timeout(blocks=20)]
+node check() {
+    let r = verify_poa(target_token);
+    if (!r.valid || r.revoked) {
+        raise(\`poa: token rejected\`);
+    }
+    if (r.grade == "lite") {
+        raise(\`poa: grade=\${r.grade} below threshold\`);
+    }
+    goto(act, r.agent_id);
+}
+
+node act(agent_id: string) {
+    let receipt = delegate_to(agent_id, intent);
+    return receipt;
+}`,
+  },
+  vichtn: {
+    label: "VIC-HTN (guardian)",
+    body: `# poa_invariant.py
+# Add Proof of Agenthood as a precondition before VIC-HTN's Logical Guardian
+# clears a plan that delegates work to another on-chain agent.
+
+import httpx
+from vic_htn.verification import (
+    LogicalGuardian,
+    InvariantResult,
+    InvariantViolation,
+    build_expected_changes,
+    build_guardian_constraints,
+)
+
+POA = "https://theseus.network/poa/api/verify"
+
+def check_poa(token: str) -> InvariantViolation | None:
+    r = httpx.post(POA, json={"jws": token}, timeout=5).json()
+    if not r["valid"] or r.get("revoked"):
+        return InvariantViolation(
+            rule="poa.signature",
+            detail=r.get("reason", "invalid or revoked"),
+        )
+    if r["agent"]["recentRuns"]["grade"] == "lite":
+        return InvariantViolation(
+            rule="poa.grade",
+            detail="grade=lite below threshold",
+        )
+    return None
+
+def gate_plan(plan, simulation_result, user_address) -> InvariantResult:
+    guardian = LogicalGuardian()
+    base = guardian.verify(
+        simulation_result,
+        expected_changes=build_expected_changes(plan),
+        constraints=build_guardian_constraints(plan),
+        user_address=user_address,
+    )
+    poa_failures = [
+        v for s in plan.steps
+        if (tok := s.metadata.get("poa_token"))
+        if (v := check_poa(tok)) is not None
+    ]
+    if poa_failures:
+        return InvariantResult(
+            passed=base.passed,
+            failed=base.failed + poa_failures,
+            is_safe=False,
+        )
+    return base`,
+  },
 };
 
-const ORDER: Lang[] = ["curl", "ts", "rust", "python"];
+const ORDER: Lang[] = ["curl", "ts", "rust", "python", "ship", "vichtn"];
 
 export default function VerificationRecipes() {
   const [lang, setLang] = useState<Lang>("curl");
