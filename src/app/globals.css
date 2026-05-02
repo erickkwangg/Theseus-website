@@ -1377,3 +1377,47 @@ body:has(.poa-shell) {
 @media (prefers-reduced-motion: reduce) {
   .poa-seal-press { animation: none; }
 }
+
+/* Share-bar buttons: small ink-on-paper pill, hover deepens.
+   Used by both <button> and <a> so the styling is shared. */
+.cta-shareLink {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--poa-rule);
+  background: transparent;
+  color: var(--poa-ink);
+  padding: 4px 10px;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, monospace);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.cta-shareLink:hover {
+  border-color: var(--poa-ink);
+  background: color-mix(in srgb, var(--poa-ink) 6%, transparent);
+}
+.cta-shareLink-success {
+  border-color: var(--poa-wax);
+  color: var(--poa-wax);
+}
+.cta-shareLink-fail {
+  border-color: #B23A3A;
+  color: #B23A3A;
+}
+
+/* Print stylesheet: when someone hits Cmd+P on a credential page, render
+   only the artifact. Strip nav, header, footer, banner, share bar. */
+@media print {
+  body { background: white !important; }
+  .poa-shell header,
+  .poa-shell footer,
+  .poa-shell nav,
+  .poa-shell [role="status"],
+  .print\:hidden { display: none !important; }
+  .poa-shell main { padding-top: 0 !important; }
+  .poa-paper { box-shadow: none !important; }
+}
