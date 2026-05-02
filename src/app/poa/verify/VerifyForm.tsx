@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import FreshnessGauge from "../_components/FreshnessGauge";
 import Glyph from "../_components/Glyph";
+import { track } from "../_components/analytics";
 
 const B64URL_SEG = /^[A-Za-z0-9_-]+$/;
 
@@ -81,6 +82,7 @@ function JwsForm() {
   async function runVerify() {
     if (!jws.trim()) return;
     setState({ kind: "running" });
+    track("poa.verify.submitted");
     try {
       const res = await fetch("/poa/api/verify", {
         method: "POST",
@@ -89,11 +91,16 @@ function JwsForm() {
       });
       const data = (await res.json()) as VerifyResponse;
       setState({ kind: "result", data });
+      track(data.valid ? "poa.verify.success" : "poa.verify.failed", {
+        freshness: data.freshness?.status ?? "unknown",
+        reason: data.reason ?? null,
+      });
     } catch (err) {
       setState({
         kind: "error",
         message: err instanceof Error ? err.message : "verify failed",
       });
+      track("poa.verify.error");
     }
   }
 

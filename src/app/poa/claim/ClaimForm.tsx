@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Sigil, { checksumFromSeed } from "../_components/Sigil";
 import SnapshotPreviewCard from "../_components/SnapshotPreviewCard";
 import ShareReceipt from "../_components/ShareReceipt";
+import { track } from "../_components/analytics";
 import type { AgentSnapshot } from "@/lib/poa/types";
 
 type ChainMode = "fixture" | "polkadot";
@@ -204,6 +205,10 @@ export default function ClaimForm({
     e.preventDefault();
     if (state.kind !== "preview") return;
     const snapshot = state.snapshot;
+    track("poa.create.submitted", {
+      sovereign: snapshot.sovereign,
+      grade: snapshot.recentRuns.grade,
+    });
     try {
       setState({
         kind: "running",
@@ -293,11 +298,14 @@ export default function ClaimForm({
       }
 
       setState({ kind: "done", response: issued });
-    } catch (err) {
-      setState({
-        kind: "error",
-        message: err instanceof Error ? err.message : "unknown-error",
+      track("poa.create.success", {
+        sovereign: snapshot.sovereign,
+        grade: snapshot.recentRuns.grade,
       });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "unknown-error";
+      setState({ kind: "error", message });
+      track("poa.create.failed", { reason: message });
     }
   }
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { track } from "./analytics";
 
 // RevokeButton: shown on /poa/[agentId] when the visitor's connected wallet
 // matches the agent's controller. Asks the wallet to sign a revoke nonce,
@@ -71,6 +72,7 @@ export default function RevokeButton({
   async function runRevoke() {
     setConfirming(false);
     setState({ kind: "running", detail: "requesting nonce..." });
+    track("poa.revoke.submitted", { agentId });
     try {
       const ch = await jsonFetch<{ nonce: string }>("/poa/api/challenge", {
         agentId,
@@ -102,13 +104,13 @@ export default function RevokeButton({
       });
 
       setState({ kind: "done" });
+      track("poa.revoke.success", { agentId });
       // Refresh the server component so the page renders the revoked state.
       router.refresh();
     } catch (err) {
-      setState({
-        kind: "error",
-        message: err instanceof Error ? err.message : "revoke-failed",
-      });
+      const message = err instanceof Error ? err.message : "revoke-failed";
+      setState({ kind: "error", message });
+      track("poa.revoke.failed", { agentId, reason: message });
     }
   }
 
