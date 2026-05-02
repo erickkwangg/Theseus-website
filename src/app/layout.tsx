@@ -193,6 +193,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${ppTelegraf.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        {/* JSON-LD lives in the body in App Router. Rendering it inside <head>
+            causes a hydration mismatch where the client re-renders with
+            type={null}; search engines pick it up either way. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -205,8 +210,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
         />
-      </head>
-      <body className={`${ppTelegraf.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
         {/* Noise texture overlay */}
         <div className="noise-overlay" aria-hidden="true" />
