@@ -1,12 +1,17 @@
-// Sigil v2: a richer, more distinctive deterministic mark.
+// Sigil v3: same structure as v2 but tuned for distinguishability at small
+// sizes (44-64px). The previous version's continuous-opacity grid blurred
+// into the same-looking blob across different agents at thumbnail sizes.
 //
-// Layered structure:
-//   - outer ring with bytewise tick marks (24 ticks, modulated by hash bytes)
-//   - an interior mirrored 8-cell-wide grid (denser than v1's 6-cell)
-//   - optional corner kzg/lite glyph keyed to verification grade
-//   - color tier driven by sovereignty + grade (sovereign + full = full
-//     saturation indigo; lite = desaturated; controller-retained = single
-//     ring weight instead of double)
+// Changes:
+//   - Cells are binary (drawn or not) based on hash byte threshold, so two
+//     agents have visibly different fill patterns instead of similar gradient
+//     averages.
+//   - ~30% of outer ring tick marks are skipped per hash, giving each agent
+//     a distinctive tick "fingerprint." Remaining ticks have wider length
+//     variance (3..14 vs 4..10).
+//   - Corner badge is rendered as a filled wax-red disc (visually loud) with
+//     cream-colored letter, shown at size >= 44 instead of 56. Variants for
+//     grade: full = solid disc, mixed = half-fill, lite = outline only.
 //
 // Same export name + checksum function so existing call sites compile.
 
@@ -18,8 +23,6 @@ type Saturation = "full" | "muted" | "faded";
 type Props = {
   seed: string;
   size?: number;
-  // Optional tier props. If omitted, v2 falls back to a sensible default that
-  // looks a touch richer than v1 but doesn't claim a particular grade.
   sovereign?: boolean;
   grade?: "full" | "mixed" | "lite" | "unknown";
   className?: string;
@@ -67,16 +70,18 @@ function saturationFor(grade: Props["grade"]): Saturation {
   }
 }
 
-// Tick marks around the outer ring: 24 evenly-spaced strokes, modulated by
-// hash bytes (long/short/very short).
+// 24 evenly-spaced strokes around the outer ring. ~30% are skipped per hash
+// (byte < 76), the rest get a dramatic length variation. Skipping cells
+// produces a more distinctive per-agent silhouette.
 function ringTicks(bytes: number[], cx: number, cy: number, r: number) {
   const ticks: { x1: number; y1: number; x2: number; y2: number; opacity: number }[] = [];
   const n = 24;
   for (let i = 0; i < n; i++) {
-    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
     const v = bytes[i % bytes.length];
-    const len = 4 + (v % 7); // 4..10
-    const opacity = 0.3 + (v / 255) * 0.65;
+    if (v < 76) continue; // ~30% drop rate
+    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+    const len = 3 + (v % 12); // 3..14
+    const opacity = 0.45 + (v / 255) * 0.5;
     const x1 = cx + Math.cos(angle) * r;
     const y1 = cy + Math.sin(angle) * r;
     const x2 = cx + Math.cos(angle) * (r + len);
@@ -86,17 +91,18 @@ function ringTicks(bytes: number[], cx: number, cy: number, r: number) {
   return ticks;
 }
 
+// Binary on/off cells. Only emit a rect when the hash byte clears the
+// threshold; ~50% fill rate with strong contrast against the cream paper.
 function gridCells(bytes: number[], grid: number, cell: number, offset: number) {
-  const cells: { x: number; y: number; opacity: number }[] = [];
+  const cells: { x: number; y: number }[] = [];
   for (let y = 0; y < grid; y++) {
     for (let x = 0; x < grid / 2; x++) {
       const v = bytes[16 + y * (grid / 2) + x] ?? 128;
-      const opacity = (v / 255) * 0.95;
-      cells.push({ x: offset + x * cell, y: offset + y * cell, opacity });
+      if (v < 128) continue;
+      cells.push({ x: offset + x * cell, y: offset + y * cell });
       cells.push({
         x: offset + (grid - 1 - x) * cell,
         y: offset + y * cell,
-        opacity,
       });
     }
   }
@@ -115,13 +121,12 @@ export default function Sigil({
   const tier = tierFor(sovereign);
   const saturation = saturationFor(grade);
 
-  // Layout: padded outer ring + inner grid centered.
   const cx = size / 2;
   const cy = size / 2;
-  const innerPad = size * 0.12; // ~12% padding inside frame for the ring
+  const innerPad = size * 0.12;
   const ringR = size / 2 - innerPad;
   const gridSize = 8;
-  const innerExtent = ringR * 1.35; // grid sits inside ring
+  const innerExtent = ringR * 1.4;
   const cell = innerExtent / gridSize;
   const offset = cx - innerExtent / 2;
 
@@ -129,13 +134,25 @@ export default function Sigil({
   const cells = gridCells(bytes, gridSize, cell, offset);
 
   const fillOpacity =
-    saturation === "full" ? 1 : saturation === "muted" ? 0.78 : 0.55;
+    saturation === "full" ? 0.95 : saturation === "muted" ? 0.78 : 0.6;
   const ringWidth = tier === "stamp" ? 1.4 : 0.9;
   const showDoubleRing = tier === "stamp";
 
-  // Corner badge: 'k' for full-KZG, 'm' for mixed, 's' for signature/lite.
-  const badge =
-    grade === "full" ? "K" : grade === "mixed" ? "M" : grade === "lite" ? "S" : null;
+  // Corner badge: filled wax-red disc, variant by grade. The badge is the
+  // single biggest visual differentiator between two agents at small sizes,
+  // so it earns its loudness.
+  const badge: { letter: string; fill: "solid" | "half" | "outline" } | null =
+    grade === "full"
+      ? { letter: "K", fill: "solid" }
+      : grade === "mixed"
+        ? { letter: "M", fill: "half" }
+        : grade === "lite"
+          ? { letter: "S", fill: "outline" }
+          : null;
+
+  const badgeR = Math.max(6, size * 0.13);
+  const badgeCx = size - innerPad - badgeR * 0.45;
+  const badgeCy = innerPad + badgeR * 0.45;
 
   return (
     <svg
@@ -152,7 +169,7 @@ export default function Sigil({
         </radialGradient>
       </defs>
 
-      {/* ground: blend with cream paper (or warm-dark in dark mode) */}
+      {/* ground */}
       <rect
         x={0}
         y={0}
@@ -168,7 +185,7 @@ export default function Sigil({
         style={{ color: "var(--poa-wax, #7B1E1E)" }}
       />
 
-      {/* outer ring (single or double) */}
+      {/* outer ring (single or double for sovereign) */}
       <circle
         cx={cx}
         cy={cy}
@@ -189,7 +206,7 @@ export default function Sigil({
         />
       )}
 
-      {/* tick marks */}
+      {/* tick marks (binary present/absent + dramatic length) */}
       {ticks.map((t, i) => (
         <line
           key={i}
@@ -197,13 +214,13 @@ export default function Sigil({
           y1={t.y1}
           x2={t.x2}
           y2={t.y2}
-          strokeWidth={0.7}
+          strokeWidth={0.8}
           stroke="var(--poa-ink, #14110D)"
           style={{ opacity: t.opacity * fillOpacity }}
         />
       ))}
 
-      {/* grid */}
+      {/* binary inner grid */}
       {cells.map((c, i) => (
         <rect
           key={i}
@@ -212,33 +229,65 @@ export default function Sigil({
           width={cell}
           height={cell}
           fill="var(--poa-ink, #14110D)"
-          style={{ opacity: c.opacity * fillOpacity * 0.85 }}
+          style={{ opacity: 0.85 * fillOpacity }}
         />
       ))}
 
-      {/* corner glyph indicating verification tier */}
-      {badge && size >= 56 && (
+      {/* corner badge: wax-red disc + letter, variants by grade */}
+      {badge && size >= 44 && (
         <g>
-          <circle
-            cx={size - innerPad - 6}
-            cy={innerPad + 6}
-            r={7}
-            fill="var(--poa-paper-card, #F1EAE1)"
-            stroke="var(--poa-wax, #7B1E1E)"
-            strokeWidth={0.8}
-            style={{ opacity: 0.85 }}
-          />
-          <text
-            x={size - innerPad - 6}
-            y={innerPad + 6 + 3}
-            textAnchor="middle"
-            fontSize={8}
-            fontFamily="var(--font-mono, ui-monospace, SFMono-Regular, monospace)"
-            fill="var(--poa-wax, #7B1E1E)"
-            style={{ fontWeight: 600 }}
-          >
-            {badge}
-          </text>
+          {badge.fill === "solid" && (
+            <circle
+              cx={badgeCx}
+              cy={badgeCy}
+              r={badgeR}
+              fill="var(--poa-wax, #7B1E1E)"
+            />
+          )}
+          {badge.fill === "half" && (
+            <>
+              <circle
+                cx={badgeCx}
+                cy={badgeCy}
+                r={badgeR}
+                fill="var(--poa-paper-card, #F1EAE1)"
+                stroke="var(--poa-wax, #7B1E1E)"
+                strokeWidth={1.1}
+              />
+              <path
+                d={`M ${badgeCx} ${badgeCy - badgeR}
+                    A ${badgeR} ${badgeR} 0 0 1 ${badgeCx} ${badgeCy + badgeR} Z`}
+                fill="var(--poa-wax, #7B1E1E)"
+              />
+            </>
+          )}
+          {badge.fill === "outline" && (
+            <circle
+              cx={badgeCx}
+              cy={badgeCy}
+              r={badgeR}
+              fill="var(--poa-paper-card, #F1EAE1)"
+              stroke="var(--poa-wax, #7B1E1E)"
+              strokeWidth={1.1}
+            />
+          )}
+          {size >= 56 && (
+            <text
+              x={badgeCx}
+              y={badgeCy + badgeR * 0.35}
+              textAnchor="middle"
+              fontSize={badgeR * 1.05}
+              fontFamily="var(--font-mono, ui-monospace, SFMono-Regular, monospace)"
+              fill={
+                badge.fill === "solid"
+                  ? "var(--poa-paper-card, #F1EAE1)"
+                  : "var(--poa-wax, #7B1E1E)"
+              }
+              style={{ fontWeight: 600 }}
+            >
+              {badge.letter}
+            </text>
+          )}
         </g>
       )}
     </svg>
