@@ -8,7 +8,10 @@ import { evaluateRevocation } from "@/lib/poa/revocation";
 import type { AgentSnapshot, RevocationReason } from "@/lib/poa/types";
 import CredentialDocument from "../_components/CredentialDocument";
 import ChainModeBanner from "../_components/ChainModeBanner";
+import PoaNav from "../_components/PoaNav";
 import ImageSlot from "../_components/ImageSlot";
+import CredentialShareBar from "../_components/CredentialShareBar";
+import RevokeButton from "../_components/RevokeButton";
 
 function portraitSlug(name: string): string {
   return name.toLowerCase().split(" ")[0];
@@ -83,6 +86,7 @@ export default async function PoaCredentialPage({ params }: Props) {
         livePolkadotBlock={liveBlock}
         pollAgentId={mode === "polkadot" ? agentId : undefined}
       />
+      <PoaNav />
 
       {/* Top signage: tiny stamp + portrait. No outer card. */}
       <section className="px-4 pt-28 pb-4 lg:pt-32">
@@ -108,7 +112,35 @@ export default async function PoaCredentialPage({ params }: Props) {
           <div className="mx-auto max-w-[920px]">
             <CredentialDocument credential={stored} revocation={revocation} />
 
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+            <div className="mt-8">
+              <CredentialShareBar
+                agentId={agentId}
+                agentName={stored.claims.agent.name}
+              />
+            </div>
+
+            {stored.claims.agent.controller && (
+              <div
+                className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5 print:hidden"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
+                <div className="max-w-md">
+                  <p className="poa-stamp">Operator</p>
+                  <p className="mt-1 text-[12.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                    Connect the controller wallet to retire this credential.
+                    Verifiers see the change on their next check.
+                  </p>
+                </div>
+                <RevokeButton
+                  agentId={agentId}
+                  controller={stored.claims.agent.controller}
+                  mode={mode}
+                  alreadyRevoked={!!revocation}
+                />
+              </div>
+            )}
+
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 print:hidden">
               <Link
                 className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
                 href={`/poa/api/credential/${stored.jti}`}

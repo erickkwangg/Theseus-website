@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       { status: 409 },
     );
   }
-  let body: { agentId?: unknown; nonce?: unknown };
+  let body: { agentId?: unknown; nonce?: unknown; prefix?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -29,6 +29,8 @@ export async function POST(req: Request) {
   }
   const agentId = typeof body.agentId === "string" ? body.agentId : null;
   const nonce = typeof body.nonce === "string" ? body.nonce : null;
+  const prefix =
+    body.prefix === "poa-revoke" ? "poa-revoke" : "poa";
   if (!agentId || !nonce) {
     return NextResponse.json({ error: "agentId-and-nonce-required" }, { status: 400 });
   }
@@ -40,7 +42,7 @@ export async function POST(req: Request) {
   if (!snapshot.controller) {
     return NextResponse.json({ error: "agent-is-sovereign-no-signature-needed" }, { status: 400 });
   }
-  const message = `poa:${agentId}:${nonce}`;
+  const message = `${prefix}:${agentId}:${nonce}`;
   const sig = fixtureSign(snapshot.controller, message);
   if (!sig) {
     return NextResponse.json(
