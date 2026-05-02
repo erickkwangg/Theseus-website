@@ -1,10 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import FreshnessGauge from "../_components/FreshnessGauge";
 import Glyph from "../_components/Glyph";
+
+const B64URL_SEG = /^[A-Za-z0-9_-]+$/;
+
+function inspectShape(raw: string) {
+  const t = raw.trim();
+  if (!t) return null;
+  const parts = t.split(".");
+  return {
+    parts,
+    count: parts.length,
+    ok:
+      parts.length === 3 &&
+      parts.every((p) => p.length > 0 && B64URL_SEG.test(p)),
+  };
+}
 
 type FreshnessOk = { status: "current" };
 type FreshnessRevoked = { status: "revoked"; reason: string };
@@ -41,6 +56,7 @@ export default function VerifyForm() {
 
 function JwsForm() {
   const [jws, setJws] = useState("");
+  const [pasteFlash, setPasteFlash] = useState(false);
   const [state, setState] = useState<
     | { kind: "idle" }
     | { kind: "running" }
@@ -48,8 +64,21 @@ function JwsForm() {
     | { kind: "error"; message: string }
   >({ kind: "idle" });
 
-  async function onVerify(e: React.FormEvent) {
-    e.preventDefault();
+  const formRef = useRef<HTMLFormElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const shape = useMemo(() => inspectShape(jws), [jws]);
+  const submittable = state.kind !== "running" && jws.trim().length > 0;
+
+  // Bring the result into view once it lands. Apps anchor your eye to what
+  // changed; an editorial page wouldn't bother.
+  useEffect(() => {
+    if (state.kind === "result" || state.kind === "error") {
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [state.kind]);
+
+  async function runVerify() {
     if (!jws.trim()) return;
     setState({ kind: "running" });
     try {
@@ -68,8 +97,40 @@ function JwsForm() {
     }
   }
 
+  async function onVerify(e: React.FormEvent) {
+    e.preventDefault();
+    await runVerify();
+  }
+
+  async function onPaste() {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        setJws(text);
+        setPasteFlash(true);
+        setTimeout(() => setPasteFlash(false), 700);
+        textareaRef.current?.focus();
+      }
+    } catch {
+      textareaRef.current?.focus();
+    }
+  }
+
+  function onClear() {
+    setJws("");
+    setState({ kind: "idle" });
+    textareaRef.current?.focus();
+  }
+
+  function onTextareaKey(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      if (submittable) void runVerify();
+    }
+  }
+
   return (
-    <form onSubmit={onVerify} className="flex flex-col gap-4">
+    <form ref={formRef} onSubmit={onVerify} className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between border-b border-slate-300/70 pb-3 dark:border-slate-700/55">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
           Verify a credential
@@ -83,42 +144,151 @@ function JwsForm() {
         <code className="font-mono">eyJ…</code>). We check the signature with
         our public key and report whether the chain still agrees.
       </p>
-      <label className="block">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-          Credential token
-        </span>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+            Credential token
+          </span>
+          <div className="flex items-center gap-1.5">
+            <ShapePill shape={shape} flash={pasteFlash} />
+            <ToolbarButton onClick={onPaste} aria-label="Paste from clipboard">
+              Paste
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={onClear}
+              aria-label="Clear token"
+              disabled={!jws}
+            >
+              Clear
+            </ToolbarButton>
+          </div>
+        </div>
         <textarea
+          ref={textareaRef}
           value={jws}
           onChange={(e) => setJws(e.target.value)}
+          onKeyDown={onTextareaKey}
           rows={6}
           spellCheck={false}
           placeholder="eyJhbGciOi…"
-          className="mt-2 w-full border border-slate-300/70 bg-white/60 p-3 font-mono text-[11px] leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:border-slate-700/55 dark:bg-slate-900/40 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300"
+          aria-describedby="jws-shape-hint"
+          className="w-full border border-slate-300/70 bg-white/60 p-3 font-mono text-[11px] leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:border-slate-700/55 dark:bg-slate-900/40 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-300"
         />
-      </label>
-      <button
-        type="submit"
-        disabled={state.kind === "running" || !jws.trim()}
-        className={cn(
-          "primary-cta inline-flex w-fit items-center rounded-md px-6 py-3 text-sm font-medium tracking-wide",
-          (state.kind === "running" || !jws.trim()) && "opacity-60",
-        )}
-      >
-        {state.kind === "running" ? "Verifying…" : "Verify credential"}
-      </button>
+        <p
+          id="jws-shape-hint"
+          className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500"
+        >
+          {jws.trim()
+            ? shape?.ok
+              ? "shape ok · 3 base64url segments"
+              : `shape: ${shape?.count ?? 0} segment${shape?.count === 1 ? "" : "s"} (expected 3, base64url)`
+            : "no token? mint one at /poa/claim, or look up an agent at /poa"}
+        </p>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <button
+          type="submit"
+          disabled={!submittable}
+          className={cn(
+            "cta-ink inline-flex w-fit items-center  px-6 py-3 text-sm font-medium tracking-wide",
+            !submittable && "opacity-60",
+          )}
+        >
+          {state.kind === "running" ? "Verifying…" : "Verify credential"}
+        </button>
+        <span
+          className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500"
+          aria-hidden
+        >
+          ⌘ ↵ to submit
+        </span>
+      </div>
 
-      {state.kind === "result" && <ResultCard data={state.data} />}
-      {state.kind === "error" && (
-        <div className="border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
-            request failed
-          </span>
-          <code className="mt-2 block font-mono text-[12px] text-rose-700 dark:text-rose-200">
-            {state.message}
-          </code>
-        </div>
-      )}
+      <div ref={resultRef} aria-live="polite" aria-atomic="true">
+        {state.kind === "result" && <ResultCard data={state.data} />}
+        {state.kind === "error" && (
+          <div className="flex items-start justify-between gap-4 border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5">
+            <div>
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
+                request failed
+              </span>
+              <code className="mt-2 block font-mono text-[12px] text-rose-700 dark:text-rose-200">
+                {state.message}
+              </code>
+            </div>
+            <button
+              type="button"
+              onClick={() => void runVerify()}
+              className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 underline decoration-rose-400/60 underline-offset-[4px] hover:text-rose-900 dark:text-rose-300 dark:hover:text-rose-200"
+            >
+              Try again
+            </button>
+          </div>
+        )}
+      </div>
     </form>
+  );
+}
+
+function ShapePill({
+  shape,
+  flash,
+}: {
+  shape: ReturnType<typeof inspectShape>;
+  flash: boolean;
+}) {
+  if (!shape) {
+    return (
+      <span
+        className={cn(
+          "inline-flex items-center gap-1 border border-slate-300/70 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 transition-colors dark:border-slate-700/55 dark:text-slate-500",
+          flash && "border-indigo-500/60 text-indigo-700 dark:text-indigo-300",
+        )}
+        aria-hidden
+      >
+        H · P · S
+      </span>
+    );
+  }
+  const { ok } = shape;
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors",
+        ok
+          ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-700 dark:border-indigo-300/40 dark:bg-indigo-400/10 dark:text-indigo-300"
+          : "border-amber-500/60 bg-amber-500/10 text-amber-700 dark:border-amber-300/40 dark:bg-amber-400/10 dark:text-amber-300",
+      )}
+      aria-hidden
+    >
+      {ok ? "✓ shape" : `× ${shape.count}/3`}
+    </span>
+  );
+}
+
+function ToolbarButton({
+  children,
+  onClick,
+  disabled,
+  ...rest
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "border border-slate-300/70 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-700 transition-colors hover:border-slate-500/60 hover:text-slate-900 dark:border-slate-700/55 dark:text-slate-200 dark:hover:border-slate-500/60 dark:hover:text-slate-50",
+        disabled && "cursor-not-allowed opacity-40 hover:border-slate-300/70 hover:text-slate-700",
+      )}
+      {...rest}
+    >
+      {children}
+    </button>
   );
 }
 

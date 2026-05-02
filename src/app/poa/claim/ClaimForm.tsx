@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Sigil, { checksumFromSeed } from "../_components/Sigil";
 import SnapshotPreviewCard from "../_components/SnapshotPreviewCard";
@@ -94,6 +94,13 @@ export default function ClaimForm({
 }) {
   const [agentId, setAgentId] = useState(agents[0]?.id ?? "");
   const [state, setState] = useState<FlowState>({ kind: "idle" });
+  const stepRefs = useRef<Record<StepKey, HTMLLIElement | null>>({
+    select: null,
+    preview: null,
+    attest: null,
+    receive: null,
+  });
+  const errorRef = useRef<HTMLDivElement>(null);
 
   // Whenever the selected agent changes, fetch its snapshot for the preview.
   // We refetch on real-chain mode so the preview is always current. In
@@ -136,6 +143,52 @@ export default function ClaimForm({
       case "error":
         return "select";
     }
+  }
+
+  // Pull the active step into view when it changes. On a multi-step flow that
+  // can outgrow the viewport, this is the "you advanced" cue.
+  const current = activeStep();
+  useEffect(() => {
+    stepRefs.current[current]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  }, [current]);
+
+  useEffect(() => {
+    if (state.kind === "error") {
+      errorRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [state.kind]);
+
+  function onFormKeyDown(e: React.KeyboardEvent<HTMLFormElement>) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      if (state.kind === "preview") {
+        e.preventDefault();
+        // The form already handles submit; trigger it explicitly so we don't
+        // depend on the active element being inside the form.
+        void onMint(new Event("submit") as unknown as React.FormEvent);
+      }
+    }
+  }
+
+  function onTryAgain() {
+    if (!agentId) {
+      setState({ kind: "idle" });
+      return;
+    }
+    setState({ kind: "loading-preview" });
+    jsonGet<{ snapshot: AgentSnapshot }>(`/poa/api/snapshot/${agentId}`)
+      .then((d) => setState({ kind: "preview", snapshot: d.snapshot }))
+      .catch((err) =>
+        setState({
+          kind: "error",
+          message: err instanceof Error ? err.message : "preview-failed",
+        }),
+      );
   }
 
   function isStepDone(step: StepKey): boolean {
@@ -249,7 +302,11 @@ export default function ClaimForm({
   }
 
   return (
-    <form onSubmit={onMint} className="flex flex-col gap-10">
+    <form
+      onSubmit={onMint}
+      onKeyDown={onFormKeyDown}
+      className="flex flex-col gap-10"
+    >
       {/* Step rail: active step glows on a left rail to signal liveness. */}
       <ol className="border-y border-slate-300/70 divide-y divide-slate-300/70 dark:border-slate-700/55 dark:divide-slate-700/55">
         {STEPS.map((step) => {
@@ -258,6 +315,9 @@ export default function ClaimForm({
           return (
             <li
               key={step.key}
+              ref={(el) => {
+                stepRefs.current[step.key] = el;
+              }}
               className={cn(
                 "grid grid-cols-[40px_minmax(0,1fr)_auto] items-baseline gap-x-4 px-2 py-4 transition-colors duration-300 sm:px-4 sm:py-5",
                 isActive && "poa-step-glow bg-indigo-50/40 dark:bg-indigo-500/5",
@@ -424,7 +484,7 @@ export default function ClaimForm({
           type="submit"
           disabled={state.kind !== "preview"}
           className={cn(
-            "primary-cta inline-flex items-center rounded-md px-8 py-4 text-base font-medium tracking-wide",
+            "cta-ink inline-flex items-center  px-8 py-4 text-base font-medium tracking-wide",
             state.kind !== "preview" && "opacity-60",
           )}
         >
@@ -439,12 +499,20 @@ export default function ClaimForm({
                 : "Mint credential"}
         </button>
         {state.kind === "preview" && (
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-            attestation:{" "}
-            <span className="text-slate-800 dark:text-slate-100">
-              {state.snapshot.sovereign ? "snapshot" : "controller-attested"}
+          <>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+              attestation:{" "}
+              <span className="text-slate-800 dark:text-slate-100">
+                {state.snapshot.sovereign ? "snapshot" : "controller-attested"}
+              </span>
             </span>
-          </span>
+            <span
+              className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500"
+              aria-hidden
+            >
+              ⌘ ↵ to mint
+            </span>
+          </>
         )}
       </div>
 
@@ -461,13 +529,26 @@ export default function ClaimForm({
       )}
 
       {state.kind === "error" && (
-        <div className="flex items-start gap-3 border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
-            Failed
-          </span>
-          <code className="font-mono text-[12px] text-rose-700 dark:text-rose-200">
-            {state.message}
-          </code>
+        <div
+          ref={errorRef}
+          aria-live="polite"
+          className="flex flex-wrap items-start justify-between gap-3 border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5"
+        >
+          <div className="flex items-start gap-3">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
+              Failed
+            </span>
+            <code className="font-mono text-[12px] text-rose-700 dark:text-rose-200">
+              {state.message}
+            </code>
+          </div>
+          <button
+            type="button"
+            onClick={onTryAgain}
+            className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 underline decoration-rose-400/60 underline-offset-[4px] hover:text-rose-900 dark:text-rose-300 dark:hover:text-rose-200"
+          >
+            Try again
+          </button>
         </div>
       )}
 
