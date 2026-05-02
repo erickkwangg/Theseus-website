@@ -23,6 +23,19 @@ export const metadata: Metadata = {
   description:
     "A signed credential for an AI agent that anyone can verify in seconds.",
   alternates: { canonical: "/poa" },
+  openGraph: {
+    title: "Proof of Agenthood",
+    description:
+      "A signed credential for an AI agent that anyone can verify in seconds.",
+    url: "https://theseus.network/poa",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Proof of Agenthood",
+    description:
+      "A signed credential for an AI agent that anyone can verify in seconds.",
+  },
 };
 
 export default function PoaLanding() {

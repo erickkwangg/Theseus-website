@@ -281,3 +281,107 @@ export function FaqJsonLd({ faqs }: FaqJsonLdProps) {
     />
   );
 }
+
+type PoaCredentialJsonLdProps = {
+  agentId: string;
+  agentName: string;
+  agentSummary?: string;
+  controller?: string | null;
+  jti: string;
+  issuedAt: number;
+  revoked: boolean;
+};
+
+/**
+ * BreadcrumbList + CreativeWork (signed credential) for a PoA credential
+ * page. Communicates issuer, controller as creator (if non-sovereign), the
+ * JWS endpoint via sameAs, and the issued / status timeline. Structured
+ * data signal AI-search crawlers pick up.
+ */
+export function PoaCredentialJsonLd({
+  agentId,
+  agentName,
+  agentSummary,
+  controller,
+  jti,
+  issuedAt,
+  revoked,
+}: PoaCredentialJsonLdProps) {
+  const pageUrl = `${SITE_URL}/poa/${agentId}`;
+  const credentialUrl = `${SITE_URL}/poa/api/credential/${jti}`;
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Theseus", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Proof of Agenthood",
+        item: `${SITE_URL}/poa`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Agents",
+        item: `${SITE_URL}/poa/agents`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: agentName,
+        item: pageUrl,
+      },
+    ],
+  };
+
+  const credential: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: `Proof of Agenthood credential for ${agentName}`,
+    description:
+      agentSummary ??
+      `Signed credential for the Theseus on-chain agent at ${agentId}.`,
+    url: pageUrl,
+    identifier: jti,
+    sameAs: [credentialUrl, `${SITE_URL}/poa/.well-known/jwks.json`],
+    dateCreated: new Date(issuedAt).toISOString(),
+    dateModified: new Date(issuedAt).toISOString(),
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    creditText: revoked ? "Revoked" : "Active",
+    publisher: {
+      "@type": "Organization",
+      name: "Theseus",
+      url: SITE_URL,
+    },
+    about: {
+      "@type": "SoftwareApplication",
+      name: agentName,
+      identifier: agentId,
+      applicationCategory: "AI agent",
+      operatingSystem: "Theseus",
+    },
+  };
+  if (controller) {
+    credential.creator = {
+      "@type": "Person",
+      identifier: controller,
+      name: "Controller",
+    };
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(credential) }}
+      />
+    </>
+  );
+}

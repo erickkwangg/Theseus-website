@@ -6,6 +6,7 @@ import { credentialStore } from "@/lib/poa/store";
 import { chainMode, getChainReader } from "@/lib/poa/chain";
 import { evaluateRevocation } from "@/lib/poa/revocation";
 import type { AgentSnapshot, RevocationReason } from "@/lib/poa/types";
+import { PoaCredentialJsonLd } from "@/components/JsonLd";
 import CredentialDocument from "../_components/CredentialDocument";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
@@ -109,6 +110,15 @@ export default async function PoaCredentialPage({ params }: Props) {
       {/* The credential, centered. */}
       {stored && !chainError && (
         <section className="px-3 sm:px-4 lg:px-6 pb-4">
+          <PoaCredentialJsonLd
+            agentId={agentId}
+            agentName={stored.claims.agent.name}
+            agentSummary={stored.claims.agent.summary}
+            controller={stored.claims.agent.controller}
+            jti={stored.jti}
+            issuedAt={stored.issuedAt}
+            revoked={!!revocation}
+          />
           <div className="mx-auto max-w-[920px]">
             <CredentialDocument credential={stored} revocation={revocation} />
 

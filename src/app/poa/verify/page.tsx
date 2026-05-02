@@ -15,6 +15,19 @@ export const metadata: Metadata = {
   description:
     "Paste a credential token to check the signature and freshness. Anyone can verify a credential without a wallet.",
   alternates: { canonical: "/poa/verify" },
+  openGraph: {
+    title: "Verify a Proof of Agenthood credential",
+    description:
+      "Paste a credential token. We check the signature with our public key and report whether the chain still agrees.",
+    url: "https://theseus.network/poa/verify",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Verify a Proof of Agenthood credential",
+    description:
+      "Paste a credential token. We check the signature with our public key and report whether the chain still agrees.",
+  },
 };
 
 export default function VerifyPage() {

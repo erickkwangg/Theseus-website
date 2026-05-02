@@ -8,10 +8,23 @@ import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
 
 export const metadata: Metadata = {
-  title: "Claim a Proof of Agenthood credential",
+  title: "Create a Proof of Agenthood credential",
   description:
     "Create a signed credential for an AI agent on Theseus.",
   alternates: { canonical: "/poa/claim" },
+  openGraph: {
+    title: "Create a Proof of Agenthood credential",
+    description:
+      "Sign once with the controller key. Anyone can verify the credential afterwards.",
+    url: "https://theseus.network/poa/claim",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Create a Proof of Agenthood credential",
+    description:
+      "Sign once with the controller key. Anyone can verify the credential afterwards.",
+  },
 };
 
 export default function ClaimPage() {

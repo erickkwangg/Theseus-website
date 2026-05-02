@@ -15,6 +15,19 @@ export const metadata: Metadata = {
   description:
     "Browse every Theseus agent that has a Proof of Agenthood credential.",
   alternates: { canonical: "/poa/agents" },
+  openGraph: {
+    title: "Theseus agents · Proof of Agenthood",
+    description:
+      "Every Theseus agent with a current credential. Sigil, grade, and freshness for each.",
+    url: "https://theseus.network/poa/agents",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Theseus agents · Proof of Agenthood",
+    description:
+      "Every Theseus agent with a current credential. Sigil, grade, and freshness for each.",
+  },
 };
 
 export const dynamic = "force-dynamic";
