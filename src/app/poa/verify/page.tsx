@@ -12,7 +12,7 @@ import { JwsShape, BadgeMockup } from "../_components/Diagrams";
 export const metadata: Metadata = {
   title: "Verify a Proof of Agenthood credential",
   description:
-    "Paste a JWS credential to verify the signature and check freshness against the chain. Recipes for cURL, TS, Rust, Python.",
+    "Paste a credential token to check the signature and freshness. Open to anyone, no wallet.",
   alternates: { canonical: "/poa/verify" },
 };
 
@@ -39,11 +39,11 @@ export default function VerifyPage() {
                 Verify a credential.
               </h1>
               <p className="max-w-md text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
-                Paste a compact JWS issued by{" "}
-                <code className="font-mono">theseus.network/poa</code> to
-                check the signature against the published JWKS and the
-                chain&apos;s freshness against it. To look up an agent by
-                address instead,{" "}
+                Paste the credential token issued by{" "}
+                <code className="font-mono">theseus.network/poa</code>. We
+                check the signature against our public key and the
+                chain&apos;s current state. To look up an agent by address
+                instead,{" "}
                 <Link
                   href="/poa"
                   className="text-indigo-700 underline underline-offset-[4px] dark:text-indigo-300"
@@ -59,13 +59,15 @@ export default function VerifyPage() {
 
       <section className="px-6 py-12 lg:py-20">
         <div className="mx-auto max-w-[1100px]">
-          {/* JWS shape ahead of the form, so users know what they're pasting. */}
+          {/* What a credential token looks like, before we ask people to paste one. */}
           <div className="mb-10 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
             <JwsShape className="w-full max-w-[420px] text-slate-700 dark:text-slate-200" />
             <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-              A compact JWS is three base64url segments joined by dots. Header
-              and payload are public; the signature is what we check against
-              the published JWKS.
+              A credential token is a long string with three parts joined by
+              dots. The first two are public data (who, what, when); the third
+              is a cryptographic signature only we can produce. We check that
+              signature with our public key (it&apos;s the standard JWS / JWKS
+              format if you&apos;re wondering).
             </p>
           </div>
           <VerifyForm />
@@ -80,8 +82,8 @@ export default function VerifyPage() {
             className="mb-8"
           />
           <p className="mb-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
-            The credential is a standard compact JWS signed by the PoA service&apos;s
-            Ed25519 key. The public JWK is at{" "}
+            For the developers: the credential is a compact JWS signed with
+            our Ed25519 key. The public JWK is at{" "}
             <code className="font-mono">/poa/.well-known/jwks.json</code>. Any
             JOSE-compatible library will verify it.
           </p>

@@ -72,21 +72,20 @@ function JwsForm() {
     <form onSubmit={onVerify} className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between border-b border-slate-300/70 pb-3 dark:border-slate-700/55">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-          Verify a JWS credential
+          Verify a credential
         </span>
         <span className="font-mono text-[10.5px] tabular-nums text-slate-400 dark:text-slate-500">
           01
         </span>
       </div>
       <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-300">
-        Paste a compact JWS issued by{" "}
-        <code className="font-mono">theseus.network/poa</code>. Server checks
-        the signature against the published JWKS and reports the freshness
-        against the chain.
+        Paste the credential token (the long string starting with{" "}
+        <code className="font-mono">eyJ…</code>). We check the signature with
+        our public key and report whether the chain still agrees.
       </p>
       <label className="block">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-          JWS (compact)
+          Credential token
         </span>
         <textarea
           value={jws}
@@ -134,7 +133,7 @@ function ResultCard({ data }: { data: VerifyResponse }) {
               invalid
             </span>
             <p className="mt-2 text-[13px] text-rose-800 dark:text-rose-200">
-              The signature did not verify against the published JWKS.
+              The signature on this token isn&apos;t one we issued.
             </p>
             <code className="mt-2 block break-all font-mono text-[11px] text-rose-700 dark:text-rose-200">
               {data.reason}

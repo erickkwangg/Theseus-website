@@ -10,11 +10,6 @@ import ChainModeBanner from "./_components/ChainModeBanner";
 import AgentLookupBar from "./_components/AgentLookupBar";
 import Glyph from "./_components/Glyph";
 import FreshnessGauge from "./_components/FreshnessGauge";
-import {
-  VerifyFlow,
-  ClaimFlow,
-  CredentialAnatomy,
-} from "./_components/Diagrams";
 
 // /poa landing: two distinct product cards. Each one looks and feels like
 // its own product (numbered, wordmarked, tagged with its audience, and
@@ -50,14 +45,24 @@ export default function PoaLanding() {
               <span className="italic">is this agent what it says it is?</span>
             </p>
             <div className="flex justify-center lg:justify-end">
-              <Image
-                src="/poa/hero-credential.png"
-                alt="A Proof of Agenthood credential — paper card with embossed wordmark, agent name, and a wax seal."
-                width={1200}
-                height={700}
-                priority
-                className="h-auto w-full max-w-[460px] [filter:drop-shadow(0_18px_30px_rgb(15_23_42_/_0.18))] dark:[filter:drop-shadow(0_18px_30px_rgb(0_0_0_/_0.45))]"
-              />
+              {/* Hero image: the source PNG has a checkered transparency
+                  pattern baked into its background. Until it gets regenerated
+                  on a clean background, we crop the visible window with
+                  clip-path + a small upscale so only the credential card
+                  shows through. */}
+              <div
+                className="relative w-full max-w-[420px] overflow-hidden"
+                style={{ clipPath: "inset(7% 9% 8% 9%)" }}
+              >
+                <Image
+                  src="/poa/hero-credential.png"
+                  alt="A Proof of Agenthood credential: paper card with embossed wordmark, agent name, and a wax seal."
+                  width={1200}
+                  height={700}
+                  priority
+                  className="block h-auto w-full scale-[1.22] [filter:drop-shadow(0_18px_30px_rgb(15_23_42_/_0.18))] dark:[filter:drop-shadow(0_18px_30px_rgb(0_0_0_/_0.45))]"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -95,9 +100,9 @@ export default function PoaLanding() {
                     <span className="italic">agent.</span>
                   </h2>
                   <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-slate-700 sm:text-base dark:text-slate-300">
-                    Paste an SS58 address. See whether it&apos;s a registered
-                    Theseus agent and what its credential says about its
-                    capability surface, verification grade, and controller.
+                    Paste an agent address. See whether it&apos;s registered
+                    on Theseus Chain and what its credential says about
+                    its capabilities, verification grade, and controller.
                   </p>
 
                   <AgentLookupBar
@@ -133,68 +138,13 @@ export default function PoaLanding() {
                 </div>
               </div>
 
-              {/* Verify flow: kills a wall of prose. */}
-              <div className="mt-10 border-t border-slate-400/30 pt-7 dark:border-slate-500/30">
-                <div className="flex items-baseline justify-between">
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-                    What happens
-                  </span>
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    server-side, no auth
-                  </span>
-                </div>
-                <VerifyFlow className="mt-4 w-full max-w-[480px]" />
-              </div>
-
-              {/* First-time onboarding: visual instead of prose. */}
-              <details className="group mt-8">
-                <summary className="flex cursor-pointer items-center gap-2 text-[12.5px] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100">
-                  <span
-                    aria-hidden
-                    className="font-mono text-[12px] text-slate-500 transition-transform group-open:rotate-90 dark:text-slate-400"
-                  >
-                    ▸
-                  </span>
-                  First time here? See the anatomy of a credential.
-                </summary>
-                <div className="mt-5 grid gap-y-6 sm:grid-cols-[auto_1fr] sm:gap-x-8">
-                  <CredentialAnatomy className="w-full max-w-[460px]" />
-                  <div className="space-y-3 text-[13px] leading-relaxed text-slate-700 dark:text-slate-300">
-                    <p>
-                      Theseus agents are autonomous programs that run on-chain.
-                      Anyone interacting with one wants to know it&apos;s really
-                      that agent.
-                    </p>
-                    <p>
-                      A credential is a portable, signed receipt of what the
-                      chain says. Verify it without trusting us: paste the JWS,
-                      fetch the public JWKS, or use any JOSE-compatible library.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-                    Where this fits in Theseus
-                  </span>
-                  <div className="mt-3 max-w-[760px] overflow-hidden rounded border border-slate-400/30 bg-white/40 p-2 dark:border-slate-500/30 dark:bg-slate-900/40">
-                    <Image
-                      src="/theseus-architecture-diagram.png"
-                      alt="Theseus architecture: chain, provers, blessed enclave, bridge"
-                      width={1600}
-                      height={900}
-                      className="h-auto w-full"
-                    />
-                  </div>
-                </div>
-              </details>
-
               {/* footer: URL stamp + secondary action */}
               <div className="mt-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">
                 <Link
                   href="/poa/verify"
                   className="text-[12.5px] text-slate-700 underline decoration-slate-500/50 underline-offset-[4px] hover:text-indigo-700 hover:decoration-indigo-400 dark:text-slate-200 dark:hover:text-indigo-300"
                 >
-                  Have a JWS to verify? Paste it on /poa/verify →
+                  Have a credential token to verify? Paste it on /poa/verify →
                 </Link>
                 <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                   theseus.network/poa
@@ -260,19 +210,6 @@ export default function PoaLanding() {
                     you publish: a signed seal
                   </span>
                 </div>
-              </div>
-
-              {/* Claim flow */}
-              <div className="mt-8 border-t border-slate-400/30 pt-6 dark:border-slate-500/30">
-                <div className="flex items-baseline justify-between">
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-700 dark:text-slate-200">
-                    What you sign
-                  </span>
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    one-time nonce
-                  </span>
-                </div>
-                <ClaimFlow className="mt-4 w-full max-w-[480px]" />
               </div>
 
               <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-slate-400/30 pt-5 dark:border-slate-500/30">

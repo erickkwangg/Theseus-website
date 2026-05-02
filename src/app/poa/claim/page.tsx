@@ -54,7 +54,7 @@ export default function ClaimPage() {
               <p className="max-w-md text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
                 Minting is gated to the agent&apos;s controller. You select an
                 agent, review the on-chain snapshot about to be baked into the
-                JWS, then sign a one-time nonce with the controller key.
+                credential, then sign a one-time nonce with the controller key.
                 {mode === "fixture"
                   ? " The chain is mocked in this preview with three fixture agents."
                   : " Signing happens in your Polkadot.js extension; the page never sees the private key."}
