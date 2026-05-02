@@ -44,33 +44,35 @@ export default function PoaLanding() {
         </div>
       </section>
 
-      {/* Verify: the product. One thing, full attention. */}
-      <section className="px-3 sm:px-4 lg:px-6 pt-6 lg:pt-10">
-        <div className="mx-auto max-w-4xl">
+      {/* Two peer products. Equal weight, side by side at lg. */}
+      <section className="px-3 sm:px-4 lg:px-6 pt-6 lg:pt-10 pb-24 lg:pb-32">
+        <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-2 lg:gap-6">
+          {/* 01 — Verify */}
           <article
-            className="hero-card poa-paper relative overflow-hidden bg-[var(--poa-paper-card)]"
+            className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
             style={{ borderRadius: "2px" }}
           >
-            <div className="relative z-10 px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
-              <div className="text-center">
-                <p className="poa-stamp">01 &middot; Verify &middot; Anyone</p>
-                <h2 className="mt-5 font-serif text-[clamp(2.5rem,6.5vw,4.75rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
-                  Look up an
-                  <span className="italic"> agent.</span>
-                </h2>
-              </div>
+            <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
+              <p className="poa-stamp">01 &middot; Verify &middot; Anyone</p>
+              <h2 className="mt-5 font-serif text-[clamp(2rem,4.6vw,3.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+                Look up an
+                <span className="italic"> agent.</span>
+              </h2>
+              <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                Paste an SS58 address or pick one of the samples below. The
+                credential page loads in seconds. No wallet, no account.
+              </p>
 
               <AgentLookupBar
-                className="mx-auto mt-12 max-w-xl"
+                className="mt-8"
                 variant="prominent"
                 showLabel={false}
                 autoFocus
               />
 
-              {/* Sample agents: a quiet row, focus-group on hover. */}
-              <div className="mx-auto mt-10 max-w-xl">
-                <p className="poa-stamp text-center">Or try one of these</p>
-                <div className="poa-focus-group mt-4 grid gap-1 sm:grid-cols-3">
+              <div className="mt-8">
+                <p className="poa-stamp">Or try</p>
+                <div className="poa-focus-group mt-3 grid grid-cols-3 gap-1">
                   {FIXTURE_AGENT_IDS.map((id) => {
                     const agent = FIXTURE_AGENTS[id];
                     const slug = portraitSlug(agent.name);
@@ -78,25 +80,25 @@ export default function PoaLanding() {
                       <Link
                         key={id}
                         href={`/poa/${id}`}
-                        className="group flex flex-col items-center gap-2 px-3 py-3"
+                        className="group flex flex-col items-center gap-2 px-2 py-3"
                       >
                         <ImageSlot
                           src={`/poa/agents/${slug}.png`}
                           alt={`Portrait of ${agent.name}`}
                           width={80}
                           height={80}
-                          className="w-12"
+                          className="w-11"
                           imgClassName="rounded-full"
                           fallback={
                             <Sigil
                               seed={id + agent.abgHash}
-                              size={48}
+                              size={44}
                               sovereign={agent.sovereign}
                               grade={agent.recentRuns.grade}
                             />
                           }
                         />
-                        <span className="block font-serif text-[14px] leading-tight text-[var(--poa-ink)] group-hover:italic">
+                        <span className="block text-center font-serif text-[13px] leading-tight text-[var(--poa-ink)] group-hover:italic">
                           {agent.name}
                         </span>
                         <span className="poa-stamp">
@@ -108,44 +110,82 @@ export default function PoaLanding() {
                 </div>
               </div>
 
-              {/* footer rail: secondary path + URL stamp */}
               <div
-                className="mt-14 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5"
-                style={{ borderColor: "var(--poa-rule)" }}
+                className="mt-auto flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5"
+                style={{ borderColor: "var(--poa-rule)", marginTop: "auto" }}
               >
                 <Link
                   href="/poa/verify"
                   className="text-[12.5px] text-[var(--poa-ink-soft)] underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
                 >
-                  Have a credential token? Verify it on /poa/verify &rarr;
+                  Have a credential token? Verify it &rarr;
                 </Link>
-                <span className="poa-stamp">theseus.network/poa</span>
+                <span className="poa-stamp">/poa</span>
               </div>
             </div>
           </article>
-        </div>
-      </section>
 
-      {/* Operators: a single-line nudge. The whisper, not the shout. */}
-      <section className="px-6 py-24 lg:py-32">
-        <div
-          className="mx-auto max-w-3xl border-t pt-10 text-center"
-          style={{ borderColor: "var(--poa-rule)" }}
-        >
-          <p className="poa-stamp">For operators</p>
-          <p className="mt-4 font-serif text-2xl italic leading-snug text-[var(--poa-ink)] sm:text-3xl">
-            Operate an agent?{" "}
-            <Link
-              href="/poa/claim"
-              className="underline decoration-[color:var(--poa-rule)] underline-offset-[6px] transition-colors hover:decoration-[color:var(--poa-ink)]"
-            >
-              Sign and seal a credential &rarr;
-            </Link>
-          </p>
-          <p className="mt-3 text-[13px] text-[var(--poa-ink-soft)]">
-            Thirty seconds. The controller signs a one-time nonce; we hand back
-            a public credential page anyone can verify.
-          </p>
+          {/* 02 — Claim */}
+          <article
+            className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
+            style={{ borderRadius: "2px" }}
+          >
+            <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
+              <p className="poa-stamp">02 &middot; Claim &middot; Operators</p>
+              <h2 className="mt-5 font-serif text-[clamp(2rem,4.6vw,3.5rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+                Sign and seal a
+                <span className="italic"> credential.</span>
+              </h2>
+              <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                Operators stamp their agent&rsquo;s identity on-chain with the
+                controller key. Signed once, served forever, revocable any
+                time.
+              </p>
+
+              <Link
+                href="/poa/claim"
+                className="cta-ink mt-8 inline-flex w-fit items-center px-6 py-3 text-sm font-medium tracking-wide"
+              >
+                Begin &rarr;
+              </Link>
+
+              <ul className="mt-8 space-y-3">
+                <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
+                  <span className="poa-stamp">~30s</span>
+                  <span className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
+                    Controller signs a one-time nonce in Polkadot.js.
+                  </span>
+                </li>
+                <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
+                  <span className="poa-stamp">Public</span>
+                  <span className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
+                    A shareable credential page at{" "}
+                    <code className="font-mono text-[12px]">
+                      /poa/&lt;agentId&gt;
+                    </code>
+                    .
+                  </span>
+                </li>
+                <li className="grid grid-cols-[80px_1fr] items-baseline gap-x-4">
+                  <span className="poa-stamp">Revocable</span>
+                  <span className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
+                    Retire it any time; verifiers see the status update on
+                    the next check.
+                  </span>
+                </li>
+              </ul>
+
+              <div
+                className="mt-auto flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t pt-5"
+                style={{ borderColor: "var(--poa-rule)", marginTop: "auto" }}
+              >
+                <span className="text-[12.5px] text-[var(--poa-ink-soft)]">
+                  Polkadot.js extension required.
+                </span>
+                <span className="poa-stamp">/poa/claim</span>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
