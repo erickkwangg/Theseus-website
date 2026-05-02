@@ -3,6 +3,7 @@ import { getChainReader } from "@/lib/poa/chain";
 import { issueCredential } from "@/lib/poa/issue";
 import { challengeStore } from "@/lib/poa/store";
 import { LIMITS, isBoundedString, isHexString, looksLikeSs58 } from "@/lib/poa/validation";
+import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
 
 type IssueBody = {
   agentId?: unknown;
@@ -75,9 +76,21 @@ export async function POST(req: Request) {
     );
   }
   if (!result.ok) {
+    void events.record({
+      kind: "issue.failed",
+      agentId,
+      outcome: result.reason,
+      ipHash: hashIp(ipFromRequest(req)),
+    });
     return NextResponse.json({ error: result.reason }, { status: 400 });
   }
   const c = result.credential;
+  void events.record({
+    kind: "issue.success",
+    agentId,
+    outcome: "ok",
+    ipHash: hashIp(ipFromRequest(req)),
+  });
   return NextResponse.json({
     jti: c.jti,
     agentId: c.agentId,

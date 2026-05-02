@@ -7,6 +7,7 @@ import {
   isHexString,
   looksLikeSs58,
 } from "@/lib/poa/validation";
+import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
 
 // POST /poa/api/revoke
 //
@@ -161,12 +162,24 @@ export async function POST(req: Request) {
     );
   }
   if (!revoked) {
+    void events.record({
+      kind: "revoke.failed",
+      agentId,
+      outcome: "already-revoked",
+      ipHash: hashIp(ipFromRequest(req)),
+    });
     return NextResponse.json(
       { error: "already-revoked" },
       { status: 409 },
     );
   }
 
+  void events.record({
+    kind: "revoke.success",
+    agentId,
+    outcome: "operator-revoked",
+    ipHash: hashIp(ipFromRequest(req)),
+  });
   return NextResponse.json({
     jti: stored.jti,
     agentId,

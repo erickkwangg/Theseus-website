@@ -9,6 +9,7 @@ import { getChainReader, chainMode } from "@/lib/poa/chain";
 import { evaluateRevocation } from "@/lib/poa/revocation";
 import { groupIntents, type IntentCategory } from "@/lib/poa/intents";
 import { LIMITS } from "@/lib/poa/validation";
+import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
 
 type VerifyBody = { jws?: unknown };
 
@@ -65,6 +66,11 @@ export async function POST(req: Request) {
 
   const result = await verifyCredential(jws);
   if (!result.valid) {
+    void events.record({
+      kind: "verify.failed",
+      outcome: result.reason,
+      ipHash: hashIp(ipFromRequest(req)),
+    });
     return NextResponse.json(
       { valid: false, reason: result.reason } satisfies VerifyResult,
       { status: 400 },
@@ -137,5 +143,11 @@ export async function POST(req: Request) {
     }
   }
 
+  void events.record({
+    kind: "verify.success",
+    agentId: out.agentId,
+    outcome: out.freshness?.status ?? "ok",
+    ipHash: hashIp(ipFromRequest(req)),
+  });
   return NextResponse.json(out);
 }

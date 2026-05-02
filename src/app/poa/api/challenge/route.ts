@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { challengeStore } from "@/lib/poa/store";
 import { LIMITS, isBoundedString, looksLikeSs58 } from "@/lib/poa/validation";
+import { events, hashIp, ipFromRequest } from "@/lib/poa/events";
 
 const CHALLENGE_TTL_MS = 5 * 60 * 1000;
 
@@ -43,6 +44,12 @@ export async function POST(req: Request) {
       { status: 503 },
     );
   }
+  void events.record({
+    kind: "challenge.requested",
+    agentId,
+    outcome: "ok",
+    ipHash: hashIp(ipFromRequest(req)),
+  });
   return NextResponse.json({
     nonce,
     agentId,
