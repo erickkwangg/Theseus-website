@@ -211,6 +211,14 @@ export default function ClaimForm({
           );
           signatureHex = sig.signatureHex;
         }
+        // Brief "signature received" beat — the moment of attestation has weight.
+        setState({
+          kind: "running",
+          step: "attest",
+          detail: "◆ signature received",
+          snapshot,
+        });
+        await new Promise((r) => setTimeout(r, 480));
         setState({
           kind: "running",
           step: "receive",
@@ -242,7 +250,7 @@ export default function ClaimForm({
 
   return (
     <form onSubmit={onMint} className="flex flex-col gap-10">
-      {/* Step rail */}
+      {/* Step rail — active step glows on a left rail to signal liveness. */}
       <ol className="border-y border-slate-300/70 divide-y divide-slate-300/70 dark:border-slate-700/55 dark:divide-slate-700/55">
         {STEPS.map((step) => {
           const isActive = activeStep() === step.key;
@@ -251,8 +259,8 @@ export default function ClaimForm({
             <li
               key={step.key}
               className={cn(
-                "grid grid-cols-[40px_minmax(0,1fr)_auto] items-baseline gap-x-4 px-2 py-4 sm:px-4 sm:py-5",
-                isActive && "bg-indigo-50/40 dark:bg-indigo-500/5",
+                "grid grid-cols-[40px_minmax(0,1fr)_auto] items-baseline gap-x-4 px-2 py-4 transition-colors duration-300 sm:px-4 sm:py-5",
+                isActive && "poa-step-glow bg-indigo-50/40 dark:bg-indigo-500/5",
               )}
             >
               <span

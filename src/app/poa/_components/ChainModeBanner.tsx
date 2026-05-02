@@ -5,20 +5,25 @@
 //   when THESEUS_RPC_URL isn't set, so production never silently shows mocks.
 // - chain unreachable → rose banner with the raw error in an expandable detail.
 //   Shown on credential page when a real chain query fails.
-// - live chain → quiet indigo strip with current block height. Shown on
-//   credential page when a polkadot fetch succeeds, so users know they're
-//   reading the real thing.
+// - live chain → quiet indigo strip with a live, ticking block height. Shown
+//   on credential page when a polkadot fetch succeeds.
+
+import LiveBlock from "./LiveBlock";
+import Glyph from "./Glyph";
 
 type Props = {
   mode: "fixture" | "polkadot";
   chainError?: string | null;
   livePolkadotBlock?: number | null;
+  // when set, LiveBlock will poll /poa/api/snapshot/<id> for fresh block data
+  pollAgentId?: string;
 };
 
 export default function ChainModeBanner({
   mode,
   chainError,
   livePolkadotBlock,
+  pollAgentId,
 }: Props) {
   if (chainError) {
     const friendly = friendlyChainErrorLine(chainError);
@@ -77,12 +82,15 @@ export default function ChainModeBanner({
         className="border-y border-indigo-400/30 bg-indigo-50/30 dark:border-indigo-500/25 dark:bg-indigo-500/5"
       >
         <div className="mx-auto flex max-w-[1700px] flex-wrap items-center gap-x-4 gap-y-1 px-6 py-2 sm:px-12 lg:px-16">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-indigo-700 dark:text-indigo-300">
+          <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-indigo-700 dark:text-indigo-300">
+            <Glyph name="chain" size={13} />
             theseus chain · live
           </span>
-          <span className="font-mono text-[10.5px] tabular-nums text-indigo-700/80 dark:text-indigo-300/80">
-            block {livePolkadotBlock.toLocaleString()}
-          </span>
+          <LiveBlock
+            initial={livePolkadotBlock}
+            agentId={pollAgentId}
+            className="text-[10.5px]"
+          />
         </div>
       </div>
     );

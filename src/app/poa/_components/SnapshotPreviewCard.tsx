@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import type { AgentSnapshot } from "@/lib/poa/types";
 import { groupIntents } from "@/lib/poa/intents";
 import Sigil, { checksumFromSeed } from "./Sigil";
+import Glyph from "./Glyph";
 
 type Props = { snapshot: AgentSnapshot; className?: string };
 
@@ -33,7 +34,10 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
           <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
             Agent
           </span>
-          <p className="mt-1 font-serif text-2xl leading-tight tracking-tight text-slate-900 dark:text-slate-50">
+          <p
+            key={snapshot.agentId}
+            className="poa-write-in mt-1 font-serif text-2xl leading-tight tracking-tight text-slate-900 dark:text-slate-50"
+          >
             {snapshot.name}
           </p>
           {snapshot.summary && (
@@ -43,7 +47,12 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
           )}
         </div>
         <div className="flex flex-col items-end gap-2">
-          <Sigil seed={snapshot.agentId + snapshot.abgHash} size={56} />
+          <Sigil
+            seed={snapshot.agentId + snapshot.abgHash}
+            size={72}
+            sovereign={snapshot.sovereign}
+            grade={snapshot.recentRuns.grade}
+          />
           <span className="font-serif text-xl italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
             {checksum}
           </span>
@@ -62,7 +71,12 @@ export default function SnapshotPreviewCard({ snapshot, className }: Props) {
       </div>
 
       <footer className="border-t border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
-        <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
+        <p className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
+          <Glyph
+            name={requiresSig ? "key" : "sovereign"}
+            size={13}
+            className="text-slate-500 dark:text-slate-400"
+          />
           {requiresSig
             ? "controller will be asked to sign a nonce"
             : "no signature required — sovereign agent"}

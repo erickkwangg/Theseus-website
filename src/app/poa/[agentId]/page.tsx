@@ -76,6 +76,7 @@ export default async function PoaCredentialPage({ params }: Props) {
         mode={mode}
         chainError={chainError}
         livePolkadotBlock={liveBlock}
+        pollAgentId={mode === "polkadot" ? agentId : undefined}
       />
 
       <section className="px-2 sm:px-3 lg:px-4 pt-24 lg:pt-28 pb-2 sm:pb-3 lg:pb-4">
@@ -102,11 +103,11 @@ export default async function PoaCredentialPage({ params }: Props) {
                 )}
                 <p className="mt-6 max-w-xl font-serif text-xl italic leading-snug text-slate-800 sm:text-2xl dark:text-slate-100">
                   {chainError
-                    ? "Cannot read on-chain state right now."
+                    ? "The chain is asleep right now. Try again in a moment."
                     : !liveSnapshot
-                      ? "Not registered on Theseus Chain."
+                      ? "This address is not a registered Theseus agent."
                       : !stored
-                        ? "On-chain registration found. No credential issued yet."
+                        ? "Registered, but no credential has been issued yet."
                         : revocation
                           ? "This credential has been revoked."
                           : "A signed receipt of agenthood."}
@@ -177,12 +178,22 @@ export default async function PoaCredentialPage({ params }: Props) {
 
       {!stored && liveSnapshot && !chainError && (
         <section className="px-2 sm:px-3 lg:px-4 py-10 lg:py-14">
-          <div className="mx-auto max-w-[700px] px-4 text-slate-700 dark:text-slate-300">
-            <p className="leading-relaxed">
-              The agent is registered on Theseus Chain, but no Proof of
-              Agenthood credential has been issued yet. Claim one to publish a
-              portable, signed snapshot of its state.
-            </p>
+          <div className="mx-auto max-w-[700px] px-4">
+            <div className="border border-dashed border-slate-300/70 px-6 py-7 text-center dark:border-slate-700/55">
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+                Empty seal slot
+              </span>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-700 dark:text-slate-200">
+                This agent is registered on Theseus Chain, but its operator
+                hasn&apos;t minted a Proof of Agenthood credential yet.
+              </p>
+              <Link
+                href="/poa/claim"
+                className="primary-cta mt-5 inline-flex items-center rounded-md px-6 py-3 text-sm font-medium tracking-wide"
+              >
+                If you operate this agent, claim a credential →
+              </Link>
+            </div>
           </div>
         </section>
       )}

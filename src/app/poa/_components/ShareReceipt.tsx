@@ -41,7 +41,7 @@ export default function ShareReceipt({
   }, [showQr, fullPageUrl]);
 
   return (
-    <div className="border border-slate-300/70 bg-white/70 dark:border-slate-700/55 dark:bg-slate-900/40">
+    <div className="poa-paper poa-materialize relative border border-indigo-700/30 bg-white/72 dark:border-indigo-300/30 dark:bg-slate-900/45">
       <header className="flex items-center justify-between border-b border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
           credential issued

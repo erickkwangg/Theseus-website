@@ -1,13 +1,18 @@
 // CredentialDocument — the editorial centerpiece for /poa/[agentId].
-// Modeled on the homepage Receipt: hairline borders, mono small-caps headers,
-// staggered rows. Reads as a document about an agent, not about an address.
-// Cryptographic identity is available but tucked into a disclosed section.
+// v2: artifact treatment. Paper grain. Sovereign agents get a double-rule
+// frame. Lite-grade agents are subtly desaturated. The bottom carries a real
+// Seal, not a status pill. Sigil is large and central, shimmering when the
+// credential is active. Technical terms have inline plain-language tooltips.
 
 import { cn } from "@/lib/utils";
 import type { StoredCredential, RevocationReason } from "@/lib/poa/types";
 import { groupIntents } from "@/lib/poa/intents";
 import Sigil, { checksumFromSeed } from "./Sigil";
+import Seal from "./Seal";
+import Glyph from "./Glyph";
 import CopyButton from "./CopyButton";
+import PoaTooltip from "./PoaTooltip";
+import RelativeTime from "./RelativeTime";
 
 type Props = {
   credential: StoredCredential;
@@ -29,8 +34,7 @@ export default function CredentialDocument({
   const issuedISO = new Date(credential.issuedAt).toISOString();
   const issuedDate = issuedISO.slice(0, 10).replace(/-/g, ".");
   const issuedTime = issuedISO.slice(11, 16) + " UTC";
-  const status = revocation ? "revoked" : "attested";
-  const issuedRelative = relativeFromNow(credential.issuedAt);
+  const status: "attested" | "revoked" = revocation ? "revoked" : "attested";
   const jwsParts = jws.split(".");
   const [jwsHeader, jwsPayload, jwsSig] =
     jwsParts.length === 3 ? jwsParts : ["", "", ""];
@@ -39,14 +43,22 @@ export default function CredentialDocument({
     <article
       aria-label="Proof of Agenthood credential"
       className={cn(
-        "border border-slate-300/70 bg-white/70 backdrop-blur-[2px]",
-        "dark:border-slate-700/55 dark:bg-slate-900/40",
+        "poa-paper poa-materialize relative border bg-white/72 backdrop-blur-[2px]",
+        // Sovereign agents get a quiet double-frame. Controller-retained get
+        // a single rule.
+        agent.sovereign
+          ? "border-indigo-700/30 poa-double-frame dark:border-indigo-300/30"
+          : "border-slate-300/70 dark:border-slate-700/55",
+        // Lite-grade agents read as "less verified" via subtle desaturation.
+        agent.recentRuns.grade === "lite" && "poa-lite",
+        "dark:bg-slate-900/45",
         className,
       )}
     >
       {/* Top bar — file header */}
       <header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-slate-300/70 px-4 py-3 sm:px-6 dark:border-slate-700/55">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
+        <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
+          <Glyph name="scroll" size={14} className="text-slate-500 dark:text-slate-400" />
           Proof of Agenthood
         </span>
         <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
@@ -54,25 +66,40 @@ export default function CredentialDocument({
         </span>
       </header>
 
-      {/* Identity block — name + summary lead, sigil/checksum on the side */}
-      <section className={cn(SECTION_GAP, "border-t-0 px-6 py-7 sm:px-8 sm:py-9")}>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-[1fr_auto] sm:gap-10">
+      {/* Identity block — name + summary lead, big sigil + checksum on the side. */}
+      <section className="border-t-0 px-6 py-9 sm:px-10 sm:py-12">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-[1fr_auto] sm:gap-12">
           <div className="min-w-0">
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-              Agent
+            <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+              <Glyph
+                name={agent.sovereign ? "sovereign" : "controller"}
+                size={13}
+              />
+              {agent.sovereign ? "Sovereign agent" : "Agent"}
             </span>
-            <h2 className="mt-2 font-serif text-3xl leading-tight tracking-tight text-slate-900 sm:text-4xl dark:text-slate-50">
+            <h2 className="mt-3 font-serif text-3xl leading-[1.1] tracking-tight text-slate-900 [text-wrap:balance] sm:text-4xl lg:text-[44px] dark:text-slate-50">
               {agent.name}
             </h2>
+            {/* Tiny ornamental rule under the name. */}
+            <div
+              className="mt-4 h-px w-12 bg-indigo-700/40 dark:bg-indigo-300/40"
+              aria-hidden
+            />
             {agent.summary && (
-              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
                 {agent.summary}
               </p>
             )}
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <Sigil seed={agent.agentId + agent.abgHash} size={84} />
-            <span className="font-serif text-[28px] italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
+          <div className="flex flex-col items-end gap-3">
+            <Sigil
+              seed={agent.agentId + agent.abgHash}
+              size={148}
+              sovereign={agent.sovereign}
+              grade={agent.recentRuns.grade}
+              shimmer={status === "attested"}
+            />
+            <span className="font-serif text-[34px] italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
               {checksum}
             </span>
           </div>
@@ -100,10 +127,12 @@ export default function CredentialDocument({
           k="Mode"
           v={agent.sovereign ? "sovereign · immutable" : "controller-retained"}
           accent={agent.sovereign}
+          glyph={agent.sovereign ? "sovereign" : "controller"}
         />
         <KvRow
           k="Registered"
           v={`block ${agent.registration.atBlock.toLocaleString()}`}
+          glyph="block"
         />
         <KvRow
           k="Funding"
@@ -119,18 +148,33 @@ export default function CredentialDocument({
           k="Grade"
           v={gradeLabel(agent.recentRuns.grade)}
           accent={agent.recentRuns.grade === "full"}
+          glyph={
+            agent.recentRuns.grade === "full"
+              ? "kzg"
+              : agent.recentRuns.grade === "lite"
+                ? "lite"
+                : undefined
+          }
         />
         {agent.recentRuns.grade === "unknown" ? (
           <p className="mt-1 text-[12px] leading-relaxed text-slate-500 dark:text-slate-400">
-            Verification grade requires aggregating recent <code className="font-mono">AgentRuns</code>{" "}
-            against <code className="font-mono">Aivm</code> proof results — that&apos;s an
-            indexer job, not a per-request RPC call. Not yet wired in this preview.
+            Verification grade requires aggregating recent{" "}
+            <code className="font-mono">AgentRuns</code> against{" "}
+            <code className="font-mono">Aivm</code> proof results — that&apos;s
+            an indexer job, not a per-request RPC call. Not yet wired in this
+            preview.
           </p>
         ) : (
           <>
             <KvRow k="Sample" v={`${agent.recentRuns.sampledRuns} runs`} />
             <KvRow
-              k="KZG-verified"
+              k={
+                <PoaTooltip term="KZG-verified">
+                  Inferences for which the prover produced a TensorCommitment
+                  proof and the chain verified it via its native KZG host
+                  function. Strongest verification tier.
+                </PoaTooltip>
+              }
               v={`${agent.recentRuns.inferenceMix.kzg} / ${agent.recentRuns.sampledRuns}`}
             />
             <KvRow
@@ -152,14 +196,21 @@ export default function CredentialDocument({
               : "controller-attested · controller signed nonce"
           }
         />
-        <KvRow
-          k="Issued"
-          v={`${issuedDate} · ${issuedTime}  (${issuedRelative})`}
-        />
+        <div className="grid grid-cols-1 items-baseline gap-y-0.5 border-b border-slate-200/70 py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+            Issued
+          </span>
+          <span className="text-[13.5px] leading-relaxed text-slate-800 dark:text-slate-100">
+            {issuedDate} · {issuedTime}{" "}
+            <span className="text-slate-500 dark:text-slate-400">
+              (
+              <RelativeTime epochMs={credential.issuedAt} />)
+            </span>
+          </span>
+        </div>
       </Section>
 
-      {/* Machine-readable identity — disclosed by default. Styled to match the
-          numbered-section pattern: a Section heading whose content collapses. */}
+      {/* Machine-readable identity — disclosed by default. */}
       <details className="group">
         <summary
           className={cn(
@@ -186,7 +237,18 @@ export default function CredentialDocument({
         <div className="border-t border-slate-300/70 dark:border-slate-700/55">
           <Section number="05" title="Identity">
             <KvRow k="Address" v={agent.agentId} mono copyable />
-            <KvRow k="ABG hash" v={agent.abgHash} mono copyable />
+            <KvRow
+              k={
+                <PoaTooltip term="ABG hash">
+                  Hash of the agent&apos;s compiled Agent Behavior Graph — the
+                  on-chain bytecode-equivalent for what the agent can do.
+                  Changes when the controller updates the agent.
+                </PoaTooltip>
+              }
+              v={agent.abgHash}
+              mono
+              copyable
+            />
             <KvRow k="ABG version" v={`v${agent.abgVersion}`} mono />
             <KvRow
               k="Controller"
@@ -195,15 +257,21 @@ export default function CredentialDocument({
               copyable={!!agent.controller}
             />
             {claims.attestation.kind === "controller-attested" && (
-              <KvRow
-                k="Nonce"
-                v={claims.attestation.nonce}
-                mono
-                copyable
-              />
+              <KvRow k="Nonce" v={claims.attestation.nonce} mono copyable />
             )}
             <KvRow k="Issuer" v="theseus.network/poa" />
-            <KvRow k="JTI" v={jti} mono copyable />
+            <KvRow
+              k={
+                <PoaTooltip term="JTI">
+                  Unique credential ID. Use it to look up or revoke this
+                  specific credential. Different from the agent&apos;s
+                  on-chain address.
+                </PoaTooltip>
+              }
+              v={jti}
+              mono
+              copyable
+            />
             <KvRow
               k="Snapshot at"
               v={`block ${agent.snapshotAtBlock.toLocaleString()} · ${agent.snapshotAtTime}`}
@@ -227,35 +295,38 @@ export default function CredentialDocument({
         </div>
       </details>
 
-      {/* Footer seal */}
-      <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-slate-300/70 px-4 py-3 sm:px-6 dark:border-slate-700/55">
-        <div className="flex items-center gap-3">
-          <span
-            aria-hidden
-            className={cn(
-              "grid h-4 w-4 place-items-center rounded-full",
+      {/* Footer — real seal */}
+      <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-slate-300/70 px-4 py-5 sm:px-6 dark:border-slate-700/55">
+        <div className="flex items-center gap-4">
+          <Seal
+            status={status}
+            label={status === "attested" ? "Attested" : "Revoked"}
+            caption={
               status === "attested"
-                ? "bg-indigo-500/15 text-indigo-600 dark:bg-indigo-400/20 dark:text-indigo-300"
-                : "bg-rose-500/15 text-rose-600 dark:bg-rose-400/20 dark:text-rose-300",
-            )}
-          >
-            {status === "attested" ? "✓" : "✕"}
-          </span>
-          <span
-            className={cn(
-              "font-mono text-[11px] uppercase tracking-[0.18em]",
-              status === "attested"
-                ? "text-indigo-700 dark:text-indigo-300"
-                : "text-rose-700 dark:text-rose-300",
-            )}
-          >
-            {status === "attested"
-              ? `attested · ${issuedDate}`
-              : `revoked · ${(revocation ?? "").replace(/-/g, " ")}`}
-          </span>
+                ? `BLOCK ${agent.snapshotAtBlock.toLocaleString()}`
+                : (revocation ?? "").replace(/-/g, " ")
+            }
+            size={84}
+          />
+          <div className="flex flex-col gap-0.5">
+            <span
+              className={cn(
+                "font-mono text-[11px] uppercase tracking-[0.18em]",
+                status === "attested"
+                  ? "text-indigo-700 dark:text-indigo-300"
+                  : "text-rose-700 dark:text-rose-300",
+              )}
+            >
+              {status === "attested" ? "attested" : "revoked"} ·{" "}
+              {issuedDate}
+            </span>
+            <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
+              <RelativeTime epochMs={credential.issuedAt} />
+            </span>
+          </div>
         </div>
         <span className="font-mono text-[10.5px] tabular-nums text-slate-500 dark:text-slate-400">
-          snapshot · block {agent.snapshotAtBlock.toLocaleString()}
+          theseus.network/poa
         </span>
       </footer>
     </article>
@@ -337,18 +408,22 @@ function IntentRow({ intentTypes }: { intentTypes: string[] }) {
   );
 }
 
+type GlyphName = React.ComponentProps<typeof Glyph>["name"];
+
 function KvRow({
   k,
   v,
   accent,
   mono,
   copyable,
+  glyph,
 }: {
-  k: string;
+  k: React.ReactNode;
   v: string;
   accent?: boolean;
   mono?: boolean;
   copyable?: boolean;
+  glyph?: GlyphName;
 }) {
   return (
     <div className="grid grid-cols-1 items-baseline gap-y-0.5 border-b border-slate-200/70 py-2 last:border-b-0 sm:grid-cols-[minmax(140px,180px)_1fr] sm:gap-x-6 dark:border-slate-700/40">
@@ -364,8 +439,20 @@ function KvRow({
             : "text-slate-800 dark:text-slate-100",
         )}
       >
+        {glyph && (
+          <Glyph
+            name={glyph}
+            size={14}
+            className={cn(
+              "shrink-0 self-center",
+              accent
+                ? "text-indigo-700 dark:text-indigo-300"
+                : "text-slate-500 dark:text-slate-400",
+            )}
+          />
+        )}
         <span className="break-all">{v}</span>
-        {copyable && <CopyButton value={v} label={k} />}
+        {copyable && <CopyButton value={v} label={typeof k === "string" ? k : undefined} />}
       </span>
     </div>
   );
@@ -408,7 +495,7 @@ function gradeLabel(g: string): string {
     case "lite":
       return "lite · signature only";
     default:
-      return "unknown";
+      return "unknown · indexer not wired";
   }
 }
 
@@ -417,19 +504,4 @@ function formatSeus(raw: string): string {
   if (raw.length <= 12) return `${raw} micro-seus`;
   const whole = raw.slice(0, raw.length - 12);
   return `${Number(whole).toLocaleString()} seus`;
-}
-
-function relativeFromNow(epochMs: number): string {
-  const diffSec = Math.max(0, (Date.now() - epochMs) / 1000);
-  if (diffSec < 60) return "just now";
-  const min = Math.floor(diffSec / 60);
-  if (min < 60) return `${min} min ago`;
-  const hr = Math.floor(min / 60);
-  if (hr < 24) return `${hr} h ago`;
-  const day = Math.floor(hr / 24);
-  if (day < 30) return `${day} day${day === 1 ? "" : "s"} ago`;
-  const month = Math.floor(day / 30);
-  if (month < 12) return `${month} month${month === 1 ? "" : "s"} ago`;
-  const year = Math.floor(day / 365);
-  return `${year} year${year === 1 ? "" : "s"} ago`;
 }

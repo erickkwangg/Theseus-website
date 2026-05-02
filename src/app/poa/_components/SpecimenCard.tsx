@@ -53,7 +53,13 @@ export default function SpecimenCard({ className }: { className?: string }) {
           </p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <Sigil seed={SPECIMEN_SEED} size={64} />
+          <Sigil
+            seed={SPECIMEN_SEED}
+            size={80}
+            sovereign
+            grade="full"
+            shimmer
+          />
           <span className="font-serif text-2xl italic leading-none tracking-tight text-slate-900 dark:text-slate-50">
             {checksum}
           </span>

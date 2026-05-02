@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import FreshnessGauge from "../_components/FreshnessGauge";
+import Glyph from "../_components/Glyph";
 
 type FreshnessOk = { status: "current" };
 type FreshnessRevoked = { status: "revoked"; reason: string };
@@ -124,46 +126,74 @@ function JwsForm() {
 function ResultCard({ data }: { data: VerifyResponse }) {
   if (!data.valid) {
     return (
-      <div className="border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
-          invalid
-        </span>
-        <p className="mt-2 text-[13px] text-rose-800 dark:text-rose-200">
-          The signature did not verify against the published JWKS.
-        </p>
-        <code className="mt-2 block font-mono text-[11px] text-rose-700 dark:text-rose-200">
-          {data.reason}
-        </code>
+      <div className="poa-result-press border border-rose-400/40 bg-rose-50/50 p-4 dark:border-rose-500/30 dark:bg-rose-500/5">
+        <div className="flex items-start gap-3">
+          <FreshnessGauge status="revoked" size={56} />
+          <div>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-rose-700 dark:text-rose-300">
+              invalid
+            </span>
+            <p className="mt-2 text-[13px] text-rose-800 dark:text-rose-200">
+              The signature did not verify against the published JWKS.
+            </p>
+            <code className="mt-2 block break-all font-mono text-[11px] text-rose-700 dark:text-rose-200">
+              {data.reason}
+            </code>
+          </div>
+        </div>
       </div>
     );
   }
 
   const freshness = data.freshness;
-  const freshLabel =
-    !freshness
-      ? "unknown"
-      : freshness.status === "current"
-        ? "current"
-        : freshness.status === "revoked"
-          ? "revoked"
-          : "unknown";
-  const freshClass =
+  const freshStatus: "current" | "revoked" | "unknown" =
     freshness?.status === "current"
-      ? "border-indigo-400/40 bg-indigo-500/5 text-indigo-700 dark:border-indigo-300/40 dark:bg-indigo-400/5 dark:text-indigo-300"
+      ? "current"
       : freshness?.status === "revoked"
-        ? "border-rose-400/40 bg-rose-50/50 text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/5 dark:text-rose-300"
-        : "border-amber-400/40 bg-amber-50/50 text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/5 dark:text-amber-300";
+        ? "revoked"
+        : "unknown";
 
   return (
-    <article className="border border-slate-300/70 bg-white/70 dark:border-slate-700/55 dark:bg-slate-900/40">
-      <header className="flex items-baseline justify-between border-b border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
-          ✓ signature valid
+    <article className="poa-result-press poa-paper relative border border-indigo-700/30 bg-white/72 dark:border-indigo-300/30 dark:bg-slate-900/45">
+      <header className="flex items-center justify-between border-b border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
+        <span className="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-300">
+          <Glyph name="attest" size={13} />
+          signature valid
         </span>
         <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
           kid · {data.kid}
         </span>
       </header>
+
+      {/* Freshness gauge — the verifier's "moment". */}
+      <div className="flex items-start gap-5 px-4 py-5 sm:px-6">
+        <FreshnessGauge status={freshStatus} size={72} />
+        <div className="flex-1">
+          <p
+            className={cn(
+              "font-mono text-[10.5px] uppercase tracking-[0.18em]",
+              freshStatus === "current"
+                ? "text-indigo-700 dark:text-indigo-300"
+                : freshStatus === "revoked"
+                  ? "text-rose-700 dark:text-rose-300"
+                  : "text-amber-700 dark:text-amber-300",
+            )}
+          >
+            freshness · {freshStatus}
+          </p>
+          <p className="mt-2 text-[13px] leading-relaxed text-slate-700 dark:text-slate-200">
+            {freshStatus === "current" &&
+              "Chain state matches the credential. Nothing has changed that would invalidate it."}
+            {freshStatus === "revoked" &&
+              freshness &&
+              "status" in freshness &&
+              freshness.status === "revoked" &&
+              `Revoked: ${freshness.reason.replace(/-/g, " ")}.`}
+            {freshStatus === "unknown" &&
+              "Couldn't verify against the chain right now. The signature itself is valid."}
+          </p>
+        </div>
+      </div>
       <div className="space-y-2 px-4 py-4">
         <Kv k="Subject" v={data.agentId ?? ""} />
         <Kv k="Agent name" v={data.claims?.agent.name ?? ""} />
@@ -208,21 +238,6 @@ function ResultCard({ data }: { data: VerifyResponse }) {
           </div>
         </div>
       )}
-      <div className={cn("border-t px-4 py-3", freshClass)}>
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em]">
-          freshness · {freshLabel}
-        </span>
-        {freshness?.status === "revoked" && (
-          <p className="mt-1 text-[12px]">
-            Revoked: {freshness.reason.replace(/-/g, " ")}.
-          </p>
-        )}
-        {freshness?.status === "unknown" && (
-          <p className="mt-1 text-[12px]">
-            Couldn&apos;t verify against the chain: {freshness.detail}
-          </p>
-        )}
-      </div>
       <footer className="border-t border-slate-300/70 px-4 py-3 dark:border-slate-700/55">
         {data.agentId && (
           <Link
