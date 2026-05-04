@@ -32,6 +32,11 @@ const ITEMS: Item[] = [
     href: "/poa/agents",
     matches: (p) => p.startsWith("/poa/agents"),
   },
+  {
+    label: "Docs",
+    href: "/poa/docs",
+    matches: (p) => p.startsWith("/poa/docs"),
+  },
 ];
 
 export default function PoaNav() {
