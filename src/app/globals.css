@@ -1189,6 +1189,28 @@
 }
 .dark .prose-blog figcaption { color: #94a3b8; }
 
+/* Figure caption: paragraph immediately after a paragraph containing only an image.
+   Pulls the caption tight under the figure, separates it from prose with a
+   smaller, centered, muted style. */
+.prose-blog p:has(> img) {
+  margin-bottom: 0.5em;
+}
+.prose-blog p:has(> img) + p {
+  margin-top: 0;
+  margin-bottom: 2.8em;
+  padding-top: 0.4em;
+  font-size: 0.875em;
+  line-height: 1.55;
+  color: #64748b;
+  text-align: center;
+  max-width: 36em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.dark .prose-blog p:has(> img) + p {
+  color: #94a3b8;
+}
+
 .prose-blog table {
   width: 100%;
   border-collapse: collapse;
