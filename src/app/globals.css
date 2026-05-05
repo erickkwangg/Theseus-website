@@ -1062,7 +1062,7 @@
 }
 .dark .prose-blog { color: #cbd5e1; }
 
-.prose-blog > * + * { margin-top: 1.25em; }
+.prose-blog > * + * { margin-top: 1.75em; }
 
 .prose-blog p { margin: 0; }
 
