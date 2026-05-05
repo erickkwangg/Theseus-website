@@ -25,25 +25,25 @@ That result fits a longer pattern. We progressed from monolithic models like GPT
 
 ![One model, one cortex](/blog/from-monoliths-to-multitudes/06-monolith-globe.png)
 
-For most of the last decade, the bet at the frontier has been that capability scales with parameters: more layers and weights produce more of whatever the model was supposed to do. On the easier benchmarks that has more or less held up. On harder work, the kind that involves multiple steps, several modalities, and external tools, scaling on its own starts to flatten out, and adding more parameters doesn't reliably fix it.
+For most of the last decade, the idea at the cutting edge has been that capability improves with parameters. Adding more layers and weights should enhance whatever the model is intended to do. This has mostly held true on easier benchmarks. However, for more complex tasks that require multiple steps, various formats, and external tools, simply adding more parameters doesn't solve the problems effectively.
 
-Scaling does buy real things: smoother performance on familiar distributions, better compression of statistical regularities, the kind of fluent natural-language handling that didn't exist five years ago. What it doesn't reliably buy is the stuff that actually matters in production: systematic generalization across modalities and tools, grounded action with traceable steps, planning under hard constraints, robustness to inputs that have drifted outside the pretraining distribution.
+Scaling does lead to real benefits. It creates smoother performance on familiar data, improves the compression of statistical patterns, and enables natural language handling that wasn't possible five years ago. However, it doesn't reliably deliver what truly matters in practice. This includes systematic generalization across formats and tools, grounded actions with clear steps, planning under strict constraints, and resilience to inputs that fall outside the pretraining data.
 
-A single model carries a single bias. It does well where the bias fits and badly where it doesn't, and the more complex the task, the more often that collision happens. The same four failure modes show up over and over.
+A single model carries a specific bias. It performs well where that bias is applicable and poorly where it isn't. The more complex the task, the more frequently these issues arise. The same four types of failures appear repeatedly.
 
-*Errors propagate.* A misreading early in the chain flows into the calculation that depends on it, and from there into the explanation that justifies the calculation.
+*Errors spread.* A mistake made early in the process affects the calculations that rely on it, which then influences the justification for that calculation.
 
-*Modality gaps are hidden.* Text-only pretraining teaches a model to talk about images, tables, and code without teaching it to operate on them at engineering fidelity. Multimodal training narrows the gap but rarely closes it across all three.
+*Modality gaps remain hidden.* Text-only pretraining allows a model to discuss images, tables, and code without actually learning to operate on them correctly. While multimodal training reduces this gap, it rarely closes it completely across all areas.
 
-*Planning lacks separation.* When the same system writes a plan, executes it, checks it, and approves it, no component is positioned to catch its own errors.
+*Planning lacks division.* When the same system creates a plan, executes it, verifies it, and approves it, no part of the system can identify its own mistakes.
 
-*Accountability is opaque.* When a one-box pipeline fails, you can't easily tell which capability failed, or why. Only that something did.
+*Accountability is unclear.* If a single pipeline fails, it is difficult to pinpoint which capability failed and why. You only know that something went wrong.
 
-Parameter scaling addresses these unevenly. They only really go away when the system is decomposed into specialized agents with explicit logic for combining their outputs.
+Parameter scaling only addresses these issues to an extent. These problems become manageable when the system is broken down into specialized agents that have clear logic for combining their outputs.
 
 ![Judge accuracy by debate protocol across five judges](/blog/from-monoliths-to-multitudes/01-debate-accuracy.png)
 
-*Khan et al., ICML 2024 [10]. Judge accuracy by protocol across five judges (GPT-3.5-Turbo through human). Across the judges tested, debate (and interactive debate) consistently match or beat single-consultant and naive baselines, with the largest gap appearing for the strongest judges. Hashed bars show what fully informed experts achieve; colored bars show judges working without the source text.*
+*Khan et al., ICML 2024 [10]. Judge accuracy based on protocol among five judges (GPT-3.5-Turbo through human). Across the judges evaluated, debate (and interactive debate) consistently matches or exceeds single-consultant and naive baselines. The largest difference appears with the strongest judges. Hashed bars represent what fully informed experts achieve, while colored bars represent judges working without the original text.*
 
 ---
 
@@ -51,35 +51,35 @@ Parameter scaling addresses these unevenly. They only really go away when the sy
 
 ![Two views, one decision](/blog/from-monoliths-to-multitudes/merge.gif)
 
-Diverse, complementary sources of evidence tend to produce larger and more reliable gains on hard tasks than parameter scaling does on its own. Three arguments make the point concrete.
+Diverse, complementary sources of evidence tend to yield larger and more reliable gains on difficult tasks than just scaling parameters. Three arguments support this idea.
 
-**The information argument.** The total knowable information about a target $Y$ from inputs $\{X_1,\dots,X_m\}$ decomposes as a chain of conditional terms:
+**The information argument.** The total knowable information about a target $Y$ from inputs $\{X_1,\dots,X_m\}$ decomposes into a series of conditional terms:
 
 $$I(Y; X_{1:m}) = \sum_{i=1}^{m} I(Y; X_i \mid X_{1:i-1})$$
 
-Each term measures what view $i$ adds beyond the views before it. Scaling a model on the same view $X_1$ chases diminishing returns inside one term. Adding an orthogonal view (a code executor, a retrieved citation, a depth sensor) opens a whole new term, and that's a term more parameters on $X_1$ can't reach no matter how many you add. Retrieval supplies facts the model never memorized, execution tools deliver exactness that language models can only approximate, and other modalities carry signals that language alone can't infer.
+Each term measures what view $i$ adds beyond the prior views. Scaling a model on the same view $X_1$ chases diminishing returns within one term. Adding an orthogonal view (like a code executor, a retrieved citation, or a depth sensor) opens a new term that a model focused solely on $X_1$ cannot access, no matter how many parameters are added. Retrieval provides facts the model has not memorized, execution tools offer precision that language models can only approximate, and other modalities convey signals that language alone cannot infer.
 
-**The error argument.** Take $k$ specialists with zero-mean errors and pairwise correlation $\rho$. A late-fusion average has expected squared error roughly
+**The error argument.** Consider $k$ specialists with zero-mean errors and pairwise correlation $\rho$. A late-fusion average has an expected squared error roughly given by:
 
 $$\text{MSE}_{\text{ensemble}} \approx \sigma^2\!\left(\rho + \frac{1-\rho}{k}\right) + \overline{\text{bias}}^{\,2}$$
 
-The variance term shrinks as $k$ grows, and faster as $\rho$ falls. In our ModalFidelity work [13] we tightened this to a standard exponential bound on classification error (the Bhattacharyya bound):
+The variance term decreases as $k$ increases, and it decreases faster as $\rho$ drops. In our ModalFidelity work [13], we refined this to an exponential bound on classification error (the Bhattacharyya bound):
 
 $$P_e < e^{-\frac{1}{2}(d-1)c}$$
 
-Error decays exponentially in the number of decorrelated specialists $d$. Decorrelation shrinks variance directly, and bias terms pointing in different directions cancel rather than compound. So a diverse panel ends up destroying the correlated component of error that scaling can't reach no matter how big the model gets.
+Error drops exponentially with the number of decorrelated specialists $d$. Decorrelation reduces variance directly, while bias terms that point in different directions cancel each other instead of adding up. So a diverse panel removes the correlated component of error that scaling cannot address, no matter how large the model becomes.
 
-**The geometry argument.** Real-world problems don't share one structure. Legal reasoning, robotic control, medical tabular data, and audio transcripts each have their own statistical character, and a single model has to learn one parameterization that compromises across all of them. Specialists don't have to compromise. Each one fits its region with fewer parameters and higher fidelity, and a fusion layer spends the global budget across structures rather than stretching one model thin across all of them.
+**The geometry argument.** Real-world problems do not share one structure. Legal reasoning, robotic control, medical tabular data, and audio transcripts each have distinct statistical characteristics. A single model must learn one parameterization that compromises across all of them. Specialists do not face this limitation. Each one fits its area with fewer parameters and improved precision. A fusion layer allocates the overall budget across structures instead of stretching one model too thin.
 
-Robustness follows the same pattern. A median or trimmed mean over agents resists outliers, Byzantine-robust aggregation caps the damage from any compromised contributor, and splitting planner from executor from judge prevents any one system from both making and certifying its own mistakes. A monolith is a single point of failure. An ensemble fails smaller and recovers faster.
+Robustness follows the same trend. A median or trimmed mean over agents resists outliers, and using Byzantine-robust aggregation limits the damage from any compromised contributor. Separating planner, executor, and judge prevents any single system from creating and certifying its own mistakes. A monolith is a single point of failure, while an ensemble fails less frequently and recovers more quickly.
 
-Not all diversity helps, of course. Two specialists that fail for the same reasons have only duplicated a failure mode rather than added one. Useful diversity is complementary across the things that matter: different modalities, different algorithmic priors (generative plus symbolic, neural plus constraint solver), different memory horizons, fast reactive agents working alongside slow reflective ones, even different training seeds when you can afford the duplication. A panel of capable, decorrelated specialists can match or outperform a single state-of-the-art monolith on complex, coordination-heavy work at the same parameter budget.
+Not all diversity is beneficial, of course. Two specialists that fail for the same reasons duplicate a failure mode rather than providing a new one. Useful diversity complements important factors: different modalities, varying algorithmic approaches (like generative versus symbolic, or neural versus constraint solver), different memory horizons, fast reactive agents working alongside slow reflective ones, and even different training seeds when duplication is feasible. A capable, decorrelated panel of specialists can match or exceed the performance of a single state-of-the-art model on complex, coordination-heavy tasks while staying within the same parameter budget.
 
-The implication for general intelligence is structural rather than incremental. Variety enlarges the information surface and reduces correlated error, while parameter scaling just concentrates more capacity behind a single bias. That's part of why later mixture-of-experts models already outperform earlier dense models several times their size.
+The implication for general intelligence is structural rather than incremental. Variety broadens the information surface and reduces correlated error, while parameter scaling simply concentrates more capacity behind a single bias. This is part of why later mixture-of-experts models already outperform earlier dense models that are several times their size.
 
 ![Multi-modality increases accuracy from 1D to 2D](/blog/from-monoliths-to-multitudes/02-modalfidelity-2d.png)
 
-*Baser et al., ModalFidelity, TMLR 2025 [13]. Same-size binary classifiers on the same data, evaluated unimodally (modality 1 only, modality 2 only) and bimodally. The 1D decision boundaries cannot separate the corrected class. The 2D boundary, formed by asking whether two views agree, recovers it. Cross-source consistency delivers better accuracy at lower cost than enlarging either source alone.*
+*Baser et al., ModalFidelity, TMLR 2025 [13]. Same-size binary classifiers on the same data, evaluated unimodally (using modality 1 only, modality 2 only) and bimodally. The 1D decision boundaries cannot separate the corrected class. The 2D boundary, formed by checking whether the two views agree, recovers it. Cross-source consistency achieves better accuracy at a lower cost than enlarging either source alone.*
 
 ---
 
