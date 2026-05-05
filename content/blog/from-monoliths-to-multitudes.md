@@ -17,7 +17,7 @@ There's a HumanEval result we often revisit. GPT-3.5, set up in a basic agentic 
 
 *Compiled by Andrew Ng, DeepLearning.AI, 2024 (drawing on AgentCoder, MetaGPT, LATS, Reflexion, and others). HumanEval coding benchmark shows zero-shot GPT-3.5 achieving 48 percent. Zero-shot GPT-4 hits 67 percent. When either model is placed in an agentic loop (involving reflection, tool use, planning, and multiple agents), the smaller model surpasses the larger one, while the larger model exceeds expert human performance.*
 
-We see this result as an indication of where the next few years might lead. If general intelligence is coming, the path likely doesn't involve enlarging a single model. It lies in networks of specialized models that can communicate, debate, and combine their knowledge. This has been our direction for some time. We progressed from monolithic models like GPT-3 to mixture-of-experts (with different sub-networks managing various inputs within a single model), and then to the tool-using assistants we see today. Each step has made the system's errors more independent from one another. The next step will take the agents completely outside any single model.
+That result fits a longer pattern. We progressed from monolithic models like GPT-3 to mixture-of-experts (with different sub-networks managing various inputs within a single model), and then to the tool-using assistants we see today. Each step has made the system's errors more independent from one another. The next step will take the agents completely outside any single model.
 
 ---
 
