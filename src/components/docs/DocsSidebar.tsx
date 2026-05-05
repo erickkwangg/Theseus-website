@@ -21,7 +21,8 @@ import {
   HelpCircle,
   Activity,
   Network,
-  ExternalLink
+  ExternalLink,
+  ShieldCheck,
 } from "lucide-react";
 
 const sections = [
@@ -65,6 +66,12 @@ const sections = [
       { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
       { href: "/docs/glossary", label: "Glossary", icon: List },
+    ],
+  },
+  {
+    title: "Proof of Agenthood",
+    items: [
+      { href: "/poa/docs", label: "Overview", icon: ShieldCheck },
     ],
   },
 ];

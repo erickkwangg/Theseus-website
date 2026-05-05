@@ -63,6 +63,31 @@ export default function DocsSidebar() {
             </ul>
           </div>
         ))}
+
+        <div
+          className="border-t pt-5"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <p className="poa-stamp mb-3">Underlying protocol</p>
+          <ul className="space-y-1">
+            <li>
+              <Link
+                href="/docs"
+                className="block py-1.5 font-serif text-[14.5px] leading-snug text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)]"
+              >
+                Theseus docs &rarr;
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/docs/agents"
+                className="block py-1.5 font-serif text-[14.5px] leading-snug text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)]"
+              >
+                Agents on Theseus
+              </Link>
+            </li>
+          </ul>
+        </div>
       </nav>
     </aside>
   );

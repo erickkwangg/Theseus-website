@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -14,15 +15,13 @@ export default function NotifyCTA() {
 
   return (
     <div id="build-notify" className="mt-8 flex flex-col items-start gap-5">
-      <span
-        aria-disabled="true"
-        className="cta-flat inline-flex cursor-not-allowed items-center gap-3 px-6 py-3 text-sm font-medium opacity-60"
+      <Link
+        href="/playground"
+        className="cta-flat inline-flex items-center gap-3 px-6 py-3 text-sm font-medium"
       >
         Open the Playground
-        <span className="rounded-sm bg-white/15 px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/90 dark:bg-black/15 dark:text-black/80">
-          Coming soon
-        </span>
-      </span>
+        <ArrowRight className="size-4" aria-hidden />
+      </Link>
 
       <form action={action} className="flex w-full max-w-md flex-col gap-2">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
@@ -57,7 +56,7 @@ export default function NotifyCTA() {
               : "text-slate-500 dark:text-slate-400",
           )}
         >
-          {state?.message ?? "Notify me when the Playground is live."}
+          {state?.message ?? "Get notified about new releases and examples."}
         </p>
       </form>
     </div>

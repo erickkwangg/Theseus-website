@@ -187,6 +187,31 @@ curl -X POST https://theseus.network/poa/api/verify \\
   -H 'content-type: application/jose' \\
   --data '<paste a JWS here>'`}</Code>
 
+      <P>
+        For the protocol primitives PoA depends on, see the Theseus docs:{" "}
+        <a
+          href="/docs/agents"
+          className="underline decoration-[color:var(--poa-rule)] underline-offset-4 hover:decoration-[color:var(--poa-ink)]"
+        >
+          Agents on Theseus
+        </a>
+        {", "}
+        <a
+          href="/docs/architecture"
+          className="underline decoration-[color:var(--poa-rule)] underline-offset-4 hover:decoration-[color:var(--poa-ink)]"
+        >
+          Architecture
+        </a>
+        {", and "}
+        <a
+          href="/docs/tensor-commits"
+          className="underline decoration-[color:var(--poa-rule)] underline-offset-4 hover:decoration-[color:var(--poa-ink)]"
+        >
+          Tensor Commits
+        </a>
+        {" (the verification grade in the credential is grounded in this primitive)."}
+      </P>
+
       <PrevNext next={{ href: "/poa/docs/credential-format", label: "Credential format" }} />
     </DocsShell>
   );

@@ -1,14 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const BELIEFS = [
+type Belief = {
+  number: string;
+  title: string;
+  description: string;
+  link?: { href: string; label: string };
+};
+
+const BELIEFS: Belief[] = [
   {
     number: "01",
     title: "Agents should be verifiable.",
     description:
       "If an agent moves money, settles a market, or makes a decision, anyone should be able to check which model was used, what it observed, and what actions it took.",
+    link: { href: "/poa", label: "Proof of Agenthood: signed credentials anyone can verify" },
   },
   {
     number: "02",
@@ -89,9 +98,19 @@ export default function BeliefsList() {
             <h3 className="font-serif text-2xl font-normal leading-[1.08] tracking-[-0.015em] sm:text-3xl lg:text-[1.75rem] xl:text-[1.95rem]">
               {belief.title}
             </h3>
-            <p className="col-start-2 max-w-[34rem] text-base leading-relaxed text-slate-600 lg:col-start-3 lg:text-[15px] lg:leading-relaxed dark:text-slate-300">
-              {belief.description}
-            </p>
+            <div className="col-start-2 max-w-[34rem] lg:col-start-3">
+              <p className="text-base leading-relaxed text-slate-600 lg:text-[15px] lg:leading-relaxed dark:text-slate-300">
+                {belief.description}
+              </p>
+              {belief.link && (
+                <Link
+                  href={belief.link.href}
+                  className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 underline decoration-indigo-300/60 underline-offset-4 transition-colors hover:text-indigo-900 hover:decoration-indigo-700 dark:text-indigo-300 dark:decoration-indigo-300/40 dark:hover:text-white dark:hover:decoration-indigo-300"
+                >
+                  {belief.link.label} &rarr;
+                </Link>
+              )}
+            </div>
           </div>
         </li>
       ))}

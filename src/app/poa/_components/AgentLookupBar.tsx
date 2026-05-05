@@ -32,11 +32,13 @@ export default function AgentLookupBar({
 
   // autoFocus on desktop only. On mobile (< 768px) auto-focusing the input
   // pops the soft keyboard immediately, hiding half the page on first paint.
+  // preventScroll keeps the hero in view; default focus() scrolls the input
+  // into view, blowing past the page title on /poa.
   useEffect(() => {
     if (!autoFocus) return;
     if (typeof window === "undefined") return;
     if (!window.matchMedia("(min-width: 768px)").matches) return;
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }, [autoFocus]);
 
   return (
