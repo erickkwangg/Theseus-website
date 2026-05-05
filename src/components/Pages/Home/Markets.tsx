@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { EXTERNAL_LINKS } from "@/config/links";
 import SectionHeader from "./SectionHeader";
 
 type Stage = "Civic" | "Managed" | "Sovereign";
@@ -164,14 +163,12 @@ export default function Markets() {
               Today, that means verifiable automation for treasuries, keepers, funds,
               and crypto-native markets. Over time, agents themselves can become trusted
               market participants.{" "}
-              <a
-                href={EXTERNAL_LINKS.substackTAM}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/blog/theseus-thesis-part-2"
                 className="text-indigo-700 underline underline-offset-4 transition-colors hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-200"
               >
                 A multi-trillion dollar market.
-              </a>
+              </Link>
             </p>
           </ScrollReveal>
         </div>

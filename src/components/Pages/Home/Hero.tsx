@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import LiveActivityLog from "./LiveActivityLog";
 import SectionHeader from "./SectionHeader";
-import { EXTERNAL_LINKS } from "@/config/links";
 
 const ROTATING_WORDS = ["Verified.", "Autonomous.", "Sovereign."];
 const TYPE_MS = 85;
@@ -89,14 +88,12 @@ export default function Hero() {
                 >
                   Launch on Theseus
                 </Link>
-                <a
-                  href={EXTERNAL_LINKS.substackEvolution}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/blog/theseus-thesis-part-1"
                   className="text-base font-medium text-slate-800 dark:text-slate-100 underline underline-offset-[6px] decoration-slate-400/70 hover:decoration-current dark:decoration-slate-500/70 transition-colors"
                 >
                   Read the thesis →
-                </a>
+                </Link>
               </div>
             </div>
 

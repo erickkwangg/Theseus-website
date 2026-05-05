@@ -11,7 +11,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { EXTERNAL_LINKS } from "@/config/links";
 import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -27,7 +26,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Agents", number: "02", href: "/#agents" },
   { label: "Build", number: "03", href: "/#build" },
   { label: "Markets", number: "04", href: "/#market" },
-  { label: "Blog", number: "05", href: EXTERNAL_LINKS.substack, external: true },
+  { label: "Blog", number: "05", href: "/blog" },
   { label: "Docs", number: "06", href: "/docs" },
 ];
 
