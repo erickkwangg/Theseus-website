@@ -1065,6 +1065,11 @@
 .prose-blog > * + * { margin-top: 1.75em; }
 
 .prose-blog p { margin: 0; }
+/* The element-selector specificity of `.prose-blog p` (0,1,1) beats
+   `.prose-blog > * + *` (0,1,0), so the universal sibling rule above
+   never reaches paragraphs. Add an explicit p+p rule with matching
+   specificity so adjacent paragraphs get the intended 1.75em gap. */
+.prose-blog > p + p { margin-top: 1.75em; }
 
 .prose-blog h2,
 .prose-blog h3,
@@ -1189,13 +1194,14 @@
 }
 .dark .prose-blog figcaption { color: #94a3b8; }
 
-/* Figure caption: paragraph immediately after a paragraph containing only an image.
-   Pulls the caption tight under the figure, separates it from prose with a
-   smaller, centered, muted style. */
+/* Figure caption: a *fully-italic* paragraph immediately after a paragraph
+   containing only an image. The `em:only-child` constraint prevents body
+   paragraphs after caption-less figures (or ones with inline-italics) from
+   being mis-styled as captions. */
 .prose-blog p:has(> img) {
   margin-bottom: 0.5em;
 }
-.prose-blog p:has(> img) + p {
+.prose-blog p:has(> img) + p:has(> em:only-child) {
   margin-top: 0;
   margin-bottom: 2.8em;
   padding-top: 0.4em;
@@ -1207,7 +1213,7 @@
   margin-left: auto;
   margin-right: auto;
 }
-.dark .prose-blog p:has(> img) + p {
+.dark .prose-blog p:has(> img) + p:has(> em:only-child) {
   color: #94a3b8;
 }
 
