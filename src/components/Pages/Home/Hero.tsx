@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import LiveActivityLog from "./LiveActivityLog";
 import SectionHeader from "./SectionHeader";
+import { TrackedLink } from "@/components/Track";
 
 const ROTATING_WORDS = ["Verified.", "Autonomous.", "Sovereign."];
 const TYPE_MS = 85;
@@ -78,22 +78,26 @@ export default function Hero() {
               </h1>
 
               <p className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-                An open runtime where agents hold their own keys, balance, and state.
+                Theseus is an open network where AI agents hold their own keys, balance, and state — and prove every action they take.
               </p>
 
               <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-6 gap-y-5 sm:gap-x-10">
-                <Link
+                <TrackedLink
                   href="/launch"
+                  event="cta_click"
+                  properties={{ location: "hero", target: "launch" }}
                   className="primary-cta inline-flex items-center rounded-md px-8 py-4 text-base font-medium tracking-wide"
                 >
                   Launch on Theseus
-                </Link>
-                <Link
+                </TrackedLink>
+                <TrackedLink
                   href="/blog/theseus-thesis-part-1"
+                  event="cta_click"
+                  properties={{ location: "hero", target: "thesis" }}
                   className="text-base font-medium text-slate-800 dark:text-slate-100 underline underline-offset-[6px] decoration-slate-400/70 hover:decoration-current dark:decoration-slate-500/70 transition-colors"
                 >
                   Read the thesis →
-                </Link>
+                </TrackedLink>
               </div>
             </div>
 

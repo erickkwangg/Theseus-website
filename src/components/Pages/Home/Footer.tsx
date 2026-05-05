@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/logo.svg";
+import { TrackedLink } from "@/components/Track";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 const FOOTER_LINK_CLASS =
@@ -21,16 +22,24 @@ export default function Footer() {
               </h2>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/launch">
+                <TrackedLink
+                  href="/launch"
+                  event="cta_click"
+                  properties={{ location: "footer", target: "launch" }}
+                >
                   <Button className="rounded-md primary-cta px-6 py-2 text-sm w-full sm:w-auto">
                     Launch on Theseus
                   </Button>
-                </Link>
-                <Link href="/docs">
+                </TrackedLink>
+                <TrackedLink
+                  href="/docs"
+                  event="cta_click"
+                  properties={{ location: "footer", target: "docs" }}
+                >
                   <Button className="rounded-md ghost-cta px-6 py-2 text-sm w-full sm:w-auto">
                     Developer Docs
                   </Button>
-                </Link>
+                </TrackedLink>
               </div>
             </div>
 
@@ -71,14 +80,15 @@ export default function Footer() {
                 <Link href="/blog" className={FOOTER_LINK_CLASS}>
                   Blog
                 </Link>
-                <a
+                <TrackedLink
                   href={EXTERNAL_LINKS.whitepaper}
+                  external
+                  event="outbound_click"
+                  properties={{ location: "footer", target: "whitepaper" }}
                   className={FOOTER_LINK_CLASS}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Whitepaper
-                </a>
+                </TrackedLink>
               </nav>
 
               <p className="text-slate-500 dark:text-slate-400 text-xs">
