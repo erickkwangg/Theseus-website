@@ -68,14 +68,9 @@ export default function Footer() {
                 <Link href="/launch" className={FOOTER_LINK_CLASS}>
                   Launch
                 </Link>
-                <a
-                  href={EXTERNAL_LINKS.substack}
-                  className={FOOTER_LINK_CLASS}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="/blog" className={FOOTER_LINK_CLASS}>
                   Blog
-                </a>
+                </Link>
                 <a
                   href={EXTERNAL_LINKS.whitepaper}
                   className={FOOTER_LINK_CLASS}

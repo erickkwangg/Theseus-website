@@ -283,16 +283,14 @@ export default function DocsHomePage() {
             <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors">Glossary</span>
             <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
-          <a 
-            href={EXTERNAL_LINKS.substack}
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link
+            href="/blog"
             className="flex items-center gap-3 p-4 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100/80 dark:bg-gray-900/50 transition-all group"
           >
             <FileText className="h-5 w-5 text-gray-500 group-hover:text-white transition-colors" />
             <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors">Blog</span>
-            <ExternalLink className="h-3 w-3 text-gray-600 ml-auto" />
-          </a>
+            <ArrowRight className="h-3 w-3 text-gray-600 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Link>
         </div>
       </div>
     </div>

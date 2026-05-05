@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap, Users, Bot, BarChart3 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
-import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -38,14 +37,12 @@ export default function DesignSpacePage() {
           <p className="mb-4">
             This page provides an overview. For complete technical details and market dynamics, read the original article.
           </p>
-          <a 
-            href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/blog/agents-evolution-of-smart-contracts"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             Read Full Article <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </Callout>
 
         {/* Evolution Section */}
@@ -229,14 +226,12 @@ export default function DesignSpacePage() {
             <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
               Read the complete article with detailed examples, technical deep dives, and the full vision.
             </p>
-            <a 
-              href="https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/blog/agents-evolution-of-smart-contracts"
               className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
             >
               Read: Agents as an Evolution of Smart Contracts <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -247,17 +242,12 @@ export default function DesignSpacePage() {
                 <h4 className="font-medium group-hover:text-indigo-300 transition-colors">← Technical Comparison</h4>
               </div>
             </Link>
-            <a 
-              href="https://theseuschain.substack.com/p/the-theseus-thesis-part-2-tam-of"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group no-underline"
-            >
+            <Link href="/blog/theseus-thesis-part-2" className="group no-underline">
               <div className="docs-card h-full text-right">
                 <p className="text-sm text-gray-500 mb-1">Related</p>
                 <h4 className="font-medium group-hover:text-indigo-300 transition-colors">Theseus Thesis: TAM →</h4>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

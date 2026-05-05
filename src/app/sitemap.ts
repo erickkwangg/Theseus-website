@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { credentialStore } from "@/lib/poa/store";
+import { listPosts } from "@/lib/blog";
 
 const BASE_URL = "https://theseus.network";
 
-const LAST_MODIFIED = "2026-05-02";
+const LAST_MODIFIED = "2026-05-04";
 
 type Route = {
   path: string;
@@ -37,6 +38,13 @@ const ROUTES: Route[] = [
   { path: "/poa/verify", priority: 0.8, changeFrequency: "weekly" },
   { path: "/poa/claim", priority: 0.7, changeFrequency: "weekly" },
   { path: "/poa/agents", priority: 0.8, changeFrequency: "daily" },
+  { path: "/poa/docs", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/poa/docs/credential-format", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/poa/docs/issuing", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/poa/docs/verifying", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/poa/docs/revocation", priority: 0.7, changeFrequency: "monthly" },
+  // Blog
+  { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -65,5 +73,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Store offline: skip dynamic entries this generation.
   }
 
-  return [...staticEntries, ...dynamicEntries];
+  // Per-post blog entries.
+  const blogEntries: MetadataRoute.Sitemap = listPosts().map((p) => ({
+    url: `${BASE_URL}/blog/${p.slug}`,
+    lastModified: p.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...dynamicEntries, ...blogEntries];
 }

@@ -49,10 +49,25 @@ A signed credential layer for Theseus agents. Anyone can verify; operators sign 
 - Public JWKS: ${SITE_URL}/poa/.well-known/jwks.json (Ed25519, EdDSA). Verifies any credential offline with a JOSE-compatible library.
 - Per-credential pages: ${SITE_URL}/poa/<agentId> renders the artifact and links to the JWS, the JWKS, the embed snippet, and the operator revoke flow.
 
+### PoA developer docs
+
+- [PoA docs overview](${SITE_URL}/poa/docs): Why every PoA agent must live on Theseus, the two attestation kinds (controller-attested vs snapshot), and the credential lifecycle.
+- [Credential format](${SITE_URL}/poa/docs/credential-format): JWS shape, protected header, signed PoACredentialClaims, embedded AgentSnapshot, attestation tagged union, verification grade.
+- [Issuing](${SITE_URL}/poa/docs/issuing): End-to-end mint flow. Challenge nonce, controller signature in browser wallet, POST /poa/api/issue, failure modes.
+- [Verifying](${SITE_URL}/poa/docs/verifying): Interactive and programmatic verification. The three independent checks (signature, revocation list, chain freshness). Offline verification recipe.
+- [Revocation](${SITE_URL}/poa/docs/revocation): Operator-initiated revoke flow, automatic auto-revocation triggers (abg-changed, controller-rotated, agent-deregistered, balance-zero-90d, sovereignty-flipped), public revocation list at /poa/api/revoked.
+
+## Blog
+
+- [Blog index](${SITE_URL}/blog): Theseus essays. Thesis, architecture, progress notes from the team.
+- [The Theseus Thesis Part 1](${SITE_URL}/blog/theseus-thesis-part-1): A first-principles exploration of Theseus. Why AI agents need a substrate with sovereignty, statefulness, and verifiability.
+- [The Theseus Thesis Part 2: TAM and AI Personhood](${SITE_URL}/blog/theseus-thesis-part-2): Why we are so bullish on Theseus. Annual GDP per AI person as the anchor for Theseus's TAM, compared to Bitcoin and Ethereum value accrual.
+- [Agents as an Evolution of Smart Contracts](${SITE_URL}/blog/agents-evolution-of-smart-contracts): Why Theseus is what Ethereum was meant to be. Bitcoin → Ethereum → Theseus as the lineage of "what kind of decision can be verified on-chain."
+
 ## External
 
 - Whitepaper: https://docsend.com/view/p9fw7vh3ygrrnwgg
-- Blog: https://theseuschain.substack.com
+- Substack mirror: https://theseuschain.substack.com (canonical posts now at ${SITE_URL}/blog)
 - GitHub: https://github.com/Theseuschain/theseuschain
 `;
 

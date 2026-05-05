@@ -44,16 +44,14 @@ export default function AgenticSmartContractsPage() {
         <Callout type="info" title="Source article">
           <p className="mb-4">
             This page summarizes the argument from the original essay. For the full piece with
-            historical context and market sizing, read it on Substack.
+            historical context and market sizing, read it on the blog.
           </p>
-          <a
-            href={EXTERNAL_LINKS.substackAgenticContracts}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/blog/agents-evolution-of-smart-contracts"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             Read Full Article <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </Callout>
 
         {/* Historical Lineage */}

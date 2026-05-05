@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowRight, GitCompare, Lightbulb, TrendingUp } from "lucide-react";
 import Callout from "@/components/docs/Callout";
-import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
@@ -271,14 +270,12 @@ export default function ComparisonPage() {
                 Full design space
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href={EXTERNAL_LINKS.substackEvolution}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/blog/theseus-thesis-part-1"
                 className="inline-flex items-center gap-2 bg-transparent border border-green-600 text-green-400 hover:bg-green-600 hover:text-slate-900 dark:hover:text-white px-5 py-2 rounded-lg transition-all text-sm no-underline"
               >
                 Read the Theseus thesis
-              </a>
+              </Link>
             </div>
           </div>
         </section>
