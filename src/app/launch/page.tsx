@@ -68,7 +68,7 @@ export default function LaunchPage() {
             Launch on <span className="hero-title-gradient">Theseus</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
-            Build agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
+            Build agents that own assets, run inference verifiably, and persist on an open network.
             Preview access is open by request.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
