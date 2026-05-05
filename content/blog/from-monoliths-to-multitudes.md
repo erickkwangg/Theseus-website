@@ -15,7 +15,7 @@ There's a HumanEval result we often revisit. GPT-3.5, set up in a basic agentic 
 
 ![HumanEval coding benchmark: zero-shot vs. agentic GPT-3.5 and GPT-4](/blog/from-monoliths-to-multitudes/05-humaneval-agentic.png)
 
-*Compiled by Andrew Ng, DeepLearning.AI, 2024 (drawing on AgentCoder, MetaGPT, LATS, Reflexion, and others). HumanEval coding benchmark shows zero-shot GPT-3.5 achieving 48 percent. Zero-shot GPT-4 hits 67 percent. When either model is placed in an agentic loop (involving reflection, tool use, planning, and multiple agents), the smaller model surpasses the larger one, while the larger model exceeds expert human performance.*
+*Compiled by Andrew Ng, DeepLearning.AI, 2024 [14] (drawing on AgentCoder, MetaGPT, LATS, Reflexion, and others). HumanEval coding benchmark shows zero-shot GPT-3.5 achieving 48 percent. Zero-shot GPT-4 hits 67 percent. When either model is placed in an agentic loop (involving reflection, tool use, planning, and multiple agents), the smaller model surpasses the larger one, while the larger model exceeds expert human performance.*
 
 That result fits a longer pattern. We progressed from monolithic models like GPT-3 to mixture-of-experts (with different sub-networks managing various inputs within a single model), and then to the tool-using assistants we see today. Each step has made the system's errors more independent from one another. The next step will take the agents completely outside any single model.
 
@@ -91,9 +91,9 @@ Variety alone isn't enough. Once you have multiple specialists, the design chall
 
 **Mid-level fusion (feature).** Each specialist normalizes its domain into a compact embedding, and cross-attention or gated mixing layers manage the combination. This is the practical default for most real systems. Specialization is maintained, context is introduced where necessary, and experts can be retrained independently.
 
-**Late fusion (decision).** Agents can vote, average, stack, or rely on a learned arbiter. The output is easy to debug and clear across trust boundaries, making it the right choice when components come from different teams or organizations. Byzantine-robust aggregation methods, like Krum and others developed in Guerraoui et al.'s *Robust Machine Learning*, limit the impact of any single bad actor in a way that no single decoder can manage.
+**Late fusion (decision).** Agents can vote, average, stack, or rely on a learned arbiter. The output is easy to debug and clear across trust boundaries, making it the right choice when components come from different teams or organizations. Byzantine-robust aggregation methods, like Krum and others developed in Guerraoui et al.'s *Robust Machine Learning* [5], limit the impact of any single bad actor in a way that no single decoder can manage.
 
-**Deliberative fusion (oversight and critique).** Outputs go through a structured exchange: propose, critique, revise, adjudicate. This is where most of the alignment work happens because optimizing the wrong proxy often leads to poor behavior. The reward-hacking and specification-gaming patterns that Christian describes in *The Alignment Problem* are one set of examples, while the broader cobra-effect dynamics that Narayanan and Kapoor mention in *AI Snake Oil* provide another. Deliberation often uncovers mis-specifications early, as the proposer and the certifier are not the same component.
+**Deliberative fusion (oversight and critique).** Outputs go through a structured exchange: propose, critique, revise, adjudicate. This is where most of the alignment work happens because optimizing the wrong proxy often leads to poor behavior. The reward-hacking and specification-gaming patterns that Christian describes in *The Alignment Problem* [1] are one set of examples, while the broader cobra-effect dynamics that Narayanan and Kapoor mention in *AI Snake Oil* [3] provide another. Deliberation often uncovers mis-specifications early, as the proposer and the certifier are not the same component.
 
 Consider a fixed total parameter budget split in two ways: one large model versus several specialists combining to the same budget with a small fusion head. If we assume reasonable conditions (varying inputs, subtasks that are mostly independent, and uncorrelated specialist errors), the staged mid-to-late fusion approach reduces total risk on two fronts. Each specialist maintains low bias on its own area, and the spread of their combined errors stays small because the errors aren't correlated across areas. Robust decision rules can then limit the worst-case impact of any single agent, something a single system on the same budget cannot do when one of its subtask distributions changes.
 
@@ -103,17 +103,17 @@ That signal's trustworthiness, of course, depends on the reality of the disagree
 
 ![mAP and GFLOPs versus fusion layer position](/blog/from-monoliths-to-multitudes/03-attention-bottlenecks.png)
 
-*Nagrani et al., NeurIPS 2021. Attention Bottlenecks for Multimodal Fusion. Attention bottlenecks hold compute roughly flat across fusion depths while matching or exceeding standard cross-attention. This only becomes competitive at higher compute and later fusion points. A few "messenger" tokens sharing high-level information between streams maintain high accuracy while keeping compute nearly flat.*
+*Nagrani et al., NeurIPS 2021 [11]. Attention Bottlenecks for Multimodal Fusion. Attention bottlenecks hold compute roughly flat across fusion depths while matching or exceeding standard cross-attention. This only becomes competitive at higher compute and later fusion points. A few "messenger" tokens sharing high-level information between streams maintain high accuracy while keeping compute nearly flat.*
 
 ![Scaling laws for early, late, and MoE fusion](/blog/from-monoliths-to-multitudes/04-apple-scaling-laws.png)
 
-*Shukor et al., ICCV 2025. Apple's scaling laws for native multimodal models. With the same training budget, all designs improve at similar rates but require different allocations. Early fusion performs comparably to late fusion at smaller model sizes if given more data. Late fusion prefers larger models. Sparse mixture-of-experts has the most favorable scaling exponent in this context, favoring smaller models trained on more data.*
+*Shukor et al., ICCV 2025 [12]. Apple's scaling laws for native multimodal models. With the same training budget, all designs improve at similar rates but require different allocations. Early fusion performs comparably to late fusion at smaller model sizes if given more data. Late fusion prefers larger models. Sparse mixture-of-experts has the most favorable scaling exponent in this context, favoring smaller models trained on more data.*
 
 ---
 
 ## IV. Why a Multi-Agent System Needs a New Substrate
 
-A multi-agent system at scale needs more than skilled components. It needs infrastructure for discoverability, accountability, bounded action, and provenance. Mollick makes a similar argument for human-AI teams in *Co-Intelligence*: capability arises from how collaboration is structured, not just from model size. The same principle applies within the model layer.
+A multi-agent system at scale needs more than skilled components. It needs infrastructure for discoverability, accountability, bounded action, and provenance. Mollick makes a similar argument for human-AI teams in *Co-Intelligence* [2]: capability arises from how collaboration is structured, not just from model size. The same principle applies within the model layer.
 
 Centralized pipelines can replicate some of these features, but they do not easily provide the variance, incentives, and audit guarantees that a coordinated system requires. Four structural issues illustrate this point concretely, and each one implies a property the substrate must provide.
 
