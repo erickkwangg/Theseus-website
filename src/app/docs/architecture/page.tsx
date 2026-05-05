@@ -9,6 +9,7 @@ import PageHero from "@/components/docs/PageHero";
 import { ArchitectureIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Architecture",
@@ -327,6 +328,7 @@ body { Transaction[] }`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <DocsFooter slug="architecture" />
       <PrevNext current="architecture" />
 
     </div>

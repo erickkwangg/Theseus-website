@@ -7,6 +7,7 @@ import PageHero from "@/components/docs/PageHero";
 import { AivmIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "AIVM",
@@ -227,6 +228,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <DocsFooter slug="aivm" />
       <PrevNext current="aivm" />
 
     </div>

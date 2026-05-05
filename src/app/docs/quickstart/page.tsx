@@ -6,6 +6,7 @@ import CodeBlock from "@/components/docs/CodeBlock";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd, HowToJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Quick Start",
@@ -288,6 +289,7 @@ make test-ship`}</CodeBlock>
           </p>
         </div>
       </div>
+      <DocsFooter slug="quickstart" />
       <PrevNext current="quickstart" />
 
     </div>

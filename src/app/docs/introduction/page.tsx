@@ -5,6 +5,7 @@ import Callout from "@/components/docs/Callout";
 import AgentSpectrum from "@/components/docs/AgentSpectrum";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -241,6 +242,7 @@ export default function IntroductionPage() {
           </div>
         </section>
       </div>
+      <DocsFooter slug="introduction" />
       <PrevNext current="introduction" />
 
     </div>

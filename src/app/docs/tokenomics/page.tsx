@@ -5,6 +5,7 @@ import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Tokenomics",
@@ -294,6 +295,7 @@ Total:
           </Link>
         </div>
       </div>
+      <DocsFooter slug="tokenomics" />
       <PrevNext current="tokenomics" />
 
     </div>

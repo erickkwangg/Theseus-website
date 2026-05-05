@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { BookOpen, ArrowRight } from "lucide-react";
 import { DocsPageJsonLd, DefinedTermSetJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 const glossaryTerms = [
   {
@@ -172,6 +173,7 @@ export default function GlossaryPage() {
           </Link>
         </div>
       </div>
+      <DocsFooter slug="glossary" />
       <PrevNext current="glossary" />
 
     </div>

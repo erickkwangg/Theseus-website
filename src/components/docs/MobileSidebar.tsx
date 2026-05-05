@@ -3,76 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { track } from "@vercel/analytics";
+import { Menu, X, ExternalLink, Rocket } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/config/links";
-import {
-  Rocket,
-  BookOpen,
-  Zap,
-  Cpu,
-  GitBranch,
-  Bot,
-  Layers,
-  Code2,
-  Puzzle,
-  GitCompare,
-  Lightbulb,
-  Coins,
-  List,
-  Sparkles,
-  HelpCircle,
-  Activity,
-  Network
-} from "lucide-react";
-
-const sections = [
-  {
-    title: "Start Here",
-    items: [
-      { href: "/docs", label: "Overview", icon: BookOpen },
-      { href: "/docs/introduction", label: "Introduction", icon: Rocket },
-      { href: "/docs/faq", label: "FAQ", icon: HelpCircle },
-    ],
-  },
-  {
-    title: "Why Theseus",
-    items: [
-      { href: "/docs/comparison", label: "Theseus vs Ethereum", icon: GitCompare },
-      { href: "/docs/agentic-smart-contracts", label: "Agentic Smart Contracts", icon: Sparkles },
-      { href: "/docs/vs-ai-infra", label: "vs AI Infra Peers", icon: Network },
-      { href: "/docs/design-space", label: "Design Space", icon: Lightbulb },
-    ],
-  },
-  {
-    title: "Core Concepts",
-    items: [
-      { href: "/docs/aivm", label: "AIVM", icon: Cpu },
-      { href: "/docs/tensor-commits", label: "Tensor Commits", icon: GitBranch },
-      { href: "/docs/agents", label: "Agents", icon: Bot },
-      { href: "/docs/architecture", label: "Architecture", icon: Layers },
-    ],
-  },
-  {
-    title: "Build",
-    items: [
-      { href: "/docs/ship", label: "SHIP Language", icon: Code2 },
-      { href: "/docs/examples", label: "Examples", icon: Puzzle },
-      { href: "/docs/quickstart", label: "Quick Start", icon: Zap },
-    ],
-  },
-  {
-    title: "Network",
-    items: [
-      { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
-      { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
-      { href: "/docs/glossary", label: "Glossary", icon: List },
-    ],
-  },
-];
+import { DOCS_SECTIONS } from "./sections";
 
 export default function MobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+
+  const handleNav = (target: string) => {
+    setIsOpen(false);
+    try {
+      track("docs_nav_click", { from: pathname, to: target, surface: "mobile_sidebar" });
+    } catch {}
+  };
 
   return (
     <>
@@ -110,7 +55,7 @@ export default function MobileSidebar() {
         </div>
 
         <nav className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-80px)]">
-          {sections.map((section) => (
+          {DOCS_SECTIONS.map((section) => (
             <div key={section.title}>
               <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 px-3">
                 {section.title}
@@ -123,7 +68,7 @@ export default function MobileSidebar() {
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => handleNav(item.href)}
                         className={`flex items-center gap-2.5 py-2 px-3 text-sm rounded-lg transition-all ${
                           isActive
                             ? "bg-indigo-500/10 text-indigo-700 dark:bg-indigo-500/15 dark:text-indigo-300 font-medium"
@@ -144,7 +89,7 @@ export default function MobileSidebar() {
             <div className="space-y-0.5">
               <Link
                 href="/launch"
-                onClick={() => setIsOpen(false)}
+                onClick={() => handleNav("/launch")}
                 className="flex items-center gap-2.5 py-2 px-3 text-sm text-indigo-700 hover:text-indigo-900 hover:bg-indigo-500/10 dark:text-indigo-300 dark:hover:text-white dark:hover:bg-indigo-500/15 rounded-lg transition-all"
               >
                 <Rocket className="h-4 w-4" />
@@ -154,6 +99,7 @@ export default function MobileSidebar() {
                 href={EXTERNAL_LINKS.whitepaper}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleNav(EXTERNAL_LINKS.whitepaper)}
                 className="flex items-center gap-2.5 py-2 px-3 text-sm text-slate-700 hover:text-indigo-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-indigo-300 dark:hover:bg-slate-900/60 rounded-lg transition-all"
               >
                 <ExternalLink className="h-4 w-4 text-slate-400 dark:text-slate-500" />
@@ -166,7 +112,3 @@ export default function MobileSidebar() {
     </>
   );
 }
-
-
-
-

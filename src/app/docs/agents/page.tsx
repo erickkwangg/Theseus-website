@@ -7,6 +7,7 @@ import PageHero from "@/components/docs/PageHero";
 import { AgentsIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Agents",
@@ -357,6 +358,7 @@ export default function AgentsPage() {
           </Link>
         </div>
       </div>
+      <DocsFooter slug="agents" />
       <PrevNext current="agents" />
 
     </div>

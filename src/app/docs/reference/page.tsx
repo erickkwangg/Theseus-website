@@ -3,6 +3,7 @@ import { BookOpen } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Reference",
@@ -364,6 +365,8 @@ export default function ReferencePage() {
           </div>
         </section>
       </div>
+
+      <DocsFooter slug="reference" />
 
       <PrevNext current="reference" />
     </div>

@@ -1033,6 +1033,28 @@
   }
 }
 
+/* Shiki dual-theme: emit both light and dark color variables, swap on .dark root */
+.shiki-block .shiki,
+.shiki-block .shiki span {
+  background-color: var(--shiki-light-bg) !important;
+  color: var(--shiki-light) !important;
+}
+.dark .shiki-block .shiki,
+.dark .shiki-block .shiki span {
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
+}
+.shiki-block pre.shiki {
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+}
+.shiki-block code {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
 .prose-blog {
   color: #334155;
   font-size: 17px;

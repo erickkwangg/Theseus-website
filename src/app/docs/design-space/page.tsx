@@ -3,6 +3,7 @@ import { ArrowRight, Lightbulb, TrendingUp, Sparkles, Zap } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Design Space",
@@ -171,6 +172,7 @@ export default function DesignSpacePage() {
         </section>
 
       </div>
+      <DocsFooter slug="design-space" />
       <PrevNext current="design-space" />
 
     </div>

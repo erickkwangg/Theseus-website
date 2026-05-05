@@ -5,6 +5,7 @@ import CodeBlock from "@/components/docs/CodeBlock";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Examples",
@@ -228,6 +229,7 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
           </Link>
         </div>
       </div>
+      <DocsFooter slug="examples" />
       <PrevNext current="examples" />
 
     </div>

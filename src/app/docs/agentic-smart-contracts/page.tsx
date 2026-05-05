@@ -5,6 +5,7 @@ import Callout from "@/components/docs/Callout";
 import { EXTERNAL_LINKS } from "@/config/links";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Agentic Smart Contracts",
@@ -369,6 +370,7 @@ export default function AgenticSmartContractsPage() {
           </Link>
         </div>
       </div>
+      <DocsFooter slug="agentic-smart-contracts" />
       <PrevNext current="agentic-smart-contracts" />
 
     </div>

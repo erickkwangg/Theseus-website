@@ -9,6 +9,7 @@ import PageHero from "@/components/docs/PageHero";
 import { TensorCommitsIllustration } from "@/components/docs/HeroIllustrations";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 import { EXTERNAL_LINKS } from "@/config/links";
 
 export const metadata: Metadata = {
@@ -318,6 +319,7 @@ export default function TensorCommitsPage() {
           </Link>
         </div>
       </div>
+      <DocsFooter slug="tensor-commits" />
       <PrevNext current="tensor-commits" />
 
     </div>

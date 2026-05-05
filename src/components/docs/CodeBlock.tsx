@@ -1,7 +1,5 @@
-"use client";
-
-import { useState, useRef, useEffect } from "react";
-import { Copy, Check } from "lucide-react";
+import { codeToHtml } from "shiki";
+import CopyButton from "./CopyButton";
 
 interface CodeBlockProps {
   code?: string;
@@ -10,47 +8,77 @@ interface CodeBlockProps {
   filename?: string;
 }
 
-export default function CodeBlock({ code, children, language, filename }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+const SAFE_LANGS = new Set<string>([
+  "bash",
+  "shell",
+  "sh",
+  "zsh",
+  "json",
+  "jsonc",
+  "yaml",
+  "toml",
+  "rust",
+  "go",
+  "python",
+  "typescript",
+  "tsx",
+  "javascript",
+  "jsx",
+  "html",
+  "css",
+  "diff",
+  "sql",
+  "md",
+  "markdown",
+]);
 
-  useEffect(() => {
-    const currentTimeout = timeoutRef.current;
-    return () => {
-      if (currentTimeout) clearTimeout(currentTimeout);
-    };
-  }, []);
+function resolveLang(lang?: string): string {
+  if (!lang) return "plaintext";
+  const normalized = lang.toLowerCase();
+  if (normalized === "text" || normalized === "txt" || normalized === "plain") {
+    return "plaintext";
+  }
+  return SAFE_LANGS.has(normalized) ? normalized : "plaintext";
+}
 
-  const displayCode = code || children || "";
+export default async function CodeBlock({
+  code,
+  children,
+  language,
+  filename,
+}: CodeBlockProps) {
+  const display = (code ?? children ?? "").toString();
+  const lang = resolveLang(language);
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(displayCode);
-    setCopied(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setCopied(false), 2000);
-  };
+  let html: string;
+  try {
+    html = await codeToHtml(display, {
+      lang,
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+    });
+  } catch {
+    html = await codeToHtml(display, {
+      lang: "plaintext",
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+    });
+  }
 
   return (
-    <div className="relative group">
-      <div className="bg-[#0d1117] border border-gray-800 rounded-lg overflow-hidden">
+    <div className="relative group my-6">
+      <div className="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#0d1117]">
         {(filename || language) && (
-          <div className="px-4 py-2 bg-gray-900/50 border-b border-gray-800 text-xs text-gray-500 font-mono">
+          <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-700/60 text-xs text-slate-500 dark:text-slate-400 font-mono">
             {filename || language}
           </div>
         )}
-        <pre className="p-4 font-mono text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap">{displayCode}</pre>
+        <div
+          className="shiki-block px-4 py-3 text-sm overflow-x-auto"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-2 p-2 bg-gray-800/80 hover:bg-gray-700 rounded-md opacity-0 group-hover:opacity-100 transition-all"
-        title="Copy to clipboard"
-      >
-        {copied ? (
-          <Check className="w-4 h-4 text-green-400" />
-        ) : (
-          <Copy className="w-4 h-4 text-gray-400" />
-        )}
-      </button>
+      <CopyButton code={display} />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import CodeBlock from "@/components/docs/CodeBlock";
 import FlowDiagram from "@/components/docs/FlowDiagram";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "SHIP Language",
@@ -315,6 +316,7 @@ node call_contract() {
           </Link>
         </div>
       </div>
+      <DocsFooter slug="ship" />
       <PrevNext current="ship" />
 
     </div>

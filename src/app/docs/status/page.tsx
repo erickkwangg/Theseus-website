@@ -4,6 +4,7 @@ import { Activity, ArrowRight, Circle, CheckCircle2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
+import DocsFooter from "@/components/docs/DocsFooter";
 
 export const metadata: Metadata = {
   title: "Status & Roadmap",
@@ -362,6 +363,7 @@ export default function StatusPage() {
           </Link>
         </section>
       </div>
+      <DocsFooter slug="status" />
       <PrevNext current="status" />
     </div>
   );
