@@ -1,7 +1,7 @@
 ---
 title: "From Monoliths to Multitudes: Why Agent Swarms Beat Giant Models on the Road to AGI"
 date: "2026-05-04"
-excerpt: "If general intelligence is coming, you probably don't get there by making one model bigger. You get there by building networks of specialized models that talk to each other, argue, and pool what they each know how to do."
+excerpt: "If general intelligence is on the horizon, simply making one model larger won't get us there. We need to create networks of specialized models that can communicate, debate, and share their knowledge."
 heroImage: "/blog/from-monoliths-to-multitudes/evolution_of_fusion.gif"
 ---
 
@@ -9,13 +9,15 @@ heroImage: "/blog/from-monoliths-to-multitudes/evolution_of_fusion.gif"
 
 ---
 
-There's a HumanEval result we keep coming back to. GPT-3.5 wrapped in a basic agentic loop (calling tools, criticizing its own work, bouncing ideas off other copies of itself) scores higher than GPT-4 used on its own. The same setup around GPT-4 lands roughly where an experienced human programmer would. GPT-4 has about ten times the parameters of GPT-3.5, and on this benchmark that mostly didn't matter.
+If general intelligence is on the horizon, simply making one model larger won't get us there. We need to create networks of specialized models that can communicate, debate, and share their knowledge.
+
+There's a HumanEval result we often revisit. GPT-3.5, set up in a basic agentic loop that involves calling tools, critiquing its own work, and exchanging ideas with other versions of itself, scores higher than GPT-4 when used alone. In a similar setup, GPT-4 scores about the same as an experienced human programmer. GPT-4 has around ten times the parameters of GPT-3.5, but this mostly does not impact the benchmark results.
 
 ![HumanEval coding benchmark: zero-shot vs. agentic GPT-3.5 and GPT-4](/blog/from-monoliths-to-multitudes/05-humaneval-agentic.png)
 
-*Compiled by Andrew Ng, DeepLearning.AI, 2024 [14] (drawing on AgentCoder, MetaGPT, LATS, Reflexion, and others). HumanEval coding benchmark. Zero-shot GPT-3.5 hits 48 percent. Zero-shot GPT-4 hits 67 percent. Wrap either in an agentic loop (reflection, tool use, planning, multi-agent) and the smaller model crosses the larger one; the larger model crosses expert-human performance.*
+*Compiled by Andrew Ng, DeepLearning.AI, 2024 (drawing on AgentCoder, MetaGPT, LATS, Reflexion, and others). HumanEval coding benchmark shows zero-shot GPT-3.5 achieving 48 percent. Zero-shot GPT-4 hits 67 percent. When either model is placed in an agentic loop (involving reflection, tool use, planning, and multiple agents), the smaller model surpasses the larger one, while the larger model exceeds expert human performance.*
 
-We think that result is a glimpse of where the next several years go. If general intelligence is coming at all, the path probably doesn't run through making one model bigger. It runs through networks of specialized models that talk to each other, argue, and pool what they each know how to do. That's been the direction of travel for a while now. We went from monolithic models like GPT-3 to mixture-of-experts (different sub-networks handling different inputs inside one model), and then from MoE to the tool-using assistants people use today. Each of those moves made the system's mistakes more independent of one another. The next one takes the agents fully outside any single model.
+We see this result as an indication of where the next few years might lead. If general intelligence is coming, the path likely doesn't involve enlarging a single model. It lies in networks of specialized models that can communicate, debate, and combine their knowledge. This has been our direction for some time. We progressed from monolithic models like GPT-3 to mixture-of-experts (with different sub-networks managing various inputs within a single model), and then to the tool-using assistants we see today. Each step has made the system's errors more independent from one another. The next step will take the agents completely outside any single model.
 
 ---
 
