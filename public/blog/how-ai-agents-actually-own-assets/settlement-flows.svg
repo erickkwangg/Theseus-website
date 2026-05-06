@@ -186,7 +186,7 @@
         <text x="20" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— fees accrue directly</text>
         <text x="20" y="82" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— working capital it controls</text>
         <text x="20" y="108" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— reputation on the address</text>
-        <text x="20" y="134" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— slashing has bite</text>
+        <text x="20" y="134" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— real stake to slash</text>
       </g>
     </g>
   </g>
