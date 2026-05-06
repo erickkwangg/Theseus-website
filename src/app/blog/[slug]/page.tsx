@@ -93,7 +93,7 @@ export default async function BlogPostPage(props: { params: Params }) {
                 height={840}
                 className="aspect-[1600/840] w-full object-cover"
                 priority
-                unoptimized={post.heroImage.endsWith(".gif")}
+                unoptimized={post.heroImage.endsWith(".gif") || post.heroImage.endsWith(".svg")}
               />
             </div>
           )}

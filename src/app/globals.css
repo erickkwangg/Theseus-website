@@ -1200,6 +1200,15 @@
    being mis-styled as captions. */
 .prose-blog p:has(> img) {
   margin-bottom: 0.5em;
+  /* Break out of the prose's max-w-2xl (672px) so technical figures render
+     wider and their internal text is legible. Capped at 56rem (896px) and
+     clamped to viewport on small screens. The negative-margin technique
+     centers a wider element within a narrower flow container. */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(56rem, 100vw - 2rem);
+  max-width: none;
 }
 .prose-blog p:has(> img) + p:has(> em:only-child) {
   margin-top: 0;

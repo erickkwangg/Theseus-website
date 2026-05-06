@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="1600" height="1100">
+  <defs>
+    <pattern id="dotgridC" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="0.8" fill="#1C1F25"/>
+    </pattern>
+
+    <marker id="arrowWhite2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#EDE8DD"/>
+    </marker>
+    <marker id="arrowMuted2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5A5E68"/>
+    </marker>
+    <marker id="arrowAccent2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF5B3A"/>
+    </marker>
+
+    <radialGradient id="ghostFill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#3A3D44" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3A3D44" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="liveGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#FF5B3A" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FF5B3A" stop-opacity="0"/>
+    </radialGradient>
+
+    <symbol id="counterparty" viewBox="0 0 80 80">
+      <rect x="6" y="20" width="68" height="56" fill="none" stroke="#EDE8DD" stroke-width="1.4"/>
+      <line x1="6"  y1="36" x2="74" y2="36" stroke="#EDE8DD" stroke-width="1"/>
+      <line x1="6"  y1="52" x2="74" y2="52" stroke="#EDE8DD" stroke-width="1"/>
+      <rect x="22" y="60" width="10" height="16" fill="#EDE8DD" fill-opacity="0.9"/>
+      <rect x="48" y="60" width="10" height="16" fill="none" stroke="#EDE8DD" stroke-width="1"/>
+      <polygon points="6,20 40,4 74,20" fill="none" stroke="#EDE8DD" stroke-width="1.4"/>
+    </symbol>
+
+    <symbol id="wallet" viewBox="0 0 80 80">
+      <rect x="10" y="14" width="60" height="50" rx="3" fill="none" stroke="#EDE8DD" stroke-width="1.4"/>
+      <path d="M 10 26 L 70 26" stroke="#EDE8DD" stroke-width="1"/>
+      <circle cx="56" cy="44" r="4" fill="#EDE8DD"/>
+      <rect x="20" y="56" width="20" height="3" fill="#EDE8DD"/>
+    </symbol>
+
+    <symbol id="ledger" viewBox="0 0 80 80">
+      <rect x="10" y="10" width="60" height="60" fill="none" stroke="#EDE8DD" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="18" y1="22" x2="62" y2="22" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.7"/>
+      <line x1="18" y1="32" x2="50" y2="32" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.7"/>
+      <line x1="18" y1="42" x2="58" y2="42" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.7"/>
+      <line x1="18" y1="52" x2="44" y2="52" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.7"/>
+      <line x1="18" y1="62" x2="54" y2="62" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.7"/>
+    </symbol>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#0A0B0D"/>
+  <rect width="1600" height="1100" fill="url(#dotgridC)"/>
+
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD">
+    <text x="80" y="80" font-size="13" letter-spacing="3" fill-opacity="0.55">FIG. 02 — SETTLEMENT FLOWS</text>
+    <line x1="80" y1="92" x2="280" y2="92" stroke="#EDE8DD" stroke-opacity="0.25"/>
+    <text x="80" y="124" font-family="'Fraunces', 'Times New Roman', Georgia, serif" font-size="36" font-weight="300" fill-opacity="0.95">
+      Two ways the money moves.
+    </text>
+    <text x="80" y="156" font-size="12" letter-spacing="2" fill-opacity="0.45">
+      WHO HOLDS THE BALANCE DETERMINES WHAT THE AGENT CAN BECOME.
+    </text>
+  </g>
+
+  <g transform="translate(0 220)">
+    <line x1="80" y1="0" x2="1520" y2="0" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.20"/>
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="80" y="34" font-size="11" letter-spacing="3" fill="#5A5E68">A —</text>
+      <text x="120" y="34" font-size="14" letter-spacing="2" fill="#EDE8DD">OPERATOR-ROUTED</text>
+      <text x="80" y="56" font-size="12" fill="#EDE8DD" fill-opacity="0.50" font-style="italic">funds pass through the operator; the agent has no on-chain presence</text>
+    </g>
+
+    <g transform="translate(0 110)">
+      <g transform="translate(180 30)">
+        <use href="#counterparty" x="0" y="0" width="80" height="80"/>
+        <text x="40" y="106" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#EDE8DD" text-anchor="middle">COUNTERPARTY</text>
+      </g>
+
+      <line x1="290" y1="70" x2="430" y2="70" stroke="#EDE8DD" stroke-width="1.4" marker-end="url(#arrowWhite2)"/>
+      <text x="360" y="58" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#EDE8DD" fill-opacity="0.55" text-anchor="middle" letter-spacing="2">PAYS</text>
+
+      <g transform="translate(450 30)">
+        <use href="#wallet" x="0" y="0" width="80" height="80"/>
+        <text x="40" y="106" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#EDE8DD" text-anchor="middle">OPERATOR</text>
+        <text x="40" y="124" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#EDE8DD" text-anchor="middle">WALLET</text>
+        <circle cx="74" cy="14" r="4" fill="#FF5B3A"/>
+        <text x="84" y="18" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="9" fill="#FF5B3A" letter-spacing="2">ON-CHAIN</text>
+      </g>
+
+      <line x1="640" y1="70" x2="780" y2="70" stroke="#5A5E68" stroke-width="1.2" stroke-dasharray="6 4" marker-end="url(#arrowMuted2)"/>
+      <text x="710" y="58" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#5A5E68" text-anchor="middle" letter-spacing="2">OFF-CHAIN</text>
+      <text x="710" y="92" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#5A5E68" text-anchor="middle" letter-spacing="2">ACCOUNTING</text>
+
+      <g transform="translate(800 30)">
+        <use href="#ledger" x="0" y="0" width="80" height="80"/>
+        <text x="40" y="106" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#5A5E68" text-anchor="middle">INTERNAL</text>
+        <text x="40" y="124" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#5A5E68" text-anchor="middle">LEDGER</text>
+      </g>
+
+      <line x1="990" y1="70" x2="1130" y2="70" stroke="#3A3D44" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#arrowMuted2)"/>
+      <text x="1060" y="58" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#3A3D44" text-anchor="middle" letter-spacing="2">CREDITS</text>
+
+      <g transform="translate(1150 30)">
+        <circle cx="40" cy="40" r="44" fill="url(#ghostFill)"/>
+        <circle cx="40" cy="40" r="34" fill="none" stroke="#3A3D44" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="40" cy="40" r="22" fill="none" stroke="#3A3D44" stroke-width="0.8" stroke-dasharray="2 3"/>
+        <circle cx="40" cy="40" r="3"  fill="#3A3D44"/>
+        <text x="40" y="106" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#3A3D44" text-anchor="middle">AGENT</text>
+        <text x="40" y="124" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" letter-spacing="2" fill="#3A3D44" text-anchor="middle" font-style="italic">no on-chain presence</text>
+      </g>
+
+      <g transform="translate(1310 -10)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+        <line x1="0" y1="0" x2="0" y2="160" stroke="#3A3D44" stroke-width="1"/>
+        <text x="20" y="20" font-size="11" letter-spacing="2" fill="#5A5E68">CONSEQUENCES</text>
+        <text x="20" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.85">— no reputation</text>
+        <text x="20" y="82" font-size="13" fill="#EDE8DD" fill-opacity="0.85">— no working capital</text>
+        <text x="20" y="108" font-size="13" fill="#EDE8DD" fill-opacity="0.85">— operator is the bottleneck</text>
+        <text x="20" y="134" font-size="13" fill="#EDE8DD" fill-opacity="0.85">— slashing has no target</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(0 600)">
+    <line x1="80" y1="0" x2="1520" y2="0" stroke="#EDE8DD" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <g transform="translate(0 640)">
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="80" y="34" font-size="11" letter-spacing="3" fill="#FF5B3A">B —</text>
+      <text x="120" y="34" font-size="14" letter-spacing="2" fill="#EDE8DD">DIRECT SETTLEMENT</text>
+      <text x="80" y="56" font-size="12" fill="#EDE8DD" fill-opacity="0.50" font-style="italic">funds settle to the agent's own address; reputation accrues there</text>
+    </g>
+
+    <g transform="translate(0 110)">
+      <g transform="translate(180 30)">
+        <use href="#counterparty" x="0" y="0" width="80" height="80"/>
+        <text x="40" y="106" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#EDE8DD" text-anchor="middle">COUNTERPARTY</text>
+      </g>
+
+      <line x1="290" y1="70" x2="900" y2="70" stroke="#FF5B3A" stroke-width="1.6" marker-end="url(#arrowAccent2)"/>
+      <text x="595" y="58" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#FF5B3A" text-anchor="middle" letter-spacing="2">PAYS DIRECTLY</text>
+      <text x="595" y="94" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="11" fill="#EDE8DD" fill-opacity="0.45" text-anchor="middle" letter-spacing="2">— ON-CHAIN, ONE HOP —</text>
+
+      <g transform="translate(920 -10)">
+        <circle cx="60" cy="80" r="90" fill="url(#liveGlow)"/>
+
+        <circle cx="60" cy="80" r="60" fill="#0E1014" stroke="#EDE8DD" stroke-width="1.5"/>
+        <circle cx="60" cy="80" r="50" fill="none" stroke="#EDE8DD" stroke-width="0.6" stroke-opacity="0.35"/>
+        <circle cx="60" cy="80" r="38" fill="none" stroke="#EDE8DD" stroke-width="0.6" stroke-opacity="0.25"/>
+        <ellipse cx="60" cy="80" rx="60" ry="22" fill="none" stroke="#EDE8DD" stroke-width="0.6" stroke-opacity="0.3"/>
+        <ellipse cx="60" cy="80" rx="22" ry="60" fill="none" stroke="#EDE8DD" stroke-width="0.6" stroke-opacity="0.3"/>
+        <circle cx="60" cy="80" r="4"  fill="#FF5B3A"/>
+        <circle cx="60" cy="80" r="10" fill="none" stroke="#FF5B3A" stroke-width="0.8" stroke-opacity="0.55"/>
+
+        <text x="60" y="166" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill="#EDE8DD" text-anchor="middle">AGENT WALLET</text>
+        <text x="60" y="186" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="10" letter-spacing="2" fill="#FF5B3A" text-anchor="middle">0x7F..A2</text>
+      </g>
+
+      <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+        <g transform="translate(1110 30)">
+          <rect x="0" y="0" width="160" height="42" rx="3" fill="#0E1014" stroke="#EDE8DD" stroke-width="1"/>
+          <text x="14" y="18" font-size="10" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">BALANCE</text>
+          <text x="14" y="34" font-size="13" fill="#EDE8DD">visible on-chain</text>
+        </g>
+        <g transform="translate(1110 88)">
+          <rect x="0" y="0" width="160" height="42" rx="3" fill="#0E1014" stroke="#EDE8DD" stroke-width="1"/>
+          <text x="14" y="18" font-size="10" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">STAKE BOND</text>
+          <text x="14" y="34" font-size="13" fill="#EDE8DD">slashable</text>
+        </g>
+        <g transform="translate(1110 146)">
+          <rect x="0" y="0" width="160" height="42" rx="3" fill="#0E1014" stroke="#FF5B3A" stroke-width="1"/>
+          <text x="14" y="18" font-size="10" letter-spacing="2" fill="#FF5B3A">REPUTATION</text>
+          <text x="14" y="34" font-size="13" fill="#EDE8DD">accrues to address</text>
+        </g>
+
+        <line x1="1042" y1="50" x2="1108" y2="50" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.45"/>
+        <line x1="1042" y1="108" x2="1108" y2="108" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.45"/>
+        <line x1="1042" y1="166" x2="1108" y2="166" stroke="#EDE8DD" stroke-width="0.8" stroke-opacity="0.45"/>
+      </g>
+
+      <g transform="translate(1310 -10)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+        <line x1="0" y1="0" x2="0" y2="180" stroke="#FF5B3A" stroke-width="1" stroke-opacity="0.7"/>
+        <text x="20" y="20" font-size="11" letter-spacing="2" fill="#FF5B3A">CONSEQUENCES</text>
+        <text x="20" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— fees accrue directly</text>
+        <text x="20" y="82" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— working capital it controls</text>
+        <text x="20" y="108" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— reputation on the address</text>
+        <text x="20" y="134" font-size="13" fill="#EDE8DD" fill-opacity="0.95">— slashing has bite</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(1430 1060)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <line x1="0" y1="-12" x2="90" y2="-12" stroke="#EDE8DD" stroke-opacity="0.25"/>
+    <text x="0" y="6" font-size="11" letter-spacing="2">THESEUS.NETWORK</text>
+  </g>
+
+</svg>
