@@ -33,9 +33,9 @@ With on-chain agents, the contract-and-oracle architecture collapses. The agent 
 
 A lending agent on Theseus doesn't subscribe to a price feed. It reads Coinbase's order book directly, pulls Binance trade flow, checks whether the current price is consistent with realized volume. It queries Uniswap pool reserves and TWAPs, weights them by depth, compares against centralized venues, reconciles. Price becomes something the agent infers from the world, not something handed to it. Redemption queues, pool imbalances, venue divergences are all observable, all part of the input. The agent refuses to act when observations don't reconcile. No network of node operators voting on a number. It looks at the market.
 
-With one agent making the decision instead of a network of nodes voting on a number, you've replaced one form of consensus risk with another. Theseus's answer is verifiable inference: one node runs the agent's reasoning, many nodes verify the proof, and the chain only accepts the result if it checks. The cognitive work happens on one machine; consensus over the result happens on the network.
+Running the decision on a single agent sounds worse than a quorum of oracle nodes voting on a price. Verifiable inference handles that. One node runs the agent, other nodes verify a proof of what it computed, and the chain rejects results whose proofs don't check out.
 
-Agents also have their own failure modes. A buggy policy, a poisoned context window, a hallucinated tool call: none of these are oracle failures, but they're all real. We addressed that surface in [How AI Agents Actually Own Assets](/blog/how-ai-agents-actually-own-assets): a bounded action layer with provable provenance and pre-execution verification. Agents introduce policy risk, but the intent layer makes that risk addressable in a way the perception layer can't.
+Agents have their own bugs. A buggy policy, a poisoned context window, a hallucinated tool call. [How AI Agents Actually Own Assets](/blog/how-ai-agents-actually-own-assets) covers how Theseus contains them: bounded action layers, provable provenance, and pre-execution checks against what the agent said it would do.
 
 The dumb contract had one option: obey. The agent has policy, perception, and verifiability. The next generation of on-chain protocols won't have better oracles. They'll have agents.
 
@@ -53,6 +53,6 @@ The biggest perception failures in DeFi all share one feature: contracts that ob
 
 **Cream Finance** ($130M, October 2021) accepted a flash-loan-manipulated price for yUSD and lent against it; the contract enforced its rules perfectly against a price that didn't survive contact with the rest of the market. An agent comparing the manipulated price against the underlying assets' actual depth would have refused.
 
-Different mechanisms, same structural failure: execution without perception. On-chain agents change that boundary. They introduce the primitive DeFi has never had: an executor that can refuse to act on inputs that don't reconcile with the rest of the market. Protocols that don't just execute, but decide whether execution is warranted at all.
+In each case, the contract did exactly what it was programmed to do, and that was the problem. An agent reading the market directly would have stopped.
 
 Theseus is building the agent runtime that makes this possible: stateful, sovereign, verifiable agents that exist as first-class on-chain entities with the cognitive capability of modern AI agents and the trust properties of a smart contract. [Learn more.](https://theseus.network)
