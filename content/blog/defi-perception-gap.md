@@ -1,7 +1,7 @@
 ---
 title: "How on-chain agents make multi-billion DeFi failures structurally impossible"
 date: "2026-05-06"
-excerpt: "DeFi has lost billions to a decade of perception failures: oracles that obeyed manipulated prices, contracts that lent against bad data, peg systems that minted into broken markets. On-chain agents close that gap."
+excerpt: "Smart contracts execute against whatever data they're handed and have no way to ask whether it's real. That limitation has cost DeFi billions. On-chain agents change it."
 heroImage: "/blog/defi-perception-gap/hero.svg"
 ---
 
@@ -21,7 +21,7 @@ The industry's response has been to build better oracles: bigger node networks, 
 
 Consider a lending protocol that doesn't ask "what is the price of this collateral?" but observes "is this collateral actually exitable at this price right now?" A stablecoin that detects its own depeg in real time and pauses minting before the cascade. A perpetuals platform that lowers leverage caps when funding diverges from the index. An insurance market that reprices risk continuously instead of relying on a quarterly governance vote.
 
-Each of these is awkward to express as a smart contract and natural to express as an agent. An entire class of reactive on-chain protocols opens up: protocols that perceive their environment, reason about it, and adapt.
+Smart contracts can't really express any of these. Agents can. An entire class of reactive on-chain protocols opens up: protocols that perceive their environment, reason about it, and adapt.
 
 ## On-chain agents are protocols
 
@@ -53,6 +53,6 @@ The biggest perception failures in DeFi all share one feature: contracts that ob
 
 **Cream Finance** ($130M, October 2021) accepted a flash-loan-manipulated price for yUSD and lent against it; the contract enforced its rules perfectly against a price that didn't survive contact with the rest of the market. An agent comparing the manipulated price against the underlying assets' actual depth would have refused.
 
-Different mechanisms, same structural failure: execution without perception. On-chain agents change that boundary. They introduce the primitive DeFi has never had: halt when markets disconnect, defer when signals conflict, act only when observations reconcile with reality. Protocols that don't just execute, but decide whether execution is warranted at all.
+Different mechanisms, same structural failure: execution without perception. On-chain agents change that boundary. They introduce the primitive DeFi has never had: an executor that can refuse to act on inputs that don't reconcile with the rest of the market. Protocols that don't just execute, but decide whether execution is warranted at all.
 
 Theseus is building the agent runtime that makes this possible: stateful, sovereign, verifiable agents that exist as first-class on-chain entities with the cognitive capability of modern AI agents and the trust properties of a smart contract. [Learn more.](https://theseus.network)
