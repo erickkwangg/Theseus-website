@@ -92,7 +92,7 @@ const glossaryTerms = [
   },
   {
     term: "TheseusStore",
-    definition: "The decentralized storage layer that holds model weights and agent context. Uses Reed-Solomon encoding and storage-miner staking.",
+    definition: "The off-chain data availability layer that holds model weights and agent context. Each blob is content-addressed and pinned to an on-chain root (weights_root for models, context_root per agent), so readers verify integrity via Merkle / Verkle proofs against the anchor — never against the storage layer's say-so.",
     link: "/docs/architecture#theseus-store"
   },
   {

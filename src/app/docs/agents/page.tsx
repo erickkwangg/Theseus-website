@@ -154,10 +154,10 @@ export default function AgentsPage() {
 
           <div className="space-y-3">
             {[
-              { step: "1", title: "Wake-up", desc: "Agent code activates via heartbeat tx every N blocks, keep-alive bounty, or event relay" },
-              { step: "2", title: "Evaluate triggers", desc: "During AGENT_TICK, check rules: scheduled block? price crossed? memory anchor changed?" },
-              { step: "3", title: "Fee & balance test", desc: "Look up model's cost, add network proof surcharge, confirm $THE balance covers total" },
-              { step: "4", title: "Call the model", desc: "Submit MODEL_INFER request with inputs and fee cap. Scheduler assigns to prover" },
+              { step: "1", title: "Wake trigger fires", desc: "Scheduled block height, an on-chain event the agent subscribes to, or an external call_agent." },
+              { step: "2", title: "ABG advances", desc: "pallet_agents interprets the agent's behavior graph through synchronous nodes (conditions, sequence, parallel) until it hits a model or tool call." },
+              { step: "3", title: "Reverse-gas check", desc: "The agent pays from its own seus balance. At zero balance the agent stops running; the call doesn't queue." },
+              { step: "4", title: "Queue + suspend", desc: "AIVM queues the inference job and emits InferenceQueued. The agent suspends. A prover picks it up, submits a verified result, and the agent resumes via on_initialize on a later block." },
             ].map((item) => (
               <div key={item.step} className="docs-card">
                 <div className="flex items-start gap-4">

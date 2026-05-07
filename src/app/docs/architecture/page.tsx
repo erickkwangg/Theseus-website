@@ -63,8 +63,8 @@ export default function ArchitecturePage() {
             />
           </div>
 
-          <Callout type="info" title="Three Main Processes">
-            <strong>AIVM</strong> executes inference and forwards valid transactions; <strong>TheseusStore</strong> handles model/context data with DA sampling; <strong>HS BFT PoS</strong> provides HotStuff-based finality. All communicate via RPC/Networking layer.
+          <Callout type="info" title="Three main processes">
+            <strong>AIVM</strong> executes inference and forwards valid transactions; <strong>TheseusStore</strong> anchors model and agent-context data via content-addressed roots and verifies retrievals against them; <strong>BFT consensus</strong> provides deterministic finality. All communicate via RPC/networking layer.
           </Callout>
         </section>
 
@@ -98,12 +98,12 @@ export default function ArchitecturePage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-2">Availability Layer: TheseusStore</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Erasure-coded storage for model weights and agent contexts:</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Off-chain DA layer for model weights and agent contexts. Integrity comes from on-chain anchors, not the storage layer:</p>
                   <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-2 py-1 bg-gray-800 rounded">Reed-Solomon encoding</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">RAG contexts</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">Storage miners</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">Merkle roots</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">weights_root</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">context_root</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">Merkle / Verkle proofs</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">OCW sampling</span>
                   </div>
                 </div>
               </div>
@@ -115,13 +115,13 @@ export default function ArchitecturePage() {
                   <Shield className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Consensus Layer: Proof of Stake</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">HotStuff BFT with AI-specific requirements:</p>
+                  <h3 className="text-lg font-medium mb-2">Consensus Layer: BFT proof-of-stake</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Deterministic finality once 2/3 of validators agree. AI-specific gating folded in:</p>
                   <div className="flex flex-wrap gap-2 text-xs">
                     <span className="px-2 py-1 bg-gray-800 rounded">Valid model roots</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">VRF selection</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">One-block finality</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">Coupled layers</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">VRF prover selection</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">Native KZG host fn</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">Forkless upgrades</span>
                   </div>
                 </div>
               </div>
@@ -173,26 +173,32 @@ body { Transaction[] }`}</CodeBlock>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="docs-card">
-              <h3 className="text-lg font-medium mb-2">Model Storage</h3>
+              <h3 className="text-lg font-medium mb-2">Model storage</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Immutable weights (Reed-Solomon encoded) addressed by content hash. Cold storage optimized, enforced by miner staking.
+                Immutable weights addressed by their on-chain <code>weights_root</code>. Provers fetch by root and verify integrity (Merkle / Verkle proofs) before running inference.
               </p>
             </div>
             <div className="docs-card">
-              <h3 className="text-lg font-medium mb-2">Context Storage</h3>
+              <h3 className="text-lg font-medium mb-2">Context storage</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Mutable agent data (conversations, embeddings, RAG). Reed-Solomon encoded with faster retrieval.
+                Agent execution context and the AKG live behind a per-agent <code>context_root</code>. Updated by <code>pallet_agents</code> as agents execute; readers verify retrievals against the anchor.
               </p>
             </div>
           </div>
 
           <div className="docs-card">
-            <h3 className="text-lg font-medium mb-3">Agent State Synchronization</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Dual-ledger pattern:</p>
-            <div className="space-y-2 text-sm">
-              <div><strong className="text-slate-900 dark:text-white">On-Chain:</strong> <span className="text-gray-600 dark:text-gray-400">Balances, model versions, config in agent state root</span></div>
-              <div><strong className="text-slate-900 dark:text-white">Off-Chain:</strong> <span className="text-gray-600 dark:text-gray-400">Large context (PDFs, embeddings) in TheseusStore with memory anchors</span></div>
-              <div><strong className="text-slate-900 dark:text-white">Sync:</strong> <span className="text-gray-600 dark:text-gray-400">libp2p diff-sync with last-write-wins + optional semantic merge</span></div>
+            <h3 className="text-lg font-medium mb-3">Correctness vs availability</h3>
+            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+              <p>
+                Consensus nodes never trust raw bytes from TheseusStore. They fetch by content-addressed root and verify against the on-chain anchor. As long as one honest full node can obtain the data and verify it against the root, the state transition stays correct.
+              </p>
+              <p>
+                The DA layer&rsquo;s economics ensure <em>availability</em>, not <em>integrity</em>. Integrity is cryptographic. See{" "}
+                <Link href="/docs/data-availability" className="text-indigo-300 underline">
+                  Data Availability
+                </Link>{" "}
+                for the full breakdown.
+              </p>
             </div>
           </div>
         </section>
@@ -267,10 +273,14 @@ body { Transaction[] }`}</CodeBlock>
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">Data availability</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-                Model weights and agent context must be retrievable for verifiers to check proofs and for agents to make progress. TheseusStore uses Reed-Solomon erasure coding so any sufficient quorum of storage miners can reconstruct missing shards.
+                Model weights and agent context must be retrievable for provers to run, for verifiers to check proofs, and for agents to make progress. The on-chain anchor (<code>weights_root</code> / <code>context_root</code>) guarantees integrity; the DA layer&rsquo;s economics guarantee availability.
               </p>
               <p className="text-gray-500 text-xs">
-                Slash condition: storage miner failing to serve pinned shards. Recovery: any other miner holding the shard can re-pin and earn the lost reward.
+                Substrate Off-chain Workers periodically sample data referenced by anchored roots, with unsigned transactions recording evidence of unavailability and triggering slashing. See{" "}
+                <Link href="/docs/data-availability" className="text-indigo-300 underline">
+                  Data Availability
+                </Link>
+                .
               </p>
             </div>
           </div>

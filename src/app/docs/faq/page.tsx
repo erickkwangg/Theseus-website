@@ -68,13 +68,13 @@ const groups = [
       },
       {
         q: "What is the consensus mechanism?",
-        a: "HotStuff BFT proof-of-stake with one-block finality. Validators stake $THE; provers stake separately and are selected via VRF weighted by stake and hardware capacity. Verifiers check Tensor Commits in roughly 2 ms each.",
+        a: "BFT consensus with deterministic finality once 2/3 of validators agree. The chain is built on Substrate (Polkadot SDK) with custom pallets for AI coordination on top of standard FRAME. Inference verification runs in constant time via a native KZG host function — a few milliseconds per proof on commodity validator hardware. Provers are selected via VRF weighted by capacity and stake.",
         link: { href: "/docs/architecture#three-layer", label: "Consensus layer" },
       },
       {
         q: "What is the slashing model?",
-        a: "Three slash conditions: invalid Tensor Commit (provers), failure to serve pinned shards (storage miners), standard consensus violations (validators). Stake is burned on slash. Economic security scales with total staked value.",
-        link: { href: "/docs/architecture#security", label: "Security model" },
+        a: "Three slash conditions: invalid Tensor Commit or missed deadline (provers), unavailability of data referenced by anchored roots (DA providers), and standard BFT consensus violations (validators). Stake is burned on slash. Full mechanics activate with open prover and validator registration in Beta — see the security page.",
+        link: { href: "/docs/security", label: "Security model" },
       },
       {
         q: "Is the chain live?",
