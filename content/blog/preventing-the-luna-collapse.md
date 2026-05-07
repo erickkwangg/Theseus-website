@@ -19,41 +19,9 @@ The mechanism's core assumption was that LUNA could absorb arbitrary mint/burn a
 
 ## The death spiral, in four arrows
 
-<figure style="margin: 2em 0;">
-<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="spiral-title" style="max-width: 100%; height: auto; display: block;">
-  <title id="spiral-title">Terra death spiral feedback loop</title>
-  <defs>
-    <marker id="spiral-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626" />
-    </marker>
-  </defs>
+![Terra death spiral feedback loop: UST slips below $1 → holders redeem UST for newly-minted LUNA → LUNA price falls → coverage shrinks per remaining UST → peg slips further. Four red arrows in a clockwise loop.](/blog/preventing-the-luna-collapse/death-spiral.svg)
 
-  <rect x="30" y="30" width="240" height="80" rx="8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
-  <text x="150" y="65" text-anchor="middle" fill="currentColor" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif">UST slips below $1</text>
-  <text x="150" y="88" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.65">peg deviation widens</text>
-
-  <rect x="330" y="30" width="240" height="80" rx="8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
-  <text x="450" y="65" text-anchor="middle" fill="currentColor" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif">Holders redeem UST</text>
-  <text x="450" y="88" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.65">new LUNA minted at oracle price</text>
-
-  <rect x="330" y="210" width="240" height="80" rx="8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
-  <text x="450" y="245" text-anchor="middle" fill="currentColor" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif">LUNA price falls</text>
-  <text x="450" y="268" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.65">supply grows faster than demand</text>
-
-  <rect x="30" y="210" width="240" height="80" rx="8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
-  <text x="150" y="245" text-anchor="middle" fill="currentColor" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif">Coverage shrinks</text>
-  <text x="150" y="268" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.65">less value backing each remaining UST</text>
-
-  <line x1="270" y1="70" x2="324" y2="70" stroke="#dc2626" stroke-width="2" marker-end="url(#spiral-arrow)"/>
-  <line x1="450" y1="110" x2="450" y2="204" stroke="#dc2626" stroke-width="2" marker-end="url(#spiral-arrow)"/>
-  <line x1="330" y1="250" x2="276" y2="250" stroke="#dc2626" stroke-width="2" marker-end="url(#spiral-arrow)"/>
-  <line x1="150" y1="210" x2="150" y2="116" stroke="#dc2626" stroke-width="2" marker-end="url(#spiral-arrow)"/>
-
-  <text x="300" y="158" text-anchor="middle" fill="currentColor" font-size="11" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">each loop dilutes LUNA further;</text>
-  <text x="300" y="172" text-anchor="middle" fill="currentColor" font-size="11" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">the mechanism keeps honoring redemptions all the way down</text>
-</svg>
-<figcaption style="text-align: center; font-size: 0.85em; opacity: 0.7; margin-top: 0.5em;">The four-step feedback loop. Each arrow is the mechanism doing exactly what it was designed to do.</figcaption>
-</figure>
+*The four-step feedback loop. Each arrow is the mechanism doing exactly what it was designed to do.*
 
 When confidence in the peg cracked, redemption pressure rose sharply. UST holders started burning UST and receiving newly-minted LUNA. The LUNA supply ballooned. With supply growing faster than demand, LUNA's price fell. As LUNA fell, the value backing each remaining UST shrank — which made the peg shakier, which drove more redemptions. Each loop dilutes LUNA further and weakens the next loop's defense.
 
@@ -69,64 +37,9 @@ What's actually missing is *judgment*: a process that reads the full vault state
 
 ## What a failsafe agent reads
 
-<figure style="margin: 2em 0;">
-<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flow-title" style="max-width: 100%; height: auto; display: block;">
-  <title id="flow-title">Failsafe agent decision flow</title>
-  <defs>
-    <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" opacity="0.7" />
-    </marker>
-  </defs>
+![Failsafe agent decision flow: five raw vault metrics (USTD median price, redemption rate, LUNA supply growth, LUNA/USD change, reserve coverage) feed an LLM agent that reasons about peg trust, mint/redeem asymmetry under stress, supply dynamics, and novel modes; the agent emits ALLOW or REFUSE.](/blog/preventing-the-luna-collapse/agent-flow.svg)
 
-  <text x="100" y="22" text-anchor="middle" fill="currentColor" font-size="11" opacity="0.5" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.1em">RAW VAULT METRICS</text>
-
-  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">
-    <rect x="20" y="44" width="200" height="40" rx="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.55"/>
-    <text x="120" y="68" text-anchor="middle" fill="currentColor">USTD median price</text>
-
-    <rect x="20" y="96" width="200" height="40" rx="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.55"/>
-    <text x="120" y="120" text-anchor="middle" fill="currentColor">Redemption rate (1h)</text>
-
-    <rect x="20" y="148" width="200" height="40" rx="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.55"/>
-    <text x="120" y="172" text-anchor="middle" fill="currentColor">LUNA supply growth (24h)</text>
-
-    <rect x="20" y="200" width="200" height="40" rx="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.55"/>
-    <text x="120" y="224" text-anchor="middle" fill="currentColor">LUNA/USD change (24h)</text>
-
-    <rect x="20" y="252" width="200" height="40" rx="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.55"/>
-    <text x="120" y="276" text-anchor="middle" fill="currentColor">Reserve coverage</text>
-  </g>
-
-  <line x1="220" y1="64" x2="298" y2="155" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#flow-arrow)"/>
-  <line x1="220" y1="116" x2="298" y2="160" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#flow-arrow)"/>
-  <line x1="220" y1="168" x2="298" y2="168" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#flow-arrow)"/>
-  <line x1="220" y1="220" x2="298" y2="180" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#flow-arrow)"/>
-  <line x1="220" y1="272" x2="298" y2="186" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#flow-arrow)"/>
-
-  <rect x="300" y="100" width="240" height="160" rx="10" stroke="#6366f1" stroke-width="1.8" fill="#6366f1" fill-opacity="0.06"/>
-  <text x="420" y="135" text-anchor="middle" fill="currentColor" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">LLM agent reasons</text>
-  <text x="420" y="158" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.7">peg trust · mint vs redeem</text>
-  <text x="420" y="174" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.7">asymmetry under stress ·</text>
-  <text x="420" y="190" text-anchor="middle" fill="currentColor" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" opacity="0.7">supply dynamics · novel modes</text>
-  <text x="420" y="222" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">reasoning signed under PoA;</text>
-  <text x="420" y="236" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">anyone can verify it later</text>
-
-  <line x1="540" y1="160" x2="600" y2="120" stroke="currentColor" stroke-width="1.4" opacity="0.55" marker-end="url(#flow-arrow)"/>
-  <line x1="540" y1="200" x2="600" y2="240" stroke="currentColor" stroke-width="1.4" opacity="0.55" marker-end="url(#flow-arrow)"/>
-
-  <rect x="600" y="92" width="100" height="50" rx="6" stroke="#10b981" stroke-width="1.5" fill="#10b981" fill-opacity="0.08"/>
-  <text x="650" y="116" text-anchor="middle" fill="#059669" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">ALLOW</text>
-  <text x="650" y="132" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.65" font-family="ui-sans-serif, system-ui, sans-serif">action proceeds</text>
-
-  <rect x="600" y="218" width="100" height="50" rx="6" stroke="#dc2626" stroke-width="1.5" fill="#dc2626" fill-opacity="0.08"/>
-  <text x="650" y="242" text-anchor="middle" fill="#dc2626" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">REFUSE</text>
-  <text x="650" y="258" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.65" font-family="ui-sans-serif, system-ui, sans-serif">tx reverts</text>
-
-  <text x="100" y="328" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">no thresholds, no labels —</text>
-  <text x="100" y="344" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.5" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">just the raw numbers</text>
-</svg>
-<figcaption style="text-align: center; font-size: 0.85em; opacity: 0.7; margin-top: 0.5em;">A Theseus failsafe agent: five raw signals in, structured verdict out. The protocol calls before executing.</figcaption>
-</figure>
+*A Theseus failsafe agent: five raw signals in, structured verdict out. The protocol calls before executing.*
 
 A Theseus agent in the failsafe slot sees five raw signals on every mint or redeem call. It returns ALLOW or REFUSE. The protocol calls the agent before executing; the verdict is honored on-chain.
 
