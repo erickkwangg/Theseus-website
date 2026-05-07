@@ -91,7 +91,7 @@ export default function DocsSidebar() {
 
   return (
     <aside className="hidden lg:block w-64 shrink-0">
-      <nav className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto space-y-6 pr-2 -mr-2">
+      <nav className="docs-rail-scroll sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto space-y-6 pr-2 -mr-2">
         {/* Version badge */}
         <div className="px-3 pb-4 border-b border-slate-200 dark:border-slate-700/60">
           <span className="text-xs text-slate-500 dark:text-slate-400">Version</span>
