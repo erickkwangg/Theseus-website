@@ -18,6 +18,25 @@ export type InferenceMix = {
 
 export type VerificationGrade = "full" | "mixed" | "lite" | "unknown";
 
+/** Optional human-readable context surface that registered agents can publish
+ *  alongside the snapshot. Omitted for agents that haven't published one
+ *  (the chain only requires the cryptographic fields). When present, the
+ *  PoA profile page renders an "Agent context" section so anyone can read
+ *  the system prompt, inputs, and outputs the agent runs under. */
+export type AgentContext = {
+  /** The verbatim system prompt the agent runs under. Render in a
+   *  pre-formatted block; never as HTML. */
+  instructions: string;
+  /** What the agent reads as input each cycle. One bullet per source. */
+  inputs?: string[];
+  /** What the agent emits. */
+  outputs?: string;
+  /** Optional schedule annotation, e.g. "every 10 blocks (~60s)". */
+  schedule?: string;
+  /** Optional URL where the agent can be observed running. */
+  demoUrl?: string;
+};
+
 export type AgentSnapshot = {
   agentId: SS58Address;
   name: string;
@@ -43,6 +62,8 @@ export type AgentSnapshot = {
   enclaveBound: boolean;
   snapshotAtBlock: number;
   snapshotAtTime: string;
+  /** Optional published context (system prompt + I/O descriptions). */
+  context?: AgentContext;
 };
 
 export type AttestationSnapshot = { kind: "snapshot" };

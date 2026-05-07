@@ -4,6 +4,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { credentialStore } from "@/lib/poa/store";
 import { chainMode } from "@/lib/poa/chain";
+import { FIXTURE_AGENTS } from "@/lib/poa/fixtures";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
 import Sigil, { checksumFromSeed } from "../_components/Sigil";
@@ -168,7 +169,7 @@ export default async function AgentsDirectory() {
       )}
 
       {credentials.length === 0 && !storeError && (
-        <section className="px-6 pb-32">
+        <section className="px-6 pb-12">
           <div
             className="mx-auto max-w-2xl border-t pt-12 text-center"
             style={{ borderColor: "var(--poa-rule)" }}
@@ -182,6 +183,85 @@ export default async function AgentsDirectory() {
           </div>
         </section>
       )}
+
+      {/* Registered fixture agents that have published their context.
+          They show up here independent of having signed a credential —
+          the "browse" surface for agents that have made their
+          instructions public. */}
+      {(() => {
+        const withContext = Object.values(FIXTURE_AGENTS).filter((a) => a.context);
+        if (withContext.length === 0) return null;
+        return (
+          <section className="px-6 pb-24">
+            <div className="mx-auto max-w-5xl">
+              <div
+                className="mb-8 border-t pt-10"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
+                <p className="poa-stamp">Registered &middot; published context</p>
+                <h2 className="mt-3 font-serif text-2xl tracking-tight text-[var(--poa-ink)]">
+                  Agents that have made their instructions readable.
+                </h2>
+                <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                  Each agent below publishes the system prompt it runs under,
+                  the inputs it reads each cycle, and the outputs it commits.
+                  Click through to read exactly what the model sees.
+                </p>
+              </div>
+              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {withContext.map((a) => {
+                  const checksum = checksumFromSeed(a.agentId + a.abgHash);
+                  return (
+                    <li key={a.agentId}>
+                      <Link
+                        href={`/poa/${a.agentId}`}
+                        className="group flex h-full flex-col gap-3 border p-4 transition-colors hover:border-[var(--poa-ink)]"
+                        style={{ borderColor: "var(--poa-rule)" }}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <Sigil
+                            seed={a.agentId + a.abgHash}
+                            size={48}
+                            sovereign={a.sovereign}
+                            grade={a.recentRuns.grade}
+                          />
+                          <span className="font-serif text-lg italic text-[var(--poa-ink)]">
+                            {checksum}
+                          </span>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-serif text-[19px] leading-tight tracking-[-0.01em] text-[var(--poa-ink)] group-hover:italic">
+                            {a.name}
+                          </p>
+                          {a.summary && (
+                            <p className="mt-1.5 line-clamp-3 text-[12.5px] leading-snug text-[var(--poa-ink-soft)]">
+                              {a.summary}
+                            </p>
+                          )}
+                        </div>
+                        <div className="mt-auto flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-2">
+                          <span className="poa-stamp">
+                            {a.sovereign ? "sovereign" : "controller"}
+                          </span>
+                          <span className="poa-stamp">
+                            {gradeShort(a.recentRuns.grade)}
+                          </span>
+                          <span
+                            className="poa-stamp ml-auto"
+                            style={{ color: "var(--poa-sepia)" }}
+                          >
+                            read context →
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </section>
+        );
+      })()}
 
       <Footer />
     </main>
