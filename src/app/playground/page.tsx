@@ -62,8 +62,8 @@ type TraceStep = {
 
 const TRACE_TEMPLATE: TraceStep[] = [
   {
-    label: "Compile SHIP to AIVM bytecode",
-    detail: "Static bounds verified. Gas budget locked.",
+    label: "Compile SHIP to a CompiledAgent",
+    detail: "shipc emits a SCALE-encoded blob the chain decodes into ABG nodes.",
     icon: Cpu,
     durationMs: 600,
   },

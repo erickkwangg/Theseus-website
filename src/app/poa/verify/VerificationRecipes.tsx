@@ -64,50 +64,39 @@ print("attestation:", claims["attestation"]["kind"])`,
   ship: {
     label: "SHIP (agent)",
     body: `// agents/poa_gated.ship
-// Reject delegation to any agent whose PoA token is invalid, revoked,
-// or below the grade threshold. Uses the same /poa/api/verify endpoint
-// as the cURL recipe, called through a host-provided tool.
+// Refuse delegation unless the target agent's PoA credential verifies,
+// is unrevoked, and at or above the configured grade. The system prompt
+// owns the gating logic; the model orchestrates the verify_poa and
+// delegate_to tool calls. Both eventually hit /poa/api/verify under the
+// hood, just like the cURL recipe.
 
-#[agent(name = "PoaGated", version = 1, ship = "1.0")]
+ship 0.1
 
-const claude_haiku_4_5: bytes32 = 0x0000000000000000000000000000000000000000000000000000000000000000;
+const MAIN_MODEL = "0xe49630ccb59348a9cbbd9989e6774e8b7340b347fbcd94da1f535fb25c15f117"
 
-struct VerifyResult {
-    valid: bool,
-    revoked: bool,
-    agent_id: string,
-    grade: string,         // "full" | "mixed" | "lite"
-    issued_at: u64,
+agent "poa_gated"
+version 1
+entry plan
+system """
+You delegate user intents to other Theseus agents, but only after
+verifying their Proof of Agenthood. Before any delegate_to call, call
+verify_poa(token). Only proceed with delegate_to when the response has
+valid == true, revoked == false, and grade != "lite". Otherwise return
+a single short sentence explaining why you refused.
+"""
+
+tools {
+  """Verify a PoA credential. Returns valid, revoked, agent_id, grade, issued_at."""
+  verify_poa(token: string)
+
+  """Delegate execution of an intent to another on-chain agent."""
+  delegate_to(agent_id: string, intent: string)
 }
 
-tool verify_poa(token: string) -> VerifyResult;
-tool delegate_to(agent_id: string, intent: string) -> string;
-
-let target_token: string;
-let intent: string;
-
-#[entry]
-node start(token: string, plan: string) {
-    target_token = token;
-    intent = plan;
-    goto(check);
-}
-
-#[retry(2), timeout(blocks=20)]
-node check() {
-    let r = verify_poa(target_token);
-    if (!r.valid || r.revoked) {
-        raise(\`poa: token rejected\`);
-    }
-    if (r.grade == "lite") {
-        raise(\`poa: grade=\${r.grade} below threshold\`);
-    }
-    goto(act, r.agent_id);
-}
-
-node act(agent_id: string) {
-    let receipt = delegate_to(agent_id, intent);
-    return receipt;
+graph {
+  plan:        model_call(MAIN_MODEL) { next -> check_tools }
+  check_tools: has_tool_calls ? exec_tools : end
+  exec_tools:  tool_call         { next -> plan }
 }`,
   },
   vichtn: {
