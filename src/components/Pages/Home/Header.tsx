@@ -25,10 +25,11 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { label: "Mission", number: "01", href: "/#mission" },
   { label: "Agents", number: "02", href: "/#agents" },
-  { label: "Build", number: "03", href: "/#build" },
-  { label: "Markets", number: "04", href: "/#market" },
-  { label: "Blog", number: "05", href: "/blog" },
-  { label: "Docs", number: "06", href: "/docs" },
+  { label: "Browse", number: "03", href: "/poa/agents" },
+  { label: "Build", number: "04", href: "/#build" },
+  { label: "Markets", number: "05", href: "/#market" },
+  { label: "Blog", number: "06", href: "/blog" },
+  { label: "Docs", number: "07", href: "/docs" },
 ];
 
 const DESKTOP_LINK_CLASS = [
