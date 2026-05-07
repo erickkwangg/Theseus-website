@@ -43,7 +43,7 @@ export default function TableOfContents() {
 
   return (
     <nav className="hidden xl:block w-56 shrink-0">
-      <div className="sticky top-24">
+      <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2 -mr-2">
         <h4 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
           On this page
         </h4>
