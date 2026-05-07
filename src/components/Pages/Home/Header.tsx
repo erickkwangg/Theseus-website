@@ -17,20 +17,14 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 type NavItem = {
   label: string;
-  /** Numbered nav items mirror the homepage section labels (01 Mission,
-   *  03 Build, …). External pages have no number — same numbering pool
-   *  on the home page would lie about where the link goes. */
-  number?: string;
   href: string;
   external?: boolean;
 };
 
 const NAV_ITEMS: NavItem[] = [
-  // Numbered: anchors into the homepage's labeled sections.
-  { label: "Mission", number: "01", href: "/#mission" },
-  { label: "Build", number: "03", href: "/#build" },
-  { label: "Markets", number: "04", href: "/#market" },
-  // Unnumbered: external routes.
+  { label: "Mission", href: "/#mission" },
+  { label: "Build", href: "/#build" },
+  { label: "Markets", href: "/#market" },
   { label: "Proof of Agenthood", href: "/poa" },
   { label: "Browse", href: "/poa/agents" },
   { label: "Blog", href: "/blog" },
@@ -52,18 +46,6 @@ const MOBILE_LINK_CLASS = [
   "text-lg font-semibold tracking-tight",
   "text-slate-500 dark:border-slate-800 dark:text-slate-400",
   "transition-colors duration-200 hover:text-indigo-600 dark:hover:text-indigo-300",
-].join(" ");
-
-const NUMBER_DESKTOP_CLASS = [
-  "font-mono text-[15px] tabular-nums",
-  "text-slate-400 dark:text-slate-500",
-  "transition-colors duration-300",
-  "group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300/80",
-].join(" ");
-
-const NUMBER_MOBILE_CLASS = [
-  "w-8 shrink-0 font-mono text-sm tabular-nums",
-  "text-slate-400 dark:text-slate-500",
 ].join(" ");
 
 const LABEL_MOBILE_CLASS = [
@@ -118,9 +100,6 @@ export default function Header() {
                           rel="noopener noreferrer"
                           className={MOBILE_LINK_CLASS}
                         >
-                          <span className={NUMBER_MOBILE_CLASS}>
-                            {item.number ?? ""}
-                          </span>
                           <span className={LABEL_MOBILE_CLASS}>
                             {item.label}
                           </span>
@@ -131,9 +110,6 @@ export default function Header() {
                           href={item.href}
                           className={MOBILE_LINK_CLASS}
                         >
-                          <span className={NUMBER_MOBILE_CLASS}>
-                            {item.number ?? ""}
-                          </span>
                           <span className={LABEL_MOBILE_CLASS}>
                             {item.label}
                           </span>
@@ -172,24 +148,10 @@ export default function Header() {
                         rel="noopener noreferrer"
                         className={DESKTOP_LINK_CLASS}
                       >
-                        {item.number && (
-                          <>
-                            <span className={NUMBER_DESKTOP_CLASS}>
-                              {item.number}
-                            </span>{" "}
-                          </>
-                        )}
                         {item.label}
                       </a>
                     ) : (
                       <Link href={item.href} className={DESKTOP_LINK_CLASS}>
-                        {item.number && (
-                          <>
-                            <span className={NUMBER_DESKTOP_CLASS}>
-                              {item.number}
-                            </span>{" "}
-                          </>
-                        )}
                         {item.label}
                       </Link>
                     )}
