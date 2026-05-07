@@ -385,3 +385,109 @@ export function PoaCredentialJsonLd({
     </>
   );
 }
+
+type PoaAgentProfileJsonLdProps = {
+  agentId: string;
+  agentName: string;
+  agentSummary?: string;
+  sovereign: boolean;
+  controller?: string | null;
+  models?: string[];
+  /** When the agent has published its system prompt + I/O surface. */
+  hasPublishedContext?: boolean;
+};
+
+/**
+ * BreadcrumbList + SoftwareApplication for an agent profile page when
+ * there's no credential yet (just a snapshot). Communicates the agent's
+ * identity, what model runs it, who controls it. Helps search and AI
+ * crawlers understand the page is about an autonomous-agent profile, not
+ * an account or product page.
+ */
+export function PoaAgentProfileJsonLd({
+  agentId,
+  agentName,
+  agentSummary,
+  sovereign,
+  controller,
+  models,
+  hasPublishedContext,
+}: PoaAgentProfileJsonLdProps) {
+  const pageUrl = `${SITE_URL}/poa/${agentId}`;
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Theseus", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Proof of Agenthood",
+        item: `${SITE_URL}/poa`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Agents",
+        item: `${SITE_URL}/poa/agents`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: agentName,
+        item: pageUrl,
+      },
+    ],
+  };
+
+  const application: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: agentName,
+    identifier: agentId,
+    description:
+      agentSummary ??
+      `Theseus on-chain agent ${agentId}. Registered with Proof of Agenthood.`,
+    applicationCategory: "AI agent",
+    operatingSystem: "Theseus",
+    url: pageUrl,
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    publisher: { "@type": "Organization", name: "Theseus", url: SITE_URL },
+  };
+
+  if (models && models.length > 0) {
+    application.softwareRequirements = models.join(", ");
+  }
+  if (sovereign) {
+    application.creator = {
+      "@type": "SoftwareApplication",
+      name: agentName,
+      identifier: agentId,
+    };
+  } else if (controller) {
+    application.creator = {
+      "@type": "Person",
+      identifier: controller,
+      name: "Controller",
+    };
+  }
+  if (hasPublishedContext) {
+    application.disambiguatingDescription =
+      "Agent has published its system prompt and I/O surface; visible on the profile page.";
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(application) }}
+      />
+    </>
+  );
+}

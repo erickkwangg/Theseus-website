@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { credentialStore } from "@/lib/poa/store";
+import { FIXTURE_AGENTS } from "@/lib/poa/fixtures";
 import { listPosts } from "@/lib/blog";
 
 const BASE_URL = "https://theseus.network";
@@ -73,6 +74,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Store offline: skip dynamic entries this generation.
   }
 
+  // Fixture agent profile pages (registered agents, possibly without an
+  // active credential — they still have indexable name/summary/context).
+  // Deduped against the dynamic credential entries above to avoid two rows
+  // for the same agentId.
+  const fixtureIds = Object.keys(FIXTURE_AGENTS);
+  const dynamicAgentIds = new Set(
+    dynamicEntries.map((e) =>
+      typeof e.url === "string" ? e.url.split("/").pop() : "",
+    ),
+  );
+  const fixtureEntries: MetadataRoute.Sitemap = fixtureIds
+    .filter((id) => !dynamicAgentIds.has(id))
+    .map((id) => ({
+      url: `${BASE_URL}/poa/${id}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "weekly" as const,
+      priority: FIXTURE_AGENTS[id].context ? 0.7 : 0.5,
+    }));
+
   // Per-post blog entries.
   const blogEntries: MetadataRoute.Sitemap = listPosts().map((p) => ({
     url: `${BASE_URL}/blog/${p.slug}`,
@@ -81,5 +101,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...dynamicEntries, ...blogEntries];
+  return [...staticEntries, ...dynamicEntries, ...fixtureEntries, ...blogEntries];
 }

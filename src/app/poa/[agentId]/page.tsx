@@ -6,7 +6,7 @@ import { credentialStore } from "@/lib/poa/store";
 import { chainMode, getChainReader } from "@/lib/poa/chain";
 import { evaluateRevocation } from "@/lib/poa/revocation";
 import type { AgentSnapshot, RevocationReason } from "@/lib/poa/types";
-import { PoaCredentialJsonLd } from "@/components/JsonLd";
+import { PoaAgentProfileJsonLd, PoaCredentialJsonLd } from "@/components/JsonLd";
 import CredentialDocument from "../_components/CredentialDocument";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
@@ -20,10 +20,52 @@ type Props = { params: Promise<{ agentId: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { agentId } = await params;
+  // Try to enrich with snapshot data (name + summary). Falls back to a
+  // generic title when the chain reader fails or the agent isn't registered.
+  let name: string | null = null;
+  let summary: string | null = null;
+  try {
+    const reader = getChainReader();
+    const snap = await reader.getAgentSnapshot(agentId);
+    if (snap) {
+      name = snap.name;
+      summary = snap.summary ?? null;
+    }
+  } catch {
+    /* leave fallback */
+  }
+
+  const shortId = `${agentId.slice(0, 8)}…${agentId.slice(-4)}`;
+  const title = name
+    ? `${name} · Proof of Agenthood`
+    : `Proof of Agenthood · ${shortId}`;
+  const description = summary
+    ? `${summary} On Theseus, every action this agent takes carries a signed Proof of Agenthood credential anyone can verify.`
+    : `Verifiable agent credential for Theseus agent ${agentId}. Signed by the agent and the model that ran it.`;
+
   return {
-    title: `Proof of Agenthood · ${agentId.slice(0, 10)}…`,
-    description: `Verifiable credential for Theseus agent ${agentId}.`,
+    title,
+    description,
     alternates: { canonical: `/poa/${agentId}` },
+    keywords: [
+      "Proof of Agenthood",
+      "AI agent credential",
+      "Theseus agent",
+      "verifiable AI",
+      "agent identity",
+      ...(name ? [name] : []),
+    ],
+    openGraph: {
+      title,
+      description,
+      url: `https://theseus.network/poa/${agentId}`,
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
@@ -171,6 +213,17 @@ export default async function PoaCredentialPage({ params }: Props) {
       {/* Empty / error states: spare, centered. */}
       {(!stored || chainError) && (
         <section className="px-4 py-10 lg:py-16">
+          {liveSnapshot && !chainError && (
+            <PoaAgentProfileJsonLd
+              agentId={agentId}
+              agentName={liveSnapshot.name}
+              agentSummary={liveSnapshot.summary}
+              sovereign={liveSnapshot.sovereign}
+              controller={liveSnapshot.controller}
+              models={liveSnapshot.capabilities.models}
+              hasPublishedContext={!!liveSnapshot.context}
+            />
+          )}
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-serif text-3xl italic leading-snug text-[var(--poa-ink)] sm:text-4xl [text-wrap:balance]">
               {chainError
