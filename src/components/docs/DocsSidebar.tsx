@@ -14,7 +14,6 @@ import {
   Code2,
   Puzzle,
   GitCompare,
-  Lightbulb,
   Coins,
   List,
   Sparkles,
@@ -43,7 +42,6 @@ const sections = [
       { href: "/docs/comparison", label: "Theseus vs Ethereum", icon: GitCompare },
       { href: "/docs/agentic-smart-contracts", label: "Agentic Smart Contracts", icon: Sparkles },
       { href: "/docs/vs-ai-infra", label: "vs AI Infra Peers", icon: Network },
-      { href: "/docs/design-space", label: "Design Space", icon: Lightbulb },
     ],
   },
   {

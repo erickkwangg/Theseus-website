@@ -14,7 +14,6 @@ const DOCS_ORDER: Array<{ slug: string; title: string }> = [
   { slug: "comparison", title: "Theseus vs Ethereum" },
   { slug: "vs-ai-infra", title: "Theseus vs AI-Infra Peers" },
   { slug: "agentic-smart-contracts", title: "Agentic Smart Contracts" },
-  { slug: "design-space", title: "Design Space" },
   { slug: "tokenomics", title: "Tokenomics" },
   { slug: "status", title: "Status & Roadmap" },
   { slug: "faq", title: "FAQ" },

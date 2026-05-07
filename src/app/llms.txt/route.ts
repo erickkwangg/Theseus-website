@@ -36,7 +36,6 @@ const BODY = `# Theseus
 - [FAQ](${SITE_URL}/docs/faq): Latency, cost, model support, privacy, and other common questions.
 - [Glossary](${SITE_URL}/docs/glossary): AIVM, Tensor Commits, SHIP, autonomy flag, FLOPs gas, Terkle Tree, $THE, slashing, and more.
 - [Tokenomics](${SITE_URL}/docs/tokenomics): $THE utility, staking, fee flows, AI-native economic primitives.
-- [Design Space](${SITE_URL}/docs/design-space): Applications and market opportunities unlocked by autonomous, verifiable agents.
 
 ## Proof of Agenthood
 

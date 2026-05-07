@@ -15,7 +15,6 @@ const pageNames: Record<string, string> = {
   "ship": "SHIP Language",
   "examples": "Examples",
   "comparison": "Theseus vs Ethereum",
-  "design-space": "Design Space",
   "tokenomics": "Tokenomics",
   "glossary": "Glossary",
 };

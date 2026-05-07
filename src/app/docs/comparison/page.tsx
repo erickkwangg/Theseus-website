@@ -264,7 +264,7 @@ export default function ComparisonPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/docs/design-space"
+                href="/docs/agentic-smart-contracts#design-space"
                 className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
               >
                 Full design space
