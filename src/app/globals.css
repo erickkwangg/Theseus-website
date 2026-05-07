@@ -1273,27 +1273,20 @@ body:has(.poa-shell) {
   letter-spacing: 0.22em;
 }
 
-/* Playground panel: inverts the local PoA palette so the contents read
-   as runtime data — terminal-feel in light mode, lifted card in dark
-   mode. Children using --poa-ink / --poa-ink-soft / --poa-rule / --poa-sepia
-   flip automatically. */
+/* Playground panel: a pure white card in light mode, pure black in dark
+   mode, sitting on the warm paper/body. Lifts runtime-data sections
+   (inputs/outputs grids, verbatim system prompts) out of the document
+   chrome so they read as the agent's working surface. Tokens keep their
+   normal polarity — text stays dark on white, light on black. */
 .poa-shell .poa-playground {
-  --poa-ink: #F5EDE0;
-  --poa-ink-soft: #B7AB99;
-  --poa-rule: rgba(245, 237, 224, 0.18);
-  --poa-rule-soft: rgba(245, 237, 224, 0.08);
-  --poa-sepia: #A39482;
-  background: #14110D;
-  color: var(--poa-ink);
+  background: #FFFFFF;
+  border: 1px solid var(--poa-rule);
+  box-shadow: 0 1px 0 rgba(20, 17, 13, 0.04);
 }
 .dark .poa-shell .poa-playground {
-  --poa-ink: #14110D;
-  --poa-ink-soft: #4A4339;
-  --poa-rule: rgba(20, 17, 13, 0.18);
-  --poa-rule-soft: rgba(20, 17, 13, 0.08);
-  --poa-sepia: #8A7864;
-  background: #F5EDE0;
-  color: var(--poa-ink);
+  background: #000000;
+  border-color: rgba(245, 237, 224, 0.14);
+  box-shadow: 0 1px 0 rgba(245, 237, 224, 0.04);
 }
 
 /* Diagonal VOID watermark across revoked credentials. */

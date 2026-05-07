@@ -74,20 +74,14 @@ export default function AgentContextSection({ context, agentName }: Props) {
         )}
       </div>
 
-      <div
-        className="mt-10 border-t pt-6"
-        style={{ borderColor: "var(--poa-rule)" }}
-      >
+      <div className="mt-8">
         <div className="mb-3 flex items-baseline justify-between">
           <p className="poa-stamp">System prompt &middot; verbatim</p>
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
             {context.instructions.length.toLocaleString()} chars
           </p>
         </div>
-        <pre
-          className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap break-words border bg-[var(--poa-paper)] px-5 py-4 font-mono text-[12px] leading-relaxed text-[var(--poa-ink)]"
-          style={{ borderColor: "var(--poa-rule)" }}
-        >
+        <pre className="poa-playground max-h-[60vh] overflow-y-auto whitespace-pre-wrap break-words px-5 py-4 font-mono text-[12px] leading-relaxed text-[var(--poa-ink)]">
           {context.instructions}
         </pre>
       </div>
