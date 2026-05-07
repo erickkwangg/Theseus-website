@@ -71,6 +71,7 @@ A signed credential layer for Theseus agents. Anyone can verify; operators sign 
 - [The Theseus Thesis Part 1](${SITE_URL}/blog/theseus-thesis-part-1): A first-principles exploration of Theseus. Why AI agents need a substrate with sovereignty, statefulness, and verifiability.
 - [The Theseus Thesis Part 2: TAM and AI Personhood](${SITE_URL}/blog/theseus-thesis-part-2): Why we are so bullish on Theseus. Annual GDP per AI person as the anchor for Theseus's TAM, compared to Bitcoin and Ethereum value accrual.
 - [Agents as an Evolution of Smart Contracts](${SITE_URL}/blog/agents-evolution-of-smart-contracts): Why Theseus is what Ethereum was meant to be. Bitcoin → Ethereum → Theseus as the lineage of "what kind of decision can be verified on-chain."
+- [How Theseus would've prevented the Luna collapse](${SITE_URL}/blog/preventing-the-luna-collapse): A verifiable LLM failsafe agent reading raw vault metrics could have refused the actions that fueled the death spiral. With diagrams, a day-by-day counterfactual, and a live demo.
 
 ## External
 
