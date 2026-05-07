@@ -33,6 +33,21 @@ export default function SHIPPage() {
       </div>
         
       <div className="prose prose-invert max-w-none">
+        <Callout type="tip" title="In one paragraph">
+          SHIP is the source language agents are written in. It compiles to the
+          ABG nodes the runtime executes — model calls, tool calls, conditions,
+          parallel/sequence structure, and terminal nodes that emit signed
+          intents (transfers, context updates, contract calls). The shape of the
+          ABG enforces what an agent can do; SHIP makes that shape ergonomic to
+          write.
+        </Callout>
+        <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
+          <li><strong>Compiles to ABG</strong>: nothing in SHIP escapes the bounded node graph the runtime executes against.</li>
+          <li><strong>Capability surface is intrinsic</strong>: the set of models, tools, and intent types the agent can use is encoded in the graph and enforced at runtime.</li>
+          <li><strong>Async by design</strong>: model and tool calls suspend the agent; resume is automatic when the verified result lands.</li>
+          <li><strong>Terminal nodes emit SHIP intents</strong>: transfers, context updates, cross-chain messages, contract calls, callbacks — validated by pallet_ship under the original caller&rsquo;s origin.</li>
+        </ul>
+
         {/* Try in playground */}
         <Callout type="info" title="Try SHIP without installing">
           <p className="mb-3">

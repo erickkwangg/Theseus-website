@@ -24,6 +24,9 @@ import {
   Activity,
   Network,
   ShieldCheck,
+  FileCode,
+  Settings2,
+  Terminal,
 } from "lucide-react";
 
 const sections = [
@@ -47,18 +50,28 @@ const sections = [
   {
     title: "Core Concepts",
     items: [
+      { href: "/docs/architecture", label: "Architecture", icon: Layers },
       { href: "/docs/aivm", label: "AIVM", icon: Cpu },
       { href: "/docs/tensor-commits", label: "Tensor Commits", icon: GitBranch },
       { href: "/docs/agents", label: "Agents", icon: Bot },
-      { href: "/docs/architecture", label: "Architecture", icon: Layers },
     ],
   },
   {
     title: "Build",
     items: [
+      { href: "/docs/quickstart", label: "Quick Start", icon: Zap },
       { href: "/docs/ship", label: "SHIP Language", icon: Code2 },
       { href: "/docs/examples", label: "Examples", icon: Puzzle },
-      { href: "/docs/quickstart", label: "Quick Start", icon: Zap },
+    ],
+  },
+  {
+    title: "Reference",
+    items: [
+      { href: "/docs/reference", label: "Overview", icon: BookOpen },
+      { href: "/docs/reference/parameters", label: "Network Parameters", icon: Settings2 },
+      { href: "/docs/reference/pallets", label: "Runtime Pallets", icon: FileCode },
+      { href: "/docs/reference/extrinsics", label: "Extrinsics", icon: Terminal },
+      { href: "/docs/glossary", label: "Glossary", icon: List },
     ],
   },
   {
@@ -66,7 +79,6 @@ const sections = [
     items: [
       { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
-      { href: "/docs/glossary", label: "Glossary", icon: List },
     ],
   },
   {

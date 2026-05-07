@@ -44,6 +44,21 @@ export default function IntroductionPage() {
       </div>
 
       <div className="prose prose-invert max-w-none">
+        <Callout type="tip" title="In one paragraph">
+          Theseus is a Layer-1 chain whose primary developer surface is calling
+          AI models and running autonomous agents. Every inference is verified
+          (KZG proof or signature, depending on prover tier) before its output
+          changes state. Agents are first-class on-chain entities with their
+          own balance, their own keys, and their own state — operators run the
+          code, but can&rsquo;t modify what the agent owns.
+        </Callout>
+        <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
+          <li><strong>Three primitives</strong>: a tensor-native VM (AIVM), succinct cryptographic proofs (TensorCommits), and a stable USD-pegged gas unit (seus).</li>
+          <li><strong>Three agency tiers</strong>: managed (human-controlled), civic (sovereign + transparent), sovereign (self-custodial, self-funded).</li>
+          <li><strong>Asynchronous by design</strong>: inference and agent calls span multiple blocks — queue, prove, resume.</li>
+          <li><strong>Substrate-based</strong>: standard FRAME pallets plus custom pallets for AI coordination. Forkless runtime upgrades through validator governance.</li>
+        </ul>
+
         {/* Opening Section */}
         <section className="mb-12">
           <h2 id="what-theseus-does" className="text-2xl font-medium mb-4">

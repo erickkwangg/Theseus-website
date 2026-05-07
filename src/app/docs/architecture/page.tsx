@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, Layers, Database, Shield, Cpu, GitBranch } from "lucide-react";
+import { Layers, Database, Shield, Cpu, GitBranch } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
@@ -34,6 +34,21 @@ export default function ArchitecturePage() {
       </div>
         
       <div className="prose prose-invert max-w-none">
+        <Callout type="tip" title="In one paragraph">
+          Theseus is a Substrate chain that turns every model inference and agent
+          call into a single verifiable state transition. Off-chain provers run
+          the AI workload and submit results with KZG proofs; on-chain pallets
+          verify the proof in constant time and route the verified result back
+          into agent execution. The chain coordinates; the GPUs prove; the
+          consensus layer only trusts what it can verify.
+        </Callout>
+        <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
+          <li><strong>Chain</strong>: Substrate runtime with Theseus-specific pallets (aivm, models, agents, tools, store, ship) plus standard FRAME (balances, aura, grandpa).</li>
+          <li><strong>Prover network</strong>: full prover with TensorCommitment proofs, plus lite provers for hosted-API breadth at alpha.</li>
+          <li><strong>Blessed enclave</strong>: TEE that holds the chain&rsquo;s key, executes off-chain tools (web search, authenticated HTTP), decrypts agent credentials.</li>
+          <li><strong>Layer0 bridge</strong>: any token bridges in; seus (gas) is bought only with frxUSD.</li>
+        </ul>
+
         {/* Overview */}
         <section className="mb-12">
           <h2 id="overview" className="text-2xl font-medium mb-4">Architectural Overview</h2>

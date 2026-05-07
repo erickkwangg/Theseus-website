@@ -33,6 +33,20 @@ export default function AIVMPage() {
       </div>
       
       <div className="prose prose-invert max-w-none">
+        <Callout type="tip" title="In one paragraph">
+          AIVM is the inference kernel: a Substrate pallet that queues every
+          model and agent call, accepts results from off-chain provers, and
+          verifies them in constant time via a native KZG host function.
+          Consensus only trusts what this verification step accepts — raw
+          inference output is never honored on its own.
+        </Callout>
+        <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
+          <li><strong>Asynchronous, never atomic</strong>: <code>call_model</code> queues a job and emits <code>InferenceQueued</code>; the result lands in a later block.</li>
+          <li><strong>Generic <code>OnInferenceVerified</code> hook</strong>: pallet_aivm doesn&rsquo;t depend on pallet_models or pallet_agents — they implement the hook.</li>
+          <li><strong>O(1) verification</strong>: KZG proofs verify in a constant number of pairings, regardless of model size.</li>
+          <li><strong>Two-tier provers</strong>: full prover with TensorCommitment proofs; lite provers with signature-only at alpha. Lite provers phased out by mainnet.</li>
+        </ul>
+
         {/* Architecture */}
         <section className="mb-12">
           <h2 id="architecture" className="text-2xl font-medium mb-6 flex items-center gap-3">

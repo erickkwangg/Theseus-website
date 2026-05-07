@@ -32,6 +32,22 @@ export default function AgentsPage() {
       </div>
         
       <div className="prose prose-invert max-w-none">
+        <Callout type="tip" title="In one paragraph">
+          An agent is a persistent on-chain entity with its own seus balance,
+          its own state, and a static <em>Agent Behavior Graph</em> (ABG) that
+          defines its logic. Agents are event-driven, not always-on: they wake
+          on triggers (events, schedules, or external <code>call_agent</code>),
+          execute their ABG until an inference or tool call suspends them, and
+          resume in a later block when the verified result lands.
+        </Callout>
+        <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
+          <li><strong>ABG = bytecode</strong>: static, versioned, capped at 256 nodes per agent. Encodes both control flow and the agent&rsquo;s declared capability surface.</li>
+          <li><strong>AKG = execution log</strong>: dynamic graph of runs, steps, and observations. Mostly DA-backed via pallet_store with on-chain anchors.</li>
+          <li><strong>Three-stage execution</strong>: queue (call_agent) → prove (submit_inference_result) → resume (inherent hook on next block).</li>
+          <li><strong>Reverse gas</strong>: the agent pays for its own seus, not the caller. At zero balance it stops; after 90 days at zero its state is reclaimed.</li>
+          <li><strong>Sub-agent calls bounded at depth 2</strong>: an agent can call another, but the callee can&rsquo;t call a third.</li>
+        </ul>
+
         {/* See it in code */}
         <Callout type="info" title="See an agent in code">
           <p className="mb-3">
