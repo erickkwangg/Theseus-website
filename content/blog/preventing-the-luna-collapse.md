@@ -15,7 +15,7 @@ Terra's mint-and-redeem worked like this: a user could always burn $1 of LUNA to
 
 As long as LUNA was deep, liquid, and trusted, the mechanism worked. Arbitrage closed any peg deviation: if UST traded at $0.99, you could buy it cheap, redeem it for $1 of LUNA, and pocket a cent. The peg held because the redemption was real money.
 
-The mechanism's core assumption was that LUNA could absorb arbitrary mint/burn at oracle price. That assumption broke down in specific conditions — and the contract had no way to recognize when those conditions arrived.
+The mechanism's core assumption was that LUNA could absorb arbitrary mint/burn at oracle price. That assumption broke down in specific conditions, and the contract had no way to recognize when those conditions arrived.
 
 ## The death spiral, in four arrows
 
@@ -23,15 +23,15 @@ The mechanism's core assumption was that LUNA could absorb arbitrary mint/burn a
 
 *The four-step feedback loop. Each arrow is the mechanism doing exactly what it was designed to do.*
 
-When confidence in the peg cracked, redemption pressure rose sharply. UST holders started burning UST and receiving newly-minted LUNA. The LUNA supply ballooned. With supply growing faster than demand, LUNA's price fell. As LUNA fell, the value backing each remaining UST shrank — which made the peg shakier, which drove more redemptions. Each loop dilutes LUNA further and weakens the next loop's defense.
+When confidence in the peg cracked, redemption pressure rose sharply. UST holders started burning UST and receiving newly-minted LUNA. The LUNA supply ballooned. With supply growing faster than demand, LUNA's price fell. As LUNA fell, the value backing each remaining UST shrank, which made the peg shakier and drove more redemptions. Each loop dilutes LUNA further and weakens the next loop's defense.
 
 The numbers from the actual collapse: LUNA's circulating supply went from roughly 343 million on May 7 to over 6.5 trillion by May 13. A 19,000× expansion in six days. The mechanism worked. Every redemption was honored at oracle price. The contract had no opinion about whether honoring those redemptions was destroying the system.
 
 ## Why no smart contract could have stopped it
 
-Determinism is a feature until it's the bug. A smart contract that gates mint/redeem can check whether the inputs satisfy a rule — does the user have UST to burn, is the oracle reporting a price — but it can't reason about whether the rule itself still makes sense. *"Is this redemption part of an orderly market response, or part of a self-reinforcing collapse?"* isn't a question a Solidity `require` can answer.
+Determinism is a feature until it's the bug. A smart contract that gates mint/redeem can check whether the inputs satisfy a rule (does the user have UST to burn, is the oracle reporting a price), but it can't reason about whether the rule itself still makes sense. There's no `require` clause that distinguishes an orderly arbitrage from a self-reinforcing collapse.
 
-You could code static thresholds: refuse mint if the peg deviates more than 2%, refuse redeem if LUNA supply grew more than 10% in 24 hours. Static thresholds either fire too early — turning a wobble into a panic by blocking exits — or too late, when the mechanism has already cascaded. Worse, attackers learn the thresholds and design around them.
+You could code static thresholds: refuse mint if the peg deviates more than 2%, refuse redeem if LUNA supply grew more than 10% in 24 hours. Static thresholds fire too early in some scenarios (turning a wobble into a panic by blocking exits) and too late in others (when the cascade is already running). Once thresholds are public, attackers design around them.
 
 What's missing is *judgment*: a process that reads the full vault state, weighs the trade-offs (mint and redeem behave very differently under stress), and decides whether the next action moves the system toward equilibrium or away from it. Solidity can't do that. An LLM agent reading on-chain inputs can.
 
@@ -45,7 +45,7 @@ A Theseus agent in the failsafe slot sees five raw signals on every mint or rede
 
 The system prompt tells the agent: you're not the oracle. You don't price LUNA. You decide whether *running the mechanism right now* is safe. You're not given thresholds. You reason from the metrics. Mint adds new claims to a stressed system; redeem is users trying to exit. The two aren't symmetric. Blanket refusal turns a wobble into a panic. Blanket approval lets a slow leak become a hemorrhage.
 
-That last instruction matters. The agent's job isn't to halt the protocol whenever something looks bad — it's to decline the specific actions that visibly accelerate the cascade, and to show the work behind every refusal so users can review it later.
+That asymmetry is the whole point. The agent's job is to decline the specific actions that accelerate the cascade and to show the reasoning behind each refusal so users can review it later.
 
 ## What the agent would have decided each day
 
@@ -59,13 +59,13 @@ We built a Theseus agent of exactly this shape and replayed the actual Terra tim
 | **Day 3** — Bank run | Peg $0.65, LUNA −73%, supply 3.2× | ALLOW (LUNA hyperinflation) | REFUSE both |
 | **Day 4** — Spiral | Peg $0.18, LUNA $0.04, supply 50× | ALLOW (terminal) | REFUSE both |
 
-The agent allows during Healthy because the mechanism is working. It refuses Mint during Wobble because adding new UST claims to a system whose peg is already under stress amplifies what's wrong, while still letting users exit. By Cracking, the LUNA supply is already growing 18% in 24 hours — more redemptions visibly accelerate the cascade — so the agent refuses both directions.
+The agent allows during Healthy because the mechanism is working. It refuses Mint during Wobble because adding new UST claims to a system whose peg is already under stress amplifies what's wrong; redeem stays open so users can still exit. By Cracking, the LUNA supply is already growing 18% in 24 hours, so more redemptions visibly accelerate the cascade. The agent refuses both directions.
 
 Each step's reasoning is real model output, generated live. The agent cites the specific numbers it sees, names the dynamic in plain language ("supply growing 18% in 24 hours while peg sits 500bps below $1"), and ends with its decision.
 
 ## Why this needs Theseus, not just an off-chain LLM
 
-You could imagine running this agent off-chain: a Python service hitting an LLM API before each mint/redeem, posting an ALLOW or REFUSE to the contract. That would catch some cases. It also fails in three ways.
+Run the agent off-chain instead: a Python service hits an LLM API before each mint/redeem and posts ALLOW or REFUSE to the contract. That would catch some cases. It would also fail in three ways.
 
 **The operator can disable it.** A failsafe controlled by the people whose protocol is failing isn't a failsafe. Self-censorship is the default failure mode for an off-chain process at the moment its verdicts get inconvenient. Theseus's sovereign-agent path means the failsafe runs from on-chain state, with no off-switch the protocol team can flip.
 
@@ -81,6 +81,6 @@ The agent is live. Step through the five days of the actual Terra collapse and w
 
 [**Run the failsafe demo →**](https://agent-oracle.theseus.network/terra)
 
-You'll see verdicts as they're made, the agent's full reasoning streaming live, and the counterfactual: what a naive contract would have done in the same moment. The PoA profile for the agent — its system prompt, its capability surface, its run history — is at [theseus.network/poa/5DkY…4hN6](https://theseus.network/poa/5DkY7e3sN2pQ9bX4hG8wRtL6vK1cM5fT9oP3jW7xZ2aV4hN6).
+You'll see verdicts as they're made, the agent's full reasoning streaming live, and the counterfactual: what a naive contract would have done in the same moment. The PoA profile for the agent (its system prompt, capability surface, and run history) is at [theseus.network/poa/5DkY…4hN6](https://theseus.network/poa/5DkY7e3sN2pQ9bX4hG8wRtL6vK1cM5fT9oP3jW7xZ2aV4hN6).
 
 The mechanism's failure mode was visible in the metrics on day one. What it didn't have was a counterparty with judgment, the authority to refuse, and a public record of every call it made. Building that counterparty was waiting on a chain that could host it.
