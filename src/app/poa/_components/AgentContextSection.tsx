@@ -18,17 +18,13 @@ export default function AgentContextSection({ context, agentName }: Props) {
       style={{ borderColor: "var(--poa-rule)" }}
       id="agent-context"
     >
-      <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 mb-6">
+      <header className="mb-7 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
         <div>
           <p className="poa-stamp">Agent context</p>
           <h2 className="mt-1 font-serif text-2xl text-[var(--poa-ink)]">
-            What {agentName} reads, knows, and writes
+            What {agentName} reads, what it returns, and the prompt it runs
+            under.
           </h2>
-          <p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
-            The instructions below are the verbatim system prompt the agent
-            runs under. Every decision the agent makes, anyone can read
-            exactly what the model saw and reasoned over.
-          </p>
         </div>
         {context.demoUrl && (
           <Link
@@ -42,17 +38,19 @@ export default function AgentContextSection({ context, agentName }: Props) {
         )}
       </header>
 
-      <div className="grid gap-6 sm:grid-cols-2 mb-6">
+      <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
         {(context.inputs || context.schedule) && (
           <div>
-            <p className="poa-stamp mb-2">Inputs</p>
-            {context.schedule && (
-              <p className="mb-2 text-[12.5px] italic text-[var(--poa-ink-soft)]">
-                {context.schedule}
-              </p>
-            )}
+            <div className="mb-3 flex items-baseline justify-between">
+              <p className="poa-stamp">Reads</p>
+              {context.schedule && (
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                  {context.schedule}
+                </p>
+              )}
+            </div>
             {context.inputs && (
-              <ul className="space-y-1.5 text-[13px] leading-relaxed text-[var(--poa-ink)]">
+              <ul className="space-y-1.5 text-[13.5px] leading-relaxed text-[var(--poa-ink)]">
                 {context.inputs.map((line, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-[var(--poa-ink-soft)]">·</span>
@@ -65,17 +63,20 @@ export default function AgentContextSection({ context, agentName }: Props) {
         )}
         {context.outputs && (
           <div>
-            <p className="poa-stamp mb-2">Output</p>
-            <p className="text-[13px] leading-relaxed text-[var(--poa-ink)]">
+            <p className="poa-stamp mb-3">Returns</p>
+            <p className="text-[13.5px] leading-relaxed text-[var(--poa-ink)]">
               {context.outputs}
             </p>
           </div>
         )}
       </div>
 
-      <div>
-        <div className="mb-2 flex items-baseline justify-between">
-          <p className="poa-stamp">System prompt (verbatim)</p>
+      <div
+        className="mt-10 border-t pt-6"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
+        <div className="mb-3 flex items-baseline justify-between">
+          <p className="poa-stamp">System prompt &middot; verbatim</p>
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
             {context.instructions.length.toLocaleString()} chars
           </p>

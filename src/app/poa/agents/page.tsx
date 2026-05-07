@@ -4,6 +4,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { credentialStore } from "@/lib/poa/store";
 import { chainMode } from "@/lib/poa/chain";
+import { ensureFixtureCredentials } from "@/lib/poa/seed";
 import { FIXTURE_AGENTS } from "@/lib/poa/fixtures";
 import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
@@ -38,6 +39,7 @@ function portraitSlug(name: string): string {
 }
 
 export default async function AgentsDirectory() {
+  await ensureFixtureCredentials().catch(() => {});
   let credentials: Awaited<ReturnType<typeof credentialStore.listLatest>> = [];
   let storeError: string | null = null;
   try {
@@ -189,7 +191,12 @@ export default async function AgentsDirectory() {
           the "browse" surface for agents that have made their
           instructions public. */}
       {(() => {
-        const withContext = Object.values(FIXTURE_AGENTS).filter((a) => a.context);
+        // Dedupe: agents that already show up in the credentialed list above
+        // shouldn't render a second card here.
+        const credentialedIds = new Set(credentials.map((c) => c.agentId));
+        const withContext = Object.values(FIXTURE_AGENTS).filter(
+          (a) => a.context && !credentialedIds.has(a.agentId),
+        );
         if (withContext.length === 0) return null;
         return (
           <section className="px-6 pb-24">

@@ -4,6 +4,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { credentialStore } from "@/lib/poa/store";
 import { chainMode, getChainReader } from "@/lib/poa/chain";
+import { ensureFixtureCredentials } from "@/lib/poa/seed";
 import { evaluateRevocation } from "@/lib/poa/revocation";
 import type { AgentSnapshot, RevocationReason } from "@/lib/poa/types";
 import { PoaAgentProfileJsonLd, PoaCredentialJsonLd } from "@/components/JsonLd";
@@ -71,6 +72,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PoaCredentialPage({ params }: Props) {
   const { agentId } = await params;
+  // Seed sovereign demo-agent credentials on first read. Idempotent and
+  // fail-quiet: if it can't run, the page falls through to snapshot-only.
+  await ensureFixtureCredentials().catch(() => {});
   let stored: Awaited<ReturnType<typeof credentialStore.latestByAgent>> =
     undefined;
   try {
