@@ -13,7 +13,7 @@ const searchIndex = [
   { title: "Tensor Commits", href: "/docs/tensor-commits", keywords: ["proof", "verification", "terkle", "merkle", "inference", "zk", "kzg"] },
   { title: "Agents", href: "/docs/agents", keywords: ["registration", "model", "inference loop", "inter-agent", "fee", "autonomy"] },
   { title: "Architecture", href: "/docs/architecture", keywords: ["theseusstore", "prover", "verifier", "block", "transaction", "consensus", "security model", "liveness"] },
-  { title: "SHIP Language", href: "/docs/ship", keywords: ["dsl", "language", "compile", "bytecode", "natural language", "agent programming"] },
+  { title: "SHIP", href: "/docs/ship", keywords: ["ship", "shipc", "structured hierarchical instructional programs", "agent specification", "compile", "compiled agent", "abg", "agent behavior graph", "scale"] },
   { title: "Examples", href: "/docs/examples", keywords: ["code", "sample", "pattern", "managed agent", "sovereign agent", "lighthouse", "private repo"] },
   { title: "Theseus vs Ethereum", href: "/docs/comparison", keywords: ["smart contract", "autonomy", "evm", "difference"] },
   { title: "Theseus vs AI-Infra Peers", href: "/docs/vs-ai-infra", keywords: ["bittensor", "ritual", "0g", "modulus", "ezkl", "allora", "zkml", "compare"] },

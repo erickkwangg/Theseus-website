@@ -57,7 +57,7 @@ const sections = [
     title: "Build",
     items: [
       { href: "/docs/quickstart", label: "Quick Start", icon: Zap },
-      { href: "/docs/ship", label: "SHIP Language", icon: Code2 },
+      { href: "/docs/ship", label: "SHIP", icon: Code2 },
       { href: "/docs/examples", label: "Examples", icon: Puzzle },
     ],
   },

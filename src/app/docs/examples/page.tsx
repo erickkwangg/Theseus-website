@@ -217,7 +217,7 @@ TLOAD(decoder) -> TMATMUL -> TCOMMIT`}</CodeBlock>
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Previous</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← SHIP Language</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← SHIP</h3>
             </div>
           </Link>
           <Link href="/docs/agents" className="group no-underline">

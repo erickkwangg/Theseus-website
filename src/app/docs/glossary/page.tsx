@@ -72,7 +72,7 @@ const glossaryTerms = [
   },
   {
     term: "SHIP",
-    definition: "Secure Heterogeneous Inference Programming. A domain-specific language for translating natural language into verifiable AIVM bytecode.",
+    definition: "Structured Hierarchical Instructional Programs. A declarative specification format for Theseus agents and their behavior graphs. Compiled by shipc into a SCALE-encoded CompiledAgent that the chain registers directly — the runtime never sees SHIP source.",
     link: "/docs/ship"
   },
   {

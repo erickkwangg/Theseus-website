@@ -12,7 +12,7 @@ const pageNames: Record<string, string> = {
   "tensor-commits": "Tensor Commits",
   "agents": "Agents",
   "architecture": "Architecture",
-  "ship": "SHIP Language",
+  "ship": "SHIP",
   "examples": "Examples",
   "comparison": "Theseus vs Ethereum",
   "tokenomics": "Tokenomics",

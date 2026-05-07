@@ -231,8 +231,8 @@ export default function AgentsPage() {
             <div className="docs-card h-full flex items-start gap-3">
               <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Write agent logic in SHIP DSL</p>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP →</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Author agents in the SHIP spec format</p>
               </div>
             </div>
           </Link>

@@ -8,7 +8,7 @@ const DOCS_ORDER: Array<{ slug: string; title: string }> = [
   { slug: "architecture", title: "Architecture" },
   { slug: "aivm", title: "AIVM" },
   { slug: "tensor-commits", title: "Tensor Commits" },
-  { slug: "ship", title: "SHIP Language" },
+  { slug: "ship", title: "SHIP" },
   { slug: "agents", title: "Agents" },
   { slug: "examples", title: "Examples" },
   { slug: "comparison", title: "Theseus vs Ethereum" },

@@ -16,7 +16,7 @@ const BODY = `# Theseus
 - [AIVM](${SITE_URL}/docs/aivm): The AI Virtual Machine. Tensor-native opcodes, deterministic execution, and cryptographic proof generation. Gas is priced in FLOPs, not opcodes.
 - [Tensor Commits](${SITE_URL}/docs/tensor-commits): Succinct cryptographic proofs for verifiable model inference. ~2 ms verification regardless of model size; sublinear scaling for 70B+ parameter models.
 - [Agents](${SITE_URL}/docs/agents): Registering agents and models, autonomous inference loops, and secure agent-to-agent interaction. Agents are first-class entities with balances and signing keys.
-- [SHIP Language](${SITE_URL}/docs/ship): The domain-specific language that compiles AI intent into bounded, verifiable AIVM execution.
+- [SHIP](${SITE_URL}/docs/ship): Structured Hierarchical Instructional Programs — declarative agent specification format. Compiles via shipc to a SCALE-encoded CompiledAgent the chain registers directly.
 
 ## Building
 

@@ -238,7 +238,7 @@ TSTREAM    - Streaming inference operations`}</CodeBlock>
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full">
               <p className="text-sm text-gray-500 mb-1">Related</p>
-              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP Language →</h3>
+              <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP →</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Write verifiable agent code</p>
             </div>
           </Link>

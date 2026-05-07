@@ -292,7 +292,7 @@ make test-ship`}</CodeBlock>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               { href: "/docs/agents", title: "Build Agents", desc: "Create sophisticated autonomous agents", icon: Bot },
-              { href: "/docs/ship", title: "SHIP Language", desc: "Master the DSL for AI agents", icon: Code2 },
+              { href: "/docs/ship", title: "SHIP", desc: "The declarative spec format agents are authored in", icon: Code2 },
               { href: "/docs/aivm", title: "AIVM Deep Dive", desc: "Understand the VM internals", icon: Layers },
               { href: "/docs/tensor-commits", title: "Tensor Commits", desc: "Learn about verifiable ML", icon: GitBranch },
             ].map((item) => (

@@ -1,57 +1,96 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Code2, AlertTriangle, CheckCircle, Zap, Cpu, Bot, Play } from "lucide-react";
+import {
+  Code2,
+  CheckCircle,
+  Zap,
+  Cpu,
+  Bot,
+  Play,
+  FileCode,
+  Terminal,
+} from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import CodeBlock from "@/components/docs/CodeBlock";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
 
 export const metadata: Metadata = {
-  title: "SHIP Language",
+  title: "SHIP",
   description:
-    "Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution.",
-  keywords: ["SHIP", "Theseus DSL", "AIVM bytecode", "verifiable agent programming"],
+    "SHIP — Structured Hierarchical Instructional Programs. The declarative agent specification format. Compiles to a SCALE-encoded CompiledAgent the chain registers directly.",
+  keywords: [
+    "SHIP",
+    "Theseus agents",
+    "Agent Behavior Graph",
+    "ABG",
+    "CompiledAgent",
+    "shipc",
+    "agent specification",
+  ],
   alternates: { canonical: "/docs/ship" },
 };
 
 export default function SHIPPage() {
   return (
     <div className="docs-content">
-      <DocsPageJsonLd title="SHIP Language" description="Learn SHIP: the domain-specific language that compiles AI intent into bounded, verifiable AIVM execution." slug="ship" />
-      {/* Page Header */}
+      <DocsPageJsonLd
+        title="SHIP"
+        description="SHIP — Structured Hierarchical Instructional Programs. The declarative agent specification format that compiles to a SCALE-encoded CompiledAgent the chain registers directly."
+        slug="ship"
+      />
       <div className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           <Code2 className="h-3 w-3" />
-          Development
+          Build
         </div>
         <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
-          SHIP Language
+          SHIP
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          Secure Heterogeneous Inference Programming. Translating natural language to verifiable bytecode.
+          Structured Hierarchical Instructional Programs. A declarative
+          specification format for Theseus agents and their behavior graphs.
         </p>
       </div>
-        
+
       <div className="prose prose-invert max-w-none">
         <Callout type="tip" title="In one paragraph">
-          SHIP is the source language agents are written in. It compiles to the
-          ABG nodes the runtime executes — model calls, tool calls, conditions,
-          parallel/sequence structure, and terminal nodes that emit signed
-          intents (transfers, context updates, contract calls). The shape of the
-          ABG enforces what an agent can do; SHIP makes that shape ergonomic to
-          write.
+          SHIP is the human-friendly authoring format for agents. A{" "}
+          <code>.ship</code> file declares the agent&rsquo;s metadata, its
+          tools, and its Agent Behavior Graph (ABG): model calls, tool calls,
+          routers, terminal nodes. The <code>shipc</code> compiler lowers it
+          to a canonical <code>CompiledAgent</code> structure, emitted as JSON
+          for tooling and SCALE for on-chain registration. The runtime never
+          sees SHIP source — only the SCALE-encoded blob.
         </Callout>
         <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
-          <li><strong>Compiles to ABG</strong>: nothing in SHIP escapes the bounded node graph the runtime executes against.</li>
-          <li><strong>Capability surface is intrinsic</strong>: the set of models, tools, and intent types the agent can use is encoded in the graph and enforced at runtime.</li>
-          <li><strong>Async by design</strong>: model and tool calls suspend the agent; resume is automatic when the verified result lands.</li>
-          <li><strong>Terminal nodes emit SHIP intents</strong>: transfers, context updates, cross-chain messages, contract calls, callbacks — validated by pallet_ship under the original caller&rsquo;s origin.</li>
+          <li>
+            <strong>Declarative, not Turing-complete</strong>: SHIP describes
+            graph shape and tool schemas, not arbitrary control flow.
+          </li>
+          <li>
+            <strong>Compiles to <code>CompiledAgent</code></strong>: a SCALE-
+            and JSON-encoded canonical structure that the chain decodes into
+            ABG nodes on registration.
+          </li>
+          <li>
+            <strong>Off-chain authoring</strong>: SHIP source lives in your
+            repo. The chain only knows about the compiled blob — runtime
+            bounds (max ABG nodes, max tools per agent, etc.) are enforced
+            during decoding.
+          </li>
+          <li>
+            <strong>Versioned</strong>: <code>0.x</code> experimental,{" "}
+            <code>1.x</code> stable (backwards-compatible within major).
+          </li>
         </ul>
 
         {/* Try in playground */}
         <Callout type="info" title="Try SHIP without installing">
           <p className="mb-3">
-            The playground compiles a real SHIP agent and shows a simulated execution trace. Useful for getting a feel for the syntax before reading the full page.
+            The playground compiles a real SHIP agent and shows a simulated
+            execution trace. Useful for getting a feel for the syntax before
+            reading the rest of the page.
           </p>
           <Link
             href="/playground"
@@ -62,47 +101,298 @@ export default function SHIPPage() {
           </Link>
         </Callout>
 
-        {/* Why SHIP */}
+        {/* What SHIP describes */}
         <section className="mb-12">
-          <h2 id="why-ship" className="text-2xl font-medium mb-4">Why SHIP Is Necessary</h2>
-          
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            SHIP translates model inference outputs into executable operations: asset transfers, agent interactions, and contract calls. It provides a constrained, verifiable layer between model output and runtime execution.
+          <h2
+            id="what-ship-describes"
+            className="text-2xl font-medium mb-4"
+          >
+            What a SHIP file describes
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            A SHIP file is a single, self-contained agent definition. It
+            captures the four things the chain needs to register an agent and
+            run it.
           </p>
 
-          <Callout type="warning" title="The Problem with Raw LLM Outputs">
-            LLMs can generate text resembling executable logic, but they&apos;re non-deterministic and lack formal guarantees about structure, safety, or correctness. Using raw outputs for bytecode generation introduces serious issues.
-          </Callout>
-
-          <div className="grid sm:grid-cols-2 gap-3 mt-6">
+          <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { icon: AlertTriangle, title: "Unpredictability", desc: "Hallucinations, unsafe constructs" },
-              { icon: AlertTriangle, title: "Unbounded execution", desc: "DoS risks" },
-              { icon: AlertTriangle, title: "No proof anchoring", desc: "Verification impossible" },
-              { icon: AlertTriangle, title: "Opaque intent", desc: "Implicit goals" },
+              {
+                title: "Agent metadata",
+                desc: "Name, version, entry node, system prompt.",
+              },
+              {
+                title: "Tool definitions",
+                desc: "Names, descriptions, JSON schemas. The capability surface the runtime enforces.",
+              },
+              {
+                title: "ABG nodes",
+                desc: "Model calls, tool calls, routers, end nodes — the directed graph the runtime executes.",
+              },
+              {
+                title: "Constants and IDs",
+                desc: "Canonical 32-byte hex IDs for models and sub-agents. No fuzzy tag lookup at registration time.",
+              },
             ].map((item) => (
               <div key={item.title} className="docs-card">
-                <div className="flex items-center gap-2 mb-1">
-                  <item.icon className="h-4 w-4 text-yellow-400" />
-                  <span className="text-slate-900 dark:text-white font-medium text-sm">{item.title}</span>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 text-xs">{item.desc}</p>
+                <h3 className="text-sm font-medium mb-1.5 text-slate-900 dark:text-white">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Ecosystem Examples */}
+        {/* End-to-end flow */}
         <section className="mb-12">
-          <h2 id="ecosystem-examples" className="text-2xl font-medium mb-4">Ecosystem Examples</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Public repositories in the Theseus ecosystem show how SHIP is used in deployed applications.
+          <h2
+            id="flow"
+            className="text-2xl font-medium mb-6 flex items-center gap-3"
+          >
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <Zap className="h-5 w-5" />
+            </span>
+            Authoring → on-chain
+          </h2>
+
+          <div className="space-y-3">
+            {[
+              {
+                step: "1",
+                title: "Author",
+                desc: "Write agent.ship in your editor. Declare metadata, tools, and the ABG.",
+                icon: FileCode,
+              },
+              {
+                step: "2",
+                title: "Compile",
+                desc: "shipc compile agent.ship — produces both agent.ship.json (for tooling/CI) and agent.ship.scale (for on-chain).",
+                icon: Terminal,
+              },
+              {
+                step: "3",
+                title: "Register",
+                desc: "Submit the SCALE blob to register_compiled_agent. The runtime decodes it into ABG nodes and enforces bounds (MaxAbgNodes, MaxToolsPerAgent, …).",
+                icon: Cpu,
+              },
+              {
+                step: "4",
+                title: "Run",
+                desc: "call_agent triggers the ABG. SHIP is no longer in the picture — the chain executes the decoded graph.",
+                icon: Bot,
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.step} className="docs-card">
+                  <div className="flex items-start gap-3">
+                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-500 text-white text-xs font-bold shrink-0">
+                      {item.step}
+                    </span>
+                    <Icon className="h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="font-medium text-sm text-slate-900 dark:text-white">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mt-0.5">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Canonical example (from the SHIP v0.1 README) */}
+        <section className="mb-12">
+          <h2 id="example" className="text-2xl font-medium mb-4">
+            A canonical example
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            A small ReAct-style weather agent: one model call, one router on
+            whether the model emitted tool calls, one tool-execution node.
+            This is the exact shape <code>shipc</code> compiles.
+          </p>
+
+          <CodeBlock language="text" filename="react_weather.ship">{`ship 0.1
+
+// Canonical IDs (32-byte 0x-prefixed hex). Model tags are no longer accepted.
+const MODEL_GPT51 = "0xe49630ccb59348a9cbbd9989e6774e8b7340b347fbcd94da1f535fb25c15f117"
+
+agent "react_weather"
+version 1
+entry   model_main
+system "You are a concise weather assistant. Use tools when necessary."
+
+tools {
+  """Get the weather for a city"""
+  get_weather(city: string, unit?: "c" | "f")
+}
+
+graph {
+  model_main: model_call(MODEL_GPT51) { next -> check_tools }
+  check_tools: has_tool_calls ? tool_exec : end
+  tool_exec:  tool_call         { next -> end }
+}`}</CodeBlock>
+
+          <div className="grid md:grid-cols-2 gap-4 mt-6">
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
+                <code className="text-indigo-300">agent</code>,{" "}
+                <code className="text-indigo-300">version</code>,{" "}
+                <code className="text-indigo-300">entry</code>
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                Identifies the agent and pins which node the runtime starts
+                with. The version is part of the agent&rsquo;s on-chain
+                identity.
+              </p>
+            </div>
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
+                <code className="text-indigo-300">system</code> prompt
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                Stored on-chain alongside the agent. Anyone calling{" "}
+                <code>get_agent</code> can read exactly what the model is told
+                to do.
+              </p>
+            </div>
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
+                <code className="text-indigo-300">tools</code> block
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                Declares the tool surface the agent can call. Each tool has a
+                description and a typed signature; the runtime rejects calls
+                outside this set.
+              </p>
+            </div>
+            <div className="docs-card">
+              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
+                <code className="text-indigo-300">graph</code> body
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                The ABG. Each node is a <code>model_call</code>,{" "}
+                <code>tool_call</code>, router (<code>?:</code> or{" "}
+                <code>match</code>), or terminal <code>end</code>. The shape
+                bounds what the agent can do.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Compile + register */}
+        <section className="mb-12">
+          <h2
+            id="compile-register"
+            className="text-2xl font-medium mb-4 flex items-center gap-3"
+          >
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+              <Terminal className="h-5 w-5" />
+            </span>
+            Compile and register
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            <code>shipc</code> emits both a JSON artifact (for editors,
+            explorers, CI) and a SCALE blob (for the chain) from the same
+            canonical structure.
+          </p>
+
+          <CodeBlock language="bash" filename="terminal">{`# Default: compile and write both JSON and SCALE artifacts into ./artifacts
+shipc compile react_weather.ship
+# -> ./artifacts/react_weather.ship.json
+# -> ./artifacts/react_weather.ship.scale
+
+# SCALE only, to stdout (for piping into a deploy script)
+shipc compile react_weather.ship --scale > react_weather.ship.scale
+
+# Validate without emitting
+shipc validate react_weather.ship`}</CodeBlock>
+
+          <p className="text-gray-600 dark:text-gray-400 mt-4 leading-relaxed">
+            Submit the SCALE blob via the chain&rsquo;s{" "}
+            <code>register_compiled_agent</code> extrinsic. The runtime
+            decodes it, applies pallet bounds, and stores{" "}
+            <code>AgentInfo + AbgNodes</code>. From that point on, the agent
+            is callable via <code>call_agent</code>.
+          </p>
+
+          <Callout type="info" title="The runtime doesn’t know about SHIP">
+            On-chain code only ever sees a SCALE-encoded{" "}
+            <code>CompiledAgent</code> blob. SHIP source, the parser, and{" "}
+            <code>shipc</code> all live off-chain. That separation means new
+            authoring formats can be added without touching consensus — they
+            just need to produce the same canonical structure.
+          </Callout>
+        </section>
+
+        {/* Design principles */}
+        <section className="mb-12">
+          <h2
+            id="principles"
+            className="text-2xl font-medium mb-6 flex items-center gap-3"
+          >
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+              <CheckCircle className="h-5 w-5" />
+            </span>
+            Design principles
+          </h2>
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              {
+                title: "Bounded by construction",
+                desc: "Max ABG nodes, max tools per agent, max system prompt size — all enforced during SCALE decoding. A SHIP file that exceeds any bound fails registration.",
+              },
+              {
+                title: "Single source of truth",
+                desc: "The same shared types power shipc’s JSON output and the runtime’s SCALE decoding. They can’t drift.",
+              },
+              {
+                title: "Auditable",
+                desc: "Anyone can inspect a deployed agent: pull AgentInfo + AbgNodes, render the graph, read the system prompt verbatim. No hidden logic.",
+              },
+              {
+                title: "Replaceable",
+                desc: "shipc is one toolchain. Anything that emits a valid CompiledAgent SCALE blob can register an agent. SHIP source isn’t a moat.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="docs-card">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <CheckCircle className="h-4 w-4 text-green-400 shrink-0" />
+                  <span className="text-slate-900 dark:text-white font-medium text-sm">
+                    {item.title}
+                  </span>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Ecosystem */}
+        <section className="mb-12">
+          <h2 id="ecosystem-examples" className="text-2xl font-medium mb-4">
+            Ecosystem examples
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            Public Theseus repos that ship SHIP-defined agents end-to-end.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">proof-of-lobster</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-                Demonstrates persistent agent identity, scheduled execution, and social interaction flows.
+                Persistent agent identity, scheduled execution, social
+                interaction flows.
               </p>
               <a
                 href="https://github.com/Theseuschain/proof-of-lobster"
@@ -116,7 +406,8 @@ export default function SHIPPage() {
             <div className="docs-card">
               <h3 className="text-lg font-medium mb-2">the-prediction-market</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-                Demonstrates agent-to-contract calls, contract-to-agent callbacks, and resolver workflows.
+                Agent-to-contract calls, contract-to-agent callbacks, resolver
+                workflows.
               </p>
               <a
                 href="https://github.com/Theseuschain/the-prediction-market"
@@ -127,193 +418,20 @@ export default function SHIPPage() {
                 View repository →
               </a>
             </div>
-          </div>
-        </section>
-
-        {/* Design Principles */}
-        <section className="mb-12">
-          <h2 id="principles" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
-              <CheckCircle className="h-5 w-5" />
-            </span>
-            Design Principles
-          </h2>
-          
-          <div className="grid sm:grid-cols-2 gap-3">
-            {[
-              { title: "Determinism", desc: "Static bounds, known gas/memory" },
-              { title: "Verifiability", desc: "Tensor Commit proofs" },
-              { title: "Traceability", desc: "Tied to agent context" },
-              { title: "Composability", desc: "Staged, delegated, templated" },
-            ].map((item) => (
-              <div key={item.title} className="docs-card">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400" />
-                  <span className="text-slate-900 dark:text-white font-medium text-sm">{item.title}</span>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Execution Flow */}
-        <section className="mb-12">
-          <h2 id="execution" className="text-2xl font-medium mb-6 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
-              <Zap className="h-5 w-5" />
-            </span>
-            Execution Flow
-          </h2>
-          
-          <div className="space-y-3">
-            {[
-              { step: "1", title: "Inference", desc: "Agent runs model, generates output" },
-              { step: "2", title: "Compilation", desc: "NL→SHIP via fine-tuned agent, then SHIP→bounded opcodes" },
-              { step: "3", title: "Verification", desc: "Tensor Commit proves inference integrity, bytecode validated" },
-              { step: "4", title: "Execution", desc: "Program submitted to runtime" },
-            ].map((item) => (
-              <div key={item.step} className="docs-card">
-                <div className="flex items-start gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-purple-500 text-white text-xs font-bold shrink-0">
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3 className="font-medium text-sm">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Why SHIP, simple example */}
-        <section className="mb-12">
-          <h2 id="example-simple" className="text-2xl font-medium mb-4">Minimal example</h2>
-
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            A sovereign agent runs a summarization model. The summary contains a trigger like &quot;Pay 10 $THE to agent_xyz for document processing&quot;.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="docs-card border-red-900/30">
-              <h3 className="text-lg font-medium mb-2 text-red-400">Without SHIP</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Text parsed directly into bytecode, causing potential execution unaligned with agent&apos;s intention.
-              </p>
-            </div>
-            <div className="docs-card border-green-900/50">
-              <h3 className="text-lg font-medium mb-2 text-green-400">With SHIP</h3>
-              <CodeBlock language="text" filename="example.ship">{`let payment = Transfer {
-  recipient: agent_xyz,
-  amount: 10 THE
-};
-commit(payment);`}</CodeBlock>
-            </div>
-          </div>
-        </section>
-
-        {/* Full real-world example */}
-        <section className="mb-12">
-          <h2 id="example-full" className="text-2xl font-medium mb-4">A full SHIP agent</h2>
-
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            The example below is a real Theseus agent that creates prediction markets from natural-language requests. It walks through the four core SHIP constructs: agent declaration, structured model invocation, contract calls, and node-based control flow.
-          </p>
-
-          <CodeBlock language="text" filename="market_creator.ship">{`#[agent(name = "MarketCreator", version = 1, ship = "1.0")]
-
-const gpt_5_1: bytes32 = 0xe496...f117;
-const CREATE_MARKET_SELECTOR: bytes4 = 0x01000001;
-
-struct MarketParams {
-  question: string,
-  options: string[],
-  deadline_blocks: number,
-}
-
-#[entry]
-node start(request: string) {
-  messages.push(system("Generate structured market params"));
-  messages.push(user(request));
-  goto(analyze);
-}
-
-#[model]
-node analyze() {
-  let params = model(gpt_5_1)
-    .schema(MarketParams)
-    .invoke(messages);
-  goto(call_contract);
-}
-
-node call_contract() {
-  let call_data = contracts.encode_call(
-    CREATE_MARKET_SELECTOR, params
-  );
-  contracts.call(
-    PREDICTION_MARKET_CONTRACT,
-    call_data,
-    0n,
-    10000000000n
-  );
-}`}</CodeBlock>
-
-          <div className="grid md:grid-cols-2 gap-4 mt-6">
             <div className="docs-card">
-              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[agent]</code> declaration
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-xs">
-                Identifies the program as an agent and locks the SHIP version. Runtime uses this to validate ABI and assign an on-chain identity.
+              <h3 className="text-lg font-medium mb-2">SHIP toolchain</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                <code>shipc</code> compiler, shared types, runtime helper, and
+                the SHIP v0.1 spec.
               </p>
-            </div>
-            <div className="docs-card">
-              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[entry]</code> and <code className="text-indigo-300">node</code> blocks
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-xs">
-                <code className="text-indigo-300">node</code> is the basic unit of control flow. <code className="text-indigo-300">#[entry]</code> marks the public entry point. <code className="text-indigo-300">goto</code> transitions between nodes deterministically.
-              </p>
-            </div>
-            <div className="docs-card">
-              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">#[model]</code> nodes
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-xs">
-                Mark a node as performing inference. The runtime emits a Tensor Commit for any <code className="text-indigo-300">model(...)</code> call inside, and the result is constrained by <code className="text-indigo-300">.schema(...)</code> so downstream code reads typed fields, not free text.
-              </p>
-            </div>
-            <div className="docs-card">
-              <h3 className="text-sm font-medium mb-1 text-slate-900 dark:text-white">
-                <code className="text-indigo-300">contracts.call(...)</code>
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-xs">
-                Same calling convention as Ethereum-style contracts: selector, encoded args, value, gas budget. Agents can call contracts, contracts can callback agents in later blocks.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-gray-500 text-sm mt-6">
-            See the <Link href="/docs/examples" className="text-indigo-300 hover:underline no-underline">Examples page</Link> for the registration patterns and AIVM-level snippets. Try this exact agent live in the <Link href="/playground" className="text-indigo-300 hover:underline no-underline">playground</Link>.
-          </p>
-        </section>
-
-        {/* Integration with AIVM */}
-        <section className="mb-12">
-          <h2 id="integration" className="text-2xl font-medium mb-4 flex items-center gap-3">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
-              <Cpu className="h-5 w-5" />
-            </span>
-            Integration with AIVM
-          </h2>
-          
-          <div className="docs-card">
-            <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-              <p>SHIP compiles to AIVM opcodes, executed via <code className="text-indigo-300">AGENT_TICK()</code> or <code className="text-indigo-300">MODEL_INFER()</code>.</p>
-              <p>Each construct maps to safe primitives: <code className="text-indigo-300">TLOAD</code>, <code className="text-indigo-300">TCUSTOM</code>, <code className="text-indigo-300">STATE_EXPORT</code>, <code className="text-indigo-300">TRANSFER_TOKEN</code>.</p>
-              <p>Tensor Commits link inference outputs to on-chain outcomes.</p>
+              <a
+                href="https://github.com/Theseuschain/SHIP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-300 hover:underline text-sm no-underline"
+              >
+                View repository →
+              </a>
             </div>
           </div>
         </section>
@@ -324,8 +442,12 @@ node call_contract() {
             <div className="docs-card h-full flex items-start gap-3">
               <Cpu className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">← AIVM Details</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Learn about the execution environment</p>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">
+                  ← AIVM
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  How verified inference results re-enter agent execution.
+                </p>
               </div>
             </div>
           </Link>
@@ -333,15 +455,18 @@ node call_contract() {
             <div className="docs-card h-full flex items-start gap-3">
               <Bot className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Build Agents →</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Create agents using SHIP</p>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">
+                  Agents →
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  Lifecycle, ABGs, the three-stage execution model.
+                </p>
               </div>
             </div>
           </Link>
         </div>
       </div>
       <PrevNext current="ship" />
-
     </div>
   );
 }

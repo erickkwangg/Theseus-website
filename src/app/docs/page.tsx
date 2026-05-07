@@ -20,7 +20,7 @@ import { CollectionPageJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: { absolute: "Theseus Developer Docs" },
   description:
-    "Developer documentation for Theseus: architecture, AIVM, SHIP language, Tensor Commits, examples, and quickstart guides.",
+    "Developer documentation for Theseus: architecture, AIVM, SHIP, Tensor Commits, examples, and quickstart guides.",
   keywords: ["Theseus docs", "AIVM", "SHIP", "quickstart", "Tensor Commits"],
   alternates: { canonical: "/docs" },
 };
@@ -32,7 +32,7 @@ const DOCS_COLLECTION = [
   { name: "AIVM", path: "/docs/aivm", description: "The AI Virtual Machine: tensor-native opcodes, deterministic execution, FLOPs gas." },
   { name: "Tensor Commits", path: "/docs/tensor-commits", description: "Succinct cryptographic proofs for verifiable model inference." },
   { name: "Agents", path: "/docs/agents", description: "Registering agents and models, autonomous inference loops, agent-to-agent interaction." },
-  { name: "SHIP Language", path: "/docs/ship", description: "Domain-specific language compiling AI intent into bounded, verifiable bytecode." },
+  { name: "SHIP", path: "/docs/ship", description: "Declarative agent specification format. Compiles to a SCALE-encoded CompiledAgent the chain registers directly." },
   { name: "Examples", path: "/docs/examples", description: "Full SHIP examples and ecosystem walkthroughs." },
   { name: "Theseus vs Ethereum", path: "/docs/comparison", description: "Architecture and trust-model comparison with Ethereum smart contracts." },
   { name: "Theseus vs AI-Infra Peers", path: "/docs/vs-ai-infra", description: "Side-by-side with Bittensor, Ritual, 0G, Modulus, Allora." },
@@ -48,7 +48,7 @@ export default function DocsHomePage() {
     <div>
       <CollectionPageJsonLd
         name="Theseus Developer Docs"
-        description="Developer documentation for Theseus: architecture, AIVM, SHIP language, Tensor Commits, examples, and quickstart guides."
+        description="Developer documentation for Theseus: architecture, AIVM, SHIP, Tensor Commits, examples, and quickstart guides."
         url="https://theseus.network/docs"
         items={DOCS_COLLECTION}
       />
@@ -131,7 +131,7 @@ export default function DocsHomePage() {
               <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 transition-colors">
                 <Code2 className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-medium group-hover:text-indigo-300 transition-colors">SHIP Language</h3>
+              <h3 className="text-lg font-medium group-hover:text-indigo-300 transition-colors">SHIP</h3>
             </div>
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
               Build agent workflows using SHIP, the domain-specific language for Theseus.
@@ -222,7 +222,7 @@ export default function DocsHomePage() {
             <div className="flex items-center gap-3 p-4 bg-slate-100/80 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 rounded-lg hover:border-slate-400 dark:hover:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-900 transition-all">
               <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors" />
               <div>
-                <span className="text-sm font-medium group-hover:text-white transition-colors">SHIP Language</span>
+                <span className="text-sm font-medium group-hover:text-white transition-colors">SHIP</span>
                 <p className="text-xs text-gray-500">DSL for agents</p>
               </div>
             </div>

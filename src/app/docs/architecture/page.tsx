@@ -85,7 +85,7 @@ export default function ArchitecturePage() {
                     <span className="px-2 py-1 bg-gray-800 rounded">Tensor operations</span>
                     <span className="px-2 py-1 bg-gray-800 rounded">Agent scheduling</span>
                     <span className="px-2 py-1 bg-gray-800 rounded">Proof generation</span>
-                    <span className="px-2 py-1 bg-gray-800 rounded">SHIP DSL</span>
+                    <span className="px-2 py-1 bg-gray-800 rounded">SHIP spec</span>
                   </div>
                 </div>
               </div>
