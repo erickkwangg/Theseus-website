@@ -33,7 +33,7 @@ Determinism is a feature until it's the bug. A smart contract that gates mint/re
 
 You could code static thresholds: refuse mint if the peg deviates more than 2%, refuse redeem if LUNA supply grew more than 10% in 24 hours. Static thresholds either fire too early — turning a wobble into a panic by blocking exits — or too late, when the mechanism has already cascaded. Worse, attackers learn the thresholds and design around them.
 
-What's actually missing is *judgment*: a process that reads the full vault state, weighs the trade-offs (mint and redeem aren't symmetric under stress), and decides whether the next action moves the system toward equilibrium or away from it. That's not a smart contract. That's an agent.
+What's missing is *judgment*: a process that reads the full vault state, weighs the trade-offs (mint and redeem behave very differently under stress), and decides whether the next action moves the system toward equilibrium or away from it. Solidity can't do that. An LLM agent reading on-chain inputs can.
 
 ## What a failsafe agent reads
 
@@ -45,7 +45,7 @@ A Theseus agent in the failsafe slot sees five raw signals on every mint or rede
 
 The system prompt tells the agent: you're not the oracle. You don't price LUNA. You decide whether *running the mechanism right now* is safe. You're not given thresholds. You reason from the metrics. Mint adds new claims to a stressed system; redeem is users trying to exit. The two aren't symmetric. Blanket refusal turns a wobble into a panic. Blanket approval lets a slow leak become a hemorrhage.
 
-That last instruction matters. The agent isn't a kill switch. It's a counterparty whose decision quality you can verify after the fact.
+That last instruction matters. The agent's job isn't to halt the protocol whenever something looks bad — it's to decline the specific actions that visibly accelerate the cascade, and to show the work behind every refusal so users can review it later.
 
 ## What the agent would have decided each day
 
@@ -61,7 +61,7 @@ We built a Theseus agent of exactly this shape and replayed the actual Terra tim
 
 The agent allows during Healthy because the mechanism is working. It refuses Mint during Wobble because adding new UST claims to a system whose peg is already under stress amplifies what's wrong, while still letting users exit. By Cracking, the LUNA supply is already growing 18% in 24 hours — more redemptions visibly accelerate the cascade — so the agent refuses both directions.
 
-The reasoning the agent produces at each step isn't templated. It's a paragraph from a frontier LLM citing the specific numbers it sees, naming the dynamic ("supply growing 18% in 24 hours while peg sits 500bps below $1"), and ending with its decision.
+Each step's reasoning is real model output, generated live. The agent cites the specific numbers it sees, names the dynamic in plain language ("supply growing 18% in 24 hours while peg sits 500bps below $1"), and ends with its decision.
 
 ## Why this needs Theseus, not just an off-chain LLM
 
@@ -73,7 +73,7 @@ You could imagine running this agent off-chain: a Python service hitting an LLM 
 
 **The history isn't durable.** A protocol's failsafe needs an audit trail that outlasts any operator's S3 bucket. Theseus stores agent runs in the AKG — the Agent Knowledge Graph — with on-chain anchors. The history is the chain.
 
-The Terra contracts had none of these properties because the chain they ran on wasn't designed for them. A failsafe that lives outside the operator's control, whose reasoning is signed by the agent itself, and whose history is part of consensus — that's a Theseus shape, not a Solidity shape.
+The Terra contracts had none of these properties because the chain underneath them wasn't built to host them. A failsafe that lives outside the operator's control, whose reasoning is signed by the agent itself, and whose history is part of consensus needs a runtime designed around exactly that shape. Theseus is the runtime.
 
 ## Try it yourself
 
@@ -83,6 +83,4 @@ The agent is live. Step through the five days of the actual Terra collapse and w
 
 You'll see verdicts as they're made, the agent's full reasoning streaming live, and the counterfactual: what a naive contract would have done in the same moment. The PoA profile for the agent — its system prompt, its capability surface, its run history — is at [theseus.network/poa/5DkY…4hN6](https://theseus.network/poa/5DkY7e3sN2pQ9bX4hG8wRtL6vK1cM5fT9oP3jW7xZ2aV4hN6).
 
-The collapse didn't have to happen. The mechanism's failure mode was visible in the metrics on day one. What was missing was something with judgment, the authority to refuse, and a record anyone could verify.
-
-That's the agent shape Theseus exists to host.
+The mechanism's failure mode was visible in the metrics on day one. What it didn't have was a counterparty with judgment, the authority to refuse, and a public record of every call it made. Building that counterparty was waiting on a chain that could host it.
