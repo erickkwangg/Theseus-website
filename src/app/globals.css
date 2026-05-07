@@ -1273,6 +1273,29 @@ body:has(.poa-shell) {
   letter-spacing: 0.22em;
 }
 
+/* Playground panel: inverts the local PoA palette so the contents read
+   as runtime data — terminal-feel in light mode, lifted card in dark
+   mode. Children using --poa-ink / --poa-ink-soft / --poa-rule / --poa-sepia
+   flip automatically. */
+.poa-shell .poa-playground {
+  --poa-ink: #F5EDE0;
+  --poa-ink-soft: #B7AB99;
+  --poa-rule: rgba(245, 237, 224, 0.18);
+  --poa-rule-soft: rgba(245, 237, 224, 0.08);
+  --poa-sepia: #A39482;
+  background: #14110D;
+  color: var(--poa-ink);
+}
+.dark .poa-shell .poa-playground {
+  --poa-ink: #14110D;
+  --poa-ink-soft: #4A4339;
+  --poa-rule: rgba(20, 17, 13, 0.18);
+  --poa-rule-soft: rgba(20, 17, 13, 0.08);
+  --poa-sepia: #8A7864;
+  background: #F5EDE0;
+  color: var(--poa-ink);
+}
+
 /* Diagonal VOID watermark across revoked credentials. */
 .poa-void { position: relative; }
 .poa-void::after {

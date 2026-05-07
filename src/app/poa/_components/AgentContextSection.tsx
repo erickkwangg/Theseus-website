@@ -38,10 +38,10 @@ export default function AgentContextSection({ context, agentName }: Props) {
         )}
       </header>
 
-      <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
+      <div className="poa-playground grid gap-x-10 gap-y-8 px-6 py-7 sm:grid-cols-[5fr_4fr] sm:px-8 sm:py-8">
         {(context.inputs || context.schedule) && (
           <div>
-            <div className="mb-3 flex items-baseline justify-between">
+            <div className="mb-3 flex items-baseline justify-between gap-4">
               <p className="poa-stamp">Reads</p>
               {context.schedule && (
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
@@ -50,9 +50,9 @@ export default function AgentContextSection({ context, agentName }: Props) {
               )}
             </div>
             {context.inputs && (
-              <ul className="space-y-1.5 text-[13.5px] leading-relaxed text-[var(--poa-ink)]">
+              <ul className="space-y-2 text-[13.5px] leading-relaxed text-[var(--poa-ink)]">
                 {context.inputs.map((line, i) => (
-                  <li key={i} className="flex gap-2">
+                  <li key={i} className="flex gap-2.5">
                     <span className="text-[var(--poa-ink-soft)]">·</span>
                     <span>{line}</span>
                   </li>
@@ -62,7 +62,10 @@ export default function AgentContextSection({ context, agentName }: Props) {
           </div>
         )}
         {context.outputs && (
-          <div>
+          <div
+            className="sm:border-l sm:pl-10"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
             <p className="poa-stamp mb-3">Returns</p>
             <p className="text-[13.5px] leading-relaxed text-[var(--poa-ink)]">
               {context.outputs}
