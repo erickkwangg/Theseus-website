@@ -43,7 +43,7 @@ export default function ArchitecturePage() {
           consensus layer only trusts what it can verify.
         </Callout>
         <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
-          <li><strong>Chain</strong>: Substrate runtime with Theseus-specific pallets (aivm, models, agents, tools, store, ship) plus standard FRAME (balances, aura, grandpa).</li>
+          <li><strong>Chain</strong>: Substrate runtime with Theseus-specific pallets (aivm, models, agents, tools, store, ship) plus standard FRAME pallets for balances and BFT consensus.</li>
           <li><strong>Prover network</strong>: full prover with TensorCommitment proofs, plus lite provers for hosted-API breadth at alpha.</li>
           <li><strong>Blessed enclave</strong>: TEE that holds the chain&rsquo;s key, executes off-chain tools (web search, authenticated HTTP), decrypts agent credentials.</li>
           <li><strong>Layer0 bridge</strong>: any token bridges in; seus (gas) is bought only with frxUSD.</li>

@@ -82,14 +82,9 @@ const PALLETS: PalletRow[] = [
     role: "Standard block timestamp.",
   },
   {
-    name: "aura",
+    name: "consensus",
     scope: "frame",
-    role: "Block production. Slot-based round-robin among the validator set, 6-second slot duration.",
-  },
-  {
-    name: "grandpa",
-    scope: "frame",
-    role: "Finality. BFT finality gadget — deterministic finality once ≥ 2/3 of validators agree.",
+    role: "Block production and BFT finality. Slot-based round-robin among the validator set with 6-second slots; deterministic finality once ≥ 2/3 of validators agree.",
   },
 ];
 

@@ -27,7 +27,7 @@ const GROUPS: Group[] = [
   {
     title: "Block",
     rows: [
-      { name: "Slot duration", value: "6 s", note: "Aura, round-robin among the validator set" },
+      { name: "Slot duration", value: "6 s", note: "round-robin among the validator set" },
       { name: "Block hash count", value: "2,400" },
       { name: "Max block weight", value: "2 s ref time" },
       { name: "Max block size", value: "5 MB" },
