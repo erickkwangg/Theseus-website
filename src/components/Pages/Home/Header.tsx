@@ -17,19 +17,24 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 type NavItem = {
   label: string;
-  number: string;
+  /** Numbered nav items mirror the homepage section labels (01 Mission,
+   *  03 Build, …). External pages have no number — same numbering pool
+   *  on the home page would lie about where the link goes. */
+  number?: string;
   href: string;
   external?: boolean;
 };
 
 const NAV_ITEMS: NavItem[] = [
+  // Numbered: anchors into the homepage's labeled sections.
   { label: "Mission", number: "01", href: "/#mission" },
-  { label: "Proof of Agenthood", number: "02", href: "/poa" },
-  { label: "Browse", number: "03", href: "/poa/agents" },
-  { label: "Build", number: "04", href: "/#build" },
-  { label: "Markets", number: "05", href: "/#market" },
-  { label: "Blog", number: "06", href: "/blog" },
-  { label: "Docs", number: "07", href: "/docs" },
+  { label: "Build", number: "03", href: "/#build" },
+  { label: "Markets", number: "04", href: "/#market" },
+  // Unnumbered: external routes.
+  { label: "Proof of Agenthood", href: "/poa" },
+  { label: "Browse", href: "/poa/agents" },
+  { label: "Blog", href: "/blog" },
+  { label: "Docs", href: "/docs" },
 ];
 
 const DESKTOP_LINK_CLASS = [
@@ -114,7 +119,7 @@ export default function Header() {
                           className={MOBILE_LINK_CLASS}
                         >
                           <span className={NUMBER_MOBILE_CLASS}>
-                            {item.number}
+                            {item.number ?? ""}
                           </span>
                           <span className={LABEL_MOBILE_CLASS}>
                             {item.label}
@@ -127,7 +132,7 @@ export default function Header() {
                           className={MOBILE_LINK_CLASS}
                         >
                           <span className={NUMBER_MOBILE_CLASS}>
-                            {item.number}
+                            {item.number ?? ""}
                           </span>
                           <span className={LABEL_MOBILE_CLASS}>
                             {item.label}
@@ -167,16 +172,24 @@ export default function Header() {
                         rel="noopener noreferrer"
                         className={DESKTOP_LINK_CLASS}
                       >
-                        <span className={NUMBER_DESKTOP_CLASS}>
-                          {item.number}
-                        </span>{" "}
+                        {item.number && (
+                          <>
+                            <span className={NUMBER_DESKTOP_CLASS}>
+                              {item.number}
+                            </span>{" "}
+                          </>
+                        )}
                         {item.label}
                       </a>
                     ) : (
                       <Link href={item.href} className={DESKTOP_LINK_CLASS}>
-                        <span className={NUMBER_DESKTOP_CLASS}>
-                          {item.number}
-                        </span>{" "}
+                        {item.number && (
+                          <>
+                            <span className={NUMBER_DESKTOP_CLASS}>
+                              {item.number}
+                            </span>{" "}
+                          </>
+                        )}
                         {item.label}
                       </Link>
                     )}
