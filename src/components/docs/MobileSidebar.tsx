@@ -26,6 +26,11 @@ import {
   FileCode,
   Settings2,
   Terminal,
+  Workflow,
+  Wrench,
+  Database,
+  Shield,
+  Vote,
 } from "lucide-react";
 
 const sections = [
@@ -55,6 +60,15 @@ const sections = [
     ],
   },
   {
+    title: "System",
+    items: [
+      { href: "/docs/execution", label: "Execution Model", icon: Workflow },
+      { href: "/docs/provers", label: "Provers", icon: Cpu },
+      { href: "/docs/tools", label: "Tools & Enclave", icon: Wrench },
+      { href: "/docs/data-availability", label: "Data Availability", icon: Database },
+    ],
+  },
+  {
     title: "Build",
     items: [
       { href: "/docs/quickstart", label: "Quick Start", icon: Zap },
@@ -75,6 +89,8 @@ const sections = [
   {
     title: "Network",
     items: [
+      { href: "/docs/security", label: "Security", icon: Shield },
+      { href: "/docs/governance", label: "Governance", icon: Vote },
       { href: "/docs/tokenomics", label: "Tokenomics", icon: Coins },
       { href: "/docs/status", label: "Status & Roadmap", icon: Activity },
     ],

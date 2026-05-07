@@ -8,7 +8,7 @@ const BODY = `# Theseus
 
 - [Theseus](${SITE_URL}/): An open runtime for autonomous AI agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
 - [Introduction](${SITE_URL}/docs/introduction): Why a runtime where agents hold their own keys, balance, and state, and how it differs from running an LLM in a smart contract.
-- [Architecture](${SITE_URL}/docs/architecture): The three-layer design: AIVM execution, TheseusStore data availability, and HotStuff BFT proof-of-stake consensus.
+- [Architecture](${SITE_URL}/docs/architecture): Substrate-based runtime with Theseus-specific pallets, off-chain provers, blessed enclave for tools, Layer0 bridge — verify-not-replicate consensus.
 - [Status & Roadmap](${SITE_URL}/docs/status): What is live, what is in private preview, and what is planned next.
 
 ## Concepts
@@ -17,6 +17,15 @@ const BODY = `# Theseus
 - [Tensor Commits](${SITE_URL}/docs/tensor-commits): Succinct cryptographic proofs for verifiable model inference. ~2 ms verification regardless of model size; sublinear scaling for 70B+ parameter models.
 - [Agents](${SITE_URL}/docs/agents): Registering agents and models, autonomous inference loops, and secure agent-to-agent interaction. Agents are first-class entities with balances and signing keys.
 - [SHIP](${SITE_URL}/docs/ship): Structured Hierarchical Instructional Programs — declarative agent specification format. Compiles via shipc to a SCALE-encoded CompiledAgent the chain registers directly.
+
+## System
+
+- [Execution Model](${SITE_URL}/docs/execution): Three-stage queue / prove / resume. How an agent call lands, gets proved off-chain, and resumes via an inherent-driven on_initialize hook.
+- [Provers](${SITE_URL}/docs/provers): Two-tier prover ecosystem (full TensorCommitment vs lite signature-only), VRF selection over a capacity registry, BLS12-381 + sumcheck + Plookup-style lookups.
+- [Tools & Enclave](${SITE_URL}/docs/tools): On-chain tools execute deterministically; off-chain tools (web search, authenticated HTTP, x402) run inside a TEE that holds the chain's key. Credential model evolves user-provided → agent-created → self-sovereign.
+- [Data Availability](${SITE_URL}/docs/data-availability): TheseusStore — content-addressed roots anchored on-chain (weights_root, context_root) make heavy data verifiable without on-chain replication. Correctness vs availability separation.
+- [Security](${SITE_URL}/docs/security): Trust assumptions at alpha (validators, full prover, lite provers, blessed enclave), prover accountability, DoS defense, KZG verification cost model.
+- [Governance](${SITE_URL}/docs/governance): Forkless runtime upgrades via set_code, validator vote with grace period and delegation, scope at alpha (runtime / prover set / validator set).
 
 ## Building
 

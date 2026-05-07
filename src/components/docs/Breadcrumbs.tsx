@@ -15,6 +15,12 @@ const pageNames: Record<string, string> = {
   "ship": "SHIP",
   "examples": "Examples",
   "comparison": "Theseus vs Ethereum",
+  "execution": "Execution Model",
+  "provers": "Provers",
+  "tools": "Tools & Enclave",
+  "data-availability": "Data Availability",
+  "security": "Security",
+  "governance": "Governance",
   "tokenomics": "Tokenomics",
   "glossary": "Glossary",
 };
