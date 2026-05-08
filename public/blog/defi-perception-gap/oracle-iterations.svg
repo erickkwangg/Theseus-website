@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 940" width="1600" height="940">
+  <defs>
+    <pattern id="dotgrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="0.8" fill="#1C1F25"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="940" fill="#0A0B0D"/>
+  <rect width="1600" height="940" fill="url(#dotgrid)"/>
+
+  <!-- HEADER -->
+  <g fill="#EDE8DD">
+    <text x="80" y="100" font-family="'Fraunces', 'Times New Roman', Georgia, serif" font-size="36" font-weight="300" letter-spacing="-0.5">A decade of better oracles. A decade of perception exploits.</text>
+    <text x="80" y="138" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill-opacity="0.50">TOP TRACK: ORACLE-SYSTEM MILESTONES.   BOTTOM TRACK: ORACLE-MANIPULATION EXPLOITS.</text>
+  </g>
+
+  <!-- year axis (axis y = 460) -->
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+    <line x1="160" y1="460" x2="1480" y2="460" stroke="#EDE8DD" stroke-opacity="0.30" stroke-width="1"/>
+    <g fill="#EDE8DD" fill-opacity="0.55" font-size="12" letter-spacing="2">
+      <line x1="160"  y1="456" x2="160"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="160"  y="446" text-anchor="middle">2017</text>
+      <line x1="325"  y1="456" x2="325"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="325"  y="446" text-anchor="middle">2018</text>
+      <line x1="490"  y1="456" x2="490"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="490"  y="446" text-anchor="middle">2019</text>
+      <line x1="655"  y1="456" x2="655"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="655"  y="446" text-anchor="middle">2020</text>
+      <line x1="820"  y1="456" x2="820"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="820"  y="446" text-anchor="middle">2021</text>
+      <line x1="985"  y1="456" x2="985"  y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="985"  y="446" text-anchor="middle">2022</text>
+      <line x1="1150" y1="456" x2="1150" y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="1150" y="446" text-anchor="middle">2023</text>
+      <line x1="1315" y1="456" x2="1315" y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="1315" y="446" text-anchor="middle">2024</text>
+      <line x1="1480" y1="456" x2="1480" y2="464" stroke="#EDE8DD" stroke-opacity="0.55"/>
+      <text x="1480" y="446" text-anchor="middle">2025</text>
+    </g>
+  </g>
+
+  <!-- track labels -->
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+    <text x="80" y="180" font-size="11" letter-spacing="3" fill="#EDE8DD" fill-opacity="0.65">ORACLE-SYSTEM MILESTONES</text>
+    <text x="80" y="860" font-size="11" letter-spacing="3" fill="#FF5B3A">ORACLE-MANIPULATION EXPLOITS</text>
+  </g>
+
+  <!-- TOP TRACK: MILESTONES -->
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+
+    <g stroke="#EDE8DD" stroke-opacity="0.30" stroke-width="0.8">
+      <line x1="160"  y1="455" x2="160"  y2="412"/>
+      <line x1="490"  y1="455" x2="490"  y2="412"/>
+      <line x1="687"  y1="455" x2="687"  y2="347"/>
+      <line x1="770"  y1="455" x2="770"  y2="412"/>
+      <line x1="825"  y1="455" x2="825"  y2="277"/>
+      <line x1="875"  y1="455" x2="875"  y2="347"/>
+      <line x1="940"  y1="455" x2="940"  y2="207"/>
+      <line x1="1095" y1="455" x2="1095" y2="412"/>
+      <line x1="1240" y1="455" x2="1240" y2="347"/>
+    </g>
+
+    <circle cx="160" cy="410" r="4" fill="#EDE8DD"/>
+    <text x="170" y="406" font-size="12" fill="#EDE8DD">Chainlink</text>
+    <text x="170" y="422" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">2017</text>
+
+    <circle cx="490" cy="410" r="4" fill="#EDE8DD"/>
+    <text x="500" y="406" font-size="12" fill="#EDE8DD">Band Protocol</text>
+    <text x="500" y="422" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">2019</text>
+
+    <circle cx="687" cy="345" r="4" fill="#EDE8DD"/>
+    <text x="697" y="341" font-size="12" fill="#EDE8DD">Compound oracle (TWAP)</text>
+    <text x="697" y="357" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">MAR 2020</text>
+
+    <circle cx="770" cy="410" r="4" fill="#EDE8DD"/>
+    <text x="780" y="406" font-size="12" fill="#EDE8DD">UMA optimistic oracle</text>
+    <text x="780" y="422" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">SEP 2020</text>
+
+    <circle cx="825" cy="275" r="4" fill="#EDE8DD"/>
+    <text x="835" y="271" font-size="12" fill="#EDE8DD">Pyth Network</text>
+    <text x="835" y="287" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">MAR 2021</text>
+
+    <circle cx="875" cy="345" r="4" fill="#EDE8DD"/>
+    <text x="885" y="341" font-size="12" fill="#EDE8DD">API3</text>
+    <text x="885" y="357" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">JUL 2021</text>
+
+    <circle cx="940" cy="205" r="4" fill="#EDE8DD"/>
+    <text x="950" y="201" font-size="12" fill="#EDE8DD">Redstone Oracles</text>
+    <text x="950" y="217" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">NOV 2021</text>
+
+    <circle cx="1095" cy="410" r="4" fill="#EDE8DD"/>
+    <text x="1105" y="406" font-size="12" fill="#EDE8DD">Pyth pull-based</text>
+    <text x="1105" y="422" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">SEP 2022</text>
+
+    <circle cx="1240" cy="345" r="4" fill="#EDE8DD"/>
+    <text x="1250" y="341" font-size="12" fill="#EDE8DD">Chronicle Labs (Maker)</text>
+    <text x="1250" y="357" font-size="10" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">JUL 2023</text>
+  </g>
+
+  <!-- BOTTOM TRACK: EXPLOITS -->
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+
+    <g stroke="#FF5B3A" stroke-opacity="0.55" stroke-width="0.8">
+      <line x1="683"  y1="465" x2="683"  y2="508"/>
+      <line x1="778"  y1="465" x2="778"  y2="578"/>
+      <line x1="792"  y1="465" x2="792"  y2="648"/>
+      <line x1="898"  y1="465" x2="898"  y2="578"/>
+      <line x1="940"  y1="465" x2="940"  y2="718"/>
+      <line x1="970"  y1="465" x2="970"  y2="788"/>
+      <line x1="1028" y1="465" x2="1028" y2="508"/>
+      <line x1="1042" y1="465" x2="1042" y2="578"/>
+      <line x1="1125" y1="465" x2="1125" y2="648"/>
+    </g>
+
+    <!-- bZx FEB 2020 (B1) -->
+    <circle cx="683" cy="510" r="4" fill="#FF5B3A"/>
+    <text x="673" y="514" font-size="11" text-anchor="end" fill="#EDE8DD">bZx</text>
+    <text x="673" y="530" font-size="10" text-anchor="end" letter-spacing="1" fill="#FF5B3A">$1M</text>
+    <text x="673" y="546" font-size="9"  text-anchor="end" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">FEB 2020</text>
+
+    <!-- Harvest OCT 2020 (B2) -->
+    <circle cx="778" cy="580" r="4" fill="#FF5B3A"/>
+    <text x="768" y="584" font-size="11" text-anchor="end" fill="#EDE8DD">Harvest Finance</text>
+    <text x="768" y="600" font-size="10" text-anchor="end" letter-spacing="1" fill="#FF5B3A">$24M</text>
+    <text x="768" y="616" font-size="9"  text-anchor="end" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">OCT 2020</text>
+
+    <!-- Compound NOV 2020 (B3) -->
+    <circle cx="792" cy="650" r="4" fill="#FF5B3A"/>
+    <text x="802" y="654" font-size="11" fill="#EDE8DD">Compound oracle</text>
+    <text x="802" y="670" font-size="10" letter-spacing="1" fill="#FF5B3A">$103M</text>
+    <text x="802" y="686" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">NOV 2020</text>
+
+    <!-- Pancake Bunny MAY 2021 (B2) -->
+    <circle cx="898" cy="580" r="4" fill="#FF5B3A"/>
+    <text x="908" y="584" font-size="11" fill="#EDE8DD">Pancake Bunny</text>
+    <text x="908" y="600" font-size="10" letter-spacing="1" fill="#FF5B3A">$45M</text>
+    <text x="908" y="616" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">MAY 2021</text>
+
+    <!-- Cream AUG 2021 (B4, y=720) -->
+    <circle cx="940" cy="720" r="4" fill="#FF5B3A"/>
+    <text x="930" y="724" font-size="11" text-anchor="end" fill="#EDE8DD">Cream Finance</text>
+    <text x="930" y="740" font-size="10" text-anchor="end" letter-spacing="1" fill="#FF5B3A">$19M</text>
+    <text x="930" y="756" font-size="9"  text-anchor="end" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">AUG 2021</text>
+
+    <!-- Cream OCT 2021 (B5, y=790) -->
+    <circle cx="970" cy="790" r="4" fill="#FF5B3A"/>
+    <text x="980" y="794" font-size="11" fill="#EDE8DD">Cream Finance</text>
+    <text x="980" y="810" font-size="10" letter-spacing="1" fill="#FF5B3A">$130M</text>
+    <text x="980" y="826" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">OCT 2021</text>
+
+    <!-- Inverse APR 2022 (B1) -->
+    <circle cx="1028" cy="510" r="4" fill="#FF5B3A"/>
+    <text x="1038" y="514" font-size="11" fill="#EDE8DD">Inverse Finance</text>
+    <text x="1038" y="530" font-size="10" letter-spacing="1" fill="#FF5B3A">$15M</text>
+    <text x="1038" y="546" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">APR 2022</text>
+
+    <!-- Terra MAY 2022 (B2) -->
+    <circle cx="1042" cy="580" r="4" fill="#FF5B3A"/>
+    <text x="1052" y="584" font-size="11" fill="#EDE8DD">Terra UST</text>
+    <text x="1052" y="600" font-size="10" letter-spacing="1" fill="#FF5B3A" fill-opacity="0.7">market cap</text>
+    <text x="1052" y="616" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">MAY 2022</text>
+
+    <!-- Mango OCT 2022 (B3) -->
+    <circle cx="1125" cy="650" r="4" fill="#FF5B3A"/>
+    <text x="1135" y="654" font-size="11" fill="#EDE8DD">Mango Markets</text>
+    <text x="1135" y="670" font-size="10" letter-spacing="1" fill="#FF5B3A">$117M</text>
+    <text x="1135" y="686" font-size="9"  letter-spacing="1" fill="#EDE8DD" fill-opacity="0.45">OCT 2022</text>
+  </g>
+
+  <!-- DATA CAVEAT -->
+  <g transform="translate(80 905)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+    <text x="0" y="0" font-size="11" letter-spacing="1" fill="#EDE8DD" fill-opacity="0.55" font-style="italic">Approximate dollar amounts from public post-mortems. Categorization reflects whether the exploit hinged on price or data perception.</text>
+  </g>
+
+  <!-- bottom-right signature -->
+  <g transform="translate(1430 905)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <line x1="0" y1="-12" x2="90" y2="-12" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="0" y="6" font-size="11" letter-spacing="2">THESEUS.NETWORK</text>
+  </g>
+
+</svg>

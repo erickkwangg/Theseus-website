@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="1600" height="1100">
+  <defs>
+    <pattern id="dotgrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="0.8" fill="#1C1F25"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#0A0B0D"/>
+  <rect width="1600" height="1100" fill="url(#dotgrid)"/>
+
+  <!-- ============ HEADER ============ -->
+  <g fill="#EDE8DD">
+    <text x="80" y="100" font-family="'Fraunces', 'Times New Roman', Georgia, serif" font-size="36" font-weight="300" letter-spacing="-0.5">What the contract saw vs what the market was.</text>
+    <text x="80" y="138" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" font-size="12" letter-spacing="2" fill-opacity="0.50">THREE PERCEPTION FAILURES, ONE STRUCTURAL PATTERN.</text>
+  </g>
+
+  <!-- column header markers (subtle, just to mark the three sections) -->
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <text x="80"   y="220" font-size="11" letter-spacing="2">CASE</text>
+    <line x1="80" y1="232" x2="380" y2="232" stroke="#EDE8DD" stroke-opacity="0.20"/>
+
+    <text x="500"  y="220" font-size="11" letter-spacing="2">PERCEPTION GAP</text>
+    <line x1="500" y1="232" x2="1180" y2="232" stroke="#EDE8DD" stroke-opacity="0.20"/>
+
+    <text x="1310" y="220" font-size="11" letter-spacing="2">CONSEQUENCE</text>
+    <line x1="1310" y1="232" x2="1500" y2="232" stroke="#EDE8DD" stroke-opacity="0.20"/>
+  </g>
+
+  <!-- ===========================================================
+       ROW 1: TERRA (LUNA) : May 2022
+       Oracle: $1.00 (peg). Market: ~$0.20 to $0.50.
+       Bar scale: max bar width = 600px = $1.20 worth (so $1.00 = 500px, $0.20 = 100px).
+       =========================================================== -->
+  <g transform="translate(0 280)">
+    <!-- left column: case label -->
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="80" y="0"  font-size="22" letter-spacing="2" fill="#EDE8DD">TERRA (LUNA)</text>
+      <text x="80" y="24" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">MAY 2022</text>
+      <text x="80" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.85">algorithmic stablecoin (UST)</text>
+      <text x="80" y="76" font-size="13" fill="#EDE8DD" fill-opacity="0.55" font-style="italic">peg held by mint/burn against LUNA</text>
+    </g>
+
+    <!-- middle column: two bars -->
+    <!-- scale: 1 dollar = 500 px. start x = 500, baseline left aligned. -->
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <!-- ORACLE bar: $1.00 → 500px wide -->
+      <text x="500" y="-8" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">ORACLE</text>
+      <rect x="500" y="0" width="500" height="28" fill="#5A5E68" rx="2"/>
+      <text x="1010" y="20" font-size="13" letter-spacing="1" fill="#EDE8DD">$1.00  ·  peg</text>
+
+      <!-- MARKET bar: range $0.20 to $0.50 → 100 to 250 px. Show as a single bar to ~$0.35 (mid) with range markers. -->
+      <text x="500" y="60" font-size="11" letter-spacing="2" fill="#FF5B3A">MARKET</text>
+      <rect x="500" y="68" width="175" height="28" fill="#FF5B3A" rx="2"/>
+      <!-- range whiskers showing the spread $0.20–$0.50 -->
+      <line x1="600" y1="62" x2="600" y2="102" stroke="#FF5B3A" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="750" y1="62" x2="750" y2="102" stroke="#FF5B3A" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="685" y="88" font-size="13" letter-spacing="1" fill="#EDE8DD">~$0.20 to $0.50</text>
+
+      <!-- gap callout -->
+      <line x1="500" y1="122" x2="1000" y2="122" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="0.7"/>
+      <text x="500" y="142" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.45">GAP: ORACLE INSISTED ON $1 WHILE THE MARKET DENIED IT.</text>
+    </g>
+
+    <!-- right column: consequence -->
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="1310" y="0"  font-size="22" letter-spacing="1" fill="#FF5B3A">~$60B</text>
+      <text x="1310" y="22" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.65">MARKET CAP LOST</text>
+      <text x="1310" y="46" font-size="11" fill="#EDE8DD" fill-opacity="0.45" font-style="italic">not extracted by an attacker</text>
+    </g>
+  </g>
+
+  <!-- thin row separator -->
+  <line x1="80" y1="450" x2="1500" y2="450" stroke="#EDE8DD" stroke-opacity="0.10" stroke-width="0.7"/>
+
+  <!-- ===========================================================
+       ROW 2: MANGO MARKETS : Oct 2022
+       Oracle: ~$0.91 (manipulated up from $0.04). Market: ~$0.04.
+       The contrast is huge. Scale: bars normalized to oracle = 500 px.
+       So $0.91 = 500 px, $0.04 ≈ 22 px.
+       =========================================================== -->
+  <g transform="translate(0 510)">
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="80" y="0"  font-size="22" letter-spacing="2" fill="#EDE8DD">MANGO MARKETS</text>
+      <text x="80" y="24" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">OCTOBER 2022</text>
+      <text x="80" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.85">derivatives, MNGO perp</text>
+      <text x="80" y="76" font-size="13" fill="#EDE8DD" fill-opacity="0.55" font-style="italic">collateral priced from a single thin oracle</text>
+    </g>
+
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <!-- ORACLE bar (manipulated): full 500 px -->
+      <text x="500" y="-8" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">ORACLE</text>
+      <rect x="500" y="0" width="500" height="28" fill="#5A5E68" rx="2"/>
+      <text x="1010" y="20" font-size="13" letter-spacing="1" fill="#EDE8DD">~$0.91  ·  manipulated</text>
+
+      <!-- MARKET bar (true price): tiny -->
+      <text x="500" y="60" font-size="11" letter-spacing="2" fill="#FF5B3A">MARKET</text>
+      <rect x="500" y="68" width="22" height="28" fill="#FF5B3A" rx="2"/>
+      <text x="540" y="88" font-size="13" letter-spacing="1" fill="#EDE8DD">~$0.04</text>
+
+      <!-- gap callout: 22x -->
+      <line x1="500" y1="122" x2="1000" y2="122" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="0.7"/>
+      <text x="500" y="142" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.45">GAP: A SHORT, FUNDED PUMP MOVED THE ORACLE 22x ABOVE THE TRUE PRICE.</text>
+    </g>
+
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="1310" y="0"  font-size="22" letter-spacing="1" fill="#FF5B3A">$117M</text>
+      <text x="1310" y="22" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.65">EXTRACTED</text>
+      <text x="1310" y="46" font-size="11" fill="#EDE8DD" fill-opacity="0.45" font-style="italic">borrowed against inflated collateral</text>
+    </g>
+  </g>
+
+  <!-- separator -->
+  <line x1="80" y1="680" x2="1500" y2="680" stroke="#EDE8DD" stroke-opacity="0.10" stroke-width="0.7"/>
+
+  <!-- ===========================================================
+       ROW 3: CREAM FINANCE : Oct 2021
+       Oracle: ~$2.00+ (flash-loan inflated). Market: ~$1.00.
+       Roughly 2x. Scale: $2.00 = 500 px, $1.00 = 250 px.
+       =========================================================== -->
+  <g transform="translate(0 740)">
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="80" y="0"  font-size="22" letter-spacing="2" fill="#EDE8DD">CREAM FINANCE</text>
+      <text x="80" y="24" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">OCTOBER 2021</text>
+      <text x="80" y="56" font-size="13" fill="#EDE8DD" fill-opacity="0.85">lending, yUSD collateral</text>
+      <text x="80" y="76" font-size="13" fill="#EDE8DD" fill-opacity="0.55" font-style="italic">price derived from a vault share, not a market</text>
+    </g>
+
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <!-- ORACLE bar: $2.00+ → 500 px -->
+      <text x="500" y="-8" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.55">ORACLE</text>
+      <rect x="500" y="0" width="500" height="28" fill="#5A5E68" rx="2"/>
+      <text x="1010" y="20" font-size="13" letter-spacing="1" fill="#EDE8DD">~$2.00+  ·  flash-loan inflated</text>
+
+      <!-- MARKET bar: $1.00 → 250 px -->
+      <text x="500" y="60" font-size="11" letter-spacing="2" fill="#FF5B3A">MARKET</text>
+      <rect x="500" y="68" width="250" height="28" fill="#FF5B3A" rx="2"/>
+      <text x="760" y="88" font-size="13" letter-spacing="1" fill="#EDE8DD">~$1.00  ·  underlying</text>
+
+      <line x1="500" y1="122" x2="1000" y2="122" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="0.7"/>
+      <text x="500" y="142" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.45">GAP: A SINGLE-BLOCK FLASH LOAN INFLATED THE COMPUTED PRICE ROUGHLY 2x.</text>
+    </g>
+
+    <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace">
+      <text x="1310" y="0"  font-size="22" letter-spacing="1" fill="#FF5B3A">$130M</text>
+      <text x="1310" y="22" font-size="11" letter-spacing="2" fill="#EDE8DD" fill-opacity="0.65">EXTRACTED</text>
+      <text x="1310" y="46" font-size="11" fill="#EDE8DD" fill-opacity="0.45" font-style="italic">borrowed against share-price spike</text>
+    </g>
+  </g>
+
+  <!-- ===========================================================
+       FOOTER: data caveat
+       =========================================================== -->
+  <g transform="translate(80 990)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#EDE8DD" stroke-opacity="0.25"/>
+    <text x="0" y="22" font-size="11" letter-spacing="2">NOTES</text>
+    <text x="0" y="46" font-size="11" letter-spacing="1" fill-opacity="0.55">Dollar amounts approximate, sourced from public post-mortems (Rekt News, project postmortems).</text>
+    <text x="0" y="64" font-size="11" letter-spacing="1" fill-opacity="0.55">Terra entry shows market cap loss, not attacker-extracted value. Extracted figures reflect borrower-realized loss.</text>
+  </g>
+
+  <!-- bottom-right signature -->
+  <g transform="translate(1430 1050)" font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <line x1="0" y1="-12" x2="90" y2="-12" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="0" y="6" font-size="11" letter-spacing="2">THESEUS.NETWORK</text>
+  </g>
+
+</svg>
