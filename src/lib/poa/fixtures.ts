@@ -277,6 +277,69 @@ OUTPUT: strict JSON, single object, no commentary.
 }`,
     },
   },
+  "5HsJ4xK2nL8pR3qY7mZ9wB1tF5dH6cV8aN2eW4xT6bP9sM3K": {
+    agentId: "5HsJ4xK2nL8pR3qY7mZ9wB1tF5dH6cV8aN2eW4xT6bP9sM3K",
+    name: "Market Resolver",
+    summary:
+      "The resolver_oracle.ship agent from Theseuschain/the-prediction-market. Called by the prediction-market contract via chain extension whenever a market needs to resolve. Reads the question, options, criteria, and verification source — uses web_search, fetch_url, and get_price tools to gather evidence — then returns a winning option index, confidence score, and evidence summary. Multi-option-aware (binary YES/NO and N-way markets both supported).",
+    abgHash: "0x4c8b3e1d9f2a6c0e5b8d7f1a4c9e2b5d8f1a3c6e9b2d5f8a1c4e7b0d3f6a9c2e",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["deepseek-chat", "gpt-5.1"],
+      tools: ["web_search", "fetch_url", "get_price"],
+      intentTypes: ["resolve_market", "context_update"],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_330_000,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "60000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule: "called by the prediction-market contract via chain extension when a market needs to resolve",
+      demoUrl: "https://agent-oracle.theseus.network/adjudicate",
+      inputs: [
+        "Market ID",
+        "Question and the available options (0-indexed)",
+        "Resolution criteria (the bar the evidence has to clear)",
+        "Verification source (drives which tools the agent reaches for)",
+      ],
+      outputs:
+        "ResolutionResult: { market_id, winning_option (0-based index), confidence_pct (0-100), evidence_summary }. Returned to the calling contract via callback. Reasoning blob anchored via TensorCommit; on-chain hash points to it.",
+      instructions: `You are a prediction market resolution oracle.
+
+Your job is to determine the winning option for prediction markets by verifying facts.
+
+## Rules
+1. For PRICE markets: use the get_price tool to fetch current prices.
+2. For EVENT markets: use web_search then fetch_url to verify outcomes.
+3. ALWAYS verify with tools before deciding — never guess.
+4. Compare evidence against the exact resolution criteria.
+5. Return the INDEX of the winning option (0-based).
+
+## Output Format
+Return a ResolutionResult with:
+- winning_option: index of the winning option (0 to N-1)
+- confidence_pct: confidence level (0-100)
+- evidence_summary: brief explanation citing specific evidence
+
+## Important
+- Options are 0-indexed: first option is 0, second is 1, etc.
+- You must pick exactly ONE winning option.
+- If truly unable to determine, pick the most likely based on available evidence and reflect the uncertainty in confidence_pct.
+
+Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.ship`,
+    },
+  },
 };
 
 export const FIXTURE_AGENTS: Record<SS58Address, AgentSnapshot> = FIXTURES;
