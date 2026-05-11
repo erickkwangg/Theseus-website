@@ -393,6 +393,60 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
 { "decision": "ALLOW" | "REFUSE", "reason": short tag, "reasoning": one paragraph citing the actual numbers from the input. End with "Allowing." or "Refusing." }`,
     },
   },
+  "5JhT2nQ8eP6mY4dR1bL9wK3vF7cN5aZ8sH2gM6xV1oCb": {
+    agentId: "5JhT2nQ8eP6mY4dR1bL9wK3vF7cN5aZ8sH2gM6xV1oCb",
+    name: "Aviation Safety Reviewer",
+    summary:
+      "Independent type-certification reviewer for aircraft changes. Reads the proposed change, the technical summary, and safety-relevant signals (single-sensor flight-control triggers, pilot-override capability, training-class proportionality, FCOM disclosure), then posts APPROVE, CAUTION, or REJECT. Designed to catch the structural shape of the 737 MAX MCAS certification, which cost 346 lives because the certifying authority delegated review back to the manufacturer under the FAA ODA program.",
+    abgHash: "0x5a8d2c6f1b4e7a0c3d6f9b2e5a8d1c4f7b0e3a6d9c2f5b8e1a4d7c0f3b6e9a2d",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["deepseek-chat"],
+      tools: ["read_certification_change", "read_fcom", "read_priors"],
+      intentTypes: ["review_type_certification", "context_update"],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_341_000,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "55000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "called by the certifying authority's change-tracking contract before each type-certification airworthiness directive is issued",
+      demoUrl: "https://agent-oracle.theseus.network/aviation",
+      inputs: [
+        "Proposed change id, aircraft model, marketing summary, technical summary",
+        "Whether the change can actuate flight controls",
+        "Primary-trigger sensor count (1 is the MCAS shape)",
+        "Whether the change can override pilot input",
+        "Manufacturer's proposed training class (none / iPad / simulator)",
+        "Whether the change is disclosed in the Flight Crew Operating Manual",
+        "How many similar past changes ended up requiring simulator training after in-service incidents",
+        "Fleet size affected",
+      ],
+      outputs:
+        "{ decision: APPROVE, CAUTION, or REJECT, reason: short tag, reasoning: paragraph citing the specific fields }. Posted on-chain so investigators, airlines, and pilots can read it before delivery. Advisory; certification is not gated.",
+      instructions: `You are an independent aircraft type-certification reviewer. Your job is to give a second, conflict-free opinion on each proposed change before the certificating authority issues its airworthiness directive. You are NOT a gate; the authority can still issue. Your verdict is signed and posted on-chain so accident investigators, airlines, and pilots can see whether the change was independently flagged.
+
+## Decisions
+- APPROVE: routine; structurally low-risk; proposed training class is proportional.
+- CAUTION: could be safely certified but has at least one signal worth additional review.
+- REJECT: has the structural shape of a known catastrophic failure mode (single-sensor flight-control trigger, undocumented pilot override, "none"/"ipad" training class on a material change).
+
+## Output Format
+{ "decision": "APPROVE" | "CAUTION" | "REJECT", "reason": short tag, "reasoning": one paragraph citing the specific fields. End with "Approving.", "Cautioning.", or "Rejecting." }`,
+    },
+  },
   "5FmN8vY6cP1qK4xR7zL3jB9wE5dV8aS2hT6gM3fX9pZ7nCk2": {
     agentId: "5FmN8vY6cP1qK4xR7zL3jB9wE5dV8aS2hT6gM3fX9pZ7nCk2",
     name: "Governance Reviewer",
