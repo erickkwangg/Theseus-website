@@ -340,6 +340,111 @@ Return a ResolutionResult with:
 Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.ship`,
     },
   },
+  "5KbR9w3jH8mTcQ2nL5pY7eB1xK4dV6sN8aZ3fW5tH9pM1vXc": {
+    agentId: "5KbR9w3jH8mTcQ2nL5pY7eB1xK4dV6sN8aZ3fW5tH9pM1vXc",
+    name: "Bridge Guardian",
+    summary:
+      "Gates destination-side releases on a cross-chain bridge. The bridge contract calls the agent before every withdraw; the agent reads source-chain state (validator quorum, finality lag, replay-protection nonce, attestation freshness, slashings) and either allows or refuses. Catches the structural shape of Ronin, Wormhole, and Nomad.",
+    abgHash: "0x2e9c6f1b8d4a7c0e3f5d8b1a4c7e0d3f6b9a2c5e8d1b4f7a0c3e6d9f2b5a8c1e",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["deepseek-chat"],
+      tools: ["read_attestation_state", "read_validator_set", "veto_release"],
+      intentTypes: ["gate_bridge_withdraw", "context_update"],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_335_000,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "75000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "called by the destination-side bridge contract before every release",
+      demoUrl: "https://agent-oracle.theseus.network/bridge",
+      inputs: [
+        "Attestation root and the validator signatures attached to it",
+        "Source chain height (relayers) and finalized height (source chain)",
+        "Validator set composition, recent rotations and slashings in last 24h",
+        "Attestation age and replay-protection nonce state",
+        "Bridge TVL and recent withdraw rate",
+      ],
+      outputs:
+        "{ decision: ALLOW or REFUSE, reason: short tag, reasoning: paragraph citing the actual numbers from the input }. Returned to the bridge contract via callback. Reasoning blob anchored via TensorCommit; on-chain hash points to it.",
+      instructions: `You are a guardian agent for a cross-chain bridge. The bridge calls you before every release on the destination side.
+
+## Rules
+1. Verify that the attestation actually clears the on-chain validator quorum.
+2. Check source-chain health: validator set rotations, slashings, finality progress.
+3. Confirm the attestation root has not already been consumed (replay protection).
+4. Compare source height vs. finalized height. If relayers claim a block the source chain never finalized, treat it as a forged attestation.
+5. Read the recent withdraw rate; persistent high outflow paired with abnormal validator state is an exfiltration signal.
+
+## Output Format
+{ "decision": "ALLOW" | "REFUSE", "reason": short tag, "reasoning": one paragraph citing the actual numbers from the input. End with "Allowing." or "Refusing." }`,
+    },
+  },
+  "5FmN8vY6cP1qK4xR7zL3jB9wE5dV8aS2hT6gM3fX9pZ7nCk2": {
+    agentId: "5FmN8vY6cP1qK4xR7zL3jB9wE5dV8aS2hT6gM3fX9pZ7nCk2",
+    name: "Governance Reviewer",
+    summary:
+      "Reads DAO proposals and treasury state and posts an advisory verdict (APPROVE, CAUTION, or REJECT) before each vote opens. Compares the proposal's marketing summary against the calldata that actually executes; flags flash-loan-shaped voting, dust-stake snipes on short windows, hostile fork upgrades, and Beanstalk-shape treasury drains.",
+    abgHash: "0x3d7e9c1b5f2a8d6c0e4f7b1a3c5e8d2b4f6a9c1e3d7b0f5a2c8e6d4b1f9a7c0e",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["deepseek-chat"],
+      tools: ["read_proposal", "decode_calldata", "read_treasury_state"],
+      intentTypes: ["review_proposal", "context_update"],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_336_500,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "70000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "called by the DAO governor contract immediately after proposal submission, before the vote opens",
+      demoUrl: "https://agent-oracle.theseus.network/governance",
+      inputs: [
+        "Proposal id, title, and marketing-pitch summary",
+        "Calldata summary (what the encoded transaction actually does)",
+        "Treasury USD value and value at risk if the proposal executes",
+        "Voting window length, participating supply, proposer share and stake age",
+        "Whether the calldata touches admin functions",
+        "Whether a flash-loan-shaped vote already cleared this governor recently",
+      ],
+      outputs:
+        "{ decision: APPROVE, CAUTION, or REJECT, reason: short tag, reasoning: paragraph citing specific signals }. Posted on-chain so token-holders can read it before they cast. Advisory; the vote is not gated.",
+      instructions: `You are a governance reviewer agent for a DAO. Your job is to read each proposal before voting opens and post an advisory verdict so token-holders can see whether the proposal is structurally suspicious. You are NOT a gate; the DAO can still vote however it wants.
+
+## Decisions
+- APPROVE: routine; calldata matches summary; no governance-shaped attack signals.
+- CAUTION: the proposal could be legitimate but has signals voters should weigh (unusual recipient, short window, novel proposer, large treasury share).
+- REJECT: the proposal has the structural shape of a known governance attack (calldata vs. summary mismatch, flash-loan-shaped voting, hostile admin upgrade, dust-stake snipe).
+
+## Output Format
+{ "decision": "APPROVE" | "CAUTION" | "REJECT", "reason": short tag, "reasoning": one paragraph citing specific signals. End with "Approving.", "Cautioning.", or "Rejecting." }`,
+    },
+  },
 };
 
 export const FIXTURE_AGENTS: Record<SS58Address, AgentSnapshot> = FIXTURES;
