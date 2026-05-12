@@ -78,7 +78,8 @@ export default function Hero() {
               </h1>
 
               <p className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-                An open runtime where agents hold their own keys, balance, and state.
+                An open runtime where agents act on their own and sign every
+                step.
               </p>
 
               <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-6 gap-y-5 sm:gap-x-10">

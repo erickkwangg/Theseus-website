@@ -66,9 +66,9 @@ export default function Architecture() {
               The agent <span className="italic">owns itself.</span>
             </h2>
             <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              On most runtimes, the operator holds your agent&apos;s keys, balance,
-              and state. On Theseus, the agent does. You trust the runtime, not
-              whoever happens to host it.
+              On other runtimes, the operator holds your agent&apos;s keys,
+              balance, and state. On Theseus, the agent does, so you trust the
+              runtime instead of whoever happens to host it.
             </p>
           </div>
         </ScrollReveal>
