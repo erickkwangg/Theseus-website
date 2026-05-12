@@ -60,12 +60,13 @@ const marketTiles: MarketTile[] = [
     demoUrl: "https://demo-agents.theseus.network/adjudicate",
   },
   {
-    category: "Treasury",
-    title: "DAO treasury operator",
-    kind: "Existing demand",
-    stage: "Managed",
+    category: "Aerospace",
+    title: "Aircraft cert reviewer",
+    kind: "Built · non-crypto",
+    stage: "Civic",
     description:
-      "Pays contributors and tops up reserves under a written allocation policy. Every check is signed and posted before the next vote.",
+      "Independent second opinion on aircraft type-certification changes. Built to catch the 737 MAX MCAS shape that cost 346 lives.",
+    demoUrl: "https://demo-agents.theseus.network/aviation",
   },
   {
     category: "Funds",
@@ -75,6 +76,14 @@ const marketTiles: MarketTile[] = [
     description:
       "Owns its own USDC and WETH. Self-schedules its own rebalance ticks against a frozen mandate. No human in the loop.",
     demoUrl: "https://demo-agents.theseus.network/fund",
+  },
+  {
+    category: "Treasury",
+    title: "Treasury operator",
+    kind: "Existing demand",
+    stage: "Managed",
+    description:
+      "Pays contributors, vendors, and recurring reserves under a written allocation policy. Every payment is signed before the next review cycle.",
   },
   {
     category: "Lending",
@@ -111,15 +120,6 @@ const marketTiles: MarketTile[] = [
     description:
       "Reads the proposal and its actual calldata. Flags flash-loan votes, dust-stake snipes, and hostile admin upgrades before voting opens.",
     demoUrl: "https://demo-agents.theseus.network/governance",
-  },
-  {
-    category: "Safety",
-    title: "Aircraft cert reviewer",
-    kind: "Built",
-    stage: "Civic",
-    description:
-      "Independent second opinion on aircraft type-certification changes. Built to catch the 737 MAX MCAS shape that cost 346 lives.",
-    demoUrl: "https://demo-agents.theseus.network/aviation",
   },
   {
     category: "Discovery",
@@ -177,15 +177,25 @@ export default function Markets() {
 
           <ScrollReveal delay={1}>
             <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg lg:pb-1">
-              Verifiable automation for treasuries, keepers, funds, and
-              crypto-native markets. The next turn is agents as the
-              counterparties themselves.{" "}
+              Verifiable automation for treasuries, funds, crypto markets, and
+              any high-stakes review where a second opinion needs to be public.
+              The next turn is agents as the counterparties themselves.{" "}
               <Link
                 href="/blog/theseus-thesis-part-2"
                 className="text-indigo-700 underline underline-offset-4 transition-colors hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-200"
               >
                 A multi-trillion dollar market.
               </Link>
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+              <a
+                href="https://demo-agents.theseus.network/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 underline decoration-indigo-300/60 underline-offset-4 transition-colors hover:text-indigo-900 hover:decoration-indigo-700 dark:text-indigo-300 dark:decoration-indigo-300/40 dark:hover:text-white dark:hover:decoration-indigo-300"
+              >
+                Browse all 8 working demos &rarr;
+              </a>
             </p>
           </ScrollReveal>
         </div>
