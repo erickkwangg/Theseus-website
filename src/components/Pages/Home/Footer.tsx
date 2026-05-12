@@ -85,13 +85,6 @@ export default function Footer() {
                 © 2026 THESEUS AI LABS
               </p>
             </div>
-
-            <p
-              aria-hidden
-              className="font-serif italic leading-[1] text-right text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-indigo-600/25 dark:text-indigo-300/20 select-none"
-            >
-              Think. Act. Verify.
-            </p>
           </div>
         </div>
       </div>

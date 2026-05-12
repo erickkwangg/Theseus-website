@@ -22,21 +22,21 @@ const stages = [
     label: "Verifiable work",
     title: "Outcomes anyone can audit.",
     description:
-      "A Civic agent reads, reasons, and signs each step of its work. It does not hold funds. Its job is to make outcomes cheap to check.",
+      "A Civic agent signs each step of its work. It does not hold funds. Its job is to make outcomes cheap to check.",
   },
   {
     stage: "Managed" as const,
     label: "Delegated execution",
     title: "Capital under signed policy.",
     description:
-      "A Managed agent operates under signed limits. Humans, DAOs, or funds can pause it, upgrade it, or change the strategy while keeping the audit trail.",
+      "A Managed agent operates under signed limits. Operators can pause it or pivot the strategy without losing the audit trail.",
   },
   {
     stage: "Sovereign" as const,
     label: "Self-running markets",
     title: "The agent becomes the counterparty.",
     description:
-      "A Sovereign agent owns its policy, balance, and history. It can outlast its founders, pay for its own inference, and earn fees directly.",
+      "A Sovereign agent owns its policy and history. It can outlast its founders and pay for its own inference from the fees it collects.",
   },
 ];
 
@@ -152,9 +152,9 @@ export default function Markets() {
 
           <ScrollReveal delay={1}>
             <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg lg:pb-1">
-              Today, that means verifiable automation for treasuries, keepers, funds,
-              and crypto-native markets. Over time, agents themselves can become trusted
-              market participants.{" "}
+              Verifiable automation for treasuries, keepers, funds, and
+              crypto-native markets. The next turn is agents as the
+              counterparties themselves.{" "}
               <Link
                 href="/blog/theseus-thesis-part-2"
                 className="text-indigo-700 underline underline-offset-4 transition-colors hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-200"

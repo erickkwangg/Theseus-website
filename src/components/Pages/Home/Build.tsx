@@ -28,9 +28,8 @@ export default function Build() {
               <ScrollReveal delay={1}>
                 <p className="text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
                   Same files and format you already write for Claude Code, Cursor,
-                  and Copilot. Describe who the agent is, give it a short driver
-                  program and the skills it needs. Theseus runs it and publishes a
-                  signed record of every step.
+                  and Copilot. Describe the agent, give it a driver program and
+                  the skills it needs, and Theseus signs every step it takes.
                 </p>
               </ScrollReveal>
 
