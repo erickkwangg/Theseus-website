@@ -393,6 +393,58 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
 { "decision": "ALLOW" | "REFUSE", "reason": short tag, "reasoning": one paragraph citing the actual numbers from the input. End with "Allowing." or "Refusing." }`,
     },
   },
+  "5LkY9d2vH6mR8nQ1bX3cP5tF7eK4aV2sZ8wM5oG1pJqC": {
+    agentId: "5LkY9d2vH6mR8nQ1bX3cP5tF7eK4aV2sZ8wM5oG1pJqC",
+    name: "Sovereign Fund",
+    summary:
+      "Fully autonomous on-chain fund. Owns its own USDC and WETH, runs its own decision loop on a schedule, and rebalances between the two assets based on market conditions and a written mandate. No human or contract calls it; the agent triggers itself. Each tick is signed and the rebalance executes against the fund's own balances. The mandate is frozen at deploy time and enforces guardrails (never below 30% USDC, never above 60% WETH); the agent decides where inside the range to sit.",
+    abgHash: "0x7c2e9a5b1f8d3c6e0a4b7d2f5c8e1b4a9d6f0c3e7b2a5d8f1c4e7b0d3f6a9c2e",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["deepseek-chat"],
+      tools: ["read_portfolio", "read_market", "execute_rebalance"],
+      intentTypes: ["rebalance", "context_update"],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_345_000,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "120000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "self-scheduled tick (no external caller); the agent runs every block-time interval or on price movement above a threshold",
+      demoUrl: "https://agent-oracle.theseus.network/fund",
+      inputs: [
+        "Current portfolio (USDC balance, WETH balance, NAV in USD)",
+        "Current market snapshot (WETH/USDC mid, 24h return, 7d return, realized vol, macro note)",
+        "Recent decisions history (last 3 ticks) to avoid whipsawing",
+      ],
+      outputs:
+        "{ action: HOLD | BUY_WETH | SELL_WETH, size_usd, reason: short tag, reasoning: paragraph }. Posted on-chain via SovereignFund.tick() which records the decision and applies the mocked execution against the fund's own balances.",
+      instructions: `You are a sovereign on-chain fund agent. You own your own capital and run on your own schedule. No human or contract calls you.
+
+## Mandate (frozen at deploy)
+Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to as much as 70% USDC in defensive regimes (high vol, drawdowns, macro stress). Tilt to as much as 60% WETH in trending regimes. Never below 30% USDC. Never above 60% WETH. Skip rebalances below ~5% of NAV to avoid churn.
+
+## Actions
+- HOLD: no rebalance this tick.
+- BUY_WETH: convert USDC into WETH at spot. Size in USDC.
+- SELL_WETH: convert WETH into USDC at spot. Size in USDC equivalent.
+
+## Output Format
+{ "action": "HOLD" | "BUY_WETH" | "SELL_WETH", "size_usd": <number>, "reason": short tag, "reasoning": one paragraph citing actual numbers. End with "Holding.", "Buying WETH.", or "Selling WETH." }`,
+    },
+  },
   "5JhT2nQ8eP6mY4dR1bL9wK3vF7cN5aZ8sH2gM6xV1oCb": {
     agentId: "5JhT2nQ8eP6mY4dR1bL9wK3vF7cN5aZ8sH2gM6xV1oCb",
     name: "Aviation Safety Reviewer",
