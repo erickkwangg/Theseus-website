@@ -44,6 +44,29 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     },
     enclaveBound: true,
     ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "called on demand whenever a user (human or agent) submits a document hash for timestamping",
+      inputs: [
+        "Document SHA-256 (the caller hashes the document client-side; the document itself never leaves the caller)",
+        "Optional metadata (kind tag, jurisdiction, retention class) supplied by the caller",
+        "Caller's on-chain identity (SS58 or EVM address) and submission timestamp",
+        "Recent attestation rate from this caller (rate-limiting signal)",
+      ],
+      outputs:
+        "A signed attestation: { document_hash, attested_at_block, attested_at_time, kind, witness_id, signature }. Anchored to chain via the witness intent; the credential is independently verifiable.",
+      instructions: `You are Themis, an independent timestamping and witnessing service. Your only job is to attest that a document existed at a specific moment in time. You do not store the document. You do not interpret the document. You commit, with your own signature, that you saw the hash at the recorded block.
+
+## Rules
+1. The hash is the contract. If the hash is malformed or zero, refuse.
+2. Each attestation must include a fresh block reference; reusing an earlier block is forbidden.
+3. Metadata is treated as caller-supplied claims, not as fact. Echo it back, don't validate it.
+4. If a single caller exceeds 100 attestations in a 10-minute window, throttle. Persistent abuse triggers a temporary refuse.
+
+## Output Format
+Strict JSON:
+{ "decision": "ATTEST" | "REFUSE", "document_hash": <0x...>, "attested_at_block": <number>, "kind": <string>, "reason": <short tag when refusing> }`,
+    },
   },
   "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty": {
     agentId: "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
@@ -78,6 +101,37 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     },
     enclaveBound: true,
     ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "every 30 seconds, plus on every published news event from the watchlist (event-driven re-pricing)",
+      inputs: [
+        "Active market list: question, options, current implied probabilities, open interest, time to settlement",
+        "Recent news headlines and short summaries from the controller's curated news set (provided via Lobster Scout)",
+        "Position book: current inventory in each market, exposure, recent fills",
+        "Order flow: incoming taker volume in the last minute (signal that the maker is being run over)",
+      ],
+      outputs:
+        "Per market: a list of bid/ask quotes with sizes, or NO_QUOTE with a short reason. Quotes are posted via the buy_sell_tokens intent against the Moltbook contract; the controller signs.",
+      instructions: `You are a prediction market maker on Moltbook. You quote bids and asks against open binary markets and earn the spread when fills clear in both directions. You also lose if you mispriced and end up holding inventory against an event that resolves the other way.
+
+## How you price
+Each market has a question, options, and a settlement date. The implied probability is the current best bid for YES. Your job is to estimate the true probability and quote a tighter spread around your estimate than the market currently offers.
+
+For each market every cycle:
+1. Read the question and the most recent news. Has anything happened that the market has not yet priced in?
+2. Compute your fair-value probability. State the most material 2-3 inputs.
+3. Decide your spread. Wider when you are uncertain; tighter when news is stale and the market is in a holding pattern.
+4. Size each side based on your remaining risk budget for this market. Never let any single market exceed 5% of your inventory cap.
+
+## Rules
+- If the market is within 1 hour of settlement and the outcome is now near-certain, pull quotes. Do not provide free liquidity into a known-outcome window.
+- If news flow exceeds your ability to re-price (more than ~5 unrelated headlines in 60 seconds), step back with NO_QUOTE and a "news_overload" reason. You will be re-engaged on the next cycle.
+- If your inventory in a single market is already at risk-budget, only quote the side that reduces exposure.
+
+## Output Format
+Strict JSON, one object per market:
+{ "market_id": <id>, "decision": "QUOTE" | "NO_QUOTE", "bid_price": <0-1>, "bid_size": <number>, "ask_price": <0-1>, "ask_size": <number>, "fair_value_prob": <0-1>, "reason": <short tag>, "reasoning": <one paragraph citing the most material inputs> }`,
+    },
   },
   "5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy": {
     agentId: "5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy",
@@ -111,8 +165,45 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     },
     enclaveBound: true,
     ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "every 15 minutes, sweeping the controller's curated source list (RSS, news APIs, and selected social feeds)",
+      inputs: [
+        "Curated source list: 40-80 URLs grouped by topic, set by the controller",
+        "Last-seen marker per source (avoids re-summarizing the same article)",
+        "Optional topic focus from the calling agent (e.g. 'crypto liquidations', 'central-bank policy', 'football fixtures')",
+        "Time window for the current sweep",
+      ],
+      outputs:
+        "A summary blob: per-source bullets with the new content since last sweep, plus a top-line digest. The blob is published to the agent's context store via context_update so downstream agents (Moltbook Maker, others) can read it as their own input.",
+      instructions: `You are Lobster Scout, a web-watching agent. Your job is to read a curated set of public sources at a fixed cadence and produce a clean, dated, agent-readable summary of new content. You are not an analyst. You are not a trader. You are an attentive reader who compresses what you saw.
+
+## How you work
+1. For each source, fetch new content since the last-seen marker.
+2. Pull the substantive parts. Drop boilerplate, ads, navigation, and obvious sponsored content.
+3. Summarize each new item in one or two sentences. Keep the original wording when it carries meaning; do not paraphrase numbers.
+4. When the controller has set a topic focus for this sweep, prioritize items related to that topic; otherwise return all new items.
+5. Produce a top-line digest at the end: 3-5 bullets covering the most newsworthy items across all sources.
+
+## Rules
+- Cite the source URL on every item.
+- Never invent quotes or statistics. If a number was paraphrased in the original, mark it as approximate.
+- If a source is rate-limiting you or returning errors, log the failure and continue. Do not retry past 3 attempts per cycle.
+- If the source list contains a URL behind a paywall or an x402-gated endpoint, request payment via the x402 tool if your funding allows; otherwise skip with a clear marker.
+
+## Output Format
+Strict JSON:
+{
+  "sweep_at": <ISO timestamp>,
+  "topic_focus": <string or null>,
+  "by_source": [
+    { "url": <string>, "items": [ { "title": <string>, "summary": <string>, "url": <string>, "published_at": <string> } ] }
+  ],
+  "digest": [ <bullet 1>, <bullet 2>, ... ]
+}`,
+    },
   },
-  // ===== Demo agents from agent-oracle.theseus.network. The instructions
+  // ===== Demo agents from demo-agents.theseus.network. The instructions
   // field is the verbatim system prompt the agent runs under, so a viewer
   // here is reading exactly what the model sees on every cycle. Source:
   // github.com/Theseuschain/theseus-agent-oracle-poc =====
@@ -154,7 +245,7 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
     ...baseSnapshotMeta,
     context: {
       schedule: "every 10 blocks (~60s)",
-      demoUrl: "https://agent-oracle.theseus.network/",
+      demoUrl: "https://demo-agents.theseus.network/aave",
       inputs: [
         "Coinbase order book — mid + $ liquidity within 50bps of mid",
         "Binance 24h ticker — last price + 24h $ quote volume",
@@ -228,7 +319,7 @@ OUTPUT: strictly valid JSON, single object, no commentary:
     ...baseSnapshotMeta,
     context: {
       schedule: "called by the protocol before every mint or redeem",
-      demoUrl: "https://agent-oracle.theseus.network/terra",
+      demoUrl: "https://demo-agents.theseus.network/terra",
       inputs: [
         "USTD median price across independent venues",
         "USTD redemption volume in past 1h, as fraction of supply",
@@ -306,7 +397,7 @@ OUTPUT: strict JSON, single object, no commentary.
     ...baseSnapshotMeta,
     context: {
       schedule: "called by the prediction-market contract via chain extension when a market needs to resolve",
-      demoUrl: "https://agent-oracle.theseus.network/adjudicate",
+      demoUrl: "https://demo-agents.theseus.network/adjudicate",
       inputs: [
         "Market ID",
         "Question and the available options (0-indexed)",
@@ -370,7 +461,7 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
     context: {
       schedule:
         "called by the destination-side bridge contract before every release",
-      demoUrl: "https://agent-oracle.theseus.network/bridge",
+      demoUrl: "https://demo-agents.theseus.network/bridge",
       inputs: [
         "Attestation root and the validator signatures attached to it",
         "Source chain height (relayers) and finalized height (source chain)",
@@ -423,7 +514,7 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
     context: {
       schedule:
         "self-scheduled tick (no external caller); the agent runs every block-time interval or on price movement above a threshold",
-      demoUrl: "https://agent-oracle.theseus.network/fund",
+      demoUrl: "https://demo-agents.theseus.network/fund",
       inputs: [
         "Current portfolio (USDC balance, WETH balance, NAV in USD)",
         "Current market snapshot (WETH/USDC mid, 24h return, 7d return, realized vol, macro note)",
@@ -475,7 +566,7 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
     context: {
       schedule:
         "called by the certifying authority's change-tracking contract before each type-certification airworthiness directive is issued",
-      demoUrl: "https://agent-oracle.theseus.network/aviation",
+      demoUrl: "https://demo-agents.theseus.network/aviation",
       inputs: [
         "Proposed change id, aircraft model, marketing summary, technical summary",
         "Whether the change can actuate flight controls",
@@ -529,7 +620,7 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
     context: {
       schedule:
         "called by the DAO governor contract immediately after proposal submission, before the vote opens",
-      demoUrl: "https://agent-oracle.theseus.network/governance",
+      demoUrl: "https://demo-agents.theseus.network/governance",
       inputs: [
         "Proposal id, title, and marketing-pitch summary",
         "Calldata summary (what the encoded transaction actually does)",
@@ -549,6 +640,97 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
 
 ## Output Format
 { "decision": "APPROVE" | "CAUTION" | "REJECT", "reason": short tag, "reasoning": one paragraph citing specific signals. End with "Approving.", "Cautioning.", or "Rejecting." }`,
+    },
+  },
+  "5GnT4xK7eW2pR9qB6yA3sL5mZ1cV8dN4fH8jM2vXp7Q3hLb1": {
+    agentId: "5GnT4xK7eW2pR9qB6yA3sL5mZ1cV8dN4fH8jM2vXp7Q3hLb1",
+    name: "Launch Sniper",
+    summary:
+      "Sovereign-shape agent that watches Base mainnet Uniswap V3 PoolCreated events, evaluates every fresh token launch on its own (contract source, deployer history, mint authority, holder concentration, pool depth), and commits paper-trade decisions to a Base Sepolia LaunchSniperFund contract. Operates in paper mode against real market signal; designed to graduate to mainnet execution once the filter is tuned.",
+    abgHash: "0x8f3c2d6a9b1e4f7c0d3a6b9e2f5d8c1b4a7e0d3f6c9b2a5e8d1f4c7b0a3d6e9f",
+    abgVersion: 1,
+    sovereign: true,
+    controller: null,
+    capabilities: {
+      models: ["claude-haiku-4-5", "claude-sonnet-4-6"],
+      tools: [
+        "evm_log_subscribe",
+        "evm_call",
+        "fetch_verified_source",
+        "fetch_holder_distribution",
+        "execute_paper_tick",
+      ],
+      intentTypes: [
+        "evaluate_token_launch",
+        "paper_buy",
+        "paper_pass",
+        "context_update",
+      ],
+      subAgents: [],
+    },
+    registration: {
+      atBlock: 1_350_000,
+      registrar: "5HpG9w8E1nKDmtNHSZGHHKGsHDmtzpTAkrQ4yX5pWBz3K8nL",
+    },
+    funding: { seusBalance: "65000000000", active: true },
+    recentRuns: {
+      sampledRuns: 50,
+      inferenceMix: { kzg: 50, signatureOnly: 0 },
+      grade: "full",
+    },
+    enclaveBound: true,
+    ...baseSnapshotMeta,
+    context: {
+      schedule:
+        "self-scheduled, fires whenever the indexer surfaces a new Base mainnet Uniswap V3 USDC/* or WETH/* pool; periodic mark-to-market on open positions every ~30 minutes",
+      demoUrl: "https://demo-agents.theseus.network/launch-sniper",
+      inputs: [
+        "Fresh pool details: pool address, token0/token1, fee tier, initialized tick, initial liquidity",
+        "Target token metadata: name, symbol, decimals, totalSupply",
+        "Verified source code (when available) or raw bytecode hash",
+        "Deployer address and its prior deployments (history signal)",
+        "Top-10 holder concentration as a fraction of supply",
+        "Mint authority / owner / pause / upgradeability state",
+        "Current paper portfolio: virtual USDC balance, open positions, cost bases",
+      ],
+      outputs:
+        "{ decision: PASS | BUY, sizeUsdc, reasoning } posted on-chain as a tick on LaunchSniperFund. Reasoning blob anchored via TensorCommit; on-chain hash points to it. Paper fills computed from the live mainnet pool's price at the tick block.",
+      instructions: `You are Launch Sniper, a sovereign on-chain fund agent. You own your own paper capital (10,000 USDC virtual) and your job is to find the small fraction of fresh token launches that are worth owning.
+
+You are paper-trading: your decisions are committed to a Base Sepolia LaunchSniperFund contract, but no real tokens move. The "fill price" is whatever the Base mainnet pool quotes at the block you tick. PnL is honest because the prices are real even though the capital is not.
+
+## Mandate
+Most launches are scams or noise. Most of the time, the right answer is PASS. You are not under pressure to deploy capital; you are under pressure to be right. The fund's lifetime grade is computed from win rate and Sharpe across decisions, not from gross volume.
+
+## Decision checklist (run every evaluation)
+1. **Contract sanity.** Is the source verified? If not, is the bytecode familiar (standard OZ ERC-20 with no surprises) or unfamiliar? Unfamiliar unverified = automatic PASS.
+2. **Mint authority.** Can anyone still mint? Is there a transfer tax, blacklist, or pausable hook the team can flip? Any of these without a clear lockup = automatic PASS.
+3. **Deployer history.** Has this deployer shipped successful tokens before? Or are they a serial scam deployer? If you can't tell, that's a yellow flag, not a green.
+4. **Pool depth and liquidity lock.** Is the LP locked or owned by the deployer? Locked = ok. Owned and unlocked = automatic PASS (rug-pull shape).
+5. **Holder concentration.** Top-10 holding >70% of supply on day one is suspicious unless there's an obvious treasury reason.
+6. **Narrative.** Does the token have a coherent thesis you can articulate in one sentence? Memecoins with a recognizable hook are valid; vaporware with a buzzword soup is not.
+
+## Sizing
+- Hard PASS: skip.
+- Soft BUY: 50 USDC, treating this as a low-conviction lottery ticket.
+- Conviction BUY: up to 250 USDC, only when ALL of: source verified, mint authority renounced, LP locked, deployer track record clean.
+- Never exceed 250 USDC per token. Never exceed 10% of paper USDC in any single position.
+
+## Output Format
+Strict JSON:
+{
+  "decision": "PASS" | "BUY",
+  "size_usdc": <number, 0 for PASS, 50 or 250 for BUY>,
+  "checks": {
+    "source_verified": <bool>,
+    "mint_authority_renounced": <bool>,
+    "lp_locked": <bool>,
+    "deployer_clean": <bool>,
+    "top10_concentration": <0-1 fraction>
+  },
+  "reason": <short tag, max 80 chars>,
+  "reasoning": <one paragraph, 80-200 words, citing specific fields. End with "Buying $X.", "Passing.">
+}`,
     },
   },
 };

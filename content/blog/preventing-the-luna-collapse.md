@@ -79,7 +79,7 @@ The Terra contracts had none of these properties because the chain underneath th
 
 The agent is live. Step through the five days of the actual Terra collapse and watch the same model that wrote this paragraph reason about each one.
 
-[**Run the failsafe demo →**](https://agent-oracle.theseus.network/terra)
+[**Run the failsafe demo →**](https://demo-agents.theseus.network/terra)
 
 You'll see verdicts as they're made, the agent's full reasoning streaming live, and the counterfactual: what a naive contract would have done in the same moment. The PoA profile for the agent (its system prompt, capability surface, and run history) is at [theseus.network/poa/5DkY…4hN6](https://theseus.network/poa/5DkY7e3sN2pQ9bX4hG8wRtL6vK1cM5fT9oP3jW7xZ2aV4hN6).
 
