@@ -14,28 +14,28 @@ type Belief = {
 const BELIEFS: Belief[] = [
   {
     number: "01",
-    title: "Agents should be verifiable.",
+    title: "Every decision leaves a receipt.",
     description:
-      "If an agent moves money, settles a market, or makes a decision, anyone should be able to check which model was used, what it observed, and what actions it took.",
+      "When an agent moves money or settles a market, anyone can read which model produced the verdict, what it saw at that moment, and what it did about it. The receipt is on-chain.",
     link: { href: "/poa", label: "Proof of Agenthood: signed credentials anyone can verify" },
   },
   {
     number: "02",
-    title: "Agents should be able to act.",
+    title: "Agents fire their own next step.",
     description:
-      "Smart contracts only operate when a human approves a transaction. Theseus agents run on a schedule, respond to events, and start the next step on their own.",
+      "Smart contracts wait for a human to sign. Theseus agents run on a schedule, react to events, and decide for themselves when to act again.",
   },
   {
     number: "03",
-    title: "Agents should hold their own state.",
+    title: "The agent holds its own keys.",
     description:
-      "Identity, balance, policy, and memory exist in the runtime, not on a private server that the operator can shut down or change.",
+      "Identity, balance, policy, memory: all of it lives in the runtime. Not on a private server the operator can shut off.",
   },
   {
     number: "04",
-    title: "Agents should work between strangers.",
+    title: "Two strangers can trust the same agent.",
     description:
-      "Two parties should be able to rely on the same agent without trusting the entity that runs it. The receipt is what they both verify.",
+      "Both sides verify the receipt. Neither has to trust the entity running the agent.",
   },
 ];
 
