@@ -29,7 +29,7 @@ const stages = [
     label: "Delegated execution",
     title: "Capital under signed policy.",
     description:
-      "A Managed agent operates under signed limits. Operators can pause it or pivot the strategy without losing the audit trail.",
+      "A Managed agent holds its own keys and balance but operates under a policy a controller can update. Every action by the agent and every change by the controller is signed and posted.",
   },
   {
     stage: "Sovereign" as const,
@@ -40,78 +40,103 @@ const stages = [
   },
 ];
 
-const marketTiles = [
+type MarketTile = {
+  category: string;
+  title: string;
+  kind: string;
+  stage: keyof typeof stageStyles;
+  description: string;
+  demoUrl?: string;
+};
+
+const marketTiles: MarketTile[] = [
+  {
+    category: "Markets",
+    title: "Prediction market resolver",
+    kind: "Built",
+    stage: "Civic",
+    description:
+      "When a market hits its deadline, the agent searches the live web for proof and returns a winning option with a public evidence trail.",
+    demoUrl: "https://demo-agents.theseus.network/adjudicate",
+  },
   {
     category: "Treasury",
     title: "DAO treasury operator",
     kind: "Existing demand",
-    stage: "Managed" as const,
+    stage: "Managed",
     description:
-      "Pays contributors, tops up reserves, and shows every allocation before the next vote.",
-  },
-  {
-    category: "Markets",
-    title: "Prediction resolver",
-    kind: "Existing demand",
-    stage: "Civic" as const,
-    description:
-      "Settles unclear questions with cited sources, model reasoning, and a public challenge window.",
-  },
-  {
-    category: "Commerce",
-    title: "Escrow between strangers",
-    kind: "New market",
-    stage: "Sovereign" as const,
-    description:
-      "Releases money when conditions are met, without a platform, lawyer, or privileged admin key.",
-  },
-  {
-    category: "Lending",
-    title: "Liquidation keeper",
-    kind: "Existing demand",
-    stage: "Managed" as const,
-    description:
-      "Closes unhealthy loans by policy, not discretion. Borrowers and lenders can review every decision.",
+      "Pays contributors and tops up reserves under a written allocation policy. Every check is signed and posted before the next vote.",
   },
   {
     category: "Funds",
-    title: "LP fund manager",
-    kind: "Existing demand",
-    stage: "Managed" as const,
+    title: "On-chain sovereign fund",
+    kind: "Built",
+    stage: "Sovereign",
     description:
-      "Runs portfolio rules against live markets. Investors can check the daily record instead of waiting for a memo.",
+      "Owns its own USDC and WETH. Self-schedules its own rebalance ticks against a frozen mandate. No human in the loop.",
+    demoUrl: "https://demo-agents.theseus.network/fund",
   },
   {
-    category: "Protocols",
-    title: "Self-running protocol",
-    kind: "New market",
-    stage: "Sovereign" as const,
+    category: "Lending",
+    title: "ETH/USD oracle for Aave",
+    kind: "Built",
+    stage: "Civic",
     description:
-      "Adjusts fees, manages support, and explains changes under a public mandate users can read before they opt in.",
+      "Reads three independent venues, refuses to price when they disagree. Catches the Mango Markets pump-the-venue shape by construction.",
+    demoUrl: "https://demo-agents.theseus.network/aave",
   },
   {
-    category: "Games",
-    title: "Agent-run economies",
-    kind: "New market",
-    stage: "Sovereign" as const,
+    category: "Stablecoins",
+    title: "Algo-stable failsafe",
+    kind: "Built",
+    stage: "Civic",
     description:
-      "Shopkeepers, quest givers, and in-game markets that run continuously, with receipts players can verify.",
+      "Gates mint and redeem on a Terra-shaped algorithmic stablecoin. Refuses to run the mechanism into a death spiral.",
+    demoUrl: "https://demo-agents.theseus.network/terra",
   },
   {
-    category: "Research",
-    title: "Shared model training",
-    kind: "New market",
-    stage: "Sovereign" as const,
+    category: "Bridges",
+    title: "Cross-chain release guardian",
+    kind: "Built",
+    stage: "Civic",
     description:
-      "Labs pool data or compute without giving anyone a copy. The agent trains, signs steps, and pays contributors.",
+      "Checks attestation quorum, finality lag, and validator history before allowing a destination-chain release.",
+    demoUrl: "https://demo-agents.theseus.network/bridge",
+  },
+  {
+    category: "Governance",
+    title: "DAO proposal reviewer",
+    kind: "Built",
+    stage: "Civic",
+    description:
+      "Reads the proposal and its actual calldata. Flags flash-loan votes, dust-stake snipes, and hostile admin upgrades before voting opens.",
+    demoUrl: "https://demo-agents.theseus.network/governance",
+  },
+  {
+    category: "Safety",
+    title: "Aircraft cert reviewer",
+    kind: "Built",
+    stage: "Civic",
+    description:
+      "Independent second opinion on aircraft type-certification changes. Built to catch the 737 MAX MCAS shape that cost 346 lives.",
+    demoUrl: "https://demo-agents.theseus.network/aviation",
+  },
+  {
+    category: "Discovery",
+    title: "Launch sniper",
+    kind: "Built",
+    stage: "Sovereign",
+    description:
+      "Watches Base mainnet for fresh token launches, evaluates each one against a strict checklist, and posts paper-trade decisions on-chain.",
+    demoUrl: "https://demo-agents.theseus.network/launch-sniper",
   },
   {
     category: "Your ideas",
     title: "Compose your own",
     kind: "Open surface",
-    stage: "Civic" as const,
+    stage: "Civic",
     description:
-      "Anywhere two parties need one agent to do the job, and both want proof it did the job right.",
+      "Anywhere two parties need one agent to do the job, and both want proof it did it right.",
   },
 ];
 
@@ -195,21 +220,21 @@ export default function Markets() {
                 {visibleTiles.map((tile) => {
                   const isCta = tile === ctaTile;
                   const ctaSpanClass = !expanded && isCta ? "lg:col-span-3" : "";
+                  const tileClass = `group block min-h-[168px] border-b p-4 transition-colors sm:border-r sm:p-5 lg:[&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 ${ctaSpanClass} ${
+                    isCta
+                      ? "border-indigo-500/25 bg-indigo-600 text-white hover:bg-indigo-500 dark:border-indigo-300/20 dark:bg-indigo-500/90 dark:hover:bg-indigo-500"
+                      : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/[0.04]"
+                  }`;
 
-                  return (
-                    <article
-                      key={tile.title}
-                      className={`min-h-[168px] border-b p-4 transition-colors sm:border-r sm:p-5 lg:[&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 ${ctaSpanClass} ${isCta
-                          ? "border-indigo-500/25 bg-indigo-600 text-white hover:bg-indigo-500 dark:border-indigo-300/20 dark:bg-indigo-500/90 dark:hover:bg-indigo-500"
-                          : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/[0.04]"
-                        }`}
-                    >
+                  const body = (
+                    <>
                       <div className="flex items-start justify-between gap-4">
                         <p
-                          className={`font-mono text-[10px] uppercase tracking-[0.2em] ${isCta
+                          className={`font-mono text-[10px] uppercase tracking-[0.2em] ${
+                            isCta
                               ? "text-indigo-100"
                               : "text-indigo-700 dark:text-indigo-300"
-                            }`}
+                          }`}
                         >
                           {tile.category}
                         </p>
@@ -222,22 +247,33 @@ export default function Markets() {
                         )}
                       </div>
                       <h4
-                        className={`mt-4 font-serif text-xl font-normal leading-tight tracking-[-0.01em] sm:text-2xl ${isCta ? "text-white" : "text-slate-950 dark:text-white"
-                          }`}
+                        className={`mt-4 font-serif text-xl font-normal leading-tight tracking-[-0.01em] sm:text-2xl ${
+                          isCta ? "text-white" : "text-slate-950 dark:text-white"
+                        }`}
                       >
                         {tile.title}
                       </h4>
                       <div
-                        className={`mt-2 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] ${isCta
+                        className={`mt-2 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] ${
+                          isCta
                             ? "text-indigo-100/80"
                             : "text-slate-500 dark:text-slate-400"
-                          }`}
+                        }`}
                       >
                         <span>{tile.kind}</span>
+                        {tile.demoUrl && (
+                          <span
+                            aria-hidden
+                            className="transition-transform group-hover:translate-x-0.5 text-indigo-700 dark:text-indigo-300"
+                          >
+                            ↗
+                          </span>
+                        )}
                       </div>
                       <p
-                        className={`mt-3 text-sm leading-relaxed ${isCta ? "text-indigo-50" : "text-slate-600 dark:text-slate-300"
-                          }`}
+                        className={`mt-3 text-sm leading-relaxed ${
+                          isCta ? "text-indigo-50" : "text-slate-600 dark:text-slate-300"
+                        }`}
                       >
                         {tile.description}
                       </p>
@@ -249,6 +285,26 @@ export default function Markets() {
                           Launch an agent
                         </Link>
                       )}
+                    </>
+                  );
+
+                  if (tile.demoUrl) {
+                    return (
+                      <a
+                        key={tile.title}
+                        href={tile.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={tileClass}
+                      >
+                        {body}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <article key={tile.title} className={tileClass}>
+                      {body}
                     </article>
                   );
                 })}
