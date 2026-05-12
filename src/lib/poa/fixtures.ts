@@ -247,10 +247,10 @@ Strict JSON:
       schedule: "every 10 blocks (~60s)",
       demoUrl: "https://demo-agents.theseus.network/aave",
       inputs: [
-        "Coinbase order book — mid + $ liquidity within 50bps of mid",
-        "Binance 24h ticker — last price + 24h $ quote volume",
-        "Uniswap V3 WETH/USDC mainnet pool — TWAP-derived price + pool TVL",
-        "Cached reference price — depth-weighted median from before any user action",
+        "Coinbase order book: mid + $ liquidity within 50bps of mid",
+        "Binance 24h ticker: last price + 24h $ quote volume",
+        "Uniswap V3 WETH/USDC mainnet pool: TWAP-derived price + pool TVL",
+        "Cached reference price: depth-weighted median from before any user action",
       ],
       outputs:
         "PRICED with a uint256 USD price (8 decimals), or REFUSED with a keccak256 reason hash. Full reasoning blob anchored via TensorCommit; on-chain hash points to it.",
@@ -263,7 +263,7 @@ Each cycle, you receive readings from three independent venues:
 
 For each reading you see: venue name, price, depth, age in seconds, and whether the venue reported successfully.
 
-You also see a cached reference price — the depth-weighted median of recent clean readings, snapshotted before any user action that could distort it.
+You also see a cached reference price: the depth-weighted median of recent clean readings, snapshotted before any user action that could distort it.
 
 You decide PRICED or REFUSED.
 
@@ -372,7 +372,7 @@ OUTPUT: strict JSON, single object, no commentary.
     agentId: "5HsJ4xK2nL8pR3qY7mZ9wB1tF5dH6cV8aN2eW4xT6bP9sM3K",
     name: "Market Resolver",
     summary:
-      "The resolver_oracle.ship agent from Theseuschain/the-prediction-market. Called by the prediction-market contract via chain extension whenever a market needs to resolve. Reads the question, options, criteria, and verification source — uses web_search, fetch_url, and get_price tools to gather evidence — then returns a winning option index, confidence score, and evidence summary. Multi-option-aware (binary YES/NO and N-way markets both supported).",
+      "The resolver_oracle.ship agent from Theseuschain/the-prediction-market. Called by the prediction-market contract via chain extension whenever a market needs to resolve. Reads the question, options, criteria, and verification source. Uses web_search, fetch_url, and get_price tools to gather evidence, then returns a winning option index, confidence score, and evidence summary. Multi-option-aware (binary YES/NO and N-way markets both supported).",
     abgHash: "0x4c8b3e1d9f2a6c0e5b8d7f1a4c9e2b5d8f1a3c6e9b2d5f8a1c4e7b0d3f6a9c2e",
     abgVersion: 1,
     sovereign: true,
@@ -413,7 +413,7 @@ Your job is to determine the winning option for prediction markets by verifying 
 ## Rules
 1. For PRICE markets: use the get_price tool to fetch current prices.
 2. For EVENT markets: use web_search then fetch_url to verify outcomes.
-3. ALWAYS verify with tools before deciding — never guess.
+3. ALWAYS verify with tools before deciding. Never guess.
 4. Compare evidence against the exact resolution criteria.
 5. Return the INDEX of the winning option (0-based).
 
