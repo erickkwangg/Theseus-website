@@ -70,7 +70,7 @@ const marketTiles: MarketTile[] = [
   },
   {
     category: "Funds",
-    title: "On-chain sovereign fund",
+    title: "Sovereign fund",
     kind: "Built",
     stage: "Sovereign",
     description:
