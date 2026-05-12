@@ -127,8 +127,16 @@ const marketTiles: MarketTile[] = [
     kind: "Built",
     stage: "Sovereign",
     description:
-      "Watches Base mainnet for fresh token launches, evaluates each one against a strict checklist, and posts paper-trade decisions on-chain.",
+      "Watches Base for fresh token launches, evaluates each one against a strict checklist, and commits a paper-trade decision the moment it decides.",
     demoUrl: "https://demo-agents.theseus.network/launch-sniper",
+  },
+  {
+    category: "Games",
+    title: "Sovereign in-game character",
+    kind: "New market",
+    stage: "Sovereign",
+    description:
+      "A video game character that owns its equipment, currency, and reputation. Players carry it across games, sell it, or hire it. The studio doesn't control its dialog, balance, or behavior.",
   },
   {
     category: "Your ideas",

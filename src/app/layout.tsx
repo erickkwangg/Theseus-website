@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "AI infrastructure",
     "agentic protocols",
     "smart contracts",
-    "on-chain agents",
+    "sovereign agents",
   ],
   alternates: {
     canonical: "/",
