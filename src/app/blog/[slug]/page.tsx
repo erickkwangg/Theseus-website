@@ -10,6 +10,7 @@ import rehypeRaw from "rehype-raw";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { getPost, listSlugs, formatDate } from "@/lib/blog";
+import MarkdownImg from "./_components/MarkdownImg";
 
 type Params = Promise<{ slug: string }>;
 
@@ -103,6 +104,7 @@ export default async function BlogPostPage(props: { params: Params }) {
               rehypeSlug,
               [rehypeAutolinkHeadings, { behavior: "wrap" }],
             ]}
+            components={{ img: MarkdownImg }}
           >
             {post.content}
           </ReactMarkdown>

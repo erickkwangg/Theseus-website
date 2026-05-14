@@ -14,6 +14,7 @@ import PoaNav from "../_components/PoaNav";
 import CredentialShareBar from "../_components/CredentialShareBar";
 import RevokeButton from "../_components/RevokeButton";
 import AgentContextSection from "../_components/AgentContextSection";
+import SigningRecord from "../_components/SigningRecord";
 
 export const dynamic = "force-dynamic";
 
@@ -160,6 +161,18 @@ export default async function PoaCredentialPage({ params }: Props) {
           <div className="mx-auto max-w-[920px]">
             <CredentialDocument credential={stored} revocation={revocation} />
 
+            {(liveSnapshot?.context?.commitmentSurface ??
+              stored.claims.agent.context?.commitmentSurface) && (
+              <SigningRecord
+                commitmentSurface={
+                  (liveSnapshot?.context?.commitmentSurface ??
+                    stored.claims.agent.context
+                      ?.commitmentSurface)!
+                }
+                agentName={stored.claims.agent.name}
+              />
+            )}
+
             <div className="mt-8">
               <CredentialShareBar
                 agentId={agentId}
@@ -245,6 +258,14 @@ export default async function PoaCredentialPage({ params }: Props) {
               </Link>
             )}
           </div>
+          {liveSnapshot?.context?.commitmentSurface && (
+            <div className="mx-auto max-w-[920px] px-3 sm:px-4 lg:px-6">
+              <SigningRecord
+                commitmentSurface={liveSnapshot.context.commitmentSurface}
+                agentName={liveSnapshot.name}
+              />
+            </div>
+          )}
           {liveSnapshot?.context && (
             <div className="px-3 sm:px-4 lg:px-6">
               <AgentContextSection
