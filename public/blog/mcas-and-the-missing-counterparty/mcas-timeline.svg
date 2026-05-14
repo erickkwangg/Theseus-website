@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-labelledby="t1">
+  <title id="t1">MCAS timeline with counterfactual agent verdicts</title>
+  <style>
+    .ink { stroke: #334155; }
+    .label { fill: #0f172a; }
+    .sub { fill: #475569; }
+    .eyebrow { fill: #64748b; }
+    .crash { fill: #b91c1c; }
+    .verdict { fill: #047857; }
+    .muted { stroke: #cbd5e1; }
+    .dark .ink { stroke: #cbd5e1; }
+    .dark .label { fill: #f1f5f9; }
+    .dark .sub { fill: #94a3b8; }
+    .dark .eyebrow { fill: #94a3b8; }
+    .dark .crash { fill: #fca5a5; }
+    .dark .verdict { fill: #86efac; }
+    .dark .muted { stroke: #475569; }
+  </style>
+
+  <text x="360" y="22" text-anchor="middle" class="eyebrow" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="1.5">MCAS TIMELINE</text>
+
+  <text x="20" y="58" class="eyebrow" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="1">WHAT HAPPENED</text>
+
+  <text x="120" y="84" text-anchor="middle" class="label" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">2016</text>
+  <text x="120" y="102" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">MCAS certified at 0.6°</text>
+  <text x="120" y="116" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">SSA proprietary</text>
+
+  <text x="270" y="84" text-anchor="middle" class="label" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">2016 to 2017</text>
+  <text x="270" y="102" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">Authority raised to 2.5°</text>
+  <text x="270" y="116" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">via in-service amendment</text>
+
+  <text x="400" y="84" text-anchor="middle" class="label" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">May 2017</text>
+  <text x="400" y="102" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">MAX enters service;</text>
+  <text x="400" y="116" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">MCAS not in training</text>
+
+  <text x="540" y="84" text-anchor="middle" class="label" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">Oct 29, 2018</text>
+  <text x="540" y="102" text-anchor="middle" class="crash" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">Lion Air 610</text>
+  <text x="540" y="116" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">189 dead</text>
+
+  <text x="670" y="84" text-anchor="middle" class="label" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">Mar 10, 2019</text>
+  <text x="670" y="102" text-anchor="middle" class="crash" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">Ethiopian 302</text>
+  <text x="670" y="116" text-anchor="middle" class="sub" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif">157 dead</text>
+
+  <line x1="40" y1="150" x2="700" y2="150" class="ink" stroke-width="1.4"/>
+
+  <circle cx="120" cy="150" r="5" class="ink" fill="#475569" stroke="none"/>
+  <circle cx="270" cy="150" r="5" class="ink" fill="#475569" stroke="none"/>
+  <circle cx="400" cy="150" r="5" class="ink" fill="#475569" stroke="none"/>
+  <circle cx="540" cy="150" r="7" fill="#b91c1c" stroke="none"/>
+  <circle cx="670" cy="150" r="7" fill="#b91c1c" stroke="none"/>
+
+  <text x="605" y="143" text-anchor="middle" class="eyebrow" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif" font-style="italic">4.5 months</text>
+
+  <text x="20" y="190" class="eyebrow" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="1">WHAT THE AGENT WOULD HAVE SIGNED</text>
+
+  <line x1="120" y1="156" x2="120" y2="210" class="muted" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="120" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">DEMAND DISCLOSURE</text>
+  <text x="120" y="240" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">→ REFUSE</text>
+  <text x="120" y="258" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">single-sensor architecture;</text>
+  <text x="120" y="272" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">training opacity</text>
+
+  <line x1="270" y1="156" x2="270" y2="210" class="muted" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="270" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">REFUSE</text>
+  <text x="270" y="246" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">4× authority increase</text>
+  <text x="270" y="260" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">via amendment, not</text>
+  <text x="270" y="274" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">fresh certification</text>
+
+  <line x1="540" y1="156" x2="540" y2="210" class="muted" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="540" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">REFUSE</text>
+  <text x="540" y="240" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">continued operation</text>
+  <text x="540" y="258" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">crash sequence matches</text>
+  <text x="540" y="272" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">prior verdict scenario</text>
+
+  <text x="360" y="306" text-anchor="middle" class="sub" font-size="11" font-style="italic" font-family="ui-sans-serif, system-ui, sans-serif">Three signed verdicts on the public record by the time of the second crash. None of them grounds an aircraft.</text>
+</svg>
