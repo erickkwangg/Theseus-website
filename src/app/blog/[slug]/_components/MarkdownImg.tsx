@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 type Props = {
-  src?: string;
+  src?: string | Blob;
   alt?: string;
   title?: string;
 };
@@ -18,7 +18,7 @@ const PUBLIC_DIR = path.join(process.cwd(), "public");
  * Falls back to a plain <img> for raster files and any non-local URL.
  */
 export default function MarkdownImg({ src, alt, title }: Props) {
-  if (!src) return null;
+  if (typeof src !== "string" || !src) return null;
 
   const isLocalSvg = src.startsWith("/") && src.endsWith(".svg");
   if (isLocalSvg) {
