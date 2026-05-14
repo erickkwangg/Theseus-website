@@ -54,10 +54,9 @@
   <text x="20" y="190" class="eyebrow" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="1">WHAT THE AGENT WOULD HAVE SIGNED</text>
 
   <line x1="120" y1="156" x2="120" y2="210" class="muted" stroke-width="1" stroke-dasharray="2 3"/>
-  <text x="120" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">DEMAND DISCLOSURE</text>
-  <text x="120" y="240" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">→ REFUSE</text>
-  <text x="120" y="258" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">single-sensor architecture;</text>
-  <text x="120" y="272" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">training opacity</text>
+  <text x="120" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">REFUSE</text>
+  <text x="120" y="246" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">single-sensor + SSA opacity;</text>
+  <text x="120" y="260" text-anchor="middle" class="sub" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif">training omission</text>
 
   <line x1="270" y1="156" x2="270" y2="210" class="muted" stroke-width="1" stroke-dasharray="2 3"/>
   <text x="270" y="226" text-anchor="middle" class="verdict" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">REFUSE</text>
