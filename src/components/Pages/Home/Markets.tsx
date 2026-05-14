@@ -19,24 +19,15 @@ const stageStyles: Record<Stage, string> = {
 const stages = [
   {
     stage: "Civic" as const,
-    label: "Verifiable work",
-    title: "Outcomes anyone can audit.",
-    description:
-      "A Civic agent signs each step of its work. It does not hold funds. Its job is to make outcomes cheap to check.",
+    title: "Decides. Can't move money.",
   },
   {
     stage: "Managed" as const,
-    label: "Delegated execution",
-    title: "Capital under signed policy.",
-    description:
-      "A Managed agent holds its own keys and balance but operates under a policy a controller can update. Every action by the agent and every change by the controller is signed and posted.",
+    title: "Can move money. A set of operators manages it.",
   },
   {
     stage: "Sovereign" as const,
-    label: "Self-running markets",
-    title: "The agent becomes the counterparty.",
-    description:
-      "A Sovereign agent owns its policy and history. It can outlast its founders and pay for its own inference from the fees it collects.",
+    title: "Can move money. Manages itself.",
   },
 ];
 
@@ -167,16 +158,13 @@ export default function Markets() {
       <div className="mx-auto max-w-[1700px] px-6 sm:px-12 lg:px-16">
         <SectionHeader
           label="Markets"
-          number="04"
+          number="05"
           className="mb-7 lg:mb-8"
         />
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-14 xl:gap-20">
           <ScrollReveal>
             <div>
-              <p className="mb-5 text-xs font-medium uppercase tracking-[0.22em] text-indigo-700 dark:text-indigo-300">
-                Existing demand / new markets
-              </p>
               <h2 className="font-serif text-4xl font-normal leading-[1.03] tracking-[-0.02em] sm:text-5xl lg:text-[clamp(3rem,4.2vw,5.35rem)]">
                 Build an agent <em>with a job.</em>
               </h2>
@@ -209,28 +197,25 @@ export default function Markets() {
         </div>
 
         <div className="mt-7 lg:px-8 xl:px-12 2xl:px-16">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            {stages.map((item, index) => (
-              <ScrollReveal key={item.stage} delay={index + 1}>
-                <article className="h-full rounded-2xl border border-slate-200 bg-slate-50/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
+          <ScrollReveal>
+            <div className="mb-7 lg:mb-8 grid grid-cols-1 gap-2 md:grid-cols-3">
+              {stages.map((item) => (
+                <div
+                  key={item.stage}
+                  className="flex items-baseline gap-2.5"
+                >
                   <span
-                    className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] ${stageStyles[item.stage]}`}
+                    className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${stageStyles[item.stage]}`}
                   >
                     {item.stage}
                   </span>
-                  <p className="mt-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    {item.label}
-                  </p>
-                  <h3 className="mt-4 max-w-[13rem] font-serif text-xl font-normal leading-tight tracking-[-0.01em] sm:text-2xl">
+                  <span className="text-[13px] leading-snug text-slate-700 dark:text-slate-300">
                     {item.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {item.description}
-                  </p>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
 
           <ScrollReveal delay={4}>
             <div className="mt-9 lg:mt-10">
@@ -271,23 +256,22 @@ export default function Markets() {
                       >
                         {tile.title}
                       </h4>
-                      <div
-                        className={`mt-2 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] ${
-                          isCta
-                            ? "text-indigo-100/80"
-                            : "text-slate-500 dark:text-slate-400"
-                        }`}
-                      >
-                        <span>{tile.kind}</span>
-                        {tile.demoUrl && (
+                      {tile.demoUrl && (
+                        <div
+                          className={`mt-2 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] ${
+                            isCta
+                              ? "text-indigo-100/80"
+                              : "text-indigo-700 dark:text-indigo-300"
+                          }`}
+                        >
                           <span
                             aria-hidden
-                            className="transition-transform group-hover:translate-x-0.5 text-indigo-700 dark:text-indigo-300"
+                            className="transition-transform group-hover:translate-x-0.5"
                           >
                             ↗
                           </span>
-                        )}
-                      </div>
+                        </div>
+                      )}
                       <p
                         className={`mt-3 text-sm leading-relaxed ${
                           isCta ? "text-indigo-50" : "text-slate-600 dark:text-slate-300"

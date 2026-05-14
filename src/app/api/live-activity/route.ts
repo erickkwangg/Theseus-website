@@ -14,7 +14,7 @@ export const revalidate = 60;
  */
 
 const LAUNCH_SNIPER_FUND =
-  "0xa6FbaadeA4e7f58D812D989737D708B279E8bd21" as Address;
+  "0xa6FBaadeA4e7F58D812d989737d708b279E8BD21" as Address;
 const SOVEREIGN_FUND =
   "0x3e1cEd606571A35c43DA11a3b21C051690Bd926a" as Address;
 
