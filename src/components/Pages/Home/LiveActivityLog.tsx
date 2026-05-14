@@ -58,9 +58,32 @@ function buildInitialBlocks(maxVisibleLines: number) {
   return { blocks, templateIdx };
 }
 
+interface RemoteBlock {
+  blockId: string;
+  agentLabel: string;
+  lines: string[];
+  ts: number;
+}
+
+async function fetchRealActivity(): Promise<Block[] | null> {
+  try {
+    const res = await fetch("/api/live-activity", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { blocks?: RemoteBlock[] };
+    if (!data.blocks?.length) return null;
+    return data.blocks.map((b, i) => ({
+      number: STARTING_BLOCK + i,
+      lines: b.lines.map((l) => ({ agentId: b.agentLabel, action: l })),
+    }));
+  } catch {
+    return null;
+  }
+}
+
 export default function LiveActivityLog() {
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_MEDIA_QUERY);
@@ -68,9 +91,21 @@ export default function LiveActivityLog() {
 
     setMounted(true);
 
-    const seed = buildInitialBlocks(maxVisibleLines);
-    setBlocks(seed.blocks);
+    // Try real on-chain activity first; fall back to simulated if the
+    // endpoint fails or returns nothing.
+    let cancelled = false;
+    fetchRealActivity().then((real) => {
+      if (cancelled) return;
+      if (real && real.length > 0) {
+        setBlocks(real.slice(-Math.min(real.length, maxVisibleLines)));
+        setLive(true);
+        return;
+      }
+      const seed = buildInitialBlocks(maxVisibleLines);
+      setBlocks(seed.blocks);
+    });
 
+    const seed = buildInitialBlocks(maxVisibleLines);
     let templateIdx = seed.templateIdx;
 
     const handleChange = (event: MediaQueryListEvent) => {
@@ -78,7 +113,21 @@ export default function LiveActivityLog() {
     };
     mq.addEventListener("change", handleChange);
 
+    // Refresh real ticks every 90s. If still in simulated mode, keep
+    // animating; if real data arrives, switch over.
+    const refresh = setInterval(async () => {
+      const real = await fetchRealActivity();
+      if (cancelled) return;
+      if (real && real.length > 0) {
+        setBlocks(real.slice(-Math.min(real.length, maxVisibleLines)));
+        setLive(true);
+      }
+    }, 90_000);
+
     const interval = setInterval(() => {
+      // Once we have real data, freeze the rolling simulation; the
+      // refresh interval above keeps it current.
+      if (live) return;
       const newLine = TEMPLATE[templateIdx % TEMPLATE.length];
       templateIdx++;
 
@@ -110,9 +159,14 @@ export default function LiveActivityLog() {
     }, TICK_MS);
 
     return () => {
+      cancelled = true;
       clearInterval(interval);
+      clearInterval(refresh);
       mq.removeEventListener("change", handleChange);
     };
+    // `live` is intentionally not in deps; we read it at interval time
+    // via closure, the toggle is one-way.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

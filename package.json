@@ -38,7 +38,8 @@
     "remark-gfm": "^4.0.1",
     "resend": "^6.12.2",
     "tailwind-merge": "^3.3.1",
-    "ulid": "^3.0.2"
+    "ulid": "^3.0.2",
+    "viem": "^2.48.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
