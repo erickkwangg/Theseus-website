@@ -47,7 +47,7 @@ export default async function StatsStrip() {
   return (
     <section
       aria-label="Live on-chain agent stats"
-      className="bg-white px-2 sm:px-3 lg:px-4 py-2 sm:py-3 lg:py-4 text-slate-900 dark:bg-transparent dark:text-white"
+      className="px-2 sm:px-3 lg:px-4 py-2 sm:py-3 lg:py-4 text-slate-900 dark:text-white"
     >
       <div className="hero-card relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
         <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-12 lg:px-16 py-7 sm:py-8 lg:py-9">
