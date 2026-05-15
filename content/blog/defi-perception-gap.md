@@ -5,13 +5,13 @@ excerpt: "Smart contracts execute against whatever data they're handed and have 
 heroImage: "/blog/defi-perception-gap/hero.svg"
 ---
 
-For a decade, DeFi has lost billions of dollars due to a common issue: smart contracts aren't smart. They're deterministic programs that follow set rules based on the data they receive. They can't browse websites, query APIs, or track market conditions. They can't analyze the data they act upon to determine if it makes sense.
+For a decade, DeFi has lost billions to the same mistake: smart contracts aren't smart. They're deterministic programs that follow set rules based on the data they receive. They can't browse websites, query APIs, or track market conditions. They can't analyze the inputs they act on to decide whether those inputs make sense.
 
-This structural flaw has cost DeFi billions, and the post-mortems all skirt around it. They point fingers at the oracle, the price feed, the TWAP window, or the decentralized network's economic security. But the failures all share the same shape: a contract adhered to a number that strayed from market reality, because it had no capacity to perceive that reality.
+This structural flaw has cost DeFi billions, and every post-mortem skirts around it. They point fingers at the oracle, the price feed, the TWAP window, or the decentralized network's economic security. But the failures all share one underlying cause: a contract obeyed a value that didn't reflect market reality, because it had no way to perceive that reality.
 
-Not every DeFi loss stems from a perception failure. Wormhole, Ronin, and Poly Network suffered from code bugs; many losses are key compromises. Adding perception doesn't fix those. But the largest single category of recurring losses, the ones the industry keeps blaming on oracles, is exactly what perception removes.
+Not every DeFi loss is a perception failure. Wormhole, Ronin, and Poly Network were code bugs; many losses are key compromises. Adding perception doesn't fix those. But the single biggest recurring category of losses, the one the industry keeps blaming on oracles, is exactly what perception removes.
 
-The industry's response has been to build better oracles: bigger node networks, more aggregation, longer TWAPs, decentralized data committees with staking, slashing, and dispute windows. It hasn't worked because oracles aren't a feature of DeFi, they're a workaround. The category exists because smart contracts cannot see, so crypto glued a feed onto them and hoped the feed would be enough. It was never going to be enough.
+The industry's response has been to build better oracles: bigger node networks, more aggregation, longer TWAPs, decentralized data committees with staking, slashing, and dispute windows. It hasn't worked, because oracles aren't a feature of DeFi, they're a workaround. The category exists because smart contracts cannot see, so crypto glued a feed onto them and hoped the feed would be enough. It was never going to be enough.
 
 ![A decade of better oracles, a decade of perception exploits](/blog/defi-perception-gap/oracle-iterations.svg)
 
