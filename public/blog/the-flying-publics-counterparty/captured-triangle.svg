@@ -9,15 +9,6 @@
     .eyebrow { fill: #64748b; font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; letter-spacing: 1.2px; }
     .arrow { stroke: #64748b; stroke-width: 1.4; fill: none; }
     .public-fill { fill: #b91c1c; font-family: ui-sans-serif, system-ui, sans-serif; }
-    @media (prefers-color-scheme: dark) {
-      .node-stroke { stroke: #cbd5e1; }
-      .public-stroke { stroke: #fca5a5; }
-      .label { fill: #f1f5f9; }
-      .sub { fill: #94a3b8; }
-      .eyebrow { fill: #94a3b8; }
-      .arrow { stroke: #94a3b8; }
-      .public-fill { fill: #fca5a5; }
-    }
     :where(.dark) .node-stroke { stroke: #cbd5e1; }
     :where(.dark) .public-stroke { stroke: #fca5a5; }
     :where(.dark) .label { fill: #f1f5f9; }
