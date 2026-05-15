@@ -1,6 +1,6 @@
 ---
 title: "The flying public's missing counterparty"
-date: "2026-05-14"
+date: "2026-05-15"
 excerpt: "MCAS wasn't an engineering failure. The warning signs were public, internal engineers raised them, and the captured certification process suppressed them. The flying public has no counterparty in that process. A sovereign LLM agent is the first technology that can give them one."
 author: "Theseus Labs"
 ---
