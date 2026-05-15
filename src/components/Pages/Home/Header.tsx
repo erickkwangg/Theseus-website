@@ -14,6 +14,7 @@ import {
 import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { track } from "@/lib/analytics";
 
 type NavItem = {
   label: string;
@@ -146,12 +147,21 @@ export default function Header() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          track("home.nav.clicked", { item: item.label })
+                        }
                         className={DESKTOP_LINK_CLASS}
                       >
                         {item.label}
                       </a>
                     ) : (
-                      <Link href={item.href} className={DESKTOP_LINK_CLASS}>
+                      <Link
+                        href={item.href}
+                        onClick={() =>
+                          track("home.nav.clicked", { item: item.label })
+                        }
+                        className={DESKTOP_LINK_CLASS}
+                      >
                         {item.label}
                       </Link>
                     )}

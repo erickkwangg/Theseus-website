@@ -11,6 +11,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { getPost, listSlugs, formatDate } from "@/lib/blog";
 import MarkdownImg from "./_components/MarkdownImg";
+import ScrollMilestones from "./_components/ScrollMilestones";
 
 type Params = Promise<{ slug: string }>;
 
@@ -96,6 +97,7 @@ export default async function BlogPostPage(props: { params: Params }) {
           )}
         </header>
 
+        <ScrollMilestones slug={slug} />
         <div className="prose-blog mx-auto mt-12 max-w-2xl">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}

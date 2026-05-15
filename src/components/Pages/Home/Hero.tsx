@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import LiveActivityLog from "./LiveActivityLog";
 import SectionHeader from "./SectionHeader";
+import { track } from "@/lib/analytics";
 
 const ROTATING_WORDS = ["Verified.", "Autonomous.", "Sovereign."];
 const TYPE_MS = 85;
@@ -85,12 +86,14 @@ export default function Hero() {
               <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-6 gap-y-5 sm:gap-x-10">
                 <Link
                   href="/launch"
+                  onClick={() => track("home.hero.cta_clicked", { target: "launch" })}
                   className="primary-cta inline-flex items-center rounded-md px-8 py-4 text-base font-medium tracking-wide"
                 >
                   Launch on Theseus
                 </Link>
                 <Link
                   href="/blog/theseus-thesis-part-1"
+                  onClick={() => track("home.hero.cta_clicked", { target: "thesis" })}
                   className="text-base font-medium text-slate-800 dark:text-slate-100 underline underline-offset-[6px] decoration-slate-400/70 hover:decoration-current dark:decoration-slate-500/70 transition-colors"
                 >
                   Read the thesis →

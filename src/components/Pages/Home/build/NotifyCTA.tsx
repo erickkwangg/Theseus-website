@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { notify, type NotifyState } from "@/app/actions/notify";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/analytics";
 
 export default function NotifyCTA() {
   const [state, action] = useActionState<NotifyState | null, FormData>(
@@ -13,10 +14,21 @@ export default function NotifyCTA() {
     null,
   );
 
+  useEffect(() => {
+    if (state?.ok === true) {
+      track("home.build.notify_succeeded");
+    } else if (state?.ok === false) {
+      track("home.build.notify_failed", {
+        reason: state.message ?? "unknown",
+      });
+    }
+  }, [state]);
+
   return (
     <div id="build-notify" className="mt-8 flex flex-col items-start gap-5">
       <Link
         href="/playground"
+        onClick={() => track("home.build.playground_clicked")}
         className="cta-flat inline-flex items-center gap-3 px-6 py-3 text-sm font-medium"
       >
         Open the Playground

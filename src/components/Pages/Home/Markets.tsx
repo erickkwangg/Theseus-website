@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeader from "./SectionHeader";
+import { track } from "@/lib/analytics";
 
 type Stage = "Civic" | "Managed" | "Sovereign";
 
@@ -188,6 +189,7 @@ export default function Markets() {
                 href="https://demo-agents.theseus.network/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("home.markets.browse_all_clicked")}
                 className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-700 underline decoration-indigo-300/60 underline-offset-4 transition-colors hover:text-indigo-900 hover:decoration-indigo-700 dark:text-indigo-300 dark:decoration-indigo-300/40 dark:hover:text-white dark:hover:decoration-indigo-300"
               >
                 Browse all 8 working demos &rarr;
@@ -297,6 +299,13 @@ export default function Markets() {
                         href={tile.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          track("home.markets.tile_clicked", {
+                            category: tile.category,
+                            title: tile.title,
+                            stage: tile.stage,
+                          })
+                        }
                         className={tileClass}
                       >
                         {body}
@@ -316,7 +325,12 @@ export default function Markets() {
                 <div className="mt-6 flex justify-center">
                   <button
                     type="button"
-                    onClick={() => setExpanded(true)}
+                    onClick={() => {
+                      track("home.markets.show_more_clicked", {
+                        revealed: hiddenCount,
+                      });
+                      setExpanded(true);
+                    }}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-700 underline-offset-4 transition-colors hover:text-indigo-900 hover:underline dark:text-indigo-300 dark:hover:text-indigo-200"
                   >
                     Show {hiddenCount} more

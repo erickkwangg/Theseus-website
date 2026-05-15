@@ -1,5 +1,6 @@
 import { Check, Minus } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import TrackOnVisible from "@/components/TrackOnVisible";
 import SectionHeader from "./SectionHeader";
 
 type Cell = "yes" | "no" | "soon";
@@ -58,6 +59,7 @@ export default function Compare() {
     >
       <div className="hero-card relative overflow-hidden rounded-2xl bg-[#F1EAE1] lg:rounded-3xl dark:bg-slate-900">
         <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-12 lg:px-16 py-12 sm:py-14 lg:py-16">
+          <TrackOnVisible event="home.compare.viewed" />
           <SectionHeader label="Compare" number="02" className="mb-8 lg:mb-10" />
 
           <ScrollReveal>
@@ -106,6 +108,7 @@ export default function Compare() {
             </div>
           </ScrollReveal>
 
+          <TrackOnVisible event="home.compare.scrolled_through" />
         </div>
       </div>
     </section>
