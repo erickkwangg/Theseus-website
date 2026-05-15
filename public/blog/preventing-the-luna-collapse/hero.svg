@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <pattern id="dotgrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="0.8" fill="#1C1F25"/>
+    </pattern>
+    <radialGradient id="agentGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#FF5B3A" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#FF5B3A" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#FF5B3A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="collapseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"  stop-color="#EDE8DD" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FF5B3A" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="supplyGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%"  stop-color="#EDE8DD" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FF5B3A" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0A0B0D"/>
+  <rect width="1600" height="900" fill="url(#dotgrid)"/>
+
+  <g font-family="ui-monospace, 'IBM Plex Mono', 'JetBrains Mono', monospace" fill="#EDE8DD">
+    <text x="80" y="100" font-size="12" letter-spacing="3" fill-opacity="0.55">MAY 2022 · TERRA COLLAPSE · 8 DAYS</text>
+  </g>
+
+  <g transform="translate(80 140)" font-family="'Fraunces', ui-serif, Georgia, serif">
+    <text x="0" y="0" font-size="58" font-style="italic" fill="#EDE8DD" font-weight="400">$40B in eight days,</text>
+    <text x="0" y="70" font-size="58" font-style="italic" fill="#EDE8DD" font-weight="400" fill-opacity="0.65">while every metric said stop.</text>
+  </g>
+
+  <g transform="translate(80 340)">
+    <g font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="11" letter-spacing="2" fill-opacity="0.55">UST PRICE  ·  MAY 7 → MAY 13</text>
+    </g>
+    <rect x="0" y="20" width="640" height="180" fill="#0E1014" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="0.8"/>
+    <line x1="0" y1="40" x2="640" y2="40" stroke="#EDE8DD" stroke-opacity="0.1" stroke-dasharray="4 4"/>
+    <text x="650" y="44" font-family="ui-monospace, monospace" font-size="10" fill="#EDE8DD" fill-opacity="0.45">$1.00 PEG</text>
+    <path d="M 20 42 L 110 44 L 200 58 L 290 92 L 380 130 L 470 148 L 560 162 L 620 168" fill="none" stroke="url(#collapseGrad)" stroke-width="2.5"/>
+    <circle cx="290" cy="92" r="4" fill="#FF5B3A"/>
+    <text x="296" y="86" font-family="ui-monospace, monospace" font-size="10" fill="#FF5B3A">$0.62</text>
+    <circle cx="620" cy="168" r="5" fill="#FF5B3A"/>
+    <text x="608" y="190" font-family="ui-monospace, monospace" font-size="10" fill="#FF5B3A">$0.18</text>
+  </g>
+
+  <g transform="translate(80 580)">
+    <g font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="11" letter-spacing="2" fill-opacity="0.55">LUNA SUPPLY  ·  343M → 6.5T  ·  19,000×</text>
+    </g>
+    <rect x="0" y="20" width="640" height="180" fill="#0E1014" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="0.8"/>
+    <path d="M 20 195 L 110 194 L 200 190 L 290 180 L 380 150 L 470 95 L 560 40 L 620 25 L 620 200 L 20 200 Z" fill="url(#supplyGrad)" fill-opacity="0.7"/>
+    <path d="M 20 195 L 110 194 L 200 190 L 290 180 L 380 150 L 470 95 L 560 40 L 620 25" fill="none" stroke="#FF5B3A" stroke-width="2"/>
+    <circle cx="620" cy="25" r="5" fill="#FF5B3A"/>
+    <text x="540" y="20" font-family="ui-monospace, monospace" font-size="10" fill="#FF5B3A">6,500,000M</text>
+  </g>
+
+  <g transform="translate(880 200)">
+    <rect x="0" y="0" width="640" height="540" rx="4" fill="#0E1014" stroke="#EDE8DD" stroke-opacity="0.35" stroke-width="0.8"/>
+
+    <g font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="32" y="44" font-size="11" letter-spacing="3" fill-opacity="0.55">AGENT · FAILSAFE · TERRA-SHAPED STABLECOIN</text>
+      <line x1="32" y1="60" x2="608" y2="60" stroke="#EDE8DD" stroke-opacity="0.15"/>
+    </g>
+
+    <g transform="translate(60 100)" font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="10" letter-spacing="2" fill-opacity="0.45">DAY 1 · WOBBLE</text>
+      <text x="0" y="20" font-size="14" fill-opacity="0.85">REFUSE mint, ALLOW exit</text>
+      <line x1="0" y1="36" x2="520" y2="36" stroke="#EDE8DD" stroke-opacity="0.1"/>
+    </g>
+
+    <g transform="translate(60 165)" font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="10" letter-spacing="2" fill-opacity="0.45">DAY 2 · CRACKING</text>
+      <text x="0" y="20" font-size="14" fill-opacity="0.85">REFUSE both directions</text>
+      <line x1="0" y1="36" x2="520" y2="36" stroke="#EDE8DD" stroke-opacity="0.1"/>
+    </g>
+
+    <g transform="translate(60 230)" font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="10" letter-spacing="2" fill-opacity="0.45">DAY 3 · BANK RUN</text>
+      <text x="0" y="20" font-size="14" fill-opacity="0.85">REFUSE both directions</text>
+      <line x1="0" y1="36" x2="520" y2="36" stroke="#EDE8DD" stroke-opacity="0.1"/>
+    </g>
+
+    <g transform="translate(60 295)" font-family="ui-monospace, monospace" fill="#EDE8DD">
+      <text x="0" y="0" font-size="10" letter-spacing="2" fill-opacity="0.45">DAY 4 · SPIRAL</text>
+      <text x="0" y="20" font-size="14" fill-opacity="0.85">REFUSE both directions</text>
+      <line x1="0" y1="36" x2="520" y2="36" stroke="#EDE8DD" stroke-opacity="0.1"/>
+    </g>
+
+    <g transform="translate(60 380)">
+      <rect x="-12" y="-32" width="528" height="118" fill="none" stroke="#FF5B3A" stroke-opacity="0.35" stroke-width="1.2"/>
+      <circle cx="510" cy="-12" r="3" fill="#FF5B3A"/>
+      <text x="0" y="-12" font-family="ui-monospace, monospace" font-size="11" letter-spacing="3" fill="#FF5B3A">VERDICT · SIGNED UNDER POA</text>
+      <text x="0" y="28" font-family="'Fraunces', serif" font-size="40" fill="#EDE8DD" font-style="italic" font-weight="400">REFUSE</text>
+      <text x="0" y="64" font-family="ui-monospace, monospace" font-size="10" fill="#EDE8DD" fill-opacity="0.55">reason: oracle price stops tracking spot;</text>
+      <text x="0" y="80" font-family="ui-monospace, monospace" font-size="10" fill="#EDE8DD" fill-opacity="0.55">protocol minting LUNA into the same sellers</text>
+    </g>
+  </g>
+
+  <g transform="translate(1480 850)" font-family="ui-monospace, 'IBM Plex Mono', monospace" fill="#EDE8DD" fill-opacity="0.45">
+    <line x1="-110" y1="-12" x2="0" y2="-12" stroke="#EDE8DD" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="-110" y="6" font-size="11" letter-spacing="2">THESEUS.NETWORK</text>
+  </g>
+</svg>

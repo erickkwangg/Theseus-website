@@ -3,6 +3,7 @@ title: "How Theseus would've prevented the Luna collapse"
 date: "2026-05-14"
 excerpt: "The mechanism that broke in May 2022 was visibly breaking in real time. A verifiable, sovereign LLM failsafe agent could have refused the actions that fueled the death spiral. A working prototype is live."
 author: "Theseus Labs"
+heroImage: "/blog/preventing-the-luna-collapse/hero.svg"
 ---
 
 May 2022: a $40 billion algorithmic stablecoin collapsed in eight days. UST, Terra protocol's dollar-pegged token, depegged on May 8. By May 10 it had dropped through $0.75. By May 13 it had reached $0.18. Meanwhile LUNA, the protocol's volatile sister token, went from $80 to fractions of a cent in the same window.

@@ -3,6 +3,7 @@ title: "Boeing's MCAS and the case for an outside reviewer"
 date: "2026-05-15"
 excerpt: "MCAS wasn't an engineering failure. The warning signs were public, internal engineers raised them, and the captured certification process suppressed them. The flying public has no independent reviewer in that process. A sovereign LLM agent is the first technology that can act as one."
 author: "Theseus Labs"
+heroImage: "/blog/the-flying-publics-counterparty/hero.svg"
 ---
 
 Sometime in the latter half of 2018, Boeing changed a parameter within the Maneuvering Characteristics Augmentation System (MCAS) of the 737 MAX from 0.6 degrees per activation to 2.5 degrees. MCAS uses that nose-down authority when a pitch-up condition is detected from the angle-of-attack sensor. The initial 0.6 degree number had been agreed upon as part of the type certification process. The 2.5 degree value came out of flight testing, where the smaller number was insufficient to counter the way the MAX's engines, larger and mounted further forward than those on the 737 NG, pitched the nose up near stall. Raising the parameter made the test result acceptable.
