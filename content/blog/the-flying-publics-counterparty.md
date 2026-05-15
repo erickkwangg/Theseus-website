@@ -1,11 +1,11 @@
 ---
-title: "The flying public's missing counterparty"
+title: "Boeing's MCAS and the case for an outside reviewer"
 date: "2026-05-15"
-excerpt: "MCAS wasn't an engineering failure. The warning signs were public, internal engineers raised them, and the captured certification process suppressed them. The flying public has no counterparty in that process. A sovereign LLM agent is the first technology that can give them one."
+excerpt: "MCAS wasn't an engineering failure. The warning signs were public, internal engineers raised them, and the captured certification process suppressed them. The flying public has no independent reviewer in that process. A sovereign LLM agent is the first technology that can act as one."
 author: "Theseus Labs"
 ---
 
-Sometime in the second half of 2018, Boeing increased a single parameter inside the Maneuvering Characteristics Augmentation System on the 737 MAX, from 0.6° to 2.5° per activation. MCAS uses that authority to push the nose of the aircraft down when its angle-of-attack sensor reports the nose is climbing too steeply. The original 0.6° figure had come out of the type certification process. The 2.5° figure came out of flight testing, where the smaller number had proved insufficient to counter the way the MAX's larger and forward-mounted engines pitched the nose up near stall. The increase made the test result acceptable.
+Sometime in the second half of 2018, Boeing increased a single parameter inside the Maneuvering Characteristics Augmentation System (MCAS) on the 737 MAX, from 0.6° to 2.5° per activation. MCAS uses that authority to push the nose of the aircraft down when its angle-of-attack sensor reports the nose is climbing too steeply. The original 0.6° figure had come out of the type certification process. The 2.5° figure came out of flight testing, where the smaller number had proved insufficient to counter the way the MAX's larger and forward-mounted engines pitched the nose up near stall. The increase made the test result acceptable.
 
 Several other things about the system had also drifted from how it was originally described to regulators. MCAS still depended on a single angle-of-attack vane, with no cockpit indication when that vane disagreed with the redundant unit on the opposite side of the nose. The pilot operating manual for the MAX did not mention the system, and pilots transitioning from the 737 NG took a short difference course that didn't introduce it.
 
@@ -43,27 +43,27 @@ The agent doesn't need to be smarter than Boeing's engineers. It needs to be mor
 
 | Stage | Public evidence | Agent verdict |
 |---|---|---|
-| **Original MCAS cert** (Mar 2017) | Single AOA sensor input; 0.6° authority per activation; omitted from pilot training; no AOA disagree alert standard | REFUSE: single point of failure on flight-critical authority with no annunciation and no training |
-| **Authority increase** (Aug 2018) | Authority raised to 2.5° per activation; repeated activation permitted; training docs unchanged | REFUSE: prior basis now magnified four-fold; pilot recovery assumption unsupported at new authority |
-| **Lion Air JT610** (Oct 2018) | FDR shows MCAS-driven runaway stab trim; crew unable to identify or counter; AOA sensor mismatch active | REFUSE: operational evidence confirms simulator and training gap |
-| **FAA emergency AD** (Nov 2018) | AD adds MCAS to pilot reference materials; no simulator training; no annunciation hardware change required | REFUSE: AD addresses awareness but not the structural failure |
-| **Ethiopian ET302** (Mar 2019) | Same scenario as Lion Air; second hull loss in five months | (verdict already REFUSE; system finally grounded by global regulators) |
+| **Original cert** (Mar 2017) | Single AOA sensor; 0.6° authority; not in pilot training; no disagree alert | REFUSE: single point of failure, no annunciation, no training |
+| **Authority increase** (Aug 2018) | Authority raised to 2.5°; repeated activation; training docs unchanged | REFUSE: prior basis now magnified four-fold; pilot recovery unsupported |
+| **Lion Air JT610** (Oct 2018) | FDR shows MCAS runaway trim; crew couldn't counter; AOA mismatch active | REFUSE: operational confirmation of training gap |
+| **FAA emergency AD** (Nov 2018) | AD updates pilot reference; no sim training; no hardware change | REFUSE: addresses awareness, not the structural failure |
+| **Ethiopian ET302** (Mar 2019) | Same scenario as Lion Air; second hull loss in five months | (already REFUSE; system grounded globally) |
 
 That's eighteen months of REFUSE verdicts before Ethiopian Air 302. Each verdict cites public evidence, each is anchored on-chain, and any insurer, lessor, airline, or foreign regulator could have queried them at any moment during that span. The verdicts above don't depend on hindsight; the single-AOA architecture, the authority increase, and the training omission were all in public documents at the time, and the internal Boeing engineers raising those concerns were doing so contemporaneously. The substantive disagreement was already in the record. What was absent, at the moment when refusal could have prevented a hull loss, was an institution whose explicit role was to formalize that disagreement on behalf of the passengers.
 
 ## How an unaccredited verdict becomes binding
 
-The agent has no legal authority, and a REFUSE doesn't stop a certification on its own. The way it becomes load-bearing is through three downstream channels that don't depend on the FAA accepting it.
+The agent has no legal authority yet, and a REFUSE doesn't stop a certification on its own. The way it becomes load-bearing is through three downstream channels that don't depend on the FAA accepting it.
 
 Aviation underwriters already do independent risk assessment with direct financial exposure to crashes. A REFUSE verdict from a credible sovereign agent feeds into hull and liability pricing in the obvious way: an aircraft type carrying active REFUSE verdicts pays more in premiums, and the manufacturer either addresses the agent's reasoning in public or absorbs the spread on every delivery. The comparison to Moody's and S&P is exact. Those ratings agencies became binding without any legal authority because markets stopped doing business at the same terms with anything they downgraded.
 
 Tort discovery after a crash asks what was knowable beforehand. A signed pre-crash REFUSE verdict citing public sources is catastrophic for a manufacturer's defense during the deposition phase of a wrongful death suit, and over enough litigation cycles, manufacturers stop ignoring signed verdicts of this kind because ignoring them becomes uninsurable.
 
-Foreign regulators already disagree with FAA findings on a regular basis; CAAC grounded the 737 MAX before the FAA did. A public signed verdict from a sovereign agent gives a foreign regulator something its own bureaucracy can cite when making the public case for disagreement, and over enough cycles the FAA either matches their conclusions or accepts being the outlier among the major civil aviation authorities.
+Foreign regulators already disagree with FAA findings on a regular basis. Over enough cycles of those regulators citing sovereign agent verdicts in their disagreements, the FAA either matches their conclusions or accepts being the outlier among the major civil aviation authorities.
 
 The three channels compound over many verdicts, not on the first one. Nobody is going to reprice a hull off a single REFUSE. After a year of verdicts being cited in underwriting memos, legal briefs, and EASA bulletins, the question of whether the agent is part of the workflow stops being open.
 
-The most credible early user, the one likely to consume the first set of verdicts before any insurance underwriter does, is a pilot union. ALPA, BALPA, and IFALPA already publish position papers opposing specific certification changes, today citing internal opinion or hired consultants. A position paper that cites a signed agent verdict instead carries something the union cannot generate on its own, which is independence from the union itself. The workflow change for the union is one new citation in a document they were already writing, and the track record that lets insurers and courts eventually defer to the agent has to start somewhere.
+The most credible early user, the one likely to consume the first set of verdicts before any insurance underwriter does, is a foreign aviation regulator. CAAC grounded the 737 MAX before the FAA did, and EASA has parted ways with FAA findings on multiple occasions over the last decade. Each of those disagreements was an uphill political fight in which the foreign regulator built the entire technical case in-house against the dominant authority. A signed sovereign agent verdict, with its citations and reasoning attached, becomes a third-party exhibit a foreign regulator can place in the file alongside its own analysis when it announces a disagreement. Because the exhibit wasn't authored by the foreign regulator's own staff, the FAA can't dismiss it as the political product of a rival authority that wanted to disagree. The workflow change for the regulator is one new line item in the disagreement filing, and the track record that lets insurers and courts later defer to the agent starts with those filings.
 
 ## Where this is already working faster
 
