@@ -331,7 +331,7 @@ export default function CredentialDocument({
               style={{
                 color: status === "attested"
                   ? "var(--poa-ink)"
-                  : "var(--poa-wax)",
+                  : "var(--poa-destructive)",
               }}
             >
               {status === "attested" ? "attested" : "revoked"} ·{" "}

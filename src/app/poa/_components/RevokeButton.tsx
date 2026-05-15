@@ -199,7 +199,7 @@ export default function RevokeButton({
 
   if (state.kind === "done") {
     return (
-      <span className="poa-stamp" style={{ color: "var(--poa-wax)" }}>
+      <span className="poa-stamp" style={{ color: "var(--poa-destructive)" }}>
         Revoked. Refreshing…
       </span>
     );
@@ -210,13 +210,13 @@ export default function RevokeButton({
     <p
       ref={errorRef}
       role="alert"
-      className="text-[12.5px] leading-relaxed text-[var(--poa-wax)]"
+      className="text-[12.5px] leading-relaxed text-[var(--poa-destructive)]"
     >
       Couldn&apos;t revoke: <code className="font-mono">{state.message}</code>{" "}
       <button
         type="button"
         onClick={() => setState({ kind: "idle" })}
-        className="underline decoration-[color:var(--poa-rule)] underline-offset-[4px] hover:decoration-[color:var(--poa-wax)]"
+        className="underline decoration-[color:var(--poa-rule)] underline-offset-[4px] hover:decoration-[color:var(--poa-destructive)]"
       >
         try again
       </button>

@@ -1147,29 +1147,33 @@
    ============================================ */
 
 .poa-shell {
-  --poa-paper: #F8FAFC;                  /* surface: slate-050 page bg */
-  --poa-paper-card: #F1EAE1;             /* surface: kit cream card */
-  --poa-ink: #0f172a;                    /* foreground: slate-900 */
-  --poa-ink-soft: #475569;               /* body-soft: slate-600 */
-  --poa-rule: #e2e8f0;                   /* border: slate-200 */
+  --poa-paper: #F8FAFC;                       /* surface: slate-050 page bg */
+  --poa-paper-card: #F1EAE1;                  /* surface: kit cream card */
+  --poa-ink: #0f172a;                         /* foreground: slate-900 */
+  --poa-ink-soft: #475569;                    /* body-soft: slate-600 */
+  --poa-rule: #e2e8f0;                        /* border: slate-200 */
   --poa-rule-soft: rgba(15, 23, 42, 0.06);
-  --poa-wax: #4f46e5;                    /* accent: indigo-600 (kit primary) */
+  --poa-wax: #4f46e5;                         /* accent: indigo-600 */
   --poa-wax-soft: rgba(79, 70, 229, 0.12);
-  --poa-sepia: #94a3b8;                  /* meta caption: slate-400 */
+  --poa-destructive: #e53e0c;                 /* destructive: kit Plate I.D */
+  --poa-destructive-soft: rgba(229, 62, 12, 0.10);
+  --poa-sepia: #94a3b8;                       /* meta caption: slate-400 */
 
   background: var(--poa-paper);
   color: var(--poa-ink);
   position: relative;
 }
 .dark .poa-shell {
-  --poa-paper: #060b16;                  /* surface: kit dark bg */
-  --poa-paper-card: #0F172A;             /* surface: kit dark card */
-  --poa-ink: #f8fafc;                    /* foreground: slate-050 */
-  --poa-ink-soft: #94a3b8;               /* body-soft: slate-400 */
-  --poa-rule: rgba(255, 255, 255, 0.10); /* border: kit dark hairline */
+  --poa-paper: #060b16;                       /* surface: kit dark bg */
+  --poa-paper-card: #0F172A;                  /* surface: kit dark card */
+  --poa-ink: #f8fafc;                         /* foreground: slate-050 */
+  --poa-ink-soft: #94a3b8;                    /* body-soft: slate-400 */
+  --poa-rule: rgba(255, 255, 255, 0.10);
   --poa-rule-soft: rgba(255, 255, 255, 0.06);
-  --poa-wax: #818cf8;                    /* accent: indigo-400 for dark */
+  --poa-wax: #818cf8;                         /* accent: indigo-400 */
   --poa-wax-soft: rgba(129, 140, 248, 0.16);
+  --poa-destructive: #ef4444;                 /* destructive: kit Plate I.D dark */
+  --poa-destructive-soft: rgba(239, 68, 68, 0.16);
   --poa-sepia: #94a3b8;
 
   background: var(--poa-paper);

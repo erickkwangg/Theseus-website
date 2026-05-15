@@ -282,7 +282,7 @@ export default async function PoaLanding() {
                             style={{
                               color:
                                 status === "revoked"
-                                  ? "var(--poa-wax)"
+                                  ? "var(--poa-destructive)"
                                   : "var(--poa-sepia)",
                             }}
                           >

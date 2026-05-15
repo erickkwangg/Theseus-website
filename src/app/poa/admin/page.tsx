@@ -160,7 +160,7 @@ export default async function AdminPage({ searchParams }: Props) {
             className="mx-auto max-w-5xl border p-5"
             style={{ borderColor: "var(--poa-rule)" }}
           >
-            <p className="poa-stamp text-[var(--poa-wax)]">Store unreachable</p>
+            <p className="poa-stamp text-[var(--poa-destructive)]">Store unreachable</p>
             <code className="mt-2 block font-mono text-[12px] text-[var(--poa-ink)]">
               {err}
             </code>
