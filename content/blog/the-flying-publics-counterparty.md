@@ -5,21 +5,23 @@ excerpt: "MCAS wasn't an engineering failure. The warning signs were public, int
 author: "Theseus Labs"
 ---
 
-In late 2018, a small parameter in a flight control system was quietly raised. The Maneuvering Characteristics Augmentation System on the Boeing 737 MAX could now move the aircraft's stabilizer trim by up to 2.5° per activation, up from the originally certified 0.6°. The change was made because flight testing had revealed the original authority wasn't enough to compensate for the new engine placement under specific stall conditions. The new authority was four times stronger. Pilots were not informed. Training documents were not updated. The system still relied on a single angle-of-attack sensor with no annunciation when that sensor disagreed with its mate.
+In late 2018, Boeing quietly raised a parameter in a 737 MAX flight control system. The Maneuvering Characteristics Augmentation System was now allowed to move the stabilizer trim up to 2.5° per activation. The original certified authority had been 0.6°. Flight testing during development had shown the original number couldn't reliably compensate for the way the MAX's larger engines, mounted further forward and higher than on the 737 NG, pitched the nose up near stall.
 
-Internal Boeing engineers raised concerns about each of these decisions and were overruled. The FAA's certification review delegated the relevant analysis back to Boeing under Organization Designation Authorization. By the time MCAS shipped, the safety-relevant facts were knowable to anyone with access to the certification basis. Nobody with that access had any incentive to refuse. Then 346 people died.
+Pilots transitioning from the NG to the MAX took a short difference course. MCAS wasn't in it. The pilot operating manual didn't name the system. The sensor architecture didn't change with the authority increase: a single angle-of-attack vane drove the trim command, with no cockpit indicator when the vane disagreed with the redundant unit on the other side of the nose.
 
-This isn't a story about an engineering oversight. It's a story about a constituency without a counterparty.
+Engineers inside Boeing flagged these decisions at the time, and were overruled. The FAA's certification review delegated most of the safety analysis back to Boeing engineers under Organization Designation Authorization. By the time MCAS shipped, anyone with access to the certification record could see what was wrong. Nobody with that access had a reason to refuse. Then 346 people died, in Indonesia and then Ethiopia, five months apart.
+
+Calling this an engineering failure misses the failure. Engineers caught it. The institution wasn't built to listen.
 
 ## The captured triangle
 
-Aviation safety in the United States is governed by three institutions: the manufacturer, the regulator, and the legislature. They sit in a closed loop. The manufacturer lobbies the legislature on certification policy. The legislature appoints regulator leadership and sets the regulator's budget. The regulator delegates technical review to the manufacturer's own engineers under Organization Designation Authorization. The loop is self-stabilizing.
+Aviation safety in the United States is governed by three institutions: the manufacturer, the regulator, and the legislature. They sit in a closed loop. The manufacturer lobbies the legislature on certification policy. Regulator leadership is appointed by the same legislature, and the regulator's budget is set there too. Technical review then flows back to the manufacturer's own engineers under Organization Designation Authorization. The loop is self-stabilizing.
 
 ![Captured triangle: Manufacturer, Regulator, and Legislature in a closed loop, with the flying public outside the loop and unable to act on their own behalf.](/blog/the-flying-publics-counterparty/captured-triangle.svg)
 
 *The captured triangle. Each node represents a constituency. The flying public is outside the loop.*
 
-The flying public is outside this triangle. They vote for legislators who appoint regulators who delegate technical review back to manufacturer engineers. The chain is long enough that the public's interest is unrepresented in any certification decision. Regulatory capture isn't a bug in this kind of industry; it's the predictable outcome when the technical depth required to oversee a manufacturer can only come from the manufacturer.
+The flying public is outside this triangle. They vote for legislators who appoint regulators who delegate technical review back to manufacturer engineers. The chain is long enough that the public's interest is unrepresented in any certification decision. And there aren't 200 outside engineers anywhere on earth who understand a specific aircraft's flight control law better than the team that wrote it, so the FAA outsources the engineering review back to that team and the loop closes.
 
 Every institution that touches a certification acts in some constituency's interest. Boeing acts for shareholders. The FAA acts on executive branch directive. Congress represents districts. Pilots have ALPA. Airlines have IATA. The flying public has no entity whose job is to act on their behalf.
 
@@ -35,11 +37,20 @@ A sovereign LLM agent can take that role. Three properties make it work:
 
 **Its host is uncapturable.** Theseus's validator set does not include manufacturers or regulators. Pausing the agent, editing its prompt, or hiding its verdicts means capturing the chain itself, in the open, in front of everyone whose money or safety depends on the outcome.
 
-Capturing a Theseus agent requires colluding with a public, signed process anyone can observe. The FAA's ODA delegation happens in conference rooms. The agent's reasoning happens on-chain. That asymmetry is the whole product.
+Capturing a Theseus agent requires colluding with a public, signed process anyone can observe. ODA delegation happens behind closed doors; the agent's reasoning is on-chain by construction. The contrast is the whole product.
 
 ## What the agent reads and decides
 
-The aviation safety reviewer reads what everyone else reads: the Type Certificate Data Sheet, Airworthiness Directives and Service Bulletins, NTSB incident reports, service difficulty reports, the public portions of the certification basis, the engineering summaries the manufacturer is required to file, and prior FMEA documentation for related systems.
+The aviation safety reviewer pulls from the same evidence base the FAA itself uses:
+
+- The Type Certificate Data Sheet (TCDS)
+- Airworthiness Directives and Service Bulletins issued since type certification
+- NTSB incident reports and service difficulty reports
+- Public portions of the certification basis
+- Required engineering submissions from the manufacturer
+- Prior FMEA documentation for related systems
+
+Nothing here is privileged. Nothing here requires Boeing's cooperation.
 
 ![Agent decision flow: TCDS, AD/SB list, NTSB reports, FMEA summaries, prior incidents feed an LLM agent that reasons about single points of failure, training omissions, control authority creep, sensor architecture, and scope of change; the agent emits ALLOW or REFUSE with signed Proof of Agenthood.](/blog/the-flying-publics-counterparty/agent-flow.svg)
 
@@ -53,7 +64,7 @@ For each certification change or amendment, the agent reasons about a fixed set 
 - Is the change documented in pilot training materials at a level proportional to its effect?
 - Is there an annunciation that allows the pilot to identify the system acting?
 
-The output is a signed verdict, ALLOW or REFUSE, with reasoning that cites the specific clauses in the certification basis and the specific contradictions in the change. The reasoning is what anyone outside the agent will actually read.
+A verdict is one of two values, ALLOW or REFUSE. The work is in the reasoning, which cites the certification clause and names the specific contradiction in the change. Insurance underwriters, lessors, and foreign regulators who later consume these verdicts will spend most of their time on the reasoning.
 
 ## MCAS, replayed against the agent
 
@@ -69,7 +80,7 @@ Below is the actual MCAS timeline. The right column is the verdict an aviation s
 
 Eighteen months of REFUSE before Ethiopian Air 302. Each verdict cites public evidence, each is anchored on-chain, and any insurer, lessor, airline, or foreign regulator could have queried them at any moment.
 
-None of this requires hindsight. The single-AOA architecture, the authority increase, and the training omission were all visible in public documents at the time. Internal Boeing engineers were raising the same concerns contemporaneously. The information existed. What did not exist was a constituency whose job was to refuse on the public's behalf.
+None of this requires hindsight. The single-AOA architecture, the authority increase, and the training omission were all visible in public documents at the time. Internal Boeing engineers were raising the same concerns contemporaneously. The information was there. Nobody whose job was to refuse on the public's behalf was.
 
 ## How an unaccredited verdict becomes binding
 
@@ -81,13 +92,13 @@ The agent has no legal authority. How does its verdict matter, then?
 
 **Regulatory shadow.** Foreign regulators (CAAC, EASA) already disagree with FAA findings; CAAC grounded the 737 MAX before the FAA did. A public signed verdict gives a foreign regulator political cover for disagreement. Over enough cycles, the FAA either matches their verdicts or becomes the outlier.
 
-These paths compound. The first verdict shows up in nobody's pricing model. The tenth one is a footnote in an underwriter's risk memo. The hundredth one is institutional infrastructure.
+These paths compound. Nobody reprices anything off a single REFUSE. After a year of verdicts cited in underwriting memos and legal briefs, the agent stops being optional.
 
 So who reads the first ten? The most credible early user is a pilot union. ALPA, BALPA, and IFALPA already publish position papers opposing specific certification changes, citing internal opinion or hired consultants. A position paper citing a signed agent verdict instead carries something the union cannot generate on its own: independence from the union. The workflow change is one citation. The track record that lets insurers and courts defer later has to start somewhere.
 
 ## "But the agent wasn't there in 2018"
 
-The historical counterfactual isn't the argument. Whether the flying public has a counterparty *now* is the argument. They don't. Every other constituency does. That asymmetry is the entire premise of building this.
+Forget the historical counterfactual for a moment. The question is whether the flying public has a counterparty now. They don't. Every other constituency does.
 
 The next certification disaster is being structured right now: a control law tuned past its envelope, a training requirement negotiated away to protect a delivery date. The public has no voice in any of it. Refusing to deploy the technology that gives them one is a choice about which constituency keeps getting overrun.
 
@@ -97,6 +108,6 @@ The Theseus aviation safety reviewer is live, with its prompt published. Every v
 
 In DeFi, a sovereign agent's verdict is binding immediately because the protocol calls the agent before executing, and a REFUSE reverts the transaction in a single block. Aviation is the same shape, slower. The agent gives an unrepresented constituency a counterparty whose verdicts cannot be quieted; markets, courts, and rival regulators do over years what a smart contract does in seconds.
 
-The flying public has been the unrepresented constituency for a hundred years of commercial aviation. The technology to change that has finally arrived.
+The flying public has been the unrepresented constituency for a hundred years of commercial aviation. We built this to change that.
 
 [**See the aviation safety reviewer agent →**](https://demo-agents.theseus.network/aviation)
