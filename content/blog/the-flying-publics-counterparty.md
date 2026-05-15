@@ -65,14 +65,6 @@ The three channels compound over many verdicts, not on the first one. Nobody is 
 
 The most credible early user, the one likely to consume the first set of verdicts before any insurance underwriter does, is a pilot union. ALPA, BALPA, and IFALPA already publish position papers opposing specific certification changes, today citing internal opinion or hired consultants. A position paper that cites a signed agent verdict instead carries something the union cannot generate on its own, which is independence from the union itself. The workflow change for the union is one new citation in a document they were already writing, and the track record that lets insurers and courts eventually defer to the agent has to start somewhere.
 
-## "But the agent wasn't there in 2018"
-
-The historical counterfactual is not really load-bearing here. The actual question is whether the flying public has an institutional counterparty in commercial aviation now, and they don't, while every other affected constituency does.
-
-Somewhere in the certification pipeline at the moment you're reading this, a control law is being tuned past the envelope its original safety case assumed, or a training requirement is being negotiated away to protect a delivery commitment. The public has no voice in any of that, in the same way they had no voice when MCAS shipped. Declining to deploy the technology that could give them one is a choice about which constituency keeps getting overrun in cases like this.
-
-The Theseus aviation safety reviewer is live, with its prompt published. Every verdict it signs becomes part of the public record.
-
 ## Where this is already working faster
 
 In DeFi, a sovereign agent's verdict is binding immediately because the protocol calls the agent before executing and a REFUSE reverts the transaction in a single block. Aviation is the same shape of problem with a much slower binding mechanism. The market repricing channel takes years; the litigation channel waits for a crash; the regulatory channel compounds citations over many cycles. The underlying logic doesn't change: an unrepresented constituency gets an institutional counterparty whose verdicts cannot be silenced, and the rest of the system has to adjust around that fact, whether the adjustment takes a block or a decade.
