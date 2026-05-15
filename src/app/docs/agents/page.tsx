@@ -23,7 +23,7 @@ export default function AgentsPage() {
           <Bot className="h-3 w-3" />
           Core Concepts
         </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+        <h1 className="font-serif text-4xl sm:text-5xl font-normal mb-4 tracking-[-0.02em] [text-wrap:balance]">
           Agents &amp; Models
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">

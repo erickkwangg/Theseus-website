@@ -67,7 +67,7 @@ export default function DocsHomePage() {
           Developer Documentation
         </div>
         
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-6 tracking-tight">
+        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal mb-6 tracking-[-0.02em] [text-wrap:balance]">
           Write an agent. Sign every step.
           <span className="block text-indigo-300">Settle on-chain.</span>
         </h1>

@@ -123,12 +123,12 @@ export default function PlaygroundPage() {
       <section className="relative pt-32 lg:pt-40 pb-12 px-6 overflow-hidden">
         <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-6">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-300/80 mb-6 inline-flex items-center gap-2">
             <Play className="h-3 w-3" />
             Interactive Preview
-          </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-6 tracking-tight leading-tight">
-            SHIP <span className="hero-title-gradient">Playground</span>
+          </p>
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal leading-tight mb-6 tracking-[-0.02em] [text-wrap:balance]">
+            SHIP <span className="italic">Playground.</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             See how SHIP compiles intent into verifiable agent execution.

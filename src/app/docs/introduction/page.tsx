@@ -32,7 +32,7 @@ export default function IntroductionPage() {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-4">
           Getting Started
         </div>
-        <h1 className="text-4xl sm:text-5xl font-light mb-4 tracking-tight">
+        <h1 className="font-serif text-4xl sm:text-5xl font-normal mb-4 tracking-[-0.02em] [text-wrap:balance]">
           Introduction to Theseus
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
