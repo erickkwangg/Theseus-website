@@ -4,11 +4,14 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
+import { credentialStore } from "@/lib/poa/store";
+import { ensureFixtureCredentials } from "@/lib/poa/seed";
 import ChainModeBanner from "./_components/ChainModeBanner";
 import PoaNav from "./_components/PoaNav";
 import AgentLookupBar from "./_components/AgentLookupBar";
-import Sigil from "./_components/Sigil";
+import Sigil, { checksumFromSeed } from "./_components/Sigil";
 import ImageSlot from "./_components/ImageSlot";
+import RelativeTime from "./_components/RelativeTime";
 
 function portraitSlug(name: string): string {
   return name.toLowerCase().split(" ")[0];
@@ -38,7 +41,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PoaLanding() {
+export default async function PoaLanding() {
+  await ensureFixtureCredentials().catch(() => {});
+  let credentials: Awaited<ReturnType<typeof credentialStore.listLatest>> = [];
+  try {
+    credentials = await credentialStore.listLatest(200);
+  } catch {
+    /* leave empty; the page still works without the directory section */
+  }
+  const credentialedIds = new Set(credentials.map((c) => c.agentId));
+  const registeredOnly = Object.values(FIXTURE_AGENTS).filter(
+    (a) => a.context && !credentialedIds.has(a.agentId),
+  );
   return (
     <main className="poa-shell min-h-screen">
       <Header />
@@ -205,7 +219,187 @@ export default function PoaLanding() {
         </div>
       </section>
 
+      {/* 03: Browse the directory — every agent with a credential, plus
+          registered agents that have published their context. Folded in
+          from the old /poa/agents route so /poa is the single surface. */}
+      {(credentials.length > 0 || registeredOnly.length > 0) && (
+        <section className="px-3 sm:px-4 lg:px-6 pb-24 lg:pb-32">
+          <div className="mx-auto max-w-6xl">
+            <div
+              className="mb-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t pt-10 lg:mb-10"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <div>
+                <p className="poa-stamp">03 &middot; Browse &middot; Directory</p>
+                <h2 className="mt-3 font-serif text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
+                  Every credentialed <span className="italic">agent.</span>
+                </h2>
+              </div>
+              <span className="poa-stamp">
+                {credentials.length + registeredOnly.length} total
+              </span>
+            </div>
+
+            {credentials.length > 0 && (
+              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {credentials.map((c) => {
+                  const a = c.claims.agent;
+                  const slug = portraitSlug(a.name);
+                  const checksum = checksumFromSeed(a.agentId + a.abgHash);
+                  const status: "active" | "revoked" = c.revoked
+                    ? "revoked"
+                    : "active";
+                  return (
+                    <li key={c.jti}>
+                      <Link
+                        href={`/poa/${a.agentId}`}
+                        className="group flex h-full flex-col gap-3 border p-4 transition-colors hover:border-[var(--poa-ink)]"
+                        style={{ borderColor: "var(--poa-rule)" }}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <ImageSlot
+                            src={`/poa/agents/${slug}.png`}
+                            alt={`Portrait of ${a.name}`}
+                            width={80}
+                            height={80}
+                            className="w-12"
+                            imgClassName="rounded-full"
+                            fallback={
+                              <Sigil
+                                seed={a.agentId + a.abgHash}
+                                size={48}
+                                sovereign={a.sovereign}
+                                grade={a.recentRuns.grade}
+                              />
+                            }
+                          />
+                          <span className="font-serif text-lg italic text-[var(--poa-ink)]">
+                            {checksum}
+                          </span>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-serif text-[19px] leading-tight tracking-[-0.01em] text-[var(--poa-ink)] group-hover:italic">
+                            {a.name}
+                          </p>
+                          {a.summary && (
+                            <p className="mt-1.5 line-clamp-2 text-[12.5px] leading-snug text-[var(--poa-ink-soft)]">
+                              {a.summary}
+                            </p>
+                          )}
+                        </div>
+                        <div className="mt-auto flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-2">
+                          <span className="poa-stamp">
+                            {a.sovereign ? "sovereign" : "controller"}
+                          </span>
+                          <span className="poa-stamp">
+                            {gradeShort(a.recentRuns.grade)}
+                          </span>
+                          <span
+                            className="poa-stamp ml-auto"
+                            style={{
+                              color:
+                                status === "revoked"
+                                  ? "var(--poa-wax)"
+                                  : "var(--poa-sepia)",
+                            }}
+                          >
+                            {status === "revoked" ? (
+                              "revoked"
+                            ) : (
+                              <RelativeTime epochMs={c.issuedAt} />
+                            )}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {registeredOnly.length > 0 && (
+              <>
+                <div
+                  className="mb-6 mt-12 border-t pt-8 lg:mb-8"
+                  style={{ borderColor: "var(--poa-rule)" }}
+                >
+                  <p className="poa-stamp">Registered &middot; published context</p>
+                  <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+                    Agents below publish their system prompt, the inputs they
+                    read, and the outputs they commit. Read what the model
+                    actually sees.
+                  </p>
+                </div>
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {registeredOnly.map((a) => {
+                    const checksum = checksumFromSeed(a.agentId + a.abgHash);
+                    return (
+                      <li key={a.agentId}>
+                        <Link
+                          href={`/poa/${a.agentId}`}
+                          className="group flex h-full flex-col gap-3 border p-4 transition-colors hover:border-[var(--poa-ink)]"
+                          style={{ borderColor: "var(--poa-rule)" }}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <Sigil
+                              seed={a.agentId + a.abgHash}
+                              size={48}
+                              sovereign={a.sovereign}
+                              grade={a.recentRuns.grade}
+                            />
+                            <span className="font-serif text-lg italic text-[var(--poa-ink)]">
+                              {checksum}
+                            </span>
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-serif text-[19px] leading-tight tracking-[-0.01em] text-[var(--poa-ink)] group-hover:italic">
+                              {a.name}
+                            </p>
+                            {a.summary && (
+                              <p className="mt-1.5 line-clamp-3 text-[12.5px] leading-snug text-[var(--poa-ink-soft)]">
+                                {a.summary}
+                              </p>
+                            )}
+                          </div>
+                          <div className="mt-auto flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-2">
+                            <span className="poa-stamp">
+                              {a.sovereign ? "sovereign" : "controller"}
+                            </span>
+                            <span className="poa-stamp">
+                              {gradeShort(a.recentRuns.grade)}
+                            </span>
+                            <span
+                              className="poa-stamp ml-auto"
+                              style={{ color: "var(--poa-sepia)" }}
+                            >
+                              read context →
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
       <Footer />
     </main>
   );
+}
+
+function gradeShort(g: string): string {
+  switch (g) {
+    case "full":
+      return "kzg";
+    case "mixed":
+      return "mixed";
+    case "lite":
+      return "lite";
+    default:
+      return "·";
+  }
 }

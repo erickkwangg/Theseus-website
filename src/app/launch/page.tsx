@@ -60,12 +60,12 @@ export default function LaunchPage() {
       <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-24 px-6 overflow-hidden">
         <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-300 text-xs mb-6">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-300/80 mb-6 inline-flex items-center gap-2">
             <Rocket className="h-3 w-3" />
-            Developer Preview
-          </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-6 tracking-tight leading-tight">
-            Launch on <span className="hero-title-gradient">Theseus</span>
+            Developer Preview · v.1.0
+          </p>
+          <h1 className="font-serif text-[clamp(3rem,7vw,5.5rem)] font-normal leading-[0.95] tracking-[-0.02em] mb-6 [text-wrap:balance]">
+            Ship your first <span className="italic">agent.</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
             Build agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
@@ -79,7 +79,7 @@ export default function LaunchPage() {
             </a>
             <Link href="/docs/quickstart">
               <Button className="ghost-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300">
-                See What You Will Build
+                See what you will build
               </Button>
             </Link>
           </div>
@@ -114,11 +114,11 @@ export default function LaunchPage() {
       <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-indigo-300/90 text-xs uppercase tracking-widest mb-4">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-300/80 mb-4">
               From request to running agent
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
-              Three steps to your first agent
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] [text-wrap:balance]">
+              Three steps to your first <span className="italic">agent.</span>
             </h2>
           </div>
 
@@ -159,8 +159,8 @@ export default function LaunchPage() {
       <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70 grid-bg">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-4">
-              Read first
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 [text-wrap:balance]">
+              Read <span className="italic">first.</span>
             </h2>
             <p className="text-slate-400 text-base max-w-2xl mx-auto">
               The fastest way to evaluate Theseus is to read what the runtime actually is and
@@ -214,7 +214,9 @@ export default function LaunchPage() {
       {/* Community */}
       <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-4">Talk to us</h2>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 [text-wrap:balance]">
+            Talk to <span className="italic">us.</span>
+          </h2>
           <p className="text-slate-400 text-base max-w-2xl mx-auto mb-10">
             Have a question, a use case to validate, or a partnership in mind? The fastest path
             is email.

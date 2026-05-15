@@ -27,7 +27,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Build", href: "/#build" },
   { label: "Markets", href: "/#market" },
   { label: "Proof of Agenthood", href: "/poa" },
-  { label: "Browse", href: "/poa/agents" },
   { label: "Blog", href: "/blog" },
   { label: "Docs", href: "/docs" },
 ];

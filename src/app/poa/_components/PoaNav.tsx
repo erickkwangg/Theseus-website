@@ -28,11 +28,6 @@ const ITEMS: Item[] = [
     matches: (p) => p.startsWith("/poa/claim"),
   },
   {
-    label: "Agents",
-    href: "/poa/agents",
-    matches: (p) => p.startsWith("/poa/agents"),
-  },
-  {
     label: "Docs",
     href: "/poa/docs",
     matches: (p) => p.startsWith("/poa/docs"),
