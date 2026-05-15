@@ -5,13 +5,11 @@ import Compare from "@/components/Pages/Home/Compare";
 import Footer from "@/components/Pages/Home/Footer";
 import Hero from "@/components/Pages/Home/Hero";
 import Markets from "@/components/Pages/Home/Markets";
-import StatsStrip from "@/components/Pages/Home/StatsStrip";
 
 export default function Home() {
   return (
     <main className="min-h-screen site-shell">
       <Hero />
-      <StatsStrip />
       <Beliefs />
       <Compare />
       <Architecture />

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
-import { FIXTURE_AGENTS, FIXTURE_AGENT_IDS } from "@/lib/poa/fixtures";
+import { FIXTURE_AGENTS } from "@/lib/poa/fixtures";
 import { chainMode } from "@/lib/poa/chain";
 import { credentialStore } from "@/lib/poa/store";
 import { ensureFixtureCredentials } from "@/lib/poa/seed";
@@ -12,6 +12,7 @@ import AgentLookupBar from "./_components/AgentLookupBar";
 import Sigil, { checksumFromSeed } from "./_components/Sigil";
 import ImageSlot from "./_components/ImageSlot";
 import RelativeTime from "./_components/RelativeTime";
+import StatsStrip from "@/components/Pages/Home/StatsStrip";
 
 function portraitSlug(name: string): string {
   return name.toLowerCase().split(" ")[0];
@@ -102,43 +103,16 @@ export default async function PoaLanding() {
               />
 
               <div className="mt-8">
-                <p className="poa-stamp">Or try</p>
-                <div className="poa-focus-group mt-3 grid grid-cols-3 gap-1">
-                  {FIXTURE_AGENT_IDS.map((id) => {
-                    const agent = FIXTURE_AGENTS[id];
-                    const slug = portraitSlug(agent.name);
-                    return (
-                      <Link
-                        key={id}
-                        href={`/poa/${id}`}
-                        className="group flex flex-col items-center gap-2 px-2 py-3"
-                      >
-                        <ImageSlot
-                          src={`/poa/agents/${slug}.png`}
-                          alt={`Portrait of ${agent.name}`}
-                          width={80}
-                          height={80}
-                          className="w-11"
-                          imgClassName="rounded-full"
-                          fallback={
-                            <Sigil
-                              seed={id + agent.abgHash}
-                              size={44}
-                              sovereign={agent.sovereign}
-                              grade={agent.recentRuns.grade}
-                            />
-                          }
-                        />
-                        <span className="block text-center font-serif text-[13px] leading-tight text-[var(--poa-ink)] group-hover:italic">
-                          {agent.name}
-                        </span>
-                        <span className="poa-stamp">
-                          {agent.sovereign ? "sovereign" : "controller"}
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
+                <p className="text-[13px] leading-relaxed text-[var(--poa-ink-soft)]">
+                  Don&apos;t have an address? Every agent with a credential is
+                  in the directory below.{" "}
+                  <a
+                    href="#03"
+                    className="underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+                  >
+                    Browse all &rarr;
+                  </a>
+                </p>
               </div>
 
               <div
@@ -219,6 +193,17 @@ export default async function PoaLanding() {
         </div>
       </section>
 
+      {/* Live counters: the network's heartbeat just above the directory.
+          Same component that used to live below the Hero on /. */}
+      <section
+        id="03"
+        className="px-3 sm:px-4 lg:px-6 pt-2 pb-8 lg:pt-4 lg:pb-10"
+      >
+        <div className="mx-auto max-w-6xl">
+          <StatsStrip />
+        </div>
+      </section>
+
       {/* 03: Browse the directory — every agent with a credential, plus
           registered agents that have published their context. Folded in
           from the old /poa/agents route so /poa is the single surface. */}
@@ -230,7 +215,7 @@ export default async function PoaLanding() {
               style={{ borderColor: "var(--poa-rule)" }}
             >
               <div>
-                <p className="poa-stamp">03 &middot; Browse &middot; Directory</p>
+                <p className="poa-stamp">Browse &middot; Directory</p>
                 <h2 className="mt-3 font-serif text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[0.98] tracking-[-0.02em] text-[var(--poa-ink)] [text-wrap:balance]">
                   Every credentialed <span className="italic">agent.</span>
                 </h2>
