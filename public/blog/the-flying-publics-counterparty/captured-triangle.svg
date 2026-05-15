@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title">
+  <title id="title">The captured triangle: manufacturer, regulator, legislature, with the flying public outside.</title>
+  <style>
+    .node { fill: none; stroke-width: 1.4; }
+    .node-stroke { stroke: #334155; }
+    .public-stroke { stroke: #b91c1c; stroke-dasharray: 4 4; }
+    .label { fill: #0f172a; font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; }
+    .sub { fill: #475569; font-family: ui-sans-serif, system-ui, sans-serif; }
+    .eyebrow { fill: #64748b; font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; letter-spacing: 1.2px; }
+    .arrow { stroke: #64748b; stroke-width: 1.4; fill: none; }
+    .public-fill { fill: #b91c1c; font-family: ui-sans-serif, system-ui, sans-serif; }
+    :where(.dark) .node-stroke { stroke: #cbd5e1; }
+    :where(.dark) .public-stroke { stroke: #fca5a5; }
+    :where(.dark) .label { fill: #f1f5f9; }
+    :where(.dark) .sub { fill: #94a3b8; }
+    :where(.dark) .eyebrow { fill: #94a3b8; }
+    :where(.dark) .arrow { stroke: #94a3b8; }
+    :where(.dark) .public-fill { fill: #fca5a5; }
+  </style>
+  <defs>
+    <marker id="t-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+    </marker>
+    <marker id="t-arrow-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+    </marker>
+    <marker id="t-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b91c1c" />
+    </marker>
+  </defs>
+
+  <text x="360" y="28" text-anchor="middle" class="eyebrow" font-size="11">THE CAPTURED TRIANGLE</text>
+
+  <!-- Manufacturer -->
+  <rect x="40" y="60" width="220" height="76" rx="8" class="node node-stroke" />
+  <text x="150" y="92" text-anchor="middle" class="label" font-size="15">Manufacturer</text>
+  <text x="150" y="113" text-anchor="middle" class="sub" font-size="11">Boeing, Airbus, Embraer</text>
+  <text x="150" y="128" text-anchor="middle" class="sub" font-size="11">represents shareholders</text>
+
+  <!-- Regulator -->
+  <rect x="460" y="60" width="220" height="76" rx="8" class="node node-stroke" />
+  <text x="570" y="92" text-anchor="middle" class="label" font-size="15">Regulator</text>
+  <text x="570" y="113" text-anchor="middle" class="sub" font-size="11">FAA, EASA</text>
+  <text x="570" y="128" text-anchor="middle" class="sub" font-size="11">represents executive branch</text>
+
+  <!-- Legislature -->
+  <rect x="250" y="220" width="220" height="76" rx="8" class="node node-stroke" />
+  <text x="360" y="252" text-anchor="middle" class="label" font-size="15">Legislature</text>
+  <text x="360" y="273" text-anchor="middle" class="sub" font-size="11">Congress</text>
+  <text x="360" y="288" text-anchor="middle" class="sub" font-size="11">represents districts</text>
+
+  <!-- Manufacturer → Legislature: lobbies -->
+  <path d="M 200 136 Q 220 200 280 220" class="arrow" marker-end="url(#t-arrow)" />
+  <text x="195" y="195" class="sub" font-size="11">lobbies</text>
+
+  <!-- Legislature → Regulator: appoints / funds -->
+  <path d="M 440 220 Q 500 200 520 136" class="arrow" marker-end="url(#t-arrow)" />
+  <text x="500" y="195" class="sub" font-size="11">appoints, funds</text>
+
+  <!-- Regulator → Manufacturer: delegates -->
+  <path d="M 460 88 L 260 88" class="arrow" marker-end="url(#t-arrow)" />
+  <text x="360" y="78" text-anchor="middle" class="sub" font-size="11">delegates technical review (ODA)</text>
+
+  <!-- The flying public, outside -->
+  <rect x="250" y="345" width="220" height="62" rx="8" class="node public-stroke" />
+  <text x="360" y="372" text-anchor="middle" class="public-fill" font-size="15" font-weight="600">The flying public</text>
+  <text x="360" y="392" text-anchor="middle" class="sub" font-size="11">no entity acts on their behalf</text>
+
+  <!-- Dashed line: public → legislature (votes) -->
+  <path d="M 360 345 L 360 296" class="arrow" stroke-dasharray="3 4" marker-end="url(#t-arrow)" />
+  <text x="368" y="324" class="sub" font-size="10" font-style="italic">votes occasionally</text>
+</svg>

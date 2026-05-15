@@ -1449,9 +1449,8 @@ body:has(.poa-shell) {
 }
 .dark .prose-blog { color: #cbd5e1; }   /* slate-300 */
 
+.prose-blog > * { margin-top: 0; margin-bottom: 0; }
 .prose-blog > * + * { margin-top: 1.25em; }
-
-.prose-blog p { margin: 0; }
 
 .prose-blog h2,
 .prose-blog h3,

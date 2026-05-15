@@ -369,6 +369,13 @@ OUTPUT: strict JSON, single object, no commentary.
   "reason": <short tag, max 80 chars>,
   "reasoning": <one paragraph, 60-150 words, citing the actual numbers from the input. End with "Allowing." or "Refusing.">
 }`,
+    commitmentSurface: {
+      address: "0x0B59da3768CB0F1725A1C2183dD1Ad93058394d2",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0x0B59da3768CB0F1725A1C2183dD1Ad93058394d2",
+      countFn: "terraLatest",
+    }
     },
   },
   "5HsJ4xK2nL8pR3qY7mZ9wB1tF5dH6cV8aN2eW4xT6bP9sM3K": {
@@ -432,6 +439,13 @@ Return a ResolutionResult with:
 - If truly unable to determine, pick the most likely based on available evidence and reflect the uncertainty in confidence_pct.
 
 Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.ship`,
+    commitmentSurface: {
+      address: "0xd14A0963D48B944463F3fE6e776C11e09101bE40",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0xd14A0963D48B944463F3fE6e776C11e09101bE40",
+      countFn: "touchedMarketCount",
+    }
     },
   },
   "5KbR9w3jH8mTcQ2nL5pY7eB1xK4dV6sN8aZ3fW5tH9pM1vXc": {
@@ -485,6 +499,13 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
 
 ## Output Format
 { "decision": "ALLOW" | "REFUSE", "reason": short tag, "reasoning": one paragraph citing the actual numbers from the input. End with "Allowing." or "Refusing." }`,
+    commitmentSurface: {
+      address: "0xe442277ba5ce3f5aF5eDAE26206976ADC964C26C",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0xe442277ba5ce3f5aF5eDAE26206976ADC964C26C",
+      countFn: "touchedAttestationCount",
+    }
     },
   },
   "5LkY9d2vH6mR8nQ1bX3cP5tF7eK4aV2sZ8wM5oG1pJqC": {
@@ -537,6 +558,13 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
 
 ## Output Format
 { "action": "HOLD" | "BUY_WETH" | "SELL_WETH", "size_usd": <number>, "reason": short tag, "reasoning": one paragraph citing actual numbers. End with "Holding.", "Buying WETH.", or "Selling WETH." }`,
+    commitmentSurface: {
+      address: "0x3e1cEd606571A35c43DA11a3b21C051690Bd926a",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0x3e1cEd606571A35c43DA11a3b21C051690Bd926a",
+      countFn: "tickCount",
+    }
     },
   },
   "5JhT2nQ8eP6mY4dR1bL9wK3vF7cN5aZ8sH2gM6xV1oCb": {
@@ -591,6 +619,13 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
 
 ## Output Format
 { "decision": "APPROVE" | "CAUTION" | "REJECT", "reason": short tag, "reasoning": one paragraph citing the specific fields. End with "Approving.", "Cautioning.", or "Rejecting." }`,
+    commitmentSurface: {
+      address: "0x453cE65E5D6eBc6C71f3e420e720d2C2E1D03bce",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0x453cE65E5D6eBc6C71f3e420e720d2C2E1D03bce",
+      countFn: "touchedChangeCount",
+    }
     },
   },
   "5FmN8vY6cP1qK4xR7zL3jB9wE5dV8aS2hT6gM3fX9pZ7nCk2": {
@@ -643,6 +678,13 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
 
 ## Output Format
 { "decision": "APPROVE" | "CAUTION" | "REJECT", "reason": short tag, "reasoning": one paragraph citing specific signals. End with "Approving.", "Cautioning.", or "Rejecting." }`,
+    commitmentSurface: {
+      address: "0xc9CCF578093603e419997358fa9646Bd891B018a",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0xc9CCF578093603e419997358fa9646Bd891B018a",
+      countFn: "touchedProposalCount",
+    }
     },
   },
   "5GnT4xK7eW2pR9qB6yA3sL5mZ1cV8dN4fH8jM2vXp7Q3hLb1": {
@@ -734,6 +776,13 @@ Strict JSON:
   "reason": <short tag, max 80 chars>,
   "reasoning": <one paragraph, 80-200 words, citing specific fields. End with "Buying $X.", "Passing.">
 }`,
+    commitmentSurface: {
+      address: "0xa6FBaadeA4e7F58D812d989737d708b279E8BD21",
+      chainId: 84532,
+      chainName: "Base Sepolia",
+      explorerAddressUrl: "https://sepolia.basescan.org/address/0xa6FBaadeA4e7F58D812d989737d708b279E8BD21",
+      countFn: "tickCount",
+    }
     },
   },
 };

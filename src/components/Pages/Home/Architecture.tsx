@@ -55,7 +55,7 @@ export default function Architecture() {
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-8">
         <SectionHeader
           label="Agents"
-          number="02"
+          number="03"
           className="mb-8 lg:mb-10"
         />
 

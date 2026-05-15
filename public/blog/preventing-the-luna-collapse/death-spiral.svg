@@ -4,11 +4,9 @@
     .ink { stroke: #334155; }
     .label { fill: #0f172a; }
     .sub { fill: #475569; }
-    @media (prefers-color-scheme: dark) {
-      .ink { stroke: #cbd5e1; }
-      .label { fill: #f1f5f9; }
-      .sub { fill: #94a3b8; }
-    }
+    .dark .ink { stroke: #cbd5e1; }
+    .dark .label { fill: #f1f5f9; }
+    .dark .sub { fill: #94a3b8; }
   </style>
   <defs>
     <marker id="spiral-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">

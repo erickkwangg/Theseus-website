@@ -35,6 +35,25 @@ export type AgentContext = {
   schedule?: string;
   /** Optional URL where the agent can be observed running. */
   demoUrl?: string;
+  /** Optional pointer to the agent's deployed commitment surface (the
+   *  contract on chain where its signed verdicts land). The PoA
+   *  profile reads live verdict counts from this address. */
+  commitmentSurface?: CommitmentSurface;
+};
+
+export type CommitmentSurface = {
+  /** EVM (or chain-native) address of the deployed commitment surface. */
+  address: string;
+  /** Chain id, e.g. 84532 for Base Sepolia. */
+  chainId: number;
+  /** Human-readable chain name. */
+  chainName: string;
+  /** Block-explorer URL prefix for the contract address. */
+  explorerAddressUrl: string;
+  /** Which read function returns the cumulative verdict count.
+   *  Append-only history contracts: tickCount.
+   *  Gate-shape contracts: touchedXCount (specific to each contract). */
+  countFn: string;
 };
 
 export type AgentSnapshot = {

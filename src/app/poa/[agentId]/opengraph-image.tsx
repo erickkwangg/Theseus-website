@@ -5,13 +5,76 @@
 // Node since @polkadot/api isn't edge-runtime safe).
 
 import { ImageResponse } from "next/og";
+import { createPublicClient, http, type Address } from "viem";
+import { baseSepolia } from "viem/chains";
 import { getChainReader } from "@/lib/poa/chain";
+import type { CommitmentSurface } from "@/lib/poa/types";
 
 export const alt = "Proof of Agenthood · Theseus";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 type Props = { params: Promise<{ agentId: string }> };
+
+async function readVerdictCount(
+  surface: CommitmentSurface,
+): Promise<number | null> {
+  try {
+    const client = createPublicClient({
+      chain: baseSepolia,
+      transport: http("https://sepolia.base.org"),
+    });
+    if (surface.countFn === "terraLatest") {
+      const abi = [
+        {
+          type: "function",
+          name: "latestTimestamp",
+          stateMutability: "view",
+          inputs: [{ name: "action", type: "uint8" }],
+          outputs: [{ type: "uint256" }],
+        },
+      ] as const;
+      const [a, b] = await Promise.all([
+        client
+          .readContract({
+            address: surface.address as Address,
+            abi,
+            functionName: "latestTimestamp",
+            args: [0],
+          })
+          .then((v) => Number(v))
+          .catch(() => 0),
+        client
+          .readContract({
+            address: surface.address as Address,
+            abi,
+            functionName: "latestTimestamp",
+            args: [1],
+          })
+          .then((v) => Number(v))
+          .catch(() => 0),
+      ]);
+      return (a > 0 ? 1 : 0) + (b > 0 ? 1 : 0);
+    }
+    const abi = [
+      {
+        type: "function",
+        name: surface.countFn,
+        stateMutability: "view",
+        inputs: [],
+        outputs: [{ type: "uint256" }],
+      },
+    ] as const;
+    const v = (await client.readContract({
+      address: surface.address as Address,
+      abi,
+      functionName: surface.countFn,
+    })) as bigint;
+    return Number(v);
+  } catch {
+    return null;
+  }
+}
 
 export default async function OgImage({ params }: Props) {
   const { agentId } = await params;
@@ -20,6 +83,7 @@ export default async function OgImage({ params }: Props) {
   let mode = "controller-retained";
   let grade = "unknown";
   let abgHash = "";
+  let verdictCount: number | null = null;
   try {
     const reader = getChainReader();
     const snapshot = await reader.getAgentSnapshot(agentId);
@@ -29,15 +93,29 @@ export default async function OgImage({ params }: Props) {
       mode = snapshot.sovereign ? "sovereign · immutable" : "controller-retained";
       grade = snapshot.recentRuns.grade;
       abgHash = snapshot.abgHash;
+      if (snapshot.context?.commitmentSurface) {
+        verdictCount = await readVerdictCount(
+          snapshot.context.commitmentSurface,
+        );
+      }
     }
   } catch {
     // OG image is best-effort; fall back to defaults if chain is unreachable.
   }
 
   const seed = agentId + abgHash;
-  const sigilSize = 360;
+  const sigilSize = 320;
   const cells = sigilCells(seed, 8, sigilSize);
   const checksum = checksum6(seed);
+
+  // The full agent summary often runs 200-400 chars; in OG dimensions
+  // (1200x630 fixed) that wraps deep enough to crash into the footer.
+  // Trim to a single readable line at this font size.
+  const summaryShort = summary
+    ? summary.length > 130
+      ? summary.slice(0, 127).replace(/\s+\S*$/, "") + "…"
+      : summary
+    : undefined;
   const badge: { letter: string; fill: "solid" | "half" | "outline" } | null =
     grade === "full"
       ? { letter: "K", fill: "solid" }
@@ -100,7 +178,7 @@ export default async function OgImage({ params }: Props) {
             <div style={{ height: 16 }} />
             <div
               style={{
-                fontSize: 96,
+                fontSize: 84,
                 lineHeight: 1.05,
                 letterSpacing: -2,
                 color: "#0f172a",
@@ -110,19 +188,54 @@ export default async function OgImage({ params }: Props) {
             >
               {name}
             </div>
-            {summary && (
+            {summaryShort && (
               <div
                 style={{
-                  marginTop: 24,
-                  fontSize: 28,
+                  marginTop: 22,
+                  fontSize: 22,
                   lineHeight: 1.35,
                   color: "#475569",
                   fontFamily: "sans-serif",
                   display: "flex",
-                  maxWidth: 700,
+                  maxWidth: 680,
                 }}
               >
-                {summary}
+                {summaryShort}
+              </div>
+            )}
+            {verdictCount !== null && verdictCount > 0 && (
+              <div
+                style={{
+                  marginTop: 28,
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: 16,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "serif",
+                    fontSize: 64,
+                    lineHeight: 1,
+                    color: "#0f172a",
+                    fontWeight: 400,
+                    display: "flex",
+                  }}
+                >
+                  {verdictCount.toLocaleString()}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: 16,
+                    letterSpacing: 3,
+                    textTransform: "uppercase",
+                    color: "#475569",
+                    display: "flex",
+                  }}
+                >
+                  verdicts signed on chain
+                </div>
               </div>
             )}
           </div>

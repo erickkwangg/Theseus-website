@@ -26,6 +26,9 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
 
   const url = `${SITE_URL}/poa/${agentId}`;
   const tweet = `${agentName} has a Proof of Agenthood credential. Verify it: ${url}`;
+  const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
+  const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(`${agentName} has a Proof of Agenthood credential. Verify it.`)}&embeds[]=${encodeURIComponent(url)}`;
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
   const embed = `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid #14110D;background:#FBF7F1;color:#14110D;font:600 12px ui-monospace,monospace;text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;border-radius:2px"><span style="color:#7B1E1E">&#9733;</span> Verified by Proof of Agenthood</a>`;
 
   async function copy(text: string, set: typeof setCopyState) {
@@ -55,11 +58,7 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
         // user cancel or share failed; fall through to X intent
       }
     }
-    window.open(
-      `https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,
-      "_blank",
-      "noopener",
-    );
+    window.open(xUrl, "_blank", "noopener");
   }
 
   return (
@@ -81,6 +80,39 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
           aria-label="Copy public credential URL"
         />
 
+        <a
+          href={xUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("poa.share.x", { agentId })}
+          className="cta-shareLink"
+          aria-label="Share this credential on X"
+        >
+          Share on X
+        </a>
+
+        <a
+          href={farcasterUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("poa.share.farcaster", { agentId })}
+          className="cta-shareLink"
+          aria-label="Share this credential on Farcaster"
+        >
+          Farcaster
+        </a>
+
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("poa.share.linkedin", { agentId })}
+          className="cta-shareLink"
+          aria-label="Share this credential on LinkedIn"
+        >
+          LinkedIn
+        </a>
+
         <button
           type="button"
           onClick={() => {
@@ -88,9 +120,9 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
             void nativeShare();
           }}
           className="cta-shareLink"
-          aria-label="Share this credential to social or system share sheet"
+          aria-label="Share to system share sheet on mobile"
         >
-          Post / Share via…
+          More…
         </button>
 
         <button
