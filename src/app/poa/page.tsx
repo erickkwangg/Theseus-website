@@ -81,8 +81,7 @@ export default async function PoaLanding() {
         <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-2 lg:gap-6">
           {/* 01: Verify */}
           <article
-            className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
-            style={{ borderRadius: "2px" }}
+            className="hero-card poa-paper relative flex flex-col overflow-hidden rounded-2xl bg-[var(--poa-paper-card)]"
           >
             <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
               <p className="poa-stamp">01 &middot; Look up &middot; Anyone</p>
@@ -132,8 +131,7 @@ export default async function PoaLanding() {
 
           {/* 02: Create */}
           <article
-            className="hero-card poa-paper relative flex flex-col overflow-hidden bg-[var(--poa-paper-card)]"
-            style={{ borderRadius: "2px" }}
+            className="hero-card poa-paper relative flex flex-col overflow-hidden rounded-2xl bg-[var(--poa-paper-card)]"
           >
             <div className="relative z-10 flex flex-1 flex-col px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
               <p className="poa-stamp">02 &middot; Create &middot; Operators</p>

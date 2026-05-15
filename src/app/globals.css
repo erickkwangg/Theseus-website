@@ -1140,36 +1140,37 @@
 }
 
 /* ============================================
-   PROOF OF AGENTHOOD: editorial-luxe register
-   Scoped to .poa-shell so the rest of the site's
-   indigo/slate palette is untouched.
+   PROOF OF AGENTHOOD: surfaces scoped to .poa-shell.
+   Variables now map to the brand kit's semantic tokens
+   (slate foreground, indigo accent, kit cream card),
+   not the previous sepia/wax editorial register.
    ============================================ */
 
 .poa-shell {
-  --poa-paper: #FBF7F1;
-  --poa-paper-card: #F1EAE1;
-  --poa-ink: #14110D;
-  --poa-ink-soft: #4A4339;
-  --poa-rule: rgba(20, 17, 13, 0.12);
-  --poa-rule-soft: rgba(20, 17, 13, 0.06);
-  --poa-wax: #7B1E1E;
-  --poa-wax-soft: rgba(123, 30, 30, 0.12);
-  --poa-sepia: #8A7864;
+  --poa-paper: #F8FAFC;                  /* surface: slate-050 page bg */
+  --poa-paper-card: #F1EAE1;             /* surface: kit cream card */
+  --poa-ink: #0f172a;                    /* foreground: slate-900 */
+  --poa-ink-soft: #475569;               /* body-soft: slate-600 */
+  --poa-rule: #e2e8f0;                   /* border: slate-200 */
+  --poa-rule-soft: rgba(15, 23, 42, 0.06);
+  --poa-wax: #4f46e5;                    /* accent: indigo-600 (kit primary) */
+  --poa-wax-soft: rgba(79, 70, 229, 0.12);
+  --poa-sepia: #94a3b8;                  /* meta caption: slate-400 */
 
   background: var(--poa-paper);
   color: var(--poa-ink);
   position: relative;
 }
 .dark .poa-shell {
-  --poa-paper: #14110D;
-  --poa-paper-card: #1C1812;
-  --poa-ink: #F5EDE0;
-  --poa-ink-soft: #B7AB99;
-  --poa-rule: rgba(245, 237, 224, 0.12);
-  --poa-rule-soft: rgba(245, 237, 224, 0.06);
-  --poa-wax: #C45757;
-  --poa-wax-soft: rgba(196, 87, 87, 0.16);
-  --poa-sepia: #A39482;
+  --poa-paper: #060b16;                  /* surface: kit dark bg */
+  --poa-paper-card: #0F172A;             /* surface: kit dark card */
+  --poa-ink: #f8fafc;                    /* foreground: slate-050 */
+  --poa-ink-soft: #94a3b8;               /* body-soft: slate-400 */
+  --poa-rule: rgba(255, 255, 255, 0.10); /* border: kit dark hairline */
+  --poa-rule-soft: rgba(255, 255, 255, 0.06);
+  --poa-wax: #818cf8;                    /* accent: indigo-400 for dark */
+  --poa-wax-soft: rgba(129, 140, 248, 0.16);
+  --poa-sepia: #94a3b8;
 
   background: var(--poa-paper);
   color: var(--poa-ink);
@@ -1177,7 +1178,7 @@
 
 /* Suppress the body-level indigo radial gradients while a poa-shell page is mounted. */
 body:has(.poa-shell) {
-  background: var(--poa-paper, #FBF7F1) !important;
+  background: var(--poa-paper, #F8FAFC) !important;
 }
 
 /* Header chrome scoped for poa surfaces: ink palette, no indigo, no glow. */

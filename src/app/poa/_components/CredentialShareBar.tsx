@@ -29,7 +29,7 @@ export default function CredentialShareBar({ agentId, agentName }: Props) {
   const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
   const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(`${agentName} has a Proof of Agenthood credential. Verify it.`)}&embeds[]=${encodeURIComponent(url)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-  const embed = `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid #14110D;background:#FBF7F1;color:#14110D;font:600 12px ui-monospace,monospace;text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;border-radius:2px"><span style="color:#7B1E1E">&#9733;</span> Verified by Proof of Agenthood</a>`;
+  const embed = `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid #0f172a;background:#F8FAFC;color:#0f172a;font:600 12px ui-monospace,monospace;text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;border-radius:2px"><span style="color:#4f46e5">&#9733;</span> Verified by Proof of Agenthood</a>`;
 
   async function copy(text: string, set: typeof setCopyState) {
     try {

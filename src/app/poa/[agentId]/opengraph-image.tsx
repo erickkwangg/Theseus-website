@@ -280,11 +280,11 @@ export default async function OgImage({ params }: Props) {
                     width: badgeR * 2,
                     height: badgeR * 2,
                     borderRadius: "50%",
-                    border: "2px solid #7B1E1E",
+                    border: "2px solid #4f46e5",
                     background:
-                      badge.fill === "solid" ? "#7B1E1E" : "#F1EAE1",
+                      badge.fill === "solid" ? "#4f46e5" : "#F1EAE1",
                     color:
-                      badge.fill === "solid" ? "#F1EAE1" : "#7B1E1E",
+                      badge.fill === "solid" ? "#F1EAE1" : "#4f46e5",
                     fontFamily: "monospace",
                     fontWeight: 700,
                     fontSize: badgeR * 1.2,
