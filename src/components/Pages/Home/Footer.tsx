@@ -62,7 +62,7 @@ export default function Footer() {
                 <Link href="/docs" className={FOOTER_LINK_CLASS}>
                   Docs
                 </Link>
-                <Link href="/launch#playground" className={FOOTER_LINK_CLASS}>
+                <Link href="/playground" className={FOOTER_LINK_CLASS}>
                   Playground
                 </Link>
                 <Link href="/launch" className={FOOTER_LINK_CLASS}>

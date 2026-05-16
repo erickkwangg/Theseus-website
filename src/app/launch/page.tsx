@@ -16,7 +16,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS } from "@/config/links";
-import PlaygroundClient from "./_components/PlaygroundClient";
+import PlaygroundClient from "@/components/PlaygroundClient";
 
 export const metadata: Metadata = {
   title: "Launch on Theseus",

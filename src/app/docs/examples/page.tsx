@@ -39,7 +39,7 @@ export default function ExamplesPage() {
             The playground runs the example below with a simulated trace. No install required.
           </p>
           <Link
-            href="/launch#playground"
+            href="/playground"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             <Play className="h-4 w-4" />
