@@ -129,7 +129,7 @@ export function SovereignAgentsSection() {
 
         <div className="mt-6 text-center">
           <Link
-            href="/playground"
+            href="/launch#playground"
             className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
           >
             Try it in the playground →

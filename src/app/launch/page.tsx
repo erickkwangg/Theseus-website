@@ -3,11 +3,6 @@ import type { Metadata } from "next";
 import {
   Mail,
   MessageCircle,
-  Play,
-  ShieldCheck,
-  GitBranch,
-  Cpu,
-  Sparkles,
   Compass,
   Activity,
   BookOpen,
@@ -21,6 +16,7 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS } from "@/config/links";
+import PlaygroundClient from "./_components/PlaygroundClient";
 
 export const metadata: Metadata = {
   title: "Launch on Theseus",
@@ -41,66 +37,6 @@ const accessHref = `mailto:${EXTERNAL_LINKS.contactEmail}?subject=${encodeURICom
 )}&body=${encodeURIComponent(
   "Hi Theseus team,\n\nI'd like preview access to deploy agents on Theseus. A bit about what I'm building:\n\n"
 )}`;
-
-// Same content as /playground, lifted here as a static preview so the
-// developer can see what they're about to open before they click.
-const SHIP_PREVIEW = `#[agent(name = "MarketCreator", version = 1, ship = "1.0")]
-
-const gpt_5_1: bytes32 = 0xe496...f117;
-const CREATE_MARKET_SELECTOR: bytes4 = 0x01000001;
-
-struct MarketParams {
-  question: string,
-  options: string[],
-  deadline_blocks: number,
-}
-
-#[entry]
-node start(request: string) {
-  messages.push(system("Generate structured market params"));
-  messages.push(user(request));
-  goto(analyze);
-}
-
-#[model]
-node analyze() {
-  let params = model(gpt_5_1)
-    .schema(MarketParams)
-    .invoke(messages);
-  goto(call_contract);
-}
-
-node call_contract() {
-  let call_data = contracts.encode_call(
-    CREATE_MARKET_SELECTOR, params
-  );
-  contracts.call(
-    PREDICTION_MARKET_CONTRACT, call_data, 0n, 10000000000n
-  );
-}`;
-
-const TRACE_STEPS = [
-  {
-    icon: Cpu,
-    label: "Compile SHIP to a CompiledAgent",
-    detail: "shipc emits a SCALE-encoded blob the chain decodes into ABG nodes.",
-  },
-  {
-    icon: Sparkles,
-    label: "Run inference on selected model",
-    detail: "One prover node runs the forward pass.",
-  },
-  {
-    icon: GitBranch,
-    label: "Generate Tensor Commit",
-    detail: "<1% overhead vs raw inference.",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Verified by 3 nodes",
-    detail: "KZG pairing checks pass. Result accepted.",
-  },
-];
 
 export default function LaunchPage() {
   return (
@@ -123,11 +59,11 @@ export default function LaunchPage() {
             Agenthood profile anyone can verify.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/playground">
+            <a href="#playground">
               <Button className="primary-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300 button-press">
                 Open the playground
               </Button>
-            </Link>
+            </a>
             <a href={accessHref}>
               <Button className="ghost-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300">
                 Request preview access
@@ -137,8 +73,8 @@ export default function LaunchPage() {
         </div>
       </section>
 
-      {/* Playground preview */}
-      <section className="px-6 pb-20 lg:pb-24">
+      {/* Playground: interactive, lives in-page now */}
+      <section id="playground" className="px-6 pb-20 lg:pb-24 scroll-mt-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 lg:mb-12">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
@@ -148,82 +84,12 @@ export default function LaunchPage() {
               Write SHIP. Run it. Get a signed <span className="italic">credential.</span>
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
-              This is the editor and the execution trace, live at{" "}
-              <Link
-                href="/playground"
-                className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
-              >
-                /playground
-              </Link>
-              . No wallet, no install, no signup.
+              The editor and the execution trace, interactive on this page. No wallet, no
+              install, no signup.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-6">
-            {/* Editor preview */}
-            <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-200 dark:border-slate-700/60 shadow-lg dark:shadow-2xl">
-              <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-slate-400 font-mono">
-                  market_creator.ship
-                </div>
-                <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
-                  Preview
-                </div>
-              </div>
-              <pre className="scroll-fade-right p-4 font-mono text-[12px] leading-relaxed overflow-x-auto text-slate-200 max-h-[460px]">
-                <code>{SHIP_PREVIEW}</code>
-              </pre>
-            </div>
-
-            {/* Trace preview */}
-            <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-200 dark:border-slate-700/60 shadow-lg dark:shadow-2xl flex flex-col">
-              <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
-                <div className="text-xs text-slate-400 font-mono">Execution trace</div>
-                <div className="ml-auto flex items-center gap-2">
-                  <Link
-                    href="/playground"
-                    className="primary-cta px-4 py-1.5 text-xs rounded-md inline-flex items-center gap-1.5"
-                  >
-                    <Play className="h-3 w-3" /> Run in browser
-                  </Link>
-                </div>
-              </div>
-              <ul className="flex flex-col divide-y divide-slate-800/60">
-                {TRACE_STEPS.map((step, idx) => {
-                  const Icon = step.icon;
-                  return (
-                    <li key={step.label} className="flex items-start gap-3 px-4 py-3.5">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-mono mt-0.5 shrink-0">
-                        {idx + 1}
-                      </span>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2 text-[13px] text-slate-100">
-                          <Icon className="h-3.5 w-3.5 text-indigo-300" />
-                          {step.label}
-                        </div>
-                        <p className="text-[11.5px] text-slate-400 mt-0.5 leading-relaxed">
-                          {step.detail}
-                        </p>
-                      </div>
-                    </li>
-                  );
-                })}
-                <li className="px-4 py-3.5 bg-emerald-500/5">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-400 mb-1">
-                    On-chain effect
-                  </p>
-                  <p className="text-[12.5px] text-slate-200">
-                    Market #4129 created · &quot;Will GPT-5 ship by EOY?&quot;
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <PlaygroundClient />
         </div>
       </section>
 

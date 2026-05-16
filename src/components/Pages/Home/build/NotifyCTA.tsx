@@ -27,7 +27,7 @@ export default function NotifyCTA() {
   return (
     <div id="build-notify" className="mt-8 flex flex-col items-start gap-5">
       <Link
-        href="/playground"
+        href="/launch#playground"
         onClick={() => track("home.build.playground_clicked")}
         className="cta-flat inline-flex items-center gap-3 px-6 py-3 text-sm font-medium"
       >

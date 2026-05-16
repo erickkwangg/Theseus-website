@@ -16,7 +16,7 @@ type Route = {
 const ROUTES: Route[] = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
   { path: "/launch", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/playground", priority: 0.8, changeFrequency: "weekly" },
+  // /playground folded into /launch#playground (permanentRedirect). Not in sitemap.
   { path: "/docs", priority: 0.9, changeFrequency: "weekly" },
   { path: "/docs/introduction", priority: 0.8, changeFrequency: "monthly" },
   { path: "/docs/quickstart", priority: 0.9, changeFrequency: "monthly" },

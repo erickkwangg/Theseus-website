@@ -93,7 +93,7 @@ export default function SHIPPage() {
             reading the rest of the page.
           </p>
           <Link
-            href="/playground"
+            href="/launch#playground"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg transition-all text-sm font-medium no-underline"
           >
             <Play className="h-4 w-4" />

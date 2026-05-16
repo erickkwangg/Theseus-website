@@ -61,7 +61,7 @@ export default function AgentsPage() {
               Full SHIP example
             </Link>
             <Link
-              href="/playground"
+              href="/launch#playground"
               className="inline-flex items-center gap-2 bg-transparent border border-indigo-500/40 hover:border-indigo-400 text-indigo-300 hover:text-slate-900 dark:hover:text-white px-4 py-2 rounded-lg transition-all text-sm no-underline"
             >
               Try in playground
