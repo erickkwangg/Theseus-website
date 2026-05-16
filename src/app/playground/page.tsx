@@ -116,21 +116,21 @@ export default function PlaygroundPage() {
   }, [runState]);
 
   return (
-    <main className="min-h-screen site-shell text-white">
+    <main className="min-h-screen site-shell">
       <Header />
 
       {/* Hero */}
       <section className="relative pt-32 lg:pt-40 pb-12 px-6 overflow-hidden">
         <div className="absolute inset-0 soft-grid opacity-15 pointer-events-none" />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-300/80 mb-6 inline-flex items-center gap-2">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-6 inline-flex items-center gap-2">
             <Play className="h-3 w-3" />
             Interactive Preview
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal leading-tight mb-6 tracking-[-0.02em] [text-wrap:balance]">
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal leading-tight mb-6 tracking-[-0.02em] text-slate-900 dark:text-slate-100 [text-wrap:balance]">
             SHIP <span className="italic">Playground.</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             See how SHIP compiles intent into verifiable agent execution.
             Hit run, watch the simulated trace.
           </p>
@@ -140,9 +140,12 @@ export default function PlaygroundPage() {
       {/* Status note */}
       <section className="px-6 pb-12">
         <div className="max-w-6xl mx-auto">
-          <div className="text-xs text-slate-400 text-center">
+          <div className="text-xs text-slate-500 dark:text-slate-400 text-center">
             Execution on this page is simulated. The real runtime is available through{" "}
-            <Link href="/launch" className="text-indigo-300 hover:text-white underline-offset-4 hover:underline">
+            <Link
+              href="/launch"
+              className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white hover:underline"
+            >
               preview access
             </Link>
             .
@@ -153,7 +156,7 @@ export default function PlaygroundPage() {
       {/* Description */}
       <section className="px-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-sm text-slate-400 mb-6">{DESCRIPTION}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">{DESCRIPTION}</p>
         </div>
       </section>
 
@@ -161,14 +164,14 @@ export default function PlaygroundPage() {
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6">
           {/* Editor */}
-          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-700/60 shadow-2xl">
-            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
+          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-200 dark:border-slate-700/60 shadow-lg dark:shadow-2xl">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-gray-400 font-mono">
+              <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-slate-400 font-mono">
                 {FILENAME}
               </div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
@@ -182,7 +185,7 @@ export default function PlaygroundPage() {
 
           {/* Trace */}
           <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-700/60 shadow-2xl flex flex-col">
-            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
               <div className="text-xs text-slate-400 font-mono">Execution trace</div>
               <div className="ml-auto flex items-center gap-2">
                 {runState === "done" && (
@@ -290,27 +293,27 @@ export default function PlaygroundPage() {
           <Link href="/docs/ship" className="group no-underline">
             <div className="docs-card h-full flex items-center justify-between gap-4 hover:border-indigo-400/40 transition-all duration-300">
               <div>
-                <div className="text-xs uppercase tracking-widest text-slate-500 mb-1">
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mb-1">
                   Reference
                 </div>
-                <div className="text-white font-medium group-hover:text-indigo-300 transition-colors">
+                <div className="text-slate-900 dark:text-slate-100 font-medium group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
                   Read the SHIP docs
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-indigo-300 transition-colors" />
+              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors" />
             </div>
           </Link>
           <Link href="/launch" className="group no-underline">
             <div className="docs-card h-full flex items-center justify-between gap-4 border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-400/60 hover:bg-indigo-500/10 transition-all duration-300">
               <div>
-                <div className="text-xs uppercase tracking-widest text-indigo-300/70 mb-1">
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-1">
                   Run for real
                 </div>
-                <div className="text-white font-medium group-hover:text-indigo-300 transition-colors">
+                <div className="text-slate-900 dark:text-slate-100 font-medium group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
                   Request preview access and deploy
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-indigo-300" />
+              <ArrowRight className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
             </div>
           </Link>
         </div>
