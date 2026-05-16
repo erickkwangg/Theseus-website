@@ -53,7 +53,7 @@ const steps = [
 
 export default function LaunchPage() {
   return (
-    <main className="min-h-screen site-shell text-white">
+    <main className="min-h-screen site-shell">
       <Header />
 
       {/* Hero */}
@@ -67,41 +67,41 @@ export default function LaunchPage() {
           <h1 className="font-serif text-[clamp(3rem,7vw,5.5rem)] font-normal leading-[0.95] tracking-[-0.02em] mb-6 [text-wrap:balance]">
             Ship your first <span className="italic">agent.</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
             Build agents that own assets, run inference verifiably, and persist on a Layer-1 runtime.
-            Preview access is open by request.
+            Try it in the browser; preview access is open by request.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href={accessHref}>
+            <Link href="/playground">
               <Button className="primary-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300 button-press">
-                Request Preview Access
-              </Button>
-            </a>
-            <Link href="/docs/quickstart">
-              <Button className="ghost-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300">
-                See what you will build
+                Open the playground
               </Button>
             </Link>
+            <a href={accessHref}>
+              <Button className="ghost-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300">
+                Request preview access
+              </Button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Status */}
-      <section className="py-12 px-6 border-t border-slate-800/70">
+      <section className="py-12 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-4xl mx-auto">
-          <div className="docs-card border-indigo-900/50 flex flex-col md:flex-row items-start gap-4">
-            <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300 shrink-0">
+          <div className="docs-card flex flex-col md:flex-row items-start gap-4">
+            <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 shrink-0">
               <Lock className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-lg font-medium mb-2">Where things stand</h3>
-              <p className="text-slate-300 text-sm leading-relaxed mb-2">
+              <h3 className="text-lg font-medium mb-2 text-slate-900 dark:text-slate-100">Where things stand</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-2">
                 The Theseus runtime is in private preview. The source repository is currently
                 closed while the protocol stabilizes, but the network is live for invited
                 developers and the path to deploy a real agent is the same one it will be at
                 public launch.
               </p>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                 If you are evaluating Theseus for a project, request access below and tell us
                 what you are building. We respond to every request.
               </p>
@@ -111,13 +111,13 @@ export default function LaunchPage() {
       </section>
 
       {/* Three steps */}
-      <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70">
+      <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-300/80 mb-4">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
               From request to running agent
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] [text-wrap:balance]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 [text-wrap:balance]">
               Three steps to your first <span className="italic">agent.</span>
             </h2>
           </div>
@@ -128,41 +128,48 @@ export default function LaunchPage() {
               return (
                 <div
                   key={step.number}
-                  className="group rounded-xl border border-gray-800 p-8
-                             bg-gradient-to-br from-slate-900/90 via-slate-950/80 to-slate-950
-                             hover:border-indigo-400/40 transition-all duration-300"
+                  className="docs-card group flex flex-col gap-5"
                 >
-                  <div className="flex items-center gap-4 mb-5">
-                    <span className="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-500/15 text-indigo-300 text-sm font-medium border border-indigo-500/30">
+                  <div className="flex items-center gap-4">
+                    <span className="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 text-sm font-medium border border-indigo-500/30">
                       {step.number}
                     </span>
-                    <Icon className="h-5 w-5 text-slate-500 group-hover:text-indigo-300 transition-colors" />
+                    <Icon className="h-5 w-5 text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors" />
                   </div>
-                  <h3 className="text-xl font-medium mb-3">{step.title}</h3>
-                  <p className="text-slate-300/90 text-sm leading-relaxed">{step.description}</p>
+                  <h3 className="text-xl font-medium text-slate-900 dark:text-slate-100">{step.title}</h3>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">{step.description}</p>
                 </div>
               );
             })}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="mt-12 flex flex-col items-center gap-4">
             <a href={accessHref}>
               <Button className="primary-cta px-8 py-5 text-base font-medium rounded-md">
-                Request Preview Access
+                Request preview access
               </Button>
             </a>
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+              Don&apos;t want to wait?{" "}
+              <Link
+                href="/playground"
+                className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
+              >
+                The playground runs in your browser →
+              </Link>
+            </p>
           </div>
         </div>
       </section>
 
       {/* Read while you wait */}
-      <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70 grid-bg">
+      <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70 grid-bg">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 [text-wrap:balance]">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 text-slate-900 dark:text-slate-100 [text-wrap:balance]">
               Read <span className="italic">first.</span>
             </h2>
-            <p className="text-slate-400 text-base max-w-2xl mx-auto">
+            <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
               The fastest way to evaluate Theseus is to read what the runtime actually is and
               what kind of agent it lets you build.
             </p>
@@ -193,14 +200,14 @@ export default function LaunchPage() {
               return (
                 <Link key={item.href} href={item.href} className="group no-underline">
                   <div className="docs-card h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300">
-                    <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-300 w-fit">
+                    <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 w-fit">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="font-medium text-white group-hover:text-indigo-300 transition-colors">
+                    <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
-                    <span className="text-xs text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 mt-auto">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{item.desc}</p>
+                    <span className="text-xs text-indigo-600 dark:text-indigo-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 mt-auto">
                       Read <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -212,12 +219,12 @@ export default function LaunchPage() {
       </section>
 
       {/* Community */}
-      <section className="py-20 lg:py-24 px-6 border-t border-slate-800/70">
+      <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 [text-wrap:balance]">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 text-slate-900 dark:text-slate-100 [text-wrap:balance]">
             Talk to <span className="italic">us.</span>
           </h2>
-          <p className="text-slate-400 text-base max-w-2xl mx-auto mb-10">
+          <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto mb-10">
             Have a question, a use case to validate, or a partnership in mind? The fastest path
             is email.
           </p>
@@ -227,12 +234,12 @@ export default function LaunchPage() {
               href={`mailto:${EXTERNAL_LINKS.contactEmail}`}
               className="docs-card flex items-center gap-4 hover:border-indigo-400/40 transition-all duration-300"
             >
-              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+              <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">
                 <Mail className="h-5 w-5" />
               </div>
               <div className="text-left">
-                <h3 className="font-medium text-white">Email us</h3>
-                <p className="text-sm text-slate-400">{EXTERNAL_LINKS.contactEmail}</p>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100">Email us</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{EXTERNAL_LINKS.contactEmail}</p>
               </div>
             </a>
 
@@ -243,21 +250,21 @@ export default function LaunchPage() {
                 rel="noopener noreferrer"
                 className="docs-card flex items-center gap-4 hover:border-indigo-400/40 transition-all duration-300"
               >
-                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div className="text-left">
-                  <h3 className="font-medium text-white">Join the Discord</h3>
-                  <p className="text-sm text-slate-400">Builders and contributors</p>
+                  <h3 className="font-medium text-slate-900 dark:text-slate-100">Join the Discord</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Builders and contributors</p>
                 </div>
               </a>
             ) : (
               <div className="docs-card flex items-center gap-4 opacity-70">
-                <div className="p-2.5 rounded-lg bg-slate-800 text-slate-500">
+                <div className="p-2.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500">
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div className="text-left">
-                  <h3 className="font-medium text-slate-300">Discord</h3>
+                  <h3 className="font-medium text-slate-700 dark:text-slate-300">Discord</h3>
                   <p className="text-sm text-slate-500">Opening soon</p>
                 </div>
               </div>
