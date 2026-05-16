@@ -227,19 +227,29 @@ export default function LaunchPage() {
         </div>
       </section>
 
-      {/* Quickstart: when browser playground isn't enough */}
+      {/* Quickstart: the real shipc compiler, today */}
       <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 lg:mb-12">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
-              From the browser to the CLI
+              From the browser to your terminal
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 mb-4 [text-wrap:balance]">
-              Deploying past the <span className="italic">playground.</span>
+              The SHIP compiler runs <span className="italic">locally.</span>
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
-              When you&apos;re ready to deploy something the chain holds onto, the CLI mirrors
-              the playground. Three commands from your terminal.
+              <a
+                href="https://github.com/Theseuschain/SHIP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
+              >
+                shipc
+              </a>{" "}
+              is a Rust CLI that compiles <code className="font-mono text-[13px]">.ship</code> files
+              into a canonical <code className="font-mono text-[13px]">CompiledAgent</code> blob,
+              ready to be SCALE-encoded for the chain. The compiler is public and open today; the
+              chain-deploy half ships with public testnet.
             </p>
           </div>
 
@@ -252,36 +262,43 @@ export default function LaunchPage() {
               </div>
               <div className="ml-4 text-xs text-slate-400 font-mono">~/agents · zsh</div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
-                Quickstart
+                Real commands, today
               </div>
             </div>
             <pre className="p-5 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200 sm:p-6">
               <code>
-                <span className="text-slate-500"># install the single-binary CLI (Linux, macOS, WSL)</span>{"\n"}
-                <span className="text-indigo-300">$</span> curl -sSL https://get.theseus.network | sh{"\n"}
+                <span className="text-slate-500"># install shipc from the public SHIP repo</span>{"\n"}
+                <span className="text-indigo-300">$</span> cargo install --git https://github.com/Theseuschain/SHIP shipc{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># authenticate against the testnet endpoint</span>{"\n"}
-                <span className="text-indigo-300">$</span> theseus auth --network testnet{"\n"}
+                <span className="text-slate-500"># lint the agent (syntax + semantics, no output)</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc validate market_creator.ship{"\n"}
+                <span className="text-emerald-400">✓ market_creator.ship is valid</span>{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># compile a SHIP file and deploy it</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile market_creator.ship -o market.cab{"\n"}
-                <span className="text-indigo-300">$</span> theseus deploy market.cab{"\n"}
+                <span className="text-slate-500"># compile to JSON (for tooling, CI, explorers)</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile market_creator.ship --json{"\n"}
                 {"\n"}
-                <span className="text-emerald-400">✓ Deployed agent 5GnT4xK7...vXp7Q3 to testnet</span>{"\n"}
-                <span className="text-emerald-400">✓ Proof of Agenthood credential signed</span>{"\n"}
-                <span className="text-emerald-400">✓ View it at theseus.network/poa/5GnT4xK7...vXp7Q3</span>
+                <span className="text-slate-500"># compile to SCALE-encoded CompiledAgent (chain-ready)</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile market_creator.ship --scale-hex{"\n"}
+                <span className="text-emerald-400">0x4f2e8a...e4c1</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-500"># default: write artifacts/agent.ship.json + .scale</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile market_creator.ship{"\n"}
+                <span className="text-emerald-400">✓ wrote ./artifacts/market_creator.ship.json</span>{"\n"}
+                <span className="text-emerald-400">✓ wrote ./artifacts/market_creator.ship.scale</span>
               </code>
             </pre>
           </div>
 
           <p className="text-center mt-8 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-            CLI ships with preview access.{" "}
-            <Link
-              href="/docs/quickstart"
+            <a
+              href="https://github.com/Theseuschain/SHIP"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
             >
-              Full quickstart in the docs →
-            </Link>
+              github.com/Theseuschain/SHIP →
+            </a>{" "}
+            · Spec, examples, runtime types · Chain deploy ships with public testnet
           </p>
         </div>
       </section>
