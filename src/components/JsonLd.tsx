@@ -324,12 +324,6 @@ export function PoaCredentialJsonLd({
       {
         "@type": "ListItem",
         position: 3,
-        name: "Agents",
-        item: `${SITE_URL}/poa/agents`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
         name: agentName,
         item: pageUrl,
       },
@@ -429,12 +423,6 @@ export function PoaAgentProfileJsonLd({
       {
         "@type": "ListItem",
         position: 3,
-        name: "Agents",
-        item: `${SITE_URL}/poa/agents`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
         name: agentName,
         item: pageUrl,
       },

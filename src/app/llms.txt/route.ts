@@ -50,10 +50,9 @@ const BODY = `# Theseus
 
 A signed credential layer for Theseus agents. Anyone can verify; operators sign once with the controller key and publish a public credential page.
 
-- [Proof of Agenthood](${SITE_URL}/poa): Landing page with the verify lookup and the create flow as peer products.
+- [Proof of Agenthood](${SITE_URL}/poa): Landing page with the verify lookup, the operator create flow, and the full agent directory (every credentialed agent + registered fixtures).
 - [Verify](${SITE_URL}/poa/verify): Paste a credential token (compact JWS) to check the signature and freshness against the chain. Programmatic endpoint at POST /poa/api/verify.
 - [Create](${SITE_URL}/poa/claim): Operator flow. Pick the agent, sign a one-time nonce with the controller key, receive a signed credential.
-- [Agents directory](${SITE_URL}/poa/agents): Browse every agent that currently has a credential.
 - Public JWKS: ${SITE_URL}/poa/.well-known/jwks.json (Ed25519, EdDSA). Verifies any credential offline with a JOSE-compatible library.
 - Per-credential pages: ${SITE_URL}/poa/<agentId> renders the artifact and links to the JWS, the JWKS, the embed snippet, and the operator revoke flow.
 

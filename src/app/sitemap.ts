@@ -5,7 +5,7 @@ import { listPosts } from "@/lib/blog";
 
 const BASE_URL = "https://theseus.network";
 
-const LAST_MODIFIED = "2026-05-04";
+const LAST_MODIFIED = "2026-05-16";
 
 type Route = {
   path: string;
@@ -43,7 +43,7 @@ const ROUTES: Route[] = [
   { path: "/poa", priority: 0.9, changeFrequency: "weekly" },
   { path: "/poa/verify", priority: 0.8, changeFrequency: "weekly" },
   { path: "/poa/claim", priority: 0.7, changeFrequency: "weekly" },
-  { path: "/poa/agents", priority: 0.8, changeFrequency: "daily" },
+  // /poa/agents folded into /poa#03 (permanentRedirect). Not in sitemap.
   { path: "/poa/docs", priority: 0.8, changeFrequency: "monthly" },
   { path: "/poa/docs/credential-format", priority: 0.7, changeFrequency: "monthly" },
   { path: "/poa/docs/issuing", priority: 0.7, changeFrequency: "monthly" },
