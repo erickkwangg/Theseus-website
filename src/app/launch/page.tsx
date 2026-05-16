@@ -1,8 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import {
-  ArrowRight,
   Mail,
   MessageCircle,
   Play,
@@ -14,6 +12,10 @@ import {
   Activity,
   BookOpen,
   Rocket,
+  FileCode2,
+  Boxes,
+  Stamp,
+  Layers,
 } from "lucide-react";
 import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
@@ -100,93 +102,7 @@ const TRACE_STEPS = [
   },
 ];
 
-// Demos already running on demo-agents.theseus.network. Each card is
-// concrete proof that the shape works for a real production case.
-const DEMOS = [
-  {
-    category: "Markets",
-    title: "Prediction market resolver",
-    description:
-      "Searches the live web for proof at deadline, returns a winning option with a public evidence trail.",
-    demoUrl: "https://demo-agents.theseus.network/adjudicate",
-  },
-  {
-    category: "Aerospace",
-    title: "Aircraft cert reviewer",
-    description:
-      "Independent second opinion on aircraft type-certification changes. Built around the 737 MAX MCAS shape.",
-    demoUrl: "https://demo-agents.theseus.network/aviation",
-  },
-  {
-    category: "Funds",
-    title: "Sovereign fund",
-    description:
-      "Owns USDC and WETH. Self-schedules rebalance ticks against a frozen mandate. No human in the loop.",
-    demoUrl: "https://demo-agents.theseus.network/fund",
-  },
-  {
-    category: "Lending",
-    title: "ETH/USD oracle for Aave",
-    description:
-      "Reads three independent venues, refuses to price when they disagree. Catches the Mango Markets shape by construction.",
-    demoUrl: "https://demo-agents.theseus.network/aave",
-  },
-  {
-    category: "Stablecoins",
-    title: "Algo-stable failsafe",
-    description:
-      "Gates mint and redeem on a Terra-shaped algorithmic stablecoin. Refuses to run the mechanism into a death spiral.",
-    demoUrl: "https://demo-agents.theseus.network/terra",
-  },
-  {
-    category: "Bridges",
-    title: "Cross-chain release guardian",
-    description:
-      "Checks attestation quorum, finality lag, and validator history before allowing a destination-chain release.",
-    demoUrl: "https://demo-agents.theseus.network/bridge",
-  },
-  {
-    category: "Governance",
-    title: "DAO proposal reviewer",
-    description:
-      "Reads each proposal and its calldata. Flags flash-loan votes, dust-stake snipes, hostile admin upgrades.",
-    demoUrl: "https://demo-agents.theseus.network/governance",
-  },
-  {
-    category: "Discovery",
-    title: "Launch sniper",
-    description:
-      "Watches Base for fresh token launches, evaluates each one against a strict checklist, commits a paper-trade decision.",
-    demoUrl: "https://demo-agents.theseus.network/launch-sniper",
-  },
-];
-
-interface LiveStats {
-  totalVerdicts: number;
-  agentsLive: number;
-  agentsDeployed: number;
-}
-
-async function fetchLiveStats(): Promise<LiveStats | null> {
-  try {
-    const hdrs = await headers();
-    const host = hdrs.get("host") ?? "localhost:3000";
-    const proto = host.startsWith("localhost") ? "http" : "https";
-    const res = await fetch(`${proto}://${host}/api/live-stats`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as LiveStats;
-  } catch {
-    return null;
-  }
-}
-
-export default async function LaunchPage() {
-  const stats = await fetchLiveStats();
-  const verdictsText = stats?.totalVerdicts ? stats.totalVerdicts.toLocaleString() : "—";
-  const deployedText = stats?.agentsDeployed ? stats.agentsDeployed.toString() : "7";
-
+export default function LaunchPage() {
   return (
     <main className="min-h-screen site-shell">
       <Header />
@@ -206,7 +122,7 @@ export default async function LaunchPage() {
             Write SHIP. Run it in the browser with a verifiable inference proof. Land at a Proof of
             Agenthood profile anyone can verify.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center mb-10">
+          <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/playground">
               <Button className="primary-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300 button-press">
                 Open the playground
@@ -218,13 +134,6 @@ export default async function LaunchPage() {
               </Button>
             </a>
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 inline-flex items-center gap-2">
-            <span className="relative inline-flex h-2 w-2">
-              <span className="absolute inset-0 rounded-full bg-emerald-500 opacity-60 animate-ping" />
-              <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            {verdictsText} verdicts signed · {deployedText} agents deployed · live on Base Sepolia
-          </p>
         </div>
       </section>
 
@@ -318,58 +227,160 @@ export default async function LaunchPage() {
         </div>
       </section>
 
-      {/* What people are building */}
+      {/* Quickstart: when browser playground isn't enough */}
       <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10 lg:mb-12">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
-              Running today on Base Sepolia
+              From the browser to the CLI
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 mb-4 [text-wrap:balance]">
-              What people have <span className="italic">built.</span>
+              Deploying past the <span className="italic">playground.</span>
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
-              Eight agents in the wild. Each one signs every decision and posts the verdict
-              on-chain. Click through and watch one run.
+              When you&apos;re ready to deploy something the chain holds onto, the CLI mirrors
+              the playground. Three commands from your terminal.
+            </p>
+          </div>
+
+          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-200 dark:border-slate-700/60 shadow-lg dark:shadow-2xl">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              </div>
+              <div className="ml-4 text-xs text-slate-400 font-mono">~/agents · zsh</div>
+              <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
+                Quickstart
+              </div>
+            </div>
+            <pre className="p-5 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200 sm:p-6">
+              <code>
+                <span className="text-slate-500"># install the single-binary CLI (Linux, macOS, WSL)</span>{"\n"}
+                <span className="text-indigo-300">$</span> curl -sSL https://get.theseus.network | sh{"\n"}
+                {"\n"}
+                <span className="text-slate-500"># authenticate against the testnet endpoint</span>{"\n"}
+                <span className="text-indigo-300">$</span> theseus auth --network testnet{"\n"}
+                {"\n"}
+                <span className="text-slate-500"># compile a SHIP file and deploy it</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile market_creator.ship -o market.cab{"\n"}
+                <span className="text-indigo-300">$</span> theseus deploy market.cab{"\n"}
+                {"\n"}
+                <span className="text-emerald-400">✓ Deployed agent 5GnT4xK7...vXp7Q3 to testnet</span>{"\n"}
+                <span className="text-emerald-400">✓ Proof of Agenthood credential signed</span>{"\n"}
+                <span className="text-emerald-400">✓ View it at theseus.network/poa/5GnT4xK7...vXp7Q3</span>
+              </code>
+            </pre>
+          </div>
+
+          <p className="text-center mt-8 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+            CLI ships with preview access.{" "}
+            <Link
+              href="/docs/quickstart"
+              className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
+            >
+              Full quickstart in the docs →
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* Reference: where to read about each layer */}
+      <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-[-0.02em] mb-4 text-slate-900 dark:text-slate-100 [text-wrap:balance]">
+              Reference, by <span className="italic">layer.</span>
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
+              Four doc pages cover the pieces you&apos;ll touch most often.
             </p>
           </div>
 
           <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {DEMOS.map((demo) => (
-              <li key={demo.title}>
-                <a
-                  href={demo.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="docs-card group h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300"
-                >
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300/80">
-                    {demo.category}
-                  </p>
-                  <h3 className="font-serif text-lg font-normal leading-tight tracking-[-0.01em] text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                    {demo.title}
-                  </h3>
-                  <p className="text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {demo.description}
-                  </p>
-                  <span className="mt-auto text-xs text-indigo-600 dark:text-indigo-300 inline-flex items-center gap-1 pt-2 opacity-70 group-hover:opacity-100 transition-opacity">
-                    Open <ArrowRight className="h-3 w-3" />
-                  </span>
-                </a>
-              </li>
-            ))}
+            <li>
+              <Link
+                href="/docs/ship"
+                className="docs-card group h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300"
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 w-fit">
+                  <FileCode2 className="h-5 w-5" />
+                </div>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                  SHIP language
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Syntax, nodes, model invocation, contract calls. The DSL agents are
+                  written in.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/docs/aivm"
+                className="docs-card group h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300"
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 w-fit">
+                  <Layers className="h-5 w-5" />
+                </div>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                  AIVM
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  The execution layer. Tensor operations as first-class instructions, gas
+                  pricing, host functions.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/docs/tensor-commits"
+                className="docs-card group h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300"
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 w-fit">
+                  <Stamp className="h-5 w-5" />
+                </div>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                  Tensor Commits
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  How inference proofs work, the prover/verifier split, KZG checks, &lt;1%
+                  overhead.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/docs/examples"
+                className="docs-card group h-full flex flex-col gap-3 hover:border-indigo-400/40 transition-all duration-300"
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 w-fit">
+                  <Boxes className="h-5 w-5" />
+                </div>
+                <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                  Examples
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Reference SHIP programs you can fork. Oracle, governance reviewer,
+                  prediction market resolver.
+                </p>
+              </Link>
+            </li>
           </ul>
 
-          <div className="text-center mt-10">
+          <p className="text-center mt-8 text-sm text-slate-600 dark:text-slate-400">
+            Want to see what reference implementations are running?{" "}
             <a
               href="https://demo-agents.theseus.network/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
+              className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
             >
-              Open all eight at demo-agents.theseus.network →
-            </a>
-          </div>
+              demo-agents.theseus.network
+            </a>{" "}
+            has eight in production.
+          </p>
         </div>
       </section>
 
