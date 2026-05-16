@@ -69,11 +69,11 @@ export default function Compare() {
           </ScrollReveal>
 
           <ScrollReveal delay={1}>
-            <div className="overflow-x-auto -mx-2 sm:mx-0">
-              <table className="w-full text-left border-collapse min-w-[520px]">
+            <div className="-mx-2 sm:mx-0">
+              <table className="w-full text-left border-collapse table-fixed">
                 <thead>
                   <tr className="border-b border-slate-300/70 dark:border-slate-700/60">
-                    <th className="py-5 pr-4 align-bottom"></th>
+                    <th className="py-5 pr-2 sm:pr-4 align-bottom"></th>
                     <ColHeader
                       label="Personal"
                       sub="OpenClaw"
@@ -95,7 +95,7 @@ export default function Compare() {
                       key={row.label}
                       className="border-b border-slate-200/70 dark:border-slate-700/40 last:border-b-0"
                     >
-                      <td className="py-4 pr-4 text-[13.5px] sm:text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+                      <td className="py-4 pr-2 sm:pr-4 text-[13px] sm:text-[15px] leading-snug sm:leading-relaxed text-slate-700 dark:text-slate-300">
                         {row.label}
                       </td>
                       <CellEl cell={row.personal} />
@@ -127,12 +127,10 @@ function ColHeader({
   return (
     <th
       scope="col"
-      className={`py-5 px-3 sm:px-4 text-center align-bottom w-[18%] sm:w-[20%] ${
-        highlight ? "" : ""
-      }`}
+      className="py-5 px-1.5 sm:px-4 text-center align-bottom w-[17%] sm:w-[20%]"
     >
       <div
-        className={`font-mono text-[10.5px] sm:text-[11px] uppercase tracking-[0.18em] mb-1 ${
+        className={`font-mono text-[9.5px] sm:text-[11px] uppercase tracking-[0.16em] sm:tracking-[0.18em] mb-1 ${
           highlight
             ? "text-indigo-700 dark:text-indigo-300"
             : "text-slate-500 dark:text-slate-500"
@@ -140,7 +138,7 @@ function ColHeader({
       >
         {label}
       </div>
-      <div className="font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      <div className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.14em] text-slate-400 dark:text-slate-500 leading-tight">
         {sub}
       </div>
     </th>
@@ -150,7 +148,7 @@ function ColHeader({
 function CellEl({ cell, highlight }: { cell: Cell; highlight?: boolean }) {
   return (
     <td
-      className={`py-4 px-3 sm:px-4 text-center align-middle ${
+      className={`py-4 px-1.5 sm:px-4 text-center align-middle ${
         highlight
           ? "bg-indigo-50/60 dark:bg-indigo-300/[0.04]"
           : ""
@@ -163,17 +161,17 @@ function CellEl({ cell, highlight }: { cell: Cell; highlight?: boolean }) {
               ? "text-indigo-600 dark:text-indigo-300"
               : "text-slate-700 dark:text-slate-300"
           }`}
-          size={22}
+          size={20}
           strokeWidth={2.5}
         />
       ) : cell === "soon" ? (
-        <span className="inline-block font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700 dark:text-amber-300">
+        <span className="inline-block font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-amber-700 dark:text-amber-300">
           soon
         </span>
       ) : (
         <Minus
           className="inline-block text-slate-400/70 dark:text-slate-600"
-          size={22}
+          size={20}
           strokeWidth={2.5}
         />
       )}
