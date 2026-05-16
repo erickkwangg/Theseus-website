@@ -8,7 +8,7 @@ export const EXTERNAL_LINKS = {
   substackAgenticContracts: "https://theseuschain.substack.com/p/agents-as-an-evolution-of-smart-contracts",
   conwayTech: "https://conway.tech",
   web4ai: "https://web4.ai",
-  contactEmail: "hello@theseus.network",
+  contactEmail: "eric@theseus.network",
   discord: "",
   walkthroughCrypto: "https://www.loom.com/share/6f75cb6b3b6f496aa199db71df814fc9",
 } as const;
