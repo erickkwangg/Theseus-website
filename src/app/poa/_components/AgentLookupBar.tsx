@@ -64,10 +64,10 @@ export default function AgentLookupBar({
           placeholder={placeholder}
           style={{
             borderColor: "var(--poa-rule, rgba(20,17,13,0.20))",
-            color: "var(--poa-ink, #14110D)",
+            color: "var(--poa-ink, #0f172a)",
           }}
           className={cn(
-            "w-full border-b bg-transparent placeholder:text-[color:var(--poa-sepia,#8A7864)] focus:border-[color:var(--poa-ink,#14110D)] focus:outline-none",
+            "w-full border-b bg-transparent placeholder:text-[color:var(--poa-sepia,#94a3b8)] focus:border-[color:var(--poa-ink,#0f172a)] focus:outline-none",
             showLabel ? "mt-2" : "",
             isProminent
               ? "py-3 font-mono text-[16px] sm:text-[18px]"

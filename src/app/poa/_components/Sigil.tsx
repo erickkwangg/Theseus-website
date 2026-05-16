@@ -182,7 +182,7 @@ export default function Sigil({
         cy={cy}
         r={ringR + 1}
         fill={`url(#sg-${seed.slice(0, 6)})`}
-        style={{ color: "var(--poa-wax, #7B1E1E)" }}
+        style={{ color: "var(--poa-wax, #4f46e5)" }}
       />
 
       {/* outer ring (single or double for sovereign) */}
@@ -192,7 +192,7 @@ export default function Sigil({
         r={ringR}
         fill="none"
         strokeWidth={ringWidth}
-        className="stroke-[color:var(--poa-ink,#14110D)]/55"
+        className="stroke-[color:var(--poa-ink,#0f172a)]/55"
       />
       {showDoubleRing && (
         <circle
@@ -201,7 +201,7 @@ export default function Sigil({
           r={ringR - 3}
           fill="none"
           strokeWidth={0.6}
-          stroke="var(--poa-ink, #14110D)"
+          stroke="var(--poa-ink, #0f172a)"
           style={{ opacity: 0.35 }}
         />
       )}
@@ -215,7 +215,7 @@ export default function Sigil({
           x2={t.x2}
           y2={t.y2}
           strokeWidth={0.8}
-          stroke="var(--poa-ink, #14110D)"
+          stroke="var(--poa-ink, #0f172a)"
           style={{ opacity: t.opacity * fillOpacity }}
         />
       ))}
@@ -228,7 +228,7 @@ export default function Sigil({
           y={c.y}
           width={cell}
           height={cell}
-          fill="var(--poa-ink, #14110D)"
+          fill="var(--poa-ink, #0f172a)"
           style={{ opacity: 0.85 * fillOpacity }}
         />
       ))}
@@ -241,7 +241,7 @@ export default function Sigil({
               cx={badgeCx}
               cy={badgeCy}
               r={badgeR}
-              fill="var(--poa-wax, #7B1E1E)"
+              fill="var(--poa-wax, #4f46e5)"
             />
           )}
           {badge.fill === "half" && (
@@ -251,13 +251,13 @@ export default function Sigil({
                 cy={badgeCy}
                 r={badgeR}
                 fill="var(--poa-paper-card, #F1EAE1)"
-                stroke="var(--poa-wax, #7B1E1E)"
+                stroke="var(--poa-wax, #4f46e5)"
                 strokeWidth={1.1}
               />
               <path
                 d={`M ${badgeCx} ${badgeCy - badgeR}
                     A ${badgeR} ${badgeR} 0 0 1 ${badgeCx} ${badgeCy + badgeR} Z`}
-                fill="var(--poa-wax, #7B1E1E)"
+                fill="var(--poa-wax, #4f46e5)"
               />
             </>
           )}
@@ -267,7 +267,7 @@ export default function Sigil({
               cy={badgeCy}
               r={badgeR}
               fill="var(--poa-paper-card, #F1EAE1)"
-              stroke="var(--poa-wax, #7B1E1E)"
+              stroke="var(--poa-wax, #4f46e5)"
               strokeWidth={1.1}
             />
           )}
@@ -280,7 +280,7 @@ export default function Sigil({
             fill={
               badge.fill === "solid"
                 ? "var(--poa-paper-card, #F1EAE1)"
-                : "var(--poa-wax, #7B1E1E)"
+                : "var(--poa-wax, #4f46e5)"
             }
             style={{ fontWeight: 600 }}
           >

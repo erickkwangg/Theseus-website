@@ -139,10 +139,10 @@ export default function Seal({
   // shell, the same classes still resolve via fallback colors.
   const toneClass =
     status === "attested"
-      ? "[&_.seal-ring]:stroke-[color:var(--poa-wax,#7B1E1E)]/65 [&_.seal-text]:fill-[color:var(--poa-wax,#7B1E1E)]"
+      ? "[&_.seal-ring]:stroke-[color:var(--poa-wax,#4f46e5)]/65 [&_.seal-text]:fill-[color:var(--poa-wax,#4f46e5)]"
       : status === "revoked"
         ? "[&_.seal-ring]:stroke-rose-700/60 [&_.seal-text]:fill-rose-700 dark:[&_.seal-ring]:stroke-rose-300/55 dark:[&_.seal-text]:fill-rose-300"
-        : "[&_.seal-ring]:stroke-[color:var(--poa-sepia,#8A7864)]/65 [&_.seal-text]:fill-[color:var(--poa-sepia,#8A7864)]";
+        : "[&_.seal-ring]:stroke-[color:var(--poa-sepia,#94a3b8)]/65 [&_.seal-text]:fill-[color:var(--poa-sepia,#94a3b8)]";
 
   // Arc spans scale with letter count so spacing stays uniform regardless
   // of word length. Roughly 13° per character, capped at 130° total.
@@ -213,10 +213,10 @@ export default function Seal({
           r={size * 0.22}
           className={
             status === "attested"
-              ? "fill-[color:var(--poa-wax,#7B1E1E)]/85"
+              ? "fill-[color:var(--poa-wax,#4f46e5)]/85"
               : status === "revoked"
                 ? "fill-rose-700/85 dark:fill-rose-500/80"
-                : "fill-[color:var(--poa-sepia,#8A7864)]/70"
+                : "fill-[color:var(--poa-sepia,#94a3b8)]/70"
           }
         />
         {/* embossed inner ring on the wax disc */}

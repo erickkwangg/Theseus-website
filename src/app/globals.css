@@ -1265,9 +1265,9 @@ body:has(.poa-shell) {
   border-radius: 2px;
   transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
 }
-.cta-ink:hover { background: #000; color: #FBF7F1; }
+.cta-ink:hover { background: #000; color: #F8FAFC; }
 .cta-ink:active { transform: translateY(1px); }
-.dark .cta-ink:hover { background: #FFFFFF; color: #14110D; }
+.dark .cta-ink:hover { background: #FFFFFF; color: #0f172a; }
 
 /* Sepia "watermark" stamp for URL captions and tiny anchor labels. */
 .poa-stamp {
