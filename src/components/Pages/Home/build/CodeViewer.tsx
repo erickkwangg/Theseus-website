@@ -11,7 +11,7 @@ export default function CodeViewer({ path }: Props) {
   const lines = tokenize(file.content, file.language);
 
   return (
-    <pre className="scroll-fade-right h-full overflow-auto px-5 py-5 font-mono text-[12.5px] leading-[1.6] bg-white dark:bg-[#0A0A0C] text-slate-700 dark:text-slate-300 sm:px-6 sm:py-6">
+    <pre className="scroll-fade-right h-full overflow-auto px-5 py-5 font-mono text-[12.5px] leading-[1.6] bg-white dark:bg-[#060b16] text-slate-700 dark:text-slate-300 sm:px-6 sm:py-6">
       <code className="block">
         {lines.map((tokens, i) => (
           <div key={i} className="flex">

@@ -161,14 +161,14 @@ export default function PlaygroundPage() {
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6">
           {/* Editor */}
-          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-slate-700/60 shadow-2xl">
-            <div className="bg-[#111115] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
+          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-700/60 shadow-2xl">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <div className="ml-4 px-3 py-0.5 bg-[#0A0A0C] rounded text-xs text-gray-400 font-mono">
+              <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-gray-400 font-mono">
                 {FILENAME}
               </div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
@@ -181,8 +181,8 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Trace */}
-          <div className="rounded-lg overflow-hidden bg-[#0A0A0C] border border-slate-700/60 shadow-2xl flex flex-col">
-            <div className="bg-[#111115] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
+          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-700/60 shadow-2xl flex flex-col">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-gray-800/50">
               <div className="text-xs text-slate-400 font-mono">Execution trace</div>
               <div className="ml-auto flex items-center gap-2">
                 {runState === "done" && (
