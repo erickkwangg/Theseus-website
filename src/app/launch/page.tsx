@@ -93,6 +93,80 @@ export default function LaunchPage() {
         </div>
       </section>
 
+      {/* Skill format: the authoring shape every agent ships in */}
+      <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10 lg:mb-12">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
+              The deployable format
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 mb-4 [text-wrap:balance]">
+              Every agent is a <span className="italic">SKILL.md.</span>
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
+              Same Markdown-with-YAML format Claude Skills use. Theseus adds a
+              frontmatter extension that names the models, tools, controller,
+              and intent surface, so a single file is enough to deploy.
+            </p>
+          </div>
+
+          <div className="rounded-lg overflow-hidden bg-[#060b16] border border-slate-200 dark:border-slate-700/60 shadow-lg dark:shadow-2xl">
+            <div className="bg-[#0F172A] px-4 py-2 flex items-center gap-2 border-b border-slate-800/60">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              </div>
+              <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-slate-400 font-mono">
+                agents/themis-notary/SKILL.md
+              </div>
+              <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
+                Theseus frontmatter
+              </div>
+            </div>
+            <pre className="p-5 sm:p-6 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200">
+              <code>
+                <span className="text-slate-500">---</span>{"\n"}
+                <span className="text-indigo-300">name</span>: themis-notary{"\n"}
+                <span className="text-indigo-300">description</span>: Independent agentic timestamping and witness service.{"\n"}
+                <span className="text-indigo-300">models</span>: <span className="text-emerald-400">[claude-opus-4-7]</span>{"\n"}
+                <span className="text-indigo-300">tools</span>: <span className="text-emerald-400">[sign_attestation, hash_document, verify_signature]</span>{"\n"}
+                <span className="text-indigo-300">sovereign</span>: <span className="text-amber-300">true</span>{"\n"}
+                <span className="text-indigo-300">controller</span>: <span className="text-amber-300">null</span>{"\n"}
+                <span className="text-indigo-300">intent_types</span>: <span className="text-emerald-400">[timestamp, witness, sign_attestation, verify_proof]</span>{"\n"}
+                <span className="text-slate-500">---</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-300"># Themis Notary</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-400">## What it does</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-300">Independent timestamping for digital documents. Each attestation</span>{"\n"}
+                <span className="text-slate-300">carries Themis&apos;s seal; anyone can verify it against the on-chain</span>{"\n"}
+                <span className="text-slate-300">credential.</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-400">## Instructions</span>{"\n"}
+                {"\n"}
+                <span className="text-slate-300">You are Themis, an independent timestamping and witnessing service.</span>{"\n"}
+                <span className="text-slate-300">Your only job is to attest that a document existed at a specific</span>{"\n"}
+                <span className="text-slate-300">moment in time...</span>
+              </code>
+            </pre>
+          </div>
+
+          <p className="text-center mt-8 text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Every agent in the{" "}
+            <Link
+              href="/poa"
+              className="text-indigo-600 dark:text-indigo-300 underline underline-offset-4 hover:text-indigo-800 dark:hover:text-white"
+            >
+              Proof of Agenthood directory
+            </Link>{" "}
+            publishes its SKILL.md. Open one, copy the file, fork the body,
+            deploy a sibling.
+          </p>
+        </div>
+      </section>
+
       {/* Quickstart: the real shipc compiler, today */}
       <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-5xl mx-auto">
@@ -112,10 +186,11 @@ export default function LaunchPage() {
               >
                 shipc
               </a>{" "}
-              is a Rust CLI that compiles <code className="font-mono text-[13px]">.ship</code> files
-              into a canonical <code className="font-mono text-[13px]">CompiledAgent</code> blob,
-              ready to be SCALE-encoded for the chain. The compiler is public and open today; the
-              chain-deploy half ships with public testnet.
+              is a Rust CLI that compiles a <code className="font-mono text-[13px]">SKILL.md</code>{" "}
+              (or the lower-level <code className="font-mono text-[13px]">.ship</code> source it
+              elaborates into) into a canonical <code className="font-mono text-[13px]">CompiledAgent</code>{" "}
+              blob, ready to be SCALE-encoded for the chain. The compiler is public and open today;
+              the chain-deploy half ships with public testnet.
             </p>
           </div>
 
@@ -128,7 +203,7 @@ export default function LaunchPage() {
               </div>
               <div className="ml-4 text-xs text-slate-400 font-mono">~/agents · zsh</div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
-                Real commands, today
+                Skill in, CompiledAgent out
               </div>
             </div>
             <pre className="p-5 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200 sm:p-6">
@@ -136,21 +211,21 @@ export default function LaunchPage() {
                 <span className="text-slate-500"># install shipc from the public SHIP repo</span>{"\n"}
                 <span className="text-indigo-300">$</span> cargo install --git https://github.com/Theseuschain/SHIP shipc{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># lint the agent (syntax + semantics, no output)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc validate market_creator.ship{"\n"}
-                <span className="text-emerald-400">✓ market_creator.ship is valid</span>{"\n"}
+                <span className="text-slate-500"># lint the skill (frontmatter + body, no output)</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc validate agents/themis-notary/SKILL.md{"\n"}
+                <span className="text-emerald-400">✓ SKILL.md is valid</span>{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># compile to JSON (for tooling, CI, explorers)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile market_creator.ship --json{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md --json{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># compile to SCALE-encoded CompiledAgent (chain-ready)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile market_creator.ship --scale-hex{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md --scale-hex{"\n"}
                 <span className="text-emerald-400">0x4f2e8a...e4c1</span>{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># default: write artifacts/agent.ship.json + .scale</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile market_creator.ship{"\n"}
-                <span className="text-emerald-400">✓ wrote ./artifacts/market_creator.ship.json</span>{"\n"}
-                <span className="text-emerald-400">✓ wrote ./artifacts/market_creator.ship.scale</span>
+                <span className="text-slate-500"># default: write artifacts/agent.json + .scale</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md{"\n"}
+                <span className="text-emerald-400">✓ wrote ./artifacts/themis-notary.json</span>{"\n"}
+                <span className="text-emerald-400">✓ wrote ./artifacts/themis-notary.scale</span>
               </code>
             </pre>
           </div>
@@ -191,11 +266,11 @@ export default function LaunchPage() {
                   <FileCode2 className="h-5 w-5" />
                 </div>
                 <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                  SHIP language
+                  Skill format
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Syntax, nodes, model invocation, contract calls. The DSL agents are
-                  written in.
+                  Theseus frontmatter, the SKILL.md body, and the underlying SHIP DSL
+                  it elaborates into.
                 </p>
               </Link>
             </li>

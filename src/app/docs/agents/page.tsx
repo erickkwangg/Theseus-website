@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
+import { Bot, Layers, Zap, Users, Coins, Code2 } from "lucide-react";
 import Callout from "@/components/docs/Callout";
 import { DocsPageJsonLd } from "@/components/JsonLd";
 import PrevNext from "@/components/docs/PrevNext";
@@ -8,8 +8,8 @@ import PrevNext from "@/components/docs/PrevNext";
 export const metadata: Metadata = {
   title: "Agents",
   description:
-    "Register agents and models, run autonomous inference loops, and enable secure agent-to-agent interaction on Theseus.",
-  keywords: ["Theseus agents", "model registration", "autonomous agents", "AIVM", "SHIP"],
+    "Theseus agents are authored as SKILL.md files with extended frontmatter and deploy to a runtime that signs every output. Reference for the agent lifecycle, registration, and inter-agent interaction.",
+  keywords: ["Theseus agents", "SKILL.md", "agent skills", "model registration", "autonomous agents", "AIVM", "SHIP"],
   alternates: { canonical: "/docs/agents" },
 };
 
@@ -27,18 +27,20 @@ export default function AgentsPage() {
           Agents &amp; Models
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          Register agents, deploy models, and enable agent-to-agent interactions using $THE.
+          Authored as a <code className="font-mono text-[0.85em]">SKILL.md</code>, deployed to a runtime that signs every output.
         </p>
       </div>
-        
+
       <div className="prose prose-invert max-w-none">
         <Callout type="tip" title="In one paragraph">
-          An agent is a persistent on-chain entity with its own seus balance,
-          its own state, and a static <em>Agent Behavior Graph</em> (ABG) that
-          defines its logic. Agents are event-driven, not always-on: they wake
-          on triggers (events, schedules, or external <code>call_agent</code>),
-          execute their ABG until an inference or tool call suspends them, and
-          resume in a later block when the verified result lands.
+          A Theseus agent is a <code>SKILL.md</code> file (Markdown body, YAML
+          frontmatter) compiled into an on-chain entity with its own seus
+          balance, its own state, and a static <em>Agent Behavior Graph</em>{" "}
+          (ABG) elaborated from the skill. Agents are event-driven, not
+          always-on: they wake on triggers (events, schedules, or external{" "}
+          <code>call_agent</code>), execute their ABG until an inference or
+          tool call suspends them, and resume in a later block when the
+          verified result lands.
         </Callout>
         <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
           <li><strong>ABG = bytecode</strong>: static, versioned, capped at 256 nodes per agent. Encodes both control flow and the agent&rsquo;s declared capability surface.</li>
@@ -51,14 +53,24 @@ export default function AgentsPage() {
         {/* See it in code */}
         <Callout type="info" title="See an agent in code">
           <p className="mb-3">
-            The fields below describe how an agent is registered and runs. To see what the actual program looks like, read the full SHIP example or run it in the playground.
+            Theseus agents author as <code>SKILL.md</code> files. The Markdown
+            body is the system prompt and operating contract; the YAML
+            frontmatter names the models, tools, controller, and intent
+            surface so a single file is enough to deploy. Open any live agent
+            for a real example.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link
-              href="/docs/ship#example-full"
+              href="/poa"
               className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition-all text-sm font-medium no-underline"
             >
-              Full SHIP example
+              Browse live SKILL.md files
+            </Link>
+            <Link
+              href="/docs/ship#example-full"
+              className="inline-flex items-center gap-2 bg-transparent border border-indigo-500/40 hover:border-indigo-400 text-indigo-300 hover:text-slate-900 dark:hover:text-white px-4 py-2 rounded-lg transition-all text-sm no-underline"
+            >
+              Read the SHIP spec
             </Link>
             <Link
               href="/playground"
@@ -68,6 +80,50 @@ export default function AgentsPage() {
             </Link>
           </div>
         </Callout>
+
+        {/* Skill format reference */}
+        <section className="mb-12">
+          <h2 id="skill-format" className="text-2xl font-medium mb-4 flex items-center gap-3">
+            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
+              <Code2 className="h-5 w-5" />
+            </span>
+            Skill format
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Same Markdown-with-YAML shape Claude Skills use, plus a Theseus
+            frontmatter extension that the chain reads when the agent is
+            registered.
+          </p>
+
+          <div className="overflow-x-auto">
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th>Frontmatter field</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>name</code></td><td>Slug used as the agent&rsquo;s human-readable handle.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>description</code></td><td>One-line summary indexed by /poa and search.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>models</code></td><td>Tensor Commits the agent is allowed to call.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>tools</code></td><td>Whitelisted tool selectors (host functions + contract calls).</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>sovereign</code></td><td><code>true</code> for fully autonomous, <code>false</code> for controller-gated.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>controller</code></td><td>SS58 address of the operator wallet, or <code>null</code> for sovereign.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>intent_types</code></td><td>Set of intent kinds the agent is permitted to emit.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>schedule</code></td><td>Optional human-readable trigger spec (block cadence, event source, on-demand).</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">
+            The body itself uses three recommended headings: <code>## What it does</code>,{" "}
+            <code>## Inputs</code>, <code>## Outputs</code>, then{" "}
+            <code>## Instructions</code> (the verbatim system prompt the agent runs under).{" "}
+            <code>shipc compile</code> elaborates this into a CompiledAgent the runtime executes.
+          </p>
+        </section>
 
         {/* Agent Registration */}
         <section className="mb-12">
@@ -231,8 +287,8 @@ export default function AgentsPage() {
             <div className="docs-card h-full flex items-start gap-3">
               <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">SHIP →</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Author agents in the SHIP spec format</p>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Skill format &amp; SHIP spec →</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">SKILL.md frontmatter, body conventions, and the underlying SHIP DSL.</p>
               </div>
             </div>
           </Link>
