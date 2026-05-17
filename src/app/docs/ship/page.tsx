@@ -18,10 +18,12 @@ import PrevNext from "@/components/docs/PrevNext";
 export const metadata: Metadata = {
   title: "SHIP",
   description:
-    "SHIP is the declarative DSL underneath the SKILL.md authoring format. Compiles to a SCALE-encoded CompiledAgent the chain registers directly.",
+    "SHIP is the declarative DSL underneath the OpenClaw-style agent file format. Compiles to a SCALE-encoded CompiledAgent the chain registers directly.",
   keywords: [
     "SHIP",
     "SKILL.md",
+    "OpenClaw-style agents",
+    "agent file format",
     "Theseus agents",
     "Agent Behavior Graph",
     "ABG",
@@ -50,22 +52,22 @@ export default function SHIPPage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           Structured Hierarchical Instructional Programs. The declarative DSL
-          underneath the <code className="font-mono text-[0.85em]">SKILL.md</code> authoring
-          format, lowered by <code className="font-mono text-[0.85em]">shipc</code> to a
-          chain-ready CompiledAgent.
+          underneath the OpenClaw-style agent file, lowered by{" "}
+          <code className="font-mono text-[0.85em]">shipc</code> to a chain-ready
+          CompiledAgent.
         </p>
       </div>
 
       <div className="prose prose-invert max-w-none">
         <Callout type="tip" title="In one paragraph">
-          Agents author as <code>SKILL.md</code> (Markdown body + Theseus YAML
-          frontmatter), which <code>shipc</code> elaborates into SHIP and then
-          lowers to a canonical <code>CompiledAgent</code> structure. SHIP
-          declares the agent&rsquo;s metadata, its tools, and its Agent
-          Behavior Graph (ABG): model calls, tool calls, routers, terminal
-          nodes. The compiler emits JSON for tooling and SCALE for on-chain
-          registration. The runtime never sees SHIP source — only the
-          SCALE-encoded blob.
+          Agents author in the OpenClaw-style format (Markdown body with
+          Theseus YAML frontmatter, written to <code>SKILL.md</code>), which{" "}
+          <code>shipc</code> elaborates into SHIP and then lowers to a
+          canonical <code>CompiledAgent</code> structure. SHIP declares the
+          agent&rsquo;s metadata, its tools, and its Agent Behavior Graph
+          (ABG): model calls, tool calls, routers, terminal nodes. The
+          compiler emits JSON for tooling and SCALE for on-chain registration.
+          The runtime never sees SHIP source — only the SCALE-encoded blob.
         </Callout>
         <ul className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-1.5 mb-10 ml-5 list-disc">
           <li>

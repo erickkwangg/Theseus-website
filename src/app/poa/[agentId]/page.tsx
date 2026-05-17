@@ -13,7 +13,7 @@ import ChainModeBanner from "../_components/ChainModeBanner";
 import PoaNav from "../_components/PoaNav";
 import CredentialShareBar from "../_components/CredentialShareBar";
 import RevokeButton from "../_components/RevokeButton";
-import SkillFile from "../_components/SkillFile";
+import AgentFile from "../_components/AgentFile";
 import SigningRecord from "../_components/SigningRecord";
 
 export const dynamic = "force-dynamic";
@@ -218,7 +218,7 @@ export default async function PoaCredentialPage({ params }: Props) {
             </div>
 
             {liveSnapshot && (
-              <SkillFile snapshot={liveSnapshot} />
+              <AgentFile snapshot={liveSnapshot} />
             )}
           </div>
         </section>
@@ -265,7 +265,7 @@ export default async function PoaCredentialPage({ params }: Props) {
           )}
           {liveSnapshot && (
             <div className="px-3 sm:px-4 lg:px-6">
-              <SkillFile snapshot={liveSnapshot} />
+              <AgentFile snapshot={liveSnapshot} />
             </div>
           )}
         </section>

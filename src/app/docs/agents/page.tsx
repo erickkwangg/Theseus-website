@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Agents",
   description:
     "Theseus agents are authored as SKILL.md files with extended frontmatter and deploy to a runtime that signs every output. Reference for the agent lifecycle, registration, and inter-agent interaction.",
-  keywords: ["Theseus agents", "SKILL.md", "agent skills", "model registration", "autonomous agents", "AIVM", "SHIP"],
+  keywords: ["Theseus agents", "SKILL.md", "OpenClaw-style agents", "agent file format", "model registration", "autonomous agents", "AIVM", "SHIP"],
   alternates: { canonical: "/docs/agents" },
 };
 
@@ -33,10 +33,11 @@ export default function AgentsPage() {
 
       <div className="prose prose-invert max-w-none">
         <Callout type="tip" title="In one paragraph">
-          A Theseus agent is a <code>SKILL.md</code> file (Markdown body, YAML
-          frontmatter) compiled into an on-chain entity with its own seus
-          balance, its own state, and a static <em>Agent Behavior Graph</em>{" "}
-          (ABG) elaborated from the skill. Agents are event-driven, not
+          A Theseus agent is one file in the OpenClaw-style format (Markdown
+          body with YAML frontmatter, written to <code>SKILL.md</code>)
+          compiled into an on-chain entity with its own seus balance, its
+          own state, and a static <em>Agent Behavior Graph</em> (ABG)
+          elaborated from the file. Agents are event-driven, not
           always-on: they wake on triggers (events, schedules, or external{" "}
           <code>call_agent</code>), execute their ABG until an inference or
           tool call suspends them, and resume in a later block when the
@@ -53,18 +54,19 @@ export default function AgentsPage() {
         {/* See it in code */}
         <Callout type="info" title="See an agent in code">
           <p className="mb-3">
-            Theseus agents author as <code>SKILL.md</code> files. The Markdown
-            body is the system prompt and operating contract; the YAML
+            Theseus agents author in the OpenClaw-style format: a Markdown
+            body in a <code>SKILL.md</code> file with YAML frontmatter on top.
+            The body is the system prompt and operating contract; the
             frontmatter names the models, tools, controller, and intent
-            surface so a single file is enough to deploy. Open any live agent
-            for a real example.
+            surface so one file is enough to deploy. Open any live agent for
+            a real example.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link
               href="/poa"
               className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition-all text-sm font-medium no-underline"
             >
-              Browse live SKILL.md files
+              Browse live agent files
             </Link>
             <Link
               href="/docs/ship#example-full"
@@ -81,19 +83,20 @@ export default function AgentsPage() {
           </div>
         </Callout>
 
-        {/* Skill format reference */}
+        {/* Agent file format reference */}
         <section className="mb-12">
-          <h2 id="skill-format" className="text-2xl font-medium mb-4 flex items-center gap-3">
+          <h2 id="agent-file-format" className="text-2xl font-medium mb-4 flex items-center gap-3">
             <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-300">
               <Code2 className="h-5 w-5" />
             </span>
-            Skill format
+            Agent file format
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Same Markdown-with-YAML shape Claude Skills use, plus a Theseus
-            frontmatter extension that the chain reads when the agent is
-            registered.
+            The OpenClaw-style format: same Markdown-with-YAML shape personal
+            agent runtimes use (and that ships as <code>SKILL.md</code> for
+            tooling compatibility), plus a Theseus frontmatter extension that
+            the chain reads when the agent registers.
           </p>
 
           <div className="overflow-x-auto">
@@ -287,8 +290,8 @@ export default function AgentsPage() {
             <div className="docs-card h-full flex items-start gap-3">
               <Code2 className="h-5 w-5 text-gray-500 group-hover:text-indigo-300 transition-colors shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Skill format &amp; SHIP spec →</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">SKILL.md frontmatter, body conventions, and the underlying SHIP DSL.</p>
+                <h3 className="font-medium group-hover:text-indigo-300 transition-colors">Agent file &amp; SHIP spec →</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">OpenClaw-style frontmatter, body conventions, and the underlying SHIP DSL.</p>
               </div>
             </div>
           </Link>

@@ -93,7 +93,7 @@ export default function LaunchPage() {
         </div>
       </section>
 
-      {/* Skill format: the authoring shape every agent ships in */}
+      {/* Agent file: the OpenClaw-style format every agent ships in */}
       <section className="py-20 lg:py-24 px-6 border-t border-slate-200 dark:border-slate-800/70">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 lg:mb-12">
@@ -101,12 +101,13 @@ export default function LaunchPage() {
               The deployable format
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 mb-4 [text-wrap:balance]">
-              Every agent is a <span className="italic">SKILL.md.</span>
+              Every agent is <span className="italic">one file.</span>
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
-              Same Markdown-with-YAML format Claude Skills use. Theseus adds a
-              frontmatter extension that names the models, tools, controller,
-              and intent surface, so a single file is enough to deploy.
+              OpenClaw-style: a Markdown body and a YAML frontmatter block.
+              Same file shape personal-runtime tools accept, plus Theseus
+              frontmatter that names the models, tools, controller, and intent
+              surface. One file is enough to deploy.
             </p>
           </div>
 
@@ -121,7 +122,7 @@ export default function LaunchPage() {
                 agents/themis-notary/SKILL.md
               </div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
-                Theseus frontmatter
+                OpenClaw-style + Theseus frontmatter
               </div>
             </div>
             <pre className="p-5 sm:p-6 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200">
@@ -203,7 +204,7 @@ export default function LaunchPage() {
               </div>
               <div className="ml-4 text-xs text-slate-400 font-mono">~/agents · zsh</div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
-                Skill in, CompiledAgent out
+                Agent file in, CompiledAgent out
               </div>
             </div>
             <pre className="p-5 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200 sm:p-6">
@@ -211,9 +212,9 @@ export default function LaunchPage() {
                 <span className="text-slate-500"># install shipc from the public SHIP repo</span>{"\n"}
                 <span className="text-indigo-300">$</span> cargo install --git https://github.com/Theseuschain/SHIP shipc{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># lint the skill (frontmatter + body, no output)</span>{"\n"}
+                <span className="text-slate-500"># lint the agent file (frontmatter + body, no output)</span>{"\n"}
                 <span className="text-indigo-300">$</span> shipc validate agents/themis-notary/SKILL.md{"\n"}
-                <span className="text-emerald-400">✓ SKILL.md is valid</span>{"\n"}
+                <span className="text-emerald-400">✓ agent file is valid</span>{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># compile to JSON (for tooling, CI, explorers)</span>{"\n"}
                 <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md --json{"\n"}
@@ -266,11 +267,11 @@ export default function LaunchPage() {
                   <FileCode2 className="h-5 w-5" />
                 </div>
                 <h3 className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                  Skill format
+                  Agent file format
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Theseus frontmatter, the SKILL.md body, and the underlying SHIP DSL
-                  it elaborates into.
+                  OpenClaw-style Markdown body, Theseus frontmatter, and the SHIP DSL
+                  the file elaborates into.
                 </p>
               </Link>
             </li>
