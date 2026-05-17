@@ -12,8 +12,28 @@ const glossaryTerms = [
   },
   {
     term: "Agent",
-    definition: "An autonomous program registered on Theseus that can hold $THE, call models, interact with other agents, and execute transactions independently.",
+    definition: "An autonomous program registered on Theseus that can hold $THE, call models, interact with other agents, and execute transactions independently. Authored as a THESEUS.md inside an agent directory; compiled by shipc into a CompiledAgent the chain registers.",
     link: "/docs/agents"
+  },
+  {
+    term: "Agent File",
+    definition: "The deployable unit. An agent directory at the root contains a THESEUS.md (the agent: system prompt, frontmatter naming models, native-tools, schedule, sovereign/controller/intent_types) plus optional skills/<name>/SKILL.md siblings for reusable capabilities. OpenClaw-style format.",
+    link: "/docs/agents#agent-file-format"
+  },
+  {
+    term: "OpenClaw-style format",
+    definition: "The Markdown-with-YAML agent file shape used by personal agent runtimes (Claude Code's CLAUDE.md, similar tools). Theseus adopts the same shape and adds chain-side frontmatter (sovereign, controller, intent_types) read at registration.",
+    link: "/docs/agents#agent-file-format"
+  },
+  {
+    term: "THESEUS.md",
+    definition: "The top-level agent file in an agent directory. Analog to Claude Code's CLAUDE.md. Canonical frontmatter fields: name (display), id (slug), description, models, native-tools, schedule. Theseus extensions: sovereign, controller, intent_types.",
+    link: "/docs/agents#agent-file-format"
+  },
+  {
+    term: "SKILL.md",
+    definition: "A reusable capability bundled inside an agent directory under skills/<name>/SKILL.md. Holds domain knowledge for using the native tools. Optional — many agents have none and reference native tools directly.",
+    link: "/docs/agents#agent-file-format"
   },
   {
     term: "Autonomy Flag",
@@ -72,7 +92,7 @@ const glossaryTerms = [
   },
   {
     term: "SHIP",
-    definition: "Structured Hierarchical Instructional Programs. A declarative specification format for Theseus agents and their behavior graphs. Compiled by shipc into a SCALE-encoded CompiledAgent that the chain registers directly — the runtime never sees SHIP source.",
+    definition: "Structured Hierarchical Instructional Programs. The declarative DSL underneath the THESEUS.md authoring format. Compiled by shipc into a SCALE-encoded CompiledAgent that the chain registers directly — the runtime never sees SHIP source.",
     link: "/docs/ship"
   },
   {

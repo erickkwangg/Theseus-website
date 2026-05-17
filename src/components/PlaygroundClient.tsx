@@ -72,8 +72,8 @@ type TraceStep = {
 
 const TRACE_TEMPLATE: TraceStep[] = [
   {
-    label: "Compile SHIP to a CompiledAgent",
-    detail: "shipc emits a SCALE-encoded blob the chain decodes into ABG nodes.",
+    label: "Compile the agent file to a CompiledAgent",
+    detail: "shipc lowers THESEUS.md through SHIP into a SCALE-encoded blob the chain decodes into ABG nodes.",
     icon: Cpu,
     durationMs: 600,
   },

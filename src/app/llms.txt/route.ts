@@ -15,8 +15,8 @@ const BODY = `# Theseus
 
 - [AIVM](${SITE_URL}/docs/aivm): The AI Virtual Machine. Tensor-native opcodes, deterministic execution, and cryptographic proof generation. Gas is priced in FLOPs, not opcodes.
 - [Tensor Commits](${SITE_URL}/docs/tensor-commits): Succinct cryptographic proofs for verifiable model inference. ~2 ms verification regardless of model size; sublinear scaling for 70B+ parameter models.
-- [Agents](${SITE_URL}/docs/agents): Registering agents and models, autonomous inference loops, and secure agent-to-agent interaction. Agents are first-class entities with balances and signing keys.
-- [SHIP](${SITE_URL}/docs/ship): Structured Hierarchical Instructional Programs — declarative agent specification format. Compiles via shipc to a SCALE-encoded CompiledAgent the chain registers directly.
+- [Agents](${SITE_URL}/docs/agents): Theseus agents author in the OpenClaw-style format — an agent directory holds a top-level THESEUS.md (analog to Claude Code's CLAUDE.md) plus optional skills/<name>/SKILL.md siblings for reusable capabilities. Canonical frontmatter (name, id, models, native-tools, schedule) plus Theseus extensions (sovereign, controller, intent_types). Agents are first-class entities with balances and signing keys.
+- [SHIP](${SITE_URL}/docs/ship): Structured Hierarchical Instructional Programs — the declarative DSL underneath the THESEUS.md authoring format. Compiles via shipc to a SCALE-encoded CompiledAgent the chain registers directly.
 
 ## System
 
@@ -30,9 +30,9 @@ const BODY = `# Theseus
 ## Building
 
 - [Quickstart](${SITE_URL}/docs/quickstart): Set up a Theseus node and deploy your first autonomous agent.
-- [Examples](${SITE_URL}/docs/examples): Full SHIP examples and ecosystem walkthroughs.
-- [Launch](${SITE_URL}/launch): Request preview access, install the CLI, and deploy your first verifiable agent.
-- [Playground](${SITE_URL}/playground): Try a SHIP agent: write the agent, run it against the runtime, inspect the signed receipt.
+- [Examples](${SITE_URL}/docs/examples): Full agent file examples and ecosystem walkthroughs.
+- [Launch](${SITE_URL}/launch): Read the agent file format, install the CLI, and request preview access.
+- [Playground](${SITE_URL}/playground): Try an agent in the browser: write the file, run it against the runtime, inspect the signed receipt.
 
 ## Comparisons
 
@@ -43,7 +43,7 @@ const BODY = `# Theseus
 ## Reference
 
 - [FAQ](${SITE_URL}/docs/faq): Latency, cost, model support, privacy, and other common questions.
-- [Glossary](${SITE_URL}/docs/glossary): AIVM, Tensor Commits, SHIP, autonomy flag, FLOPs gas, Terkle Tree, $THE, slashing, and more.
+- [Glossary](${SITE_URL}/docs/glossary): AIVM, Tensor Commits, THESEUS.md, OpenClaw-style format, SHIP, autonomy flag, FLOPs gas, Terkle Tree, $THE, slashing, and more.
 - [Tokenomics](${SITE_URL}/docs/tokenomics): $THE utility, staking, fee flows, AI-native economic primitives.
 
 ## Proof of Agenthood
