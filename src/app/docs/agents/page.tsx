@@ -8,8 +8,8 @@ import PrevNext from "@/components/docs/PrevNext";
 export const metadata: Metadata = {
   title: "Agents",
   description:
-    "Theseus agents are authored as SKILL.md files with extended frontmatter and deploy to a runtime that signs every output. Reference for the agent lifecycle, registration, and inter-agent interaction.",
-  keywords: ["Theseus agents", "SKILL.md", "OpenClaw-style agents", "agent file format", "model registration", "autonomous agents", "AIVM", "SHIP"],
+    "Theseus agents author as THESEUS.md (plus optional skills/<name>/SKILL.md siblings) and deploy to a runtime that signs every output. Reference for the agent lifecycle, registration, and inter-agent interaction.",
+  keywords: ["Theseus agents", "THESEUS.md", "SKILL.md", "OpenClaw-style agents", "agent file format", "model registration", "autonomous agents", "AIVM", "SHIP"],
   alternates: { canonical: "/docs/agents" },
 };
 
@@ -27,17 +27,20 @@ export default function AgentsPage() {
           Agents &amp; Models
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-          Authored as a <code className="font-mono text-[0.85em]">SKILL.md</code>, deployed to a runtime that signs every output.
+          Authored as a <code className="font-mono text-[0.85em]">THESEUS.md</code>, deployed to a runtime that signs every output.
         </p>
       </div>
 
       <div className="prose prose-invert max-w-none">
         <Callout type="tip" title="In one paragraph">
-          A Theseus agent is one file in the OpenClaw-style format (Markdown
-          body with YAML frontmatter, written to <code>SKILL.md</code>)
-          compiled into an on-chain entity with its own seus balance, its
-          own state, and a static <em>Agent Behavior Graph</em> (ABG)
-          elaborated from the file. Agents are event-driven, not
+          A Theseus agent is a directory: a <code>THESEUS.md</code> (Markdown
+          body with YAML frontmatter — analog to Claude Code&rsquo;s
+          <code>CLAUDE.md</code>) plus optional{" "}
+          <code>skills/&lt;name&gt;/SKILL.md</code> siblings for reusable
+          capabilities. The directory compiles into an on-chain entity with
+          its own seus balance, its own state, and a static{" "}
+          <em>Agent Behavior Graph</em> (ABG) elaborated from the file.
+          Agents are event-driven, not
           always-on: they wake on triggers (events, schedules, or external{" "}
           <code>call_agent</code>), execute their ABG until an inference or
           tool call suspends them, and resume in a later block when the
@@ -54,12 +57,14 @@ export default function AgentsPage() {
         {/* See it in code */}
         <Callout type="info" title="See an agent in code">
           <p className="mb-3">
-            Theseus agents author in the OpenClaw-style format: a Markdown
-            body in a <code>SKILL.md</code> file with YAML frontmatter on top.
-            The body is the system prompt and operating contract; the
-            frontmatter names the models, tools, controller, and intent
-            surface so one file is enough to deploy. Open any live agent for
-            a real example.
+            Theseus agents author in the OpenClaw-style format: the agent
+            itself is <code>THESEUS.md</code> at the root of an agent
+            directory, with reusable capabilities (if any) under{" "}
+            <code>skills/&lt;name&gt;/SKILL.md</code>. The Markdown body is
+            the system prompt and operating contract; the YAML frontmatter
+            names the models, native tools, controller, and intent surface so
+            one directory is enough to deploy. Open any live agent for a real
+            example.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link
@@ -93,10 +98,12 @@ export default function AgentsPage() {
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            The OpenClaw-style format: same Markdown-with-YAML shape personal
-            agent runtimes use (and that ships as <code>SKILL.md</code> for
-            tooling compatibility), plus a Theseus frontmatter extension that
-            the chain reads when the agent registers.
+            An agent directory holds a top-level <code>THESEUS.md</code>{" "}
+            (analog to Claude Code&rsquo;s <code>CLAUDE.md</code>) plus
+            optional <code>skills/&lt;name&gt;/SKILL.md</code> files for
+            reusable capabilities the agent invokes. The canonical
+            frontmatter fields shape the agent definition; Theseus extensions
+            on the bottom are read by the chain when the agent registers.
           </p>
 
           <div className="overflow-x-auto">
@@ -108,14 +115,15 @@ export default function AgentsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>name</code></td><td>Slug used as the agent&rsquo;s human-readable handle.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>name</code></td><td>Human-readable display name shown in the directory and on the credential.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>id</code></td><td>Stable slug used as the directory name and the on-chain agent handle.</td></tr>
                 <tr><td className="font-medium text-slate-900 dark:text-white"><code>description</code></td><td>One-line summary indexed by /poa and search.</td></tr>
                 <tr><td className="font-medium text-slate-900 dark:text-white"><code>models</code></td><td>Tensor Commits the agent is allowed to call.</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>tools</code></td><td>Whitelisted tool selectors (host functions + contract calls).</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>sovereign</code></td><td><code>true</code> for fully autonomous, <code>false</code> for controller-gated.</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>controller</code></td><td>SS58 address of the operator wallet, or <code>null</code> for sovereign.</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>intent_types</code></td><td>Set of intent kinds the agent is permitted to emit.</td></tr>
-                <tr><td className="font-medium text-slate-900 dark:text-white"><code>schedule</code></td><td>Optional human-readable trigger spec (block cadence, event source, on-demand).</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>native-tools</code></td><td>Built-in host functions and contract-call primitives the agent may invoke.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>schedule</code></td><td>Trigger spec: block cadence, event source, or on-demand.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>sovereign</code></td><td>Theseus extension. <code>true</code> for fully autonomous, <code>false</code> for controller-gated.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>controller</code></td><td>Theseus extension. SS58 address of the operator wallet, or <code>null</code> for sovereign.</td></tr>
+                <tr><td className="font-medium text-slate-900 dark:text-white"><code>intent_types</code></td><td>Theseus extension. Set of intent kinds the agent is permitted to emit.</td></tr>
               </tbody>
             </table>
           </div>

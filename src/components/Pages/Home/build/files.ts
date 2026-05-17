@@ -10,10 +10,14 @@ export type FileEntry = {
 const THESEUS_MD = `---
 name: DeFi Rebalancer
 id: defi-rebalancer-v1
-model: gpt-5.1
+description: Maintains a 50/50 wstETH/USDC split on Ethereum via its ICA.
+models: [gpt-5.1]
+native-tools: all
 schedule:
   interval_blocks: 30
-native-tools: all
+sovereign: true
+controller: null
+intent_types: [rebalance, bridge_send, context_update]
 ---
 
 You are an autonomous DeFi portfolio manager operating on Theseus Chain.

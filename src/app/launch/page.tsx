@@ -119,7 +119,7 @@ export default function LaunchPage() {
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
               <div className="ml-4 px-3 py-0.5 bg-[#060b16] rounded text-xs text-slate-400 font-mono">
-                agents/themis-notary/SKILL.md
+                agents/themis-notary/THESEUS.md
               </div>
               <div className="ml-auto text-[10px] uppercase tracking-widest text-slate-500">
                 OpenClaw-style + Theseus frontmatter
@@ -128,10 +128,12 @@ export default function LaunchPage() {
             <pre className="p-5 sm:p-6 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-200">
               <code>
                 <span className="text-slate-500">---</span>{"\n"}
-                <span className="text-indigo-300">name</span>: themis-notary{"\n"}
+                <span className="text-indigo-300">name</span>: Themis Notary{"\n"}
+                <span className="text-indigo-300">id</span>: themis-notary{"\n"}
                 <span className="text-indigo-300">description</span>: Independent agentic timestamping and witness service.{"\n"}
                 <span className="text-indigo-300">models</span>: <span className="text-emerald-400">[claude-opus-4-7]</span>{"\n"}
-                <span className="text-indigo-300">tools</span>: <span className="text-emerald-400">[sign_attestation, hash_document, verify_signature]</span>{"\n"}
+                <span className="text-indigo-300">native-tools</span>: <span className="text-emerald-400">[sign_attestation, hash_document, verify_signature]</span>{"\n"}
+                <span className="text-indigo-300">schedule</span>: on demand, per document hash{"\n"}
                 <span className="text-indigo-300">sovereign</span>: <span className="text-amber-300">true</span>{"\n"}
                 <span className="text-indigo-300">controller</span>: <span className="text-amber-300">null</span>{"\n"}
                 <span className="text-indigo-300">intent_types</span>: <span className="text-emerald-400">[timestamp, witness, sign_attestation, verify_proof]</span>{"\n"}
@@ -162,7 +164,7 @@ export default function LaunchPage() {
             >
               Proof of Agenthood directory
             </Link>{" "}
-            publishes its SKILL.md. Open one, copy the file, fork the body,
+            publishes its THESEUS.md. Open one, copy the file, fork the body,
             deploy a sibling.
           </p>
         </div>
@@ -187,11 +189,13 @@ export default function LaunchPage() {
               >
                 shipc
               </a>{" "}
-              is a Rust CLI that compiles a <code className="font-mono text-[13px]">SKILL.md</code>{" "}
-              (or the lower-level <code className="font-mono text-[13px]">.ship</code> source it
-              elaborates into) into a canonical <code className="font-mono text-[13px]">CompiledAgent</code>{" "}
-              blob, ready to be SCALE-encoded for the chain. The compiler is public and open today;
-              the chain-deploy half ships with public testnet.
+              is a Rust CLI that compiles an agent directory (a{" "}
+              <code className="font-mono text-[13px]">THESEUS.md</code> plus any
+              {" "}<code className="font-mono text-[13px]">skills/&lt;name&gt;/SKILL.md</code> the
+              agent uses) into a canonical{" "}
+              <code className="font-mono text-[13px]">CompiledAgent</code> blob, ready to be
+              SCALE-encoded for the chain. The compiler is public and open today; the chain-deploy
+              half ships with public testnet.
             </p>
           </div>
 
@@ -212,19 +216,19 @@ export default function LaunchPage() {
                 <span className="text-slate-500"># install shipc from the public SHIP repo</span>{"\n"}
                 <span className="text-indigo-300">$</span> cargo install --git https://github.com/Theseuschain/SHIP shipc{"\n"}
                 {"\n"}
-                <span className="text-slate-500"># lint the agent file (frontmatter + body, no output)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc validate agents/themis-notary/SKILL.md{"\n"}
-                <span className="text-emerald-400">✓ agent file is valid</span>{"\n"}
+                <span className="text-slate-500"># lint the agent directory (THESEUS.md + any skills)</span>{"\n"}
+                <span className="text-indigo-300">$</span> shipc validate agents/themis-notary{"\n"}
+                <span className="text-emerald-400">✓ agents/themis-notary is valid</span>{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># compile to JSON (for tooling, CI, explorers)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md --json{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary --json{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># compile to SCALE-encoded CompiledAgent (chain-ready)</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md --scale-hex{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary --scale-hex{"\n"}
                 <span className="text-emerald-400">0x4f2e8a...e4c1</span>{"\n"}
                 {"\n"}
                 <span className="text-slate-500"># default: write artifacts/agent.json + .scale</span>{"\n"}
-                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary/SKILL.md{"\n"}
+                <span className="text-indigo-300">$</span> shipc compile agents/themis-notary{"\n"}
                 <span className="text-emerald-400">✓ wrote ./artifacts/themis-notary.json</span>{"\n"}
                 <span className="text-emerald-400">✓ wrote ./artifacts/themis-notary.scale</span>
               </code>

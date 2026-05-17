@@ -1,9 +1,8 @@
-// Renders the agent's deployable agent file. Theseus agents author in the
-// OpenClaw-style format: a Markdown body with YAML frontmatter that names
-// the models, tools, controller, and intent surface. The file is shape-
-// compatible with personal-runtime skills tools (it ships as SKILL.md), but
-// the unit is an agent, not a skill. This section shows the file verbatim
-// so an operator can read or copy it and deploy a sibling.
+// Renders the agent's deployable THESEUS.md. Theseus agents author in the
+// OpenClaw-style format: the top-level agent lives in THESEUS.md (analog
+// to Claude Code's CLAUDE.md); reusable capabilities the agent invokes
+// live under skills/<name>/SKILL.md. This section shows the agent's
+// THESEUS.md verbatim so an operator can read or copy it.
 
 import { buildAgentFile, agentSlug } from "@/lib/poa/agent-file";
 import type { AgentSnapshot } from "@/lib/poa/types";
@@ -16,7 +15,7 @@ type Props = {
 export default function AgentFile({ snapshot }: Props) {
   const file = buildAgentFile(snapshot);
   const slug = agentSlug(snapshot);
-  const path = `agents/${slug}/SKILL.md`;
+  const path = `agents/${slug}/THESEUS.md`;
 
   return (
     <section
@@ -36,10 +35,12 @@ export default function AgentFile({ snapshot }: Props) {
       </header>
 
       <p className="mb-5 max-w-2xl text-[13.5px] leading-relaxed text-[var(--poa-ink-soft)]">
-        OpenClaw-style format: a Markdown body and a YAML frontmatter block.
-        Same file shape personal-runtime tools use, plus Theseus frontmatter
-        that names the models, tools, controller, and intent surface. Fork it,
-        change the body, deploy a sibling.
+        OpenClaw-style format. The agent lives in <code className="font-mono text-[12px]">THESEUS.md</code> at
+        the root of an agent directory; reusable capabilities go in
+        sibling <code className="font-mono text-[12px]">skills/&lt;name&gt;/SKILL.md</code>{" "}
+        files. Theseus frontmatter (sovereign, controller, intent_types) on
+        top of the canonical fields. Fork it, change the body, deploy a
+        sibling.
       </p>
 
       <div

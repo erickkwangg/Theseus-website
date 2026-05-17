@@ -1,10 +1,15 @@
-// Build the deployable agent file (SKILL.md) for a Theseus agent.
+// Build the deployable THESEUS.md for a Theseus agent.
 //
-// Theseus agents are authored and deployed in the OpenClaw-style agent
-// format: Markdown body plus a YAML frontmatter block that names the
-// models, tools, sovereignty flag, controller, and intent surface. Same
-// file shape personal-runtime skills tools use; the chain just reads the
-// extra Theseus fields when the agent registers.
+// The OpenClaw-style agent format: an agent directory contains a top-level
+// THESEUS.md (analog to Claude Code's CLAUDE.md) plus optional skills/
+// subdirectories where each reusable capability is its own SKILL.md.
+// Canonical frontmatter fields: name, id, models, native-tools, schedule.
+// Theseus extensions read by the chain at registration: sovereign,
+// controller, intent_types.
+//
+// PoA fixtures don't currently define user-authored sub-skills (their
+// tool surface is built-in native tools), so each fixture renders as a
+// single THESEUS.md.
 
 import type { AgentSnapshot } from "./types";
 
@@ -78,11 +83,18 @@ export function buildAgentFile(snapshot: AgentSnapshot): string {
     snapshot.summary?.split(/(?<=\.)\s/)[0]?.trim() ??
     `Theseus agent ${snapshot.name}.`;
 
+  // Canonical THESEUS.md frontmatter, in the order the homepage Build
+  // example uses, with Theseus extension fields grouped at the bottom.
   const frontmatter: string[] = ["---"];
-  frontmatter.push(`name: ${slug}`);
+  frontmatter.push(`name: ${yamlString(snapshot.name)}`);
+  frontmatter.push(`id: ${slug}`);
   frontmatter.push(`description: ${yamlString(description)}`);
   frontmatter.push(`models: ${yamlList(snapshot.capabilities.models)}`);
-  frontmatter.push(`tools: ${yamlList(snapshot.capabilities.tools)}`);
+  frontmatter.push(`native-tools: ${yamlList(snapshot.capabilities.tools)}`);
+  if (snapshot.context?.schedule) {
+    frontmatter.push(`schedule: ${yamlString(snapshot.context.schedule)}`);
+  }
+  // Theseus extensions
   frontmatter.push(`sovereign: ${snapshot.sovereign ? "true" : "false"}`);
   frontmatter.push(
     `controller: ${snapshot.controller ? snapshot.controller : "null"}`,
@@ -90,9 +102,6 @@ export function buildAgentFile(snapshot: AgentSnapshot): string {
   frontmatter.push(
     `intent_types: ${yamlList(snapshot.capabilities.intentTypes)}`,
   );
-  if (snapshot.context?.schedule) {
-    frontmatter.push(`schedule: ${yamlString(snapshot.context.schedule)}`);
-  }
   frontmatter.push("---");
 
   const body: string[] = [];
