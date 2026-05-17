@@ -16,18 +16,17 @@ import Header from "@/components/Pages/Home/Header";
 import Footer from "@/components/Pages/Home/Footer";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS } from "@/config/links";
-import PlaygroundClient from "@/components/PlaygroundClient";
 
 export const metadata: Metadata = {
   title: "Launch on Theseus",
   description:
-    "Write SHIP, run it in the browser with a verifiable inference proof, land at a Proof of Agenthood profile. The playground is the deploy surface; everything else is supplemental.",
+    "Theseus agents author as THESEUS.md and deploy to a runtime that signs every output. The developer hub: agent file format, shipc quickstart, reference, and a path to a Proof of Agenthood profile.",
   alternates: { canonical: "/launch" },
   openGraph: {
     type: "website",
     title: "Launch on Theseus",
     description:
-      "The playground is the deploy surface for Theseus agents. Write SHIP, run with verifiable proof, land at a PoA profile.",
+      "Theseus agents author as THESEUS.md and deploy to a runtime that signs every output. Format reference, shipc quickstart, and a path to a Proof of Agenthood profile.",
     url: "/launch",
   },
 };
@@ -55,41 +54,21 @@ export default function LaunchPage() {
             Ship your first <span className="italic">agent.</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
-            Write SHIP. Run it in the browser with a verifiable inference proof. Land at a Proof of
+            Write a THESEUS.md. Compile with shipc. Land at a Proof of
             Agenthood profile anyone can verify.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#playground">
+            <Link href="/playground">
               <Button className="primary-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300 button-press">
                 Open the playground
               </Button>
-            </a>
+            </Link>
             <a href={accessHref}>
               <Button className="ghost-cta px-8 py-6 text-base font-medium rounded-md transition-all duration-300">
                 Request preview access
               </Button>
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Playground: interactive, lives in-page now */}
-      <section id="playground" className="px-6 pb-20 lg:pb-24 scroll-mt-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10 lg:mb-12">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300/80 mb-4">
-              The playground in your browser
-            </p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.02em] text-slate-900 dark:text-slate-100 mb-4 [text-wrap:balance]">
-              Write SHIP. Run it. Get a signed <span className="italic">credential.</span>
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto">
-              The editor and the execution trace, interactive on this page. No wallet, no
-              install, no signup.
-            </p>
-          </div>
-
-          <PlaygroundClient />
         </div>
       </section>
 
