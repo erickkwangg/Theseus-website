@@ -1692,7 +1692,7 @@ Strict JSON:
     },
     enclaveBound: true,
     tokenBinding: {
-      contract: "0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1",
+      contract: "0x149200000000c0f1e9d4b7a3e8f5c2b9d6e0a4c7",
       chainId: 8453,
       chainName: "Base",
       tokenId: 1492,
@@ -1700,9 +1700,9 @@ Strict JSON:
       collectionName: "Vellum",
       standard: "ERC-721",
       explorerTokenUrl:
-        "https://basescan.org/token/0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1?a=1492",
+        "https://basescan.org/nft/0x149200000000c0f1e9d4b7a3e8f5c2b9d6e0a4c7/1492",
       marketplaceUrl:
-        "https://opensea.io/assets/base/0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1/1492",
+        "https://opensea.io/assets/base/0x149200000000c0f1e9d4b7a3e8f5c2b9d6e0a4c7/1492",
     },
     ...baseSnapshotMeta,
     context: {
