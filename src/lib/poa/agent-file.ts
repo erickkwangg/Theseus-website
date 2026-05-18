@@ -77,6 +77,59 @@ function inlineLine(s: string): string {
   return s.replace(/\s+/g, " ").trim();
 }
 
+// Split an instructions blob into identity (soul) + operational rest.
+// Heuristic: everything before the first `## ` heading is identity prose.
+// If there are no headings, the first paragraph is identity and the rest
+// is operational. Returns nulls for empty halves so callers can decide
+// whether to emit the corresponding file.
+function splitSoulAndRest(instructions: string): {
+  soul: string | null;
+  rest: string;
+} {
+  const trimmed = instructions.trim();
+  if (!trimmed) return { soul: null, rest: "" };
+  const headingMatch = trimmed.match(/^## /m);
+  if (headingMatch && headingMatch.index !== undefined && headingMatch.index > 0) {
+    const soul = trimmed.substring(0, headingMatch.index).trim();
+    const rest = trimmed.substring(headingMatch.index).trim();
+    return { soul: soul || null, rest };
+  }
+  // No `## ` heading. Take the first paragraph as soul, the rest as ops.
+  const paraSplit = trimmed.indexOf("\n\n");
+  if (paraSplit === -1) {
+    // Single paragraph: treat as identity-only, no operational rest.
+    return { soul: trimmed, rest: "" };
+  }
+  const soul = trimmed.substring(0, paraSplit).trim();
+  const rest = trimmed.substring(paraSplit).trim();
+  return { soul: soul || null, rest };
+}
+
+// Resolves the SOUL.md body for a snapshot, preferring an explicit
+// `context.soul` field but falling back to the heuristic split.
+export function resolveSoulBody(snapshot: AgentSnapshot): string | null {
+  const explicit = snapshot.context?.soul?.trim();
+  if (explicit) return explicit;
+  const instructions = snapshot.context?.instructions;
+  if (!instructions) return null;
+  return splitSoulAndRest(instructions).soul;
+}
+
+// Resolves what THESEUS.md should put under its Instructions heading.
+// If a soul was extracted from the instructions, we drop it here so the
+// two files don't repeat content.
+function resolveOperationalInstructions(
+  snapshot: AgentSnapshot,
+): string | null {
+  const instructions = snapshot.context?.instructions;
+  if (!instructions) return null;
+  // If the snapshot ships an explicit soul, the whole instructions blob
+  // is operational by definition.
+  if (snapshot.context?.soul?.trim()) return instructions.trim() || null;
+  const { rest } = splitSoulAndRest(instructions);
+  return rest || null;
+}
+
 export function buildAgentFile(snapshot: AgentSnapshot): string {
   const slug = agentSlug(snapshot);
   const description =
@@ -133,18 +186,70 @@ export function buildAgentFile(snapshot: AgentSnapshot): string {
     body.push("");
   }
 
-  if (ctx?.instructions) {
+  const operationalInstructions = resolveOperationalInstructions(snapshot);
+  if (operationalInstructions) {
     body.push("## Instructions");
     body.push("");
     // Demote any `## ` headings inside the verbatim instructions to `### `
     // so they nest cleanly under the wrapping Instructions heading. Lines
     // that aren't headings pass through unchanged.
-    const demoted = ctx.instructions
-      .trim()
-      .replace(/^## /gm, "### ");
+    const demoted = operationalInstructions.replace(/^## /gm, "### ");
     body.push(demoted);
     body.push("");
   }
 
   return frontmatter.join("\n") + body.join("\n");
+}
+
+// Build the SOUL.md (identity/persona/mandate) for an agent directory.
+// Returns null if the snapshot has nothing identity-shaped to publish.
+// Frontmatter is intentionally minimal — name/id/kind only — since the
+// chain-side metadata already lives in THESEUS.md.
+export function buildSoulFile(snapshot: AgentSnapshot): string | null {
+  const soulBody = resolveSoulBody(snapshot);
+  if (!soulBody) return null;
+  const slug = agentSlug(snapshot);
+  const frontmatter = [
+    "---",
+    `name: ${yamlString(snapshot.name)}`,
+    `id: ${slug}`,
+    "kind: identity",
+    "---",
+  ].join("\n");
+  const body = `\n# ${snapshot.name}\n\n${soulBody}\n`;
+  return frontmatter + body;
+}
+
+// Describes the files in an agent directory for the directory-tree UI.
+export type AgentDirectoryFile = {
+  path: string;
+  filename: string;
+  kind: "agent" | "soul" | "skill";
+  content: string;
+};
+
+export function buildAgentDirectory(
+  snapshot: AgentSnapshot,
+): AgentDirectoryFile[] {
+  const slug = agentSlug(snapshot);
+  const files: AgentDirectoryFile[] = [
+    {
+      path: `agents/${slug}/THESEUS.md`,
+      filename: "THESEUS.md",
+      kind: "agent",
+      content: buildAgentFile(snapshot),
+    },
+  ];
+  const soul = buildSoulFile(snapshot);
+  if (soul) {
+    files.push({
+      path: `agents/${slug}/SOUL.md`,
+      filename: "SOUL.md",
+      kind: "soul",
+      content: soul,
+    });
+  }
+  // skills/<name>/SKILL.md entries land here when fixtures gain explicit
+  // user-authored skills (none today; native-tools cover the surface).
+  return files;
 }

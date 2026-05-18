@@ -27,6 +27,11 @@ export type AgentContext = {
   /** The verbatim system prompt the agent runs under. Render in a
    *  pre-formatted block; never as HTML. */
   instructions: string;
+  /** Optional identity/persona/mandate body — what becomes SOUL.md in
+   *  the agent directory. When absent, the soul is heuristically
+   *  extracted from the first prose paragraph of `instructions`
+   *  (everything before the first `## ` heading). */
+  soul?: string;
   /** What the agent reads as input each cycle. One bullet per source. */
   inputs?: string[];
   /** What the agent emits. */
