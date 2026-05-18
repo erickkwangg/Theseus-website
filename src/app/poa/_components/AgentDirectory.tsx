@@ -58,6 +58,45 @@ export default function AgentDirectory({ snapshot }: Props) {
         files.
       </p>
 
+      {snapshot.tokenBinding && (
+        <div
+          className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className="poa-stamp">NFT binding</span>
+            <span className="font-mono text-[12.5px] text-[var(--poa-ink)]">
+              {snapshot.tokenBinding.collectionName} #{snapshot.tokenBinding.tokenId}
+              <span className="text-[var(--poa-ink-soft)]">
+                {" "}
+                / {snapshot.tokenBinding.collectionSize.toLocaleString()}
+              </span>
+            </span>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              {snapshot.tokenBinding.standard} · {snapshot.tokenBinding.chainName}
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            <a
+              href={snapshot.tokenBinding.marketplaceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+            >
+              Marketplace ↗
+            </a>
+            <a
+              href={snapshot.tokenBinding.explorerTokenUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+            >
+              Token on explorer ↗
+            </a>
+          </div>
+        </div>
+      )}
+
       <div
         className="poa-playground overflow-hidden border"
         style={{ borderColor: "var(--poa-rule)" }}

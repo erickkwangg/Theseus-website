@@ -147,6 +147,17 @@ export function buildAgentFile(snapshot: AgentSnapshot): string {
   if (snapshot.context?.schedule) {
     frontmatter.push(`schedule: ${yamlString(snapshot.context.schedule)}`);
   }
+  // NFT binding (only present when the agent is wrapped behind a tradeable
+  // token; the token's holder is the on-chain controller).
+  if (snapshot.tokenBinding) {
+    const t = snapshot.tokenBinding;
+    frontmatter.push(`nft_collection: ${yamlString(t.collectionName)}`);
+    frontmatter.push(`nft_token_id: ${t.tokenId}`);
+    frontmatter.push(`nft_collection_size: ${t.collectionSize}`);
+    frontmatter.push(`nft_standard: ${yamlString(t.standard)}`);
+    frontmatter.push(`nft_chain: ${yamlString(t.chainName)}`);
+    frontmatter.push(`nft_contract: ${yamlString(t.contract)}`);
+  }
   // Theseus extensions
   frontmatter.push(`sovereign: ${snapshot.sovereign ? "true" : "false"}`);
   frontmatter.push(

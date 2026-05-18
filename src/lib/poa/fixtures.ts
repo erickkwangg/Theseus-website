@@ -1691,6 +1691,19 @@ Strict JSON:
       grade: "full",
     },
     enclaveBound: true,
+    tokenBinding: {
+      contract: "0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1",
+      chainId: 8453,
+      chainName: "Base",
+      tokenId: 1492,
+      collectionSize: 5000,
+      collectionName: "Vellum",
+      standard: "ERC-721",
+      explorerTokenUrl:
+        "https://basescan.org/token/0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1?a=1492",
+      marketplaceUrl:
+        "https://opensea.io/assets/base/0xVe11um14920000c0f1e9d4b7a3e8f5c2b9d6e0a4c7f1/1492",
+    },
     ...baseSnapshotMeta,
     context: {
       schedule:

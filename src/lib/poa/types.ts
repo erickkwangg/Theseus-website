@@ -67,6 +67,32 @@ export type AgentContext = {
   commitmentSurface?: CommitmentSurface;
 };
 
+/** Optional NFT binding for an agent. When present, the agent is wrapped
+ *  behind an ERC-721 (or pallet-native NFT primitive) whose holder is the
+ *  agent's on-chain controller. Transferring the token transfers control
+ *  of the agent in one step: marketplaces see a standard NFT interface;
+ *  the chain sees a controller-change extrinsic. */
+export type TokenBinding = {
+  /** Token contract address on the binding chain. */
+  contract: string;
+  /** Chain id of the binding chain (e.g. 8453 for Base mainnet). */
+  chainId: number;
+  /** Human-readable chain name. */
+  chainName: string;
+  /** This agent's token id within the collection. */
+  tokenId: number;
+  /** Total mints in the collection. */
+  collectionSize: number;
+  /** Human-readable collection name (e.g. "Vellum"). */
+  collectionName: string;
+  /** Standard the binding uses ("ERC-721", "ERC-1155", "pallet-uniques"). */
+  standard: string;
+  /** Block-explorer URL for the specific token. */
+  explorerTokenUrl: string;
+  /** Marketplace listing URL (OpenSea, Blur, Magic Eden, Tensor, etc.). */
+  marketplaceUrl: string;
+};
+
 export type CommitmentSurface = {
   /** EVM (or chain-native) address of the deployed commitment surface. */
   address: string;
@@ -107,6 +133,9 @@ export type AgentSnapshot = {
   enclaveBound: boolean;
   snapshotAtBlock: number;
   snapshotAtTime: string;
+  /** Optional NFT wrapping. When present, the agent is a tradeable token
+   *  on the binding chain; the token holder is the agent's controller. */
+  tokenBinding?: TokenBinding;
   /** Optional published context (system prompt + I/O descriptions). */
   context?: AgentContext;
 };
