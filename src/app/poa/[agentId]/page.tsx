@@ -14,6 +14,8 @@ import PoaNav from "../_components/PoaNav";
 import CredentialShareBar from "../_components/CredentialShareBar";
 import RevokeButton from "../_components/RevokeButton";
 import AgentDirectory from "../_components/AgentDirectory";
+import InGameDemoLink from "../_components/InGameDemoLink";
+import { agentSlug } from "@/lib/poa/agent-file";
 import SigningRecord from "../_components/SigningRecord";
 
 export const dynamic = "force-dynamic";
@@ -218,7 +220,12 @@ export default async function PoaCredentialPage({ params }: Props) {
             </div>
 
             {liveSnapshot && (
-              <AgentDirectory snapshot={liveSnapshot} />
+              <>
+                <AgentDirectory snapshot={liveSnapshot} />
+                {agentSlug(liveSnapshot) === "calder" && (
+                  <InGameDemoLink agentId={agentId} agentName={liveSnapshot.name} />
+                )}
+              </>
             )}
           </div>
         </section>
