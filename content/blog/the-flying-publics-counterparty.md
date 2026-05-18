@@ -1,5 +1,5 @@
 ---
-title: "Boeing's MCAS and the case for an outside reviewer"
+title: "Boeing's MCAS and the case for an independent agent"
 date: "2026-05-15"
 excerpt: "MCAS wasn't an engineering failure. The warning signs were public, internal engineers raised them, and the captured certification process suppressed them. The flying public has no independent reviewer in that process. A sovereign LLM agent is the first technology that can act as one."
 author: "Theseus Labs"
