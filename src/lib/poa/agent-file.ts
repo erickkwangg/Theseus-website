@@ -11,7 +11,7 @@
 // tool surface is built-in native tools), so each fixture renders as a
 // single THESEUS.md.
 
-import type { AgentSnapshot } from "./types";
+import type { AgentSkill, AgentSnapshot } from "./types";
 
 export function agentSlug(snapshot: AgentSnapshot): string {
   return snapshot.name
@@ -203,7 +203,7 @@ export function buildAgentFile(snapshot: AgentSnapshot): string {
 
 // Build the SOUL.md (identity/persona/mandate) for an agent directory.
 // Returns null if the snapshot has nothing identity-shaped to publish.
-// Frontmatter is intentionally minimal — name/id/kind only — since the
+// Frontmatter is intentionally minimal (name/id/kind only) since the
 // chain-side metadata already lives in THESEUS.md.
 export function buildSoulFile(snapshot: AgentSnapshot): string | null {
   const soulBody = resolveSoulBody(snapshot);
@@ -220,10 +220,40 @@ export function buildSoulFile(snapshot: AgentSnapshot): string | null {
   return frontmatter + body;
 }
 
+// Build a single skills/<name>/SKILL.md from an AgentSkill entry. Matches
+// the Anthropic Skills frontmatter shape (name, description, allowed-tools)
+// used by Claude Code and the homepage Build example.
+export function buildSkillFile(skill: AgentSkill): string {
+  const frontmatter = ["---"];
+  frontmatter.push(`name: ${skill.name}`);
+  // Description is a free-text scalar; allow newlines via folded indented
+  // continuation if the source contains them. For one-liners just emit
+  // as a quoted-or-bare scalar.
+  if (skill.description.includes("\n")) {
+    const lines = skill.description.split("\n").map((l) => l.trim());
+    frontmatter.push(`description: ${lines[0]}`);
+    for (const cont of lines.slice(1)) {
+      frontmatter.push(`  ${cont}`);
+    }
+  } else {
+    frontmatter.push(`description: ${yamlString(skill.description)}`);
+  }
+  if (skill.allowedTools && skill.allowedTools.length > 0) {
+    // Space-separated, matching the Anthropic / homepage Build convention.
+    frontmatter.push(`allowed-tools: ${skill.allowedTools.join(" ")}`);
+  }
+  frontmatter.push("---");
+  return frontmatter.join("\n") + "\n\n" + skill.body.trim() + "\n";
+}
+
 // Describes the files in an agent directory for the directory-tree UI.
 export type AgentDirectoryFile = {
   path: string;
   filename: string;
+  /** Path relative to the agent directory, used for indentation in the tree.
+   *  For agent/soul files this is the same as filename; for skills it's
+   *  `skills/<name>/SKILL.md`. */
+  treePath: string;
   kind: "agent" | "soul" | "skill";
   content: string;
 };
@@ -236,6 +266,7 @@ export function buildAgentDirectory(
     {
       path: `agents/${slug}/THESEUS.md`,
       filename: "THESEUS.md",
+      treePath: "THESEUS.md",
       kind: "agent",
       content: buildAgentFile(snapshot),
     },
@@ -245,11 +276,20 @@ export function buildAgentDirectory(
     files.push({
       path: `agents/${slug}/SOUL.md`,
       filename: "SOUL.md",
+      treePath: "SOUL.md",
       kind: "soul",
       content: soul,
     });
   }
-  // skills/<name>/SKILL.md entries land here when fixtures gain explicit
-  // user-authored skills (none today; native-tools cover the surface).
+  const skills = snapshot.context?.skills ?? [];
+  for (const skill of skills) {
+    files.push({
+      path: `agents/${slug}/skills/${skill.name}/SKILL.md`,
+      filename: "SKILL.md",
+      treePath: `skills/${skill.name}/SKILL.md`,
+      kind: "skill",
+      content: buildSkillFile(skill),
+    });
+  }
   return files;
 }

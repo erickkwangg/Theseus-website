@@ -75,7 +75,7 @@ export default function AgentDirectory({ snapshot }: Props) {
           )}
         </div>
 
-        <div className="grid sm:grid-cols-[180px_1fr]">
+        <div className="grid sm:grid-cols-[200px_1fr]">
           {/* File tree */}
           <nav
             className="border-b sm:border-b-0 sm:border-r"
@@ -89,31 +89,73 @@ export default function AgentDirectory({ snapshot }: Props) {
               >
                 {slug}/
               </li>
-              {files.map((file) => {
-                const isActive = file.path === activePath;
+              {(() => {
+                const topLevel = files.filter((f) => f.kind !== "skill");
+                const skills = files.filter((f) => f.kind === "skill");
                 return (
-                  <li key={file.path}>
-                    <button
-                      type="button"
-                      onClick={() => setActivePath(file.path)}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`group flex w-full items-baseline gap-2 px-4 py-1.5 text-left font-mono text-[12px] transition-colors ${
-                        isActive
-                          ? "bg-[color:var(--poa-rule)]/40 text-[var(--poa-ink)]"
-                          : "text-[var(--poa-ink-soft)] hover:bg-[color:var(--poa-rule)]/20 hover:text-[var(--poa-ink)]"
-                      }`}
-                    >
-                      <span className="text-[var(--poa-ink-soft)] group-hover:text-[var(--poa-ink-soft)]">
-                        ▸
-                      </span>
-                      <span>{file.filename}</span>
-                      <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--poa-ink-soft)]">
-                        {fileKindLabel(file.kind)}
-                      </span>
-                    </button>
-                  </li>
+                  <>
+                    {topLevel.map((file) => {
+                      const isActive = file.path === activePath;
+                      return (
+                        <li key={file.path}>
+                          <button
+                            type="button"
+                            onClick={() => setActivePath(file.path)}
+                            aria-current={isActive ? "true" : undefined}
+                            className={`group flex w-full items-baseline gap-2 px-4 py-1.5 text-left font-mono text-[12px] transition-colors ${
+                              isActive
+                                ? "bg-[color:var(--poa-rule)]/40 text-[var(--poa-ink)]"
+                                : "text-[var(--poa-ink-soft)] hover:bg-[color:var(--poa-rule)]/20 hover:text-[var(--poa-ink)]"
+                            }`}
+                          >
+                            <span className="text-[var(--poa-ink-soft)]">▸</span>
+                            <span>{file.filename}</span>
+                            <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--poa-ink-soft)]">
+                              {fileKindLabel(file.kind)}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                    {skills.length > 0 && (
+                      <>
+                        <li
+                          className="mt-1 flex items-baseline gap-2 px-4 py-1 font-mono text-[12px] text-[var(--poa-ink-soft)]"
+                          aria-hidden="true"
+                        >
+                          <span>▾</span>
+                          <span>skills/</span>
+                        </li>
+                        {skills.map((file) => {
+                          const isActive = file.path === activePath;
+                          // skills/<name>/SKILL.md -> show <name>
+                          const skillName = file.treePath.split("/")[1] ?? "";
+                          return (
+                            <li key={file.path}>
+                              <button
+                                type="button"
+                                onClick={() => setActivePath(file.path)}
+                                aria-current={isActive ? "true" : undefined}
+                                className={`group flex w-full items-baseline gap-2 pl-7 pr-4 py-1.5 text-left font-mono text-[12px] transition-colors ${
+                                  isActive
+                                    ? "bg-[color:var(--poa-rule)]/40 text-[var(--poa-ink)]"
+                                    : "text-[var(--poa-ink-soft)] hover:bg-[color:var(--poa-rule)]/20 hover:text-[var(--poa-ink)]"
+                                }`}
+                              >
+                                <span className="text-[var(--poa-ink-soft)]">▸</span>
+                                <span className="truncate">{skillName}</span>
+                                <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--poa-ink-soft)]">
+                                  {fileKindLabel(file.kind)}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </>
+                    )}
+                  </>
                 );
-              })}
+              })()}
             </ul>
           </nav>
 

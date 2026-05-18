@@ -23,15 +23,36 @@ export type VerificationGrade = "full" | "mixed" | "lite" | "unknown";
  *  (the chain only requires the cryptographic fields). When present, the
  *  PoA profile page renders an "Agent context" section so anyone can read
  *  the system prompt, inputs, and outputs the agent runs under. */
+/** A reusable sub-skill bundled inside the agent directory. Matches the
+ *  Anthropic Skills shape: name (slug), description (when to use it),
+ *  allowed-tools (subset of the agent's native-tools the skill may call),
+ *  and a markdown body. Emitted at skills/<name>/SKILL.md. */
+export type AgentSkill = {
+  /** Kebab-case slug; becomes both the directory and the frontmatter `name`. */
+  name: string;
+  /** One-line summary explaining what the skill does AND when to use it.
+   *  Surface text shown next to the skill in the tree and indexed by search. */
+  description: string;
+  /** Subset of the agent's native-tools the skill may invoke. Emitted
+   *  space-separated to match the Anthropic Skills convention. */
+  allowedTools?: string[];
+  /** Markdown body. First line should be `# <Title>` matching the slug. */
+  body: string;
+};
+
 export type AgentContext = {
   /** The verbatim system prompt the agent runs under. Render in a
    *  pre-formatted block; never as HTML. */
   instructions: string;
-  /** Optional identity/persona/mandate body — what becomes SOUL.md in
+  /** Optional identity/persona/mandate body. Becomes SOUL.md in
    *  the agent directory. When absent, the soul is heuristically
    *  extracted from the first prose paragraph of `instructions`
    *  (everything before the first `## ` heading). */
   soul?: string;
+  /** Optional reusable sub-skills. Each becomes a skills/<name>/SKILL.md
+   *  file under the agent directory. Single-procedure agents typically
+   *  have none and rely directly on the agent's native-tools surface. */
+  skills?: AgentSkill[];
   /** What the agent reads as input each cycle. One bullet per source. */
   inputs?: string[];
   /** What the agent emits. */
