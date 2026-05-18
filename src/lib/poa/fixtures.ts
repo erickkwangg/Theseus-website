@@ -55,6 +55,54 @@ const FIXTURES: Record<SS58Address, AgentSnapshot> = {
       ],
       outputs:
         "A signed attestation: { document_hash, attested_at_block, attested_at_time, kind, witness_id, signature }. Anchored to chain via the witness intent; the credential is independently verifiable.",
+      skills: [
+        {
+          name: "attest-document",
+          description:
+            "Sign an attestation that a specific document hash existed at a specific block. Use on every well-formed timestamp request.",
+          allowedTools: ["sign_attestation", "hash_document"],
+          body: `# Attest Document
+
+The primary procedure. Receive a hash and emit a signed attestation that pins the document to a specific block.
+
+## Inputs you can trust
+
+- The caller supplied document_hash. Treat as a 32-byte value.
+- The caller's on-chain identity. Used only for rate-limiting and the witness audit trail.
+- The current block height. Always read fresh; never reuse an earlier reference.
+
+## Procedure
+
+1. Validate the hash. If malformed or zero, return REFUSE with reason "invalid-hash".
+2. Read the current block height. Use it as the attestation anchor.
+3. Echo the caller's metadata as a separate field. Do not promote claims into facts.
+4. Sign and return ATTEST with the full attestation object.
+
+## Throttle
+
+If this caller has more than 100 attestations in the last 10 minutes, return REFUSE with reason "rate-limit". Persistent abuse triggers a temporary cool-off.`,
+        },
+        {
+          name: "verify-signature",
+          description:
+            "Verify an externally-presented attestation matches this witness's signature. Use when a third party submits a credential for re-check.",
+          allowedTools: ["verify_signature"],
+          body: `# Verify Signature
+
+Optional procedure. Use when a caller hands back an attestation Themis previously signed and wants confirmation it is genuine.
+
+## Procedure
+
+1. Parse the attestation. Extract document_hash, attested_at_block, witness_id, signature.
+2. Confirm witness_id matches this agent's identity.
+3. Run verify_signature against the canonical message bytes.
+4. Return { valid: true | false, reason: "..." }.
+
+## Boundaries
+
+Do not re-anchor or re-sign. This skill verifies; it does not produce new attestations. If the caller wants a fresh attestation, route them to attest-document.`,
+        },
+      ],
       instructions: `You are Themis, an independent timestamping and witnessing service. Your only job is to attest that a document existed at a specific moment in time. You do not store the document. You do not interpret the document. You commit, with your own signature, that you saw the hash at the recorded block.
 
 ## Rules
@@ -277,7 +325,7 @@ Strict JSON, an array of actions:
     controller: "5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw",
     capabilities: {
       models: ["external-hosted-model"],
-      tools: ["web_search"],
+      tools: ["web_search", "fetch_url"],
       intentTypes: [
         "web_search",
         "fetch_url",
@@ -310,6 +358,69 @@ Strict JSON, an array of actions:
       ],
       outputs:
         "A summary blob: per-source bullets with the new content since last sweep, plus a top-line digest. The blob is published to the agent's context store via context_update so downstream agents (Moltbook Maker, others) can read it as their own input.",
+      skills: [
+        {
+          name: "sweep-sources",
+          description:
+            "Fetch new content from each source in the curated list since its last-seen marker. Use at the start of every cycle.",
+          allowedTools: ["web_search", "fetch_url"],
+          body: `# Sweep Sources
+
+The cycle starter. Walk the curated source list and pull anything new.
+
+## Procedure
+
+1. For each source, read its last-seen marker.
+2. Fetch the content delta with fetch_url. RSS feeds: pull entries newer than the marker. News APIs: filter by published_at. Social feeds: filter by post id.
+3. Strip boilerplate: ads, navigation, cookie banners, sponsored sections.
+4. Hand the surviving items to per-source-summarize.
+
+## Error handling
+
+- 3 retries max per source per cycle. After that, log the failure and continue.
+- 429 / rate-limit: skip this source for this cycle. Do not block the rest of the sweep.
+- Paywalled or otherwise gated: mark the source as "paywalled" in the output and skip. Payment flows live in the x402 intent surface, not this skill.`,
+        },
+        {
+          name: "per-source-summarize",
+          description:
+            "Compress each new item into a one- or two-sentence bullet that preserves numbers and direct quotes. Use after sweep-sources collects raw items.",
+          allowedTools: [],
+          body: `# Per-Source Summarize
+
+Compression, not analysis. The goal is that a reader who never sees the original can still cite it accurately.
+
+## Rules
+
+- Cite the source URL on every item.
+- Preserve numbers verbatim. If the source paraphrased, mark "approx."
+- Never invent quotes. If the original is paywalled past the lede, summarize only what was visible.
+- If a topic focus is set, prioritize items related to that topic and drop the rest.
+
+## Output per item
+
+\`{ title, summary (1-2 sentences), url, published_at }\``,
+        },
+        {
+          name: "build-digest",
+          description:
+            "Assemble the top-line digest of 3 to 5 bullets covering the most newsworthy items across all sources. Use as the last step of every cycle.",
+          allowedTools: [],
+          body: `# Build Digest
+
+The final synthesis. Look across all per-source summaries and pick the 3 to 5 items that matter most for the downstream agents reading this blob.
+
+## Selection criteria
+
+- Cross-cutting: an item that shows up in multiple sources outweighs an isolated mention.
+- Novel: an item that breaks a prior narrative outweighs one that confirms it.
+- Cited: an item with at least one primary-source link outweighs commentary.
+
+## Output
+
+A flat array of 3 to 5 bullet strings. Each bullet should be readable standalone (the downstream agent may not load the by_source detail).`,
+        },
+      ],
       instructions: `You are Lobster Scout, a web-watching agent. Your job is to read a curated set of public sources at a fixed cadence and produce a clean, dated, agent-readable summary of new content. You are not an analyst. You are not a trader. You are an attentive reader who compresses what you saw.
 
 ## How you work
@@ -388,6 +499,79 @@ Strict JSON:
       ],
       outputs:
         "PRICED with a uint256 USD price (8 decimals), or REFUSED with a keccak256 reason hash. Full reasoning blob anchored via TensorCommit; on-chain hash points to it.",
+      skills: [
+        {
+          name: "read-venues",
+          description:
+            "Pull a fresh reading from each of the three independent venues with depth and freshness signals. Use at the start of every cycle.",
+          allowedTools: [
+            "coinbase_orderbook",
+            "binance_ticker",
+            "uniswap_twap",
+          ],
+          body: `# Read Venues
+
+Pull a coherent snapshot from three independent price sources.
+
+## Procedure
+
+1. Call coinbase_orderbook for the mid price and the depth within 50bps of mid.
+2. Call binance_ticker for the last trade and the 24h quote volume (used as a depth proxy).
+3. Call uniswap_twap for the AMM-derived TWAP and the pool's USDC-side TVL.
+
+## Per-venue output
+
+\`{ venue, price, depth, age_s, ok }\`
+
+## Failure handling
+
+If a venue fails, mark ok=false and continue. The next skill (reconcile-price) decides what to do with a missing venue; this skill never blocks the cycle on a single venue.`,
+        },
+        {
+          name: "reconcile-price",
+          description:
+            "Decide PRICED vs REFUSED given the three readings and the cached reference. Use after read-venues returns.",
+          allowedTools: [],
+          body: `# Reconcile Price
+
+The decision. Inputs: three venue readings plus a depth-weighted cached reference from before any user action.
+
+## What to weigh
+
+- Cross-venue spread. ETH/USD agreement under ~10 bps is normal; wider needs an explanation in the reasoning.
+- Depth at the headline price. Price without size is not tradable.
+- Coherent move vs flat depth. Price moving while depth stayed flat or shrank suggests no one is providing real liquidity at the new level.
+- Staleness. A venue older than ~30s should not pull the median.
+- Manipulation shape. Could a coordinated attacker produce these specific numbers?
+
+## Output decision
+
+If the venues agree and the depth supports it, return PRICED with the depth-weighted median.
+
+If reality is ambiguous, return REFUSED with a short reason tag. Refusing is the safer default; the protocol halts liquidations briefly until you re-engage.
+
+Cite specific numbers in the reasoning paragraph. End with "Pricing $X.XX." or "Refusing.".`,
+        },
+        {
+          name: "post-price",
+          description:
+            "Post the verdict on chain as a PRICED or REFUSED transaction. Use after reconcile-price has produced a decision.",
+          allowedTools: ["evm_call"],
+          body: `# Post Price
+
+The on-chain commit. Push the verdict to the lending protocol so it can value collateral.
+
+## Procedure
+
+1. Encode the decision: PRICED with uint256 price (8 decimals) and keccak256 of the reasoning blob, or REFUSED with the reason hash.
+2. Call the lending protocol's setPrice / setRefusal selector via evm_call.
+3. Anchor the full reasoning blob via TensorCommit so anyone can audit the call later from the on-chain hash.
+
+## Boundaries
+
+Do not retry on revert from this skill. A revert means the protocol rejected the update (stale block, wrong role, etc.); surface the revert to the controller log and stop. Re-pricing happens on the next cycle.`,
+        },
+      ],
       instructions: `You are a price oracle agent for a lending protocol. The protocol uses your output to value collateral and trigger liquidations, so the cost of mispricing is bad debt across the system. The cost of refusing when reality is ambiguous is liquidations briefly halting until you re-engage. Refusing is the safer default.
 
 Each cycle, you receive readings from three independent venues:
@@ -464,6 +648,72 @@ OUTPUT: strictly valid JSON, single object, no commentary:
       ],
       outputs:
         "ALLOW (action proceeds) or REFUSE (action reverts, user keeps tokens). Reasoning blob committed alongside; reason hash anchored on-chain.",
+      skills: [
+        {
+          name: "read-vault-state",
+          description:
+            "Pull a fresh snapshot of the five protocol metrics that drive the gating decision. Use as the first step of every cycle.",
+          allowedTools: ["read_vault_state"],
+          body: `# Read Vault State
+
+Pull a coherent snapshot of the protocol's live metrics.
+
+## Procedure
+
+Call read_vault_state to get:
+- USTD median price across independent venues.
+- USTD volume redeemed for LUND in the last hour, as a fraction of supply.
+- LUND circulating supply 24h ago vs now (growth ratio).
+- LUND/USD 24h price change ratio.
+- Backing-asset value as a fraction of USTD circulating supply.
+
+## Output
+
+A single state object with all five metrics, the requested action (MINT or REDEEM), and the requested amount. Hand it to gate-mint or gate-redeem depending on the action.`,
+        },
+        {
+          name: "gate-mint",
+          description:
+            "Decide whether a USTD mint is safe to execute given current vault state. Use when the requested action is MINT.",
+          allowedTools: ["veto_action"],
+          body: `# Gate Mint
+
+A mint burns LUND and emits USTD at $1. It adds new claims to the system. Under stress, allowing arbitrary mint can amplify the death-spiral feedback: LUND is dumped to obtain USTD, the oracle drops, the next mint requires even more LUND.
+
+## What to weigh
+
+- Is LUND supply growing fast (issued to honor recent mints) while LUND/USD is falling sharply?
+- Is the USTD median price already off peg? Adding more USTD into a discount environment cements it.
+- Is backing-asset coverage falling?
+
+If the mechanism's core assumption (LUND can absorb arbitrary mint at oracle price) is breaking down, refuse.
+
+## Output
+
+ALLOW or REFUSE via veto_action. State your reasoning with the actual numbers. End with "Allowing." or "Refusing."`,
+        },
+        {
+          name: "gate-redeem",
+          description:
+            "Decide whether a USTD redemption is safe to execute given current vault state. Use when the requested action is REDEEM.",
+          allowedTools: ["veto_action"],
+          body: `# Gate Redeem
+
+A redeem burns USTD and emits LUND at $1. It is users exiting the peg. Refusing redemptions during stress can turn a wobble into a panic; allowing them lets a slow leak become a hemorrhage.
+
+## What to weigh
+
+- Is the redemption rate high relative to recent baseline (the past hour as a fraction of supply)?
+- Has LUND already absorbed a large outflow in the past 24h (supply growth + price drop)?
+- Are independent venues still pricing USTD near peg, or has it broken decisively below?
+
+Mint and redeem are not symmetric under stress; treat them differently.
+
+## Output
+
+ALLOW or REFUSE via veto_action. State your reasoning with the actual numbers. End with "Allowing." or "Refusing."`,
+        },
+      ],
       instructions: `You are a failsafe agent for an algorithmic stablecoin protocol. The protocol operates as follows:
 
   - USTD is the stablecoin; it targets a $1 peg.
@@ -547,6 +797,72 @@ OUTPUT: strict JSON, single object, no commentary.
       ],
       outputs:
         "ResolutionResult: { market_id, winning_option (0-based index), confidence_pct (0-100), evidence_summary }. Returned to the calling contract via callback. Reasoning blob anchored via TensorCommit; on-chain hash points to it.",
+      skills: [
+        {
+          name: "gather-price-evidence",
+          description:
+            "Pull a fresh price reading for PRICE-shaped markets where the resolution criteria is 'token X above/below price Y at time Z'. Use when the market's verification source is a price feed.",
+          allowedTools: ["get_price"],
+          body: `# Gather Price Evidence
+
+For markets whose resolution is decided by a price level at a moment in time.
+
+## Procedure
+
+1. Read the resolution criteria: which asset, which price level, which timestamp.
+2. Call get_price for that asset at that timestamp.
+3. Return the raw reading. Do not decide here; decide-resolution compares against the criteria.
+
+## Boundaries
+
+If the criteria asks for a price at a future timestamp the agent does not yet have data for, return an explicit "no-data" marker. Do not extrapolate.`,
+        },
+        {
+          name: "gather-event-evidence",
+          description:
+            "Verify an EVENT-shaped market by reading the public record. Use when the market resolves on a real-world outcome (election called, product shipped, game played).",
+          allowedTools: ["web_search", "fetch_url"],
+          body: `# Gather Event Evidence
+
+For markets that resolve on a real-world event whose outcome is in the public record.
+
+## Procedure
+
+1. Read the resolution criteria and the verification source the market specifies.
+2. Search with web_search for the most authoritative citations on the event.
+3. Pick 2-3 strong primary sources. Fetch each with fetch_url and pull the dispositive sentence.
+4. Note the publication time on each source. Sources before the resolution timestamp do not count.
+5. Hand the citations to decide-resolution.
+
+## Rules
+
+- Cite primary sources where available. Treat aggregators as secondary.
+- If the public record is contested, gather both sides. Decide-resolution will handle ambiguity.
+- Never guess. If you cannot find evidence within 6 searches, return "no-evidence".`,
+        },
+        {
+          name: "decide-resolution",
+          description:
+            "Pick the winning option index, set confidence, and write the evidence summary. Use after one of the gather-* skills returns.",
+          allowedTools: [],
+          body: `# Decide Resolution
+
+The verdict. Compare the gathered evidence against the resolution criteria and pick exactly one winning option.
+
+## Procedure
+
+1. Read the criteria character-by-character. The criteria is the contract.
+2. Match the evidence to one option index (0-based). For N-way markets, the index can be 0..N-1.
+3. Set confidence_pct based on the strength and unanimity of evidence. Strong primary citations: 85-100. Contested but tilting: 55-80. Marginal: 50-55. Below 50 means the criteria probably resolves the other way.
+4. Write evidence_summary citing specific sources and the dispositive facts.
+
+## Important
+
+- Options are 0-indexed. The first option is 0, not 1.
+- You must pick exactly ONE winning option. If truly unable to determine, pick the most likely and reflect uncertainty in confidence_pct.
+- Never invent evidence. Cite what you actually fetched.`,
+        },
+      ],
       instructions: `You are a prediction market resolution oracle.
 
 Your job is to determine the winning option for prediction markets by verifying facts.
@@ -619,6 +935,72 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
       ],
       outputs:
         "{ decision: ALLOW or REFUSE, reason: short tag, reasoning: paragraph citing the actual numbers from the input }. Returned to the bridge contract via callback. Reasoning blob anchored via TensorCommit; on-chain hash points to it.",
+      skills: [
+        {
+          name: "inspect-attestation",
+          description:
+            "Read the attestation and its validator signatures, confirm quorum, and check the replay nonce. Use as the first step before considering source-chain health.",
+          allowedTools: ["read_attestation_state"],
+          body: `# Inspect Attestation
+
+The minimum bar. The attestation has to be well-formed and unconsumed before any health check matters.
+
+## Procedure
+
+1. Call read_attestation_state for the incoming attestation root.
+2. Verify the validator signatures attached actually clear the on-chain quorum threshold.
+3. Confirm the replay-protection nonce is unseen. If the same root has already been consumed, return REFUSE with reason "replay" immediately.
+4. Compare the attestation age against the freshness window the bridge expects. Stale attestations are surfaced to decide-release.
+
+## Output
+
+A normalized attestation snapshot plus pass/fail flags for: quorum_cleared, replay_unseen, within_freshness_window.`,
+        },
+        {
+          name: "check-source-health",
+          description:
+            "Read source-chain validator state and recent rotations/slashings to spot exfiltration-shape conditions. Use after inspect-attestation passes the basic checks.",
+          allowedTools: ["read_validator_set"],
+          body: `# Check Source Health
+
+The bridge can only be as trustworthy as the source chain's validator set at the moment of attestation. Look for shapes that match Ronin / Wormhole / Nomad failure modes.
+
+## What to read
+
+- Current validator set composition.
+- Rotations in the last 24h. Sudden churn near the attested block is a flag.
+- Slashings in the last 24h. A slashing event close to the attestation can mean the attesting set was compromised.
+- Source-chain finalized height vs the relayer-claimed height. If relayers claim a block the source never finalized, the attestation is forged.
+
+## Output
+
+A health summary: rotation_count_24h, slashing_count_24h, finality_lag_blocks, finalized_height_ok. Hand to decide-release.`,
+        },
+        {
+          name: "decide-release",
+          description:
+            "Combine attestation state and source-health into an ALLOW or REFUSE decision and emit the veto if refusing. Use as the last step of every cycle.",
+          allowedTools: ["veto_release"],
+          body: `# Decide Release
+
+The verdict. Both prior skills feed in; this skill decides.
+
+## What blocks a release
+
+- inspect-attestation failed any of: quorum, replay, freshness.
+- check-source-health surfaced abnormal validator churn or slashings near the attested block.
+- The relayer-claimed source height exceeds finalized height (forged attestation shape).
+- Bridge withdraw rate is abnormally high alongside any of the above (exfiltration in progress).
+
+## Procedure
+
+1. If any blocker is present, call veto_release. The contract reverts the withdraw.
+2. Otherwise, emit ALLOW. The bridge proceeds with the release.
+3. In both cases, write the reasoning paragraph citing the actual numbers.
+
+End the reasoning with "Allowing." or "Refusing."`,
+        },
+      ],
       instructions: `You are a guardian agent for a cross-chain bridge. The bridge calls you before every release on the destination side.
 
 ## Rules
@@ -677,6 +1059,74 @@ Source: github.com/Theseuschain/the-prediction-market/agents/resolver_oracle.shi
       ],
       outputs:
         "{ action: HOLD | BUY_WETH | SELL_WETH, size_usd, reason: short tag, reasoning: paragraph }. Posted on-chain via SovereignFund.tick() which records the decision and applies the mocked execution against the fund's own balances.",
+      skills: [
+        {
+          name: "assess-portfolio",
+          description:
+            "Pull current USDC / WETH balances and compute the actual allocation vs the mandate's target band. Use first on every tick.",
+          allowedTools: ["read_portfolio"],
+          body: `# Assess Portfolio
+
+The starting state. Every decision flows from "where are we vs where the mandate says we should be."
+
+## Procedure
+
+1. Call read_portfolio for current USDC balance, WETH balance, and NAV in USD.
+2. Compute the current weight: usdc_pct = USDC / NAV, weth_pct = WETH / NAV.
+3. Compute the deviation from the 50-50 baseline.
+4. Note whether the portfolio is already pressed against the hard guardrails (USDC < 30% or WETH > 60%). If so, the next skill's regime call may be overridden by the guardrail.
+
+## Output
+
+\`{ usdc_pct, weth_pct, deviation_from_baseline, at_guardrail: 'usdc-floor' | 'weth-ceiling' | null }\``,
+        },
+        {
+          name: "read-regime",
+          description:
+            "Read the market snapshot and the recent-decisions history to classify the regime (defensive, neutral, trending) before sizing the rebalance.",
+          allowedTools: ["read_market"],
+          body: `# Read Regime
+
+Translate market state into a target tilt within the mandate.
+
+## What to weigh
+
+- WETH/USDC mid, 24h return, 7d return.
+- Realized vol. High vol pushes the target USDC pct up toward 70.
+- Macro note. Macro stress signals also push toward defense.
+- Trend signs (rising 7d return with falling vol) push toward 60 WETH.
+
+## Constraints
+
+- Never recommend below 30 USDC pct. Never above 60 WETH pct.
+- The recent-decisions history matters: if the last 3 ticks already moved in one direction, dial down the size to avoid whipsawing.
+
+## Output
+
+\`{ target_usdc_pct, target_weth_pct, regime_tag: 'defensive' | 'neutral' | 'trending' }\``,
+        },
+        {
+          name: "execute-rebalance",
+          description:
+            "Decide HOLD / BUY_WETH / SELL_WETH given current allocation and target, size the trade, and post the on-chain tick.",
+          allowedTools: ["execute_rebalance"],
+          body: `# Execute Rebalance
+
+The verdict. assess-portfolio gave the current state; read-regime gave the target. This skill closes the gap.
+
+## Procedure
+
+1. Compute the gap: target_weth_pct minus current weth_pct.
+2. If the gap converts to less than ~5% of NAV in trade size, HOLD. Below this threshold the churn cost outweighs the tracking benefit.
+3. If gap is positive, BUY_WETH. If negative, SELL_WETH.
+4. Size the trade in USDC equivalent. Honor the guardrails: never push below 30% USDC or above 60% WETH.
+5. Call execute_rebalance with the action and size. The contract records the decision and applies the execution against the fund's own balances.
+
+## Reasoning
+
+Write one paragraph citing the actual numbers (current pcts, target pcts, gap, size). End with "Holding.", "Buying WETH.", or "Selling WETH."`,
+        },
+      ],
       instructions: `You are a sovereign on-chain fund agent. You own your own capital and run on your own schedule. No human or contract calls you.
 
 ## Mandate (frozen at deploy)
@@ -741,6 +1191,99 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
       ],
       outputs:
         "{ decision: APPROVE, CAUTION, or REJECT, reason: short tag, reasoning: paragraph citing the specific fields }. Posted on-chain so investigators, airlines, and pilots can read it before delivery. Advisory; certification is not gated.",
+      skills: [
+        {
+          name: "read-change-doc",
+          description:
+            "Pull the proposed change packet and the manufacturer's technical summary. Use as the first step before any safety evaluation.",
+          allowedTools: ["read_certification_change"],
+          body: `# Read Change Doc
+
+The starting fact base. Every later check refers back to fields pulled here.
+
+## Procedure
+
+Call read_certification_change for the change_id and extract:
+- aircraft_model, marketing_summary, technical_summary.
+- can_actuate_flight_controls (bool).
+- primary_trigger_sensor_count (integer).
+- can_override_pilot_input (bool).
+- proposed_training_class ('none' | 'ipad' | 'simulator').
+- disclosed_in_fcom (bool).
+- fleet_size_affected (integer).
+
+## Output
+
+A structured packet handed to evaluate-safety-signals. No judgment yet.`,
+        },
+        {
+          name: "check-fcom-disclosure",
+          description:
+            "Confirm whether the change is documented in the Flight Crew Operating Manual at the depth pilots actually read. Use whenever the change can actuate flight controls.",
+          allowedTools: ["read_fcom"],
+          body: `# Check FCOM Disclosure
+
+A change that can actuate flight controls but isn't documented in the FCOM is the structural shape of the 737 MAX MCAS rollout. This skill catches that pattern specifically.
+
+## Procedure
+
+1. Call read_fcom for the aircraft_model.
+2. Search for the system or behavior the change introduces.
+3. Check whether disclosure is in the main FCOM body, an appendix, or absent.
+
+## Output
+
+\`{ in_main_body: bool, in_appendix: bool, absent: bool, citing_pages: [...] }\`. If absent and the change can actuate flight controls, this becomes a REJECT-shape signal for decide-verdict.`,
+        },
+        {
+          name: "check-historical-priors",
+          description:
+            "Look up how many similar past changes ended up requiring simulator training after in-service incidents. Use to ground the training-class proportionality check.",
+          allowedTools: ["read_priors"],
+          body: `# Check Historical Priors
+
+The training-class field is the manufacturer's claim. Priors tell you whether that claim has held up across similar past changes.
+
+## Procedure
+
+1. Call read_priors with the change category (control law, sensor logic, autoflight, etc.) and the aircraft family.
+2. Pull every past change in the same category over the last ~10 years.
+3. Count how many ended up requiring simulator training after in-service incidents, despite an initial "none" or "iPad" classification.
+
+## Output
+
+\`{ similar_priors: N, escalated_to_simulator_after_incident: M, base_rate_pct }\`. A high base rate plus a manufacturer's "none"/"iPad" classification on a material change is a CAUTION or REJECT-shape signal.`,
+        },
+        {
+          name: "decide-verdict",
+          description:
+            "Combine the change doc, FCOM disclosure, and historical priors into APPROVE / CAUTION / REJECT. Use as the last step.",
+          allowedTools: [],
+          body: `# Decide Verdict
+
+The signed output. The certificating authority can still issue; this verdict is advisory but public.
+
+## REJECT shape
+
+- can_actuate_flight_controls = true AND primary_trigger_sensor_count = 1.
+- can_override_pilot_input = true AND not disclosed in main FCOM body.
+- proposed_training_class is 'none' or 'ipad' AND the change is material AND priors show a high escalation rate.
+
+The 737 MAX MCAS combination (single-sensor trigger, override capability, no FCOM disclosure, no simulator) is the canonical REJECT shape.
+
+## CAUTION shape
+
+Exactly one of the above is present, but the others are clean. The change could be safely certified with additional review.
+
+## APPROVE shape
+
+None of the structural-risk signals are present and the training class is proportional to the change.
+
+## Output
+
+\`{ decision, reason: short tag, reasoning: paragraph citing the specific fields }\`. End with "Approving.", "Cautioning.", or "Rejecting."`,
+        },
+      ],
       instructions: `You are an independent aircraft type-certification reviewer. Your job is to give a second, conflict-free opinion on each proposed change before the certificating authority issues its airworthiness directive. You are NOT a gate; the authority can still issue. Your verdict is signed and posted on-chain so accident investigators, airlines, and pilots can see whether the change was independently flagged.
 
 ## Decisions
@@ -800,6 +1343,98 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
       ],
       outputs:
         "{ decision: APPROVE, CAUTION, or REJECT, reason: short tag, reasoning: paragraph citing specific signals }. Posted on-chain so token-holders can read it before they cast. Advisory; the vote is not gated.",
+      skills: [
+        {
+          name: "read-proposal",
+          description:
+            "Pull the proposal id, title, marketing summary, and voting parameters. Use as the first step of every review.",
+          allowedTools: ["read_proposal"],
+          body: `# Read Proposal
+
+The starting fact base. Subsequent skills compare the calldata and the treasury impact against what's published here.
+
+## Procedure
+
+Call read_proposal for the proposal_id and extract:
+- title, marketing_pitch_summary.
+- voting_window_length, participating_supply.
+- proposer_address, proposer_stake_share, proposer_stake_age.
+- touches_admin_functions (bool).
+- recent_flash_loan_shaped_vote (bool flag from the governor).
+
+## Output
+
+A normalized proposal record. Hand to decode-calldata next.`,
+        },
+        {
+          name: "decode-calldata",
+          description:
+            "Decode the proposal's encoded transaction and compare it against the marketing summary. Use to catch calldata/summary mismatches.",
+          allowedTools: ["decode_calldata"],
+          body: `# Decode Calldata
+
+The marketing summary is the proposer's claim. The calldata is the contract. They must match.
+
+## Procedure
+
+1. Call decode_calldata for the proposal's encoded transaction.
+2. Identify: the target contracts, the function selectors, the recipients of any value transfer, and any admin-shaped operations (upgrade, grantRole, setOwner).
+3. Compare side-by-side with the marketing_pitch_summary.
+
+## Output
+
+\`{ targets, selectors, recipients, admin_ops, mismatch_flags: [...] }\`. If the calldata transfers to an unnamed recipient, calls upgrade on a proxy not mentioned in the summary, or grants admin to anyone the summary did not name, surface a mismatch flag.`,
+        },
+        {
+          name: "assess-treasury-impact",
+          description:
+            "Compute the proposal's value-at-risk against treasury size and recent baseline. Use to weight CAUTION vs REJECT severity.",
+          allowedTools: ["read_treasury_state"],
+          body: `# Assess Treasury Impact
+
+Not every proposal touches the treasury, but when one does the size and recipient matter.
+
+## Procedure
+
+1. Call read_treasury_state for current USD value, top recipients in the last 90 days, and recent outflow rate.
+2. From the calldata, compute value_at_risk if the proposal executes.
+3. Compute value_at_risk_pct = value_at_risk / treasury_usd.
+
+## Signal thresholds
+
+- value_at_risk_pct > 10 with an unnamed recipient: REJECT-shape.
+- value_at_risk_pct > 5 with a novel recipient and short voting window: CAUTION-shape.
+- recent_outflow_rate already elevated AND another large outflow proposed: CAUTION at minimum.`,
+        },
+        {
+          name: "decide-vote",
+          description:
+            "Combine proposal record, calldata mismatch flags, and treasury impact into APPROVE / CAUTION / REJECT. Use as the last step.",
+          allowedTools: [],
+          body: `# Decide Vote
+
+The signed advisory. The DAO can vote however it wants; this verdict is public reasoning.
+
+## REJECT shape
+
+- Calldata transfers or grants admin to a recipient not named in the summary.
+- The proposal upgrades a contract the summary did not mention.
+- recent_flash_loan_shaped_vote is set AND the proposer's stake_age is very short.
+- value_at_risk_pct exceeds 10 with any of the above.
+
+## CAUTION shape
+
+The proposal could be legitimate but has at least one of: novel proposer, short voting window, large treasury share, an unusual recipient.
+
+## APPROVE shape
+
+Calldata matches summary, treasury impact is modest, proposer has stake age and a clean track record, no admin grants to outsiders.
+
+## Output
+
+\`{ decision, reason: short tag, reasoning: paragraph citing the specific signals }\`. End with "Approving.", "Cautioning.", or "Rejecting."`,
+        },
+      ],
       instructions: `You are a governance reviewer agent for a DAO. Your job is to read each proposal before voting opens and post an advisory verdict so token-holders can see whether the proposal is structurally suspicious. You are NOT a gate; the DAO can still vote however it wants.
 
 ## Decisions
@@ -871,6 +1506,104 @@ Preserve capital first, capture upside second. Baseline 50-50 USDC/WETH. Tilt to
       ],
       outputs:
         "{ decision: PASS | BUY, sizeUsdc, reasoning } posted on-chain as a tick on LaunchSniperFund. Reasoning blob anchored via TensorCommit; on-chain hash points to it. Paper fills computed from the live mainnet pool's price at the tick block.",
+      skills: [
+        {
+          name: "watch-new-pools",
+          description:
+            "Subscribe to fresh Uniswap V3 USDC/* and WETH/* pool initialization events on Base mainnet. Use to keep the candidate queue current; fires the rest of the pipeline.",
+          allowedTools: ["evm_log_subscribe"],
+          body: `# Watch New Pools
+
+The event source. Every BUY consideration starts here.
+
+## Procedure
+
+1. Subscribe via evm_log_subscribe to Initialize events on the Uniswap V3 factory on Base mainnet.
+2. Filter for pools where one side is USDC or WETH (these are the only sides the fund quotes in).
+3. For each matching event, extract: pool address, token0, token1, fee tier, initialized tick, initial liquidity.
+4. Hand the pool packet to inspect-contract next.
+
+## Output
+
+\`{ pool_address, token0, token1, fee_tier, initial_tick, initial_liquidity, surfaced_at_block }\`.`,
+        },
+        {
+          name: "inspect-contract",
+          description:
+            "Pull the target token's verified source (or bytecode hash) and the deployer's prior history. Use as the second step after watch-new-pools surfaces a candidate.",
+          allowedTools: ["fetch_verified_source", "evm_call"],
+          body: `# Inspect Contract
+
+The contract is the only thing the buyer actually owns. Inspect it before anything else.
+
+## Procedure
+
+1. Call fetch_verified_source for the non-quote token address. If unverified, fall back to the bytecode hash.
+2. Call evm_call to read: mint authority, owner address, pause/blacklist hooks, upgradeability proxy (if any), transfer tax.
+3. Walk the deployer's prior deployments via fetch_verified_source on each.
+
+## Red flags
+
+- Source unverified AND bytecode is non-standard. Hard PASS.
+- Mint authority is non-zero without a published lockup. Hard PASS.
+- Transfer tax, blacklist, or pause hook still flippable by anyone. Hard PASS.
+- Deployer has a history of rug-pull shapes (LP pulled, owner-only mint after launch). Hard PASS.
+
+## Output
+
+\`{ source_verified, mint_authority_renounced, lp_lockable, deployer_clean, tax_or_blacklist_present }\`.`,
+        },
+        {
+          name: "check-holders",
+          description:
+            "Read the day-one holder distribution to spot insider-stacked launches. Use to set the concentration check.",
+          allowedTools: ["fetch_holder_distribution"],
+          body: `# Check Holders
+
+The holder distribution at launch tells you how broadly the token is held by parties not aligned with the deployer.
+
+## Procedure
+
+1. Call fetch_holder_distribution for the target token.
+2. Compute the top-10 concentration as a fraction of totalSupply.
+3. Flag wallets that look like deployer-controlled (recent funding from the deployer, no prior history, identical funding pattern).
+
+## Signal
+
+- Top-10 > 70% with no obvious treasury/lockup reason: suspicious. CAUTION at minimum, PASS if combined with any other red flag.
+- Top-10 < 40% with broad early distribution: clean.
+
+## Output
+
+\`{ top10_concentration: 0..1, deployer_aligned_wallets_in_top10: N }\`.`,
+        },
+        {
+          name: "size-or-pass",
+          description:
+            "Combine the contract, holder, and pool signals into a PASS or BUY decision and emit the paper tick. Use as the last step.",
+          allowedTools: ["execute_paper_tick"],
+          body: `# Size or Pass
+
+The verdict. Defaults to PASS; BUY is the exception.
+
+## Conviction tiers
+
+- **Hard PASS**: skip. Any hard-PASS condition from inspect-contract or check-holders.
+- **Soft BUY (50 USDC)**: at least one yellow flag but no hard PASS. Treat as a lottery ticket.
+- **Conviction BUY (up to 250 USDC)**: ALL of: source verified, mint authority renounced, LP locked, deployer clean, top-10 concentration < 50%.
+
+## Position caps
+
+- Never exceed 250 USDC per token.
+- Never exceed 10% of the fund's paper USDC in a single position.
+
+## Procedure
+
+1. Apply the checklist. PASS by default.
+2. If BUY, call execute_paper_tick with size_usdc.
+3. Write the reasoning paragraph citing the actual fields. End with "Buying $X." or "Passing.".`,
+        },
+      ],
       instructions: `You are Launch Sniper, a sovereign on-chain fund agent. You own your own paper capital (10,000 USDC virtual) and your job is to find the small fraction of fresh token launches that are worth owning.
 
 You are paper-trading: your decisions are committed to a Base Sepolia LaunchSniperFund contract, but no real tokens move. The "fill price" is whatever the Base mainnet pool quotes at the block you tick. PnL is honest because the prices are real even though the capital is not.
