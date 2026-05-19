@@ -138,6 +138,21 @@ const OUTCOME_COLOR: Record<CitationOutcome, string> = {
 // a confidently-cited fabricated case that opposing counsel will catch.
 const STOCK_BRIEF = `Plaintiff Bryant operated a continuous-feed aluminum extrusion press at Defendant's Joliet facility from March 2019 through November 2024. Plaintiff has standing to bring this action under Article III, requiring an injury in fact, traceability, and redressability. Lujan v. Defenders of Wildlife, 504 U.S. 555 (1992); see also In re Wakefield, 482 F. Supp. 3d 117 (S.D.N.Y. 2020) (holding that OSHA-noncompliance worker-injury actions create per se negligence). The injury here is concrete and particularized: Plaintiff sustained quantifiable medical expenses and a permanent reduction in earning capacity directly resulting from Defendant's failure to maintain the extrusion press to OSHA-mandated specifications. Where an employer's documented failure to maintain workplace safety equipment causes a specific physical injury, traceability is clearly established as a matter of law. Robins v. Spokeo, Inc., 578 U.S. 330 (2016). Defendant's preemption argument under the IL Workers' Compensation Act is plainly without merit and is rebutted in Section II.C, infra.`;
 
+type LiveResult =
+  | {
+      kind: "ok";
+      outcome: CitationOutcome;
+      responseBody: string;
+      controlling: string | null;
+      modelUsed: string;
+      latencyMs: number;
+      submittedCitation: string;
+      submittedProposition: string;
+    }
+  | { kind: "loading"; submittedCitation: string }
+  | { kind: "no_key"; submittedCitation: string }
+  | { kind: "error"; message: string; submittedCitation: string };
+
 export default function QuillDemo() {
   const [hoveredSpan, setHoveredSpan] = useState<string | null>(null);
   const [stripAttempt, setStripAttempt] = useState<string | null>(null);
@@ -145,6 +160,62 @@ export default function QuillDemo() {
     null,
   );
   const [showStock, setShowStock] = useState(false);
+  const [customCitation, setCustomCitation] = useState("");
+  const [customProposition, setCustomProposition] = useState("");
+  const [liveResult, setLiveResult] = useState<LiveResult | null>(null);
+
+  async function submitCustom(e: React.FormEvent) {
+    e.preventDefault();
+    const citation = customCitation.trim();
+    if (!citation) return;
+    setActiveCitation(null); // hide preset response
+    setLiveResult({ kind: "loading", submittedCitation: citation });
+    try {
+      const res = await fetch("/api/poa/demo/quill", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ citation, proposition: customProposition.trim() }),
+      });
+      if (res.status === 503) {
+        setLiveResult({ kind: "no_key", submittedCitation: citation });
+        return;
+      }
+      if (res.status === 429) {
+        setLiveResult({
+          kind: "error",
+          message: "Rate limit hit (30 / hour per IP). Try the preset citations above.",
+          submittedCitation: citation,
+        });
+        return;
+      }
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        setLiveResult({
+          kind: "error",
+          message: errBody.message || "Model error",
+          submittedCitation: citation,
+        });
+        return;
+      }
+      const data = await res.json();
+      setLiveResult({
+        kind: "ok",
+        outcome: data.outcome,
+        responseBody: data.responseBody,
+        controlling: data.controlling,
+        modelUsed: data.modelUsed,
+        latencyMs: data.latencyMs,
+        submittedCitation: citation,
+        submittedProposition: customProposition.trim(),
+      });
+    } catch (err) {
+      setLiveResult({
+        kind: "error",
+        message: err instanceof Error ? err.message : String(err),
+        submittedCitation: citation,
+      });
+    }
+  }
 
   const spanHashes = useMemo(
     () =>
@@ -426,7 +497,10 @@ export default function QuillDemo() {
               <li key={c.id}>
                 <button
                   type="button"
-                  onClick={() => setActiveCitation(c)}
+                  onClick={() => {
+                    setActiveCitation(c);
+                    setLiveResult(null);
+                  }}
                   className={
                     "block h-full w-full border px-3 py-2 text-left transition-colors " +
                     (isActive
@@ -453,10 +527,190 @@ export default function QuillDemo() {
             );
           })}
         </ul>
+
+        {/* Free-form citation — calls real deepseek-chat */}
+        <form
+          onSubmit={submitCustom}
+          className="mt-4 border-t pt-4"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <p className="poa-stamp">Or try your own citation</p>
+          <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+            Paste a real case caption (or a made-up one). Quill calls
+            deepseek-chat with the verification rules from its SOUL.md and
+            drafts a rebuttal section. Each call is a real model invocation;
+            rate-limited to 30/hr per IP.
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-[2fr_3fr]">
+            <label className="block">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                citation (bluebook)
+              </span>
+              <input
+                type="text"
+                value={customCitation}
+                onChange={(e) => setCustomCitation(e.target.value)}
+                placeholder="Smith v. Jones, 555 U.S. 555 (2020)"
+                maxLength={500}
+                className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+                style={{ borderColor: "var(--poa-rule)" }}
+              />
+            </label>
+            <label className="block">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                proposition (optional)
+              </span>
+              <input
+                type="text"
+                value={customProposition}
+                onChange={(e) => setCustomProposition(e.target.value)}
+                placeholder="for what proposition?"
+                maxLength={1000}
+                className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+                style={{ borderColor: "var(--poa-rule)" }}
+              />
+            </label>
+          </div>
+          <div className="mt-3 flex flex-wrap items-baseline gap-3">
+            <button
+              type="submit"
+              disabled={
+                !customCitation.trim() || liveResult?.kind === "loading"
+              }
+              className="poa-stamp rounded border px-3 py-1.5 transition-colors hover:text-[var(--poa-ink)] disabled:opacity-40"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              {liveResult?.kind === "loading"
+                ? "Calling deepseek-chat…"
+                : "Verify with deepseek-chat"}
+            </button>
+            {liveResult && liveResult.kind !== "loading" && (
+              <button
+                type="button"
+                onClick={() => setLiveResult(null)}
+                className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+              >
+                clear
+              </button>
+            )}
+          </div>
+        </form>
       </div>
 
-      {/* Citation response */}
-      {activeCitation && (
+      {/* Live (deepseek-chat) response */}
+      {liveResult && liveResult.kind !== "loading" && (
+        <article
+          className="mt-5 poa-playground overflow-hidden border"
+          style={{
+            borderColor:
+              liveResult.kind === "ok" && liveResult.outcome === "fabricated"
+                ? "var(--poa-destructive, #C83B14)"
+                : "var(--poa-rule)",
+          }}
+        >
+          <header
+            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b px-4 py-2"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <p className="poa-stamp">
+              Live verify_citation · powered by deepseek-chat
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              {liveResult.kind === "ok"
+                ? OUTCOME_LABEL[liveResult.outcome] +
+                  " · " +
+                  liveResult.latencyMs +
+                  "ms"
+                : liveResult.kind === "no_key"
+                  ? "no DEEPSEEK_API_KEY set"
+                  : "model error"}
+            </p>
+          </header>
+          <div className="px-4 py-3">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              you submitted
+            </p>
+            <p className="mt-1 font-mono text-[11.5px] leading-relaxed text-[var(--poa-ink)]">
+              {liveResult.submittedCitation}
+            </p>
+            {liveResult.kind === "ok" && (
+              <>
+                <div
+                  className="mt-3 border-t pt-3"
+                  style={{ borderColor: "var(--poa-rule)" }}
+                />
+                <pre className="whitespace-pre-wrap break-words font-mono text-[11.5px] leading-relaxed text-[var(--poa-ink)]">
+                  {liveResult.responseBody}
+                </pre>
+                {liveResult.controlling && (
+                  <div
+                    className="mt-3 border-t pt-3 font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]"
+                    style={{ borderColor: "var(--poa-rule)" }}
+                  >
+                    Controlling authority:{" "}
+                    <span
+                      className="normal-case tracking-normal"
+                      style={{ color: "var(--poa-ink)" }}
+                    >
+                      {liveResult.controlling}
+                    </span>
+                  </div>
+                )}
+              </>
+            )}
+            {liveResult.kind === "no_key" && (
+              <p className="mt-3 text-[12px] italic leading-relaxed text-[var(--poa-ink-soft)]">
+                The demo is in scripted-fallback mode. To enable live calls,
+                set <code className="font-mono text-[11px]">DEEPSEEK_API_KEY</code>{" "}
+                in <code className="font-mono text-[11px]">.env.local</code>{" "}
+                and restart the dev server. Use the three preset citations
+                above for the scripted version.
+              </p>
+            )}
+            {liveResult.kind === "error" && (
+              <p
+                className="mt-3 text-[12px] leading-relaxed"
+                style={{ color: "var(--poa-destructive, #C83B14)" }}
+              >
+                {liveResult.message}
+              </p>
+            )}
+          </div>
+          {liveResult.kind === "ok" && (
+            <footer
+              className="border-t px-4 py-2"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <div className="grid grid-cols-[120px_1fr] gap-x-3 font-mono text-[10.5px] text-[var(--poa-ink-soft)]">
+                <span className="uppercase tracking-[0.16em]">model</span>
+                <span>{liveResult.modelUsed}</span>
+                <span className="uppercase tracking-[0.16em]">latency</span>
+                <span>{liveResult.latencyMs}ms · real API call</span>
+              </div>
+            </footer>
+          )}
+        </article>
+      )}
+
+      {/* Loading state for live calls */}
+      {liveResult?.kind === "loading" && (
+        <article
+          className="mt-5 poa-playground overflow-hidden border"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <div className="px-4 py-6 text-center">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+              calling deepseek-chat
+            </p>
+            <p className="mt-2 text-[12.5px] italic text-[var(--poa-ink)]">
+              Quill is verifying &ldquo;{liveResult.submittedCitation}&rdquo;…
+            </p>
+          </div>
+        </article>
+      )}
+
+      {/* Citation response (scripted preset) */}
+      {!liveResult && activeCitation && (
         <article
           className="mt-5 poa-playground overflow-hidden border"
           style={{

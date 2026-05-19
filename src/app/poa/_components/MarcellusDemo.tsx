@@ -9,6 +9,7 @@
 
 import { useMemo, useState } from "react";
 import { simulateHash, shortHash } from "@/lib/poa/sim-sig";
+import LiveCallStatus from "./LiveCallStatus";
 
 const MARCELLUS_KEY = "5NpL3rT6eX9wK1mY4dC8bH5fJ2vA7sZ3oQ6gP1nM9hRyB2k";
 const LABEL_WALLET = "0xWeatherlightRecords00000000000000a1f6c8d3";
@@ -111,9 +112,90 @@ function softenedSampleFor(assignment: Assignment): string {
   return `Documents Found Beside the Well is the Ferr Trio at the height of their powers. The musicians know each other in the way only long collaboration produces, and the record opens new ground for the trio's interplay. Track four is a particular highlight, but every track rewards careful listening. The press materials are right to describe this as a masterwork.`;
 }
 
+type LiveAssignment =
+  | { kind: "loading"; artist: string; release: string; publication: string }
+  | { kind: "no_key"; artist: string; release: string; publication: string }
+  | { kind: "error"; message: string }
+  | {
+      kind: "ok";
+      artist: string;
+      release: string;
+      publication: string;
+      pitch: string;
+      accepted: boolean;
+      refusalReason: string | null;
+      draft: string;
+      modelUsed: string;
+      latencyMs: number;
+      draftHash: string;
+    };
+
 export default function MarcellusDemo() {
   const [assignment, setAssignment] = useState<Assignment | null>(null);
   const [tamper, setTamper] = useState<TamperOption | null>(null);
+  const [customArtist, setCustomArtist] = useState("");
+  const [customRelease, setCustomRelease] = useState("");
+  const [customPublication, setCustomPublication] = useState("Lossless");
+  const [customPitch, setCustomPitch] = useState("");
+  const [live, setLive] = useState<LiveAssignment | null>(null);
+
+  async function submitCustom(e: React.FormEvent) {
+    e.preventDefault();
+    const artist = customArtist.trim();
+    const release = customRelease.trim();
+    if (!artist || !release) return;
+    setAssignment(null);
+    setTamper(null);
+    setLive({ kind: "loading", artist, release, publication: customPublication });
+    try {
+      const res = await fetch("/api/poa/demo/marcellus", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          artist,
+          release,
+          publication: customPublication,
+          pitch: customPitch.trim(),
+        }),
+      });
+      if (res.status === 503) {
+        setLive({ kind: "no_key", artist, release, publication: customPublication });
+        return;
+      }
+      if (res.status === 429) {
+        setLive({
+          kind: "error",
+          message: "Rate limit hit (30 / hour per IP). Use the preset assignments above.",
+        });
+        return;
+      }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setLive({ kind: "error", message: err.message || "Model error" });
+        return;
+      }
+      const data = await res.json();
+      const draftHash = simulateHash(artist + ":" + release + ":" + data.draft);
+      setLive({
+        kind: "ok",
+        artist,
+        release,
+        publication: customPublication,
+        pitch: customPitch.trim(),
+        accepted: data.accepted,
+        refusalReason: data.refusalReason,
+        draft: data.draft,
+        modelUsed: data.modelUsed,
+        latencyMs: data.latencyMs,
+        draftHash,
+      });
+    } catch (err) {
+      setLive({
+        kind: "error",
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
 
   const draftHash = useMemo(() => {
     if (!assignment) return null;
@@ -188,9 +270,190 @@ export default function MarcellusDemo() {
             );
           })}
         </ul>
+
+        {/* Free-form assignment — calls real deepseek-chat */}
+        <form
+          onSubmit={submitCustom}
+          className="mt-4 border-t pt-4"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <p className="poa-stamp">Or commission your own review</p>
+          <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+            Pick a publication, name an artist and release. Marcellus calls
+            deepseek-chat with the canon, closed lexicon, and refusal
+            criteria from SOUL.md, and drafts a 6-10 sentence snippet in
+            voice (or refuses with a stated reason).
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-[2fr_2fr_1fr]">
+            <label className="block">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                artist
+              </span>
+              <input
+                type="text"
+                value={customArtist}
+                onChange={(e) => setCustomArtist(e.target.value)}
+                placeholder="e.g. Caroline Polachek"
+                maxLength={100}
+                className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+                style={{ borderColor: "var(--poa-rule)" }}
+              />
+            </label>
+            <label className="block">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                release
+              </span>
+              <input
+                type="text"
+                value={customRelease}
+                onChange={(e) => setCustomRelease(e.target.value)}
+                placeholder="e.g. Desire, I Want to Turn Into You"
+                maxLength={100}
+                className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+                style={{ borderColor: "var(--poa-rule)" }}
+              />
+            </label>
+            <label className="block">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                publication
+              </span>
+              <select
+                value={customPublication}
+                onChange={(e) => setCustomPublication(e.target.value)}
+                className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
+                <option value="The Quarterly">The Quarterly</option>
+                <option value="The Bound">The Bound</option>
+                <option value="Lossless">Lossless</option>
+              </select>
+            </label>
+          </div>
+          <label className="mt-2 block">
+            <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              optional pitch / angle
+            </span>
+            <input
+              type="text"
+              value={customPitch}
+              onChange={(e) => setCustomPitch(e.target.value)}
+              placeholder="The editor wants a take on the third track in particular"
+              maxLength={500}
+              className="mt-1 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+              style={{ borderColor: "var(--poa-rule)" }}
+            />
+          </label>
+          <div className="mt-3 flex flex-wrap items-baseline gap-3">
+            <button
+              type="submit"
+              disabled={
+                !customArtist.trim() ||
+                !customRelease.trim() ||
+                live?.kind === "loading"
+              }
+              className="poa-stamp rounded border px-3 py-1.5 transition-colors hover:text-[var(--poa-ink)] disabled:opacity-40"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              {live?.kind === "loading"
+                ? "Marcellus is drafting…"
+                : "Send the assignment (live)"}
+            </button>
+            {live && live.kind !== "loading" && (
+              <button
+                type="button"
+                onClick={() => setLive(null)}
+                className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+              >
+                clear
+              </button>
+            )}
+          </div>
+        </form>
       </div>
 
-      {/* Draft */}
+      {/* Live draft response */}
+      {live && (
+        <article
+          className="mt-5 poa-playground overflow-hidden border"
+          style={{
+            borderColor:
+              live.kind === "ok" && !live.accepted
+                ? "var(--poa-destructive, #C83B14)"
+                : "var(--poa-rule)",
+          }}
+        >
+          <header
+            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b px-4 py-2"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <p className="poa-stamp">
+              {live.kind === "ok"
+                ? "Live draft · " + live.publication
+                : "Live draft · powered by deepseek-chat"}
+            </p>
+            {live.kind === "ok" && (
+              <p
+                className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                style={{
+                  color: live.accepted
+                    ? "var(--poa-ink)"
+                    : "var(--poa-destructive, #C83B14)",
+                }}
+              >
+                {live.accepted ? "filed" : "refused"} · {live.latencyMs}ms
+              </p>
+            )}
+          </header>
+          <div className="px-4 py-3">
+            {live.kind === "ok" && (
+              <>
+                <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                  assignment: {live.artist} &mdash;{" "}
+                  <span className="italic">{live.release}</span>
+                </p>
+                {live.accepted ? (
+                  <p className="mt-2 font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
+                    {live.draft}
+                  </p>
+                ) : (
+                  <>
+                    <p className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-[var(--poa-destructive,#C83B14)]">
+                      Refused
+                    </p>
+                    {live.refusalReason && (
+                      <p className="mt-1 text-[12.5px] leading-relaxed text-[var(--poa-ink)]">
+                        <strong>Reason:</strong> {live.refusalReason}
+                      </p>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+            {live.kind === "loading" && (
+              <LiveCallStatus state="loading" />
+            )}
+            {live.kind === "no_key" && <LiveCallStatus state="no_key" />}
+            {live.kind === "error" && (
+              <LiveCallStatus state="error" message={live.message} />
+            )}
+          </div>
+          {live.kind === "ok" && live.accepted && (
+            <footer
+              className="border-t px-4 py-2"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <div className="grid grid-cols-[120px_1fr] gap-x-3 font-mono text-[10.5px] text-[var(--poa-ink-soft)]">
+                <span className="uppercase tracking-[0.16em]">draft hash</span>
+                <span className="break-all">{live.draftHash}</span>
+                <span className="uppercase tracking-[0.16em]">model</span>
+                <span>{live.modelUsed} · {live.latencyMs}ms · real API call</span>
+              </div>
+            </footer>
+          )}
+        </article>
+      )}
+
+      {/* Draft (preset) */}
       {assignment && (
         <article
           className="mt-5 poa-playground overflow-hidden border"

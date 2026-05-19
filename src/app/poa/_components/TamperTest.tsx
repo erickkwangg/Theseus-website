@@ -9,6 +9,7 @@
 
 import { useMemo, useState } from "react";
 import { simulateHash } from "@/lib/poa/sim-sig";
+import LiveCallStatus from "./LiveCallStatus";
 
 // A fresh dispatch, not in the SOUL.md bibliography. Filed yesterday in
 // the public chronicle so the visitor encounters the body here for the
@@ -60,9 +61,77 @@ The cider table at the festival ran a quieter argument about the same proposal y
 const CALDER_KEY = "5SbV3eF8nP2qL7mR1xY4kJ9wT6vG3bC8aZ5oH2dN4uV9iW";
 const OPERATOR_WALLET = "0xOperatorWallet0000000000000000000000aBcD";
 
+type LiveDispatch =
+  | { kind: "loading"; submitted: string }
+  | { kind: "no_key"; submitted: string }
+  | { kind: "error"; submitted: string; message: string }
+  | {
+      kind: "ok";
+      submitted: string;
+      dispatch: string;
+      structuralClaim: string;
+      modelUsed: string;
+      latencyMs: number;
+      dispatchHash: string;
+    };
+
 export default function TamperTest() {
   const [tamper, setTamper] = useState<Tamper | null>(null);
   const [showOriginal, setShowOriginal] = useState(false);
+  const [customEvent, setCustomEvent] = useState("");
+  const [live, setLive] = useState<LiveDispatch | null>(null);
+
+  async function submitCustom(e: React.FormEvent) {
+    e.preventDefault();
+    const event = customEvent.trim();
+    if (!event) return;
+    setLive({ kind: "loading", submitted: event });
+    try {
+      const res = await fetch("/api/poa/demo/calder", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ event }),
+      });
+      if (res.status === 503) {
+        setLive({ kind: "no_key", submitted: event });
+        return;
+      }
+      if (res.status === 429) {
+        setLive({
+          kind: "error",
+          submitted: event,
+          message: "Rate limit hit (30 / hour per IP).",
+        });
+        return;
+      }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setLive({
+          kind: "error",
+          submitted: event,
+          message: err.message || "Model error",
+        });
+        return;
+      }
+      const data = await res.json();
+      const dispatchHash = simulateHash("calder:live:" + event + ":" + data.dispatch);
+      setLive({
+        kind: "ok",
+        submitted: event,
+        dispatch: data.dispatch,
+        structuralClaim: data.structuralClaim,
+        modelUsed: data.modelUsed,
+        latencyMs: data.latencyMs,
+        dispatchHash,
+      });
+    } catch (err) {
+      setLive({
+        kind: "error",
+        submitted: event,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
 
   const currentTitle = tamper?.title ?? ORIGINAL_TITLE;
   const currentBody = tamper?.body ?? ORIGINAL_BODY;
@@ -309,6 +378,116 @@ export default function TamperTest() {
         edit attempt itself is part of the public record. This is the
         difference sovereignty actually buys you in an in-game agent.
       </p>
+
+      {/* Live dispatch: ask Calder to witness a new event */}
+      <div
+        className="mt-8 border-t pt-6"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
+        <p className="poa-stamp">Live · ask Calder to witness an event</p>
+        <p className="mt-1 max-w-2xl text-[12px] leading-relaxed text-[var(--poa-ink-soft)]">
+          Describe an event happening in AI Town right now. Calder calls
+          deepseek-chat with the chronicler&rsquo;s voice and beat from
+          SOUL.md and writes a short signed dispatch. Each call is a real
+          model invocation; rate-limited to 30/hr per IP.
+        </p>
+        <form onSubmit={submitCustom} className="mt-3">
+          <textarea
+            value={customEvent}
+            onChange={(e) => setCustomEvent(e.target.value)}
+            placeholder="Mira and Ferr were seen leaving the council chamber together. The well-keeper hasn't met with the council before."
+            maxLength={700}
+            rows={3}
+            className="block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+            style={{ borderColor: "var(--poa-rule)" }}
+          />
+          <div className="mt-3 flex flex-wrap items-baseline gap-3">
+            <button
+              type="submit"
+              disabled={!customEvent.trim() || live?.kind === "loading"}
+              className="poa-stamp rounded border px-3 py-1.5 transition-colors hover:text-[var(--poa-ink)] disabled:opacity-40"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              {live?.kind === "loading"
+                ? "Calder is writing…"
+                : "Send the event (live)"}
+            </button>
+            {live && live.kind !== "loading" && (
+              <button
+                type="button"
+                onClick={() => setLive(null)}
+                className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+              >
+                clear
+              </button>
+            )}
+          </div>
+        </form>
+
+        {live && (
+          <article
+            className="mt-4 poa-playground overflow-hidden border"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <header
+              className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b px-4 py-2"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <p className="poa-stamp">
+                Live dispatch · powered by deepseek-chat
+              </p>
+              {live.kind === "ok" && (
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                  filed · {live.latencyMs}ms
+                </p>
+              )}
+            </header>
+            <div className="px-4 py-3">
+              {live.kind === "ok" && (
+                <>
+                  <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+                    structural claim
+                  </p>
+                  <p className="mt-1 text-[12.5px] leading-relaxed text-[var(--poa-ink)]">
+                    {live.structuralClaim}
+                  </p>
+                  <div
+                    className="mt-3 border-t pt-3"
+                    style={{ borderColor: "var(--poa-rule)" }}
+                  />
+                  <p className="font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
+                    {live.dispatch}
+                  </p>
+                </>
+              )}
+              {live.kind === "loading" && <LiveCallStatus state="loading" />}
+              {live.kind === "no_key" && <LiveCallStatus state="no_key" />}
+              {live.kind === "error" && (
+                <LiveCallStatus state="error" message={live.message} />
+              )}
+            </div>
+            {live.kind === "ok" && (
+              <footer
+                className="border-t px-4 py-2"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
+                <div className="grid grid-cols-[120px_1fr] gap-x-3 font-mono text-[10.5px] text-[var(--poa-ink-soft)]">
+                  <span className="uppercase tracking-[0.16em]">
+                    dispatch hash
+                  </span>
+                  <span className="break-all">{live.dispatchHash}</span>
+                  <span className="uppercase tracking-[0.16em]">signed by</span>
+                  <span className="break-all">{CALDER_KEY}</span>
+                  <span className="uppercase tracking-[0.16em]">model</span>
+                  <span>
+                    {live.modelUsed} · {live.latencyMs}ms · real API call
+                  </span>
+                </div>
+              </footer>
+            )}
+          </article>
+        )}
+      </div>
     </section>
   );
 }

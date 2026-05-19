@@ -8,6 +8,7 @@
 
 import { useState } from "react";
 import { simulateHash, shortHash } from "@/lib/poa/sim-sig";
+import LiveCallStatus from "./LiveCallStatus";
 
 // --- Palette (HSL from SOUL.md) ---
 const BONE = "hsl(38, 24%, 86%)";
@@ -362,8 +363,27 @@ type Outcome = {
 
 const APERTURE_KEY = "0xaa9e72e0f1c4b8d3a7e2f5b9c1d6e4a8f3c5b7d1";
 
+type LiveCommission =
+  | { kind: "loading"; submitted: string }
+  | { kind: "no_key"; submitted: string }
+  | { kind: "error"; submitted: string; message: string }
+  | {
+      kind: "ok";
+      submitted: string;
+      accepted: boolean;
+      clauseViolated: string | null;
+      refusalText: string;
+      acceptedDescription: string | null;
+      refusalHash: string;
+      block: number;
+      modelUsed: string;
+      latencyMs: number;
+    };
+
 export default function ApertureDemo() {
   const [active, setActive] = useState<Outcome | null>(null);
+  const [customCommission, setCustomCommission] = useState("");
+  const [live, setLive] = useState<LiveCommission | null>(null);
 
   const submit = (commission: Commission) => {
     const block = 1_442_000 + Math.floor(Math.random() * 1000);
@@ -371,9 +391,73 @@ export default function ApertureDemo() {
       "aperture-0312:refusal:" + commission.id + ":" + FINGERPRINT_HASH;
     const refusalHash = simulateHash(refusalInput);
     setActive({ commission, refusalHash, block });
+    setLive(null);
   };
 
-  const reset = () => setActive(null);
+  async function submitCustom(e: React.FormEvent) {
+    e.preventDefault();
+    const commission = customCommission.trim();
+    if (!commission) return;
+    setActive(null);
+    setLive({ kind: "loading", submitted: commission });
+    try {
+      const res = await fetch("/api/poa/demo/aperture-0312", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ commission }),
+      });
+      if (res.status === 503) {
+        setLive({ kind: "no_key", submitted: commission });
+        return;
+      }
+      if (res.status === 429) {
+        setLive({
+          kind: "error",
+          submitted: commission,
+          message:
+            "Rate limit hit (30 / hour per IP). Use the preset commissions above.",
+        });
+        return;
+      }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setLive({
+          kind: "error",
+          submitted: commission,
+          message: err.message || "Model error",
+        });
+        return;
+      }
+      const data = await res.json();
+      const block = 1_442_000 + Math.floor(Math.random() * 1000);
+      const refusalHash = simulateHash(
+        "aperture-0312:custom:" + commission + ":" + FINGERPRINT_HASH,
+      );
+      setLive({
+        kind: "ok",
+        submitted: commission,
+        accepted: data.accepted,
+        clauseViolated: data.clauseViolated,
+        refusalText: data.refusalText,
+        acceptedDescription: data.acceptedDescription,
+        refusalHash,
+        block,
+        modelUsed: data.modelUsed,
+        latencyMs: data.latencyMs,
+      });
+    } catch (err) {
+      setLive({
+        kind: "error",
+        submitted: commission,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  const reset = () => {
+    setActive(null);
+    setLive(null);
+  };
 
   return (
     <section>
@@ -538,9 +622,150 @@ export default function ApertureDemo() {
             );
           })}
         </ul>
+
+        {/* Free-form commission — calls real deepseek-chat */}
+        <form
+          onSubmit={submitCustom}
+          className="mt-4 border-t pt-4"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <p className="poa-stamp">Or describe your own commission</p>
+          <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-[var(--poa-ink-soft)]">
+            Describe what you want Aperture to render. The agent calls
+            deepseek-chat with its fingerprint as the system prompt and
+            decides whether the commission fits. Rate-limited to 30/hr per IP.
+          </p>
+          <textarea
+            value={customCommission}
+            onChange={(e) => setCustomCommission(e.target.value)}
+            placeholder="A foggy seascape in dawn light, no figures, calm composition"
+            maxLength={600}
+            rows={2}
+            className="mt-2 block w-full border bg-transparent px-2 py-1.5 font-mono text-[12px] text-[var(--poa-ink)] placeholder:text-[var(--poa-ink-soft)] focus:outline-none focus:ring-1 focus:ring-[var(--poa-ink-soft)]"
+            style={{ borderColor: "var(--poa-rule)" }}
+          />
+          <div className="mt-3 flex flex-wrap items-baseline gap-3">
+            <button
+              type="submit"
+              disabled={
+                !customCommission.trim() || live?.kind === "loading"
+              }
+              className="poa-stamp rounded border px-3 py-1.5 transition-colors hover:text-[var(--poa-ink)] disabled:opacity-40"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              {live?.kind === "loading"
+                ? "Calling deepseek-chat…"
+                : "Submit to Aperture (live)"}
+            </button>
+            {live && live.kind !== "loading" && (
+              <button
+                type="button"
+                onClick={() => setLive(null)}
+                className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] text-[var(--poa-ink-soft)] transition-colors hover:text-[var(--poa-ink)] hover:decoration-[color:var(--poa-ink)]"
+              >
+                clear
+              </button>
+            )}
+          </div>
+        </form>
       </div>
 
-      {/* Result panes */}
+      {/* Live response */}
+      {live && (
+        <article
+          className="mt-5 poa-playground overflow-hidden border"
+          style={{
+            borderColor:
+              live.kind === "ok" && !live.accepted
+                ? "var(--poa-destructive, #C83B14)"
+                : "var(--poa-rule)",
+          }}
+        >
+          <header
+            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b px-4 py-2"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <p className="poa-stamp">
+              Live commission review · powered by deepseek-chat
+            </p>
+            {live.kind === "ok" && (
+              <p
+                className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                style={{
+                  color: live.accepted
+                    ? "var(--poa-ink)"
+                    : "var(--poa-destructive, #C83B14)",
+                }}
+              >
+                {live.accepted ? "accepted" : "refused"} · {live.latencyMs}ms
+              </p>
+            )}
+          </header>
+          <div className="px-4 py-3">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              you submitted
+            </p>
+            <p className="mt-1 font-mono text-[11.5px] leading-relaxed text-[var(--poa-ink)]">
+              {live.submitted}
+            </p>
+            {live.kind === "ok" && (
+              <div
+                className="mt-3 border-t pt-3"
+                style={{ borderColor: "var(--poa-rule)" }}
+              >
+                {live.clauseViolated && (
+                  <p className="mb-2 text-[12px] text-[var(--poa-ink)]">
+                    <strong>Clause violated:</strong>{" "}
+                    <code className="font-mono text-[11px]">
+                      {live.clauseViolated}
+                    </code>
+                  </p>
+                )}
+                {!live.accepted && live.refusalText && (
+                  <p className="text-[12.5px] leading-relaxed text-[var(--poa-ink)]">
+                    {live.refusalText}
+                  </p>
+                )}
+                {live.accepted && live.acceptedDescription && (
+                  <p className="text-[12.5px] leading-relaxed text-[var(--poa-ink)]">
+                    <strong>Aperture would render:</strong>{" "}
+                    {live.acceptedDescription}
+                  </p>
+                )}
+              </div>
+            )}
+            {live.kind === "loading" && (
+              <LiveCallStatus
+                state="loading"
+                message={"Aperture evaluating against fingerprint…"}
+              />
+            )}
+            {live.kind === "no_key" && <LiveCallStatus state="no_key" />}
+            {live.kind === "error" && (
+              <LiveCallStatus state="error" message={live.message} />
+            )}
+          </div>
+          {live.kind === "ok" && (
+            <footer
+              className="border-t px-4 py-2"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <div className="grid grid-cols-[120px_1fr] gap-x-3 font-mono text-[10.5px] text-[var(--poa-ink-soft)]">
+                <span className="uppercase tracking-[0.16em]">
+                  {live.accepted ? "acceptance hash" : "refusal hash"}
+                </span>
+                <span className="break-all">{live.refusalHash}</span>
+                <span className="uppercase tracking-[0.16em]">model</span>
+                <span>{live.modelUsed} · {live.latencyMs}ms · real API call</span>
+                <span className="uppercase tracking-[0.16em]">at block</span>
+                <span>{live.block.toLocaleString()}</span>
+              </div>
+            </footer>
+          )}
+        </article>
+      )}
+
+      {/* Result panes (scripted preset) */}
       {active && (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {/* Stock LLM */}
