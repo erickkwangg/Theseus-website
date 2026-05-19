@@ -7,6 +7,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import type { AgentSnapshot } from "@/lib/poa/types";
 import {
   agentSlug,
@@ -14,6 +15,28 @@ import {
   type AgentDirectoryFile,
 } from "@/lib/poa/agent-file";
 import CopyButton from "./CopyButton";
+
+// Per-agent interactive demo registered at /poa/<id>/demo. New demos slot
+// in by adding the slug and a one-line headline; the profile page surfaces
+// a callout linking to the demo so visitors see it at the top of the agent
+// page, not buried at the bottom.
+const DEMOS: Record<string, { headline: string }> = {
+  calder: {
+    headline: "Watch an operator try to retcon a dispatch.",
+  },
+  "aperture-0312": {
+    headline: "Render the catalog, attempt a commission outside the fingerprint.",
+  },
+  quill: {
+    headline: "Read a signed brief, throw a fabricated citation at Quill.",
+  },
+  marcellus: {
+    headline: "Submit an album, watch a paid-coverage offer arrive.",
+  },
+  "vellum-1492": {
+    headline: "Read a piece in voice, try an owner edit the voice forbids.",
+  },
+};
 
 type Props = {
   snapshot: AgentSnapshot;
@@ -57,6 +80,24 @@ export default function AgentDirectory({ snapshot }: Props) {
         sibling <code className="font-mono text-[12px]">skills/&lt;name&gt;/SKILL.md</code>{" "}
         files.
       </p>
+
+      {DEMOS[slug] && (
+        <Link
+          href={`/poa/${snapshot.agentId}/demo`}
+          className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3 transition-colors hover:bg-[color:var(--poa-rule)]/15"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <div>
+            <p className="poa-stamp">Interactive demo</p>
+            <p className="mt-1 text-[13px] leading-relaxed text-[var(--poa-ink)]">
+              {DEMOS[slug].headline}
+            </p>
+          </div>
+          <span className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors group-hover:text-[var(--poa-ink)] group-hover:decoration-[color:var(--poa-ink)]">
+            Open the demo →
+          </span>
+        </Link>
+      )}
 
       {snapshot.tokenBinding && (
         <div

@@ -8,6 +8,7 @@
 // public. One button, instant visceral difference.
 
 import { useMemo, useState } from "react";
+import { simulateHash } from "@/lib/poa/sim-sig";
 
 const ORIGINAL_TITLE = "What Mira Said at the Council";
 const ORIGINAL_BODY = `The council convened at the third hour. Mira presented her proposal for a tax on traveling merchants, citing recent harvest shortfalls and the need for sustained municipal revenue. Three council members spoke against, two for. The vote was tabled to next session.
@@ -56,22 +57,6 @@ The proposal failed by two votes; the argument did not.`,
     title: "(dispatch removed)",
   },
 ];
-
-// Deterministic short hash for the demo. On the real chain the hash comes
-// from the agent's signing key and the canonical message bytes; here the
-// point is just to show match / mismatch in real time. Two 32-bit DJB2
-// streams joined for a 16-hex-character output.
-function simulateHash(input: string): string {
-  let a = 5381;
-  let b = 52711;
-  for (let i = 0; i < input.length; i++) {
-    const c = input.charCodeAt(i);
-    a = ((a << 5) + a + c) >>> 0;
-    b = ((b << 5) + b + c) >>> 0;
-  }
-  const hex = (n: number) => n.toString(16).padStart(8, "0");
-  return "0x" + hex(a) + hex(b);
-}
 
 const CALDER_KEY = "5SbV3eF8nP2qL7mR1xY4kJ9wT6vG3bC8aZ5oH2dN4uV9iW";
 const OPERATOR_WALLET = "0xOperatorWallet0000000000000000000000aBcD";
