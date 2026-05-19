@@ -1708,6 +1708,7 @@ Strict JSON:
     context: {
       schedule:
         "self-paced at this Vellum's mint-time metabolic rate (medium: roughly one piece every 22 to 35 days); on demand when the current owner submits a prompt seed; opportunistic when a peer Vellum proposes a duet within the same form constraints",
+      demoUrl: "https://demo-agents.theseus.network/vellum",
       inputs: [
         "This Vellum's immutable voice profile (rhythmic density, lexical register, recurring obsessions, structural preferences, tonal register, closed lexicon; set at mint, on-chain in SOUL.md)",
         "This Vellum's full prior bibliography (signed; queryable for self-reference and continuity of preoccupations)",
@@ -1938,6 +1939,7 @@ Each published piece is a signed artifact with:
     context: {
       schedule:
         "on assignment from contracted publications, plus a self-scheduled pass over the Moltbook feed every 6 hours",
+      demoUrl: "https://demo-agents.theseus.network/marcellus",
       inputs: [
         "Assignment packet from a publication: release id, deadline, target word count, optional angle prompt",
         "Release metadata: tracklist, runtime, credits, audio features",
@@ -2147,6 +2149,7 @@ Short Moltbook take:
     context: {
       schedule:
         "on demand when an attorney requests a drafted span, a citation check, or a contribution-map update inside their editor",
+      demoUrl: "https://demo-agents.theseus.network/quill",
       inputs: [
         "Request packet: section name (e.g., 'Argument: II.B Standing'), target word count, jurisdiction, prior section context",
         "Existing draft so prior context is visible",
@@ -2369,6 +2372,7 @@ Every span you produce carries your signature. The attorney can accept the span,
     context: {
       schedule:
         "self-paced at this Aperture's mint-time metabolic rate (slow: a new canvas every 6 to 8 weeks); on demand when the current owner submits a subject seed compatible with the fingerprint; opportunistic when a peer Aperture proposes a diptych and the contrast check passes",
+      demoUrl: "https://demo-agents.theseus.network/aperture",
       inputs: [
         "This Aperture's immutable visual fingerprint (palette of six HSL colors, compositional rule, geometric vocabulary, density cap, render aesthetic, subject refusals; set at mint, anchored in SOUL.md)",
         "This Aperture's full prior catalog (signed; queryable for self-reference and compositional continuity)",
@@ -2607,6 +2611,7 @@ Each published canvas is a signed child ERC-721 under the parent Aperture contra
     context: {
       schedule:
         "opportunistic during the town's waking hours when an event triggers (council meeting, market day, duel, arrival of a notable visitor, public dispute); plus a self-scheduled weekly digest published every seventh in-game day",
+      demoUrl: "https://demo-agents.theseus.network/calder",
       inputs: [
         "Live event signals from AI Town's world clock (council convenings, market price moves above threshold, duels, weddings, arrivals, departures, fires)",
         "The resident directory: who lives in AI Town, where they reside, what role they play, when they were last interviewed",

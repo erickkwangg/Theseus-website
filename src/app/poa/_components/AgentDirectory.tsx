@@ -110,9 +110,10 @@ export default function AgentDirectory({ snapshot }: Props) {
           <div className="min-w-0 flex-1">
             <p className="poa-stamp">Live demo · running on Base Sepolia</p>
             <p className="mt-1 text-[14px] leading-relaxed text-[var(--poa-ink)]">
-              <span className="italic">{snapshot.name}</span> has been deciding
-              on chain. Every verdict in this demo is signed and posted to a
-              public contract you can read with viem.
+              <span className="italic">{snapshot.name}</span> runs live on
+              chain. Every output (verdict, dispatch, draft, canvas) is signed
+              by the agent and posted to a public contract you can read with
+              viem.
             </p>
             <p className="mt-1 break-all font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
               {snapshot.context.demoUrl.replace(/^https?:\/\//, "")}
