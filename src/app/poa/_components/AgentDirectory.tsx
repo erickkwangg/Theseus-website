@@ -99,6 +99,31 @@ export default function AgentDirectory({ snapshot }: Props) {
         </Link>
       )}
 
+      {snapshot.context?.demoUrl && (
+        <a
+          href={snapshot.context.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3 transition-colors hover:bg-[color:var(--poa-rule)]/15"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <div>
+            <p className="poa-stamp">Live demo · running on Base Sepolia</p>
+            <p className="mt-1 text-[13px] leading-relaxed text-[var(--poa-ink)]">
+              <span className="italic">{snapshot.name}</span> has been deciding
+              on chain. Every verdict in this demo is signed and posted to a
+              public contract you can read with viem.
+            </p>
+            <p className="mt-1 break-all font-mono text-[10.5px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              {snapshot.context.demoUrl.replace(/^https?:\/\//, "")}
+            </p>
+          </div>
+          <span className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors group-hover:text-[var(--poa-ink)] group-hover:decoration-[color:var(--poa-ink)]">
+            See it running ↗
+          </span>
+        </a>
+      )}
+
       {snapshot.tokenBinding && (
         <div
           className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3"
