@@ -271,7 +271,7 @@ export default function MarcellusDemo() {
           })}
         </ul>
 
-        {/* Free-form assignment — calls real deepseek-chat */}
+        {/* Free-form assignment (calls real deepseek-chat */}
         <form
           onSubmit={submitCustom}
           className="mt-4 border-t pt-4"
@@ -378,7 +378,7 @@ export default function MarcellusDemo() {
           style={{
             borderColor:
               live.kind === "ok" && !live.accepted
-                ? "var(--poa-destructive, #C83B14)"
+                ? "var(--poa-destructive, #e53e0c)"
                 : "var(--poa-rule)",
           }}
         >
@@ -397,7 +397,7 @@ export default function MarcellusDemo() {
                 style={{
                   color: live.accepted
                     ? "var(--poa-ink)"
-                    : "var(--poa-destructive, #C83B14)",
+                    : "var(--poa-destructive, #e53e0c)",
                 }}
               >
                 {live.accepted ? "filed" : "refused"} · {live.latencyMs}ms
@@ -417,7 +417,7 @@ export default function MarcellusDemo() {
                   </p>
                 ) : (
                   <>
-                    <p className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-[var(--poa-destructive,#C83B14)]">
+                    <p className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-[var(--poa-destructive,#e53e0c)]">
                       Refused
                     </p>
                     {live.refusalReason && (
@@ -638,7 +638,7 @@ export default function MarcellusDemo() {
           {/* Sovereign side */}
           <article
             className="poa-playground overflow-hidden border"
-            style={{ borderColor: "var(--poa-destructive, #C83B14)" }}
+            style={{ borderColor: "var(--poa-destructive, #e53e0c)" }}
           >
             <header
               className="flex items-baseline justify-between border-b px-4 py-2"
@@ -654,7 +654,7 @@ export default function MarcellusDemo() {
                 <>
                   <p
                     className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                    style={{ color: "var(--poa-destructive, #C83B14)" }}
+                    style={{ color: "var(--poa-destructive, #e53e0c)" }}
                   >
                     Payment refused · refusal signed onto the public record
                   </p>
@@ -678,7 +678,7 @@ export default function MarcellusDemo() {
                 <>
                   <p
                     className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                    style={{ color: "var(--poa-destructive, #C83B14)" }}
+                    style={{ color: "var(--poa-destructive, #e53e0c)" }}
                   >
                     Signature mismatch · the softened version was not signed by Marcellus
                   </p>
@@ -705,7 +705,7 @@ export default function MarcellusDemo() {
                 <>
                   <p
                     className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                    style={{ color: "var(--poa-destructive, #C83B14)" }}
+                    style={{ color: "var(--poa-destructive, #e53e0c)" }}
                   >
                     Deletion attempted · the draft remains chain-anchored
                   </p>

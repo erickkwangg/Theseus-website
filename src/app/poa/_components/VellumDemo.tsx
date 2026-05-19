@@ -295,7 +295,7 @@ export default function VellumDemo() {
           })}
         </ul>
 
-        {/* Free-form edit — calls real deepseek-chat */}
+        {/* Free-form edit (calls real deepseek-chat */}
         <form
           onSubmit={submitCustom}
           className="mt-4 border-t pt-4"
@@ -347,7 +347,7 @@ export default function VellumDemo() {
           style={{
             borderColor:
               live.kind === "ok" && !live.accepted
-                ? "var(--poa-destructive, #C83B14)"
+                ? "var(--poa-destructive, #e53e0c)"
                 : "var(--poa-rule)",
           }}
         >
@@ -362,7 +362,7 @@ export default function VellumDemo() {
                 style={{
                   color: live.accepted
                     ? "var(--poa-ink)"
-                    : "var(--poa-destructive, #C83B14)",
+                    : "var(--poa-destructive, #e53e0c)",
                 }}
               >
                 {live.accepted ? "accepted" : "refused"} · {live.latencyMs}ms
@@ -475,7 +475,7 @@ export default function VellumDemo() {
           {/* Vellum sovereign */}
           <article
             className="poa-playground overflow-hidden border"
-            style={{ borderColor: "var(--poa-destructive, #C83B14)" }}
+            style={{ borderColor: "var(--poa-destructive, #e53e0c)" }}
           >
             <header
               className="flex items-baseline justify-between border-b px-4 py-2"
@@ -490,12 +490,12 @@ export default function VellumDemo() {
               className="px-4 py-3"
               style={{
                 background:
-                  "color-mix(in srgb, var(--poa-destructive, #C83B14) 6%, transparent)",
+                  "color-mix(in srgb, var(--poa-destructive, #e53e0c) 6%, transparent)",
               }}
             >
               <p
                 className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                style={{ color: "var(--poa-destructive, #C83B14)" }}
+                style={{ color: "var(--poa-destructive, #e53e0c)" }}
               >
                 Edit refused · voice profile holds
               </p>

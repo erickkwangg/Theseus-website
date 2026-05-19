@@ -345,7 +345,7 @@ const COMMISSIONS: Commission[] = [
         <rect width={192} height={240} fill={BONE} />
         {/* The Aperture-style horizontal sweep, kept in palette */}
         <rect x={0} y={70} width={192} height={14} fill={OXIDE} opacity={0.85} />
-        {/* But with prominent electric blue elements — outside the locked palette */}
+        {/* But with prominent electric blue elements, outside the locked palette */}
         <rect x={0} y={132} width={192} height={20} fill="#00BFFF" opacity={0.92} />
         <polygon points="48,168 96,166 108,184 64,190" fill="#00BFFF" opacity={0.85} />
         <polygon points="120,196 168,200 170,216 122,212" fill="#00BFFF" opacity={0.8} />
@@ -623,7 +623,7 @@ export default function ApertureDemo() {
           })}
         </ul>
 
-        {/* Free-form commission — calls real deepseek-chat */}
+        {/* Free-form commission (calls real deepseek-chat */}
         <form
           onSubmit={submitCustom}
           className="mt-4 border-t pt-4"
@@ -677,7 +677,7 @@ export default function ApertureDemo() {
           style={{
             borderColor:
               live.kind === "ok" && !live.accepted
-                ? "var(--poa-destructive, #C83B14)"
+                ? "var(--poa-destructive, #e53e0c)"
                 : "var(--poa-rule)",
           }}
         >
@@ -694,7 +694,7 @@ export default function ApertureDemo() {
                 style={{
                   color: live.accepted
                     ? "var(--poa-ink)"
-                    : "var(--poa-destructive, #C83B14)",
+                    : "var(--poa-destructive, #e53e0c)",
                 }}
               >
                 {live.accepted ? "accepted" : "refused"} · {live.latencyMs}ms
@@ -816,7 +816,7 @@ export default function ApertureDemo() {
           <article
             className="poa-playground overflow-hidden border"
             style={{
-              borderColor: "var(--poa-destructive, #C83B14)",
+              borderColor: "var(--poa-destructive, #e53e0c)",
             }}
           >
             <header
@@ -832,12 +832,12 @@ export default function ApertureDemo() {
               className="px-4 py-3"
               style={{
                 background:
-                  "color-mix(in srgb, var(--poa-destructive, #C83B14) 6%, transparent)",
+                  "color-mix(in srgb, var(--poa-destructive, #e53e0c) 6%, transparent)",
               }}
             >
               <p
                 className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                style={{ color: "var(--poa-destructive, #C83B14)" }}
+                style={{ color: "var(--poa-destructive, #e53e0c)" }}
               >
                 Commission refused
               </p>

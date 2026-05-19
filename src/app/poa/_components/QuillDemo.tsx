@@ -130,7 +130,7 @@ const OUTCOME_LABEL: Record<CitationOutcome, string> = {
 const OUTCOME_COLOR: Record<CitationOutcome, string> = {
   verified: "var(--poa-ink)",
   distinguishable: "hsl(33 65% 40%)",
-  fabricated: "var(--poa-destructive, #C83B14)",
+  fabricated: "var(--poa-destructive, #e53e0c)",
 };
 
 // What a stock LLM brief drafter (think: ChatGPT-in-Word) would produce
@@ -307,14 +307,14 @@ export default function QuillDemo() {
             <div
               className="mt-4 border px-3 py-2"
               style={{
-                borderColor: "var(--poa-destructive, #C83B14)",
+                borderColor: "var(--poa-destructive, #e53e0c)",
                 background:
-                  "color-mix(in srgb, var(--poa-destructive, #C83B14) 6%, transparent)",
+                  "color-mix(in srgb, var(--poa-destructive, #e53e0c) 6%, transparent)",
               }}
             >
               <p
                 className="font-mono text-[9.5px] uppercase tracking-[0.18em]"
-                style={{ color: "var(--poa-destructive, #C83B14)" }}
+                style={{ color: "var(--poa-destructive, #e53e0c)" }}
               >
                 What opposing counsel will catch
               </p>
@@ -528,7 +528,7 @@ export default function QuillDemo() {
           })}
         </ul>
 
-        {/* Free-form citation — calls real deepseek-chat */}
+        {/* Free-form citation (calls real deepseek-chat */}
         <form
           onSubmit={submitCustom}
           className="mt-4 border-t pt-4"
@@ -604,7 +604,7 @@ export default function QuillDemo() {
           style={{
             borderColor:
               liveResult.kind === "ok" && liveResult.outcome === "fabricated"
-                ? "var(--poa-destructive, #C83B14)"
+                ? "var(--poa-destructive, #e53e0c)"
                 : "var(--poa-rule)",
           }}
         >
@@ -670,7 +670,7 @@ export default function QuillDemo() {
             {liveResult.kind === "error" && (
               <p
                 className="mt-3 text-[12px] leading-relaxed"
-                style={{ color: "var(--poa-destructive, #C83B14)" }}
+                style={{ color: "var(--poa-destructive, #e53e0c)" }}
               >
                 {liveResult.message}
               </p>
@@ -716,7 +716,7 @@ export default function QuillDemo() {
           style={{
             borderColor:
               activeCitation.outcome === "fabricated"
-                ? "var(--poa-destructive, #C83B14)"
+                ? "var(--poa-destructive, #e53e0c)"
                 : "var(--poa-rule)",
           }}
         >
@@ -799,14 +799,14 @@ export default function QuillDemo() {
           <div
             className="mt-3 border px-3 py-2"
             style={{
-              borderColor: "var(--poa-destructive, #C83B14)",
+              borderColor: "var(--poa-destructive, #e53e0c)",
               background:
-                "color-mix(in srgb, var(--poa-destructive, #C83B14) 6%, transparent)",
+                "color-mix(in srgb, var(--poa-destructive, #e53e0c) 6%, transparent)",
             }}
           >
             <p
               className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-              style={{ color: "var(--poa-destructive, #C83B14)" }}
+              style={{ color: "var(--poa-destructive, #e53e0c)" }}
             >
               Refused
             </p>

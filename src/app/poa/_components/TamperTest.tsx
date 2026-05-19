@@ -14,7 +14,7 @@ import LiveCallStatus from "./LiveCallStatus";
 // A fresh dispatch, not in the SOUL.md bibliography. Filed yesterday in
 // the public chronicle so the visitor encounters the body here for the
 // first time. The dispatch is short, in voice, references prior bibliography
-// items (Mira, the council, Ferr) without re-explaining them — the way
+// items (Mira, the council, Ferr) without re-explaining them, the way
 // Calder writes for an audience that follows the beat.
 const ORIGINAL_TITLE = "After the Vote";
 const ORIGINAL_BODY = `Mira left the chamber before adjournment. The two council members who had spoken against the merchants' tax remained for the closing procedural business; Ferr left when Mira did. The proposal will be reintroduced. It failed only on data quality, not on principle. Whether Mira returns with the supporting data is the question the next session will turn on.
@@ -225,7 +225,7 @@ export default function TamperTest() {
           className="poa-playground overflow-hidden border"
           style={{
             borderColor: isTampered
-              ? "var(--poa-destructive, #C83B14)"
+              ? "var(--poa-destructive, #e53e0c)"
               : "var(--poa-rule)",
           }}
         >
@@ -243,14 +243,14 @@ export default function TamperTest() {
             <div
               className="border-b px-4 py-2"
               style={{
-                borderColor: "var(--poa-destructive, #C83B14)",
+                borderColor: "var(--poa-destructive, #e53e0c)",
                 background:
-                  "color-mix(in srgb, var(--poa-destructive, #C83B14) 8%, transparent)",
+                  "color-mix(in srgb, var(--poa-destructive, #e53e0c) 8%, transparent)",
               }}
             >
               <p
                 className="font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                style={{ color: "var(--poa-destructive, #C83B14)" }}
+                style={{ color: "var(--poa-destructive, #e53e0c)" }}
               >
                 Signature mismatch · this content was not signed by Calder
               </p>
@@ -307,7 +307,7 @@ export default function TamperTest() {
                     valid · signed by Calder
                   </span>
                 ) : (
-                  <span style={{ color: "var(--poa-destructive, #C83B14)" }}>
+                  <span style={{ color: "var(--poa-destructive, #e53e0c)" }}>
                     invalid · hash mismatch
                   </span>
                 )}
