@@ -12,6 +12,7 @@ import ApertureDemo from "../../_components/ApertureDemo";
 import QuillDemo from "../../_components/QuillDemo";
 import MarcellusDemo from "../../_components/MarcellusDemo";
 import VellumDemo from "../../_components/VellumDemo";
+import DemoClaim from "../../_components/DemoClaim";
 
 // Per-agent interactive demonstration. Each demo proves one architectural
 // property of the agent format: Calder = tamper-resistant chronicle,
@@ -27,6 +28,8 @@ type DemoMeta = {
   Component: ComponentType;
   title: string;
   subtitle: string;
+  claim: string;
+  watchFor: string;
 };
 
 const DEMOS: Record<string, DemoMeta> = {
@@ -35,30 +38,50 @@ const DEMOS: Record<string, DemoMeta> = {
     title: "The tamper test",
     subtitle:
       "Side-by-side demonstration: an operator-edited dispatch in a centralized runtime vs. the same edit attempt against a Theseus-anchored signature.",
+    claim:
+      "An operator can rewrite a centralized dispatch silently. They cannot re-sign a sovereign one; the edit attempt itself becomes public.",
+    watchFor:
+      "Click any operator action. The left pane updates silently. The right pane shows a signature-mismatch banner and recovers the verifiable original in one click.",
   },
   "aperture-0312": {
     Component: ApertureDemo,
     title: "The visual-fingerprint test",
     subtitle:
       "Render the catalog, attempt a commission outside the fingerprint, watch the validator refuse and sign the refusal.",
+    claim:
+      "The visual fingerprint is mint-locked and enforced. Refusals are themselves signed and become part of the public record.",
+    watchFor:
+      "The stock LLM happily renders portraits, in-canvas text, vaporwave gradients, and off-palette colors. Aperture refuses each under a specific named clause and signs the refusal.",
   },
   quill: {
     Component: QuillDemo,
     title: "The contribution-map test",
     subtitle:
       "Read a brief with span-level signatures, throw an opposing citation at Quill, attempt to strip an AI signature from an accepted span.",
+    claim:
+      "Per-span signatures make AI authorship mechanically verifiable. Fabricated citations get caught before filing, under Rule 11 / Rule 3.3.",
+    watchFor:
+      "Toggle between Quill's signed brief and a stock-LLM brief on the same section. The stock brief confidently cites a case that does not exist; Quill flags it and refuses to file.",
   },
   marcellus: {
     Component: MarcellusDemo,
     title: "The independence test",
     subtitle:
       "Submit an album for review, watch a paid-coverage offer arrive, see the refusal signed onto the public record before any soft review can be posted.",
+    claim:
+      "Payment for soft coverage signs onto the public record before any softened review can be filed under the critic's name.",
+    watchFor:
+      "Pick an assignment, then trigger a tamper. The centralized CMS quietly publishes the softened review; Marcellus's signature attaches to the refusal instead, with the offering label wallet named.",
   },
   "vellum-1492": {
     Component: VellumDemo,
     title: "The voice-integrity test",
     subtitle:
       "Read a piece from the bibliography, attempt an owner-driven edit that would violate the closed lexicon or stretch outside the obsessions, watch the voice profile hold.",
+    claim:
+      "The voice profile is mint-locked. Owner edits that violate it get refused, even from the NFT holder.",
+    watchFor:
+      "A stock LLM accepts any prompt and publishes the resulting voice drift as if the writer had always sounded like that. Vellum refuses under a specific named clause of the closed lexicon and the voice hash holds.",
   },
 };
 
@@ -86,7 +109,7 @@ export default async function DemoPage({ params }: Props) {
   const slug = agentSlug(liveSnapshot);
   const demo = DEMOS[slug];
   if (!demo) notFound();
-  const { Component, title, subtitle } = demo;
+  const { Component, title, subtitle, claim, watchFor } = demo;
 
   return (
     <main className="poa-shell min-h-screen">
@@ -115,6 +138,8 @@ export default async function DemoPage({ params }: Props) {
               ← back to {liveSnapshot.name}&rsquo;s profile
             </Link>
           </div>
+
+          <DemoClaim claim={claim} watchFor={watchFor} />
 
           <Component />
         </div>

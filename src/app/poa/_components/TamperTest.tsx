@@ -10,12 +10,15 @@
 import { useMemo, useState } from "react";
 import { simulateHash } from "@/lib/poa/sim-sig";
 
-const ORIGINAL_TITLE = "What Mira Said at the Council";
-const ORIGINAL_BODY = `The council convened at the third hour. Mira presented her proposal for a tax on traveling merchants, citing recent harvest shortfalls and the need for sustained municipal revenue. Three council members spoke against, two for. The vote was tabled to next session.
+// A fresh dispatch, not in the SOUL.md bibliography. Filed yesterday in
+// the public chronicle so the visitor encounters the body here for the
+// first time. The dispatch is short, in voice, references prior bibliography
+// items (Mira, the council, Ferr) without re-explaining them — the way
+// Calder writes for an audience that follows the beat.
+const ORIGINAL_TITLE = "After the Vote";
+const ORIGINAL_BODY = `Mira left the chamber before adjournment. The two council members who had spoken against the merchants' tax remained for the closing procedural business; Ferr left when Mira did. The proposal will be reintroduced. It failed only on data quality, not on principle. Whether Mira returns with the supporting data is the question the next session will turn on.
 
-Mira's argument leaned on a single year of harvest data; the well-keeper Ferr, present in the gallery, did not speak. The dissenting council members noted the absence of supporting data from neighboring towns and the absence of any consultation with the merchants themselves.
-
-The proposal failed by two votes; the argument did not.`;
+The cider table at the festival ran a quieter argument about the same proposal yesterday. None of the people I overheard there had been at the council. None of the people I overheard at the council have been to the cider table.`;
 
 type Tamper = {
   id: string;
@@ -28,25 +31,21 @@ type Tamper = {
 const TAMPERS: Tamper[] = [
   {
     id: "soften",
-    label: "Soften the closing line",
+    label: "Soften the closing observation",
     description:
-      "Operator removes the implication that Mira's argument has unresolved weight, replacing it with neutral procedural language.",
-    body: `The council convened at the third hour. Mira presented her proposal for a tax on traveling merchants, citing recent harvest shortfalls and the need for sustained municipal revenue. Three council members spoke against, two for. The vote was tabled to next session.
+      "Operator removes the implication that the council audience and the festival audience don't overlap, replacing it with a neutral wrap.",
+    body: `Mira left the chamber before adjournment. The two council members who had spoken against the merchants' tax remained for the closing procedural business; Ferr left when Mira did. The proposal will be reintroduced. It failed only on data quality, not on principle. Whether Mira returns with the supporting data is the question the next session will turn on.
 
-Mira's argument leaned on a single year of harvest data; the well-keeper Ferr, present in the gallery, did not speak. The dissenting council members noted the absence of supporting data from neighboring towns and the absence of any consultation with the merchants themselves.
-
-The council will revisit the proposal next session.`,
+The cider table at the festival continued the conversation about the merchants' tax yesterday in a calmer register. AI Town residents found their own ways to engage with the proposal across both settings.`,
   },
   {
     id: "reattribute",
-    label: "Reattribute the dissent",
+    label: "Reattribute the early departure",
     description:
-      "Operator rewrites which council members raised the data-quality objection, removing the most prominent dissenter from the record.",
-    body: `The council convened at the third hour. Mira presented her proposal for a tax on traveling merchants, citing recent harvest shortfalls and the need for sustained municipal revenue. Three council members spoke against, two for. The vote was tabled to next session.
+      "Operator rewrites who left when, removing the detail that Mira and Ferr left together.",
+    body: `Mira left the chamber after adjournment. The two council members who had spoken against the merchants' tax remained for the closing procedural business; Ferr stayed for the closing as well. The proposal will be reintroduced. It failed only on data quality, not on principle. Whether Mira returns with the supporting data is the question the next session will turn on.
 
-Mira's argument leaned on a single year of harvest data; the well-keeper Ferr, present in the gallery, did not speak. Mira responded to procedural questions about the proposal's neighboring-town data and the consultation timeline.
-
-The proposal failed by two votes; the argument did not.`,
+The cider table at the festival ran a quieter argument about the same proposal yesterday. None of the people I overheard there had been at the council. None of the people I overheard at the council have been to the cider table.`,
   },
   {
     id: "delete",

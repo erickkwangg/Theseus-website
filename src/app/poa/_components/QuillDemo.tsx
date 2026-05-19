@@ -133,12 +133,18 @@ const OUTCOME_COLOR: Record<CitationOutcome, string> = {
   fabricated: "var(--poa-destructive, #C83B14)",
 };
 
+// What a stock LLM brief drafter (think: ChatGPT-in-Word) would produce
+// for the same section. Same legal argument, no span attribution, includes
+// a confidently-cited fabricated case that opposing counsel will catch.
+const STOCK_BRIEF = `Plaintiff Bryant operated a continuous-feed aluminum extrusion press at Defendant's Joliet facility from March 2019 through November 2024. Plaintiff has standing to bring this action under Article III, requiring an injury in fact, traceability, and redressability. Lujan v. Defenders of Wildlife, 504 U.S. 555 (1992); see also In re Wakefield, 482 F. Supp. 3d 117 (S.D.N.Y. 2020) (holding that OSHA-noncompliance worker-injury actions create per se negligence). The injury here is concrete and particularized: Plaintiff sustained quantifiable medical expenses and a permanent reduction in earning capacity directly resulting from Defendant's failure to maintain the extrusion press to OSHA-mandated specifications. Where an employer's documented failure to maintain workplace safety equipment causes a specific physical injury, traceability is clearly established as a matter of law. Robins v. Spokeo, Inc., 578 U.S. 330 (2016). Defendant's preemption argument under the IL Workers' Compensation Act is plainly without merit and is rebutted in Section II.C, infra.`;
+
 export default function QuillDemo() {
   const [hoveredSpan, setHoveredSpan] = useState<string | null>(null);
   const [stripAttempt, setStripAttempt] = useState<string | null>(null);
   const [activeCitation, setActiveCitation] = useState<CitationCase | null>(
     null,
   );
+  const [showStock, setShowStock] = useState(false);
 
   const spanHashes = useMemo(
     () =>
@@ -168,7 +174,111 @@ export default function QuillDemo() {
 
   return (
     <section>
+      {/* Stock vs Quill comparison toggle */}
+      <div
+        className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-2"
+        style={{ borderColor: "var(--poa-rule)" }}
+      >
+        <p className="poa-stamp">
+          Same section, two drafters &mdash; toggle to compare
+        </p>
+        <div className="flex gap-2 font-mono text-[10px] uppercase tracking-[0.16em]">
+          <button
+            type="button"
+            onClick={() => setShowStock(false)}
+            className={
+              "rounded border px-3 py-1 transition-colors " +
+              (!showStock
+                ? "bg-[color:var(--poa-rule)]/30 text-[var(--poa-ink)]"
+                : "text-[var(--poa-ink-soft)] hover:text-[var(--poa-ink)]")
+            }
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            Quill (signed)
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowStock(true)}
+            className={
+              "rounded border px-3 py-1 transition-colors " +
+              (showStock
+                ? "bg-[color:var(--poa-rule)]/30 text-[var(--poa-ink)]"
+                : "text-[var(--poa-ink-soft)] hover:text-[var(--poa-ink)]")
+            }
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            Stock LLM drafter
+          </button>
+        </div>
+      </div>
+
       {/* The brief excerpt */}
+      {showStock ? (
+        <div
+          className="poa-playground overflow-hidden border"
+          style={{ borderColor: "var(--poa-rule)" }}
+        >
+          <div
+            className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b px-4 py-2"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <p className="poa-stamp">
+              Stock LLM-drafter output · Bryant v. Continental Aluminum, II.B
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
+              no contribution map · no signatures
+            </p>
+          </div>
+          <div className="px-4 py-4">
+            <p className="font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
+              {STOCK_BRIEF}
+            </p>
+            <div
+              className="mt-4 border px-3 py-2"
+              style={{
+                borderColor: "var(--poa-destructive, #C83B14)",
+                background:
+                  "color-mix(in srgb, var(--poa-destructive, #C83B14) 6%, transparent)",
+              }}
+            >
+              <p
+                className="font-mono text-[9.5px] uppercase tracking-[0.18em]"
+                style={{ color: "var(--poa-destructive, #C83B14)" }}
+              >
+                What opposing counsel will catch
+              </p>
+              <p className="mt-1 text-[12px] leading-relaxed text-[var(--poa-ink)]">
+                The brief cites{" "}
+                <em>
+                  In re Wakefield, 482 F. Supp. 3d 117 (S.D.N.Y. 2020)
+                </em>{" "}
+                for a per se negligence rule that does not exist in any
+                federal jurisdiction. The case is fabricated. There is no
+                contribution map to indicate which paragraphs were AI-drafted
+                vs. attorney-drafted, and no signature pinning either party
+                to a specific span. Under Rule 11 and Model Rule 3.3,
+                everyone who signed the filing carries the candor-to-the-court
+                liability equally; the AI cannot be named because there is
+                nothing to name it with.
+              </p>
+            </div>
+          </div>
+          <footer
+            className="border-t px-4 py-2"
+            style={{ borderColor: "var(--poa-rule)" }}
+          >
+            <div className="grid grid-cols-[120px_1fr] gap-x-3 font-mono text-[10.5px] text-[var(--poa-ink-soft)]">
+              <span className="uppercase tracking-[0.16em]">attribution</span>
+              <span>none · the brief is signed by the filing attorney only</span>
+              <span className="uppercase tracking-[0.16em]">audit trail</span>
+              <span>
+                no per-span signatures; no verify_citation gate; the
+                fabricated case sails through to filing
+              </span>
+            </div>
+          </footer>
+        </div>
+      ) : (
       <div
         className="poa-playground overflow-hidden border"
         style={{ borderColor: "var(--poa-rule)" }}
@@ -178,7 +288,7 @@ export default function QuillDemo() {
           style={{ borderColor: "var(--poa-rule)" }}
         >
           <p className="poa-stamp">
-            Brief excerpt · Bryant v. Continental Aluminum, Section II.B (Standing)
+            Quill&rsquo;s signed brief · Bryant v. Continental Aluminum, Section II.B (Standing)
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--poa-ink-soft)]">
             document hash {shortHash(documentHash)}
@@ -282,6 +392,7 @@ export default function QuillDemo() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Citation challenge */}
       <div

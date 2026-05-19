@@ -239,9 +239,14 @@ export default function VellumDemo() {
               </p>
             </header>
             <div className="px-4 py-3">
-              <p className="font-serif text-[13.5px] leading-[1.7] text-[var(--poa-ink)]">
-                {active.proposedBody.split("\n\n")[0]}
+              <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                what the operator&rsquo;s LLM publishes
               </p>
+              <div className="mt-2 space-y-3 font-serif text-[13.5px] leading-[1.7] text-[var(--poa-ink)]">
+                {active.proposedBody.split("\n\n").map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
               <p className="mt-3 text-[11px] italic leading-relaxed text-[var(--poa-ink-soft)]">
                 The edit applies. The voice quietly drifts toward whatever the
                 prompt pushes for. Subscribers don&rsquo;t see the drift; they

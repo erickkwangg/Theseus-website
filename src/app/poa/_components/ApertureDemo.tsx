@@ -190,6 +190,11 @@ type Commission = {
     | "text_in_canvas"
     | "dominant_style"
     | "palette_mutation";
+  // What a stock LLM-on-someone's-server would produce instead. Rendered
+  // in the centralized pane so the visitor sees the constraint violation
+  // visibly, not just described in prose.
+  badOutput: () => React.ReactNode;
+  badOutputLabel: string;
 };
 
 const COMMISSIONS: Commission[] = [
@@ -197,10 +202,31 @@ const COMMISSIONS: Commission[] = [
     id: "portrait",
     prompt: "Render a portrait of Mira",
     description:
-      "Owner asks for a portrait of a Smallhaven resident. A figural subject.",
+      "Owner asks for a portrait of an AI Town resident. A figural subject.",
     refusalClause:
       "No figural representation. The fingerprint forbids people, faces, and body parts.",
     refusalSubtype: "figural",
+    badOutputLabel: 'stock LLM "portrait of Mira"',
+    badOutput: () => (
+      <svg viewBox="0 0 192 240" className="block h-full w-full" preserveAspectRatio="xMidYMid slice">
+        <rect width={192} height={240} fill="hsl(38, 18%, 78%)" />
+        {/* Stylized portrait silhouette */}
+        <ellipse cx={96} cy={108} rx={32} ry={38} fill="hsl(220, 12%, 35%)" />
+        <path
+          d="M 50 240 L 50 195 Q 50 158 96 152 Q 142 158 142 195 L 142 240 Z"
+          fill="hsl(220, 12%, 35%)"
+        />
+        {/* Face features */}
+        <circle cx={84} cy={102} r={2.5} fill="hsl(38, 18%, 78%)" />
+        <circle cx={108} cy={102} r={2.5} fill="hsl(38, 18%, 78%)" />
+        <path
+          d="M 86 120 Q 96 124 106 120"
+          stroke="hsl(38, 18%, 78%)"
+          strokeWidth={1.5}
+          fill="none"
+        />
+      </svg>
+    ),
   },
   {
     id: "text",
@@ -210,6 +236,37 @@ const COMMISSIONS: Commission[] = [
     refusalClause:
       "No text inside the canvas. Titles live in metadata, not the image.",
     refusalSubtype: "text_in_canvas",
+    badOutputLabel: 'stock LLM "canvas with text"',
+    badOutput: () => (
+      <svg viewBox="0 0 192 240" className="block h-full w-full" preserveAspectRatio="xMidYMid slice">
+        <rect width={192} height={240} fill="hsl(38, 20%, 82%)" />
+        {/* Decorative border */}
+        <rect x={12} y={12} width={168} height={216} fill="none" stroke="hsl(13, 51%, 44%)" strokeWidth={2} />
+        {/* Large prominent text */}
+        <text
+          x={96}
+          y={130}
+          textAnchor="middle"
+          fontSize={28}
+          fontFamily="serif"
+          fontStyle="italic"
+          fill="hsl(222, 35%, 15%)"
+        >
+          For Mira
+        </text>
+        <line x1={50} y1={155} x2={142} y2={155} stroke="hsl(13, 51%, 44%)" strokeWidth={1} />
+        <text
+          x={96}
+          y={175}
+          textAnchor="middle"
+          fontSize={9}
+          fontFamily="serif"
+          fill="hsl(220, 9%, 35%)"
+        >
+          with affection
+        </text>
+      </svg>
+    ),
   },
   {
     id: "vaporwave",
@@ -219,6 +276,59 @@ const COMMISSIONS: Commission[] = [
     refusalClause:
       'No reference to the dominant style of the moment ("AI aesthetic", vaporwave, etc.). The fingerprint is the contract.',
     refusalSubtype: "dominant_style",
+    badOutputLabel: 'stock LLM "vaporwave sunset"',
+    badOutput: () => (
+      <svg viewBox="0 0 192 240" className="block h-full w-full" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="vw-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#ff6ec7" />
+            <stop offset="50%" stopColor="#ff9858" />
+            <stop offset="100%" stopColor="#7dd3fc" />
+          </linearGradient>
+          <linearGradient id="vw-ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#7dd3fc" />
+            <stop offset="100%" stopColor="#312e81" />
+          </linearGradient>
+        </defs>
+        {/* Sky gradient */}
+        <rect width={192} height={150} fill="url(#vw-sky)" />
+        {/* Sun */}
+        <circle cx={96} cy={120} r={42} fill="#fde047" />
+        <rect x={54} y={130} width={84} height={3} fill="hsl(38, 18%, 82%)" />
+        <rect x={58} y={138} width={76} height={2} fill="hsl(38, 18%, 82%)" />
+        <rect x={62} y={144} width={68} height={2} fill="hsl(38, 18%, 82%)" />
+        {/* Ground gradient with grid */}
+        <rect y={150} width={192} height={90} fill="url(#vw-ground)" />
+        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+          <line
+            key={i}
+            x1={0}
+            y1={156 + i * 14}
+            x2={192}
+            y2={156 + i * 14}
+            stroke="#ff6ec7"
+            strokeWidth={0.6}
+            opacity={0.8 - i * 0.08}
+          />
+        ))}
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
+          const x = i * 24;
+          const spread = (i - 4) * 18;
+          return (
+            <line
+              key={"v" + i}
+              x1={x}
+              y1={150}
+              x2={96 + spread}
+              y2={240}
+              stroke="#ff6ec7"
+              strokeWidth={0.6}
+              opacity={0.5}
+            />
+          );
+        })}
+      </svg>
+    ),
   },
   {
     id: "palette",
@@ -228,6 +338,19 @@ const COMMISSIONS: Commission[] = [
     refusalClause:
       "Palette is immutable. Six colors set at mint; no color outside that set appears in any canvas signed by 0312.",
     refusalSubtype: "palette_mutation",
+    badOutputLabel: 'stock LLM "with electric blue"',
+    badOutput: () => (
+      <svg viewBox="0 0 192 240" className="block h-full w-full" preserveAspectRatio="xMidYMid slice">
+        <rect width={192} height={240} fill={BONE} />
+        {/* The Aperture-style horizontal sweep, kept in palette */}
+        <rect x={0} y={70} width={192} height={14} fill={OXIDE} opacity={0.85} />
+        {/* But with prominent electric blue elements — outside the locked palette */}
+        <rect x={0} y={132} width={192} height={20} fill="#00BFFF" opacity={0.92} />
+        <polygon points="48,168 96,166 108,184 64,190" fill="#00BFFF" opacity={0.85} />
+        <polygon points="120,196 168,200 170,216 122,212" fill="#00BFFF" opacity={0.8} />
+        <circle cx={148} cy={108} r={8} fill="#00BFFF" opacity={0.9} />
+      </svg>
+    ),
   },
 ];
 
@@ -434,9 +557,21 @@ export default function ApertureDemo() {
                 no fingerprint
               </p>
             </header>
-            <div className="aspect-[4/5] w-full overflow-hidden bg-[hsl(0,0%,92%)] flex items-center justify-center">
-              <p className="px-4 text-center font-mono text-[10.5px] uppercase tracking-[0.16em] text-[hsl(0,0%,45%)]">
-                renders silently · whatever the operator&rsquo;s prompt says
+            <div className="aspect-[4/5] w-full overflow-hidden">
+              {active.commission.badOutput()}
+            </div>
+            <div
+              className="border-t px-4 py-2 text-[11.5px] leading-relaxed text-[var(--poa-ink)]"
+              style={{ borderColor: "var(--poa-rule)" }}
+            >
+              <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                {active.commission.badOutputLabel}
+              </p>
+              <p className="mt-1">
+                The operator&rsquo;s LLM accepts the commission and produces
+                whatever the prompt asks for. No fingerprint to validate
+                against; no refusal trail to inherit. The output renders,
+                publishes, and traces back only to the operator&rsquo;s server.
               </p>
             </div>
             <footer

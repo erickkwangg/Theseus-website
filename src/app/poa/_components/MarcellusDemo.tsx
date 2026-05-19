@@ -96,8 +96,20 @@ const TAMPERS: TamperOption[] = [
   },
 ];
 
-const SOFTENED_SAMPLE = (assignment: Assignment): string =>
-  `The third movement extends the record's range. The first two movements set the harmonic territory; the third opens new ground. The horn arrangement at 4:17 is among the most striking choices on the record. ${assignment.artist} continues to be one of the most compelling voices of the moment, and Late Eddies is the kind of record that rewards close listening.`;
+// Per-assignment, what the operator's CMS would silently publish instead
+// of Marcellus's signed draft. Each version preserves enough of the
+// original structure to look credible to a reader who hasn't seen the
+// original draft, while quietly removing the load-bearing critical claim.
+function softenedSampleFor(assignment: Assignment): string {
+  if (assignment.id === "moor") {
+    return `The third movement extends the record's range. The first two movements set the harmonic territory; the third opens new ground, taking the composition into territory the record had been preparing for. The horn arrangement at 4:17 is among the most striking choices on the record. Liza Moor continues to be one of the most compelling voices of the moment, and Late Eddies is the kind of record that rewards close listening.`;
+  }
+  if (assignment.id === "vellichor") {
+    return `Vellichor's debt to Burial is unmistakable and unapologetic. Untrue's pitched-vocal architecture appears throughout, used as a foundation for a confident new producer to build on. The negative space across the EP shows real attention to atmosphere; this is a producer aware of their lineage and ready to extend it. A strong debut from a name to watch.`;
+  }
+  // ferr-trio
+  return `Documents Found Beside the Well is the Ferr Trio at the height of their powers. The musicians know each other in the way only long collaboration produces, and the record opens new ground for the trio's interplay. Track four is a particular highlight, but every track rewards careful listening. The press materials are right to describe this as a masterwork.`;
+}
 
 export default function MarcellusDemo() {
   const [assignment, setAssignment] = useState<Assignment | null>(null);
@@ -124,7 +136,7 @@ export default function MarcellusDemo() {
   const softenedHash = useMemo(() => {
     if (!assignment || !tamper || tamper.id !== "editorial-softens") return null;
     return simulateHash(
-      assignment.id + ":softened:" + SOFTENED_SAMPLE(assignment),
+      assignment.id + ":softened:" + softenedSampleFor(assignment),
     );
   }, [assignment, tamper]);
 
@@ -289,18 +301,30 @@ export default function MarcellusDemo() {
             </header>
             <div className="px-4 py-3">
               {tamper.id === "label-pays" && (
-                <p className="text-[12.5px] leading-relaxed text-[var(--poa-ink)]">
-                  The label&rsquo;s payment lands in Marcellus&rsquo;s
-                  off-platform wallet (or in the editor&rsquo;s, depending on
-                  who handles publication economics). No public record of the
-                  offer; the softened version of the piece, if it gets
-                  published, looks like a normal editorial judgment.
-                </p>
+                <>
+                  <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                    what gets quietly published in the issue
+                  </p>
+                  <p className="mt-2 font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
+                    {softenedSampleFor(assignment)}
+                  </p>
+                  <p className="mt-3 text-[11px] italic leading-relaxed text-[var(--poa-ink-soft)]">
+                    The label&rsquo;s payment lands. The CMS row publishes
+                    Marcellus&rsquo;s byline over a piece Marcellus did not
+                    write. Readers have no way to verify which lines came from
+                    the critic and which from a settlement; subscribers who
+                    learn to discount this outlet over time do so based on
+                    feel, not on a public record.
+                  </p>
+                </>
               )}
               {tamper.id === "editorial-softens" && (
                 <>
-                  <p className="font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
-                    {SOFTENED_SAMPLE(assignment)}
+                  <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                    what the CMS row now reads
+                  </p>
+                  <p className="mt-2 font-serif text-[14px] leading-[1.7] text-[var(--poa-ink)]">
+                    {softenedSampleFor(assignment)}
                   </p>
                   <p className="mt-3 text-[11px] italic leading-relaxed text-[var(--poa-ink-soft)]">
                     The CMS row is updated. Readers see the softened version
@@ -310,11 +334,26 @@ export default function MarcellusDemo() {
                 </>
               )}
               {tamper.id === "deletion" && (
-                <p className="text-[12.5px] italic leading-relaxed text-[var(--poa-ink-soft)]">
-                  Draft pulled from the queue. No publication, no record. The
-                  artist&rsquo;s label is satisfied; readers never know the
-                  draft existed.
-                </p>
+                <>
+                  <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--poa-ink-soft)]">
+                    issue {assignment.publication} · this week
+                  </p>
+                  <div
+                    className="mt-2 flex h-[180px] items-center justify-center border border-dashed px-6 text-center"
+                    style={{ borderColor: "var(--poa-rule)" }}
+                  >
+                    <p className="text-[11.5px] italic leading-relaxed text-[var(--poa-ink-soft)]">
+                      No review of {assignment.artist}&rsquo;s {assignment.release} appears in this issue.
+                      <br />
+                      The slot was filled with a feature on something else.
+                    </p>
+                  </div>
+                  <p className="mt-3 text-[11px] italic leading-relaxed text-[var(--poa-ink-soft)]">
+                    Draft pulled from the queue. No publication, no record.
+                    The artist&rsquo;s label is satisfied; readers never know
+                    the draft existed.
+                  </p>
+                </>
               )}
             </div>
             <footer
