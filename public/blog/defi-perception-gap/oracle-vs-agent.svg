@@ -95,10 +95,10 @@
 
     <!-- coral annotation block -->
     <g transform="translate(143 770)">
-      <rect x="0" y="0" width="280" height="64" rx="3" fill="#1A0E0C" stroke="#FF5B3A" stroke-width="1.2"/>
+      <rect x="0" y="0" width="280" height="76" rx="3" fill="#1A0E0C" stroke="#FF5B3A" stroke-width="1.2"/>
       <text x="20" y="26" font-size="11" letter-spacing="2" fill="#FF5B3A">FAILURE MODE</text>
       <text x="20" y="48" font-size="13" fill="#EDE8DD">manipulable price,</text>
-      <text x="20" y="64" font-size="13" fill="#EDE8DD">contract obeys.</text>
+      <text x="20" y="66" font-size="13" fill="#EDE8DD">contract obeys.</text>
     </g>
   </g>
 
@@ -173,10 +173,10 @@
 
     <!-- annotation -->
     <g transform="translate(620 770)">
-      <rect x="0" y="0" width="360" height="64" rx="3" fill="#1A0E0C" stroke="#FF5B3A" stroke-width="1.2"/>
+      <rect x="0" y="0" width="360" height="76" rx="3" fill="#1A0E0C" stroke="#FF5B3A" stroke-width="1.2"/>
       <text x="20" y="26" font-size="11" letter-spacing="2" fill="#FF5B3A">PROPERTY</text>
       <text x="20" y="48" font-size="13" fill="#EDE8DD">refuses to act if sources do not</text>
-      <text x="20" y="64" font-size="13" fill="#EDE8DD">reconcile across venues.</text>
+      <text x="20" y="66" font-size="13" fill="#EDE8DD">reconcile across venues.</text>
     </g>
   </g>
 
