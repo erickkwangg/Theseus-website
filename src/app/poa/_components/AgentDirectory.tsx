@@ -82,34 +82,34 @@ export default function AgentDirectory({ snapshot }: Props) {
       </p>
 
       {DEMOS[slug] && (
-        <Link
-          href={`/poa/${snapshot.agentId}/demo`}
-          className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3 transition-colors hover:bg-[color:var(--poa-rule)]/15"
+        <div
+          className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border px-4 py-4"
           style={{ borderColor: "var(--poa-rule)" }}
         >
-          <div>
+          <div className="min-w-0 flex-1">
             <p className="poa-stamp">Interactive demo</p>
-            <p className="mt-1 text-[13px] leading-relaxed text-[var(--poa-ink)]">
+            <p className="mt-1 text-[14px] leading-relaxed text-[var(--poa-ink)]">
               {DEMOS[slug].headline}
             </p>
           </div>
-          <span className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors group-hover:text-[var(--poa-ink)] group-hover:decoration-[color:var(--poa-ink)]">
-            Open the demo →
-          </span>
-        </Link>
+          <Link
+            href={`/poa/${snapshot.agentId}/demo`}
+            className="cta-ink inline-flex shrink-0 items-center gap-2 px-5 py-2.5 text-[13px] font-medium tracking-wide"
+          >
+            Open the demo
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
       )}
 
       {snapshot.context?.demoUrl && (
-        <a
-          href={snapshot.context.demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mb-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border px-4 py-3 transition-colors hover:bg-[color:var(--poa-rule)]/15"
+        <div
+          className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border px-4 py-4"
           style={{ borderColor: "var(--poa-rule)" }}
         >
-          <div>
+          <div className="min-w-0 flex-1">
             <p className="poa-stamp">Live demo · running on Base Sepolia</p>
-            <p className="mt-1 text-[13px] leading-relaxed text-[var(--poa-ink)]">
+            <p className="mt-1 text-[14px] leading-relaxed text-[var(--poa-ink)]">
               <span className="italic">{snapshot.name}</span> has been deciding
               on chain. Every verdict in this demo is signed and posted to a
               public contract you can read with viem.
@@ -118,10 +118,16 @@ export default function AgentDirectory({ snapshot }: Props) {
               {snapshot.context.demoUrl.replace(/^https?:\/\//, "")}
             </p>
           </div>
-          <span className="poa-stamp underline decoration-[color:var(--poa-rule)] underline-offset-[4px] transition-colors group-hover:text-[var(--poa-ink)] group-hover:decoration-[color:var(--poa-ink)]">
-            See it running ↗
-          </span>
-        </a>
+          <a
+            href={snapshot.context.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-ink inline-flex shrink-0 items-center gap-2 px-5 py-2.5 text-[13px] font-medium tracking-wide"
+          >
+            See it running
+            <span aria-hidden>↗</span>
+          </a>
+        </div>
       )}
 
       {snapshot.tokenBinding && (
