@@ -42,7 +42,7 @@ export default async function StatsStrip() {
   const stats = await fetchStats();
   const verdicts = stats?.totalVerdicts ?? null;
   const agents = stats?.agentsLive ?? null;
-  const deployed = stats?.agentsDeployed ?? 7;
+  const deployed = stats?.agentsDeployed ?? 12;
 
   return (
     <section

@@ -86,6 +86,18 @@ const AGENTS: AgentSpec[] = [
   },
 ];
 
+// Off-chain demo agents (live at demo-agents.theseus.network). They
+// don't have history contracts on Base Sepolia — verdicts surface as
+// signed LLM decisions in the demo UI — but they are deployed agents
+// in the catalog and should be counted in agentsDeployed.
+const OFFCHAIN_AGENT_LABELS = [
+  "Vellum 1492",
+  "Aperture 0312",
+  "Marcellus",
+  "Quill",
+  "Calder",
+] as const;
+
 const TERRA_LATEST_TS_ABI = [
   {
     type: "function",
@@ -199,8 +211,8 @@ export async function GET() {
     return NextResponse.json(
       {
         totalVerdicts,
-        agentsLive,
-        agentsDeployed: AGENTS.length,
+        agentsLive: agentsLive + OFFCHAIN_AGENT_LABELS.length,
+        agentsDeployed: AGENTS.length + OFFCHAIN_AGENT_LABELS.length,
         latestTickAt,
       },
       {
@@ -213,8 +225,8 @@ export async function GET() {
     return NextResponse.json(
       {
         totalVerdicts: 0,
-        agentsLive: 0,
-        agentsDeployed: AGENTS.length,
+        agentsLive: OFFCHAIN_AGENT_LABELS.length,
+        agentsDeployed: AGENTS.length + OFFCHAIN_AGENT_LABELS.length,
         error: (err as Error).message,
       },
       { status: 200 },
